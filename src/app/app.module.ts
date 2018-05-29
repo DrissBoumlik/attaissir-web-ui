@@ -11,7 +11,7 @@ import { ScriptLoaderService } from './_services/script-loader.service';
 import { ThirdsModule } from './thirds/thirds.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ContractsModule } from './contracts/contracts.module';
-import {DxFormModule} from 'devextreme-angular';
+import { DxFormModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [

@@ -39,7 +39,7 @@
                 </dxo-label>
                 <dxi-validation-rule type="required" message="First name is required" i18n-message></dxi-validation-rule>
               </dxi-item>
-              <dxi-item dataField="last_name" [editorOptions]="{ placeholder: 'Last name'} ">
+              <dxi-item dataField="last_name" [editorOptions]="{ placeholder: ''} ">
                 <dxo-label
                   text="Last name" i18n-text>
                 </dxo-label>
@@ -54,7 +54,7 @@
                 </dxo-label>
                 <dxi-validation-rule type="required" message="Arabic first name is required" i18n-message></dxi-validation-rule>
               </dxi-item>
-              <dxi-item dataField="last_name_ar" [editorOptions]="{ placeholder: 'Last name (Arabic)' }">
+              <dxi-item dataField="last_name_ar" [editorOptions]="{ placeholder: '' }">
                 <dxo-label
                   text="Last name (Arabic)" i18n-text>
                 </dxo-label>
@@ -254,7 +254,7 @@
 
     <hr>
 
-    <dxi-item *ngIf="isWizard"
+    <dxi-item *ngIf="!isWizard"
       itemType="button"
       alignment="left"
       [buttonOptions]="buttonOptions">

@@ -7,12 +7,7 @@ import { Injectable } from '@angular/core';
 export class Third {
 
   id: number;
-  types: any = [
-    {
-      id: 0,
-      libelle: ''
-    }
-  ];
+  types: any;
   code: number;
   civility: string;
   social_reason: string;
@@ -45,14 +40,21 @@ export class Third {
   bank_name: string;
   rib: number;
   isCorporation: boolean;
-  actionsPermission: any = {
-    delete: false,
-    update: false
-  };
+  actionsPermission: any;
   created_date: Date;
   updated_date: Date;
 
   constructor() {
+    this.types = [
+      {
+        id: 0,
+        libelle: ''
+      }
+    ];
+    this.actionsPermission = {
+      delete: false,
+      update: false
+    };
     this.etat = true;
     this.isCorporation = false;
     this.payment_mode = 'Virement';

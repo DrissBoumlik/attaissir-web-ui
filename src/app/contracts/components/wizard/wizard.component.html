@@ -73,55 +73,90 @@
 </div>
 
 <div class="m-content">
-  <aw-wizard>
-    <aw-wizard-step stepTitle="Title of step 1">
-      <h1 i188n>Agreggated Informations</h1>
-      <app-tiers-form [isEdit]="false" [tier]="tier" [isWizard]="true"></app-tiers-form>
+  <aw-wizard [navBarLayout]="navBarLayout">
+    <aw-wizard-step stepTitle="Agreggated Informations" [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome'}" i18n-step-title>
 
-      <button type="button" awNextStep i18n>Next Step</button>
-      <button type="button" [awGoToStep]="{stepIndex: 2}" i18n>Go directly to third Step</button>
+      <div>
+        <h1 i188n>Agreggated Informations</h1>
+        <app-tiers-form [isEdit]="false" [tier]="tier" [isWizard]="true"></app-tiers-form>
+      </div>
+
+      <button type="button" class="btn btn-success" awNextStep i18n>Next Step</button>
     </aw-wizard-step>
-    <aw-wizard-step stepTitle="Title of step 2" awOptionalStep>
+    <aw-wizard-step stepTitle="Contracted area" i18n-step-title [navigationSymbol]="{ symbol: '&#xf039;', fontFamily: 'FontAwesome'}" awOptionalStep>
 
-      <form >
-        <dx-form id="form"
-                 [formData]="tier"
-                 [readOnly]="false"
-                 [showColonAfterLabel]="true"
-                 [showValidationSummary]="true"
-                 validationGroup="tierData">
+      <div>
+        <h1 i18n>Contracted area</h1>
+        <form >
+          <dx-form id="form"
+                   [formData]="tier"
+                   [readOnly]="false"
+                   [showColonAfterLabel]="true"
+                   [showValidationSummary]="true"
+                   validationGroup="tierData">
 
-          <dxi-item itemType="group" caption="General informations" [colCount]="3" i18n-caption *ngFor="let camp of campaigns; let i of index">
+            <dxi-item itemType="group" caption="" [colCount]="12" *ngFor="let camp of campaigns">
 
-            <dxi-item dataField="campaign" [editorOptions]="{ value: campaignProps(camp) }">
-              <dxo-label
-                text="Campaign" i18n-text>
-              </dxo-label>
+              <dxi-item dataField="campaign" [editorOptions]="{ value: campaignProps(camp) }" [colSpan]="5">
+                <dxo-label
+                  text="Campaign" i18n-text>
+                </dxo-label>
+              </dxi-item>
+              <dxi-item dataField="superficies[]" editorType="dxNumberBox" [colSpan]="5">
+                <dxo-label
+                  text="Superficie" i18n-text>
+                </dxo-label>
+              </dxi-item>
+
+              <dxi-item *ngIf="(camp === campaigns[campaigns.length -1]) && (campaigns.length < 5)"
+                        itemType="button"
+                        alignment="left"
+                        [buttonOptions]="addButtonOptions">
+              </dxi-item>
+              <dxi-item *ngIf="(camp === campaigns[campaigns.length -1]) && (campaigns.length > 1)"
+                        itemType="button"
+                        alignment="left"
+                        [buttonOptions]="removeButtonOptions">
+              </dxi-item>
+
             </dxi-item>
-            <dxi-item dataField="superficies[]" editorType="dxNumberBox">
-              <dxo-label
-                text="Superficie" i18n-text>
-              </dxo-label>
-            </dxi-item>
+          </dx-form>
+        </form>
+      </div>
 
-            <dxi-item
-                      itemType="button"
-                      alignment="left"
-                      [buttonOptions]="buttonOptions">
-            </dxi-item>
-
-          </dxi-item>
-        </dx-form>
-      </form>
-
-
-      <button type="button" awPreviousStep i18n>Go to previous step</button>
-      <button type="button" awNextStep i18n>Go to next step</button>
+      <button type="button" class="btn default" awPreviousStep i18n i18n>Previous Step</button>
+      <button type="button" class="btn btn-success" awNextStep i18n i18n>Next Step</button>
     </aw-wizard-step>
-    <aw-wizard-step stepTitle="Title of step 3">
-      Content of Step 3
-      <button type="button" awPreviousStep>Previous Step</button>
-      <button type="button" (click)="finishFunction()">Finish</button>
+    <aw-wizard-step stepTitle="Parcels" i18n-step-title [navigationSymbol]="{ symbol: '&#xf1ad;', fontFamily: 'FontAwesome'}">
+
+      <div>
+        <h1 i18n>Parcels</h1>
+        <dx-data-grid
+          id="gridContainer"
+          [dataSource]="structures"
+
+          (onEditingStart)="logEvent('EditingStart')"
+          (onInitNewRow)="logEvent('InitNewRow')"
+          (onRowInserting)="logEvent('RowInserting')"
+          (onRowInserted)="logEvent('RowInserted')"
+          (onRowUpdating)="logEvent('RowUpdating')"
+          (onRowUpdated)="logEvent('RowUpdated')"
+          (onRowRemoving)="logEvent('RowRemoving')"
+          (onRowRemoved)="logEvent('RowRemoved')">
+
+          <dxo-paging [enabled]="true"></dxo-paging>
+          <dxo-editing
+            mode="row"
+            [allowUpdating]="true"
+            [allowDeleting]="true"
+            [allowAdding]="true">
+          </dxo-editing>
+
+        </dx-data-grid>
+      </div>
+
+      <button type="button" class="btn default" awPreviousStep i18n>Previous Step</button>
+      <button type="button" class="btn btn-success" (click)="finishFunction()" i18n>Finish</button>
     </aw-wizard-step>
   </aw-wizard>
 
