@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {Structure} from '../classes/structure';
@@ -8,6 +8,10 @@ import {Structure} from '../classes/structure';
   providedIn: 'root'
 })
 export class StructuresService {
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
+  private options = {
+    headers: this.headers
+  };
 
   routeName: string;
   constructor(public http: HttpClient) {
