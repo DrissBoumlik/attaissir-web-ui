@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Third} from '../../../thirds/classes/third';
 import {Structure} from '../../classes/structure';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
 
 @Component({
   selector: 'app-wizard',
@@ -14,11 +15,13 @@ export class WizardComponent implements OnInit {
   campaign: string;
   superficies: any;
   structures: any;
+  cin_search: string;
   addButtonOptions: any;
   removeButtonOptions: any;
 
   constructor(public tier: Third,
-              public structure: Structure) {
+              public structure: Structure,
+              public tierService: ThirdsService) {
   }
 
   ngOnInit() {

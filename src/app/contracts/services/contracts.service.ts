@@ -7,42 +7,45 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class ContractsService {
+  routeName: string;
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {
+    this.routeName = 'contracts';
+  }
 
   /**
    * Get a collection of Contracts
-   * @returns {Observable<Contact[]>}
+   * @returns {Observable<Contract[]>}
    */
-  getContacts(): Observable<Contact[]> {
-    return this.http.get<Contact[]>(`${environment.apiUrl}/${this.fake}`);
+  getContracts(): Observable<Contract[]> {
+    return this.http.get<Contract[]>(`${environment.apiUrl}/${this.routeName}`);
   }
 
   /**
    * Get a Contracts
    * @param id
-   * @returns {Observable<Contact[]>}
+   * @returns {Observable<Contract[]>}
    */
-  getContact(id: number): Observable<Contact> {
-    return this.http.get<Contact>(`${environment.apiUrl}/${this.fake}/${id}`);
+  getContract(id: number): Observable<Contract> {
+    return this.http.get<Contract>(`${environment.apiUrl}/${this.routeName}/${id}`);
   }
 
   /**
    * Add a contracts
-   * @param Contact
-   * @returns {Observable<Contact[]>}
+   * @param Contract
+   * @returns {Observable<Contract[]>}
    */
-  addContact(Contact: Contact): Observable<Contact[]> {
-    return this.http.post<Contact[]>(`${environment.apiUrl}/${this.fake}`, JSON.stringify(Contact), this.options);
+  addContract(contract: Contract): Observable<Contract[]> {
+    return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(contract), this.options);
   }
 
   /**
    * Edit a contracts
-   * @param Contact
-   * @returns {Observable<Contact>}
+   * @param Contract
+   * @returns {Observable<Contract>}
    */
-  editContact(Contact: Contact): Observable<Contact> {
-    return this.http.put<Contact>(`${environment.apiUrl}/${this.fake}/${Contact.id}`, JSON.stringify(Contact), this.options);
+  editContract(contract: Contract): Observable<Contract> {
+    return this.http.put<Contract>(`${environment.apiUrl}/${this.routeName}/${contract.id}`, JSON.stringify(contract), this.options);
   }
 
   /**
@@ -50,7 +53,7 @@ export class ContractsService {
    * @param id  the id of the contracts intended to delete
    * @returns {Observable<any>}
    */
-  deleteContact(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.fake}/${id}`, this.options);
+  deleteContract(id: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, this.options);
   }
 }
