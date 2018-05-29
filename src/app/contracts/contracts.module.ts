@@ -5,6 +5,8 @@ import { ContractsRoutingModule } from './contracts-routing.module';
 import { WizardComponent } from './components/wizard/wizard.component';
 import {ArchwizardModule} from 'angular-archwizard';
 import {ThirdsModule} from '../thirds/thirds.module';
+import {ListContractComponent} from './components/list-contract/list-contract.component';
+import {DxDataGridModule} from 'devextreme-angular';
 
 @NgModule({
   imports: [
@@ -12,9 +14,11 @@ import {ThirdsModule} from '../thirds/thirds.module';
     ArchwizardModule,
     ThirdsModule,
     ContractsRoutingModule,
+    DxDataGridModule,
   ],
   declarations: [
-    WizardComponent
+    WizardComponent,
+    ListContractComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

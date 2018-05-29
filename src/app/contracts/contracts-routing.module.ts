@@ -8,7 +8,8 @@ const routes: Routes = [
     path: '',
     component: DefaultComponent,
     children: [
-      { path: 'wizard', component: WizardComponent }
+      { path: 'wizard', component: WizardComponent },
+      {path: 'list', component: ListContractComponent, pathMatch: 'full'}
     ]
   }
 ];
