@@ -15,10 +15,10 @@ export class ThirdsService {
     headers: this.headers
   };
 
-  fake: string;
+  routeName: string;
 
   constructor(private http: HttpClient) {
-    this.fake = (true) ? 'comments' : 'thirds';
+    this.routeName = (true) ? 'comments' : 'thirds';
   }
 
   /**
@@ -26,7 +26,7 @@ export class ThirdsService {
    * @returns {Observable<Third[]>}
    */
   getThirds(): Observable<Third[]> {
-    return this.http.get<Third[]>(`${environment.apiUrl}/${this.fake}`);
+    return this.http.get<Third[]>(`${environment.apiUrl}/${this.routeName}`);
   }
 
   /**
@@ -35,7 +35,16 @@ export class ThirdsService {
    * @returns {Observable<Third[]>}
    */
   getThird(id: number): Observable<Third> {
-    return this.http.get<Third>(`${environment.apiUrl}/${this.fake}/${id}`);
+    return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/${id}`);
+  }
+
+  /**
+   * Get a Third parties
+   * @param cin
+   * @returns {Observable<Third[]>}
+   */
+  getThirdByCIN(cin: string): Observable<Third> {
+    return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/?cin=${cin}`);
   }
 
   /**
@@ -44,7 +53,7 @@ export class ThirdsService {
    * @returns {Observable<Third[]>}
    */
   addThird(third: Third): Observable<Third[]> {
-    return this.http.post<Third[]>(`${environment.apiUrl}/${this.fake}`, JSON.stringify(third), this.options);
+    return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(third), this.options);
   }
 
   /**
@@ -53,7 +62,7 @@ export class ThirdsService {
    * @returns {Observable<Third>}
    */
   editThird(third: Third): Observable<Third> {
-    return this.http.put<Third>(`${environment.apiUrl}/${this.fake}/${third.id}`, JSON.stringify(third), this.options);
+    return this.http.put<Third>(`${environment.apiUrl}/${this.routeName}/${third.id}`, JSON.stringify(third), this.options);
   }
 
   /**
@@ -62,7 +71,7 @@ export class ThirdsService {
    * @returns {Observable<any>}
    */
   deleteThird(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.fake}/${id}`, this.options);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, this.options);
   }
 
   /**
@@ -71,7 +80,7 @@ export class ThirdsService {
    * @param test
    * @returns {any}
    */
-  faker(data, test) {
+  dataFormatter(data, test) {
     return (!test) ? data[0]['data'] : data;
   }
 }

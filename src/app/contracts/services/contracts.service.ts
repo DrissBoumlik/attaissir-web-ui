@@ -65,4 +65,14 @@ export class ContractsService {
   deleteContract(id: number): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, this.options);
   }
+
+  /**
+   * Format data depending of API
+   * @param data
+   * @param test
+   * @returns {any}
+   */
+  dataFormatter(data, test) {
+    return (!test) ? data[0]['data'] : data;
+  }
 }

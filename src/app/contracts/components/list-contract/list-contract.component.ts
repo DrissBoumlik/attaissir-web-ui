@@ -13,7 +13,7 @@ export class ListContractComponent implements OnInit {
   constructor(private contractsService: ContractsService) { }
 
   ngOnInit() {
-    this.contracts = this.contractsService.getAllContracts();
+    this.contracts = null;// this.contractsService.getAllContracts();
     console.log(this.contracts);
   }
 

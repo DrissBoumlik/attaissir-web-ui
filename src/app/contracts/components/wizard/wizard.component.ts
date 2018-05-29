@@ -15,7 +15,8 @@ export class WizardComponent implements OnInit {
   campaign: string;
   superficies: any;
   structures: any;
-  cin_search: string;
+  searchForm: any;
+  addThird: boolean;
   addButtonOptions: any;
   removeButtonOptions: any;
 
@@ -25,8 +26,13 @@ export class WizardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.addThird = false;
+    this.searchForm = {
+      cin: ''
+    };
     this.campaigns = [2019];
     this.navBarLayout = 'large-filled-symbols';
+
     this.addButtonOptions = {
       text: '',
       icon: 'plus',
@@ -53,6 +59,11 @@ export class WizardComponent implements OnInit {
 
   campaignProps(campaign: number) {
     return `${campaign} - ${campaign + 1}`;
+  }
+
+  searchCIN() {
+    console.log(this.searchForm);
+    this.tierService.getThirdByCIN(this.searchForm.cin);
   }
 
   logEvent(e) {}
