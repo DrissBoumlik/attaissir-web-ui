@@ -1,0 +1,127 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">
+        THIRD PARTIES LIST - {{ third_parties_count }}
+      </h3>
+    </div>
+    <div>
+      <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
+        <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+          <i class="la la-plus m--hide"></i>
+          <i class="la la-ellipsis-h"></i>
+        </a>
+        <div class="m-dropdown__wrapper">
+          <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+          <div class="m-dropdown__inner">
+            <div class="m-dropdown__body">
+              <div class="m-dropdown__content">
+                <ul class="m-nav">
+                  <li class="m-nav__section m-nav__section--first m--hide">
+										<span class="m-nav__section-text">
+											Quick Actions
+										</span>
+                  </li>
+                  <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                      <i class="m-nav__link-icon flaticon-share"></i>
+                      <span class="m-nav__link-text">
+												Activity
+											</span>
+                    </a>
+                  </li>
+                  <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                      <i class="m-nav__link-icon flaticon-chat-1"></i>
+                      <span class="m-nav__link-text">
+												Messages
+											</span>
+                    </a>
+                  </li>
+                  <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                      <i class="m-nav__link-icon flaticon-info"></i>
+                      <span class="m-nav__link-text">
+												FAQ
+											</span>
+                    </a>
+                  </li>
+                  <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                      <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                      <span class="m-nav__link-text">
+												Support
+											</span>
+                    </a>
+                  </li>
+                  <li class="m-nav__separator m-nav__separator--fit"></li>
+                  <li class="m-nav__item">
+                    <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
+                      Submit
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+
+  <dx-data-grid
+    id="gridContainer"
+    [dataSource]="third_parties"
+    [columnHidingEnabled]="true"
+    [allowColumnReordering]="true"
+    [remoteOperations]="{ groupPaging: true }"
+    (onEditingStart)="onStartEdit($event.data.id)"
+    (onRowRemoving)="onRemoveThird($event.data.id)"
+>
+
+    <dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>
+    <dx-button id="gridDeleteSelected"
+               text="Delete Selected Records" i18n-text
+               [height]="34"
+               [width]="195"
+               [useIcons]="true"
+               [disabled]="selectedItems.length < 2"
+               (onClick)="deleteRecords()">
+    </dx-button>
+
+    <dxo-editing
+      mode="row"
+      [useIcons]="true"
+      [allowUpdating]="true"
+      [allowDeleting]="true">
+    </dxo-editing>
+    <dxo-selection mode="multiple"></dxo-selection>
+
+    <dxo-sorting mode="multiple"></dxo-sorting>
+    <dxo-filter-row
+      [visible]="true" [applyFilter]="applyFilter"></dxo-filter-row>
+
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-export [enabled]="true" fileName="Tiers" [allowExportSelectedData]="true"></dxo-export>
+
+    <dxo-pager
+      [allowedPageSizes]="[5, 8, 15, 30]"
+      [showInfo]="true"
+      [showNavigationButtons]="true"
+      [showPageSizeSelector]="true"
+      [visible]="true">
+    </dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+  </dx-data-grid>
+
+</div>

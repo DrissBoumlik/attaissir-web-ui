@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
+  <file original="ng.template" id="ngi18n">
+    <unit id="3530314652604556414">
+      <notes>
+        <note category="location">app/theme/layouts/footer/footer.component.ts:7</note>
+      </notes>
+      <segment>
+        <source>2018 © SIAM618 by</source>
+      </segment>
+    </unit>
+    <unit id="2543365055780221138">
+      <notes>
+        <note category="location">app/theme/layouts/footer/footer.component.ts:8,10</note>
+      </notes>
+      <segment>
+        <source>
+						Graviton Inc.
+					</source>
+      </segment>
+    </unit>
+    <unit id="9081514879261466952">
+      <notes>
+        <note category="description">Fournisseur de prestation</note>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:14</note>
+      </notes>
+      <segment>
+        <source>Service provider</source>
+      </segment>
+    </unit>
+    <unit id="148392384219370339">
+      <notes>
+        <note category="description">Fournisseur de bouture</note>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:20</note>
+      </notes>
+      <segment>
+        <source>Cutting supplier</source>
+      </segment>
+    </unit>
+    <unit id="8847837781241105195">
+      <notes>
+        <note category="description">Agrégé</note>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:26</note>
+      </notes>
+      <segment>
+        <source>Aggregated</source>
+      </segment>
+    </unit>
+    <unit id="7316700358547997045">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:10</note>
+      </notes>
+      <segment>
+        <source>Third party type</source>
+      </segment>
+    </unit>
+    <unit id="5342432350421167093">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:37</note>
+      </notes>
+      <segment>
+        <source>First name</source>
+      </segment>
+    </unit>
+    <unit id="6407628057642629970">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:39</note>
+      </notes>
+      <segment>
+        <source>First name is required</source>
+      </segment>
+    </unit>
+    <unit id="3586674587150281199">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:43</note>
+      </notes>
+      <segment>
+        <source>Last name</source>
+      </segment>
+    </unit>
+    <unit id="5005290836214172506">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:45</note>
+      </notes>
+      <segment>
+        <source>Last name is required</source>
+      </segment>
+    </unit>
+    <unit id="7270549558679351701">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:50</note>
+      </notes>
+      <segment>
+        <source>First name (Arabic)</source>
+      </segment>
+    </unit>
+    <unit id="4670215994786061253">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:52</note>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:58</note>
+      </notes>
+      <segment>
+        <source>Arabic first name is required</source>
+      </segment>
+    </unit>
+    <unit id="3731795085729462395">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:56</note>
+      </notes>
+      <segment>
+        <source>Last name (Arabic)</source>
+      </segment>
+    </unit>
+    <unit id="3888923206074715508">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:62</note>
+      </notes>
+      <segment>
+        <source>CIN required</source>
+      </segment>
+    </unit>
+    <unit id="3948439187870398089">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:68</note>
+      </notes>
+      <segment>
+        <source>Gender</source>
+      </segment>
+    </unit>
+    <unit id="6304432362546770951">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:73</note>
+      </notes>
+      <segment>
+        <source>Address</source>
+      </segment>
+    </unit>
+    <unit id="1200737650075932684">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:78</note>
+      </notes>
+      <segment>
+        <source>Zip code</source>
+      </segment>
+    </unit>
+    <unit id="2314075913167237221">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:83</note>
+      </notes>
+      <segment>
+        <source>City</source>
+      </segment>
+    </unit>
+    <unit id="3179148736830644140">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:93</note>
+      </notes>
+      <segment>
+        <source>Date of birth</source>
+      </segment>
+    </unit>
+    <unit id="5298978568870128327">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:101</note>
+      </notes>
+      <segment>
+        <source>Date of death</source>
+      </segment>
+    </unit>
+    <unit id="4768749765465246664">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:108</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="818722060838326292">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:112</note>
+      </notes>
+      <segment>
+        <source>This is not a valid Email address</source>
+      </segment>
+    </unit>
+    <unit id="2802752513051202841">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:123</note>
+      </notes>
+      <segment>
+        <source>Telephone 1</source>
+      </segment>
+    </unit>
+    <unit id="7331161655172413274">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:128</note>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:142</note>
+      </notes>
+      <segment>
+        <source>The phone must have a correct Moroccan phone format</source>
+      </segment>
+    </unit>
+    <unit id="3286710254172453781">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:137</note>
+      </notes>
+      <segment>
+        <source>Telephone 2</source>
+      </segment>
+    </unit>
+    <unit id="1863727721311738869">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:147</note>
+      </notes>
+      <segment>
+        <source>Education level</source>
+      </segment>
+    </unit>
+    <unit id="5253137867859614648">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:154</note>
+      </notes>
+      <segment>
+        <source>Familial situation</source>
+      </segment>
+    </unit>
+    <unit id="575675446736703593">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:159</note>
+      </notes>
+      <segment>
+        <source>Children number</source>
+      </segment>
+    </unit>
+    <unit id="1022816531715047589">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:161</note>
+      </notes>
+      <segment>
+        <source>You cannot have negative children.</source>
+      </segment>
+    </unit>
+    <unit id="5944488753746113803">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:167</note>
+      </notes>
+      <segment>
+        <source>Insurance</source>
+      </segment>
+    </unit>
+    <unit id="4725752593225554554">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:172</note>
+      </notes>
+      <segment>
+        <source>retreat</source>
+      </segment>
+    </unit>
+    <unit id="3575341435226473082">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:33</note>
+      </notes>
+      <segment>
+        <source>General informations</source>
+      </segment>
+    </unit>
+    <unit id="5386755765245904348">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:181</note>
+      </notes>
+      <segment>
+        <source>Payment mode</source>
+      </segment>
+    </unit>
+    <unit id="7912661373826249386">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:187</note>
+      </notes>
+      <segment>
+        <source>Bank name</source>
+      </segment>
+    </unit>
+    <unit id="2226300862840574002">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:189</note>
+      </notes>
+      <segment>
+        <source>Bank name is required</source>
+      </segment>
+    </unit>
+    <unit id="2978277460719204389">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:195</note>
+      </notes>
+      <segment>
+        <source>RIB</source>
+      </segment>
+    </unit>
+    <unit id="4715283779522829238">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:197</note>
+      </notes>
+      <segment>
+        <source>RIB is required</source>
+      </segment>
+    </unit>
+    <unit id="5875130684997376720">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:178</note>
+      </notes>
+      <segment>
+        <source>Billing</source>
+      </segment>
+    </unit>
+    <unit id="7762403898659514408">
+      <notes>
+        <note category="description">registre de commerce</note>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:212</note>
+      </notes>
+      <segment>
+        <source>Business register</source>
+      </segment>
+    </unit>
+    <unit id="956480276641114184">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:218</note>
+      </notes>
+      <segment>
+        <source>Patent number</source>
+      </segment>
+    </unit>
+    <unit id="8827383625507736873">
+      <notes>
+        <note category="description">identifiant fiscal</note>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:224</note>
+      </notes>
+      <segment>
+        <source>Tax identification</source>
+      </segment>
+    </unit>
+    <unit id="204030015626744594">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:231</note>
+      </notes>
+      <segment>
+        <source>ICE</source>
+      </segment>
+    </unit>
+    <unit id="1032416920439333226">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:237</note>
+      </notes>
+      <segment>
+        <source>TVA code</source>
+      </segment>
+    </unit>
+    <unit id="4861342587962608090">
+      <notes>
+        <note category="description">Personne morale</note>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:203</note>
+      </notes>
+      <segment>
+        <source>Corporation</source>
+      </segment>
+    </unit>
+    <unit id="2748671167822190966">
+      <notes>
+        <note category="location">app/thirds/components/tiers-form/tiers-form.component.ts:247</note>
+      </notes>
+      <segment>
+        <source>Is active?</source>
+      </segment>
+    </unit>
+    <unit id="7908949778917311347">
+      <notes>
+        <note category="location">app/thirds/components/index/index.component.ts:4,6</note>
+      </notes>
+      <segment>
+        <source>
+        Dashboard
+      </source>
+      </segment>
+    </unit>
+    <unit id="1811345962166559753">
+      <notes>
+        <note category="location">app/thirds/components/edit/edit.component.ts:4,6</note>
+      </notes>
+      <segment>
+        <source>
+        EDIT <ph id="0" equiv="INTERPOLATION" disp="{{ tier.first_name?.toUpperCase() }}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{ tier.last_name?.toUpperCase() }}"/><pc id="2" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span&gt;" dispEnd="&lt;/span&gt;"> - CODE SIAM <ph id="3" equiv="INTERPOLATION_2" disp="{{ tier.code }}"/></pc>
+      </source>
+      </segment>
+    </unit>
+    <unit id="962314304633350441">
+      <notes>
+        <note category="location">app/thirds/components/list/list.component.ts:87</note>
+      </notes>
+      <segment>
+        <source>Delete Selected Records</source>
+      </segment>
+    </unit>
+  </file>
+</xliff>

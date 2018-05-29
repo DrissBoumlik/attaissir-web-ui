@@ -1,0 +1,45 @@
+# Third parties Module
+```
+Third parties module.
+```
+
+#### module files:
+
+* `thirds.module.spec.ts` Test file
+* [ThirdsModule](../../../documentation/modules/ThirdsModule.html) Module file we can import modules or declare components here.
+* [ThirdsRoutingModule](../../../documentation/routes.html) Routes
+
+## Classes
+
+```
+All the classes & models goes here.
+```
+
+#### existing classes
+
+* [thirds.ts](../../../documentation/classes/Third.html) Third parties Model
+
+
+## Components
+
+```
+All components live here
+```
+#### existing components
+
+* [AddComponent](../../../documentation/components/AddComponent.html)
+* [EditComponent](../../../documentation/components/EditComponent.html)
+* [IndexComponent](../../../documentation/components/IndexComponent.html)
+* [ListComponent](../../../documentation/components/ListComponent.html)
+* [ShowComponent](../../../documentation/components/ShowComponent.html)
+* [TiersForm](../../../documentation/components/tiersForm.html)
+
+# Services
+
+```
+Services to communicate with the Back Service
+```
+
+#### existing services
+
+* [ThirdsService](../../../documentation/injectables/ThirdsService.html)
