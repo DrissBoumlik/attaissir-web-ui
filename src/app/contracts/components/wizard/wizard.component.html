@@ -103,33 +103,34 @@
             </dx-list>
           </div>
           <div class="right">
-          <dx-form id="form"
-                   [formData]="currentThird">
-            <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+            <dx-form id="form"
+                     [formData]="currentThird">
+              <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
 
-                <dxi-item dataField="first_name" [disabled]="true"></dxi-item>
-              <dxi-item dataField="last_name" [disabled]="true"></dxi-item>
-                <dxi-item dataField="first_name_ar" [disabled]="true"></dxi-item>
-              <dxi-item dataField="last_name_ar" [disabled]="true"></dxi-item>
-              <dxi-item dataField="id" [disabled]="true"></dxi-item>
-                <dxi-item dataField="date_birth" [editorOptions]="{ width: '50%'}" [disabled]="true"></dxi-item>
+                  <dxi-item dataField="first_name" [disabled]="true"></dxi-item>
+                <dxi-item dataField="last_name" [disabled]="true"></dxi-item>
+                  <dxi-item dataField="first_name_ar" [disabled]="true"></dxi-item>
+                <dxi-item dataField="last_name_ar" [disabled]="true"></dxi-item>
+                <dxi-item dataField="id" [disabled]="true"></dxi-item>
+                  <dxi-item dataField="date_birth" [editorOptions]="{ width: '50%'}" [disabled]="true"></dxi-item>
 
-            </dxi-item>
-            <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
-              <dxi-item itemType="group">
-                <dxi-item dataField="adress" [disabled]="true"></dxi-item>
-                <dxi-item dataField="city" [disabled]="true"></dxi-item>
-                <dxi-item dataField="postal_code" [disabled]="true"></dxi-item>
               </dxi-item>
-              <dxi-item itemType="group">
-                <dxi-item dataField="email" [label]="{text: 'Email'}" [disabled]="true"></dxi-item>
-                <dxi-item dataField="tel1" [label]="{text: 'Telephone 1'}" [disabled]="true"></dxi-item>
-                <dxi-item dataField="tel2" [label]="{text: 'Telephone 2'}" [disabled]="true"></dxi-item>
+              <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+                <dxi-item itemType="group">
+                  <dxi-item dataField="adress" [disabled]="true"></dxi-item>
+                  <dxi-item dataField="city" [disabled]="true"></dxi-item>
+                  <dxi-item dataField="postal_code" [disabled]="true"></dxi-item>
+                </dxi-item>
+                <dxi-item itemType="group">
+                  <dxi-item dataField="email" [label]="{text: 'Email'}" [disabled]="true"></dxi-item>
+                  <dxi-item dataField="tel1" [label]="{text: 'Telephone 1'}" [disabled]="true"></dxi-item>
+                  <dxi-item dataField="tel2" [label]="{text: 'Telephone 2'}" [disabled]="true"></dxi-item>
+                </dxi-item>
               </dxi-item>
-            </dxi-item>
-          </dx-form>
+            </dx-form>
+          </div>
         </div>
-        </div>
+        <button class="btn btn-accent" i18n><i class="fa fa-plus"></i> Add Third party</button>
 
         <app-tiers-form [isEdit]="false" [tier]="tier" [isWizard]="true" *ngIf="addThird"></app-tiers-form>
 

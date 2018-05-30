@@ -1,4 +1,6 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+import ArrayStore from 'devextreme/data/array_store';
+import DataSource from 'devextreme/data/data_source';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +10,7 @@ export class Third {
 
   id: number;
   types: any;
-  code_siam: string;
-  code_as400: string;
+  code: number;
   civility: string;
   social_reason: string;
   rc: string;
@@ -18,9 +19,6 @@ export class Third {
   ice: string;
   last_name: string;
   first_name: string;
-  ar_last_name: string;
-  ar_first_name: string;
-  commune: string;
   cin: string;
   date_birth: Date;
   date_death: Date;
@@ -41,11 +39,8 @@ export class Third {
   payment_mode: string;
   dette: number;
   etat: boolean;
-  bank_accounts: [{
-    id: number,
-    bank: string,
-    rib: string
-  }];
+  bank_name: string;
+  rib: number;
   isCorporation: boolean;
   actionsPermission: any;
   created_date: Date;
@@ -65,5 +60,20 @@ export class Third {
     this.etat = true;
     this.isCorporation = false;
     this.payment_mode = 'Virement';
+  }
+
+  /**
+   * Devextreme data source
+   * @param {Third[]} dat
+   * @returns {DevExpress.data.DataSource}
+   */
+  static getDataSource = (dat: Third[]) => {
+    return new DataSource({
+      store: new ArrayStore({
+        data: dat,
+        key: 'id'
+      }),
+      searchExpr: ['cin']
+    });
   }
 }
