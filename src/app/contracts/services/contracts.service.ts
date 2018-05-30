@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Contract } from '../classes/contract';
+import {Observable} from 'rxjs';
+import {environment} from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Contract} from '../classes/contract';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContractsService {
+
   routeName: string;
   private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
   private options = {
@@ -74,5 +75,15 @@ export class ContractsService {
    */
   dataFormatter(data, test) {
     return (!test) ? data[0]['data'] : data;
+  }
+
+  /**
+   *
+   * @returns {any}
+   */
+  getAllContracts(): any {
+    //
+    // return this.http.get(`${environment.apiUrl}/contracts`);
+    return [];
   }
 }

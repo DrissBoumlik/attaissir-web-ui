@@ -1,4 +1,7 @@
 import {Injectable} from '@angular/core';
+import DevExpress from 'devextreme/bundles/dx.all';
+import ArrayStore = DevExpress.data.ArrayStore;
+import DataSource = DevExpress.data.DataSource;
 
 @Injectable({
   providedIn: 'root',
@@ -65,5 +68,19 @@ export class Third {
     this.etat = true;
     this.isCorporation = false;
     this.payment_mode = 'Virement';
+  }
+  /**
+   * Devextreme data source
+   * @param {Third[]} dat
+   * @returns {DevExpress.data.DataSource}
+   */
+  static getDataSource = (dat: Third[]) => {
+    return new DataSource({
+      store: new ArrayStore({
+        data: dat,
+        key: 'id'
+      }),
+      searchExpr: ['cin']
+    });
   }
 }
