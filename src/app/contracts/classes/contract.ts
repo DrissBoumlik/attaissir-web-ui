@@ -5,6 +5,7 @@ export class Contract {
   id: number;
   ref: string;
   tiers: Third;
+  status = 'en_cours';
   structure: Structure;
   date_de_signature: Date;
   date_de_debut: Date;
