@@ -9,7 +9,7 @@ import { DefaultComponent } from '../theme/pages/default/default.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'tiers',
     component: DefaultComponent,
     children: [
       { path: '', component: IndexComponent },

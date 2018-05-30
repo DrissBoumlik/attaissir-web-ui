@@ -29,7 +29,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   exports: [
     TiersFormComponent,
     DxFormModule,
-    DxDataGridModule
+    DxDataGridModule,
+    FormsModule
   ],
   declarations: [
     TiersFormComponent,

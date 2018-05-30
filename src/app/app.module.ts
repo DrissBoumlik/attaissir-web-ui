@@ -11,7 +11,6 @@ import { ScriptLoaderService } from './_services/script-loader.service';
 import { ThirdsModule } from './thirds/thirds.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ContractsModule } from './contracts/contracts.module';
-import { DxFormModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -29,11 +28,12 @@ import { DxFormModule } from 'devextreme-angular';
     ContractsModule,
     ToastrModule.forRoot(),
   ],
+  exports: [],
   providers: [{
     provide: LOCALE_ID,
     useValue: 'fr'
   },
-    ScriptLoaderService
+    ScriptLoaderService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

@@ -23,9 +23,18 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       case 'tiers': {
         this.sections = [
           { icon: 'line-graph', name: 'DashBoard', url: './' },
-          { icon: 'plus', name: 'Nuveau agrégé', url: 'add' },
-          { icon: 'list', name: 'Liste des  agrégés', url: 'list' },
+          { icon: 'plus', name: 'New Aggregated'/*Nuveau agrégé*/, url: 'add' },
+          { icon: 'list', name: 'Aggregated List'/*Liste des  agrégés*/, url: 'list' },
         ];
+        break;
+      }
+      case 'contrats': {
+        this.sections = [
+          { icon: 'line-graph', name: 'DashBoard', url: './' },
+          { icon: 'plus', name: 'New Contract', url: 'wizard' },
+          { icon: 'list', name: 'Contracts List', url: 'list' },
+        ];
+        break;
       }
     }
   }
