@@ -86,7 +86,7 @@ export class ContractsService {
     // return this.http.get(`${environment.apiUrl}/contracts`);
     const contrat = new Contract();
     contrat.id = 1;
-    contrat.tiers = {
+    /*contrat.tiers = {
       id: 1,
       types: {
         id: '1',
@@ -147,7 +147,7 @@ export class ContractsService {
       actionsPermission: null,
       created_date: null,
       updated_date: null,
-    };
+    };*/
     contrat.arrondissement = 'arrondissement';
     contrat.campagne = '2018/2019';
     contrat.CDA = 698;
@@ -162,7 +162,7 @@ export class ContractsService {
     contrat.province = 'province1';
     contrat.ref = 'ref1';
     contrat.secteur = 'secteur1';
-    contrat.structure = {
+    /*contrat.structure = {
       id: 11,
       libelle: 'sidi bennour',
       code: '1p11',
@@ -178,7 +178,7 @@ export class ContractsService {
         id: '3',
         libelle: 'division'
       }
-    };
+    };*/
     contrat.superficie_contractee = 500;
     contrat.superficie_total = 600;
     contrat.type_de_bien = 'semis';

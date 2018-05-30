@@ -11,7 +11,8 @@ export class Third {
 
   id: number;
   types: any;
-  code: number;
+  code_siam: string;
+  code_as400: string;
   civility: string;
   social_reason: string;
   rc: string;
@@ -29,6 +30,7 @@ export class Third {
   address: string;
   city: string;
   street: string;
+  commune: string;
   postal_code: number;
   tel1: string;
   tel2: string;
