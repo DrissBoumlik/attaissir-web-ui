@@ -24,6 +24,7 @@ export class TiersFormComponent implements OnInit {
   gender: any;
   payment_mode: any;
   phonePattern: any;
+  ribPattern: any;
   locale: string;
 
   constructor() {
@@ -38,26 +39,65 @@ export class TiersFormComponent implements OnInit {
     };
     this.education_level = {
       dataSource: [
-        'Primary',
-        'Secondary school',
-        'Secondary qualifying',
-        'High school',
-        'Higher education',
-        'Illiterate',
-      ]
+        {
+          Name: 'Primary',
+          ID: 'primaire'
+        },
+        {
+          Name: 'Secondary school',
+          ID: 'secondaire_college'
+        },
+        {
+          Name: 'Secondary qualifying',
+          ID: 'secondaire_qualifiant'
+        },
+        {
+          Name: 'High school',
+          ID: 'bachelier'
+        },
+        {
+          Name: 'Higher education',
+          ID: 'enseignement_superieur'
+        },
+        {
+          Name: 'Illiterate',
+          ID: 'ignorant'
+        }
+      ],
+      displayExpr: 'Name',
+      valueExpr: 'ID'
     };
     this.situation = {
       dataSource: [
-        'Single',
-        'Marry',
-        'Divorce'
-      ]
+        {
+          Name: 'Single',
+          ID: 'celibataire'
+        },
+        {
+          Name: 'Marry',
+          ID: 'marier'
+        },
+        {
+          Name: 'Divorce',
+          ID: 'divorcer'
+        }
+      ],
+      displayExpr: 'Name',
+      valueExpr: 'ID'
     };
     this.gender = {
-      dataSource: [
-        'Male',
-        'Female',
-      ]
+      items: [
+        {
+          Name: 'Male',
+          ID: 'm'
+        },
+        {
+          Name: 'Female',
+          ID: 'f'
+        }
+      ],
+      displayExpr: 'Name',
+      valueExpr: 'ID'
     };
     this.dateOptions = {
       invalidDateMessage: 'The date must have the following format: dd/MM/yyyy',
@@ -70,13 +110,29 @@ export class TiersFormComponent implements OnInit {
     };
     this.payment_mode = {
       dataSource: [
-        'Virement',
-        'Cheque'
+        {
+          Name: 'Virement',
+          ID: 'virement'
+        },
+        {
+          Name: 'Cheque',
+          ID: 'cheque'
+        }
       ],
-      layout: 'horizontal'
+      layout: 'horizontal',
+      displayExpr: 'Name',
+      valueExpr: 'ID'
     };
     this.phonePattern = /^0[5|6|7]\s*\d{4}\s*\d{4}$/;
+    this.ribPattern = /^\d{5}\s*\d{5}\s*\d{12}\s*\d{2}$/;
+  }
 
+  /**
+   * Update civility value
+   * @param e
+   */
+  onMoraleChanged = (e) => {
+    this.tier.civility = (this.tier.morale) ? 'morale' : 'physique';
   }
 
 }

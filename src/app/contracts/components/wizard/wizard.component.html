@@ -117,7 +117,7 @@
               </dxi-item>
               <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
                 <dxi-item itemType="group">
-                  <dxi-item dataField="adress" [disabled]="true"></dxi-item>
+                  <dxi-item dataField="address" [disabled]="true"></dxi-item>
                   <dxi-item dataField="city" [disabled]="true"></dxi-item>
                   <dxi-item dataField="postal_code" [disabled]="true"></dxi-item>
                 </dxi-item>
@@ -129,10 +129,11 @@
               </dxi-item>
             </dx-form>
           </div>
+          <button class="btn btn-accent btn-float" *ngIf="!addThird" (click)="addThird = true"><i class="fa fa-plus"></i> <span i18n>Add Third party</span></button>
         </div>
-        <button class="btn btn-accent" i18n><i class="fa fa-plus"></i> Add Third party</button>
 
-        <app-tiers-form [isEdit]="false" [tier]="tier" [isWizard]="true" *ngIf="addThird"></app-tiers-form>
+        <app-tiers-form [isEdit]="false" [tier]="tier" [isWizard]="true" *ngIf="addThird" [cancelBtn]="addThird"></app-tiers-form>
+        <button class="btn btn-accent btn-float" *ngIf="addThird" (click)="addThird = false"><i class="fa fa-remove"></i> <span i18n>Cancel</span></button>
 
       </div>
       <!-- End Agreggated Informations -->

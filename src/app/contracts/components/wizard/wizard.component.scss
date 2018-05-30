@@ -3,6 +3,12 @@
   margin-left: 2px;
 }
 
+::ng-deep .btn-float{
+  bottom: 0;
+  position: absolute;
+  right: 41px;
+}
+
 ::ng-deep .left {
   float: left;
   width: 330px;

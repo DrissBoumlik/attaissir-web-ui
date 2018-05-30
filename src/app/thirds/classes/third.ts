@@ -20,11 +20,13 @@ export class Third {
   ice: string;
   last_name: string;
   first_name: string;
+  ar_last_name: string;
+  ar_first_name: string;
   cin: string;
   date_birth: Date;
   date_death: Date;
   gender: string;
-  adress: string;
+  address: string;
   city: string;
   street: string;
   postal_code: number;
@@ -40,27 +42,32 @@ export class Third {
   payment_mode: string;
   dette: number;
   etat: boolean;
-  bank_name: string;
-  rib: number;
   isCorporation: boolean;
   actionsPermission: any;
   created_date: Date;
   updated_date: Date;
+  bank_accounts: any;
+  morale: boolean;
 
   constructor() {
     this.types = [
       {
-        id: 0,
+        id: null,
         libelle: ''
       }
     ];
-    this.actionsPermission = {
-      delete: false,
-      update: false
-    };
+    this.bank_accounts = [
+        {
+          id: null,
+          bank: '',
+          rib: null
+      }
+    ];
     this.etat = true;
     this.isCorporation = false;
-    this.payment_mode = 'Virement';
+    this.payment_mode = 'virement';
+    this.morale = false;
+    this.civility = (this.morale) ? 'morale' : 'physique';
   }
   /**
    * Devextreme data source
