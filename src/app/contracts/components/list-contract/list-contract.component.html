@@ -73,28 +73,31 @@
 </div>
 
 <div class="m-content">
-
   <dx-data-grid
+    id="gridContainer"
     (onEditStart)="onEditcontrat($event)"
+    (onRowRemoving)="onDeleteContract($event.data.id)"
     [dataSource]="contracts"
-    [columnHidingEnabled]="true"
-    [allowColumnReordering]="true"
     [remoteOperations]="true"
     height="600"
     showBorders="true"
-    [masterDetail]="{ enabled: true, template: 'detail' }">
+    (onSelectionChanged)="selectionChanged($event)"
+    (onContentReady)="contentReady($event)"
+    [masterDetail]="{ enabled: true, template: 'detail' }"
+    KeyExpr="id">
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-header-filter [visible]="true"></dxo-header-filter>
     <dxo-group-panel [visible]="true"></dxo-group-panel>
-    <dxo-scrolling mode="virtual"></dxo-scrolling>
+    <dxo-scrolling mode="infinite"></dxo-scrolling>
     <dxo-editing
-      mode="row"
-      [allowAdding]="true"
-      [allowUpdating]="true"
-      [allowDeleting]="true">
+      mode="single"
+      [useIcons]="true"
+      [allowDeleting]="true"
+      [allowUpdating]="true">
     </dxo-editing>
     <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+    <dxo-selection mode="single"></dxo-selection>
 
     <dxi-column dataField="id" caption="Id Contrat">
     </dxi-column>
@@ -102,22 +105,479 @@
     </dxi-column>
     <dxi-column dataField="date_de_debut" caption="Date de début" dataType="date">
     </dxi-column>
-    <dxi-column dataField="duree_de_contrat" caption="durée de contrat" dataType="Text"></dxi-column>
+    <dxi-column dataField="duree_de_contrat" caption="durée de contrat" dataType="Text">
+    </dxi-column>
     <dxi-column dataField="campagne" caption="Campagne">
     </dxi-column>
-    <dxi-column dataField="tiers.first_name" caption="Agrégé" datatype="Text">
+    <dxi-column dataField="tiers.id" caption="Agrégé" datatype="Text">
     </dxi-column>
     <dxi-column dataField="structure.libelle" caption="Structure" dataType="Text">
     </dxi-column>
 
-    <div *dxTemplate="let contract of contracts">
-      <dx-data-grid
-        [dataSource]="contract.tiers.types"
-        showBorders="true">
-        <dxi-column dataField="id" caption="Id Contrat">
-        </dxi-column>
-      </dx-data-grid>
-    </div>
-  </dx-data-grid>
+    <div *dxTemplate="let contract of 'detail'">
+      <div class="m-portlet m-portlet--tabs" >
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text" style="padding-left: 5%">
+                Informations supplementaire
+              </h3>
+            </div>
+          </div>
+          <div class="m-portlet__head-tools" style="float: left">
+            <ul class="nav nav-tabs m-tabs-line m-tabs-line--right" role="tablist">
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link active show" data-toggle="tab" [href]="'#tab2'+contract.data.id"
+                   role="tab" aria-selected="true">
+                  <i class="flaticon-file"></i> Agrégé
+                </a>
+              </li>
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link" data-toggle="tab" [href]="'#tab1'+contract.data.id" role="tab"
+                   aria-selected="false">
+                  <i class="flaticon-avatar"></i> Contrat
+                </a>
+              </li>
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link" data-toggle="tab" [href]="'#tab3'+contract.data.id" role="tab"
+                   aria-selected="false">
+                  <i class="flaticon-info"></i> Structure
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="m-portlet__body">
+          <div class="tab-content">
+            <div class="tab-pane" [id]="'tab1'+contract.data.id" role="tabpanel">
 
+            </div>
+            <div class="tab-pane active" [id]="'tab2'+contract.data.id" role="tabpanel">
+              <div class="card ">
+                <h5 class="card-header">
+                  Informations générale
+                </h5>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-3">
+                              Nom:
+                            </div>
+                            <div class="col-md-9">
+                              <p class="font-weight-bold">{{ contract.data.tiers.last_name }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-3">
+                              Prénom:
+                            </div>
+                            <div class="col-md-9">
+                              <p class="font-weight-bold">{{ contract.data.tiers.first_name }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6" dir="rtl">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="row" style="float: right;">
+                            <div class="col-md-9">
+                              الاسم الشخصي:
+                            </div>
+                            <div class="col-md-3">
+                              <p class="font-weight-bold">{{ contract.data.tiers.ar_first_name }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-9">
+                              الاسم العائلي:
+                            </div>
+                            <div class="col-md-3">
+                              <p class="font-weight-bold">{{ contract.data.tiers.ar_last_name }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <div class="row">
+                        <div class="col-md-3">
+                          CIN:
+                        </div>
+                        <div class="col-md-9">
+                          <p class="font-weight-bold">{{ contract.data.tiers.cin }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-8">
+                          numéro de téléphone principal:
+                        </div>
+                        <div class="col-4">
+                          <p class="font-weight-bold">{{ contract.data.tiers.tel1 }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-8">
+                          numéro de téléphone secondaire:
+                        </div>
+                        <div class="col-md-4" style="float: right;">
+                          <p class="font-weight-bold">{{ contract.data.tiers.tel2 }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-6 container">
+                      <div class="row">
+                        <div class="col-md-6 container">
+                          <div class="row">
+                            <div class="col-md-3">
+                              Email:
+                            </div>
+                            <div class="col-md-9">
+                              <p class="font-weight-bold">{{ contract.data.tiers.address_email }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6 container">
+                          <div class="row">
+                            <div class="col-md-6">
+                              Situation familiale:
+                            </div>
+                            <div class="col-md-6" style="float: right">
+                              <p class="font-weight-bold">{{ contract.data.tiers.situation }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 container">
+                      <div class="row">
+                        <div class="col-md-6 container">
+                          <div class="row">
+                            <div class="col-md-5">
+                              Education:
+                            </div>
+                            <div class="col-md-7">
+                              <p class="font-weight-bold">{{ contract.data.tiers.education_level }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6 container">
+                          <div class="row">
+                            <div class="col-md-9" style="float: left;">
+                              Nombre d'enfants:
+                            </div>
+                            <div class="col-md-3">
+                              <p class="font-weight-bold">{{ contract.data.tiers.children_number }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="card ">
+                <h5 class="card-header">
+                  Adresse
+                </h5>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="row">
+                        <div class="col-md-3">
+                          Adresse:
+                        </div>
+                        <div class="col-md-9">
+                          <p class="font-weight-bold">{{ contract.data.tiers.adress }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="row">
+                        <div class="col-3">
+                          Ville:
+                        </div>
+                        <div class="col-7">
+                          <p class="font-weight-bold">{{ contract.data.tiers.city }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="row">
+                        <div class="col-md-5">
+                          Commune:
+                        </div>
+                        <div class="col-md-7" style="float: right;">
+                          <p class="font-weight-bold">{{ contract.data.tiers.commune }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="row">
+                        <div class="col-md-5">
+                          Code postale:
+                        </div>
+                        <div class="col-md-7">
+                          <p class="font-weight-bold">{{ contract.data.tiers.postal_code }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="card ">
+                <h5 class="card-header">
+                  Informations techniques
+                </h5>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="row">
+                        <div class="col-md-6">
+                          Code SIAM:
+                        </div>
+                        <div class="col-md-6">
+                          <p class="font-weight-bold">{{ contract.data.tiers.code_siam }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="row">
+                        <div class="col-md-6">
+                          Code AS400:
+                        </div>
+                        <div class="col-md-6">
+                          <p class="font-weight-bold">{{ contract.data.tiers.code_as400 }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="row">
+                        <div class="col-md-8">
+                          Registre de commerce:
+                        </div>
+                        <div class="col-md-4">
+                          <p class="font-weight-bold">{{ contract.data.tiers.rc }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="row">
+                        <div class="col-md-7">
+                          Numéro de patente:
+                        </div>
+                        <div class="col-md-5">
+                          <p class="font-weight-bold">{{ contract.data.tiers.patent_number }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="row">
+                        <div class="col-md-7">
+                          Identification fiscale:
+                        </div>
+                        <div class="col-md-3">
+                          <p class="font-weight-bold">{{ contract.data.tiers.if }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="row">
+                        <div class="col-7">
+                          Identifiant commun de l’entreprise:
+                        </div>
+                        <div class="col-3">
+                          <p class="font-weight-bold">{{ contract.data.tiers.ice }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="row">
+                        <div class="col-7">
+                          Retraité:
+                        </div>
+                        <div class="col-3">
+                          <p class="font-weight-bold" *ngIf="contract.data.tiers.retreat">Oui</p>
+                          <p class="font-weight-bold" *ngIf="!contract.data.tiers.retreat">Non</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="row">
+                        <div class="col-7">
+                          Assuré:
+                        </div>
+                        <div class="col-3">
+                          <p class="font-weight-bold" *ngIf="contract.data.tiers.assurance">Oui</p>
+                          <p class="font-weight-bold" *ngIf="!contract.data.tiers.assurance">Non</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="card ">
+                <h5 class="card-header">
+                  Information bancaire
+                </h5>
+                <div class="card-body">
+                  <div *ngFor="let bank_account of contract.data.tiers.bank_accounts; let i = index">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="row">
+                          <div class="col-md-9">
+                            Compte №:
+                          </div>
+                          <div class="col-md-3">
+                            <p class="font-weight-bold">{{ i }}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="row">
+                          <div class="col-3">
+                            Banque:
+                          </div>
+                          <div class="col-9">
+                            <p class="font-weight-bold">{{ bank_account.bank }}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="row">
+                          <div class="col-md-3">
+                            RIB:
+                          </div>
+                          <div class="col-md-9" style="float: right;">
+                            <p class="font-weight-bold">{{ bank_account.rib }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" [id]="'tab2'+contract.data.id" role="tabpanel">
+              <div class="card ">
+                <h5 class="card-header">
+                  Informations générale
+                </h5>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-3">
+                              Libelle:
+                            </div>
+                            <div class="col-md-9">
+                              <p class="font-weight-bold">{{ contract.data.structure.libelle }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-3">
+                              Code:
+                            </div>
+                            <div class="col-md-9">
+                              <p class="font-weight-bold">{{ contract.data.structure.code }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-6">
+                              Ville:
+                            </div>
+                            <div class="col-md-6">
+                              <p class="font-weight-bold">{{ contract.data.structure.city }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-3">
+                              Code postale:
+                            </div>
+                            <div class="col-md-9">
+                              <p class="font-weight-bold">{{ contract.data.structure.postal_code }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-3">
+                          Adresse:
+                        </div>
+                        <div class="col-md-9">
+                          <p class="font-weight-bold">{{ contract.data.structure.address }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-8">
+                          numéro de téléphone principal:
+                        </div>
+                        <div class="col-4">
+                          <p class="font-weight-bold">{{ contract.data.structure.tel1 }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-8">
+                          numéro de téléphone secondaire:
+                        </div>
+                        <div class="col-md-4">
+                          <p class="font-weight-bold">{{ contract.data.structure.tel2 }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </dx-data-grid>
 </div>
