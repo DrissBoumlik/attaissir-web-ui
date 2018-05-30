@@ -14,11 +14,11 @@ const routes: Routes = [
         loadChildren: './pages/default/index/index.module#IndexModule'
       },
       {
-        path: 'contrats',
+        path: '',
         loadChildren: '../contracts/contracts.module#ContractsModule'
       },
       {
-        path: 'tiers',
+        path: '',
         loadChildren: '../thirds/thirds.module#ThirdsModule'
       },
       {
@@ -27,8 +27,8 @@ const routes: Routes = [
       },
       {
         path: '',
-        'redirectTo': 'index',
-        'pathMatch': 'full'
+        redirectTo: 'index',
+        pathMatch: 'full'
       }
     ]
   },

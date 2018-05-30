@@ -29,7 +29,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.tierService.getThirds().subscribe(third_parties => {
-      this.third_parties = this.tiers = this.tierService.dataFormatter(third_parties, true);
+      this.third_parties = this.tiers = this.tierService.dataFormatter(third_parties, false);
       this.third_parties = this.third_parties.map(val => {
         delete val.civility;
         delete val.code;

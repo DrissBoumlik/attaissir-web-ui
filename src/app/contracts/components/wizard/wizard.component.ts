@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Third} from '../../../thirds/classes/third';
-import {Structure} from '../../classes/structure';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
+import { Third } from '../../../thirds/classes/third';
+import { Structure } from '../../classes/structure';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-wizard',
@@ -17,15 +18,27 @@ export class WizardComponent implements OnInit {
   structures: any;
   searchForm: any;
   addThird: boolean;
+  thirds: any;
+  tiers: Third[];
   addButtonOptions: any;
   removeButtonOptions: any;
 
   constructor(public tier: Third,
-              public structure: Structure,
-              public tierService: ThirdsService) {
+    public currentThird: Third,
+    public structure: Structure,
+    public tierService: ThirdsService,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
+    this.tierService.getThirds().subscribe(tiers => {
+      this.tiers = this.tierService.dataFormatter(tiers, false);
+      this.thirds = Third.getDataSource(this.tiers);
+
+      console.log(this.tiers);
+      console.log(this.thirds);
+    });
+
     this.addThird = false;
     this.searchForm = {
       cin: ''
@@ -49,24 +62,37 @@ export class WizardComponent implements OnInit {
       type: 'danger',
       useSubmitBehavior: false,
       onClick: (e) => {
-        console.log(this.campaigns);
         const campaign = this.campaigns[this.campaigns.length - 1];
         this.campaigns.pop(campaign + 1);
-        console.log(this.campaigns);
       }
     };
   }
 
-  campaignProps(campaign: number) {
+  goToArea = ($e) => {
+    if (!this.currentThird.id) {
+      this.toastr.error('Select or create a Aggregated first!');
+    }
+  }
+
+  goToParcels = ($e) => {
+    // code here
+  }
+
+  campaignProps = (campaign: number) => {
     return `${campaign} - ${campaign + 1}`;
   }
 
-  searchCIN() {
+  listSelectionChanged = (e) => {
+    this.currentThird = e.addedItems[0];
+  }
+
+
+  searchCIN = () => {
     console.log(this.searchForm);
     this.tierService.getThirdByCIN(this.searchForm.cin);
   }
 
-  logEvent(e) {}
+  logEvent(e) { }
 
   finishFunction() {
   }

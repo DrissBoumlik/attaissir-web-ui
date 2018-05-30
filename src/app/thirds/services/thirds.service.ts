@@ -18,8 +18,10 @@ export class ThirdsService {
   routeName: string;
 
   constructor(private http: HttpClient) {
-    this.routeName = (true) ? 'comments' : 'thirds';
+    this.routeName = (environment.apiUrl === 'http://json.code.go') ? 'comments' : 'third-parties';
   }
+
+
 
   /**
    * Get a collection of Third parties
@@ -70,17 +72,17 @@ export class ThirdsService {
    * @param id  the id of the third party intended to delete
    * @returns {Observable<any>}
    */
-  deleteThird(id: number): Observable<any> {
+  deleteThird = (id: number): Observable<any> => {
     return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, this.options);
   }
 
   /**
    * Format data depending of API
-   * @param data
-   * @param test
-   * @returns {any}
+   * @param {any} dat
+   * @param {boolean} test
+   * @returns {Third[]}
    */
-  dataFormatter(data, test) {
-    return (!test) ? data[0]['data'] : data;
+  dataFormatter = (dat: any, test: boolean) => {
+    return (!test) ? dat['data'] : dat;
   }
 }
