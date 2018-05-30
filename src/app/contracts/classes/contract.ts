@@ -1,14 +1,12 @@
-import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root',
-})
+import {Third} from '../../thirds/classes/third';
+import {Structure} from './structure';
 
 export class Contract {
   id: number;
   ref: string;
-  tiers: number;
-  structure: number;
+  tiers: Third;
+  status = 'en_cours';
+  structure: Structure;
   date_de_signature: Date;
   date_de_debut: Date;
   duree_de_contrat: number;
