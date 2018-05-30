@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Third } from '../../../thirds/classes/third';
 import { Structure } from '../../classes/structure';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
-import {ToastrService} from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-wizard',
@@ -27,7 +27,7 @@ export class WizardComponent implements OnInit {
     public currentThird: Third,
     public structure: Structure,
     public tierService: ThirdsService,
-              private toastr: ToastrService) {
+    private toastr: ToastrService) {
   }
 
   ngOnInit() {

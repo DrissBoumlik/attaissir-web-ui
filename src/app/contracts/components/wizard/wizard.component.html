@@ -78,7 +78,7 @@
                     [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome'}" (stepExit)="goToArea($event)" i18n-step-title>
 
       <!-- Agreggated Informations -->
-      <div class="container">
+      <div class="">
         <h1 i188n>Agreggated Informations</h1>
         <hr>
 
@@ -126,7 +126,6 @@
                 <dxi-item dataField="tel1" [label]="{text: 'Telephone 1'}" [disabled]="true"></dxi-item>
                 <dxi-item dataField="tel2" [label]="{text: 'Telephone 2'}" [disabled]="true"></dxi-item>
               </dxi-item>
-              <dxi-item dataField="Notes" [colSpan]="2" editorType="dxTextArea" [editorOptions]="{ height: 140 }"></dxi-item>
             </dxi-item>
           </dx-form>
         </div>
@@ -134,13 +133,12 @@
 
         <app-tiers-form [isEdit]="false" [tier]="tier" [isWizard]="true" *ngIf="addThird"></app-tiers-form>
 
-        <!-- End Agreggated Informations -->
-
-        <div *ngIf="tier.id"></div>
-
       </div>
+      <!-- End Agreggated Informations -->
 
-      <p><button type="button" class="btn btn-success" awNextStep i18n>Next Step</button></p>
+      <p>
+        <button type="button" class="btn btn-success" awNextStep i18n>Next Step</button>
+      </p>
     </aw-wizard-step>
     <aw-wizard-step stepTitle="Contracted area" [canEnter]="currentThird?.id > 0" (stepExit)="goToParcels($event)" [navigationSymbol]="{ symbol: '&#xf039;', fontFamily: 'FontAwesome'}"
                     awOptionalStep i18n-step-title>
@@ -183,8 +181,10 @@
         </form>
       </div>
 
-      <button type="button" class="btn default" awPreviousStep i18n i18n>Previous Step</button>
-      <button type="button" class="btn btn-success" awNextStep i18n i18n>Next Step</button>
+      <p>
+        <button type="button" class="btn default" awPreviousStep i18n i18n>Previous Step</button>
+        <button type="button" class="btn btn-success" awNextStep i18n i18n>Next Step</button>
+      </p>
     </aw-wizard-step>
     <aw-wizard-step stepTitle="Parcels" i18n-step-title
                     [navigationSymbol]="{ symbol: '&#xf1ad;', fontFamily: 'FontAwesome'}">
@@ -194,7 +194,6 @@
         <dx-data-grid
           id="gridContainer"
           [dataSource]="structures"
-
           (onEditingStart)="logEvent('EditingStart')"
           (onInitNewRow)="logEvent('InitNewRow')"
           (onRowInserting)="logEvent('RowInserting')"
@@ -203,7 +202,6 @@
           (onRowUpdated)="logEvent('RowUpdated')"
           (onRowRemoving)="logEvent('RowRemoving')"
           (onRowRemoved)="logEvent('RowRemoved')">
-
           <dxo-paging [enabled]="true"></dxo-paging>
           <dxo-editing
             mode="row"
@@ -215,8 +213,10 @@
         </dx-data-grid>
       </div>
 
-      <button type="button" class="btn default" awPreviousStep i18n>Previous Step</button>
-      <button type="button" class="btn btn-success" (click)="finishFunction()" i18n>Finish</button>
+      <p>
+        <button type="button" class="btn default" awPreviousStep i18n>Previous Step</button>
+        <button type="button" class="btn btn-success" (click)="finishFunction()" i18n>Finish</button>
+      </p>
     </aw-wizard-step>
   </aw-wizard>
 
