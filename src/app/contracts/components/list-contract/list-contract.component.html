@@ -79,7 +79,7 @@
     (onRowRemoving)="onDeleteContract($event.data.id)"
     [dataSource]="contracts"
     [remoteOperations]="true"
-    height="600"
+    height="800"
     showBorders="true"
     (onSelectionChanged)="selectionChanged($event)"
     (onContentReady)="contentReady($event)"
@@ -109,8 +109,8 @@
     </dxi-column>
     <dxi-column dataField="campagne" caption="Campagne">
     </dxi-column>
-    <dxi-column dataField="tiers.id" caption="Agrégé" datatype="Text">
-    </dxi-column>
+    <dxi-column dataField="tiers.last_name" caption="Nom agrégé" datatype="Text"></dxi-column>
+    <dxi-column dataField="tiers.first_name" caption="Prénom agrégé" datatype="Text"></dxi-column>
     <dxi-column dataField="structure.libelle" caption="Structure" dataType="Text">
     </dxi-column>
 
@@ -129,13 +129,13 @@
               <li class="nav-item m-tabs__item">
                 <a class="nav-link m-tabs__link active show" data-toggle="tab" [href]="'#tab2'+contract.data.id"
                    role="tab" aria-selected="true">
-                  <i class="flaticon-file"></i> Agrégé
+                  <i class="flaticon-avatar"></i> Agrégé
                 </a>
               </li>
               <li class="nav-item m-tabs__item">
                 <a class="nav-link m-tabs__link" data-toggle="tab" [href]="'#tab1'+contract.data.id" role="tab"
                    aria-selected="false">
-                  <i class="flaticon-avatar"></i> Contrat
+                  <i class="flaticon-file"></i> Contrat
                 </a>
               </li>
               <li class="nav-item m-tabs__item">
@@ -235,8 +235,8 @@
                         <div class="col-md-8">
                           numéro de téléphone secondaire:
                         </div>
-                        <div class="col-md-4" style="float: right;">
-                          <p class="font-weight-bold">{{ contract.data.tiers.tel2 }}</p>
+                        <div class="col-md-4">
+                          <p class="font-weight-bold">{{ contract.data.tiers.tel2  || 'N/A'}}</p>
                         </div>
                       </div>
                     </div>
@@ -404,7 +404,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                       <div class="row">
                         <div class="col-7">
                           Identifiant commun de l’entreprise:
@@ -414,7 +414,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="row">
                         <div class="col-7">
                           Retraité:
@@ -425,7 +425,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="row">
                         <div class="col-7">
                           Assuré:
@@ -482,7 +482,7 @@
                 </div>
               </div>
             </div>
-            <div class="tab-pane" [id]="'tab2'+contract.data.id" role="tabpanel">
+            <div class="tab-pane" [id]="'tab3'+contract.data.id" role="tabpanel">
               <div class="card ">
                 <h5 class="card-header">
                   Informations générale
@@ -527,10 +527,10 @@
                         </div>
                         <div class="col-md-6">
                           <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-5">
                               Code postale:
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-7">
                               <p class="font-weight-bold">{{ contract.data.structure.postal_code }}</p>
                             </div>
                           </div>
@@ -556,7 +556,7 @@
                           numéro de téléphone principal:
                         </div>
                         <div class="col-4">
-                          <p class="font-weight-bold">{{ contract.data.structure.tel1 }}</p>
+                          <p class="font-weight-bold">{{ contract.data.structure.tel1 || 'N/A' }}</p>
                         </div>
                       </div>
                     </div>
@@ -566,7 +566,7 @@
                           numéro de téléphone secondaire:
                         </div>
                         <div class="col-md-4">
-                          <p class="font-weight-bold">{{ contract.data.structure.tel2 }}</p>
+                          <p class="font-weight-bold">{{ contract.data.structure.tel2 || 'N/A'}}</p>
                         </div>
                       </div>
                     </div>
