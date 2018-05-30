@@ -7,6 +7,7 @@ import {ArchwizardModule} from 'angular-archwizard';
 import {ThirdsModule} from '../thirds/thirds.module';
 import {ListContractComponent} from './components/list-contract/list-contract.component';
 import {DxDataGridModule, DxListModule, DxTemplateModule} from 'devextreme-angular';
+import {ContractsService} from './services/contracts.service';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import {DxDataGridModule, DxListModule, DxTemplateModule} from 'devextreme-angul
     WizardComponent,
     ListContractComponent
   ],
-  providers: [],
+  providers: [ContractsService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ContractsModule {
