@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
 
@@ -11,7 +11,6 @@ export class Third {
 
   id: number;
   types: any;
-  code_siam: string;
   code_as400: string;
   civility: string;
   social_reason: string;
@@ -46,13 +45,13 @@ export class Third {
   etat: boolean;
   isCorporation: boolean;
   actionsPermission: any;
-  created_date: Date;
-  updated_date: Date;
   bank_accounts: any;
   morale?: boolean;
+  created_at?: Date;
+  updated_at?: Date;
 
   constructor() {
-    this.types = [
+    /*this.types = [
       {
         id: null,
         libelle: ''
@@ -64,7 +63,7 @@ export class Third {
           bank: '',
           rib: null
       }
-    ];
+    ];*/
     this.etat = true;
     this.isCorporation = false;
     this.payment_mode = 'virement';

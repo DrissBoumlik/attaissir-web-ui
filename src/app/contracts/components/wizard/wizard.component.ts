@@ -3,6 +3,9 @@ import { Third } from '../../../thirds/classes/third';
 import { Structure } from '../../classes/structure';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
+import { Contract } from '../../classes/contract';
+import { CampaignService } from '../../services/campaign.service';
+import { Campaign } from '../../classes/campaign';
 
 @Component({
   selector: 'app-wizard',
@@ -12,13 +15,16 @@ import { ToastrService } from 'ngx-toastr';
 export class WizardComponent implements OnInit {
 
   navBarLayout: string;
-  campaigns: any;
-  campaign: string;
-  superficies: any;
+
+  campaignsRes: any[];
+  campaigns: any[];
+  campaignsForm: any;
+  contract: Contract;
   structures: any;
   searchForm: any;
   addThird: boolean;
   thirds: any;
+  area: number;
   tiers: Third[];
   addButtonOptions: any;
   removeButtonOptions: any;
@@ -27,6 +33,7 @@ export class WizardComponent implements OnInit {
     public currentThird: Third,
     public structure: Structure,
     public tierService: ThirdsService,
+    public campaignService: CampaignService,
     private toastr: ToastrService) {
   }
 
@@ -34,16 +41,60 @@ export class WizardComponent implements OnInit {
     this.tierService.getThirds().subscribe(tiers => {
       this.tiers = this.tierService.dataFormatter(tiers, false);
       this.thirds = Third.getDataSource(this.tiers);
-
-      console.log(this.tiers);
-      console.log(this.thirds);
+    }, error1 => {
+      console.log(error1);
+      this.toastr.error(error1.message);
     });
 
     this.addThird = false;
     this.searchForm = {
       cin: ''
     };
-    this.campaigns = [2019];
+    this.campaignsRes = [
+      {
+        id: 21,
+        libelle: '2019 - 2020',
+        start_date: 2019,
+        area: 0,
+        hidded: false
+      },
+      {
+        id: 22,
+        libelle: '2020 - 2021',
+        start_date: 2020,
+        area: 0,
+        hidded: true
+      },
+      {
+        id: 23,
+        libelle: '2021 - 2022',
+        start_date: 2021,
+        area: 0,
+        hidded: true
+      },
+      {
+        id: 24,
+        libelle: '2022 - 2023',
+        start_date: 2022,
+        area: 0,
+        hidded: true
+      },
+      {
+        id: 25,
+        libelle: '2023 - 2024',
+        start_date: 2023,
+        area: 0,
+        hidded: true
+      }
+    ];
+    this.campaigns = this.campaignsRes.filter(camp => !camp.hidded);
+    /*this.campaignService.getCampaigns().subscribe( camp => {
+      this.campaignsRes = this.campaignService.dataFormatter(camp, false);
+    }, error1 => {
+      console.log(error1);
+      this.toastr.error(error1.message);
+    });*/
+
     this.navBarLayout = 'large-filled-symbols';
 
     this.addButtonOptions = {
@@ -52,8 +103,8 @@ export class WizardComponent implements OnInit {
       type: 'success',
       useSubmitBehavior: false,
       onClick: (e) => {
-        const campaign = this.campaigns[this.campaigns.length - 1];
-        this.campaigns.push(campaign + 1);
+        const tmp = this.campaignsRes[this.campaigns.length];
+        this.campaigns.push(tmp);
       }
     };
     this.removeButtonOptions = {
@@ -62,8 +113,7 @@ export class WizardComponent implements OnInit {
       type: 'danger',
       useSubmitBehavior: false,
       onClick: (e) => {
-        const campaign = this.campaigns[this.campaigns.length - 1];
-        this.campaigns.pop(campaign + 1);
+        this.campaigns.pop();
       }
     };
   }
@@ -75,32 +125,38 @@ export class WizardComponent implements OnInit {
     return tocheck;
   }
 
-  goToArea = ($e) => {
+  onAreaChanged = (area, i) => {
+    this.campaigns[i].area = area;
+  }
+
+  goToArea = () => {
     if (!this.currentThird.cin) {
       this.toastr.error('Select or create a Aggregated first!');
+    } else {
+      console.log(this.currentThird);
     }
   }
 
-  goToParcels = ($e) => {
-    // code here
-  }
 
-  campaignProps = (campaign: number) => {
-    return `${campaign} - ${campaign + 1}`;
+  goToParcels = () => {
+    if (!this.currentThird.cin) {
+      this.toastr.error('Select at least one campaign to continue!');
+    } else {
+      console.log(this.currentThird);
+      console.log(this.campaigns);
+    }
   }
 
   listSelectionChanged = (e) => {
     this.currentThird = e.addedItems[0];
   }
 
-
-  searchCIN = () => {
-    console.log(this.searchForm);
-    this.tierService.getThirdByCIN(this.searchForm.cin);
+  logEvent(e) {
   }
 
-  logEvent(e) { }
-
   finishFunction() {
+    console.log(this.currentThird);
+    console.log(this.campaigns);
+    console.log(this.contract);
   }
 }

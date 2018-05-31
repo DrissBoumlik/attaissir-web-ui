@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Contract} from '../classes/contract';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Contract } from '../classes/contract';
 
 @Injectable({
   providedIn: 'root'
@@ -94,7 +94,6 @@ export class ContractsService {
         description: null
       },
       etat: false,
-      code_siam: '145',
       code_as400: '145',
       civility: 'morale',
       social_reason: 'graviton',
@@ -145,8 +144,8 @@ export class ContractsService {
       ],
       isCorporation: false,
       actionsPermission: null,
-      created_date: null,
-      updated_date: null,
+      created_at: null,
+      updated_at: null,
     };
     contrat.arrondissement = 'arrondissement';
     contrat.campagne = '2018/2019';

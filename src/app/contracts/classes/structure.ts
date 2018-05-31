@@ -17,6 +17,8 @@ export class Structure {
   email: string;
   logo: string;
   type: any;
+  created_at?: Date;
+  updated_at?: Date;
 
 
   constructor() {

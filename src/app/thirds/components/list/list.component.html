@@ -91,6 +91,10 @@
                [disabled]="selectedItems.length < 2"
                (onClick)="deleteRecords()">
     </dx-button>
+    <dxo-remote-operations
+      [sorting]="true"
+      [paging]="true">
+    </dxo-remote-operations>
 
     <dxo-editing
       mode="row"

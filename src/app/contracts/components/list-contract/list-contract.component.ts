@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Contract} from '../../classes/contract';
-import {ContractsService} from '../../services/contracts.service';
-import {Third} from '../../../thirds/classes/third';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {ToastrService} from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
+import { Contract } from '../../classes/contract';
+import { ContractsService } from '../../services/contracts.service';
+import { Third } from '../../../thirds/classes/third';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-contract',
@@ -14,8 +14,8 @@ export class ListContractComponent implements OnInit {
   contracts: Contract[];
 
   constructor(private contractsService: ContractsService,
-              private thirdService: ThirdsService,
-              private toastr: ToastrService) {
+    private thirdService: ThirdsService,
+    private toastr: ToastrService) {
   }
 
   ngOnInit() {

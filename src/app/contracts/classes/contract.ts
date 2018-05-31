@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Third} from '../../thirds/classes/third';
-import {Structure} from './structure';
+import { Third } from '../../thirds/classes/third';
+import { Structure } from './structure';
 
 @Injectable({
   providedIn: 'root',
@@ -30,4 +30,6 @@ export class Contract {
   type_de_sole: string;
   culture_anterieure: string;
   mode_irrigation: string;
+  created_at?: Date;
+  updated_at?: Date;
 }
