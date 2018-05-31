@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Injectable } from '@angular/core';
 import { Third } from '../../thirds/classes/third';
 import { Structure } from './structure';
@@ -6,19 +7,23 @@ import { Structure } from './structure';
   providedIn: 'root',
 })
 
+
+
 export class Contract {
   id: number;
   ref: string;
   third: Third;
   status = 'en_cours';
   structure: Structure;
+  application_date: Date;
+  experation_date: Date;
   date_de_signature: Date;
-  date_de_debut: Date;
   duree_de_contrat: number;
   campagne: string;
   CDA: number;
   douar: string;
   zone: string;
+  code_ormva;
   arrondissement: string;
   commune: string;
   province: string;
@@ -30,6 +35,9 @@ export class Contract {
   type_de_sole: string;
   culture_anterieure: string;
   mode_irrigation: string;
+  culture_type: string;
+  contrat_type: string;
+  status: string;
   created_at?: Date;
   updated_at?: Date;
 }

@@ -153,7 +153,6 @@
         <h1 i18n>Contracted area</h1>
         <form>
           <dx-form id="form2"
-                   [formData]="campaignsForm"
                    [readOnly]="false"
                    [showColonAfterLabel]="true"
                    [showValidationSummary]="true">
@@ -167,7 +166,7 @@
                   </dxo-label>
                 </dxi-item>
 
-                <dxi-item dataField="area" [editorOptions]="{ onValueChanged: onAreaChanged(area, i) }" editorType="dxNumberBox" [colSpan]="5">
+                <dxi-item dataField="camp.area" editorType="dxNumberBox" [colSpan]="5">
                   <dxo-label
                     text="Superficie" i18n-text>
                   </dxo-label>
