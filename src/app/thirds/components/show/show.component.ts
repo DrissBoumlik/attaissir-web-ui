@@ -21,8 +21,8 @@ export class ShowComponent implements OnInit {
     this.route.params.subscribe(
       params => {
         this.thirdService.getThird(+params.id).subscribe(
-          (res: Third) => {
-            this.third = res;
+          (res: any) => {
+            this.third = res.data;
           },
           (error) => {
             this.router.navigate(['/404']).catch(

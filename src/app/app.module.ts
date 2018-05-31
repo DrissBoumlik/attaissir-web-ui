@@ -11,6 +11,7 @@ import { ScriptLoaderService } from './_services/script-loader.service';
 import { ThirdsModule } from './thirds/thirds.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ContractsModule } from './contracts/contracts.module';
+import { DetailContractComponent } from './contracts/components/detail-contract/detail-contract.component';
 
 @NgModule({
   declarations: [
