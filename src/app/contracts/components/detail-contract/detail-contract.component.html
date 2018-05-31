@@ -1,0 +1,490 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">
+        Contrat Agrégat-Agrégés ( {{ structure?.libelle | uppercase }} /  {{ third?.first_name | uppercase }} {{ third?.last_name | uppercase }})
+      </h3>
+    </div>
+    <div>
+      <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+           m-dropdown-toggle="hover" aria-expanded="true">
+        <a href="#"
+           class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+          <i class="la la-plus m--hide"></i>
+          <i class="la la-ellipsis-h"></i>
+        </a>
+        <div class="m-dropdown__wrapper">
+          <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+          <div class="m-dropdown__inner">
+            <div class="m-dropdown__body">
+              <div class="m-dropdown__content">
+                <ul class="m-nav">
+                  <li class="m-nav__section m-nav__section--first m--hide">
+										<span class="m-nav__section-text">
+											Quick Actions
+										</span>
+                  </li>
+                  <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                      <i class="m-nav__link-icon flaticon-share"></i>
+                      <span class="m-nav__link-text">
+												Activity
+											</span>
+                    </a>
+                  </li>
+                  <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                      <i class="m-nav__link-icon flaticon-chat-1"></i>
+                      <span class="m-nav__link-text">
+												Messages
+											</span>
+                    </a>
+                  </li>
+                  <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                      <i class="m-nav__link-icon flaticon-info"></i>
+                      <span class="m-nav__link-text">
+												FAQ
+											</span>
+                    </a>
+                  </li>
+                  <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                      <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                      <span class="m-nav__link-text">
+												Support
+											</span>
+                    </a>
+                  </li>
+                  <li class="m-nav__separator m-nav__separator--fit"></li>
+                  <li class="m-nav__item">
+                    <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
+                      Submit
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END: Subheader -->
+<div class="m-content">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12">
+      <div class="m-portlet m-portlet--full-height m-portlet--tabs   m-portlet--unair">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-tools">
+            <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
+                  <i class="flaticon-share m--hide"></i>
+                  Contract
+                </a>
+              </li>
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
+                  Agrégé
+                </a>
+              </li>
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_4" role="tab">
+                  Structure
+                </a>
+              </li>
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
+                  Attachments
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="m-portlet__head-tools">
+            <ul class="m-portlet__nav">
+              <li class="m-portlet__nav-item m-portlet__nav-item--last">
+                <div
+                  class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                  m-dropdown-toggle="hover" aria-expanded="true">
+                  <a href="#"
+                     class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+                    <i class="la la-gear"></i>
+                  </a>
+                  <div class="m-dropdown__wrapper">
+                    <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                    <div class="m-dropdown__inner">
+                      <div class="m-dropdown__body">
+                        <div class="m-dropdown__content">
+                          <ul class="m-nav">
+                            <li class="m-nav__section m-nav__section--first">
+															<span class="m-nav__section-text">
+																Quick Actions
+															</span>
+                            </li>
+                            <li class="m-nav__item">
+                              <a href="" class="m-nav__link">
+                                <i class="m-nav__link-icon flaticon-share"></i>
+                                <span class="m-nav__link-text">
+																	Create Post
+																</span>
+                              </a>
+                            </li>
+                            <li class="m-nav__item">
+                              <a href="" class="m-nav__link">
+                                <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                <span class="m-nav__link-text">
+																	Send Messages
+																</span>
+                              </a>
+                            </li>
+                            <li class="m-nav__item">
+                              <a href="" class="m-nav__link">
+                                <i class="m-nav__link-icon flaticon-multimedia-2"></i>
+                                <span class="m-nav__link-text">
+																	Upload File
+																</span>
+                              </a>
+                            </li>
+                            <li class="m-nav__section">
+															<span class="m-nav__section-text">
+																Useful Links
+															</span>
+                            </li>
+                            <li class="m-nav__item">
+                              <a href="" class="m-nav__link">
+                                <i class="m-nav__link-icon flaticon-info"></i>
+                                <span class="m-nav__link-text">
+																	FAQ
+																</span>
+                              </a>
+                            </li>
+                            <li class="m-nav__item">
+                              <a href="" class="m-nav__link">
+                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                <span class="m-nav__link-text">
+																	Support
+																</span>
+                              </a>
+                            </li>
+                            <li class="m-nav__separator m-nav__separator--fit m--hide"></li>
+                            <li class="m-nav__item m--hide">
+                              <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
+                                Submit
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tab-content">
+          <div class="tab-pane active" id="m_user_profile_tab_1">
+            <div class="m-form m-form--fit m-form--label-align-right">
+              <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                  <div class="col-10 ml-auto">
+                    <h3 class="m-form__section">
+                      1. Informations générales
+                    </h3>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Date d'application
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.application_date"
+                           readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Date d'expiration
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.experation_date | date" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Date de signature
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.date_de_signature | date"
+                           readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Code ORMVA
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.code_ormva" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Type de culture
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.culture_type" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Type de contract
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.contrat_type" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Status
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.status" readonly>
+                  </div>
+                </div>
+                <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane " id="m_user_profile_tab_2">
+            <div class="m-form m-form--fit m-form--label-align-right">
+              <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                  <div class="col-10 ml-auto">
+                    <h3 class="m-form__section">
+                      1. Informations générales
+                    </h3>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Nom complet
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text"
+                           [value]="contract.third?.first_name + ' ' + contract.third?.last_name"
+                           readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    CIN
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.cin | uppercase" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Date de naissance
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.date_birth | uppercase"
+                           readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    numéro de téléphone principal
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.tel1 | uppercase" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    numéro de téléphone secondaire
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.tel2 | uppercase" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Email
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.address_email" readonly>
+                  </div>
+                </div>
+                <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                <div class="form-group m-form__group row">
+                  <div class="col-10 ml-auto">
+                    <h3 class="m-form__section">
+                      2.Adresse
+                    </h3>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Adresse
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.address" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Ville
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.city" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Rue
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.street" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Code postal
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.code_siam" readonly>
+                  </div>
+                </div>
+                <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                <div class="form-group m-form__group row">
+                  <div class="col-10 ml-auto">
+                    <h3 class="m-form__section">
+                      3. Société
+                    </h3>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Raison sociale
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.social_reason" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Numéro de patente
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.patent_number" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Code TVA
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.tva_code">
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    ICE
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="contract.third?.ice">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="m_user_profile_tab_3"></div>
+          <div class="tab-pane" id="m_user_profile_tab_4">
+            <div class="m-form m-form--fit m-form--label-align-right">
+              <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                  <div class="col-10 ml-auto">
+                    <h3 class="m-form__section">
+                      1. Informations sur la structure
+                    </h3>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Libelle
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="structure.libelle"
+                           readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Code
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="structure.code" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Ville
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="structure.city"
+                           readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Adresse
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="structure.address" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Code postale
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="structure.postal_code" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Email
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="structure.email" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Numéro de téléphone principal:
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="structure.tel1" readonly>
+                  </div>
+                </div>
+                <div class="form-group m-form__group row">
+                  <label class="col-2 col-form-label">
+                    Numéro de téléphone secondaire:
+                  </label>
+                  <div class="col-7">
+                    <input class="form-control m-input" type="text" [value]="structure.tel2" readonly>
+                  </div>
+                </div>
+                <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
