@@ -32,8 +32,7 @@ export class ListComponent implements OnInit {
       this.third_parties = this.tiers = this.tierService.dataFormatter(third_parties, false);
       this.third_parties = this.third_parties.map(val => {
         delete val.civility;
-        delete val.code;
-        delete val.entities;
+        delete val.code_siam;
         delete val.types;
 
         val = this.renameObj(val, 'rc', 'Business register');

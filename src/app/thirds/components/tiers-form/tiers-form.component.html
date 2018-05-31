@@ -48,13 +48,13 @@
             </dxi-item>
 
             <dxi-item itemType="group" caption="" [colCount]="2" i18n-caption>
-              <dxi-item dataField="first_name_ar">
+              <dxi-item dataField="ar_first_name">
                 <dxo-label
                   text="First name (Arabic)" i18n-text>
                 </dxo-label>
                 <dxi-validation-rule type="required" message="Arabic first name is required" i18n-message></dxi-validation-rule>
               </dxi-item>
-              <dxi-item dataField="last_name_ar" [editorOptions]="{ placeholder: '' }">
+              <dxi-item dataField="ar_last_name" [editorOptions]="{ placeholder: '' }">
                 <dxo-label
                   text="Last name (Arabic)" i18n-text>
                 </dxo-label>
@@ -62,32 +62,31 @@
               </dxi-item>
             </dxi-item>
 
-            <dxi-item dataField="CIN" [disabled]="isEdit">
+            <dxi-item dataField="cin" [disabled]="isEdit">
               <dxi-validation-rule type="required" message="CIN required" i18n-message></dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="gender"
-                      editorType="dxSelectBox"
-                      [editorOptions]="gender">
+                      editorType="dxSelectBox" [editorOptions]="gender">
               <dxo-label
                 text="Gender" i18n-text>
               </dxo-label>
             </dxi-item>
-            <dxi-item dataField="adress">
+            <dxi-item dataField="address">
               <dxo-label
                 text="Address" i18n-text>
               </dxo-label>
             </dxi-item>
-            <dxi-item dataField="postal_code">
+            <dxi-item dataField="postal_code" editorType="dxNumberBox">
               <dxo-label
                 text="Zip code" i18n-text>
               </dxo-label>
+              <dxi-validation-rule type="numeric" [min]="0" message="You cannot have a negative postal code." i18n-message></dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="city">
               <dxo-label
                 text="City" i18n-text>
               </dxo-label>
             </dxi-item>
-
 
             <dxi-item
               dataField="date_birth"
@@ -105,7 +104,6 @@
                 text="Date of death" i18n-text>
               </dxo-label>
             </dxi-item>
-
 
             <dxi-item dataField="email">
               <dxo-label
@@ -152,8 +150,9 @@
               </dxo-label>
             </dxi-item>
 
-
-            <dxi-item dataField="situation" editorType="dxSelectBox" [editorOptions]="situation">
+            {{ tier.situation }}
+            <dxi-item dataField="situation"
+                      editorType="dxSelectBox" [editorOptions]="situation">
               <dxo-label
                 text="Familial situation" i18n-text>
               </dxo-label>
@@ -186,26 +185,37 @@
               </dxo-label>
             </dxi-item>
 
-            <dxi-item dataField="bank_name" *ngIf="tier.payment_mode === 'Virement'">
+            <dxi-item dataField="bank_accounts[0].bank">
               <dxo-label
                 text="Bank name" i18n-text>
               </dxo-label>
-              <dxi-validation-rule type="required" message="Bank name is required" i18n-message></dxi-validation-rule>
             </dxi-item>
 
 
-            <dxi-item dataField="rib" *ngIf="tier.payment_mode === 'Virement'">
+            <dxi-item dataField="bank_accounts[0].rib" [editorOptions]="{
+                    mask: '00000 00000 000000000000 00',
+                    useMaskedValue: true,
+                    maskInvalidMessage: 'RIB is incorrect'
+                }">
               <dxo-label
                 text="RIB" i18n-text>
               </dxo-label>
-              <dxi-validation-rule type="required" message="RIB is required" i18n-message></dxi-validation-rule>
+              <dxi-validation-rule
+                type="pattern"
+                [pattern]="ribPattern"
+                message="RIB is incorrect" i18n-message>
+              </dxi-validation-rule>
             </dxi-item>
           </dxi-item>
 
-
+        <dxi-item dataField="morale" editorType="dxSwitch" (change)="onMoraleChanged($event)">
+          <dxo-label
+            text="Is morale person?" i18n-text>
+          </dxo-label>
+        </dxi-item>
 
         <dxi-item itemType="group" caption="Corporation"
-                  [colCount]="2" i18n-caption="Personne morale">
+                  [colCount]="2" i18n-caption="Personne morale" *ngIf="tier.morale">
 
           <dxi-item dataField="social_reason">
 

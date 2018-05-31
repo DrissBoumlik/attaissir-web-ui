@@ -68,8 +68,15 @@ export class WizardComponent implements OnInit {
     };
   }
 
+  checker = (tocheck) => {
+    if (typeof tocheck === 'undefined') {
+      return false;
+    }
+    return tocheck;
+  }
+
   goToArea = ($e) => {
-    if (!this.currentThird.id) {
+    if (!this.currentThird.cin) {
       this.toastr.error('Select or create a Aggregated first!');
     }
   }

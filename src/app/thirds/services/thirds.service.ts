@@ -55,6 +55,7 @@ export class ThirdsService {
    * @returns {Observable<Third[]>}
    */
   addThird(third: Third): Observable<Third[]> {
+    console.log(third);
     return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(third), this.options);
   }
 

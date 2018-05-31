@@ -86,7 +86,7 @@ export class ContractsService {
     // return this.http.get(`${environment.apiUrl}/contracts`);
     const contrat = new Contract();
     contrat.id = 1;
-    contrat.tiers = {
+    contrat.third = {
       id: 1,
       types: {
         id: '1',
@@ -111,7 +111,7 @@ export class ContractsService {
       date_death: null,
       gender: 'M',
       commune: 'rabat-salé',
-      adress: 'tzkdda',
+      address: 'tzkdda',
       street: 'street1',
       city: 'rabat',
       postal_code: 11001,

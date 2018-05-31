@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import ArrayStore from 'devextreme/data/array_store';
+import DataSource from 'devextreme/data/data_source';
 
 
 @Injectable({
@@ -21,14 +23,14 @@ export class Third {
   first_name: string;
   ar_last_name: string;
   ar_first_name: string;
-  commune: string;
   cin: string;
   date_birth: Date;
   date_death: Date;
   gender: string;
-  adress: string;
+  address: string;
   city: string;
   street: string;
+  commune: string;
   postal_code: number;
   tel1: string;
   tel2: string;
@@ -42,38 +44,45 @@ export class Third {
   payment_mode: string;
   dette: number;
   etat: boolean;
-  bank_accounts: {
-    id: number,
-    bank: string,
-    rib: string
-  }[];
   isCorporation: boolean;
   actionsPermission: any;
   created_date: Date;
   updated_date: Date;
+  bank_accounts: any;
+  morale?: boolean;
 
   constructor() {
     this.types = [
       {
-        id: 0,
+        id: null,
         libelle: ''
       }
     ];
-    this.actionsPermission = {
-      delete: false,
-      update: false
-    };
+    this.bank_accounts = [
+        {
+          id: null,
+          bank: '',
+          rib: null
+      }
+    ];
     this.etat = true;
     this.isCorporation = false;
-    this.payment_mode = 'Virement';
+    this.payment_mode = 'virement';
+    this.morale = false;
+    this.civility = (this.morale) ? 'morale' : 'physique';
   }
-
   /**
    * Devextreme data source
    * @param {Third[]} dat
    * @returns {DevExpress.data.DataSource}
    */
   static getDataSource = (dat: Third[]) => {
-    return null;
+    return new DataSource({
+      store: new ArrayStore({
+        data: dat,
+        key: 'id'
+      }),
+      searchExpr: ['cin']
+    });
   }
 }

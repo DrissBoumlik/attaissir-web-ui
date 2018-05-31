@@ -25,11 +25,12 @@ export class AddComponent implements OnInit {
   onFormSubmit = function(e) {
     console.log('good');
     this.thirdsService.addThird(this.tier).subscribe(data => {
+      console.log(data);
       this.tier = new Third();
       this.toastr.success(
         `New third party added successfully.`);
     }, err => {
-      this.toastr.error(err);
+      this.toastr.error(err.message);
     });
     e.preventDefault();
   };
