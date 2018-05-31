@@ -31,9 +31,13 @@ export class ListContractComponent implements OnInit {
 
   }
 
+  deleteRow = () => {
+    console.log('ok');
+  }
+
   selectionChanged(e) {
-    e.component.collapseAll(-1);
-    e.component.expandRow(e.currentSelectedRowKeys[0]);
+    /*e.component.collapseAll(-1);
+    e.component.expandRow(e.currentSelectedRowKeys[0]);*/
   }
 
   contentReady(e) {
@@ -42,10 +46,13 @@ export class ListContractComponent implements OnInit {
      }*/
   }
 
-  onDeleteContract(idContract: number) {
-    this.contractsService.deleteContract(idContract).subscribe(
+
+  onDeleteContract(event: any) {
+    event.cancel = true;
+    this.contractsService.deleteContract(event.data.id).subscribe(
       () => {
         this.toastr.success('Le contrat a été supprimé avec succès');
+        event.cancel = false;
       },
       (err) => {
         this.toastr.error(err.message);
