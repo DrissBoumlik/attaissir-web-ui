@@ -75,7 +75,8 @@
 <div class="m-content">
   <aw-wizard [navBarLayout]="navBarLayout">
     <aw-wizard-step stepTitle="Agreggated Informations"
-                    [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome'}" (stepExit)="goToArea($event)" i18n-step-title>
+                    [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome'}" (stepExit)="goToArea($event)"
+                    i18n-step-title>
 
       <!-- Agreggated Informations -->
       <div class="">
@@ -96,7 +97,7 @@
               <div *dxTemplate="let item of 'item'">
                 <div>
                   <div class="third">
-                    <div class="first_name"><b>{{ item.cin }}</b> {{item.first_name}} {{ item.id }}</div>
+                    <div class="first_name"><b>{{ item.cin }}</b> {{item.first_name}}</div>
                   </div>
                 </div>
               </div>
@@ -107,12 +108,12 @@
                      [formData]="currentThird">
               <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
 
-                  <dxi-item dataField="first_name" [disabled]="true"></dxi-item>
+                <dxi-item dataField="first_name" [disabled]="true"></dxi-item>
                 <dxi-item dataField="last_name" [disabled]="true"></dxi-item>
-                  <dxi-item dataField="first_name_ar" [disabled]="true"></dxi-item>
+                <dxi-item dataField="first_name_ar" [disabled]="true"></dxi-item>
                 <dxi-item dataField="last_name_ar" [disabled]="true"></dxi-item>
                 <dxi-item dataField="id" [disabled]="true"></dxi-item>
-                  <dxi-item dataField="date_birth" [editorOptions]="{ width: '50%'}" [disabled]="true"></dxi-item>
+                <dxi-item dataField="date_birth" [editorOptions]="{ width: '50%'}" [disabled]="true"></dxi-item>
 
               </dxi-item>
               <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
@@ -129,12 +130,13 @@
               </dxi-item>
             </dx-form>
           </div>
-          <button class="btn btn-accent btn-float" *ngIf="!addThird" (click)="addThird = true"><i class="fa fa-plus"></i> <span i18n>Add Third party</span></button>
+          <button class="btn btn-accent btn-float" *ngIf="!addThird" (click)="addThird = true"><i
+            class="fa fa-plus"></i> <span i18n>Add Third party</span></button>
         </div>
 
-        <app-tiers-form [isEdit]="false" [tier]="tier" [isWizard]="true" *ngIf="addThird" [cancelBtn]="addThird"></app-tiers-form>
-        <button class="btn btn-accent btn-float" *ngIf="addThird" (click)="addThird = false"><i class="fa fa-remove"></i> <span i18n>Cancel</span></button>
-
+        <app-tiers-form [isEdit]="false" [tier]="tier" [isWizard]="true" *ngIf="addThird"></app-tiers-form>
+        <button class="btn btn-accent btn-float" *ngIf="addThird" (click)="addThird = false"><i
+          class="fa fa-remove"></i> <span i18n>Cancel</span></button>
       </div>
       <!-- End Agreggated Informations -->
 
@@ -142,7 +144,9 @@
         <button type="button" class="btn btn-success" awNextStep i18n>Next Step</button>
       </p>
     </aw-wizard-step>
-    <aw-wizard-step stepTitle="Contracted area" [canEnter]="currentThird?.id > 0" (stepExit)="goToParcels($event)" [navigationSymbol]="{ symbol: '&#xf039;', fontFamily: 'FontAwesome'}"
+    <aw-wizard-step stepTitle="Contracted area" [canEnter]="checker(this.currentThird?.cin)"
+                    (stepExit)="goToParcels($event)"
+                    [navigationSymbol]="{ symbol: '&#xf039;', fontFamily: 'FontAwesome'}"
                     awOptionalStep i18n-step-title>
 
       <div>

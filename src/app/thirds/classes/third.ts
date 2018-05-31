@@ -49,7 +49,7 @@ export class Third {
   created_date: Date;
   updated_date: Date;
   bank_accounts: any;
-  morale: boolean;
+  morale?: boolean;
 
   constructor() {
     this.types = [
