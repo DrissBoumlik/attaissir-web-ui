@@ -12,7 +12,8 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./list-contract.component.scss']
 })
 export class ListContractComponent implements OnInit {
-  contracts: Contract[];
+  contracts: any;
+
 
   constructor(private contractsService: ContractsService,
               private thirdService: ThirdsService,
@@ -22,8 +23,11 @@ export class ListContractComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contracts = this.contractsService.getAllContracts();
-    console.log(this.contracts);
+    this.contractsService.getContracts().subscribe(
+      (res: any) => {
+        this.contracts = res.data;
+      }
+    );
   }
 
   onEditcontrat(contrat: any) {

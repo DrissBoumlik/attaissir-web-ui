@@ -41,9 +41,6 @@ export class DetailContractComponent implements OnInit {
         );
       }
     );*/
-    this.contract = this.contractService.getoneContract(1);
-    this.third = this.contract.third;
-    this.structure = this.contract.structure;
   }
 
 }

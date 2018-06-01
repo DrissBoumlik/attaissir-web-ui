@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Third } from '../../thirds/classes/third';
 import { Structure } from './structure';
+import {Campaign} from './campaign';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ export class Contract {
   ref: string;
   third: Third;
   structure: Structure;
+  campaign: Campaign[];
   application_date: Date;
   experation_date: Date;
   date_de_signature: Date;

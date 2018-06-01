@@ -1,0 +1,13 @@
+input:-moz-read-only { /* For Firefox */
+  font-weight: bold;
+  border: none;
+}
+
+input:read-only {
+  font-weight: bold;
+  border: none;
+}
+.custom3 {
+  padding-top:2vh;
+  padding-left:2vh;
+}

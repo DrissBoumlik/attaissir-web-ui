@@ -75,7 +75,7 @@
 <!-- END: Subheader -->
 <div class="m-content">
   <div class="row">
-    <div class="col-xl-3 col-lg-4">
+    <div class="col-xl-2 col-lg-2">
       <div class="m-portlet m-portlet--full-height   m-portlet--unair">
         <div class="m-portlet__body">
           <div class="m-card-profile">
@@ -84,7 +84,9 @@
             </div>
             <div class="m-card-profile__pic">
               <div class="m-card-profile__pic-wrapper">
-                <avatar [letter]="'NA'" [background]="'#065c82'" [email]="third?.first_name + ' ' + third?.last_name | uppercase" [displayType]="'circle'"></avatar>
+                <avatar [letter]="'NA'" [background]="'#065c82'"
+                        [email]="third?.first_name + ' ' + third?.last_name | uppercase"
+                        [displayType]="'circle'"></avatar>
               </div>
             </div>
             <div class="m-card-profile__details">
@@ -92,32 +94,14 @@
               {{ third?.first_name }} {{ third?.last_name }}
 							</span>
               <a href="" class="m-card-profile__email m-link">
-                <strong>{{ third?.address_email }}</strong>
+                <strong>{{ third?.email }}</strong>
               </a>
             </div>
           </div>
-          <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">
-            <li class="m-nav__separator m-nav__separator--fit"></li>
-            <li class="m-nav__section m--hide">
-              <span class="m-nav__section-text">
-                Section
-              </span>
-            </li>
-            <li class="m-nav__item"  style="padding-bottom: 3px" disabled *ngIf="third?.retreat">
-              <button class="btn m-btn--square  btn-danger btn-block" type="button">
-                Retraité
-              </button>
-            </li>
-            <li class="m-nav__item"  style="padding-bottom: 3px" disabled *ngIf="third?.assurance">
-              <button class="btn m-btn--square  btn-primary btn-block" type="button">
-                Assuré
-              </button>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
-    <div class="col-xl-9 col-lg-8">
+    <div class="col-xl-10 col-lg-10">
       <div class="m-portlet m-portlet--full-height m-portlet--tabs   m-portlet--unair">
         <div class="m-portlet__head">
           <div class="m-portlet__head-tools">
@@ -125,7 +109,7 @@
               <li class="nav-item m-tabs__item">
                 <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
                   <i class="flaticon-share m--hide"></i>
-                  Profile
+                  Fiche
                 </a>
               </li>
               <li class="nav-item m-tabs__item">
@@ -135,7 +119,12 @@
               </li>
               <li class="nav-item m-tabs__item">
                 <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
-                  Paramétres
+                  Comptes Bancaires
+                </a>
+              </li>
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_4" role="tab">
+                  Documents
                 </a>
               </li>
             </ul>
@@ -226,147 +215,259 @@
           <div class="tab-pane active" id="m_user_profile_tab_1">
             <div class="m-form m-form--fit m-form--label-align-right">
               <div class="m-portlet__body">
-                <div class="form-group m-form__group row">
-                  <div class="col-10 ml-auto">
-                    <h3 class="m-form__section">
-                      1. Informations générales
-                    </h3>
+                <div class="row">
+                  <div class="col-xl-6 col-lg-6 col-md-6">
+                    <div class="form-group m-form__group row">
+                      <div class="col-10 ml-auto">
+                        <h3 class="m-form__section">
+                          1. Informations générales
+                        </h3>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        Nom complet
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text"
+                               [value]="third?.first_name + ' ' + third?.last_name"
+                               readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        CIN
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.cin | uppercase" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        Situation familiale
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.situation" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        Date de naissance
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.date_birth | uppercase"
+                               readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row" *ngIf="third?.date_death">
+                      <label class="col-4 col-form-label">
+                        Date du décès
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.date_death | uppercase"
+                               readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        numéro de téléphone principal
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.tel1 | uppercase" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        numéro de téléphone secondaire
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.tel2 | uppercase" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        Email
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.email" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        Assurance.
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.assurance ? 'Oui' : 'Non'"
+                               readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        Retraite.
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.retreat ? 'Oui' : 'Non'"
+                               readonly>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6">
+                    <div class="form-group m-form__group row">
+                      <div class="col-10 ml-auto">
+                        <h3 class="m-form__section">
+                          2.Adresse
+                        </h3>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        Adresse
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.address" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        Ville
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.city" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        Commune
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.commune" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        Rue
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.street" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                      <label class="col-4 col-form-label">
+                        Code postal
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text" [value]="third?.postal_code" readonly>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    Nom complet
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.first_name + ' ' + third?.last_name"
-                           readonly>
+                <div *ngIf="third?.social_reason">
+                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                  <div class="form-group m-form__group row">
+                    <div class="col-10 ml-auto">
+                      <h3 class="m-form__section">
+                        3. Société
+                      </h3>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    CIN
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.cin | uppercase" readonly>
+                  <div class="form-group m-form__group row">
+                    <label class="col-4 col-form-label">
+                      Raison sociale
+                    </label>
+                    <div class="col-7">
+                      <input class="form-control m-input" type="text" [value]="third?.social_reason" readonly>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    Date de naissance
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.date_birth | uppercase" readonly>
+                  <div class="form-group m-form__group row">
+                    <label class="col-4 col-form-label">
+                      Numéro de patente
+                    </label>
+                    <div class="col-7">
+                      <input class="form-control m-input" type="text" [value]="third?.patent_number" readonly>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    numéro de téléphone principal
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.tel1 | uppercase" readonly>
+                  <div class="form-group m-form__group row">
+                    <label class="col-4 col-form-label">
+                      Code TVA
+                    </label>
+                    <div class="col-7">
+                      <input class="form-control m-input" type="text" [value]="third?.tva_code" readonly>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    numéro de téléphone secondaire
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.tel2 | uppercase" readonly>
+                  <div class="form-group m-form__group row">
+                    <label class="col-4 col-form-label">
+                      Identification fiscale
+                    </label>
+                    <div class="col-7">
+                      <input class="form-control m-input" type="text" [value]="third?.if" readonly>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    Email
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.address_email" readonly>
-                  </div>
-                </div>
-                <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-                <div class="form-group m-form__group row">
-                  <div class="col-10 ml-auto">
-                    <h3 class="m-form__section">
-                      2.Adresse
-                    </h3>
-                  </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    Adresse
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.address" readonly>
-                  </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    Ville
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.city" readonly>
-                  </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    Rue
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.street" readonly>
-                  </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    Code postal
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.postal_code" readonly>
-                  </div>
-                </div>
-                <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-                <div class="form-group m-form__group row">
-                  <div class="col-10 ml-auto">
-                    <h3 class="m-form__section">
-                      3. Société
-                    </h3>
-                  </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    Raison sociale
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.social_reason" readonly>
-                  </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    Numéro de patente
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.patent_number" readonly>
-                  </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    Code TVA
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.tva_code">
-                  </div>
-                </div>
-                <div class="form-group m-form__group row">
-                  <label class="col-2 col-form-label">
-                    ICE
-                  </label>
-                  <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="third?.ice">
+                  <div class="form-group m-form__group row">
+                    <label class="col-4 col-form-label">
+                      Identifiant commun de l’entreprise.
+                    </label>
+                    <div class="col-7">
+                      <input class="form-control m-input" type="text" [value]="third?.ice" readonly>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="tab-pane" id="m_user_profile_tab_2"></div>
-          <div class="tab-pane" id="m_user_profile_tab_3"></div>
+          <div class="tab-pane" id="m_user_profile_tab_3">
+            <!-- <div class="d-flex align-items-center custom3">
+               <div class="mr-auto">
+                 <h3 class="m-subheader__title">
+                   Liste des comptes bancaires
+                 </h3>
+                 <hr>
+               </div>
+             </div>-->
+            <div class="container">
+              <dx-data-grid id="gridContainer"
+                            [allowColumnReordering]="true"
+                            [dataSource]="third?.bank_accounts"
+                            (onRowRemoving)="onRemoveBA($event)"
+                            (onRowUpdating)="onUpdateBA($event)"
+                            (onEditingStart)="onStartUpdate($event)"
+                            [showColumnLines]="true"
+                            [showRowLines]="true"
+                            [showBorders]="true"
+                            (onRowInserting)="onAddBA($event)"
+                            [rowAlternationEnabled]="true"
+                            style="padding-top: 2vh"
+                            [noDataText]="'L\'agrégé ne dispose pas de compte bancaire'"
+                            keyExpr="id">
+                <dxi-column dataField="rib" format="#######  ################ ##">
+                  <dxi-validation-rule type="required"></dxi-validation-rule>
+                  <dxi-validation-rule
+                    type="pattern"
+                    [pattern]="patternRIB" message="Format RIB invalide"
+                  ></dxi-validation-rule>
+                </dxi-column>
+                <dxi-column dataField="bank" caption="Banque">
+                  <dxi-validation-rule type="required"></dxi-validation-rule>
+                  <dxi-validation-rule type="stringLength" [min]="2" [max]="50" message="20 charactères max"></dxi-validation-rule>
+                </dxi-column>
+                <dxo-remote-operations
+                  [sorting]="true"
+                  [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="multiple"></dxo-selection>
+                <dxo-editing
+                  [useIcons]="true"
+                  mode="row"
+                  [allowUpdating]="true"
+                  [allowDeleting]="true"
+                  [allowAdding]="true">
+                </dxo-editing>
+                <dxo-pager
+                  [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </div>
+          </div>
         </div>
       </div>
     </div>
