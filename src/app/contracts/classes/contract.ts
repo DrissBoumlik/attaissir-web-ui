@@ -7,7 +7,7 @@ import { Structure } from './structure';
 })
 
 export class Contract {
-  id: number;
+  id?: number;
   ref: string;
   third: Third;
   structure: Structure;
@@ -20,7 +20,7 @@ export class Contract {
   CDA: number;
   douar: string;
   zone: string;
-  code_ormva;
+  code_ormva: string;
   arrondissement: string;
   commune: string;
   province: string;

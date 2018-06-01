@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Third } from '../../../thirds/classes/third';
 import { Structure } from '../../classes/structure';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
 import { Contract } from '../../classes/contract';
 import { CampaignService } from '../../services/campaign.service';
-import { Campaign } from '../../classes/campaign';
+import { GroundsService } from '../../services/grounds.service';
+import { Ground } from '../../classes/ground';
+
 
 @Component({
   selector: 'app-wizard',
@@ -13,16 +15,26 @@ import { Campaign } from '../../classes/campaign';
   styleUrls: ['./wizard.component.scss']
 })
 export class WizardComponent implements OnInit {
+  @Input() isEdit: boolean;
 
   navBarLayout: string;
-
+  cdas: any;
+  zones: any;
+  matricules: any;
+  parcelForm: any;
   campaignsRes: any[];
+  currentParcel: any[];
+
+  cdaEditorOptions: any;
+  zoneEditorOptions: any;
+  matriculeEditorOption: any;
+
+  parcels: any[];
   campaigns: any[];
   maxYears: number;
-  campaignsForm: any;
   contract: Contract;
+  grounds: Ground[];
   structures: any;
-  searchForm: any;
   addThird: boolean;
   thirds: any;
   area: number;
@@ -35,10 +47,18 @@ export class WizardComponent implements OnInit {
     public structure: Structure,
     public tierService: ThirdsService,
     public campaignService: CampaignService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private thirdService: ThirdsService,
+    private groundService: GroundsService) {
   }
 
   ngOnInit() {
+    this.cdaEditorOptions = {
+      items: this.cdas,
+      value: '',
+      OnValueChanged: () => {}
+    };
+
     this.maxYears = 5;
     this.tierService.getThirds().subscribe(tiers => {
       this.tiers = this.tierService.dataFormatter(tiers, false);
@@ -49,17 +69,20 @@ export class WizardComponent implements OnInit {
     });
 
     this.addThird = false;
-    this.searchForm = {
-      cin: ''
-    };
 
+    this.groundService.getGrounds().subscribe(grounds => {
+      this.grounds = this.groundService.dataFormatter(grounds, false);
+    }, error1 => {
+      console.log(error1);
+      this.toastr.error(error1.message);
+    });
 
-    this.campaignService.getCampaigns().subscribe( camp => {
+    this.campaignService.getCampaigns().subscribe(camp => {
       this.campaignsRes = this.campaignService.dataFormatter(camp, false);
 
       this.campaigns = this.campaignsRes.map(c => {
-        c['hidded']  = true;
-        c['area']    = 0;
+        c['hidded'] = true;
+        c['area'] = 0;
         return c;
       });
       this.campaigns[0]['hidded'] = false;
@@ -92,6 +115,27 @@ export class WizardComponent implements OnInit {
     };
   }
 
+  deleteRecords = (e) => {
+    console.log(e);
+  }
+
+  saveThird = () => {
+    this.thirdService.addThird(this.currentThird).subscribe(data => {
+      console.log(data);
+      this.tier = new Third();
+      this.toastr.success(
+        `New third party added successfully.`);
+    }, err => {
+      this.toastr.error(err.message);
+    });
+    this.addThird = false;
+  }
+
+  cancelThird = () => {
+    this.addThird = false;
+    this.currentThird = null;
+  }
+
   checker = (tocheck) => {
     if (typeof tocheck === 'undefined') {
       return false;
@@ -99,8 +143,40 @@ export class WizardComponent implements OnInit {
     return tocheck;
   }
 
-  trackByIndex = (index: number, value: number) => {
-    return index;
+  editGround = (event) => {
+    event.cancel = true;
+    this.groundService.editGround(event.data.id).subscribe(res => {
+      this.toastr.success(
+        `Ground has been edited successfully.`);
+      event.cancel = false;
+    }, error1 => {
+      this.toastr.error(error1.message);
+    });
+  }
+  addGround = (event) => {
+    event.cancel = true;
+    this.groundService.addGround(event.data).subscribe(res => {
+      this.toastr.success(
+        `New Ground has been added successfully.`);
+      event.cancel = false;
+    }, error1 => {
+      this.toastr.error(error1.message);
+    });
+  }
+
+  AddParcel = () => {}
+
+  deleteGround = (event) => {
+    event.cancel = true;
+    this.groundService.deleteGround(event.data.id).subscribe(
+      () => {
+        this.toastr.success('Ground has been deleted successfully.');
+        event.cancel = false;
+      },
+      (err) => {
+        this.toastr.error(err.message);
+      }
+    );
   }
 
 
@@ -119,7 +195,9 @@ export class WizardComponent implements OnInit {
 
   goToParcels = () => {
     if (!this.currentThird.cin) {
-      this.toastr.error('Select at least one campaign to continue!');
+      this.toastr.error('Select or create a Aggregated first!');
+    } else if (this.campaigns.length <= 0 || this.campaigns[0].area <= 0) {
+      this.toastr.error('Select at least one campaign to continue and area shoyuld be greater then 0!');
     } else {
       console.log(this.currentThird);
       console.log(this.campaigns);

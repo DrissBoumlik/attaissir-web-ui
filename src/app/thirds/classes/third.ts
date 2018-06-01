@@ -9,7 +9,7 @@ import DataSource from 'devextreme/data/data_source';
 
 export class Third {
 
-  id: number;
+  id?: number;
   types: any;
   code_as400: string;
   civility: string;
@@ -37,10 +37,10 @@ export class Third {
   situation: string;
   children_number: number;
   assurance: string;
-  retreat: string;
+  retraite: string;
   education_level: string;
   tva_code: number;
-  payment_mode: string;
+  payement_mode: string;
   dette: number;
   etat: boolean;
   isCorporation: boolean;
@@ -66,7 +66,7 @@ export class Third {
     ];*/
     this.etat = true;
     this.isCorporation = false;
-    this.payment_mode = 'virement';
+    this.payement_mode = 'virement';
     this.morale = false;
     this.civility = (this.morale) ? 'morale' : 'physique';
   }

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 
 export class Structure {
-  id: number;
+  id?: number;
   libelle: string;
   code: string;
   city: string;

@@ -7,27 +7,27 @@
            validationGroup="tierData">
 
 
-    <dxi-item itemType="group" [colCount]="3" caption="Third party type" i18n-caption>
+    <!--<dxi-item itemType="group" [colCount]="3" caption="Third party type" i18n-caption>
 
-      <dxi-item editorType="dxCheckBox" dataField="service_provider">
+      <dxi-item editorType="dxCheckBox" dataField="types[0].service_provider">
         <dxo-label
           text="Service provider" i18n-text="Fournisseur de prestation">
         </dxo-label>
       </dxi-item>
 
-      <dxi-item editorType="dxCheckBox" dataField="cutting_supplier">
+      <dxi-item editorType="dxCheckBox" dataField="types[0].cutting_supplier">
         <dxo-label
           text="Cutting supplier" i18n-text="Fournisseur de bouture">
         </dxo-label>
       </dxi-item>
 
-      <dxi-item editorType="dxCheckBox" dataField="aggregated" [checked]="true">
+      <dxi-item editorType="dxCheckBox" dataField="types[0].aggregated" [checked]="true">
         <dxo-label
           text="Aggregated" i18n-text="Agrégé">
         </dxo-label>
       </dxi-item>
 
-    </dxi-item>
+    </dxi-item>-->
 
 
     <dxi-item itemType="group" caption="General informations" [colCount]="2" i18n-caption>
@@ -169,25 +169,25 @@
       </dxi-item>
 
 
-      <dxi-item editorType="dxCheckBox" dataField="insurance">
+      <dxi-item editorType="dxCheckBox" dataField="assurance">
         <dxo-label
           text="Insurance" i18n-text>
         </dxo-label>
       </dxi-item>
-      <dxi-item editorType="dxCheckBox" dataField="retreat">
+      <dxi-item editorType="dxCheckBox" dataField="retraite">
         <dxo-label
-          text="retreat" i18n-text>
+          text="Retraite" i18n-text>
+        </dxo-label>
+      </dxi-item>
+      <dxi-item dataField="payement_mode" editorType="dxRadioGroup" [editorOptions]="payment_mode" [colSpan]="2">
+        <dxo-label
+          text="Payment mode" i18n-text>
         </dxo-label>
       </dxi-item>
     </dxi-item>
 
 
-    <dxi-item itemType="group" [colCount]="2" caption="Billing" i18n-caption>
-      <dxi-item dataField="payment_mode" editorType="dxRadioGroup" [editorOptions]="payment_mode" [colSpan]="2">
-        <dxo-label
-          text="Payment mode" i18n-text>
-        </dxo-label>
-      </dxi-item>
+    <!--<dxi-item itemType="group" [colCount]="2" caption="Billing" i18n-caption>
 
       <dxi-item dataField="bank_accounts[0].bank">
         <dxo-label
@@ -197,8 +197,8 @@
 
 
       <dxi-item dataField="bank_accounts[0].rib" [editorOptions]="{
-                    mask: '00000 00000 000000000000 00',
-                    useMaskedValue: true,
+                    mask: '000000 0000000000000000 00',
+                    useMaskedValue: false,
                     maskInvalidMessage: 'RIB is incorrect'
                 }">
         <dxo-label
@@ -210,7 +210,7 @@
           message="RIB is incorrect" i18n-message>
         </dxi-validation-rule>
       </dxi-item>
-    </dxi-item>
+    </dxi-item>-->
 
     <dxi-item dataField="morale" editorType="dxSwitch" (change)="onMoraleChanged($event)">
       <dxo-label
@@ -260,7 +260,7 @@
     </dxi-item>
 
 
-    <dxi-item dataField="etat" editorType="dxSwitch" *ngIf="isEdit">
+    <dxi-item dataField="etat" editorType="dxSwitch" *ngIf="false">
       <dxo-label
         text="Is active?" i18n-text>
       </dxo-label>

@@ -45,11 +45,11 @@ export class TiersFormComponent implements OnInit {
         },
         {
           Name: 'Secondary school',
-          ID: 'secondaire_college'
+          ID: 'secondaire college'
         },
         {
           Name: 'Secondary qualifying',
-          ID: 'secondaire_qualifiant'
+          ID: 'secondaire qualifiant'
         },
         {
           Name: 'High school',
@@ -57,7 +57,7 @@ export class TiersFormComponent implements OnInit {
         },
         {
           Name: 'Higher education',
-          ID: 'enseignement_superieur'
+          ID: 'enseignement superieur'
         },
         {
           Name: 'Illiterate',
@@ -124,7 +124,7 @@ export class TiersFormComponent implements OnInit {
       valueExpr: 'ID'
     };
     this.phonePattern = /^0[5|6|7]\s*\d{4}\s*\d{4}$/;
-    this.ribPattern = /^\d{5}\s*\d{5}\s*\d{12}\s*\d{2}$/;
+    this.ribPattern = /^\d{6}\s*\d{16}\s*\d{2}$/;
   }
 
   /**

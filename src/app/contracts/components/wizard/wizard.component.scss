@@ -7,6 +7,9 @@
   bottom: 90px;
   position: fixed;
   right: 41px;
+  .row {
+    width: 250px;
+  }
 }
 
 ::ng-deep .left {

@@ -12,7 +12,7 @@ import { Contract } from '../classes/contract';
 export class ContractsService {
 
   routeName: string;
-  private headers = new HttpHeaders({'Content-Type': 'application/json', 'charset': 'UTF-8'});
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
   private options = {
     headers: this.headers
   };
@@ -122,11 +122,11 @@ export class ContractsService {
       situation: 'celibataire',
       children_number: 0,
       assurance: 'false',
-      retreat: 'false',
+      retraite: 'false',
       tva_code: null,
       dette: null,
       education_level: 'enseignement_superieur',
-      payment_mode: 'virement',
+      payement_mode: 'virement',
       bank_accounts: [
         {
           id: 1,
@@ -241,11 +241,11 @@ export class ContractsService {
       situation: 'celibataire',
       children_number: 0,
       assurance: 'false',
-      retreat: 'false',
+      retraite: 'false',
       tva_code: null,
       dette: null,
       education_level: 'enseignement_superieur',
-      payment_mode: 'virement',
+      payement_mode: 'virement',
       bank_accounts: [
         {
           id: 1,

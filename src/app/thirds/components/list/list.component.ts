@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ThirdsService } from '../../services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
+import { Third } from '../../classes/third';
 
 @Component({
   selector: 'app-list',
@@ -22,7 +23,7 @@ export class ListComponent implements OnInit {
   constructor(public tierService: ThirdsService,
     private router: Router,
     private route: ActivatedRoute,
-    private toaster: ToastrService) {
+    private toastr: ToastrService) {
 
     this.third_parties_count = 0;
   }
@@ -57,6 +58,13 @@ export class ListComponent implements OnInit {
     return ob;
   }
 
+  gotoShow(idContract: number) {
+    this.router.navigate(['../show/' + idContract], { relativeTo: this.route }).catch(
+      err => {
+        this.toastr.error(err.message);
+      }
+    );
+  }
 
   selectionChanged(data: any) {
     this.selectedItems = data.selectedRowsData;
@@ -75,10 +83,10 @@ export class ListComponent implements OnInit {
   onRemoveThird(thirdId: number): any {
     this.tierService.deleteThird(thirdId).subscribe(
       (res) => {
-        this.toaster.success('User deleted successfully');
+        this.toastr.success('User deleted successfully');
       },
       (err) => {
-        this.toaster.error(err);
+        this.toastr.error(err.message);
       }
     );
   }
@@ -90,7 +98,7 @@ export class ListComponent implements OnInit {
   onStartEdit(thirdId: number) {
     this.router.navigate(['../edit/' + thirdId], { relativeTo: this.route }).catch(
       err => {
-        this.toaster.error(err);
+        this.toastr.error(err.message);
       }
     );
   }

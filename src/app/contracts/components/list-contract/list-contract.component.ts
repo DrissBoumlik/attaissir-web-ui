@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Contract} from '../../classes/contract';
-import {ContractsService} from '../../services/contracts.service';
-import {Third} from '../../../thirds/classes/third';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {ToastrService} from 'ngx-toastr';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Contract } from '../../classes/contract';
+import { ContractsService } from '../../services/contracts.service';
+import { Third } from '../../../thirds/classes/third';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-contract',
@@ -15,10 +15,10 @@ export class ListContractComponent implements OnInit {
   contracts: Contract[];
 
   constructor(private contractsService: ContractsService,
-              private thirdService: ThirdsService,
-              private toastr: ToastrService,
-              private router: Router,
-              private route: ActivatedRoute) {
+    private thirdService: ThirdsService,
+    private toastr: ToastrService,
+    private router: Router,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class ListContractComponent implements OnInit {
   }
 
   showDetails(idContract: number) {
-    this.router.navigate(['../show/' + idContract], {relativeTo: this.route}).catch(
+    this.router.navigate(['../show/' + idContract], { relativeTo: this.route }).catch(
       err => {
         this.toastr.error(err);
       }
