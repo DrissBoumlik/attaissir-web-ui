@@ -157,9 +157,9 @@
                    [showColonAfterLabel]="true"
                    [showValidationSummary]="true">
 
-              <dxi-item itemType="group" caption="" [colCount]="12" *ngFor="let camp of campaigns; let i = index"
+              <dxi-item itemType="group" caption="" [colCount]="12" *ngFor="let camp of campaigns; let i = index; trackBy: trackByIndex"
                         [attr.data-index]="i">
-                <dxi-item dataField="campaignYear" [editorOptions]="{ value: camp.libelle }" [colSpan]="5"
+                <dxi-item dataField="campaignYear" [editorOptions]="{ value: camp?.label }" [colSpan]="5"
                           [disabled]="true">
                   <dxo-label
                     text="Campaign" i18n-text>
@@ -172,7 +172,7 @@
                   </dxo-label>
                 </dxi-item>
 
-                <dxi-item *ngIf="(camp.start_date === campaigns[campaigns.length - 1].start_date) && (campaigns.length < 5)"
+                <dxi-item *ngIf="(camp.start_date === campaigns[campaigns.length - 1].start_date) && (campaigns.length < maxYears)"
                           itemType="button"
                           alignment="left"
                           [buttonOptions]="addButtonOptions">

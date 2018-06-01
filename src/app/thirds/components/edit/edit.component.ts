@@ -27,7 +27,7 @@ export class EditComponent implements OnInit {
       if (this.id) {
         this.thirdsService.getThird(this.id)
           .subscribe(data => {
-            this.tier = this.thirdsService.dataFormatter(data, false);
+            this.tier = this.thirdsService.dataFormatter(data, true);
             if (this.tier.social_reason || this.tier.patent_number || this.tier.ice
               || this.tier.rc || this.tier.tva_code || this.tier.if) {
               this.tier.isCorporation = true;

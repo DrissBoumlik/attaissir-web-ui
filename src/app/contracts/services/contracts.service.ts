@@ -76,7 +76,7 @@ export class ContractsService {
    * @returns {any}
    */
   dataFormatter(data, test) {
-    return (!test) ? data[0]['data'] : data;
+    return (!test) ? data['data'] : data;
   }
 
   /**

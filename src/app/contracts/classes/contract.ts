@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Injectable } from '@angular/core';
 import { Third } from '../../thirds/classes/third';
 import { Structure } from './structure';
@@ -7,18 +6,16 @@ import { Structure } from './structure';
   providedIn: 'root',
 })
 
-
-
 export class Contract {
   id: number;
   ref: string;
   third: Third;
-  status = 'en_cours';
   structure: Structure;
   application_date: Date;
   experation_date: Date;
   date_de_signature: Date;
   duree_de_contrat: number;
+  date_de_debut: Date;
   campagne: string;
   CDA: number;
   douar: string;
@@ -40,4 +37,8 @@ export class Contract {
   status: string;
   created_at?: Date;
   updated_at?: Date;
+
+  constructor() {
+    this.status = 'en_cours';
+  }
 }

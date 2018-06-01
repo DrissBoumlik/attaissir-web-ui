@@ -69,6 +69,6 @@ export class StructuresService {
    * @returns {any}
    */
   dataFormatter(data, test) {
-    return (!test) ? data[0]['data'] : data;
+    return (!test) ? data['data'] : data;
   }
 }

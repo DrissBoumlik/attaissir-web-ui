@@ -64,11 +64,11 @@ export class CampaignService {
 
   /**
    * Format data depending of API
-   * @param data
+   * @param dat
    * @param test
    * @returns {any}
    */
-  dataFormatter(data, test) {
-    return (!test) ? data[0]['data'] : data;
+  dataFormatter(dat, test) {
+    return (!test) ? dat['data'] : dat;
   }
 }

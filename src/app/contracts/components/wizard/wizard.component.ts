@@ -18,6 +18,7 @@ export class WizardComponent implements OnInit {
 
   campaignsRes: any[];
   campaigns: any[];
+  maxYears: number;
   campaignsForm: any;
   contract: Contract;
   structures: any;
@@ -38,6 +39,7 @@ export class WizardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.maxYears = 5;
     this.tierService.getThirds().subscribe(tiers => {
       this.tiers = this.tierService.dataFormatter(tiers, false);
       this.thirds = Third.getDataSource(this.tiers);
@@ -50,50 +52,22 @@ export class WizardComponent implements OnInit {
     this.searchForm = {
       cin: ''
     };
-    this.campaignsRes = [
-      {
-        id: 21,
-        libelle: '2019 - 2020',
-        start_date: 2019,
-        area: 0,
-        hidded: false
-      },
-      {
-        id: 22,
-        libelle: '2020 - 2021',
-        start_date: 2020,
-        area: 0,
-        hidded: true
-      },
-      {
-        id: 23,
-        libelle: '2021 - 2022',
-        start_date: 2021,
-        area: 0,
-        hidded: true
-      },
-      {
-        id: 24,
-        libelle: '2022 - 2023',
-        start_date: 2022,
-        area: 0,
-        hidded: true
-      },
-      {
-        id: 25,
-        libelle: '2023 - 2024',
-        start_date: 2023,
-        area: 0,
-        hidded: true
-      }
-    ];
-    this.campaigns = this.campaignsRes.filter(camp => !camp.hidded);
-    /*this.campaignService.getCampaigns().subscribe( camp => {
+
+
+    this.campaignService.getCampaigns().subscribe( camp => {
       this.campaignsRes = this.campaignService.dataFormatter(camp, false);
+
+      this.campaigns = this.campaignsRes.map(c => {
+        c['hidded']  = true;
+        c['area']    = 0;
+        return c;
+      });
+      this.campaigns[0]['hidded'] = false;
+      this.campaigns = this.campaignsRes.filter(c => !c.hidded);
     }, error1 => {
       console.log(error1);
       this.toastr.error(error1.message);
-    });*/
+    });
 
     this.navBarLayout = 'large-filled-symbols';
 
@@ -124,6 +98,11 @@ export class WizardComponent implements OnInit {
     }
     return tocheck;
   }
+
+  trackByIndex = (index: number, value: number) => {
+    return index;
+  }
+
 
   onAreaChanged = (area, i) => {
     this.campaigns[i].area = area;

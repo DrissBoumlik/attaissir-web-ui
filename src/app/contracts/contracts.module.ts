@@ -9,6 +9,7 @@ import {ListContractComponent} from './components/list-contract/list-contract.co
 import {DxButtonModule, DxDataGridModule, DxListModule, DxPopupModule, DxTemplateModule} from 'devextreme-angular';
 import {ContractsService} from './services/contracts.service';
 import {DetailContractComponent} from './components/detail-contract/detail-contract.component';
+import { AvenantComponent } from './componants/avenant/avenant.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {DetailContractComponent} from './components/detail-contract/detail-contr
   declarations: [
     WizardComponent,
     ListContractComponent,
-    DetailContractComponent
+    DetailContractComponent,
+    AvenantComponent
   ],
   providers: [ContractsService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
