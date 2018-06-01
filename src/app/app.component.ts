@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import config from 'devextreme/core/config';
+import { locale, loadMessages } from 'devextreme/localization';
+import 'devextreme-intl';
+
+
 
 @Component({
   selector: 'app-root',
@@ -10,5 +13,10 @@ export class AppComponent {
   title = 'app';
 
   constructor() {
+
+    loadMessages('fr');
+    locale('fr');
+
+    sessionStorage.setItem('locale', 'fr');
   }
 }

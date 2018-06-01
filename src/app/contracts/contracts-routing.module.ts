@@ -10,6 +10,7 @@ const routes: Routes = [
     path: 'contrats',
     component: DefaultComponent,
     children: [
+      { path: '', component: ListContractComponent },
       { path: 'add', component: AddComponent },
       { path: 'list', component: ListContractComponent },
       { path: 'show/:id', component: DetailContractComponent }

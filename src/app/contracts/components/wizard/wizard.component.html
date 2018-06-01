@@ -141,10 +141,9 @@
       </div>
       <div id="form-container">
         <dx-form id="form3"
-                 [colCount]="2"
+                 [colCount]="5"
                  [formData]="parcelForm">
 
-          <dxi-item dataField="FirstName" [colCount]="5">
             <dxi-item dataField="cda" caption="CDA" i18n-caption editorType="dxSelectBox" [editorOptions]="cdaEditorOptions">
               <dxi-validation-rule type="required" message="CDA is required"></dxi-validation-rule>
             </dxi-item>
@@ -157,46 +156,49 @@
             <dxi-item dataField="FirstName" caption="Total Sup" i18n-caption="Sup totale" editorType="dxNumberBox"></dxi-item>
             <dxi-item dataField="FirstName" caption="Yearly Sup" i18n-caption="Sup annuelle" editorType="dxNumberBox"></dxi-item>
 
-          </dxi-item>
           <a class="btn btn-success" (click)="AddParcel()"><i class="fa fa-save"></i></a>
         </dx-form>
       </div>
 
-      <dx-data-grid
-        id="gridContainer"
-        [dataSource]="parcels"
-        (onRowInserting)="addGround($event)"
-        (onRowUpdating)="editGround($event)"
-        (onRowRemoving)="deleteGround($event)">
+      <hr class="separate">
 
-        <dx-button id="gridDeleteSelected"
-                   text="Delete Selected Records" i18n-text
-                   [height]="34"
-                   [width]="195"
-                   [useIcons]="true"
-                   (onClick)="deleteRecords($event)">
-        </dx-button>
-        <dxo-editing
-          mode="popup"
-          [useIcons]="true"
-          [allowDeleting]="true"
-          [allowEditing]="true"
-          [allowUpdating]="true">
-        </dxo-editing>
+      <div class="">
+        <dx-data-grid
+          id="gridContainer"
+          [dataSource]="parcels"
+          (onRowInserting)="addGround($event)"
+          (onRowUpdating)="editGround($event)"
+          (onRowRemoving)="deleteGround($event)">
 
-        <dxo-remote-operations
-          [sorting]="true"
-          [paging]="true">
-        </dxo-remote-operations>
-        <dxo-paging [enabled]="true"></dxo-paging>
-        <dxo-editing
-          mode="row"
-          [allowUpdating]="true"
-          [allowDeleting]="true"
-          [allowAdding]="true">
-        </dxo-editing>
+          <dx-button id="gridDeleteSelected"
+                     text="Delete Selected Records" i18n-text
+                     [height]="34"
+                     [width]="195"
+                     [useIcons]="true"
+                     (onClick)="deleteRecords($event)">
+          </dx-button>
+          <dxo-editing
+            mode="popup"
+            [useIcons]="true"
+            [allowDeleting]="true"
+            [allowEditing]="true"
+            [allowUpdating]="true">
+          </dxo-editing>
 
-      </dx-data-grid>
+          <dxo-remote-operations
+            [sorting]="true"
+            [paging]="true">
+          </dxo-remote-operations>
+          <dxo-paging [enabled]="true"></dxo-paging>
+          <dxo-editing
+            mode="row"
+            [allowUpdating]="true"
+            [allowDeleting]="true"
+            [allowAdding]="true">
+          </dxo-editing>
+
+        </dx-data-grid>
+      </div>
     </div>
 
     <p>
@@ -205,4 +207,3 @@
     </p>
   </aw-wizard-step>
 </aw-wizard>
-
