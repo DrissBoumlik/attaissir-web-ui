@@ -97,6 +97,11 @@
                 </a>
               </li>
               <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_5" role="tab">
+                  Campagnes
+                </a>
+              </li>
+              <li class="nav-item m-tabs__item">
                 <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
                   Attachments
                 </a>
@@ -316,7 +321,7 @@
                     Email
                   </label>
                   <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="contract.third?.address_email" readonly>
+                    <input class="form-control m-input" type="text" [value]="contract.third?.email" readonly>
                   </div>
                 </div>
                 <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
@@ -483,6 +488,7 @@
               </div>
             </div>
           </div>
+          <div class="tab-pane" id="m_user_profile_tab_5"></div>
         </div>
       </div>
     </div>

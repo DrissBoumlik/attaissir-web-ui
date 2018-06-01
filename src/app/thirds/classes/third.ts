@@ -33,7 +33,7 @@ export class Third {
   postal_code: number;
   tel1: string;
   tel2: string;
-  address_email: string;
+  email: string;
   situation: string;
   children_number: number;
   assurance: string;

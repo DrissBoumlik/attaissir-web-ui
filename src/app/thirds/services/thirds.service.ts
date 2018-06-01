@@ -22,7 +22,6 @@ export class ThirdsService {
   }
 
 
-
   /**
    * Get a collection of Third parties
    * @returns {Observable<Third[]>}
@@ -84,5 +83,33 @@ export class ThirdsService {
    */
   dataFormatter = (dat: any, test: boolean) => {
     return (!test) ? dat['data'] : dat;
+  }
+
+  /**
+   *
+   * @param {number} idBankAccount
+   * @returns {Observable<any>}
+   */
+  deleteBankAccount(idBankAccount: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/bank-accounts/${idBankAccount}`, this.options);
+  }
+
+  /**
+   *
+   * @returns {Observable<any>}
+   * @param data
+   */
+  addBankAccount(data: { rib: string, bank: string, third_party_id: number }): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/bank-accounts`, data, this.options);
+  }
+
+  /**
+   *
+   * @returns {Observable<Object>}
+   * @param newBA
+   * @param id
+   */
+  updateBankAccount(newBA: { rib: string, bank: string, third_party_id: number }, id: number): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/bank-accounts/${id}`, newBA, this.options);
   }
 }

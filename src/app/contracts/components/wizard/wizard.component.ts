@@ -56,7 +56,7 @@ export class WizardComponent implements OnInit {
     this.cdaEditorOptions = {
       items: this.cdas,
       value: '',
-      OnValueChanged: () => {}
+      OnValueChanged: () => { }
     };
 
     this.maxYears = 5;
@@ -164,7 +164,7 @@ export class WizardComponent implements OnInit {
     });
   }
 
-  AddParcel = () => {}
+  AddParcel = () => { }
 
   deleteGround = (event) => {
     event.cancel = true;

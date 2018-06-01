@@ -2,7 +2,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
-import { DxDataGridModule, DxFormModule, DxRadioGroupModule, DxSwitchModule, DxTemplateModule } from 'devextreme-angular';
+import {
+  DxButtonModule, DxDataGridModule, DxFormModule, DxRadioGroupModule,
+  DxSwitchModule, DxTemplateModule
+} from 'devextreme-angular';
 import { FormsModule } from '@angular/forms';
 import { ThirdsRoutingModule } from './thirds-routing.module';
 import { TiersFormComponent } from './components/tiers-form/tiers-form.component';
@@ -21,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DxDataGridModule,
     DxFormModule,
     FormsModule,
+    DxButtonModule,
     DxRadioGroupModule,
     NgbModule.forRoot(),
     DxSwitchModule,
@@ -30,8 +34,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   exports: [
     TiersFormComponent,
     DxFormModule,
-    DxDataGridModule,
-    FormsModule
+    FormsModule,
+    DxTemplateModule,
+    DxDataGridModule
   ],
   declarations: [
     TiersFormComponent,
