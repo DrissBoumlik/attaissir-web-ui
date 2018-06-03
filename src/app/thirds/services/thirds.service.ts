@@ -132,7 +132,9 @@ export class ThirdsService {
     const formData: FormData = new FormData();
     formData.append('document', file, file.name);
     return this.http
-      .post(`${environment.apiUrl}/documents`, formData, new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}));
+      .post(`${environment.apiUrl}/documents`, formData, {
+        headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})
+      });
   }
 
   putDocumentInfo(docInfo: { third_party_id: number, document_type_id: number }, id: number): Observable<any> {

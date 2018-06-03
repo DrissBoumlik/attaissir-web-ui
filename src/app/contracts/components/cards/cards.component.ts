@@ -18,15 +18,29 @@ export class CardsComponent implements OnInit {
               private cardsService: CardsService) { }
 
   ngOnInit() {
+    this.cardsService.getCards().subscribe( cards => {
+      this.cards = this.cardsService.dataFormatter(cards, false);
+      this.cards = this.cards.map( card => {
+        return {
+          id: card.id,
+          status: (card.active === 'actif') ? 'Oui' : 'Non',
+          full_name: `kkk kkkkk`,
+          cin: 'az1254',
+          serail: 'aaaaaazzeee',
+          printed: 'oui',
+          printed_at: '12/12/2018'
+        };
+      });
+      },
+      (err) => {
+        this.toastr.error(err.error.message);
+      });
   }
 
   onStartEdit = (e) => {
-    e.cancel = true;
-    this.cardsService.deleteCard(e.data.id).subscribe(
+    this.cardsService.editCard(e.data).subscribe(
       () => {
-        this.toastr.success('Le compte bancaire a été supprimé avec succès.');
-        e.cancel = false;
-
+        this.toastr.success('Le compte bancaire a été modifié avec succès.');
       },
       (err) => {
         this.toastr.error(err.error.message);
@@ -35,16 +49,16 @@ export class CardsComponent implements OnInit {
   }
   onRemoveThird = (e) => {
     console.log(e);
-    this.cardsService.editCard(this.card).subscribe(
+    this.cardsService.deleteCard(e).subscribe(
       () => {
-        this.toastr.success('Le compte bancaire a été modifié avec succès.');
+        this.toastr.success('Le compte bancaire a été supprimé avec succès.');
       },
       (err) => {
         e.cancel = false;
         this.toastr.error(err.error.message);
       }
     );
-  };
+  }
   gotoShow = (e) => {};
 
 }

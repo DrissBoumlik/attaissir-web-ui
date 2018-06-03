@@ -91,7 +91,6 @@ export class WizardComponent implements OnInit {
       type: 'success',
       useSubmitBehavior: false,
       onClick: (e) => {
-        console.log(this.parcelForm);
         this.groundService.addGround(this.parcelForm).subscribe(ground => {
           this.parcelForm = {
             cda: null,
@@ -103,6 +102,7 @@ export class WizardComponent implements OnInit {
             yearly_surface: null,
             mode_worth: null
           };
+          console.log(ground);
           this.groundsList.push(ground);
         }, error1 => {
           this.toastr.error(error1.error.message);
@@ -120,81 +120,88 @@ export class WizardComponent implements OnInit {
         searchEnabled: true,
         onSelectionChanged: (e) => {
           // Zone
-          console.log(e.selectedItem);
-          this.zoneService.getZonesByCDA(e.selectedItem.id).subscribe(zone => {
-            this.zones = this.zoneService.dataFormatter(zone, false).zones;
-            this.zoneEditorOptions = {
-              items: this.zones,
-              displayExpr: 'libelle',
-              valueExpr: 'libelle',
-              value: '',
-              searchEnabled: true,
-              onSelectionChanged: (event) => {
-                // Sector
-                console.log(event.selectedItem);
-                this.zoneService.getSectors(event.selectedItem.id).subscribe(secteur => {
-                  this.sectors = this.zoneService.dataFormatter(secteur, false).zones;
-                  this.sectorEditorOptions = {
-                    items: this.sectors,
-                    displayExpr: 'libelle',
-                    valueExpr: 'libelle',
-                    value: '',
-                    searchEnabled: true,
-                    onSelectionChanged: (event1) => {
-                      // Bloc
-                      console.log(event1.selectedItem);
-                      this.zoneService.getBlocs(event1.selectedItem.id).subscribe(block => {
-                        this.blocs = this.zoneService.dataFormatter(block, false).zones;
-                        this.blocEditorOptions = {
-                          items: this.blocs,
-                          displayExpr: 'libelle',
-                          valueExpr: 'libelle',
-                          value: '',
-                          searchEnabled: true,
-                          onSelectionChanged: (e2) => {
-                            // Ground
-                            console.log(e2);
-                            this.zoneService.getBlocs(e2.selectedItem.id).subscribe(ground => {
-                              this.mle = this.zoneService.dataFormatter(ground, false).zones;
-                              if (this.mle.length > 0) {
-                                this.matriculeEditorOptions = {
-                                  editorType: 'dxSelectBox',
-                                  items: this.mle,
-                                  displayExpr: 'libelle',
-                                  valueExpr: 'libelle',
-                                  value: '',
-                                  searchEnabled: true,
-                                  onSelectionChanged: (e1) => {
-                                    console.log(e1);
-                                  }
-                                };
-                              } else {
-                                this.matriculeEditorOptions = {
-                                  editorType: 'dxTextBox',
-                                  onSelectionChanged: (e1) => {
-                                    console.log(e1);
-                                  }
-                                };
-                              }
+          if (e.selectedItem) {
+            this.zoneService.getZonesByCDA(e.selectedItem.id).subscribe(zone => {
+              this.zones = this.zoneService.dataFormatter(zone, false).zones;
+              this.zoneEditorOptions = {
+                items: this.zones,
+                displayExpr: 'libelle',
+                valueExpr: 'libelle',
+                value: '',
+                searchEnabled: true,
+                onSelectionChanged: (event) => {
+                  // Sector
+                  if (event.selectedItem) {
+                    this.zoneService.getSectors(event.selectedItem.id).subscribe(secteur => {
+                      this.sectors = this.zoneService.dataFormatter(secteur, false).zones;
+                      this.sectorEditorOptions = {
+                        items: this.sectors,
+                        displayExpr: 'libelle',
+                        valueExpr: 'libelle',
+                        value: '',
+                        searchEnabled: true,
+                        onSelectionChanged: (event1) => {
+                          // Bloc
+                          console.log(event1.selectedItem);
+                          if (event1.selectedItem) {
+                            this.zoneService.getBlocs(event1.selectedItem.id).subscribe(block => {
+                              this.blocs = this.zoneService.dataFormatter(block, false).zones;
+                              this.blocEditorOptions = {
+                                items: this.blocs,
+                                displayExpr: 'libelle',
+                                valueExpr: 'libelle',
+                                value: '',
+                                searchEnabled: true,
+                                onSelectionChanged: (e2) => {
+                                  // Ground
+                                  console.log(e2);
+                                  if (e2.selectedItem) {
+                                    this.zoneService.getBlocs(e2.selectedItem.id).subscribe(ground => {
+                                      this.mle = this.zoneService.dataFormatter(ground, false).zones;
+                                      if (this.mle.length > 0) {
+                                        this.matriculeEditorOptions = {
+                                          editorType: 'dxSelectBox',
+                                          items: this.mle,
+                                          displayExpr: 'libelle',
+                                          valueExpr: 'libelle',
+                                          value: '',
+                                          searchEnabled: true,
+                                          onSelectionChanged: (e1) => {
+                                            console.log(e1);
+                                          }
+                                        };
+                                      } else {
+                                        this.matriculeEditorOptions = {
+                                          editorType: 'dxTextBox',
+                                          onSelectionChanged: (e1) => {
+                                            console.log(e1);
+                                          }
+                                        };
+                                      }
 
+                                    }, error1 => {
+                                      this.toastr.error(error1.error.message);
+                                    });
+                                  }
+                                }
+                              };
                             }, error1 => {
                               this.toastr.error(error1.error.message);
                             });
                           }
-                        };
-                      }, error1 => {
-                        this.toastr.error(error1.error.message);
-                      });
-                    }
-                  };
-                }, error1 => {
-                  this.toastr.error(error1.error.message);
-                });
-              }
-            };
-          }, error1 => {
-            this.toastr.error(error1.error.message);
-          });
+                        }
+                      };
+                    }, error1 => {
+                      this.toastr.error(error1.error.message);
+                    });
+                  }
+
+                }
+              };
+            }, error1 => {
+              this.toastr.error(error1.error.message);
+            });
+          }
         }
       };
 
