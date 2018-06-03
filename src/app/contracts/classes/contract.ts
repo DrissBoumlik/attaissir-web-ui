@@ -15,8 +15,8 @@ export class Contract {
   structure: Structure;
   campaign: Campaign[];
   application_date: Date;
-  experation_date: Date;
-  date_de_signature: Date;
+  expiration_date: Date;
+  signature_date: Date;
   duree_de_contrat: number;
   date_de_debut: Date;
   campagne: string;

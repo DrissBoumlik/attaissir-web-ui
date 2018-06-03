@@ -12,6 +12,7 @@ import { ThirdsModule } from './thirds/thirds.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ContractsModule } from './contracts/contracts.module';
 import { DetailContractComponent } from './contracts/components/detail-contract/detail-contract.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { DetailContractComponent } from './contracts/components/detail-contract/
   imports: [
     LayoutModule,
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     ThemeRoutingModule,

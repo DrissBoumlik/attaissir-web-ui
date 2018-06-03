@@ -42,6 +42,7 @@ export class ListContractComponent implements OnInit {
     console.log('ok');
   }
 
+
   selectionChanged(e) {
     /*e.component.collapseAll(-1);
     e.component.expandRow(e.currentSelectedRowKeys[0]);*/

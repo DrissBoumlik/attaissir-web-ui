@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ThirdsService } from '../../services/thirds.service';
-import { Third } from '../../classes/third';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ThirdsService} from '../../services/thirds.service';
+import {Third} from '../../classes/third';
+import {ToastrService} from 'ngx-toastr';
+import {Contract} from '../../../contracts/classes/contract';
+import {Document} from '../../classes/document';
 
 @Component({
   selector: 'app-show',
@@ -12,13 +14,17 @@ import { ToastrService } from 'ngx-toastr';
 export class ShowComponent implements OnInit {
 
   third: Third;
+  contracts: Contract[];
+  documents: Document;
   patternRIB: any = /^\d{24}$/i;
-  namePattern: any = /^[^0-9]+$/;
+  documentsList = true;
+  docTypes: string[];
+  filePath = [];
 
   constructor(private thirdService: ThirdsService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private toaster: ToastrService) {
+              private route: ActivatedRoute,
+              private router: Router,
+              private toaster: ToastrService) {
   }
 
   ngOnInit() {
@@ -26,7 +32,7 @@ export class ShowComponent implements OnInit {
       params => {
         this.thirdService.getThird(+params.id).subscribe(
           (res: any) => {
-            this.third = res;
+            this.third = res.data;
           },
           (error) => {
             this.router.navigate(['/404']).catch(
@@ -36,6 +42,11 @@ export class ShowComponent implements OnInit {
             );
           }
         );
+      }
+    );
+    this.thirdService.getDocTypes().subscribe(
+      (res: any) => {
+        this.docTypes = res.data;
       }
     );
   }
@@ -73,9 +84,6 @@ export class ShowComponent implements OnInit {
     );
   }
 
-  logEvent(eventName) {
-    console.log(eventName);
-  }
 
   onUpdateBA(e: any) {
     console.log(e);
@@ -98,4 +106,49 @@ export class ShowComponent implements OnInit {
   onStartUpdate(e: any) {
     e.data.rib = e.data.rib.replace(/\s/g, '');
   }
+
+  onStartUpdateOrInsertDocument() {
+    this.documentsList = false;
+  }
+
+  onUpdateDOC(e: any) {
+
+  }
+
+  onRemoveDOC(e: any) {
+
+  }
+
+  onAddDOC(e: any) {
+    console.log(e);
+    console.log(this.filePath);
+    const newDoc = {
+      type: e.data.type,
+      file: this.filePath[0]
+    };
+    console.log(newDoc);
+    this.thirdService.addDocument(newDoc.file).subscribe(
+      res => {
+        this.thirdService.putDocumentInfo({
+          third_party_id: this.third.id,
+          document_type_id: newDoc.type
+        }, res.data.id).subscribe(
+          result => {
+            console.log(result);
+          }
+        );
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  loadDocuments() {
+    this.documents = this.thirdService.loadDocuments(this.third.id);
+    console.log(this.documents);
+  }
+
+  downloadDocument(data: any) {
+    window.open(data.value);
+  }
+
 }

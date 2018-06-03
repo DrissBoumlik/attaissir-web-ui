@@ -23,7 +23,7 @@ export class AddComponent implements OnInit {
    * @param e Event
    */
   onFormSubmit = function(e) {
-    console.log('good');
+    console.log(this.tier);
     this.thirdsService.addThird(this.tier).subscribe(data => {
       console.log(data);
       this.tier = new Third();
