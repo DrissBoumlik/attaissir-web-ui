@@ -3,13 +3,16 @@ import { Third } from '../../../thirds/classes/third';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
 import { Contract } from '../../../contracts/classes/contract';
-import { Ground } from '../../../contracts/classes/ground';
 import { Structure } from '../../../contracts/classes/structure';
 import { CampaignService } from '../../../contracts/services/campaign.service';
 import { GroundsService } from '../../../contracts/services/grounds.service';
 import { ZonesService } from '../../../contracts/services/zones.service';
 import { ContractsService } from '../../../contracts/services/contracts.service';
 import { Zone } from '../../../contracts/classes/zone';
+import { ContractedArea } from '../../../contracts/classes/contracted-area';
+import { ContractedAreaService } from '../../../contracts/services/contracted-area.service';
+import { AgreementGround } from '../../../contracts/classes/agreement-ground';
+import { AgreementGroundsService } from '../../../contracts/services/agreement-grounds.service';
 
 
 @Component({
@@ -68,7 +71,9 @@ export class WizardComponent implements OnInit {
     private thirdService: ThirdsService,
     private groundService: GroundsService,
     private zoneService: ZonesService,
-    private contractService: ContractsService) {
+    private contractService: ContractsService,
+    private contractedArea: ContractedAreaService,
+    private agreementGroundService: AgreementGroundsService) {
   }
 
   ngOnInit() {
@@ -336,7 +341,24 @@ export class WizardComponent implements OnInit {
     console.log(this.currentThird);
     console.log(this.campaigns);
     console.log(this.contract);
-    console.log(this.parcelForm);
-    // this.contractService.addContract(this.contract).subscribe(contract => {}, error1 => {});
+    console.log(this.groundsList);
+
+    this.contract.third_party_id = this.currentThird.id;
+    this.contractService.addContract(this.contract).subscribe(contract => {
+      contract = this.contractService.dataFormatter(contract, false);
+
+      this.campaigns = this.campaigns.map(data => {
+        data.campaign_id = contract['id'];
+      });
+      this.contractedArea.addMultiAreas({ data: this.campaigns }).subscribe(data => {
+        data = this.contractedArea.dataFormatter(data, false);
+        // this.agreementGroundService.addAgreementGround();
+
+      }, error1 => {
+        this.toastr.error(error1.error.message);
+      });
+    }, error1 => {
+      this.toastr.error(error1.error.message);
+    });
   }
 }

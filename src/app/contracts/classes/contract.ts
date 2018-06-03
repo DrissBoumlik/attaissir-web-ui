@@ -20,8 +20,10 @@ export class Contract {
   status: string; // ['encours', 'actif', 'inactif', 'suspendu', 'bloque', 'exprire'])->default('encours');
   costum_fields: string;
   third?: Third;
+  third_party_id?: number;
+  third_id?: number;
   structure?: Structure;
-  campaign?: Campaign;
+  structure_id?: number;
   created_at?: Date;
   updated_at?: Date;
 

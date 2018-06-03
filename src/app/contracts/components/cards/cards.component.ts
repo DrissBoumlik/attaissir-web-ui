@@ -21,15 +21,8 @@ export class CardsComponent implements OnInit {
     this.cardsService.getCards().subscribe(cards => {
       this.cards = this.cardsService.dataFormatter(cards, false);
       this.cards = this.cards.map(card => {
-        return {
-          id: card.id,
-          status: (card.active === 'actif') ? 'Oui' : 'Non',
-          full_name: `kkk kkkkk`,
-          cin: 'az1254',
-          serail: 'aaaaaazzeee',
-          printed: 'oui',
-          printed_at: '12/12/2018'
-        };
+        card.full_name = `${card.first_name} ${card.last_name}`;
+        return card;
       });
     },
       (err) => {
