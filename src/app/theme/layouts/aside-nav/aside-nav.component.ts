@@ -20,73 +20,56 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.currentUrl = this.router.url.split('/')[1];
-    // switch (this.currentUrl) {
-    //   case 'tiers': {
-    //     this.sections = [
-    //       { icon: 'line-graph', name: 'DashBoard', url: './' },
-    //       { icon: 'plus', name: 'New Aggregated'/*Nuveau agrégé*/, url: 'add' },
-    //       { icon: 'list', name: 'Aggregated List'/*Liste des  agrégés*/, url: 'list' },
-    //     ];
-    //     break;
-    //   }
-    //   case 'contrats': {
-    //     this.sections = [
-    //       { icon: 'line-graph', name: 'DashBoard', url: './' },
-    //       { icon: 'plus', name: 'New Contract', url: 'add' },
-    //       { icon: 'list', name: 'Contracts List', url: 'list' },
-    //     ];
-    //     break;
-    //   }
-    // }
-    
+
+
     this.mainMenu = [
       {
-        name : 'Tiers',
-        icon : 'flaticon-users',
-        url : 'tiers',
-        description : 'Gestion des tiers',
-        subMenu : [
-            { icon: 'flaticon-plus', name: 'New Aggregated'/*Nuveau agrégé*/, url: 'add' },
-            { icon: 'flaticon-list', name: 'Aggregated List'/*Liste des  agrégés*/, url: 'list' },
-          ]
+        name: 'Tiers',
+        icon: 'flaticon-users',
+        url: 'tiers',
+        description: 'Gestion des tiers',
+        subMenu: [
+          { icon: 'flaticon-plus', name: 'New Aggregated'/*Nuveau agrégé*/, url: '/tiers/add' },
+          { icon: 'flaticon-list', name: 'Aggregated List'/*Liste des  agrégés*/, url: '/tiers/list' },
+        ]
       },
       {
-        name : 'Contracts',
-        icon : 'flaticon-file',
-        url : 'contrats',
-        description : 'Gestion des Contracts',
-        subMenu : [
-            { icon: 'flaticon-plus', name: 'New Contract', url: 'add' },
-            { icon: 'flaticon-list', name: 'Contracts List', url: 'list' },
-          ]
+        name: 'Contracts',
+        icon: 'flaticon-file',
+        url: 'contrats',
+        description: 'Gestion des Contracts',
+        subMenu: [
+          { icon: 'flaticon-plus', name: 'New Contract', url: '/contrats/add' },
+          { icon: 'flaticon-list', name: 'Contracts List', url: '/contrats/list' },
+        ]
       },
       {
-        name : 'Intrants',
-        icon : 'flaticon-coins',
-        url : '/intrants',
-        description : 'Gestion des Intrants'
+        name: 'Intrants',
+        icon: 'flaticon-coins',
+        url: '/intrants',
+        description: 'Gestion des Intrants'
       },
       {
-        name : 'Interventions',
-        icon : 'flaticon-coins',
-        url : '/interventions',
-        description : 'Gestion des Interventions'
+        name: 'Interventions',
+        icon: 'flaticon-coins',
+        url: '/interventions',
+        description: 'Gestion des Interventions'
       },
       {
-        name : 'Map',
-        icon : 'flaticon-map-location',
-        url : '/map',
-        description : 'Suivi des vehicules en temps réel'
+        name: 'Map',
+        icon: 'flaticon-map-location',
+        url: '/map',
+        description: 'Suivi des vehicules en temps réel'
       },
       {
-        name : 'Configuration',
-        icon : 'flaticon-cogwheel',
-        url : '/config',
-        description : 'Global configuration'
+        name: 'Configuration',
+        icon: 'flaticon-cogwheel',
+        url: '/config',
+        description: 'Global configuration'
       }
     ]
     console.log(this.mainMenu);
-    
+
   }
 
   ngAfterViewInit() {

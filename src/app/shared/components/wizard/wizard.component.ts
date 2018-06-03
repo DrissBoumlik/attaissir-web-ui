@@ -8,8 +8,8 @@ import { Structure } from '../../../contracts/classes/structure';
 import { CampaignService } from '../../../contracts/services/campaign.service';
 import { GroundsService } from '../../../contracts/services/grounds.service';
 import { ZonesService } from '../../../contracts/services/zones.service';
-import {ContractsService} from '../../../contracts/services/contracts.service';
-import {Zone} from '../../../contracts/classes/zone';
+import { ContractsService } from '../../../contracts/services/contracts.service';
+import { Zone } from '../../../contracts/classes/zone';
 
 
 @Component({
@@ -68,7 +68,7 @@ export class WizardComponent implements OnInit {
     private thirdService: ThirdsService,
     private groundService: GroundsService,
     private zoneService: ZonesService,
-              private contractService: ContractsService) {
+    private contractService: ContractsService) {
   }
 
   ngOnInit() {

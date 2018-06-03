@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ThirdsService} from '../../services/thirds.service';
-import {Third} from '../../classes/third';
-import {ToastrService} from 'ngx-toastr';
-import {Contract} from '../../../contracts/classes/contract';
-import {Document} from '../../classes/document';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ThirdsService } from '../../services/thirds.service';
+import { Third } from '../../classes/third';
+import { ToastrService } from 'ngx-toastr';
+import { Contract } from '../../../contracts/classes/contract';
+import { Document } from '../../classes/document';
 
 @Component({
   selector: 'app-show',
@@ -22,9 +22,9 @@ export class ShowComponent implements OnInit {
   filePath = [];
 
   constructor(private thirdService: ThirdsService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private toaster: ToastrService) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private toaster: ToastrService) {
   }
 
   ngOnInit() {
