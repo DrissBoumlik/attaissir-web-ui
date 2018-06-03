@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HrefPreventDefaultDirective } from '../../_directives/href-prevent-default.directive';
 import { UnwrapTagDirective } from '../../_directives/unwrap-tag.directive';
+import { SubHeaderComponent } from './sub-header/sub-header.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { UnwrapTagDirective } from '../../_directives/unwrap-tag.directive';
     TooltipsComponent,
     HrefPreventDefaultDirective,
     UnwrapTagDirective,
+    SubHeaderComponent,
   ],
   exports: [
     HeaderNavComponent,

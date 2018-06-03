@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 
-export class Parcels {
+export class Parcel {
   id?: number;
   exploited_surface: number;
   manuel_surface: number;

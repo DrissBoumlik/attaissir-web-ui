@@ -73,5 +73,29 @@
 </div>
 
 <div class="m-content">
-  <app-wizard [isEdit]="true"></app-wizard>
+  <dx-form id="form"
+              [formData]="contract">
+  <dxi-item itemType="group"  [colCount]="4" caption="Contract" i18n-caption>
+    <dxi-item dataField="code" [editorOptions]="{ label: 'Code'}" i18n-label></dxi-item>
+    <dxi-item dataField="application_date" editorType="dxDateBox" [editorOptions]="{ label: 'Application date'}" i18n-label></dxi-item>
+    <dxi-item dataField="expiration_date" editorType="dxDateBox" [editorOptions]="{ label: 'Expiration date'}" i18n-label></dxi-item>
+    <dxi-item dataField="signature_date" editorType="dxDateBox" [editorOptions]="{ label: 'Signature date'}" i18n-label></dxi-item>
+    <dxi-item dataField="code_ormva" [editorOptions]="{ label: 'Code ORMVA'}" i18n-label></dxi-item>
+    <dxi-item dataField="culture_type" editorType="dxSelectorBox" [editorOptions]="{ label: 'Culture type', items: ['cas', 'bas']}" i18n-label></dxi-item>
+    <dxi-item dataField="contract_type" editorType="dxSelectorBox" [editorOptions]="{ label: 'Contract type', items: ['pluriannuel', 'annuel', 'avenant']}" i18n-label></dxi-item>
+    <dxi-item dataField="status" editorType="dxSelectorBox" [editorOptions]="{ label: 'Contract type', items: ['encours', 'actif', 'inactif', 'suspendu', 'bloque', 'exprire']}" i18n-label></dxi-item>
+  </dxi-item>
+
+  <dxi-item itemType="group" caption="Third parties" i18n-caption>
+    <app-tiers-form [tier]="tier"></app-tiers-form>
+  </dxi-item>
+
+  <dxi-item itemType="group" caption="Third parties" i18n-caption *ngFor="let ground of agreement_grounds">
+
+    <dxi-item dataField="agri_session" [editorOptions]="{ label: 'Agri session'}" i18n-label></dxi-item>
+    <dxi-item dataField="annuel_surface" editorType="dxNumericBox" [editorOptions]="{ label: 'Yearly surface'}" i18n-label></dxi-item>
+    <dxi-item dataField="mode_worth" editorType="dxDateBox" [editorOptions]="{ label: 'Mode worth', items: ['propritaire', 'location', 'procuration']}" i18n-label></dxi-item>
+
+  </dxi-item>
+</dx-form>
 </div>

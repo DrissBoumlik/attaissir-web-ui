@@ -26,7 +26,7 @@ export class ShowComponent implements OnInit {
       params => {
         this.thirdService.getThird(+params.id).subscribe(
           (res: any) => {
-            this.third = res;
+            this.third = this.thirdService.dataFormatter(res, false);
           },
           (error) => {
             this.router.navigate(['/404']).catch(
@@ -51,7 +51,7 @@ export class ShowComponent implements OnInit {
         });
       },
       (err) => {
-        this.toaster.error(err.message);
+        this.toaster.error(err.error.message);
       }
     );
   }

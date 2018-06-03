@@ -53,7 +53,7 @@ export class EditComponent implements OnInit {
         `${this.tier.first_name.toUpperCase()} ${this.tier.last_name.toUpperCase()} information's edited successfully`
       );
     }, err => {
-      this.toastr.error(err.message);
+      this.toastr.error(err.error.message);
     });
 
 

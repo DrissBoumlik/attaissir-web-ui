@@ -9,39 +9,23 @@ import { Campaign } from './campaign';
 })
 
 export class Contract {
-  id: number;
-  ref: string;
-  third: Third;
-  structure: Structure;
-  campaign: Campaign[];
+  id?: number;
+  code: string;
   application_date: Date;
-  experation_date: Date;
-  date_de_signature: Date;
-  duree_de_contrat: number;
-  date_de_debut: Date;
-  campagne: string;
-  CDA: number;
-  douar: string;
-  zone: string;
-  code_ormva;
-  arrondissement: string;
-  commune: string;
-  province: string;
-  secteur: string;
-  parcelle: string;
-  superficie_total: number;
-  superficie_contractee: number;
-  type_de_bien: string;
-  type_de_sole: string;
-  culture_anterieure: string;
-  mode_irrigation: string;
-  culture_type: string;
-  contrat_type: string;
-  status: string;
+  expiration_date: Date;
+  signature_date: Date;
+  code_ormva: string;
+  culture_type: string; // ['cas', 'bas'])->nullable();
+  contrat_type: string; // ['pluriannuel', 'annuel', 'avenant'])->nullable();
+  status: string; // ['encours', 'actif', 'inactif', 'suspendu', 'bloque', 'exprire'])->default('encours');
+  costum_fields: string;
+  third?: Third;
+  structure?: Structure;
+  campaign?: Campaign;
   created_at?: Date;
   updated_at?: Date;
 
   constructor() {
-    this.status = 'en_cours';
+    this.status = 'draft';
   }
 }
