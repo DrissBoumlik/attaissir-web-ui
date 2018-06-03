@@ -1,6 +1,6 @@
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
-    <div class="siam-page-header"> 
+    <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Dashboard</a>
       <h2>Liste des tiers</h2>
       <a class="siam-header-btn-new" href="/tiers/add"><i class="fa fa-plus"></i></a>
@@ -66,8 +66,7 @@
 
     <dxo-group-panel [visible]="true"></dxo-group-panel>
     <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
-    <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="Details" i18n-caption="Détails" allowColumnResizing="true">
-    </dxi-column>
+
     <dxi-column dataField="first_name" caption="First name" i18n-caption>
     </dxi-column>
     <dxi-column dataField="last_name" caption="Last name" i18n-caption>
@@ -78,8 +77,11 @@
     </dxi-column>
     <dxi-column dataField="first_name" caption="First name" i18n-caption>
     </dxi-column>
+    <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="Details" i18n-caption="Détails" allowColumnResizing="true">
+    </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate'">
-      <a (click)="gotoShow(data.data.id)"><i class="fa fa-eye fa-5x"> View</i></a>
+      <a  (click)="gotoShow(data.data.id)">
+        <i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
       </div>
     </dx-data-grid>
 

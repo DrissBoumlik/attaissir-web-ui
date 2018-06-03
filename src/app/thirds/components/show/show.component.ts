@@ -47,10 +47,10 @@ export class ShowComponent implements OnInit {
     this.thirdService.getDocTypes().subscribe(
       (res: any) => {
         this.docTypes = this.thirdService.dataFormatter(res, false);
-       /* this.docTypes = this.docTypes.map((type: any) => {
-          type.id = Number.parseInt(type.id);
-          return type;
-        });*/
+        /* this.docTypes = this.docTypes.map((type: any) => {
+           type.id = Number.parseInt(type.id);
+           return type;
+         });*/
       }
     );
   }
@@ -130,7 +130,6 @@ export class ShowComponent implements OnInit {
       type: e.data.label,
       file: this.filePath[0]
     };
-    e.cancel = true;
     console.log(newDoc);
     this.thirdService.addDocument(newDoc.file).subscribe(
       res => {
