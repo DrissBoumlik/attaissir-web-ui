@@ -1,6 +1,7 @@
 export class Document {
   id: number;
-  type: string;
+  typeId: string;
+  label: string;
   path: string;
   downloadPath: string;
 }

@@ -15,10 +15,10 @@ export class ShowComponent implements OnInit {
 
   third: Third;
   contracts: Contract[];
-  documents: Document;
+  documents: Document[];
   patternRIB: any = /^\d{24}$/i;
   documentsList = true;
-  docTypes: string[];
+  docTypes: any;
   filePath = [];
 
   constructor(private thirdService: ThirdsService,
@@ -32,7 +32,7 @@ export class ShowComponent implements OnInit {
       params => {
         this.thirdService.getThird(+params.id).subscribe(
           (res: any) => {
-            this.third = res.data;
+            this.third = this.thirdService.dataFormatter(res, false);
           },
           (error) => {
             this.router.navigate(['/404']).catch(
@@ -46,7 +46,11 @@ export class ShowComponent implements OnInit {
     );
     this.thirdService.getDocTypes().subscribe(
       (res: any) => {
-        this.docTypes = res.data;
+        this.docTypes = this.thirdService.dataFormatter(res, false);
+        /* this.docTypes = this.docTypes.map((type: any) => {
+           type.id = Number.parseInt(type.id);
+           return type;
+         });*/
       }
     );
   }
@@ -123,7 +127,7 @@ export class ShowComponent implements OnInit {
     console.log(e);
     console.log(this.filePath);
     const newDoc = {
-      type: e.data.type,
+      type: e.data.label,
       file: this.filePath[0]
     };
     console.log(newDoc);
