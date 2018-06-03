@@ -12,7 +12,6 @@ import { ThirdsModule } from './thirds/thirds.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ContractsModule } from './contracts/contracts.module';
 import { SharedModule } from './shared/shared.module';
-import { DetailContractComponent } from './contracts/components/detail-contract/detail-contract.component';
 import {FormsModule} from '@angular/forms';
 
 @NgModule({

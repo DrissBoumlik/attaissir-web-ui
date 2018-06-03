@@ -32,7 +32,7 @@ export class ShowComponent implements OnInit {
       params => {
         this.thirdService.getThird(+params.id).subscribe(
           (res: any) => {
-            this.third = res.data;
+            this.third = this.thirdService.dataFormatter(res, false);
           },
           (error) => {
             this.router.navigate(['/404']).catch(

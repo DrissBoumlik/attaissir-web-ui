@@ -11,7 +11,7 @@ import {Document} from '../classes/document';
 })
 export class ThirdsService {
 
-  private headers = new HttpHeaders({'Content-Type': 'application/json', 'charset': 'UTF-8'});
+  public headers = new HttpHeaders({'Content-Type': 'application/json', 'charset': 'UTF-8'});
   private options = {
     headers: this.headers
   };
