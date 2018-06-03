@@ -1,0 +1,9 @@
+input:-moz-read-only { /* For Firefox */
+  font-weight: bold;
+  border: none;
+}
+
+input:read-only {
+  font-weight: bold;
+  border: none;
+}

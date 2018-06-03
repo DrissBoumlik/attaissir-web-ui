@@ -206,7 +206,7 @@
                     Date d'application
                   </label>
                   <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="contract.application_date"
+                    <input class="form-control m-input" type="text" [value]="contract?.application_date"
                            readonly>
                   </div>
                 </div>
@@ -215,7 +215,7 @@
                     Date d'expiration
                   </label>
                   <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="contract.expiration_date | date" readonly>
+                    <input class="form-control m-input" type="text" [value]="contract?.expiration_date" readonly>
                   </div>
                 </div>
                 <div class="form-group m-form__group row">
@@ -223,7 +223,7 @@
                     Date de signature
                   </label>
                   <div class="col-7">
-                    <input class="form-control m-input" type="text" [value]="contract.signature_date | date"
+                    <input class="form-control m-input" type="text" [value]="contract?.signature_date"
                            readonly>
                   </div>
                 </div>

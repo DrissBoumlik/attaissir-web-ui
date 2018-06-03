@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { ThirdsService } from '../../services/thirds.service';
-import { Third } from '../../classes/third';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
+import {ThirdsService} from '../../services/thirds.service';
+import {Third} from '../../classes/third';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -15,10 +15,11 @@ export class EditComponent implements OnInit {
   id: number;
 
   constructor(public route: ActivatedRoute,
-    private location: Location,
-    public tier: Third,
-    public thirdsService: ThirdsService,
-    private toastr: ToastrService) {
+              private router: Router,
+              private location: Location,
+              public tier: Third,
+              public thirdsService: ThirdsService,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -47,11 +48,12 @@ export class EditComponent implements OnInit {
    * Submiting form data
    * @param e Event
    */
-  onFormSubmit = function(e) {
+  onFormSubmit = function (e) {
     this.thirdsService.editThird(this.tier).subscribe(data => {
       this.toastr.success(
         `${this.tier.first_name.toUpperCase()} ${this.tier.last_name.toUpperCase()} information's edited successfully`
       );
+      this.router.navigate(['/tiers/show/' + this.tier.id]);
     }, err => {
       this.toastr.error(err.error.message);
     });

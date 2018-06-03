@@ -3,7 +3,7 @@
   <div class="d-flex align-items-center">
     <div class="mr-auto">
       <h3 class="m-subheader__title">
-        {{ third?.first_name | uppercase }} {{ third?.last_name | uppercase }}
+        Fiche agriculture ({{ third?.first_name | uppercase }} {{ third?.last_name | uppercase }})
       </h3>
     </div>
     <div>
@@ -75,7 +75,7 @@
 <!-- END: Subheader -->
 <div class="m-content">
   <div class="row">
-    <div class="col-xl-2 col-lg-2">
+    <div class="col-xl-3 col-lg-3">
       <div class="m-portlet m-portlet--full-height   m-portlet--unair">
         <div class="m-portlet__body">
           <div class="m-card-profile">
@@ -101,7 +101,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-10 col-lg-10">
+    <div class="col-xl-9 col-lg-9">
       <div class="m-portlet m-portlet--full-height m-portlet--tabs   m-portlet--unair">
         <div class="m-portlet__head">
           <div class="m-portlet__head-tools">
@@ -123,7 +123,8 @@
                 </a>
               </li>
               <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_4" role="tab">
+                <a class="nav-link m-tabs__link" data-toggle="tab" (click)="loadDocuments()"
+                   href="#m_user_profile_tab_4" role="tab">
                   Documents
                 </a>
               </li>
@@ -231,6 +232,16 @@
                       <div class="col-7">
                         <input class="form-control m-input" type="text"
                                [value]="third?.first_name + ' ' + third?.last_name"
+                               readonly>
+                      </div>
+                    </div>
+                    <div class="form-group m-form__group row" DIR="ltr">
+                      <label class="col-4 col-form-label">
+                        الاسم الكامل
+                      </label>
+                      <div class="col-7">
+                        <input class="form-control m-input" type="text"
+                               [value]="third?.ar_first_name + ' ' + third?.ar_last_name"
                                readonly>
                       </div>
                     </div>
@@ -448,7 +459,8 @@
                 </dxi-column>
                 <dxi-column dataField="bank" caption="Banque">
                   <dxi-validation-rule type="required"></dxi-validation-rule>
-                  <dxi-validation-rule type="stringLength" [min]="2" [max]="50" message="20 charactères max"></dxi-validation-rule>
+                  <dxi-validation-rule type="stringLength" [min]="2" [max]="50"
+                                       message="20 charactères max"></dxi-validation-rule>
                 </dxi-column>
                 <dxo-remote-operations
                   [sorting]="true"
@@ -461,6 +473,81 @@
                   [allowUpdating]="true"
                   [allowDeleting]="true"
                   [allowAdding]="true">
+                </dxo-editing>
+                <dxo-pager
+                  [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </div>
+          </div>
+          <div class="tab-pane" id="m_user_profile_tab_4">
+            <div class="container">
+              <dx-data-grid id="gridCont"
+                            [allowColumnReordering]="true"
+                            [dataSource]="documents"
+                            (onRowRemoving)="onRemoveDOC($event)"
+                            (onRowUpdating)="onUpdateDOC($event)"
+                            (onEditingStart)="onStartUpdateOrInsertDocument()"
+                            (onInsertingStart)="onStartUpdateOrInsertDocument()"
+                            [showColumnLines]="true"
+                            [showRowLines]="true"
+                            [showBorders]="true"
+                            (onRowInserting)="onAddDOC($event)"
+                            [rowAlternationEnabled]="true"
+                            style="padding-top: 2vh"
+                            [noDataText]="'L\'agrégé ne dispose pas de documents'"
+                            keyExpr="id">
+
+                <dxi-column dataField="type" caption="Type">
+                  <dxo-lookup
+                    [dataSource]="docTypes"
+                    displayExpr="label"
+                    valueExpr="id">
+                  </dxo-lookup>
+                </dxi-column>
+
+                <dxi-column dataField="path" caption="Upload" editCellTemplate="cellTemplate2" [visible]="false"></dxi-column>
+
+                <dxi-column dataField="downloadPath"  caption="Download" cellTemplate="cellTemplate" ></dxi-column>
+
+                <div *dxTemplate="let data of 'cellTemplate'">
+                  <dx-button
+                    class="send"
+                    icon="fa fa-cloud-download"
+                    text="Download"
+                    (onClick)="downloadDocument(data)">
+                  </dx-button>
+                </div>
+                <div *dxTemplate="let data of 'cellTemplate2'">
+                  <div class="container">
+                    <dx-file-uploader
+                      selectButtonText="Ajouter un document"
+                      labelText="document"
+                      accept="*"
+                      uploadMode="useForm"
+                      [(value)]="filePath">
+                    </dx-file-uploader>
+                  </div>
+                </div>
+                <dxo-remote-operations
+                  [sorting]="true"
+                  [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="multiple"></dxo-selection>
+                <dxo-editing
+                  [useIcons]="true"
+                  mode="popup"
+                  [form]="{items: ['type', 'path']}"
+                  [allowUpdating]="true"
+                  [allowDeleting]="true"
+                  [allowAdding]="true">
+                  <dxo-popup
+                    title="Ajouter ou modifier"
+                    [showTitle]="true"
+                    [width]="700"
+                    [height]="345"
+                    [position]="{ my: 'center', at: 'center'}">
+                  </dxo-popup>
                 </dxo-editing>
                 <dxo-pager
                   [showPageSizeSelector]="false"
