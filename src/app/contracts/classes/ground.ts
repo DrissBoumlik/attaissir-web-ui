@@ -7,6 +7,13 @@ import { Injectable } from '@angular/core';
 export class Ground {
   id?: number;
   mle: string;
+  perimeter: string;
+  region: string;
+  borough: string;
+  cda: string;
+  zone: string;
+  secteur: string;
+  block: string;
   common_rural: string;
   total_surface: number;
   bare_surface: number;
@@ -14,8 +21,6 @@ export class Ground {
   ground_number: number;
   culture_number: number;
   legal_status: string;
-  mode_worth: string; // ['propritaire', 'location', 'procuration'];
   coords_geo: string;
   costum_fields: string;
-  zone_id?: number;
 }

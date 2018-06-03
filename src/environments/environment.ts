@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://s6.acharij.code.go',
+  apiUrl: 'http://s2.hbelouali.code.go',
 };
 
 /*

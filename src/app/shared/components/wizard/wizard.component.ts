@@ -8,6 +8,7 @@ import { Structure } from '../../../contracts/classes/structure';
 import { CampaignService } from '../../../contracts/services/campaign.service';
 import { GroundsService } from '../../../contracts/services/grounds.service';
 import { ZonesService } from '../../../contracts/services/zones.service';
+import {ContractsService} from '../../../contracts/services/contracts.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class WizardComponent implements OnInit {
   sectors: any;
   blocs: any;
   grounds: any;
-  matricules: any;
+  mle: any;
   parcelForm: any;
   campaignsRes: any[];
   groundsList: any[];
@@ -63,15 +64,27 @@ export class WizardComponent implements OnInit {
     private toastr: ToastrService,
     private thirdService: ThirdsService,
     private groundService: GroundsService,
-    private zoneService: ZonesService) {
+    private zoneService: ZonesService,
+              private contractService: ContractsService) {
   }
 
   ngOnInit() {
+    this.groundsList = [];
     this.worthEditorOptions = {
       items: ['propritaire', 'location', 'procuration']
     };
     this.allMode = 'allPages';
     this.checkBoxesMode = 'onClick';
+    this.parcelForm = {
+      cda: null,
+      zone: null,
+      secteur: null,
+      block: null,
+      mle: null,
+      total_surface: null,
+      yearly_surface: null,
+      mode_worth: null
+    };
     this.addParcelOptions = {
       text: 'Add parcel',
       icon: 'plus',
@@ -79,15 +92,22 @@ export class WizardComponent implements OnInit {
       useSubmitBehavior: false,
       onClick: (e) => {
         console.log(this.parcelForm);
-        this.groundsList.push(this.parcelForm);
+        this.groundService.addGround(this.parcelForm).subscribe(ground => {
+          this.parcelForm = {
+            cda: null,
+            zone: null,
+            secteur: null,
+            block: null,
+            mle: null,
+            total_surface: null,
+            yearly_surface: null,
+            mode_worth: null
+          };
+          this.groundsList.push(ground);
+        }, error1 => {
+          this.toastr.error(error1.error.message);
+        });
       }
-    };
-    this.parcelForm = {
-      cda: null,
-      zone: null,
-      matricules: null,
-      total_surface: null,
-      yearly_surface: null,
     };
     this.zoneService.getCDAs().subscribe(cda => {
       // CDA
@@ -95,7 +115,7 @@ export class WizardComponent implements OnInit {
       this.cdaEditorOptions = {
         items: this.cdas,
         displayExpr: 'libelle',
-        valueExpr: 'id',
+        valueExpr: 'libelle',
         value: '',
         searchEnabled: true,
         onSelectionChanged: (e) => {
@@ -106,42 +126,42 @@ export class WizardComponent implements OnInit {
             this.zoneEditorOptions = {
               items: this.zones,
               displayExpr: 'libelle',
-              valueExpr: 'id',
+              valueExpr: 'libelle',
               value: '',
               searchEnabled: true,
               onSelectionChanged: (event) => {
                 // Sector
                 console.log(event.selectedItem);
-                this.zoneService.getSectors(event.selectedItem.id).subscribe(sector => {
-                  this.sectors = this.zoneService.dataFormatter(sector, false).zones;
+                this.zoneService.getSectors(event.selectedItem.id).subscribe(secteur => {
+                  this.sectors = this.zoneService.dataFormatter(secteur, false).zones;
                   this.sectorEditorOptions = {
                     items: this.sectors,
                     displayExpr: 'libelle',
-                    valueExpr: 'id',
+                    valueExpr: 'libelle',
                     value: '',
                     searchEnabled: true,
                     onSelectionChanged: (event1) => {
                       // Bloc
                       console.log(event1.selectedItem);
-                      this.zoneService.getBlocs(event1.selectedItem.id).subscribe(bloc => {
-                        this.blocs = this.zoneService.dataFormatter(bloc, false).zones;
+                      this.zoneService.getBlocs(event1.selectedItem.id).subscribe(block => {
+                        this.blocs = this.zoneService.dataFormatter(block, false).zones;
                         this.blocEditorOptions = {
                           items: this.blocs,
                           displayExpr: 'libelle',
-                          valueExpr: 'id',
+                          valueExpr: 'libelle',
                           value: '',
                           searchEnabled: true,
                           onSelectionChanged: (e2) => {
                             // Ground
                             console.log(e2);
                             this.zoneService.getBlocs(e2.selectedItem.id).subscribe(ground => {
-                              this.matricules = this.zoneService.dataFormatter(ground, false).zones;
-                              if (this.matricules.length > 0) {
+                              this.mle = this.zoneService.dataFormatter(ground, false).zones;
+                              if (this.mle.length > 0) {
                                 this.matriculeEditorOptions = {
                                   editorType: 'dxSelectBox',
-                                  items: this.matricules,
+                                  items: this.mle,
                                   displayExpr: 'libelle',
-                                  valueExpr: 'id',
+                                  valueExpr: 'libelle',
                                   value: '',
                                   searchEnabled: true,
                                   onSelectionChanged: (e1) => {
@@ -305,10 +325,12 @@ export class WizardComponent implements OnInit {
   logEvent(e) {
   }
 
-  finishFunction() {
+  finishFunction(e) {
+    e.preventDefault();
     console.log(this.currentThird);
     console.log(this.campaigns);
     console.log(this.contract);
     console.log(this.parcelForm);
+    // this.contractService.addContract(this.contract).subscribe(contract => {}, error1 => {});
   }
 }
