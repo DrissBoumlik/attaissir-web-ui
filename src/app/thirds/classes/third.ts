@@ -73,15 +73,16 @@ export class Third {
   /**
    * Devextreme data source
    * @param {Third[]} dat
+   * @param {string} search
    * @returns {DevExpress.data.DataSource}
    */
-  static getDataSource = (dat: Third[]) => {
+  static getDataSource = (dat: Third[], search: string) => {
     return new DataSource({
       store: new ArrayStore({
         data: dat,
         key: 'id'
       }),
-      searchExpr: ['cin']
+      searchExpr: [search]
     });
   }
 }

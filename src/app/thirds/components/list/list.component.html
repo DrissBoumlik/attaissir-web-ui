@@ -126,7 +126,7 @@
 
     <dxo-group-panel [visible]="true"></dxo-group-panel>
     <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
-    <dxi-column dataField="id" caption="Id" i18n-caption>
+    <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="Details" i18n-caption="Détails" allowColumnResizing="true">
     </dxi-column>
     <dxi-column dataField="first_name" caption="First name" i18n-caption>
     </dxi-column>
@@ -138,10 +138,8 @@
     </dxi-column>
     <dxi-column dataField="first_name" caption="First name" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="Details" i18n-caption="Détails" allowColumnResizing="true">
-    </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate'">
-      <a (click)="gotoShow(data.data.id)"><i class="fa fa-info-circle fa-5x"></i></a>
+      <a (click)="gotoShow(data.data.id)"><i class="fa fa-eye fa-5x"> View</i></a>
     </div>
   </dx-data-grid>
 

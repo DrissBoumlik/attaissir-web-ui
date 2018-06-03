@@ -55,7 +55,7 @@ export class EditComponent implements OnInit {
       );
       this.router.navigate(['/tiers/show/' + this.tier.id]);
     }, err => {
-      this.toastr.error(err.message);
+      this.toastr.error(err.error.message);
     });
 
 

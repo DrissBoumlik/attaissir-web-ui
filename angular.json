@@ -22,11 +22,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            /*"i18nFile": "src/locale/messages.fr.xlf",
-            "i18nMissingTranslation": "error",
-            "i18nLocale": "fr",
-            "i18nFormat": "xlf",
-            "aot": true,*/
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/favicon-16x16.png",

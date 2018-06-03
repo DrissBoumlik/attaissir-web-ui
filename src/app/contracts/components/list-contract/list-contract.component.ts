@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Contract } from '../../classes/contract';
 import { ContractsService } from '../../services/contracts.service';
 import { Third } from '../../../thirds/classes/third';
@@ -63,7 +63,7 @@ export class ListContractComponent implements OnInit {
         event.cancel = false;
       },
       (err) => {
-        this.toastr.error(err.message);
+        this.toastr.error(err.error.message);
       }
     );
   }

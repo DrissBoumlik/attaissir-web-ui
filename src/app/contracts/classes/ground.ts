@@ -17,5 +17,5 @@ export class Ground {
   mode_worth: string; // ['propritaire', 'location', 'procuration'];
   coords_geo: string;
   costum_fields: string;
-  zone_id: number;
+  zone_id?: number;
 }

@@ -12,7 +12,7 @@ const routes: Routes = [
     path: 'tiers',
     component: DefaultComponent,
     children: [
-      { path: '', component: IndexComponent },
+      { path: '', component: ListComponent/*IndexComponent*/ },
       { path: 'add', component: AddComponent },
       { path: 'edit/:id', component: EditComponent },
       { path: 'show/:id', component: ShowComponent },

@@ -30,7 +30,7 @@ export class AddComponent implements OnInit {
       this.toastr.success(
         `New third party added successfully.`);
     }, err => {
-      this.toastr.error(err.message);
+      this.toastr.error(err.error.message);
     });
     e.preventDefault();
   };
