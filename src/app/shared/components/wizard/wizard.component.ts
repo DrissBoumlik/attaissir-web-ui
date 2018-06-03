@@ -9,6 +9,7 @@ import { CampaignService } from '../../../contracts/services/campaign.service';
 import { GroundsService } from '../../../contracts/services/grounds.service';
 import { ZonesService } from '../../../contracts/services/zones.service';
 import {ContractsService} from '../../../contracts/services/contracts.service';
+import {Zone} from '../../../contracts/classes/zone';
 
 
 @Component({
@@ -24,11 +25,13 @@ export class WizardComponent implements OnInit {
   checkBoxesMode: any;
 
   navBarLayout: string;
+  block_id: number;
   cdas: any;
   zones: any;
   sectors: any;
   blocs: any;
   grounds: any;
+  mles: any;
   mle: any;
   parcelForm: any;
   campaignsRes: any[];
@@ -91,7 +94,13 @@ export class WizardComponent implements OnInit {
       type: 'success',
       useSubmitBehavior: false,
       onClick: (e) => {
+        const z = new Zone();
+        z.zone_id = this.block_id;
+        z.zone_type_id = 7;
+        z.label = e.mle;
+
         this.groundService.addGround(this.parcelForm).subscribe(ground => {
+          ground = this.groundService.dataFormatter(ground, false);
           this.parcelForm = {
             cda: null,
             zone: null,
@@ -142,8 +151,8 @@ export class WizardComponent implements OnInit {
                         searchEnabled: true,
                         onSelectionChanged: (event1) => {
                           // Bloc
-                          console.log(event1.selectedItem);
                           if (event1.selectedItem) {
+                            this.block_id = event1.selectedItem.id;
                             this.zoneService.getBlocs(event1.selectedItem.id).subscribe(block => {
                               this.blocs = this.zoneService.dataFormatter(block, false).zones;
                               this.blocEditorOptions = {
@@ -154,31 +163,21 @@ export class WizardComponent implements OnInit {
                                 searchEnabled: true,
                                 onSelectionChanged: (e2) => {
                                   // Ground
-                                  console.log(e2);
                                   if (e2.selectedItem) {
                                     this.zoneService.getBlocs(e2.selectedItem.id).subscribe(ground => {
-                                      this.mle = this.zoneService.dataFormatter(ground, false).zones;
-                                      if (this.mle.length > 0) {
-                                        this.matriculeEditorOptions = {
-                                          editorType: 'dxSelectBox',
-                                          items: this.mle,
-                                          displayExpr: 'libelle',
-                                          valueExpr: 'libelle',
-                                          value: '',
-                                          searchEnabled: true,
-                                          onSelectionChanged: (e1) => {
-                                            console.log(e1);
-                                          }
-                                        };
-                                      } else {
-                                        this.matriculeEditorOptions = {
-                                          editorType: 'dxTextBox',
-                                          onSelectionChanged: (e1) => {
-                                            console.log(e1);
-                                          }
-                                        };
-                                      }
-
+                                      console.log(this.mles);
+                                      this.mles = this.zoneService.dataFormatter(ground, false).zones;
+                                      this.matriculeEditorOptions = {
+                                        editorType: 'dxSelectBox',
+                                        items: this.mles,
+                                        displayExpr: 'libelle',
+                                        valueExpr: 'libelle',
+                                        value: '',
+                                        searchEnabled: true,
+                                        onSelectionChanged: (e1) => {
+                                          console.log(e1);
+                                        }
+                                      };
                                     }, error1 => {
                                       this.toastr.error(error1.error.message);
                                     });
