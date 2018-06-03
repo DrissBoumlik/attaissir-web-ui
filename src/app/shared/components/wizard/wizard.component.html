@@ -96,8 +96,6 @@
           <dxi-item dataField="code_ormva" [editorOptions]="{ label: 'Code ORMVA'}" i18n-labe></dxi-item>
           <dxi-item dataField="expiration_date" [editorOptions]="{ label: 'Expiration date'}" i18n-label
                     editorType="dxDateBox"></dxi-item>
-          <dxi-item dataField="culture_type" editorType="dxSelectBox" i18n-label [editorOptions]="aggregatedOptions"
-          ></dxi-item>
           <dxi-item dataField="signature_date" [editorOptions]="{ label: 'Signature date'}" i18n-label
                     editorType="dxDateBox"></dxi-item>
           <dxi-item dataField="contract_type" editorType="dxSelectBox" i18n-label
@@ -184,22 +182,22 @@
                     [editorOptions]="zoneEditorOptions">
             <dxi-validation-rule type="required" message="Zone is required"></dxi-validation-rule>
           </dxi-item>
-          <dxi-item dataField="sector" caption="Sector" i18n-caption editorType="dxSelectBox"
+          <dxi-item dataField="secteur" caption="Sector" i18n-caption editorType="dxSelectBox"
                     [editorOptions]="sectorEditorOptions">
             <dxi-validation-rule type="required" message="Sector is required"></dxi-validation-rule>
           </dxi-item>
-          <dxi-item dataField="bloc" caption="Bloc" i18n-caption editorType="dxSelectBox"
+          <dxi-item dataField="block" label="Bloc" i18n-caption editorType="dxSelectBox"
                     [editorOptions]="blocEditorOptions">
             <dxi-validation-rule type="required" message="Bloc is required"></dxi-validation-rule>
           </dxi-item>
-          <dxi-item dataField="matricules" caption="Mle" i18n-caption
+          <dxi-item dataField="mle" caption="Mle" i18n-caption
                     [editorOptions]="matriculeEditorOptions">
             <dxi-validation-rule type="required" message="Mle is required"></dxi-validation-rule>
           </dxi-item>
           >
           <dxi-item dataField="total_surface" caption="Total Sup" i18n-caption="Sup totale"
                     editorType="dxNumberBox"></dxi-item>
-          <dxi-item dataField="yearly_surface" caption="Yearly Sup" i18n-caption="Sup annuelle"
+          <dxi-item dataField="bare_surface" caption="Bare Sup" i18n-caption="Sup annuelle"
                     editorType="dxNumberBox"></dxi-item>
           <dxi-item dataField="mode_worth" caption="Mode of worth" i18n-caption editorType="dxSelectBox"
                     [editorOptions]="worthEditorOptions">
@@ -219,6 +217,13 @@
           [dataSource]="groundsList"
           keyExpr="id">
 
+          <dxo-editing
+            mode="row"
+            [allowUpdating]="false"
+            [allowDeleting]="true"
+            [allowAdding]="false">
+          </dxo-editing>
+
           <dxo-pager
             [allowedPageSizes]="[5, 8, 15, 30]"
             [showInfo]="true"
@@ -228,13 +233,13 @@
           </dxo-pager>
           <dxo-paging [pageSize]="10"></dxo-paging>
 
+          <dxi-column dataField="mle" caption="Mle" i18n-caption></dxi-column>
           <dxi-column dataField="cda" caption="CDA" i18n-caption></dxi-column>
           <dxi-column dataField="zone" caption="Zone" i18n-caption></dxi-column>
-          <dxi-column dataField="matricule" caption="Mle" i18n-caption></dxi-column>
           <dxi-column dataField="sector" caption="Sector" i18n-caption></dxi-column>
-          <dxi-column dataField="bloc" caption="Bloc" i18n-caption></dxi-column>
+          <dxi-column dataField="block" caption="Block" i18n-caption></dxi-column>
           <dxi-column dataField="total_surface" caption="Total Sup" i18n-caption></dxi-column>
-          <dxi-column dataField="yearly_surface" caption="Yearly Sup" i18n-caption></dxi-column>
+          <dxi-column dataField="bare_surface" caption="Bare Sup" i18n-caption></dxi-column>
 
         </dx-data-grid>
       </div>
@@ -242,7 +247,7 @@
 
     <p>
       <button type="button" class="btn default" awPreviousStep i18n>Previous Step</button>
-      <button type="button" class="btn btn-success" (click)="finishFunction()" i18n>Finish</button>
+      <button type="button" class="btn btn-success" (click)="finishFunction($event)" i18n>Finish</button>
     </p>
   </aw-wizard-step>
 </aw-wizard>
