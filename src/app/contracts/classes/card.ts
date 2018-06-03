@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Structure} from './structure';
-import {Third} from '../../thirds/classes/third';
+import { Structure } from './structure';
+import { Third } from '../../thirds/classes/third';
 
 @Injectable({
   providedIn: 'root',

@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { Helpers } from '../../../helpers';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import 'rxjs/add/operator/filter';
 
 declare let mLayout: any;
 @Component({
@@ -8,13 +10,19 @@ declare let mLayout: any;
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderNavComponent implements OnInit, AfterViewInit {
+  public pageTitle: string;
+  // private route:ActivatedRoute
 
 
-  constructor() {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.pageTitle = 'Dashboard';
 
   }
   ngOnInit() {
-
+    // console.log(this.route);
   }
   ngAfterViewInit() {
 

@@ -30,6 +30,7 @@
         </div>
         <div class="right">
           <dx-form id="form"
+                   labelLocation="top"
                    [formData]="currentThird">
             <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
 
@@ -88,6 +89,7 @@
       <h1 i18n>Contract Informations</h1>
 
       <dx-form id="form11"
+               labelLocation="top"
                [formData]="contract">
 
         <dxi-item itemType="group" [colCount]="2">
@@ -124,6 +126,7 @@
         <dx-form id="form2" *ngFor="let camp of campaigns; let i = index;"
                  [formData]="camp"
                  [readOnly]="false"
+                 labelLocation="top"
                  [showColonAfterLabel]="true"
                  [showValidationSummary]="true">
 
@@ -173,6 +176,7 @@
       <div id="form-container">
         <dx-form id="form3"
                  [colCount]="4"
+                 labelLocation="top"
                  [formData]="parcelForm">
 
           <dxi-item dataField="cda" i18n-label editorType="dxSelectBox" [editorOptions]="cdaEditorOptions">
@@ -233,6 +237,8 @@
           </dxo-pager>
           <dxo-paging [pageSize]="10"></dxo-paging>
 
+
+          <dxi-column dataField="id" caption="Id" i18n-caption></dxi-column>
           <dxi-column dataField="mle" caption="Mle" i18n-caption></dxi-column>
           <dxi-column dataField="cda" caption="CDA" i18n-caption></dxi-column>
           <dxi-column dataField="zone" caption="Zone" i18n-caption></dxi-column>

@@ -15,6 +15,8 @@ export class Zone {
   total_surface: number;
   cultivable_surface: number;
   type: any;
+  zone_id?: number;
+  zone_type_id?: number;
 
   constructor() {
   }

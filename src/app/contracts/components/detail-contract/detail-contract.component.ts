@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Contract} from '../../classes/contract';
-import {ContractsService} from '../../services/contracts.service';
-import {ActivatedRoute, Router, RouterLinkActive} from '@angular/router';
-import {Structure} from '../../classes/structure';
-import {Third} from '../../../thirds/classes/third';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
+import { Component, OnInit } from '@angular/core';
+import { Contract } from '../../classes/contract';
+import { ContractsService } from '../../services/contracts.service';
+import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
+import { Structure } from '../../classes/structure';
+import { Third } from '../../../thirds/classes/third';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
 
 @Component({
   selector: 'app-detail-contract',
@@ -18,9 +18,9 @@ export class DetailContractComponent implements OnInit {
   attatchments: any;
 
   constructor(private contractService: ContractsService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private thirdsService: ThirdsService) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private thirdsService: ThirdsService) {
   }
 
   ngOnInit() {

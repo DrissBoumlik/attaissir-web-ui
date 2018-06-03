@@ -3,7 +3,7 @@ import { Contract } from '../../classes/contract';
 import { Third } from '../../../thirds/classes/third';
 import { AgreementGround } from '../../classes/agreement-ground';
 import { ContractsService } from '../../services/contracts.service';
-import {ToastrService} from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit',
@@ -16,7 +16,7 @@ export class EditComponent implements OnInit {
   constructor(public contract: Contract,
     public tier: Third,
     public contractService: ContractsService,
-              public toastr: ToastrService) { }
+    public toastr: ToastrService) { }
 
   ngOnInit() {
     this.contractService.getContracts().subscribe(data => {

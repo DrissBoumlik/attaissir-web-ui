@@ -45,7 +45,7 @@
 
   <dxo-group-panel [visible]="true"></dxo-group-panel>
   <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
-  <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="Details" i18n-caption="Détails" allowColumnResizing="true">
+  <dxi-column cellTemplate="cellTemplate" caption="Details" i18n-caption="Détails" [disabled]="true" allowColumnResizing="true">
   </dxi-column>
   <dxi-column dataField="full_name" caption="Full name" i18n-caption>
   </dxi-column>
@@ -57,17 +57,9 @@
   </dxi-column>
   <dxi-column dataField="printed" caption="Printed" i18n-caption>
   </dxi-column>
-  <dxi-column dataField="printed_at" caption="Printed at" i18n-caption>
-  </dxi-column>
-  <dxi-column dataField="serial" caption="Serial" i18n-caption>
-  </dxi-column>
-  <dxi-column dataField="serial" caption="Serial" i18n-caption>
-  </dxi-column>
-  <dxi-column dataField="city" caption="City" i18n-caption>
-  </dxi-column>
-  <dxi-column dataField="first_name" caption="First name" i18n-caption>
+  <dxi-column dataField="printed_at" itemtype="date" caption="Printed at" i18n-caption>
   </dxi-column>
   <div *dxTemplate="let data of 'cellTemplate'">
-    <a (click)="gotoShow(data.data.id)"><i class="fa fa-eye fa-5x"> View</i></a>
+    <a href="javascript::void(0)" (click)="gotoShow(data.data.id)"><i class="fa fa-eye fa-5x"> View</i></a>
   </div>
 </dx-data-grid>

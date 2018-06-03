@@ -5,7 +5,7 @@ import { ListContractComponent } from './components/list-contract/list-contract.
 import { DetailContractComponent } from './components/detail-contract/detail-contract.component';
 import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
-import {CardsComponent} from './components/cards/cards.component';
+import { CardsComponent } from './components/cards/cards.component';
 
 const routes: Routes = [
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
       { path: 'list', component: ListContractComponent },
       { path: 'show/:id', component: DetailContractComponent },
       { path: 'edit/:id', component: EditComponent },
-      { path: 'cards' , component: CardsComponent }
+      { path: 'cards', component: CardsComponent }
     ]
   }
 ];
