@@ -462,7 +462,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="b5a41698e0b47cf02fff7c3cde2d8e87f1dfef64" datatype="html">
-        <source>Parcels</source><target>Parcelle</target>
+        <source>Parcel</source><target>Parcelle</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
           <context context-type="linenumber">135</context>

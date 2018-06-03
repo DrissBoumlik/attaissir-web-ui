@@ -61,7 +61,7 @@ export class ListComponent implements OnInit {
   gotoShow(idContract: number) {
     this.router.navigate(['../show/' + idContract], { relativeTo: this.route }).catch(
       err => {
-        this.toastr.error(err.message);
+        this.toastr.error(err.error.message);
       }
     );
   }
@@ -86,7 +86,7 @@ export class ListComponent implements OnInit {
         this.toastr.success('User deleted successfully');
       },
       (err) => {
-        this.toastr.error(err.message);
+        this.toastr.error(err.error.message);
       }
     );
   }
@@ -98,7 +98,7 @@ export class ListComponent implements OnInit {
   onStartEdit(thirdId: number) {
     this.router.navigate(['../edit/' + thirdId], { relativeTo: this.route }).catch(
       err => {
-        this.toastr.error(err.message);
+        this.toastr.error(err.error.message);
       }
     );
   }

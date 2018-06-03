@@ -12,6 +12,7 @@ declare let mLayout: any;
 export class AsideNavComponent implements OnInit, AfterViewInit {
   public sections: { icon: string, name: string, url: string }[];
   private currentUrl: string;
+  mainMenu: any;
 
   constructor(private router: Router) {
 

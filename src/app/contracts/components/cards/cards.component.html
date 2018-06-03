@@ -1,0 +1,65 @@
+<dx-data-grid
+  id="gridContainer"
+  [dataSource]="cards"
+  [columnHidingEnabled]="true"
+  [allowColumnReordering]="true"
+  [remoteOperations]="{ groupPaging: true }"
+  (onEditingStart)="onStartEdit($event.data.id)"
+  (onRowRemoving)="onRemoveThird($event.data.id)"
+>
+
+  <!--<dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>-->
+
+  <dxo-remote-operations
+    [sorting]="true"
+    [paging]="true">
+  </dxo-remote-operations>
+
+  <dxo-editing
+    mode="row"
+    [useIcons]="true"
+    [allowUpdating]="true"
+    [allowDeleting]="true">
+  </dxo-editing>
+  <dxo-selection mode="multiple"></dxo-selection>
+
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-filter-row
+    [visible]="true" [applyFilter]="applyFilter"></dxo-filter-row>
+
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-export [enabled]="true" fileName="Tiers" [allowExportSelectedData]="true"></dxo-export>
+
+  <dxo-pager
+    [allowedPageSizes]="[5, 8, 15, 30]"
+    [showInfo]="true"
+    [showNavigationButtons]="true"
+    [showPageSizeSelector]="true"
+    [visible]="true">
+  </dxo-pager>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+  <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+  <dxi-column cellTemplate="cellTemplate" caption="Details" i18n-caption="Détails" [disabled]="true" allowColumnResizing="true">
+  </dxi-column>
+  <dxi-column dataField="full_name" caption="Full name" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="cin" caption="CIN" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="serial" caption="Serial" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="status" caption="Status" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="printed" caption="Printed" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="printed_at" itemtype="date" caption="Printed at" i18n-caption>
+  </dxi-column>
+  <div *dxTemplate="let data of 'cellTemplate'">
+    <a href="javascript::void(0)" (click)="gotoShow(data.data.id)"><i class="fa fa-eye fa-5x"> View</i></a>
+  </div>
+</dx-data-grid>
