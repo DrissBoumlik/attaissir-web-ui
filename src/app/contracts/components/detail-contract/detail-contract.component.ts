@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Contract } from '../../classes/contract';
-import { ContractsService } from '../../services/contracts.service';
-import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
-import { Structure } from '../../classes/structure';
-import { Third } from '../../../thirds/classes/third';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { Document } from '../../../thirds/classes/document';
-import { environment } from '../../../../environments/environment';
-import { CardsService } from '../../services/cards.service';
+import {Component, OnInit} from '@angular/core';
+import {Contract} from '../../classes/contract';
+import {ContractsService} from '../../services/contracts.service';
+import {ActivatedRoute, Router, RouterLinkActive} from '@angular/router';
+import {Structure} from '../../classes/structure';
+import {Third} from '../../../thirds/classes/third';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {Document} from '../../../thirds/classes/document';
+import {environment} from '../../../../environments/environment';
+import {CardsService} from '../../services/cards.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-detail-contract',
@@ -23,12 +24,14 @@ export class DetailContractComponent implements OnInit {
   docTypes: any;
   filePath = [];
   id: number;
+  avenants: any;
 
   constructor(private contractService: ContractsService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private thirdsService: ThirdsService,
-    public cardService: CardsService) {
+              private route: ActivatedRoute,
+              private router: Router,
+              private thirdsService: ThirdsService,
+              public cardService: CardsService,
+              private toaster: ToastrService) {
   }
 
   ngOnInit() {
@@ -65,6 +68,11 @@ export class DetailContractComponent implements OnInit {
         this.docTypes = this.thirdsService.dataFormatter(res, false);
       }
     );
+    this.contractService.getContracts().subscribe(
+      (res: any) => {
+        this.avenants = res.data;
+      }
+    );
   }
 
   download() {
@@ -98,5 +106,24 @@ export class DetailContractComponent implements OnInit {
       });
   }
 
+  addAvenant(idContract: number) {
+    console.log(idContract);
+  }
+  getStatusColor(value: string): string {
+    switch (value) {
+      case 'inactif' : {
+        return 'badge badge-pill badge-warning';
+      }
+      case 'actif' : {
+        return 'badge badge-pill badge-success';
+      }
+      case 'encours' : {
+        return 'badge badge-pill badge-info';
+      }
+      default : {
+        return 'badge badge-pill badge-danger';
+      }
+    }
+  }
 }
 

@@ -1,6 +1,6 @@
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
-    <div class="siam-page-header"> 
+    <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Dashboard</a>
       <h2>Liste des contrats</h2>
       <a class="siam-header-btn-new" routerLink="/contrats/add"><i class="fa fa-plus"></i></a>
@@ -17,7 +17,6 @@
     (onRowRemoving)="onDeleteContract($event)"
     [dataSource]="contracts"
     [remoteOperations]="true"
-    height="800"
     showBorders="true"
     (onSelectionChanged)="selectionChanged($event)"
     (onContentReady)="contentReady($event)"
