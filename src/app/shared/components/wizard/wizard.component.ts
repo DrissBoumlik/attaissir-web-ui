@@ -85,6 +85,7 @@ export class WizardComponent implements OnInit {
   ngOnInit() {
     this.tierData = 'tierData';
     this.groundsList = [];
+    this.contract.application_date = new Date();
     this.expirationDateOptions = {
       label: 'Expiration date',
       value: new Date(2019, 3, 27),

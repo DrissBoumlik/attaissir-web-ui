@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Third } from '../classes/third';
-import { } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { Document } from '../classes/document';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Third} from '../classes/third';
+import {} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Document} from '../classes/document';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThirdsService {
 
-  public headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
+  public headers = new HttpHeaders({'Content-Type': 'application/json', 'charset': 'UTF-8'});
   private options = {
     headers: this.headers
   };
@@ -132,7 +132,7 @@ export class ThirdsService {
     const formData: FormData = new FormData();
     formData.append('document', file, file.name);
     return this.http
-      .post(`${environment.apiUrl}/documents`, formData, { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) });
+      .post(`${environment.apiUrl}/documents`, formData, {headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})});
   }
 
   putDocumentInfo(docInfo: any, id: number): Observable<any> {

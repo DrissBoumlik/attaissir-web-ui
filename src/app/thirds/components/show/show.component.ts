@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ThirdsService } from '../../services/thirds.service';
-import { Third } from '../../classes/third';
-import { ToastrService } from 'ngx-toastr';
-import { Contract } from '../../../contracts/classes/contract';
-import { Document } from '../../classes/document';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ThirdsService} from '../../services/thirds.service';
+import {Third} from '../../classes/third';
+import {ToastrService} from 'ngx-toastr';
+import {Contract} from '../../../contracts/classes/contract';
+import {Document} from '../../classes/document';
+import DevExpress from 'devextreme/bundles/dx.all';
+import {ContractsService} from '../../../contracts/services/contracts.service';
+
 
 @Component({
   selector: 'app-show',
@@ -22,9 +25,10 @@ export class ShowComponent implements OnInit {
   filePath = [];
 
   constructor(private thirdService: ThirdsService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private toaster: ToastrService) {
+              private route: ActivatedRoute,
+              private router: Router,
+              private toaster: ToastrService,
+              private contractService: ContractsService) {
   }
 
   ngOnInit() {
@@ -153,6 +157,59 @@ export class ShowComponent implements OnInit {
 
   downloadDocument(data: any) {
     window.open(data.value);
+  }
+
+  getStatusColor(value: string): string {
+    switch (value) {
+      case 'inactif' : {
+        return 'badge badge-pill badge-warning';
+      }
+      case 'actif' : {
+        return 'badge badge-pill badge-success';
+      }
+      case 'encours' : {
+        return 'badge badge-pill badge-info';
+      }
+      default : {
+        return 'badge badge-pill badge-danger';
+      }
+    }
+  }
+
+  getAdequateAction(value: string): string {
+    switch (value) {
+      case 'inactif' : {
+        return 'Activer';
+      }
+      default : {
+        return 'Désactiver';
+      }
+    }
+  }
+
+  getThirdAgreements = (idThird: number) => {
+    this.contractService.getContracts().subscribe(
+      (res: any) => {
+        this.contracts = [];
+        res.data.forEach(contract => {
+          if (contract.third_cin === this.third.cin) {
+            this.contractService.getContract(contract.id).subscribe(
+              (contr: any) => {
+                this.contracts.push(contr.data);
+              }
+            );
+          }
+        });
+      }
+    );
+  }
+
+  showDetails(idContract: number) {
+    this.router.navigate(['/contrats/show/' + idContract]).catch(
+      err => {
+        this.toaster.error(err);
+      }
+    );
   }
 
 }

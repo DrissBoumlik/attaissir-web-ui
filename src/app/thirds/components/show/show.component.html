@@ -113,7 +113,8 @@
                 </a>
               </li>
               <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
+                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab"
+                   (click)="getThirdAgreements(third?.id)">
                   Contrats
                 </a>
               </li>
@@ -223,9 +224,9 @@
             <div class="m-form m-form--fit m-form--label-align-right">
               <div class="m-portlet__body">
                 <div class="row">
-                  <div class="col-xl-6 col-lg-6 col-md-6">
+                  <div class="col-xl-4 col-lg-4 col-md-4 ">
                     <div class="form-group m-form__group row">
-                      <div class="col-10 ml-auto">
+                      <div class=" ml-auto">
                         <h3 class="m-form__section">
                           1. Informations générales
                         </h3>
@@ -328,7 +329,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-xl-6 col-lg-6 col-md-6">
+                  <div class="col-xl-4 col-lg-4 col-md-4 ">
                     <div class="form-group m-form__group row">
                       <div class="col-10 ml-auto">
                         <h3 class="m-form__section">
@@ -377,61 +378,112 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-xl-4 col-lg-4 col-md-4">
+                    <div *ngIf="third?.social_reason">
+                      <div class="form-group m-form__group row">
+                        <div class="col-10 ml-auto">
+                          <h3 class="m-form__section">
+                            3. Société
+                          </h3>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          Raison sociale
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.social_reason" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          Numéro de patente
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.patent_number" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          Code TVA
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.tva_code" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          Identification fiscale
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.if" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          Identifiant commun de l’entreprise.
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.ice" readonly>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div *ngIf="third?.social_reason">
-                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-                  <div class="form-group m-form__group row">
-                    <div class="col-10 ml-auto">
-                      <h3 class="m-form__section">
-                        3. Société
-                      </h3>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-4 col-form-label">
-                      Raison sociale
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="third?.social_reason" readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-4 col-form-label">
-                      Numéro de patente
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="third?.patent_number" readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-4 col-form-label">
-                      Code TVA
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="third?.tva_code" readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-4 col-form-label">
-                      Identification fiscale
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="third?.if" readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-4 col-form-label">
-                      Identifiant commun de l’entreprise.
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="third?.ice" readonly>
-                    </div>
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>
-          <div class="tab-pane" id="m_user_profile_tab_2"></div>
+          <div class="tab-pane" id="m_user_profile_tab_2">
+            <div class="m-portlet__body">
+              <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " id="ContractsgridContainer"
+                            [allowColumnReordering]="true"
+                            [dataSource]="contracts"
+                            [showColumnLines]="true"
+                            [showRowLines]="true"
+                            [showBorders]="true"
+                            [rowAlternationEnabled]="true"
+                            style="padding-top: 2vh"
+                            class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
+                            [noDataText]="'L\'agrégé ne dispose pas de contrat'"
+                            keyExpr="id">
+                <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
+                </dxi-column>
+                <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
+                </dxi-column>
+                <dxi-column dataField="contrat_type" caption="type de contrat" dataType="Text">
+                </dxi-column>
+                <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
+                </dxi-column>
+                <dxi-column dataField="structure.label" caption="Structure" dataType="Text"></dxi-column>
+                <dxi-column dataField="id" caption="Détails" cellTemplate="detsTemplate"></dxi-column>
+                <div *dxTemplate="let data of 'statusTemplate'">
+                      <span [ngClass]="getStatusColor(data.value)">
+                            {{ data.value }}
+                        </span>
+                </div>
+                <div *dxTemplate="let data of 'detsTemplate'">
+                  <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="showDetails(data.value)"
+                     class="fa fa-info-circle fa-5x"></i>
+                </div>
+                <dxo-remote-operations
+                  [sorting]="true"
+                  [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="multiple"></dxo-selection>
+                <dxo-editing
+                  [useIcons]="true"
+                  mode="row"
+                  [allowUpdating]="false"
+                  [allowDeleting]="false"
+                  [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                  [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </div>
+          </div>
           <div class="tab-pane" id="m_user_profile_tab_3">
             <!-- <div class="d-flex align-items-center custom3">
                <div class="mr-auto">
@@ -441,8 +493,8 @@
                  <hr>
                </div>
              </div>-->
-            <div class="container">
-              <dx-data-grid id="gridContainer"
+            <div class="m-portlet__body">
+              <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " id="gridContainer"
                             [allowColumnReordering]="true"
                             [dataSource]="third?.bank_accounts"
                             (onRowRemoving)="onRemoveBA($event)"
@@ -487,8 +539,8 @@
             </div>
           </div>
           <div class="tab-pane" id="m_user_profile_tab_4">
-            <div class="container">
-              <dx-data-grid id="gridCont"
+            <div class="m-portlet__body">
+              <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " id="gridCont"
                             [allowColumnReordering]="true"
                             [dataSource]="documents"
                             (onRowRemoving)="onRemoveDOC($event)"
@@ -573,8 +625,8 @@
                  <hr>
                </div>
              </div>-->
-            <div class="container">
-              <dx-data-grid id="CardsgridContainer"
+            <div class="m-portlet__body">
+              <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " id="CardsgridContainer"
                             [allowColumnReordering]="true"
                             [dataSource]="third?.cards"
                             [showColumnLines]="true"
@@ -586,11 +638,22 @@
                             keyExpr="id">
                 <dxi-column dataField="code_rfid" caption="Serial">
                 </dxi-column>
-                <dxi-column dataField="status" caption="Status">
+                <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
                 </dxi-column>
+                <dxi-column dataField="status" caption="Action" cellTemplate="actionsTemplate">
+                </dxi-column>
+                <div *dxTemplate="let data of 'statusTemplate'">
+                  <span [ngClass]="getStatusColor(data.value)">
+                    {{ data.value }}
+                  </span>
+                </div>
+                <div *dxTemplate="let data of 'actionsTemplate'">
+                  <dx-button [text]="getAdequateAction(data.value)"
+                             *ngIf="data.value === 'actif' || data.value === 'inactif'"></dx-button>
+                </div>
                 <dxo-remote-operations
                   [sorting]="true"
-                  [paging]="false">
+                  [paging]="true">
                 </dxo-remote-operations>
                 <dxo-selection mode="multiple"></dxo-selection>
                 <dxo-editing
@@ -598,10 +661,10 @@
                   mode="row"
                   [allowUpdating]="false"
                   [allowDeleting]="false"
-                  [allowAdding]="false">
+                  [allowAdding]="true">
                 </dxo-editing>
                 <dxo-pager
-                  [showPageSizeSelector]="false"
+                  [showPageSizeSelector]="true"
                 ></dxo-pager>
               </dx-data-grid>
             </div>
