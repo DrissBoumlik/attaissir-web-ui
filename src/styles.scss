@@ -78,7 +78,7 @@
 .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item.m-menu__item--open>.m-menu__heading .m-menu__link-icon, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item.m-menu__item--open>.m-menu__link .m-menu__link-icon {
     color: rgba(255,255,255,.4);
 }
-.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item.m-menu__item--open>.m-menu__heading .m-menu__link-icon, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item.m-menu__item--open>.m-menu__link .m-menu__link-icon {
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item.m-menu__item--open>.m-menu__heading .m-menu__link-icon {
     display:none;
 }
 .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item.m-menu__item--open>.m-menu__heading .m-menu__link-text, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item.m-menu__item--open>.m-menu__link .m-menu__link-text {
@@ -730,4 +730,106 @@ float: left;
 }
 .m-menu__item.m-menu__item-disabled {
     opacity:0.4;
+}
+
+/* Login Page */
+.m-login__content {
+    position:relative;
+}
+.m-login__content:after {
+    content: '';
+    overflow-y: overlay;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    z-index: 301;
+    bottom: 0;
+    background: rgba(31, 40, 57, 0.9);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(31, 40, 57, 0.6)), color-stop(100%, #203341));
+    background: linear-gradient(135deg, #1f2839fc 0%, rgba(32, 51, 65, 0.23) 100%);
+}
+.m-login.m-login--1 .m-login__content .m-login__msg {
+    position: relative;
+    z-index: 10000;
+}
+.m-login.m-login--1 .m-login__content .m-login__welcome {
+    position: relative;
+    z-index: 1000;
+}
+.m-login.m-login--1 .m-login__content .m-login__logo {
+    position: absolute;
+    bottom:25px;
+    z-index: 1000;
+    opacity:0.7;
+}
+
+
+.m-checkbox.m-checkbox--focus>input:checked~span {
+    border: 1px solid #868686;
+        border-radius: 3px;
+}
+.m-checkbox.m-checkbox--focus>span:after {
+    border: solid #565656;
+}
+.m-login.m-login--1 .m-login__wrapper .m-login__form .m-login__form-action .btn {
+    display: inline-block;
+    text-align: center;
+    padding: .75rem 2rem;
+}
+.form-control.focus, .form-control:focus {
+    border-color: #000000;
+    color: #575962;
+    box-shadow: none;
+}
+
+.form-control.focus::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #575962;
+}
+.form-control.focus::-moz-placeholder { /* Firefox 19+ */
+  color: #575962;
+}
+.form-control.focus:-ms-input-placeholder { /* IE 10+ */
+  color: #575962;
+}
+.form-control.focus:-moz-placeholder { /* Firefox 18- */
+  color: #575962;
+}
+.m-link:hover {
+    color: #2f2f2f;
+}
+.m-link:hover:after {
+    border-bottom: 1px solid #9c9c9c;
+    opacity: .3;
+}
+.m-login__form-inputs {
+    border: 1px solid #c4cdd6;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 27px 1px rgba(22, 29, 37, 0.05) !important;
+}
+.m-login__form-inputs .form-control {
+    padding: 15px !important;
+}
+.m-login.m-login--1 .m-login__wrapper .m-login__form .m-form__group .form-control {
+    border-bottom: 1px solid #c4cdd7;
+}
+.m-brand .m-brand__tools .m-brand__toggler:hover span {
+    background: #ffffff;
+}
+.m-brand .m-brand__tools .m-brand__toggler:hover span::after, .m-brand .m-brand__tools .m-brand__toggler:hover span::before {
+    background: #ffffff;
+}
+.m-brand .m-brand__tools .m-brand__toggler.m-brand__toggler--active span {
+    background: #ffffff;
+}
+.m-brand .m-brand__tools .m-brand__toggler.m-brand__toggler--active span::after, .m-brand .m-brand__tools .m-brand__toggler.m-brand__toggler--active span::before {
+    background: #ffffff;
+}
+.m-aside-left--minimize .m-aside-menu .m-menu__nav>.m-menu__item>.m-menu__link .m-menu__link-text {
+    display: none !important;
+}
+.m-aside-left--minimize .m-aside-menu .m-menu__nav > .m-menu__item > .m-menu__link .m-menu__link-icon {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 20px;
 }
