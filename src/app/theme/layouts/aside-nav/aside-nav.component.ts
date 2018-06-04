@@ -26,7 +26,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'Tiers',
         icon: 'flaticon-users',
-        url: 'tiers',
+        url: '/tiers/list',
         description: 'Gestion des tiers',
         subMenu: [
           { icon: 'flaticon-plus', name: 'New Aggregated'/*Nuveau agrégé*/, url: '/tiers/add' },
@@ -36,7 +36,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'Contracts',
         icon: 'flaticon-file',
-        url: 'contrats',
+        url: '/contrats/list',
         description: 'Gestion des Contracts',
         subMenu: [
           { icon: 'flaticon-plus', name: 'New Contract', url: '/contrats/add' },

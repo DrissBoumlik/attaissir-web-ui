@@ -14,6 +14,7 @@
             class="list"
             [dataSource]="thirds"
             [grouped]="false"
+            [readOnly]="false"
             [searchEnabled]="true"
             selectionMode="single"
             [selectedItemKeys]="[currentThird?.id]"
@@ -31,6 +32,7 @@
         <div class="right">
           <dx-form id="form"
                    labelLocation="top"
+                   [readOnly]="isEdit"
                    [formData]="currentThird">
             <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
 
@@ -60,11 +62,11 @@
           class="fa fa-plus"></i> <span i18n>Add Third party</span></button>
       </div>
 
-      <app-tiers-form [isEdit]="false" [tier]="tier" [isWizard]="true" *ngIf="addThird"></app-tiers-form>
+      <app-tiers-form [isEdit]="isEdit" [readOnly]="isEdit" [validationGroup]="tierData" [tier]="tier" [isWizard]="true" *ngIf="addThird"></app-tiers-form>
       <div class="btn-float">
         <div class="row">
           <div class="col-sm-6">
-            <button class="btn btn-success" *ngIf="addThird" (click)="saveThird()"><i
+            <button class="btn btn-success" *ngIf="addThird" (click)="saveThird($event)"><i
               class="fa fa-save"></i> <span i18n>Save</span></button>
           </div>
           <div class="col-sm-6">
@@ -90,18 +92,17 @@
 
       <dx-form id="form11"
                labelLocation="top"
+               [readOnly]="isEdit"
                [formData]="contract">
 
         <dxi-item itemType="group" [colCount]="2">
           <dxi-item dataField="application_date" [editorOptions]="{ label: 'Application date'}" i18n-label
                     editorType="dxDateBox"></dxi-item>
           <dxi-item dataField="code_ormva" [editorOptions]="{ label: 'Code ORMVA'}" i18n-labe></dxi-item>
-          <dxi-item dataField="expiration_date" [editorOptions]="{ label: 'Expiration date'}" i18n-label
-                    editorType="dxDateBox"></dxi-item>
-          <dxi-item dataField="signature_date" [editorOptions]="{ label: 'Signature date'}" i18n-label
+          <dxi-item dataField="expiration_date" [editorOptions]="expirationDateOptions" i18n-label
                     editorType="dxDateBox"></dxi-item>
           <dxi-item dataField="contract_type" editorType="dxSelectBox" i18n-label
-                    [editorOptions]="{ label: 'Contract type', items: ['pluriannuel', 'annuel', 'avenant'] }"
+                    [editorOptions]="{ label: 'Contract type', items: ['pluriannuel', 'annuel'] }"
           ></dxi-item>
           <dxi-item dataField="superficie_total" [editorOptions]="{ label: 'Total superficie'}" i18n-label
                     editorType="dxNumberBox"></dxi-item>
@@ -125,7 +126,7 @@
       <form>
         <dx-form id="form2" *ngFor="let camp of campaigns; let i = index;"
                  [formData]="camp"
-                 [readOnly]="false"
+                 [readOnly]="isEdit"
                  labelLocation="top"
                  [showColonAfterLabel]="true"
                  [showValidationSummary]="true">
@@ -177,6 +178,7 @@
         <dx-form id="form3"
                  [colCount]="4"
                  labelLocation="top"
+                 [readOnly]="isEdit"
                  [formData]="parcelForm">
 
           <dxi-item dataField="cda" i18n-label editorType="dxSelectBox" [editorOptions]="cdaEditorOptions">

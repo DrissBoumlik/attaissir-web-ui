@@ -5,7 +5,7 @@
            [showColonAfterLabel]="true"
            [showValidationSummary]="true"
            labelLocation="top"
-           validationGroup="tierData">
+           validationGroup="{{ tierData }}">
 
 
     <!--<dxi-item itemType="group" [colCount]="3" caption="Third party type" i18n-caption>
@@ -89,6 +89,24 @@
       <dxi-item dataField="city">
         <dxo-label
           text="City" i18n-text>
+        </dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="borough">
+        <dxo-label
+          text="Borough" i18n-text>
+        </dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="commandment">
+        <dxo-label
+          text="Commandment" i18n-text>
+        </dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="region">
+        <dxo-label
+          text="Region" i18n-text>
         </dxo-label>
       </dxi-item>
 

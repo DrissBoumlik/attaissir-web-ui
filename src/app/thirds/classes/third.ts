@@ -49,6 +49,9 @@ export class Third {
   actionsPermission: any;
   bank_accounts: any;
   morale?: boolean;
+  borough: string;
+  commandment: string;
+  region: string;
   created_at?: Date;
   updated_at?: Date;
 

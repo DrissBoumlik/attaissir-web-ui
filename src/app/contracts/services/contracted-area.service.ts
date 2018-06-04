@@ -17,7 +17,7 @@ export class ContractedAreaService {
   };
 
   constructor(public http: HttpClient) {
-    this.routeName = 'contracted_areas';
+    this.routeName = 'contracted-areas';
   }
 
   /**

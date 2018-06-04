@@ -1,6 +1,6 @@
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
-    <div class="siam-page-header"> 
+    <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Dashboard</a>
       <h2>Add third party</h2>
     </div>
@@ -9,7 +9,7 @@
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
-      <app-tiers-form [isEdit]="false" [tier]="tier" (submit)="onFormSubmit($event)"></app-tiers-form>
+      <app-tiers-form [isEdit]="false" [readOnly]="false" [tier]="tier" (submit)="onFormSubmit($event)"></app-tiers-form>
     </div>
   </div>
 </div>

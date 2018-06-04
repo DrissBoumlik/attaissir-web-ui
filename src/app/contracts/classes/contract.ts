@@ -28,6 +28,6 @@ export class Contract {
   updated_at?: Date;
 
   constructor() {
-    this.status = 'draft';
+    this.status = 'encours';
   }
 }

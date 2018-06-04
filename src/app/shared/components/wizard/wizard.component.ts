@@ -13,6 +13,8 @@ import { ContractedArea } from '../../../contracts/classes/contracted-area';
 import { ContractedAreaService } from '../../../contracts/services/contracted-area.service';
 import { AgreementGround } from '../../../contracts/classes/agreement-ground';
 import { AgreementGroundsService } from '../../../contracts/services/agreement-grounds.service';
+import { Campaign } from '../../../contracts/classes/campaign';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -22,10 +24,17 @@ import { AgreementGroundsService } from '../../../contracts/services/agreement-g
 })
 export class WizardComponent implements OnInit {
   @Input() isEdit: boolean;
+  @Input() contract?: Contract;
+  @Input() currentThird?: Third;
+  @Input() structure?: Structure;
+  @Input() groundsList?: any[];
+  @Input() campaigns?: any[];
+  @Input() readOnly: boolean;
 
   contracts: any;
   allMode: any;
   checkBoxesMode: any;
+  tierData: string;
 
   navBarLayout: string;
   block_id: number;
@@ -38,7 +47,6 @@ export class WizardComponent implements OnInit {
   mle: any;
   parcelForm: any;
   campaignsRes: any[];
-  groundsList: any[];
   currentParcel: any[];
 
   cdaEditorOptions: any;
@@ -47,9 +55,9 @@ export class WizardComponent implements OnInit {
   blocEditorOptions: any;
   sectorEditorOptions: any;
   worthEditorOptions: any;
+  expirationDateOptions: any;
 
   parcels: any[];
-  campaigns: any[];
   maxYears: number;
   structures: any;
   addThird: boolean;
@@ -62,9 +70,6 @@ export class WizardComponent implements OnInit {
   addParcelOptions: any;
 
   constructor(public tier: Third,
-    public currentThird: Third,
-    public structure: Structure,
-    public contract: Contract,
     public tierService: ThirdsService,
     public campaignService: CampaignService,
     private toastr: ToastrService,
@@ -73,11 +78,18 @@ export class WizardComponent implements OnInit {
     private zoneService: ZonesService,
     private contractService: ContractsService,
     private contractedArea: ContractedAreaService,
-    private agreementGroundService: AgreementGroundsService) {
+    private agreementGroundService: AgreementGroundsService,
+              private router: Router) {
   }
 
   ngOnInit() {
+    this.tierData = 'tierData';
     this.groundsList = [];
+    this.expirationDateOptions = {
+      label: 'Expiration date',
+      min: this.contract.application_date
+    };
+
     this.worthEditorOptions = {
       items: ['propritaire', 'location', 'procuration']
     };
@@ -116,7 +128,6 @@ export class WizardComponent implements OnInit {
             yearly_surface: null,
             mode_worth: null
           };
-          console.log(ground);
           this.groundsList.push(ground);
         }, error1 => {
           this.toastr.error(error1.error.message);
@@ -170,7 +181,6 @@ export class WizardComponent implements OnInit {
                                   // Ground
                                   if (e2.selectedItem) {
                                     this.zoneService.getBlocs(e2.selectedItem.id).subscribe(ground => {
-                                      console.log(this.mles);
                                       this.mles = this.zoneService.dataFormatter(ground, false).zones;
                                       this.matriculeEditorOptions = {
                                         editorType: 'dxSelectBox',
@@ -218,7 +228,6 @@ export class WizardComponent implements OnInit {
       this.tiers = this.tierService.dataFormatter(tiers, false);
       this.thirds = Third.getDataSource(this.tiers, 'cin');
     }, error1 => {
-      console.log(error1);
       this.toastr.error(error1.error.message);
     });
 
@@ -227,7 +236,6 @@ export class WizardComponent implements OnInit {
 
     this.campaignService.getCampaigns().subscribe(camp => {
       this.campaignsRes = this.campaignService.dataFormatter(camp, false);
-
       this.campaigns = this.campaignsRes.map(c => {
         c['hidded'] = true;
         c['area'] = 0;
@@ -238,7 +246,6 @@ export class WizardComponent implements OnInit {
         this.campaigns = this.campaignsRes.filter(c => !c.hidded);
       }
     }, error1 => {
-      console.log(error1);
       this.toastr.error(error1.error.message);
     });
 
@@ -249,6 +256,7 @@ export class WizardComponent implements OnInit {
       icon: 'plus',
       type: 'success',
       useSubmitBehavior: false,
+      validationGroup: 'tierData',
       onClick: (e) => {
         const tmp = this.campaignsRes[this.campaigns.length];
         this.campaigns.push(tmp);
@@ -279,8 +287,6 @@ export class WizardComponent implements OnInit {
   }
 
   goToArea = () => {
-    console.log(this.contract);
-    console.log(this.currentThird);
     if (!this.contract.code_ormva) {
       this.toastr.error('Fill the contract fields first!');
     } else {
@@ -300,18 +306,14 @@ export class WizardComponent implements OnInit {
     }
   }
 
-  deleteRecords = (e) => {
-    console.log(e);
-  }
 
-  saveThird = () => {
+  saveThird = (e) => {
     this.thirdService.addThird(this.currentThird).subscribe(data => {
       this.tier = new Third();
       this.currentThird = data[0];
       this.toastr.success(
         `New third party added successfully.`);
     }, err => {
-      console.log(err);
       this.toastr.error(err.error.message);
     });
     this.addThird = false;
@@ -338,21 +340,31 @@ export class WizardComponent implements OnInit {
 
   finishFunction(e) {
     e.preventDefault();
-    console.log(this.currentThird);
-    console.log(this.campaigns);
-    console.log(this.contract);
-    console.log(this.groundsList);
-
     this.contract.third_party_id = this.currentThird.id;
+    this.contract.culture_type = 'cas'; // TO receive from structure
+    this.contract.structure_id = 1; // TO receive from structure
     this.contractService.addContract(this.contract).subscribe(contract => {
       contract = this.contractService.dataFormatter(contract, false);
 
-      this.campaigns = this.campaigns.map(data => {
-        data.campaign_id = contract['id'];
+      this.campaigns = this.campaigns.map(c => {
+
+        return {
+          contracted_surface: c.area,
+          agreement_id: contract['id'],
+          campaign_id: c.id
+        };
       });
-      this.contractedArea.addMultiAreas({ data: this.campaigns }).subscribe(data => {
+      this.contractedArea.addMultiAreas( { 'contracted_surfaces': this.campaigns }).subscribe(data => {
         data = this.contractedArea.dataFormatter(data, false);
-        // this.agreementGroundService.addAgreementGround();
+        for (const ground of this.groundsList) {
+          this.agreementGroundService.addAgreementGround(ground).subscribe(d => {
+            d = this.contractedArea.dataFormatter(d, false);
+            console.log(d);
+            this.router.navigate([`/contrats/show/${contract['id']}`]);
+          }, error1 => {
+            this.toastr.error(error1.error.message);
+          } );
+        }
 
       }, error1 => {
         this.toastr.error(error1.error.message);

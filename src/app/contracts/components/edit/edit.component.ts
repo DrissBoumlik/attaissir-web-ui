@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Contract } from '../../classes/contract';
 import { Third } from '../../../thirds/classes/third';
-import { AgreementGround } from '../../classes/agreement-ground';
-import { ContractsService } from '../../services/contracts.service';
+import { Structure } from '../../classes/structure';
+import { Location } from '@angular/common';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -11,19 +13,31 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
-  agreement_grounds: AgreementGround[];
+  groundsList?: any[];
+  campaigns?: any[];
+  id: number;
 
-  constructor(public contract: Contract,
-    public tier: Third,
-    public contractService: ContractsService,
-    public toastr: ToastrService) { }
+  constructor(
+    public contract: Contract,
+    public currentThird: Third,
+    public structure: Structure,
+    public route: ActivatedRoute,
+    private router: Router,
+    private location: Location,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.contractService.getContracts().subscribe(data => {
-      //
-    }, error1 => {
-      this.toastr.error(error1.error.message);
+    this.groundsList = [];
+    this.campaigns = [];
+
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      if (this.id) {
+        // e
+      } else {
+        this.toastr.warning('ID not provided.');
+        this.location.back();
+      }
     });
   }
-
 }
