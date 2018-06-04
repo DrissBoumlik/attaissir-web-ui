@@ -6,6 +6,8 @@ import { Structure } from '../../classes/structure';
 import { Third } from '../../../thirds/classes/third';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { Document } from '../../../thirds/classes/document';
+import { environment } from '../../../../environments/environment';
+import { CardsService } from '../../services/cards.service';
 
 @Component({
   selector: 'app-detail-contract',
@@ -20,11 +22,13 @@ export class DetailContractComponent implements OnInit {
   campagnes: any;
   docTypes: any;
   filePath = [];
+  id: number;
 
   constructor(private contractService: ContractsService,
     private route: ActivatedRoute,
     private router: Router,
-    private thirdsService: ThirdsService) {
+    private thirdsService: ThirdsService,
+    public cardService: CardsService) {
   }
 
   ngOnInit() {
@@ -32,6 +36,7 @@ export class DetailContractComponent implements OnInit {
       params => {
         this.contractService.getContract(+params.id).subscribe(
           (res: any) => {
+            this.id = params.id;
             this.contract = res.data;
             this.third = res.data.third_party;
             this.campagnes = res.data.campaigns;
@@ -46,11 +51,11 @@ export class DetailContractComponent implements OnInit {
             );
           },
           (error) => {
-            this.router.navigate(['/404']).catch(
+            /*this.router.navigate(['/404']).catch(
               err => {
                 console.log(err);
               }
-            );
+            );*/
           }
         );
       }
@@ -60,6 +65,14 @@ export class DetailContractComponent implements OnInit {
         this.docTypes = this.thirdsService.dataFormatter(res, false);
       }
     );
+  }
+
+  download() {
+    this.cardService.getDoc(this.id).subscribe(data => {
+      console.log(data);
+    }, error1 => {
+      console.log(error1);
+    });
   }
 
   onAddDOC(e: any) {

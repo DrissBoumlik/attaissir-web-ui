@@ -71,20 +71,20 @@
               </dxi-item>
             </dxi-item>
           </dx-form>
-          
+
           </div>
-          
+
         </div>
-        
+
       </div>
 
-     <app-tiers-form [isEdit]="isEdit" [readOnly]="isEdit" [validationGroup]="tierData" [tier]="tier" [isWizard]="true" *ngIf="addThird"></app-tiers-form>
+     <app-tiers-form [isEdit]="isEdit" [readOnly]="isEdit" [validationGroup]="tierData" [tier]="tier" [isWizard]="true" *ngIf="addThird" (submit)="onFormSubmit($event)"></app-tiers-form>
     </div>
     <!-- End Agreggated Informations -->
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5"  *ngIf="!addThird">
 			<div class="m-form__actionss">
 				<button type="button" class="btn btn-success float-right"  awNextStep i18n>Next Step</button>
-				<button class="btn float-right mr-3" *ngIf="currentThird.cin" (click)="addThird = true"><span i18n>Add Third party</span></button>
+				<button class="btn float-right mr-3" *ngIf="!!currentThird.cin" (click)="addThird = true"><span i18n>Add Third party</span></button>
 			</div>
 		</div>
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5"  *ngIf="addThird">
@@ -93,7 +93,7 @@
 				<button class="btn  float-right mr-3" (click)="cancelThird()"><span i18n>Cancel</span></button>
 			</div>
 		</div>
-		
+
   </aw-wizard-step>
 
   <aw-wizard-step stepTitle="2. Contract Informations" [canEnter]="!!currentThird.cin"

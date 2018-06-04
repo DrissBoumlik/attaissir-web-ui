@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ContractsService } from '../../services/contracts.service';
 
 @Component({
   selector: 'app-edit',
@@ -24,7 +25,8 @@ export class EditComponent implements OnInit {
     public route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private contractService: ContractsService) { }
 
   ngOnInit() {
     this.groundsList = [];
@@ -39,5 +41,33 @@ export class EditComponent implements OnInit {
         this.location.back();
       }
     });
+
+    this.route.params.subscribe(
+      params => {
+        this.contractService.getContract(+params.id).subscribe(
+          (res: any) => {
+            this.id = params.id;
+            this.contract = res.data;
+            this.currentThird = res.data.third_party;
+            this.campaigns = res.data.campaigns;
+            this.contractService.getStrcutureById(res.data.structure.id).subscribe(
+              (struct: Structure) => {
+                this.structure = this.contractService.dataFormatter(struct, false);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+          },
+          (error) => {
+            /*this.router.navigate(['/404']).catch(
+              err => {
+                console.log(err);
+              }
+            );*/
+          }
+        );
+      }
+    );
   }
 }

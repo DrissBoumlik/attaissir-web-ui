@@ -53,9 +53,9 @@ export class AuthComponent implements OnInit {
         this.handleSignUpFormSubmit();
         this.handleForgetPasswordFormSubmit();
       });
-      // Set page height
-      document.getElementById("m_login").style.height = (screen.height-118)+"px";
-      // m-login--signin
+    // Set page height
+    document.getElementById("m_login").style.height = (screen.height - 118) + "px";
+    // m-login--signin
   }
 
   signin() {

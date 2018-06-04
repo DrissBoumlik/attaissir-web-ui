@@ -14,7 +14,7 @@ import { ContractedAreaService } from '../../../contracts/services/contracted-ar
 import { AgreementGround } from '../../../contracts/classes/agreement-ground';
 import { AgreementGroundsService } from '../../../contracts/services/agreement-grounds.service';
 import { Campaign } from '../../../contracts/classes/campaign';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -79,7 +79,7 @@ export class WizardComponent implements OnInit {
     private contractService: ContractsService,
     private contractedArea: ContractedAreaService,
     private agreementGroundService: AgreementGroundsService,
-              private router: Router) {
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -87,6 +87,7 @@ export class WizardComponent implements OnInit {
     this.groundsList = [];
     this.expirationDateOptions = {
       label: 'Expiration date',
+      value: new Date(2019, 3, 27),
       min: this.contract.application_date
     };
 
@@ -307,6 +308,17 @@ export class WizardComponent implements OnInit {
   }
 
 
+  onFormSubmit = (e) => {
+    this.thirdService.addThird(this.currentThird).subscribe(data => {
+      this.tier = new Third();
+      this.currentThird = data[0];
+      this.toastr.success(
+        `New third party added successfully.`);
+    }, err => {
+      this.toastr.error(err.error.message);
+    });
+    this.addThird = false;
+  }
   saveThird = (e) => {
     this.thirdService.addThird(this.currentThird).subscribe(data => {
       this.tier = new Third();
@@ -322,6 +334,7 @@ export class WizardComponent implements OnInit {
   cancelThird = () => {
     this.addThird = false;
     this.currentThird = new Third();
+    this.currentThird.cin = '';
   }
 
   checker = (tocheck) => {
@@ -354,7 +367,7 @@ export class WizardComponent implements OnInit {
           campaign_id: c.id
         };
       });
-      this.contractedArea.addMultiAreas( { 'contracted_surfaces': this.campaigns }).subscribe(data => {
+      this.contractedArea.addMultiAreas({ 'contracted_surfaces': this.campaigns }).subscribe(data => {
         data = this.contractedArea.dataFormatter(data, false);
         for (const ground of this.groundsList) {
           this.agreementGroundService.addAgreementGround(ground).subscribe(d => {
@@ -363,7 +376,7 @@ export class WizardComponent implements OnInit {
             this.router.navigate([`/contrats/show/${contract['id']}`]);
           }, error1 => {
             this.toastr.error(error1.error.message);
-          } );
+          });
         }
 
       }, error1 => {

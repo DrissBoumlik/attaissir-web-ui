@@ -44,6 +44,10 @@ export class CardsService {
     return this.http.post<Card[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(card), this.options);
   }
 
+  getDoc(id: number): Observable<Card[]> {
+    return this.http.put<Card[]>(`${environment.apiUrl}/agreements/${id}/prints`, JSON.stringify(id), this.options);
+  }
+
   /**
    * Edit a Card
    * @param Card
