@@ -2,37 +2,35 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="708208b824f472516977049996599ca14545622f" datatype="html">
+      <trans-unit id="b1ebb9472d497f11f816c6318b222400c43a8be8" datatype="html">
         <source>
-									THIRDS PARTIES
-								</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/theme/layouts/header-nav/header-nav.component.ts</context>
-          <context context-type="linenumber">55</context>
-        </context-group>
-        <note priority="1" from="description">TIERS</note>
-      </trans-unit>
-      <trans-unit id="ef8f0e4152095054b5d2f630e6c96d3578ab423f" datatype="html">
-        <source>
-									CONTRACTS
-								</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/theme/layouts/header-nav/header-nav.component.ts</context>
-          <context context-type="linenumber">66</context>
-        </context-group>
-        <note priority="1" from="description">CONTRATS</note>
-      </trans-unit>
-      <trans-unit id="d77cc4861e5348e9e29c783620c17d4d44393145" datatype="html">
-        <source>
-						<x id="INTERPOLATION" equiv-text="{{ section.name }}"/>
-					</source>
+										<x id="INTERPOLATION" equiv-text="{{ menuItem.name }}"/>
+									</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/theme/layouts/aside-nav/aside-nav.component.ts</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="c55ab35fbd56e14e857dbd3f3467729ab85f7302" datatype="html">
-        <source>2018 © SIAM618 by</source>
+      <trans-unit id="ddbd96f50ab76d874040a7ded21d8389f50507be" datatype="html">
+        <source>
+										<x id="INTERPOLATION" equiv-text="{{ menuItem.description }}"/>
+									</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/theme/layouts/aside-nav/aside-nav.component.ts</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c2bd1c6e683fde0701bc3a5ea6a74fdcd419b54b" datatype="html">
+        <source>
+              						<x id="INTERPOLATION" equiv-text="{{ subMenuItem.name }}"/>
+              					</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/theme/layouts/aside-nav/aside-nav.component.ts</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="750b3e51a89e6ffc8694e97613ad1580dce77426" datatype="html">
+        <source>2018 © SIAM618 by </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/theme/layouts/footer/footer.component.ts</context>
           <context context-type="linenumber">7</context>
@@ -51,234 +49,251 @@
         <source>First name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/list/list.component.ts</context>
-          <context context-type="linenumber">131</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/thirds/components/list/list.component.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="198754934a0d0fe6b4b259910dddd0d78537e023" datatype="html">
         <source>First name is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6ce3dadf53dda1a1ab0c3167a8ed8dced471b0dc" datatype="html">
         <source>Last name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/list/list.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b061a80a31110c0c4b925b68eb8b9d371e818b0f" datatype="html">
         <source>Last name is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="96582744bc737e1e2f98d33a3f2d0aa7fcb850ce" datatype="html">
         <source>First name (Arabic)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="59069e5b8d8c703123969e31e6d9385b4655e0fc" datatype="html">
         <source>Arabic first name is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5a151095fed598c65eacd7ad3f028ab3ecb33afc" datatype="html">
         <source>Last name (Arabic)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a8c8469a0f951e60ed69d09e566846fd3250215d" datatype="html">
         <source>CIN required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="003d4f5e4909ccf01b6a204c688fd6dab15c20bd" datatype="html">
         <source>Gender</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="729754dd19eb9ce0670b0aeb5a6ae60574c2c563" datatype="html">
         <source>Address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e5f74d4f69166b727e7e4337118204586c50a236" datatype="html">
         <source>Zip code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="23585a590be9ea89e270a6b5ccbfa2e1079d544f" datatype="html">
         <source>You cannot have a negative postal code.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5c7012b5a926b32d9e45fefdcc8a1a3cb6f023d0" datatype="html">
         <source>City</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">91</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/list/list.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b089641bfe9b196b4c9a3ae2857b5e550c9a5818" datatype="html">
+        <source>Borough</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ce069acc41f1f835f6d91e27464346a0df1ac25d" datatype="html">
+        <source>Commandment</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2ae797460f17fe72086256ec5e2da35ddc6e1614" datatype="html">
+        <source>Region</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
+          <context context-type="linenumber">109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4dfbe8e9e0b5fd0f16d3d888ba2359495c7f996f" datatype="html">
         <source>Date of birth</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bcee184687d45c4e1ec902bcfc216980f9ef3e97" datatype="html">
         <source>Date of death</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="244aae9346da82b0922506c2d2581373a15641cc" datatype="html">
         <source>Email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="89469f0336e22c8c4715799ad9f277af30662f2b" datatype="html">
         <source>This is not a valid Email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="468d98b56458c0e68fe7cabead0d6d98f9a41fd9" datatype="html">
         <source>Telephone 1</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="80ec45cc1833c81400f172fbdaffdd00a5c1cc13" datatype="html">
         <source>The phone must have a correct Moroccan phone format</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">152</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">166</context>
         </context-group>
       </trans-unit>
       <trans-unit id="aa12a33dd31f386646bf5802fb7170cf11391558" datatype="html">
         <source>Telephone 2</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">161</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3e2d5fa737eff628ffc84d72b636808d6a4b3e99" datatype="html">
         <source>Education level</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="437cb1fc4a4fdb9703044981bcb760b288a76a78" datatype="html">
         <source>Familial situation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">160</context>
+          <context context-type="linenumber">179</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ee6ff8d5aa159f98bfbec007146f0370ac5217cf" datatype="html">
         <source>Children number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f196047013484fb766753a1e12b578283a7fe378" datatype="html">
         <source>You cannot have negative children.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">167</context>
+          <context context-type="linenumber">186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="56a60fde852fd96d109bf446bdf1bd4f0d24e468" datatype="html">
         <source>Insurance</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">193</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2fe5b916c5ba360ef2a3a85da903f2ccc9c7281b" datatype="html">
         <source>Retraite</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">179</context>
+          <context context-type="linenumber">198</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a75e1e33e7cad40b09371a191b742d6f4466b652" datatype="html">
         <source>Payment mode</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">184</context>
+          <context context-type="linenumber">203</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="c34add93b2ea8efbc723eec55f8d87b9fa2721fb" datatype="html">
-        <source>General informations</source>
+      <trans-unit id="21d1d57acab108434575aa6bcaf95bbade3531ff" datatype="html">
+        <source>General Informations</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8f17ffb31a6eff420cb9ddc6bcc48c588d60a77e" datatype="html">
         <source>Is morale person?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">217</context>
+          <context context-type="linenumber">236</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9b7ae17ed2514a416439c610e6863e317d1b419a" datatype="html">
         <source>Business register</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">230</context>
+          <context context-type="linenumber">249</context>
         </context-group>
         <note priority="1" from="description">registre de commerce</note>
       </trans-unit>
@@ -286,14 +301,14 @@
         <source>Patent number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">236</context>
+          <context context-type="linenumber">255</context>
         </context-group>
       </trans-unit>
       <trans-unit id="544280d9171718c9a4295272545fd8403303fc7c" datatype="html">
         <source>Tax identification</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">242</context>
+          <context context-type="linenumber">261</context>
         </context-group>
         <note priority="1" from="description">identifiant fiscal</note>
       </trans-unit>
@@ -301,21 +316,21 @@
         <source>ICE</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">249</context>
+          <context context-type="linenumber">268</context>
         </context-group>
       </trans-unit>
       <trans-unit id="05557ed4575e0425b23363ba5d47e24b4e4c205b" datatype="html">
         <source>TVA code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">255</context>
+          <context context-type="linenumber">274</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d7285e9fcfc94bcef69381a83a76b7d0dfbd7fe9" datatype="html">
         <source>Corporation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">221</context>
+          <context context-type="linenumber">240</context>
         </context-group>
         <note priority="1" from="description">Personne morale</note>
       </trans-unit>
@@ -323,7 +338,184 @@
         <source>Is active?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/tiers-form/tiers-form.component.ts</context>
-          <context context-type="linenumber">265</context>
+          <context context-type="linenumber">284</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d55d4544412b148ee7e44e4f39f031e9b394c472" datatype="html">
+        <source>Add Third party</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8b28432b6c78dfa3fb0a921ff13c63faa06457fe" datatype="html">
+        <source>Next Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">180</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="52c9a103b812f258bcddc3d90a6e3f46871d25fe" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9ba24bf3c65fed6e59c2d2264be8d104f370a69c" datatype="html">
+        <source>Previous Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">128</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">179</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">270</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8f7e889d83770d3f90eec318226ae54cac961719" datatype="html">
+        <source>Campaign</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="02395e0cd8f93e9a1967084bbe43efaf535e4c17" datatype="html">
+        <source>Superficie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">158</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="da45a344c97a4cedae594570102577146f5d9670" datatype="html">
+        <source>Zone</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">200</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">259</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/contracts/components/cards/cards.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="936788a5ab949fe0d70098ba051ac7a44999ff08" datatype="html">
+        <source>Sector</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">204</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">260</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/contracts/components/cards/cards.component.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="746cb8fd11118f63f8db00aba1f0a6896e398fda" datatype="html">
+        <source>Mle</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">212</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">257</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b1a32d0db38564b022d246c5f7d11c96eca99bb7" datatype="html">
+        <source>Total Sup</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">217</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">262</context>
+        </context-group>
+        <note priority="1" from="description">Sup totale</note>
+      </trans-unit>
+      <trans-unit id="33241eeea22fcb417cca0def8f2f664f2c14c840" datatype="html">
+        <source>Bare Sup</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">219</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">263</context>
+        </context-group>
+        <note priority="1" from="description">Sup annuelle</note>
+      </trans-unit>
+      <trans-unit id="4cad6af22827ed6adb8958c2fc25cbe2016d02fd" datatype="html">
+        <source>Mode of worth</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">221</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2798cc1e152b1ec07fd8daf94a2a073d1ba1ebcc" datatype="html">
+        <source>Id</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">256</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0ca696e4201f5459188169a7b34c80e0babfaad9" datatype="html">
+        <source>CDA</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">258</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/contracts/components/cards/cards.component.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7f5d0c10614e8a34f0e2dad33a0568277c50cf69" datatype="html">
+        <source>Block</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">261</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/contracts/components/cards/cards.component.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3ea51cf415feffef55e82c7b60e9486055837661" datatype="html">
+        <source>Finish</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">271</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ee87b81941ce88c77656e7ab284bafa838a0ba5c" datatype="html">
@@ -332,15 +524,6 @@
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/index/index.component.ts</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7e8e10dccbee3ca2da229ab652273c1895ae0e59" datatype="html">
-        <source>
-        ADD A THIRD PARTY
-      </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/thirds/components/add/add.component.ts</context>
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
@@ -357,116 +540,18 @@
         <source>Delete Selected Records</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/list/list.component.ts</context>
-          <context context-type="linenumber">87</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2798cc1e152b1ec07fd8daf94a2a073d1ba1ebcc" datatype="html">
-        <source>Id</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/thirds/components/list/list.component.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9c21fa4a28e22912e55dd9304664ecf3b62ec5e5" datatype="html">
         <source>CIN</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/thirds/components/list/list.component.ts</context>
-          <context context-type="linenumber">135</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4f8b2bb476981727ab34ed40fde1218361f92c45" datatype="html">
-        <source>Details</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/thirds/components/list/list.component.ts</context>
-          <context context-type="linenumber">141</context>
-        </context-group>
-        <note priority="1" from="description">Détails</note>
-      </trans-unit>
-      <trans-unit id="d55d4544412b148ee7e44e4f39f031e9b394c472" datatype="html">
-        <source>Add Third party</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="52c9a103b812f258bcddc3d90a6e3f46871d25fe" datatype="html">
-        <source>Save</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
-          <context context-type="linenumber">67</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
-        <source>Cancel</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
-          <context context-type="linenumber">71</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8b28432b6c78dfa3fb0a921ff13c63faa06457fe" datatype="html">
-        <source>Next Step</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">74</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
-          <context context-type="linenumber">128</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="98c11c9700902f93e605703ea13330d24119d8be" datatype="html">
-        <source>Contracted area</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
-          <context context-type="linenumber">88</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8f7e889d83770d3f90eec318226ae54cac961719" datatype="html">
-        <source>Campaign</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
-          <context context-type="linenumber">101</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="02395e0cd8f93e9a1967084bbe43efaf535e4c17" datatype="html">
-        <source>Superficie</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
-          <context context-type="linenumber">107</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9ba24bf3c65fed6e59c2d2264be8d104f370a69c" datatype="html">
-        <source>Previous Step</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
-          <context context-type="linenumber">127</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
-          <context context-type="linenumber">159</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b5a41698e0b47cf02fff7c3cde2d8e87f1dfef64" datatype="html">
-        <source>Parcel</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
-          <context context-type="linenumber">135</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3ea51cf415feffef55e82c7b60e9486055837661" datatype="html">
-        <source>Finish</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/wizard/wizard.component.ts</context>
-          <context context-type="linenumber">160</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="99c574ed0a4aa240dd60ac5d47caa28b25e9aee1" datatype="html">
-        <source>
-        LIST DES CONTRATS
-      </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/list-contract/list-contract.component.ts</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="sourcefile">app/contracts/components/cards/cards.component.ts</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f41f812e8a1da7abfb579994c8d931863c656ced" datatype="html">
@@ -474,12 +559,30 @@
         CONTRACTUALIZATION
       </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/contracts/components/add/add.component.ts</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">app/contracts/components/edit/edit.component.ts</context>
           <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f8b2bb476981727ab34ed40fde1218361f92c45" datatype="html">
+        <source>Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/contracts/components/cards/cards.component.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <note priority="1" from="description">Détails</note>
+      </trans-unit>
+      <trans-unit id="b760f123248930122fc7e7b6b6bf94e376e959c8" datatype="html">
+        <source>Full name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/contracts/components/cards/cards.component.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1e203f5b9e480285559b451cdf843fee0ffe795d" datatype="html">
+        <source>Perimeter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/contracts/components/cards/cards.component.ts</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
     </body>

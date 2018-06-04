@@ -15,7 +15,7 @@ export class AgreementGroundsService {
 
   routeName: string;
   constructor(public http: HttpClient) {
-    this.routeName = 'agreement-ground';
+    this.routeName = 'agreement-grounds';
   }
 
   /**
