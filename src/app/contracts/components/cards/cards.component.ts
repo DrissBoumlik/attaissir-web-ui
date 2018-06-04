@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
-import {CardsService} from '../../services/cards.service';
-import {Card} from 'primeng/card';
+import { ToastrService } from 'ngx-toastr';
+import { CardsService } from '../../services/cards.service';
+import { Card } from 'primeng/card';
 
 @Component({
   selector: 'app-cards',
@@ -15,23 +15,16 @@ export class CardsComponent implements OnInit {
   selectedItems: any[];
 
   constructor(private toastr: ToastrService,
-              private cardsService: CardsService) { }
+    private cardsService: CardsService) { }
 
   ngOnInit() {
-    this.cardsService.getCards().subscribe( cards => {
+    this.cardsService.getCards().subscribe(cards => {
       this.cards = this.cardsService.dataFormatter(cards, false);
-      this.cards = this.cards.map( card => {
-        return {
-          id: card.id,
-          status: (card.active === 'actif') ? 'Oui' : 'Non',
-          full_name: `kkk kkkkk`,
-          cin: 'az1254',
-          serail: 'aaaaaazzeee',
-          printed: 'oui',
-          printed_at: '12/12/2018'
-        };
+      this.cards = this.cards.map(card => {
+        card.full_name = `${card.first_name} ${card.last_name}`;
+        return card;
       });
-      },
+    },
       (err) => {
         this.toastr.error(err.error.message);
       });
@@ -59,6 +52,6 @@ export class CardsComponent implements OnInit {
       }
     );
   }
-  gotoShow = (e) => {};
+  gotoShow = (e) => { };
 
 }

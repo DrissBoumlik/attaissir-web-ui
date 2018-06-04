@@ -20,25 +20,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.currentUrl = this.router.url.split('/')[1];
-    // switch (this.currentUrl) {
-    //   case 'tiers': {
-    //     this.sections = [
-    //       { icon: 'line-graph', name: 'DashBoard', url: './' },
-    //       { icon: 'plus', name: 'New Aggregated'/*Nuveau agrégé*/, url: 'add' },
-    //       { icon: 'list', name: 'Aggregated List'/*Liste des  agrégés*/, url: 'list' },
-    //     ];
-    //     break;
-    //   }
-    //   case 'contrats': {
-    //     this.sections = [
-    //       { icon: 'line-graph', name: 'DashBoard', url: './' },
-    //       { icon: 'plus', name: 'New Contract', url: 'add' },
-    //       { icon: 'list', name: 'Contracts List', url: 'list' },
-    //     ];
-    //     break;
-    //   }
-    // }
-    
+
+
     this.mainMenu = [
       {
         name : 'Tiers',
@@ -46,8 +29,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url : 'tiers',
         description : 'Gestion des tiers',
         subMenu : [
-            { icon: 'flaticon-plus', name: 'New Aggregated'/*Nuveau agrégé*/, url: 'add' },
-            { icon: 'flaticon-list', name: 'Aggregated List'/*Liste des  agrégés*/, url: 'list' },
+            { icon: 'flaticon-plus', name: 'New Aggregated'/*Nuveau agrégé*/, url: '/tiers/add' },
+            { icon: 'flaticon-list', name: 'Aggregated List'/*Liste des  agrégés*/, url: '/tiers/list' },
           ],
         disabled: 'false'
       },
@@ -57,8 +40,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url : 'contrats',
         description : 'Gestion des Contracts',
         subMenu : [
-            { icon: 'flaticon-plus', name: 'New Contract', url: 'add' },
-            { icon: 'flaticon-list', name: 'Contracts List', url: 'list' },
+            { icon: 'flaticon-plus', name: 'New Contract', url: '/contrats/add' },
+            { icon: 'flaticon-list', name: 'Contracts List', url: '/contrats/list' },
           ],
         disabled: 'false'
       },
@@ -92,7 +75,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       }
     ]
     console.log(this.mainMenu);
-    
+
   }
 
   ngAfterViewInit() {

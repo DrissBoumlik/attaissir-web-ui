@@ -15,12 +15,6 @@
     [paging]="true">
   </dxo-remote-operations>
 
-  <dxo-editing
-    mode="row"
-    [useIcons]="true"
-    [allowUpdating]="true"
-    [allowDeleting]="true">
-  </dxo-editing>
   <dxo-selection mode="multiple"></dxo-selection>
 
   <dxo-sorting mode="multiple"></dxo-sorting>
@@ -51,15 +45,17 @@
   </dxi-column>
   <dxi-column dataField="cin" caption="CIN" i18n-caption>
   </dxi-column>
-  <dxi-column dataField="serial" caption="Serial" i18n-caption>
+  <dxi-column dataField="perimeter" caption="Perimeter" i18n-caption>
   </dxi-column>
-  <dxi-column dataField="status" caption="Status" i18n-caption>
+  <dxi-column dataField="cda" caption="CDA" i18n-caption>
   </dxi-column>
-  <dxi-column dataField="printed" caption="Printed" i18n-caption>
+  <dxi-column dataField="zone" caption="Zone" i18n-caption>
   </dxi-column>
-  <dxi-column dataField="printed_at" itemtype="date" caption="Printed at" i18n-caption>
+  <dxi-column dataField="sector" caption="Sector" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="block" caption="Block" i18n-caption>
   </dxi-column>
   <div *dxTemplate="let data of 'cellTemplate'">
-    <a href="javascript::void(0)" (click)="gotoShow(data.data.id)"><i class="fa fa-eye fa-5x"> View</i></a>
+    <a (click)="gotoShow(data.data.id)"><i class="fa fa-eye fa-5x"> View</i></a>
   </div>
 </dx-data-grid>

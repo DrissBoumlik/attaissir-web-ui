@@ -16,6 +16,8 @@ export class TiersFormComponent implements OnInit {
   @Input() id?: number;
   @Input() tier: Third;
   @Input() isWizard?: boolean;
+  @Input() validationGroup?: string;
+  @Input() readOnly?: boolean;
 
   buttonOptions: any;
   education_level: any;
@@ -26,12 +28,14 @@ export class TiersFormComponent implements OnInit {
   phonePattern: any;
   ribPattern: any;
   locale: string;
+  tierData: string;
 
   constructor() {
     locale('fr');
   }
 
   ngOnInit() {
+    this.tierData = 'tierData';
     this.buttonOptions = {
       text: (!this.isEdit) ? 'Add' : 'Update',
       type: 'success',

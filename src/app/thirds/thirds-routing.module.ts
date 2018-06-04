@@ -12,28 +12,28 @@ const routes: Routes = [
     path: 'tiers',
     component: DefaultComponent,
     children: [
-      { 
-        path: '', 
+      {
+        path: '',
         component: ListComponent,
-        data: { title: 'Heroes List' } 
+        data: { title: 'Heroes List' }
       },
-      { 
-        path: 'add', 
+      {
+        path: 'add',
         component: AddComponent,
         data: { title: 'Heroes List' }
-        },
-      { 
-        path: 'edit/:id', 
+      },
+      {
+        path: 'edit/:id',
         component: EditComponent,
         data: { title: 'Heroes List' }
       },
-      { 
-        path: 'show/:id', 
+      {
+        path: 'show/:id',
         component: ShowComponent,
         data: { title: 'Heroes List' }
       },
-      { 
-        path: 'list', 
+      {
+        path: 'list',
         component: ListComponent,
         data: { title: 'Heroes List' }
       }

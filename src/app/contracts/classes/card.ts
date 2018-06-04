@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Structure} from './structure';
-import {Third} from '../../thirds/classes/third';
+import { Structure } from './structure';
+import { Third } from '../../thirds/classes/third';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +13,20 @@ export class Card {
   status: string; // ['actif', 'inactif', 'perdue']
   description: string;
   printed_at: Date;
+  perimeter: string;
+  region: string;
+  borough: string;
+  cda: string;
+  zone: string;
+  sector: string;
+  block: string;
+  cin: string;
+  last_name: string;
+  first_name: string;
+  social_reason: string;
+  ice: 180250172344;
   structure: Structure;
-  third_party: Third;
+  third_party?: Third;
   created_at?: Date;
   updated_at?: Date;
 

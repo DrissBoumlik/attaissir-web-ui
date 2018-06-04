@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { Helpers } from '../../../helpers';
-import { ActivatedRoute,NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 
 declare let mLayout: any;

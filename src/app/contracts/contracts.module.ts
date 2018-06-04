@@ -4,7 +4,10 @@ import { CommonModule } from '@angular/common';
 import { ContractsRoutingModule } from './contracts-routing.module';
 import { ThirdsModule } from '../thirds/thirds.module';
 import { ListContractComponent } from './components/list-contract/list-contract.component';
-import {DxDataGridModule, DxLookupModule, DxPopupModule, DxTemplateModule} from 'devextreme-angular';
+import {
+  DxDataGridModule, DxFileUploaderModule, DxLookupModule, DxPopupModule, DxSelectBoxModule,
+  DxTemplateModule
+} from 'devextreme-angular';
 import { ContractsService } from './services/contracts.service';
 import { DetailContractComponent } from './components/detail-contract/detail-contract.component';
 import { AvenantComponent } from './components/avenant/avenant.component';
@@ -24,11 +27,15 @@ import { CardsComponent } from './components/cards/cards.component';
     DxDataGridModule,
     DxPopupModule,
     DxLookupModule,
+    DxFileUploaderModule,
+    DxSelectBoxModule,
   ],
   exports: [
     DxTemplateModule,
     DxDataGridModule,
     DxPopupModule,
+    DxFileUploaderModule,
+    DxSelectBoxModule,
   ],
   declarations: [
     ListContractComponent,

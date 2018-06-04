@@ -4,24 +4,24 @@ import { LogoutComponent } from './auth/logout/logout.component';
 
 
 const routes: Routes = [
-  { 
-    path: 'login', 
+  {
+    path: 'login',
     loadChildren: './auth/auth.module#AuthModule',
     data: { title: 'Heroes List' }
-    
+
   },
-  { 
-    path: 'logout', 
+  {
+    path: 'logout',
     component: LogoutComponent,
-    data: { title: 'Heroes List' } 
-    
+    data: { title: 'Heroes List' }
+
   },
-  { 
-    path: '', 
-    redirectTo: 'index', 
+  {
+    path: '',
+    redirectTo: 'index',
     pathMatch: 'full',
     data: { title: 'Heroes List' }
-  
+
   },
 ];
 

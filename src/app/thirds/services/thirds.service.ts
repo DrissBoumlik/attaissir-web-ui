@@ -1,17 +1,17 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Third} from '../classes/third';
-import {} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {Document} from '../classes/document';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Third } from '../classes/third';
+import { } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Document } from '../classes/document';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThirdsService {
 
-  private headers = new HttpHeaders({'Content-Type': 'application/json', 'charset': 'UTF-8'});
+  public headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
   private options = {
     headers: this.headers
   };
@@ -118,8 +118,8 @@ export class ThirdsService {
     const doc1 = new Document();
     doc1.id = 1;
     doc1.path = 'http://rusenergyweek.com/upload/iblock/1b9/1b9cb0045fcda0e07be921ec922f5191.pdf';
+    doc1.label = 'CIN';
     doc1.downloadPath = doc1.path;
-    doc1.type = 'CIN';
     return [doc1];
     /*return this.http.get(`${environment.apiUrl}/documents/${idThird}`, this.options);*/
   }
@@ -132,12 +132,10 @@ export class ThirdsService {
     const formData: FormData = new FormData();
     formData.append('document', file, file.name);
     return this.http
-      .post(`${environment.apiUrl}/documents`, formData, {
-        headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})
-      });
+      .post(`${environment.apiUrl}/documents`, formData, { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) });
   }
 
-  putDocumentInfo(docInfo: { third_party_id: number, document_type_id: number }, id: number): Observable<any> {
+  putDocumentInfo(docInfo: any, id: number): Observable<any> {
     return this.http.put(`${environment.apiUrl}/documents/${id}`,
       docInfo, this.options);
   }

@@ -26,6 +26,7 @@ export class CampaignService {
     return this.http.get<Campaign[]>(`${environment.apiUrl}/${this.routeName}`);
   }
 
+
   /**
    * Get a Campaign
    * @param id
@@ -43,6 +44,7 @@ export class CampaignService {
   addCampaign(campaign: Campaign): Observable<Campaign[]> {
     return this.http.post<Campaign[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(campaign), this.options);
   }
+
 
   /**
    * Edit a Campaign

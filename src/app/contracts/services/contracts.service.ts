@@ -79,4 +79,12 @@ export class ContractsService {
     return (!test) ? data['data'] : data;
   }
 
+  /**
+   *
+   * @param {number} id
+   * @returns {Observable<any>}
+   */
+  getStrcutureById(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/structures/${id}`, this.options);
+  }
 }
