@@ -1,36 +1,50 @@
 <aw-wizard [navBarLayout]="navBarLayout">
-  <aw-wizard-step stepTitle="Agreggated Informations"
-                  [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome'}" (stepExit)="goToContractInfo()"
+  <aw-wizard-step stepTitle="1. Agreggated Informations"
+                  [navigationSymbol]="{ symbol: '&#xf10e;', fontFamily: 'Flaticon'}" (stepExit)="goToContractInfo()"
                   i18n-step-title>
 
     <!-- Agreggated Informations -->
     <div class="">
-      <h1 i188n>Agreggated Informations</h1>
-      <hr>
 
       <div *ngIf="!addThird">
         <div class="left">
-          <dx-list
-            class="list"
-            [dataSource]="thirds"
-            [grouped]="false"
-            [searchEnabled]="true"
-            selectionMode="single"
-            [selectedItemKeys]="[currentThird?.id]"
-            (onSelectionChanged)=listSelectionChanged($event)
-          >
-            <div *dxTemplate="let item of 'item'">
-              <div>
-                <div class="third">
-                  <div class="first_name"><b>{{ item.cin }}</b> {{item.first_name}}</div>
+          <h5 class="mb-3">Thirds parties list</h5>
+          <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+            <div class="m-portlet__body  m-portlet__body--no-padding">
+
+              <dx-list
+                class="list"
+                [dataSource]="thirds"
+                [grouped]="false"
+                [searchEnabled]="true"
+                selectionMode="single"
+                height="100%"
+                [selectedItemKeys]="[currentThird?.id]"
+                (onSelectionChanged)=listSelectionChanged($event)
+              >
+                <div *dxTemplate="let item of 'item'">
+                  <div>
+                    <div class="third">
+                      <div class="first_name"><b>{{ item.cin }}</b> {{item.first_name}}</div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </dx-list>
             </div>
-          </dx-list>
+          </div>
         </div>
         <div class="right">
-          <dx-form id="form"
-                   [formData]="currentThird">
+          <div class="siam-empty-page" *ngIf="!currentThird.cin">
+            <div class="siam-empty-page-content">
+              <h2>Choose third party</h2>
+              <p>You choose third party from list on left <br>or create new one</p>
+              <button class="btn btn-large" (click)="addThird = true"><span i18n>Add Third party</span></button>
+            </div>
+          </div>
+          <div *ngIf="currentThird.cin">
+            <dx-form id="form"
+                   [formData]="currentThird"
+                   labelLocation="top">
             <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
 
               <dxi-item dataField="first_name" [disabled]="true"></dxi-item>
@@ -54,38 +68,38 @@
               </dxi-item>
             </dxi-item>
           </dx-form>
+          
+          </div>
+          
         </div>
-        <button class="btn btn-accent btn-float" *ngIf="!addThird" (click)="addThird = true"><i
-          class="fa fa-plus"></i> <span i18n>Add Third party</span></button>
+        
       </div>
 
       <app-tiers-form [isEdit]="false" [tier]="tier" [isWizard]="true" *ngIf="addThird"></app-tiers-form>
-      <div class="btn-float">
-        <div class="row">
-          <div class="col-sm-6">
-            <button class="btn btn-success" *ngIf="addThird" (click)="saveThird()"><i
-              class="fa fa-save"></i> <span i18n>Save</span></button>
-          </div>
-          <div class="col-sm-6">
-            <button class="btn btn-accent btn-float" *ngIf="addThird" (click)="cancelThird()"><i
-              class="fa fa-remove"></i> <span i18n>Cancel</span></button>
-          </div>
-        </div>
-      </div>
+
     </div>
     <!-- End Agreggated Informations -->
-    <p>
-      <button type="button" class="btn btn-success" awNextStep i18n>Next Step</button>
-    </p>
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5"  *ngIf="!addThird">
+			<div class="m-form__actionss">
+				<button type="button" class="btn btn-success float-right"  awNextStep i18n>Next Step</button>
+				<button class="btn float-right mr-3" *ngIf="currentThird.cin" (click)="addThird = true"><span i18n>Add Third party</span></button>
+			</div>
+		</div>
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5"  *ngIf="addThird">
+			<div class="m-form__actionss">
+				<button class="btn btn-success float-right" (click)="saveThird()"><span i18n>Save</span></button>
+				<button class="btn  float-right mr-3" (click)="cancelThird()"><span i18n>Cancel</span></button>
+			</div>
+		</div>
+		
   </aw-wizard-step>
 
-  <aw-wizard-step stepTitle="Contract Informations" [canEnter]="!!currentThird.cin"
+  <aw-wizard-step stepTitle="2. Contract Informations" [canEnter]="!!currentThird.cin"
                   (stepExit)="goToArea()"
-                  [navigationSymbol]="{ symbol: '&#xf039;', fontFamily: 'FontAwesome'}"
+                  [navigationSymbol]="{ symbol: '&#xf151;', fontFamily: 'Flaticon'}"
                   i18n-step-title>
 
     <div>
-      <h1 i18n>Contract Informations</h1>
 
       <dx-form id="form11"
                [formData]="contract">
@@ -107,19 +121,19 @@
 
       </dx-form>
     </div>
-
-    <p>
-      <button type="button" class="btn default" awPreviousStep i18n>Previous Step</button>
-      <button type="button" class="btn btn-success" awNextStep i18n>Next Step</button>
-    </p>
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5">
+			<div class="m-form__actionss">
+        <button type="button" class="btn default float-left" awPreviousStep i18n>Previous Step</button>
+        <button type="button" class="btn btn-success float-right" awNextStep i18n>Next Step</button>
+			</div>
+		</div>
   </aw-wizard-step>
-  <aw-wizard-step stepTitle="Contracted area" [canEnter]="!!contract.code_ormva"
+  <aw-wizard-step stepTitle="3. Contracted area" [canEnter]="!!contract.code_ormva"
                   (stepExit)="goToParcels()"
-                  [navigationSymbol]="{ symbol: '&#xf039;', fontFamily: 'FontAwesome'}"
+                  [navigationSymbol]="{ symbol: '&#xf19f;', fontFamily: 'Flaticon'}"
                   i18n-step-title>
 
     <div>
-      <h1 i18n>Contracted area</h1>
       <form>
         <dx-form id="form2" *ngFor="let camp of campaigns; let i = index;"
                  [formData]="camp"
@@ -157,18 +171,18 @@
         </dx-form>
       </form>
     </div>
-
-    <p>
-      <button type="button" class="btn default" awPreviousStep i18n>Previous Step</button>
-      <button type="button" class="btn btn-success" awNextStep i18n>Next Step</button>
-    </p>
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5">
+			<div class="m-form__actionss">
+        <button type="button" class="btn default float-left" awPreviousStep i18n>Previous Step</button>
+        <button type="button" class="btn btn-success float-right" awNextStep i18n>Next Step</button>
+			</div>
+		</div>
   </aw-wizard-step>
-  <aw-wizard-step stepTitle="Parcel" [canEnter]="!!currentThird.cin && (campaigns.length > 0 && campaigns[0].area > 0)"
+  <aw-wizard-step stepTitle="4. Parcel" [canEnter]="!!currentThird.cin && (campaigns.length > 0 && campaigns[0].area > 0)"
                   i18n-step-title
-                  [navigationSymbol]="{ symbol: '&#xf1ad;', fontFamily: 'FontAwesome'}">
+                  [navigationSymbol]="{ symbol: '&#xf1a0;', fontFamily: 'Flaticon'}">
 
     <div>
-      <h1 i18n>Parcel</h1>
 
       <div id="form-container">
         <dx-form id="form3"
@@ -209,9 +223,8 @@
         </dx-form>
       </div>
 
-      <hr class="separate">
 
-      <div class="">
+      <div class="siam-table-fullwidth-portlet mt-5">
         <dx-data-grid
           id="gridContainer"
           [dataSource]="groundsList"
@@ -225,6 +238,7 @@
           </dxo-editing>
 
           <dxo-pager
+          [allowedPageSizes]="false"
             [allowedPageSizes]="[5, 8, 15, 30]"
             [showInfo]="true"
             [showNavigationButtons]="true"
@@ -244,10 +258,11 @@
         </dx-data-grid>
       </div>
     </div>
-
-    <p>
-      <button type="button" class="btn default" awPreviousStep i18n>Previous Step</button>
-      <button type="button" class="btn btn-success" (click)="finishFunction($event)" i18n>Finish</button>
-    </p>
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5">
+			<div class="m-form__actionss">
+        <button type="button" class="btn default float-left" awPreviousStep i18n>Previous Step</button>
+        <button type="button" class="btn btn-success float-right" (click)="finishFunction($event)" i18n>Finish</button>
+			</div>
+		</div>
   </aw-wizard-step>
 </aw-wizard>

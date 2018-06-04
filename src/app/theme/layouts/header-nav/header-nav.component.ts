@@ -10,19 +10,13 @@ declare let mLayout: any;
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderNavComponent implements OnInit, AfterViewInit {
-  private pageTitle: string;
-  //private route:ActivatedRoute
 
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-    this.pageTitle = 'Dashboard';
+  constructor() {
 
   }
   ngOnInit() {
-    //console.log(this.route);
+
   }
   ngAfterViewInit() {
 

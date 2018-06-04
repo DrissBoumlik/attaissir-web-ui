@@ -48,7 +48,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         subMenu : [
             { icon: 'flaticon-plus', name: 'New Aggregated'/*Nuveau agrégé*/, url: 'add' },
             { icon: 'flaticon-list', name: 'Aggregated List'/*Liste des  agrégés*/, url: 'list' },
-          ]
+          ],
+        disabled: 'false'
       },
       {
         name : 'Contracts',
@@ -58,31 +59,36 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         subMenu : [
             { icon: 'flaticon-plus', name: 'New Contract', url: 'add' },
             { icon: 'flaticon-list', name: 'Contracts List', url: 'list' },
-          ]
+          ],
+        disabled: 'false'
       },
       {
         name : 'Intrants',
         icon : 'flaticon-coins',
         url : '/intrants',
-        description : 'Gestion des Intrants'
+        description : 'Gestion des Intrants',
+        disabled: 'false'
       },
       {
         name : 'Interventions',
         icon : 'flaticon-coins',
         url : '/interventions',
-        description : 'Gestion des Interventions'
+        description : 'Gestion des Interventions',
+        disabled: 'false'
       },
       {
         name : 'Map',
         icon : 'flaticon-map-location',
         url : '/map',
-        description : 'Suivi des vehicules en temps réel'
+        description : 'Suivi des vehicules en temps réel',
+        disabled: 'false'
       },
       {
         name : 'Configuration',
         icon : 'flaticon-cogwheel',
         url : '/config',
-        description : 'Global configuration'
+        description : 'Global configuration',
+        disabled: 'false'
       }
     ]
     console.log(this.mainMenu);

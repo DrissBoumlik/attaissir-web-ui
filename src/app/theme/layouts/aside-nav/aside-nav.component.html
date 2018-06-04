@@ -85,9 +85,9 @@
 								</a>
 							</li>
 							
-							<li class="m-menu__item m-menu__item--wd  m-menu__item--submenu" aria-haspopup="true" routerLinkActive="m-menu__item--open"
+							<li class="m-menu__item m-menu__item--wd  m-menu__item--submenu {{menuItem.disabled == 'true' ? 'm-menu__item-disabled' : ''}}" aria-haspopup="true" routerLinkActive="m-menu__item--open"
                 routerLinkActiveOptions="{ exact: true }" m-menu-submenu-toggle="hover" m-menu-link-redirect="1"
-                aria-haspopup="true" *ngFor="let menuItem of mainMenu">
+                aria-haspopup="true" *ngFor="let menuItem of mainMenu" routerLink="/{{ menuItem.url }}">
 								<a  href="javascript:;" class="m-menu__link m-menu__toggle"  routerLink="/{{ menuItem.url }}">
 									<i class="m-menu__link-icon {{ menuItem.icon }}"></i>
 									<span class="m-menu__link-text" i18n="">
@@ -102,7 +102,7 @@
 									<span class="m-menu__arrow"></span>
 									<ul class="m-menu__subnav">
                     <li class="m-menu__item " routerLinkActive="m-menu__item--active" [routerLinkActiveOptions]="{ exact: true }"
-                        aria-haspopup="true" *ngFor="let subMenuItem of menuItem.subMenu">
+                        aria-haspopup="true" *ngFor="let subMenuItem of menuItem.subMenu" routerLink="/{{ menuItem.url }}">
                       <a [routerLink]="subMenuItem.url" class="m-menu__link">
                         <span class="m-menu__item-here"></span>
                         <i  [ngClass]="'m-menu__link-icon ' + subMenuItem.icon"></i>
