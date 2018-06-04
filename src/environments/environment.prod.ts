@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://s5.acharij.code.go/'
+  apiUrl: 'http://api.siam618.graviton.ma'
 
 };

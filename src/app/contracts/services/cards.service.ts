@@ -45,7 +45,7 @@ export class CardsService {
   }
 
   getDoc(id: number): Observable<Card[]> {
-    return this.http.put<Card[]>(`${environment.apiUrl}/agreements/${id}/prints`, JSON.stringify(id), this.options);
+    return this.http.get<Card[]>(`${environment.apiUrl}/agreements/${id}/prints`, this.options);
   }
 
   /**
@@ -54,7 +54,13 @@ export class CardsService {
    * @returns {Observable<Card>}
    */
   editCard(card: Card): Observable<Card> {
-    return this.http.put<Card>(`${environment.apiUrl}/${this.routeName}/${card.id}`, JSON.stringify(card), this.options);
+    return this.http.put<Card>(`${environment.apiUrl}/${this.routeName}/${card.id}`, JSON.stringify(card), {
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          'charset': 'UTF-8' }
+          )
+    });
   }
 
   /**
