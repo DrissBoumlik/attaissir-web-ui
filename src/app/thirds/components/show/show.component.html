@@ -467,7 +467,7 @@
                   </div>
                   <div *dxTemplate="let data of 'actionsTemplate'">
                     <dx-button [text]="getAdequateAction(data.value)"
-                                (click)="switchCarteStatus(data.value)"></dx-button>
+                                (click)="switchCarteStatus(data.value)" *ngIf="canHaveAction(data.value)"></dx-button>
                   </div>
                   <dxo-remote-operations
                     [sorting]="true"
@@ -479,7 +479,7 @@
                     mode="row"
                     [allowUpdating]="false"
                     [allowDeleting]="false"
-                    [allowAdding]="true">
+                    [allowAdding]="false">
                   </dxo-editing>
                   <dxo-pager
                     [showPageSizeSelector]="true"

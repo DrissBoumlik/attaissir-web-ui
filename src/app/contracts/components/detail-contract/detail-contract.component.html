@@ -5,7 +5,7 @@
       <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Contrat Agrégat-Agrégés ( {{ structure?.label | uppercase }} / {{ third?.first_name | uppercase }} {{
         third?.last_name | uppercase }})</h2>
-      <a class="siam-header-btn-new"  (click)="downloadContract()" download=""><i
+      <a class="siam-header-btn-new" href="javascript::" (click)="downloadContract()" download=""><i
         class="fa fa-download"></i></a>
     </div>
   </div>
@@ -122,12 +122,18 @@
                       Status
                     </label>
                     <div class="col-7">
-                        <span style="font-size: larger" [ngClass]="getStatusColor(contract?.status)">
+                      <div class="row">
+                        <div class="col-3">
+                          <div [ngClass]="getStatusColor(contract?.status)" class="alert alert-primary" role="alert">
                             {{ contract?.status }}
-                        </span>
-                      <div style="float: right" *ngIf="isContractEncours">
-                        <dx-button [text]="'Valider'" [type]="'success'" (onClick)="activateContrat()"> </dx-button>
-                    </div>
+                          </div>
+                        </div>
+                        <div class="col-9">
+                          <div style="float: right" *ngIf="isContractEncours">
+                            <dx-button [text]="'Valider'" [type]="'success'" (onClick)="activateContrat()"></dx-button>
+                          </div>
+                        </div>
+                      </div>
                       <!--<input class="form-control m-input" type="text" [value]="" readonly>-->
                     </div>
                   </div>

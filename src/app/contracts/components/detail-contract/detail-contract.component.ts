@@ -123,14 +123,18 @@ export class DetailContractComponent implements OnInit {
   }
 
   loadDocuments() {
-    this.documents = this.contract.documents.map(doc => {
-      return doc = {
-        downloadPath: doc.path,
-        id: doc.id,
-        path: doc.path,
-        label: doc.type.label
-      };
-    });
+    this.contractService.getContract(this.contract.id).subscribe(
+      (res: any) => {
+          this.documents = res.data.documents.map(doc => {
+            return doc = {
+              downloadPath: doc.path,
+              id: doc.id,
+              path: doc.path,
+              label: doc.type.label
+            };
+          });
+      }
+    );
   }
 
   downloadDocument(data: any) {
@@ -145,19 +149,19 @@ export class DetailContractComponent implements OnInit {
   getStatusColor(value: string): string {
     switch (value) {
       case 'inactif' : {
-        return 'badge badge-pill badge-warning';
+        return 'alert alert-warning';
       }
       case 'actif' : {
-        return 'badge badge-pill badge-success';
+        return 'alert alert-success';
       }
       case 'encours' : {
-        return 'badge badge-pill badge-info';
+        return 'alert alert-info';
       }
       case 'suspendu' : {
-        return 'badge badge-pill badge-dark';
+        return 'alert alert-danger';
       }
       default : {
-        return 'badge badge-pill badge-danger';
+        return 'alert alert-primary';
       }
     }
   }
@@ -176,10 +180,10 @@ export class DetailContractComponent implements OnInit {
     );
   }
 
+
   downloadContract() {
-    this.contractService.printContract(this.contract.id).subscribe(
-      (res) => {}
-    );
+    this.contractService.printContract(this.contract.id);
   }
+
 }
 
