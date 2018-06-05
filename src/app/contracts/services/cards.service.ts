@@ -63,8 +63,13 @@ export class CardsService {
     });
   }
 
-  massCards(card: any): Observable<Card> {
-    return this.http.put<Card>(`${environment.apiUrl}/${this.routeName}/mass-activate`, JSON.stringify(card), this.options);
+  massCards(card: any, action: string): Observable<Card> {
+    return this.http.put<Card>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify({
+      bulk: {
+        name: action,
+        ids: card
+      }
+    }), this.options);
   }
 
   /**

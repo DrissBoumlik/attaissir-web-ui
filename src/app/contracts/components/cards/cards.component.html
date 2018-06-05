@@ -3,7 +3,6 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Liste des Cartes</h2>
-      <a class="siam-header-btn-new" routerLink="/tiers/ajouter"><i class="fa fa-plus"></i></a>
     </div>
 
   </div>
@@ -13,12 +12,27 @@
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body m-portlet__body--no-padding">
 
+      <dx-select-box id="select-prefix"
+                     [dataSource]="[
+                      {name: 'Activate', action: 'activate'},
+                      {name: 'Deactivate', action: 'deactivate'}
+                      ]"
+                     placeholder= "Select title"
+                     displayExpr="name"
+                     valueExpr="action"
+                     (onValueChanged)="selectAction($event)">
+      </dx-select-box>
+      <dx-button
+        text="Appliquer"
+        [disabled]="!selectedItems?.length || !action"
+        (onClick)="doAction($event)">
+      </dx-button>
     <dx-data-grid
   id="gridContainer"
   [dataSource]="cards"
   [columnHidingEnabled]="true"
   [allowColumnReordering]="true"
-  (onSelectionChanged)="activateCards($event)"
+  [(selectedRowKeys)]="selectedItems"
   [remoteOperations]="{ groupPaging: true }"
   (onEditingStart)="onStartEdit($event.data.id)"
   (onRowRemoving)="onRemoveThird($event.data.id)"
@@ -56,7 +70,7 @@
   <dxo-group-panel [visible]="true"></dxo-group-panel>
   <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
-  <dxi-column dataField="full_name" caption="Full name" i18n-caption>
+  <dxi-column dataField="full_name" caption="Nom complet" i18n-caption>
   </dxi-column>
   <dxi-column dataField="cin" caption="CIN" i18n-caption>
   </dxi-column>
@@ -64,6 +78,11 @@
   </dxi-column>
   <dxi-column dataField="cda" caption="CDA" i18n-caption>
   </dxi-column>
+  <dxi-column dataField="status" cellTemplate="cellTemplate" caption="Status" i18n-caption>
+  </dxi-column>
+  <div *dxTemplate="let data of 'cellTemplate'">
+    <i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-id-card fa-5x" [ngClass]="{'text-success': data !== 'inactif', 'text-danger': data === 'inactif'}"></i> {{ data }}
+  </div>
   <dxi-column dataField="zone" caption="Zone" i18n-caption>
   </dxi-column>
   <dxi-column dataField="sector" caption="Sector" i18n-caption>

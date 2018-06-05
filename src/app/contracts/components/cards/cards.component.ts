@@ -12,6 +12,7 @@ export class CardsComponent implements OnInit {
   cards: any;
   card: any;
   applyFilter: any;
+  action: string;
   selectedItems: any[];
 
   constructor(private toastr: ToastrService,
@@ -46,7 +47,20 @@ export class CardsComponent implements OnInit {
       return { id: card.id };
     });
     console.log(e.selectedItems);
-    this.cardsService.massCards({ cards: cards }).subscribe(d => {
+
+  }
+
+  selectAction = (e) => {
+    this.action = e.value;
+  }
+
+  doAction = (e) => {
+    console.log(this.action);
+    console.log(this.selectedItems);
+    const cards = this.selectedItems.map(card => {
+      return Number(card.id);
+    });
+    this.cardsService.massCards(cards, this.action).subscribe(d => {
       console.log(d);
     }, err => {
       this.toastr.error(err.error.message);
