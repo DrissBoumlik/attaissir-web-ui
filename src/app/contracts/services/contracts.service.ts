@@ -95,4 +95,8 @@ export class ContractsService {
   activateContract(idContrat: number): Observable<any> {
     return this.http.put(`${environment.apiUrl}/${this.routeName}/${idContrat}/activate`, this.options);
   }
+
+  printContract(idContract: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/agreements/${idContract}/prints`, this.options);
+  }
 }

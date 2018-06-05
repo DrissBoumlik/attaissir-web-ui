@@ -5,9 +5,12 @@ import {Third} from '../../classes/third';
 import {ToastrService} from 'ngx-toastr';
 import {Contract} from '../../../contracts/classes/contract';
 import {Document} from '../../classes/document';
-import DevExpress from 'devextreme/bundles/dx.all';
 import {ContractsService} from '../../../contracts/services/contracts.service';
+import {CardsService} from '../../../contracts/services/cards.service';
+import {environment} from '../../../../environments/environment';
 
+declare const require: any;
+const $ = require('jquery');
 
 @Component({
   selector: 'app-show',
@@ -18,7 +21,7 @@ export class ShowComponent implements OnInit {
 
   third: Third;
   contracts: Contract[];
-  documents: Document[];
+  documents: any;
   patternRIB: any = /^\d{24}$/i;
   documentsList = true;
   docTypes: any;
@@ -30,7 +33,7 @@ export class ShowComponent implements OnInit {
               private router: Router,
               private toaster: ToastrService,
               private contractService: ContractsService,
-              private carteService: CardsService) {
+              private cardsService: CardsService) {
   }
 
   ngOnInit() {

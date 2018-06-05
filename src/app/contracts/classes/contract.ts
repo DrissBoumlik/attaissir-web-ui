@@ -30,4 +30,6 @@ export class Contract {
   constructor() {
     this.status = 'encours';
   }
+
+
 }

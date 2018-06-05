@@ -29,8 +29,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/tiers/liste',
         description: 'Gestion des tiers',
         subMenu: [
-          { icon: 'flaticon-plus', name: 'New Aggregated'/*Nuveau agrégé*/, url: '/tiers/ajouter' },
-          { icon: 'flaticon-list', name: 'Aggregated List'/*Liste des  agrégés*/, url: '/tiers/liste' },
+          { icon: 'flaticon-plus', name: 'Nouveaux agrégé'/*Nuveau agrégé*/, url: '/tiers/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des agrégés'/*Liste des  agrégés*/, url: '/tiers/liste' },
         ],
         disabled: 'false'
       },
@@ -40,8 +40,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/contrats/liste',
         description: 'Gestion des Contracts',
         subMenu: [
-          { icon: 'flaticon-plus', name: 'New Contract', url: '/contrats/ajouter' },
-          { icon: 'flaticon-list', name: 'Contracts List', url: '/contrats/liste' },
+          { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste' },
         ],
         disabled: 'false'
       },

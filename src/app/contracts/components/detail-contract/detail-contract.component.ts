@@ -175,5 +175,11 @@ export class DetailContractComponent implements OnInit {
       }
     );
   }
+
+  downloadContract() {
+    this.contractService.printContract(this.contract.id).subscribe(
+      (res) => {}
+    );
+  }
 }
 
