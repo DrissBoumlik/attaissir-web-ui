@@ -87,4 +87,12 @@ export class ContractsService {
   getStrcutureById(id: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/structures/${id}`, this.options);
   }
+
+  /**
+   *
+   * @param {number} idContrat
+   */
+  activateContract(idContrat: number): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/${this.routeName}/${idContrat}/activate`, this.options);
+  }
 }
