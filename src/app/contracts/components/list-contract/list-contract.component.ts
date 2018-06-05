@@ -69,7 +69,7 @@ export class ListContractComponent implements OnInit {
   }
 
   showDetails(idContract: number) {
-    this.router.navigate(['../show/' + idContract], { relativeTo: this.route }).catch(
+    this.router.navigate([`/contrats/afficher/${idContract}`]).catch(
       err => {
         this.toastr.error(err);
       }
