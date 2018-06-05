@@ -100,6 +100,14 @@ export class ListContractComponent implements OnInit {
     }
   }
 
+  onStartEdit = (e) => {
+    this.router.navigate([`/contrats/modifier/${e.data.id}`]).catch(
+      err => {
+        this.toastr.error(err.error.message);
+      }
+    );
+  }
+
 
   getStatusClr(value: string): string {
     switch (value) {

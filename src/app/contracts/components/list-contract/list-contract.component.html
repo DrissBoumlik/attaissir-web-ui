@@ -19,6 +19,7 @@
         [remoteOperations]="true"
         showBorders="true"
         (onSelectionChanged)="selectionChanged($event)"
+        (onEditingStart)="onStartEdit($event.data.id)"
         (onContentReady)="contentReady($event)"
         [masterDetail]="{ enabled: false, template: 'detail' }"
         KeyExpr="id">
@@ -28,7 +29,7 @@
         <dxo-group-panel [visible]="true"></dxo-group-panel>
         <dxo-scrolling mode="virtual"></dxo-scrolling>
         <dxo-editing
-          mode="popup"
+          mode="row"
           [useIcons]="true"
           [allowDeleting]="true"
           [allowEditing]="false"

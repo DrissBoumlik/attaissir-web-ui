@@ -63,7 +63,7 @@ export class AuthComponent implements OnInit {
     this.loading = true;
     this._authService.login(this.model.email, this.model.password).subscribe(
       data => {
-        if (data['token']) {
+        if (data['data']['token']) {
           localStorage.setItem('currentUser', JSON.stringify(data));
         }
         this._router.navigate([this.returnUrl]);
