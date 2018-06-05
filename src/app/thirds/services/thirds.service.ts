@@ -32,6 +32,15 @@ export class ThirdsService {
   }
 
   /**
+   * Get a collection of any parties
+   * @returns {Observable<any[]>}
+   */
+  getStats(): Observable<any[]> {
+    return this.http.get<any[]>(`http://s6.acharij.code.go/agreements/kpi`);
+  }
+
+
+  /**
    * Get a Third parties
    * @param id
    * @returns {Observable<Third[]>}

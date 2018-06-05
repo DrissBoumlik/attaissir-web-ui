@@ -47,41 +47,12 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Cartes',
-        icon: 'flaticon-card',
+        icon: 'flaticon-tabs',
         url: '/tiers/cartes',
         description: 'Generator des cards',
         disabled: 'false'
-      },
-      {
-        name: 'Intrants',
-        icon: 'flaticon-coins',
-        url: '/intrants',
-        description: 'Gestion des Intrants',
-        disabled: 'false'
-      },
-      {
-        name: 'Interventions',
-        icon: 'flaticon-coins',
-        url: '/interventions',
-        description: 'Gestion des Interventions',
-        disabled: 'false'
-      },
-      {
-        name: 'Map',
-        icon: 'flaticon-map-location',
-        url: '/map',
-        description: 'Suivi des vehicules en temps réel',
-        disabled: 'false'
-      },
-      {
-        name: 'Configuration',
-        icon: 'flaticon-cogwheel',
-        url: '/config',
-        description: 'Global configuration',
-        disabled: 'false'
       }
     ]
-    console.log(this.mainMenu);
 
   }
 

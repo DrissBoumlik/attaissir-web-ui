@@ -98,7 +98,7 @@
 									</span>
 									<i class="m-menu__ver-arrow la la-angle-right"></i>
 								</a>
-								<div class="m-menu__submenu ">
+								<div class="m-menu__submenu " *ngIf="menuItem.subMenu">
 									<span class="m-menu__arrow"></span>
 									<ul class="m-menu__subnav">
                     <li class="m-menu__item " routerLinkActive="m-menu__item--active" [routerLinkActiveOptions]="{ exact: true }"

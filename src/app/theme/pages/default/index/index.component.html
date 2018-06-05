@@ -1,5 +1,53 @@
+<div class="siam-dashboard-intro">
+	<div class="row">
+		<div class="col-md-9">
+			<div class="siam-dashboard-intro-wm">
+				<h2 class="siam-dashboard-intro-wm-title"> Bienvenue dans Siam </h2>
+				<h1 class="siam-dashboard-intro-wm-subtitle"> Tout commence ici. </h1>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="weather-widget">
+			  <div id="w-city" class="weather-widget-city"></div>
+			  <div class="weather-widget-date">
+			    <span id="w-day"></span>&nbsp;
+			    <span id="w-date-hour"></span>
+			  </div>
+			  <div id="w-temp" class="weather-widget-temp"></div>
+			</div>
+		</div>
+	</div>
+	<div class="siam-dashboard-shortcuts">
+		<div class="siam-dashboard-shortcuts-item" [routerLink]="shortcut.url"  *ngFor="let shortcut of shortcutsList">
+			<div class="siam-dashboard-si-icon-wrapper">
+				<div class="siam-dashboard-si-icon">
+					<i class="{{shortcut.icon}}"></i>
+				</div>
+			</div>
+			<div class="siam-dashboard-si-title">
+				{{shortcut.title}}
+			</div>
+		</div>
+	</div>
+</div>
+<div class="siam-dashboard-tiles">
+	<div class="siam-dashboard-tiles-item" *ngFor="let tile of tilesList" [ngStyle]="{'background-color': tile.backgroundColor,'color': tile.textColor}">
+		<div class="siam-dashboard-tiles-item-icon">
+			<i class="{{ tile.icon }}"></i>
+		</div>
+		<div class="siam-dashboard-tiles-item-value">
+			{{ tile.value }}
+		</div>
+		<div class="siam-dashboard-tiles-item-title">
+			{{ tile.title }}
+		</div>
+		<div class="siam-dashboard-tiles-item-subtitle">
+			{{ tile.subTitle }}
+		</div>
+	</div>
+</div>
 <!-- BEGIN: Subheader -->
-<div class="m-subheader" appunwraptag="">
+<!--<div class="m-subheader" appunwraptag="">
 	<div class="d-flex align-items-center">
 		<div class="mr-auto">
 			<h3 class="m-subheader__title">
@@ -7,7 +55,7 @@
 			</h3>
 		</div>
 	</div>
-</div>
+</div>-->
 <!-- END: Subheader -->
 <div class="m-content">
 
