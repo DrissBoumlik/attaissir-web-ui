@@ -13,4 +13,6 @@ export class AgreementGround {
   mode_worth: string; // ['propritaire', 'location', 'procuration'])->nullable();
   ground?: Ground;
   agreement?: Contract;
+  ground_id?: number;
+  agreement_id?: number;
 }

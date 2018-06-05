@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ThirdsService } from '../../services/thirds.service';
 import { Third } from '../../classes/third';
@@ -15,7 +15,6 @@ export class EditComponent implements OnInit {
   id: number;
 
   constructor(public route: ActivatedRoute,
-    private router: Router,
     private location: Location,
     public tier: Third,
     public thirdsService: ThirdsService,
@@ -29,6 +28,12 @@ export class EditComponent implements OnInit {
         this.thirdsService.getThird(this.id)
           .subscribe(data => {
             this.tier = this.thirdsService.dataFormatter(data, false);
+            Object.getOwnPropertyNames(this.tier).filter(attr => {
+              if (!attr) {
+                delete this.tier[attr];
+              }
+              return attr;
+            });
             if (this.tier.social_reason || this.tier.patent_number || this.tier.ice
               || this.tier.rc || this.tier.tva_code || this.tier.if) {
               this.tier.isCorporation = true;
@@ -53,7 +58,6 @@ export class EditComponent implements OnInit {
       this.toastr.success(
         `${this.tier.first_name.toUpperCase()} ${this.tier.last_name.toUpperCase()} information's edited successfully`
       );
-      this.router.navigate(['/tiers/show/' + this.tier.id]);
     }, err => {
       this.toastr.error(err.error.message);
     });

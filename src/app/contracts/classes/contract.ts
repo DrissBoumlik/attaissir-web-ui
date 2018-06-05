@@ -10,7 +10,7 @@ import { Campaign } from './campaign';
 
 export class Contract {
   id?: number;
-  code: string;
+  code?: string;
   application_date: Date;
   expiration_date: Date;
   signature_date: Date;
@@ -24,10 +24,13 @@ export class Contract {
   third_id?: number;
   structure?: Structure;
   structure_id?: number;
+  documents?: any;
   created_at?: Date;
   updated_at?: Date;
 
   constructor() {
     this.status = 'encours';
   }
+
+
 }

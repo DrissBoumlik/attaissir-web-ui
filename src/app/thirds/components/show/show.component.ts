@@ -5,9 +5,12 @@ import {Third} from '../../classes/third';
 import {ToastrService} from 'ngx-toastr';
 import {Contract} from '../../../contracts/classes/contract';
 import {Document} from '../../classes/document';
-import DevExpress from 'devextreme/bundles/dx.all';
 import {ContractsService} from '../../../contracts/services/contracts.service';
+import {CardsService} from '../../../contracts/services/cards.service';
+import {environment} from '../../../../environments/environment';
 
+declare const require: any;
+const $ = require('jquery');
 
 @Component({
   selector: 'app-show',
@@ -18,17 +21,19 @@ export class ShowComponent implements OnInit {
 
   third: Third;
   contracts: Contract[];
-  documents: Document[];
+  documents: any;
   patternRIB: any = /^\d{24}$/i;
   documentsList = true;
   docTypes: any;
   filePath = [];
+  bank_accounts: any;
 
   constructor(private thirdService: ThirdsService,
               private route: ActivatedRoute,
               private router: Router,
               private toaster: ToastrService,
-              private contractService: ContractsService) {
+              private contractService: ContractsService,
+              private cardsService: CardsService) {
   }
 
   ngOnInit() {
@@ -37,6 +42,8 @@ export class ShowComponent implements OnInit {
         this.thirdService.getThird(+params.id).subscribe(
           (res: any) => {
             this.third = this.thirdService.dataFormatter(res, false);
+            this.bank_accounts = this.third.bank_accounts;
+
           },
           (error) => {
             this.router.navigate(['/404']).catch(
@@ -124,17 +131,26 @@ export class ShowComponent implements OnInit {
   }
 
   onRemoveDOC(e: any) {
-
+    this.thirdService.deleteDocument(e.data.id).subscribe(
+      (res) => {
+        this.toaster.success('Le document a été supprimé avec succès.');
+      },
+      (err) => {
+        this.toaster.error(err.message);
+      }
+    );
   }
 
   onAddDOC(e: any) {
-    console.log(e);
-    console.log(this.filePath);
+    const d = new $.Deferred();
     const newDoc = {
       type: e.data.label,
       file: this.filePath[0]
     };
-    console.log(newDoc);
+    e.cancel = true;
+    e.data.label = this.docTypes.find(dt => {
+      return dt.id === newDoc.type;
+    }).label;
     this.thirdService.addDocument(newDoc.file).subscribe(
       res => {
         this.thirdService.putDocumentInfo({
@@ -142,21 +158,33 @@ export class ShowComponent implements OnInit {
           document_type_id: newDoc.type
         }, res.data.id).subscribe(
           result => {
-            console.log(result);
+            e.data.downloadPath = res.data.path;
+            d.resolve();
           }
         );
       }, error => {
         console.log(error);
       });
+    e.cancel = d.promise();
   }
 
   loadDocuments() {
-    this.documents = this.thirdService.loadDocuments(this.third.id);
-    console.log(this.documents);
+    this.thirdService.getThird(this.third.id).subscribe(
+      (res: any) => {
+        this.documents = res.data.documents.map(doc => {
+          return doc = {
+            downloadPath: doc.path,
+            id: doc.id,
+            path: doc.path,
+            label: doc.type.label
+          };
+        });
+      }
+    );
   }
 
   downloadDocument(data: any) {
-    window.open(data.value);
+    window.open(`${environment.apiUrl}/storage/${data.value}`);
   }
 
   getStatusColor(value: string): string {
@@ -176,7 +204,11 @@ export class ShowComponent implements OnInit {
     }
   }
 
-  getAdequateAction(value: string): string {
+  getAdequateAction(idCarte: number): string {
+    let value;
+    value = this.third.cards.find(card => {
+      return card.id === idCarte;
+    }).status;
     switch (value) {
       case 'inactif' : {
         return 'Activer';
@@ -212,4 +244,25 @@ export class ShowComponent implements OnInit {
     );
   }
 
+  switchCarteStatus(idCarte: number) {
+    const carte = this.third.cards.find(card => {
+      return card.id === idCarte;
+    });
+    carte.status = carte.status === 'actif' ? 'inactif' : 'actif';
+    this.cardsService.editCard(carte).subscribe(
+      (res) => {
+        console.log('res : ' + res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  canHaveAction(id: number) {
+    const carte = this.third.cards.find(card => {
+      return card.id === id;
+    });
+    return carte.status === 'actif' || carte.status === 'inactif';
+  }
 }

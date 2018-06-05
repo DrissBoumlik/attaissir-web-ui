@@ -31,83 +31,83 @@
     </dxi-item>-->
 
 
-    <dxi-item itemType="group" caption="General Informations" [colCount]="2" i18n-caption>
+    <dxi-item itemType="group" caption="Informations Générale" [colCount]="2" i18n-caption>
 
       <dxi-item itemType="group" caption="" [colCount]="2" i18n-caption>
         <dxi-item dataField="first_name">
           <dxo-label
-            text="First name" i18n-text>
+            text="Prénom" i18n-text>
           </dxo-label>
-          <dxi-validation-rule type="required" message="First name is required" i18n-message></dxi-validation-rule>
+          <dxi-validation-rule type="required" message="Prénom est obligatoire" i18n-message></dxi-validation-rule>
         </dxi-item>
         <dxi-item dataField="last_name" [editorOptions]="{ placeholder: ''} ">
           <dxo-label
-            text="Last name" i18n-text>
+            text="Nom" i18n-text>
           </dxo-label>
-          <dxi-validation-rule type="required" message="Last name is required" i18n-message></dxi-validation-rule>
+          <dxi-validation-rule type="required" message="Nom est obligatoire" i18n-message></dxi-validation-rule>
         </dxi-item>
       </dxi-item>
 
       <dxi-item itemType="group" caption="" [colCount]="2" i18n-caption>
         <dxi-item dataField="ar_first_name">
           <dxo-label
-            text="First name (Arabic)" i18n-text>
+            text="Prénom (Arabic)" i18n-text>
           </dxo-label>
-          <dxi-validation-rule type="required" message="Arabic first name is required"
+          <dxi-validation-rule type="required" message="Prénom (Arabe) est obligatoire"
                                i18n-message></dxi-validation-rule>
         </dxi-item>
         <dxi-item dataField="ar_last_name" [editorOptions]="{ placeholder: '' }">
           <dxo-label
-            text="Last name (Arabic)" i18n-text>
+            text="Nom (Arabic)" i18n-text>
           </dxo-label>
-          <dxi-validation-rule type="required" message="Arabic first name is required"
+          <dxi-validation-rule type="required" message="Nom (Arabe) est obligatoire"
                                i18n-message></dxi-validation-rule>
         </dxi-item>
       </dxi-item>
 
       <dxi-item dataField="cin" [disabled]="isEdit">
-        <dxi-validation-rule type="required" message="CIN required" i18n-message></dxi-validation-rule>
+        <dxi-validation-rule type="required" message="CIN est obligatoire" i18n-message></dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="gender"
                 editorType="dxSelectBox" [editorOptions]="gender">
         <dxo-label
-          text="Gender" i18n-text>
+          text="Sexe" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="required" message="Gender is required" i18n-message></dxi-validation-rule>
+        <dxi-validation-rule type="required" message="Sexe est obligatoire" i18n-message></dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="address">
         <dxo-label
-          text="Address" i18n-text>
+          text="Adresse" i18n-text>
         </dxo-label>
       </dxi-item>
       <dxi-item dataField="postal_code" editorType="dxNumberBox">
         <dxo-label
-          text="Zip code" i18n-text>
+          text="Code postal" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="numeric" [min]="0" message="You cannot have a negative postal code."
+        <dxi-validation-rule type="numeric" [min]="0" message="Vous ne pouvez pas avoir un code postal négatif."
                              i18n-message></dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="city">
         <dxo-label
-          text="City" i18n-text>
+          text="Ville" i18n-text>
         </dxo-label>
       </dxi-item>
 
       <dxi-item dataField="borough">
         <dxo-label
-          text="Borough" i18n-text>
+          text="Arrondissement" i18n-text>
         </dxo-label>
       </dxi-item>
 
       <dxi-item dataField="commandment">
         <dxo-label
-          text="Commandment" i18n-text>
+          text="Commandement" i18n-text>
         </dxo-label>
       </dxi-item>
 
       <dxi-item dataField="region">
         <dxo-label
-          text="Region" i18n-text>
+          text="Région" i18n-text>
         </dxo-label>
       </dxi-item>
 
@@ -116,15 +116,7 @@
         editorType="dxDateBox"
         [editorOptions]="dateOptions">
         <dxo-label
-          text="Date of birth" i18n-text>
-        </dxo-label>
-      </dxi-item>
-      <dxi-item
-        dataField="date_death"
-        editorType="dxDateBox"
-        [editorOptions]="dateOptions">
-        <dxo-label
-          text="Date of death" i18n-text>
+          text="Date de naissance" i18n-text>
         </dxo-label>
       </dxi-item>
 
@@ -134,7 +126,7 @@
         </dxo-label>
         <dxi-validation-rule
           type="email"
-          message="This is not a valid Email address"
+          message="Ce n'est pas une adresse email valide."
           i18n-message
         >
         </dxi-validation-rule>
@@ -142,7 +134,7 @@
       <dxi-item dataField="tel1" [editorOptions]="{
                     mask: '00 0000 0000',
                     useMaskedValue: true,
-                    maskInvalidMessage: 'The phone must have a correct Moroccan phone format'
+                    maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
                 }">
         <dxo-label
           text="Telephone 1" i18n-text>
@@ -150,13 +142,13 @@
         <dxi-validation-rule
           type="pattern"
           [pattern]="phonePattern"
-          message="The phone must have a correct Moroccan phone format" i18n-message>
+          message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
         </dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="tel2" [editorOptions]="{
                     mask: '00 0000 0000',
                     useMaskedValue: true,
-                    maskInvalidMessage: 'The phone must have a correct Moroccan phone format'
+                    maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
                 }">
         <dxo-label
           text="Telephone 2" i18n-text>
@@ -164,12 +156,12 @@
         <dxi-validation-rule *ngIf="!isEdit"
                              type="pattern"
                              [pattern]="phonePattern"
-                             message="The phone must have a correct Moroccan phone format" i18n-message>
+                             message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
         </dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="education_level" editorType="dxSelectBox" [editorOptions]="education_level">
         <dxo-label
-          text="Education level" i18n-text>
+          text="Niveau d`instruction" i18n-text>
         </dxo-label>
       </dxi-item>
 
@@ -177,21 +169,21 @@
       <dxi-item dataField="situation"
                 editorType="dxSelectBox" [editorOptions]="situation">
         <dxo-label
-          text="Familial situation" i18n-text>
+          text="Situation Familiale" i18n-text>
         </dxo-label>
       </dxi-item>
       <dxi-item dataField="children_number" editorType="dxNumberBox">
         <dxo-label
-          text="Children number" i18n-text>
+          text="Nombre d'enfants" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="numeric" [min]="0" message="You cannot have negative children."
+        <dxi-validation-rule type="numeric" [min]="0" message="Vous ne pouvez pas avoir des enfants négatifs."
                              i18n-message></dxi-validation-rule>
       </dxi-item>
 
 
       <dxi-item editorType="dxCheckBox" dataField="assurance">
         <dxo-label
-          text="Insurance" i18n-text>
+          text="Assurance" i18n-text>
         </dxo-label>
       </dxi-item>
       <dxi-item editorType="dxCheckBox" dataField="retraite">
@@ -201,7 +193,7 @@
       </dxi-item>
       <dxi-item dataField="payement_mode" editorType="dxRadioGroup" [editorOptions]="payment_mode" [colSpan]="2">
         <dxo-label
-          text="Payment mode" i18n-text>
+          text="Mode de paiement" i18n-text>
         </dxo-label>
       </dxi-item>
     </dxi-item>
@@ -234,32 +226,34 @@
 
     <dxi-item dataField="morale" editorType="dxSwitch" (change)="onMoraleChanged($event)">
       <dxo-label
-        text="Is morale person?" i18n-text>
+        text="Personne Morale?" i18n-text>
       </dxo-label>
     </dxi-item>
 
-    <dxi-item itemType="group" caption="Corporation"
+    <dxi-item itemType="group" caption="Société"
               [colCount]="2" i18n-caption="Personne morale" *ngIf="tier.morale">
 
       <dxi-item dataField="social_reason">
-
+        <dxo-label
+          text="Raison sociale">
+        </dxo-label>
       </dxi-item>
 
       <dxi-item dataField="rc">
         <dxo-label
-          text="Business register" i18n-text="registre de commerce">
+          text="Registre de commerce" i18n-text="registre de commerce">
         </dxo-label>
       </dxi-item>
 
       <dxi-item dataField="patent_number">
         <dxo-label
-          text="Patent number" i18n-text="">
+          text="Numéro de patente" i18n-text="">
         </dxo-label>
       </dxi-item>
 
       <dxi-item dataField="if">
         <dxo-label
-          text="Tax identification" i18n-text="identifiant fiscal">
+          text="Identification fiscale" >
         </dxo-label>
       </dxi-item>
 
@@ -272,7 +266,7 @@
 
       <dxi-item dataField="tva_code">
         <dxo-label
-          text="TVA code" i18n-text>
+          text="Code TVA" i18n-text>
         </dxo-label>
       </dxi-item>
 
@@ -282,7 +276,7 @@
 
     <dxi-item dataField="etat" editorType="dxSwitch" *ngIf="false">
       <dxo-label
-        text="Is active?" i18n-text>
+        text="Est actif?" i18n-text>
       </dxo-label>
     </dxi-item>
 

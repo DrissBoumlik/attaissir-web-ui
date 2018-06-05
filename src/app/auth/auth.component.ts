@@ -48,27 +48,82 @@ export class AuthComponent implements OnInit {
       'assets/vendors/base/vendors.bundle.js',
       'assets/demo/demo12/base/scripts.bundle.js'], true).then(() => {
         Helpers.setLoading(false);
-        this.handleFormSwitch();
-        this.handleSignInFormSubmit();
-        this.handleSignUpFormSubmit();
-        this.handleForgetPasswordFormSubmit();
+      this.handleFormSwitch();
+      this.handleSignInFormSubmit();
+      this.handleSignUpFormSubmit();
+      this.handleForgetPasswordFormSubmit();
       });
     // Set page height
-    document.getElementById("m_login").style.height = (screen.height - 118) + "px";
+    document.getElementById('m_login').style.height = (screen.height - 118) + 'px';
     // m-login--signin
   }
 
   signin() {
+    console.log('ok');
     this.loading = true;
     this._authService.login(this.model.email, this.model.password).subscribe(
       data => {
+        if (data['data']['token']) {
+          localStorage.setItem('currentUser', JSON.stringify(data));
+        }
         this._router.navigate([this.returnUrl]);
       },
       error => {
         this.showAlert('alertSignin');
-        this._alertService.error(error);
+        if (error.error) {
+          this._alertService.error(error.error.error);
+        }
         this.loading = false;
       });
+  }
+
+  displaySignUpForm() {
+    let login = document.getElementById('m_login');
+    mUtil.removeClass(login, 'm-login--forget-password');
+    mUtil.removeClass(login, 'm-login--signin');
+
+    mUtil.addClass(login, 'm-login--signup');
+    mUtil.animateClass(login.getElementsByClassName('m-login__signup')[0], 'flipInX animated');
+  }
+
+  displaySignInForm() {
+    let login = document.getElementById('m_login');
+    mUtil.removeClass(login, 'm-login--forget-password');
+    mUtil.removeClass(login, 'm-login--signup');
+    try {
+      $('form').data('validator').resetForm();
+    } catch (e) {
+    }
+
+    mUtil.addClass(login, 'm-login--signin');
+    mUtil.animateClass(login.getElementsByClassName('m-login__signin')[0], 'flipInX animated');
+  }
+
+  displayForgetPasswordForm() {
+    let login = document.getElementById('m_login');
+    mUtil.removeClass(login, 'm-login--signin');
+    mUtil.removeClass(login, 'm-login--signup');
+
+    mUtil.addClass(login, 'm-login--forget-password');
+    mUtil.animateClass(login.getElementsByClassName('m-login__forget-password')[0], 'flipInX animated');
+  }
+
+  handleFormSwitch() {
+    document.getElementById('m_login_forget_password').addEventListener('click', (e) => {
+      e.preventDefault();
+      this.displayForgetPasswordForm();
+    });
+
+    document.getElementById('m_login_forget_password_cancel').addEventListener('click', (e) => {
+      e.preventDefault();
+      this.displaySignInForm();
+    });
+
+
+    document.getElementById('m_login_signup_cancel').addEventListener('click', (e) => {
+      e.preventDefault();
+      this.displaySignInForm();
+    });
   }
 
   signup() {
@@ -134,59 +189,6 @@ export class AuthComponent implements OnInit {
         e.preventDefault();
         return;
       }
-    });
-  }
-
-  displaySignUpForm() {
-    let login = document.getElementById('m_login');
-    mUtil.removeClass(login, 'm-login--forget-password');
-    mUtil.removeClass(login, 'm-login--signin');
-
-    mUtil.addClass(login, 'm-login--signup');
-    mUtil.animateClass(login.getElementsByClassName('m-login__signup')[0], 'flipInX animated');
-  }
-
-  displaySignInForm() {
-    let login = document.getElementById('m_login');
-    mUtil.removeClass(login, 'm-login--forget-password');
-    mUtil.removeClass(login, 'm-login--signup');
-    try {
-      $('form').data('validator').resetForm();
-    } catch (e) {
-    }
-
-    mUtil.addClass(login, 'm-login--signin');
-    mUtil.animateClass(login.getElementsByClassName('m-login__signin')[0], 'flipInX animated');
-  }
-
-  displayForgetPasswordForm() {
-    let login = document.getElementById('m_login');
-    mUtil.removeClass(login, 'm-login--signin');
-    mUtil.removeClass(login, 'm-login--signup');
-
-    mUtil.addClass(login, 'm-login--forget-password');
-    mUtil.animateClass(login.getElementsByClassName('m-login__forget-password')[0], 'flipInX animated');
-  }
-
-  handleFormSwitch() {
-    document.getElementById('m_login_forget_password').addEventListener('click', (e) => {
-      e.preventDefault();
-      this.displayForgetPasswordForm();
-    });
-
-    document.getElementById('m_login_forget_password_cancel').addEventListener('click', (e) => {
-      e.preventDefault();
-      this.displaySignInForm();
-    });
-
-    document.getElementById('m_login_signup').addEventListener('click', (e) => {
-      e.preventDefault();
-      this.displaySignUpForm();
-    });
-
-    document.getElementById('m_login_signup_cancel').addEventListener('click', (e) => {
-      e.preventDefault();
-      this.displaySignInForm();
     });
   }
 

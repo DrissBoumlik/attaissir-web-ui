@@ -8,7 +8,7 @@
 							<h1 class="text-center">
 								Connexion
 							</h1>
-							<div class="m-login__desc">Enter your username and password <br>to connect to your account</div>
+							<div class="m-login__desc">Entre votre email et votre mot de passe <br>pour se connecter.</div>
 
 						</div>
 						<form (ngSubmit)="f.form.valid && signin()" #f="ngForm" class="m-login__form m-form" action="">
@@ -22,20 +22,7 @@
 								</div>
 							</div>
 
-							<div class="row m-login__form-sub">
-								<div class="col m--align-left">
-									<label class="m-checkbox m-checkbox--focus">
-										<input type="checkbox" name="remember" [(ngModel)]="model.remember" #remember="ngModel">
-										Remember me
-										<span></span>
-									</label>
-								</div>
-								<div class="col m--align-right">
-									<a href="javascript:;" id="m_login_forget_password" class="m-link">
-										Forget Password ?
-									</a>
-								</div>
-							</div>
+
 							<div class="m-login__form-action">
 								<button [disabled]="loading" [ngClass]="{'m-loader m-loader--right m-loader--light': loading}" id="m_login_signin_submit" class="btn m-btn m-btn--pill m-btn--air">
 									Connexion

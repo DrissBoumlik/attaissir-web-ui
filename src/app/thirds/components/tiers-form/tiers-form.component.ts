@@ -74,15 +74,15 @@ export class TiersFormComponent implements OnInit {
     this.situation = {
       dataSource: [
         {
-          Name: 'Single',
+          Name: 'Célibataire',
           ID: 'celibataire'
         },
         {
-          Name: 'Marry',
+          Name: 'Marier',
           ID: 'marier'
         },
         {
-          Name: 'Divorce',
+          Name: 'Divorcer',
           ID: 'divorcer'
         }
       ],
@@ -92,11 +92,11 @@ export class TiersFormComponent implements OnInit {
     this.gender = {
       items: [
         {
-          Name: 'Male',
+          Name: 'Homme',
           ID: 'm'
         },
         {
-          Name: 'Female',
+          Name: 'Femme',
           ID: 'f'
         }
       ],

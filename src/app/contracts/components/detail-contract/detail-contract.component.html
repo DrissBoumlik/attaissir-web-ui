@@ -2,10 +2,10 @@
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
-      <a class="siam-header-back-btn" routerLink="/contrats/list"><i class="fa fa-angle-left"></i> Dashboard</a>
+      <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Dashboard</a>
       <h2>Contrat Agrégat-Agrégés ( {{ structure?.label | uppercase }} / {{ third?.first_name | uppercase }} {{
         third?.last_name | uppercase }})</h2>
-      <a class="siam-header-btn-new" href="javascript::void(0)" (click)="download()" download=""><i
+      <a class="siam-header-btn-new" href="javascript::" (click)="downloadContract()" download=""><i
         class="fa fa-download"></i></a>
     </div>
   </div>
@@ -42,7 +42,8 @@
                   </a>
                 </li>
                 <li class="nav-item m-tabs__item">
-                  <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_5" role="tab">
+                  <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_5"
+                     (click)="loadDocuments()" role="tab">
                     Attachments
                   </a>
                 </li>
@@ -58,6 +59,7 @@
             <div class="tab-pane active" id="m_user_profile_tab_1">
               <div class="m-form m-form--fit m-form--label-align-right">
                 <div class="m-portlet__body">
+                  <hr>
                   <div class="form-group m-form__group row">
                     <div class="col-10 ml-auto">
                       <h3 class="m-form__section">
@@ -120,7 +122,19 @@
                       Status
                     </label>
                     <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="contract?.status" readonly>
+                      <div class="row">
+                        <div class="col-3">
+                          <div [ngClass]="getStatusColor(contract?.status)" class="alert alert-primary" role="alert">
+                            {{ contract?.status }}
+                          </div>
+                        </div>
+                        <div class="col-9">
+                          <div style="float: right" *ngIf="isContractEncours">
+                            <dx-button [text]="'Valider'" [type]="'success'" (onClick)="activateContrat()"></dx-button>
+                          </div>
+                        </div>
+                      </div>
+                      <!--<input class="form-control m-input" type="text" [value]="" readonly>-->
                     </div>
                   </div>
                   <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
@@ -130,6 +144,7 @@
             <div class="tab-pane " id="m_user_profile_tab_2">
               <div class="m-form m-form--fit m-form--label-align-right">
                 <div class="m-portlet__body">
+                  <hr>
                   <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6">
                       <div class="form-group m-form__group row">
@@ -271,7 +286,6 @@
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -311,6 +325,7 @@
             <div class="tab-pane" id="m_user_profile_tab_4">
               <div class="m-form m-form--fit m-form--label-align-right">
                 <div class="m-portlet__body">
+                  <hr>
                   <div class="form-group m-form__group row">
                     <div class="col-10 ml-auto">
                       <h3 class="m-form__section">
@@ -479,14 +494,13 @@
                               style="padding-top: 2vh"
                               [noDataText]="'le contrat ne dispose pas d\'avenants'"
                               keyExpr="id">
-                  <dxi-column dataField="id" caption="réference">
+                  <dxi-column dataField="code" caption="réference">
                   </dxi-column>
                   <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
                   </dxi-column>
                   <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
                   </dxi-column>
                   <dxi-column dataField="signature_date" caption="Date de signature" dataType="date"></dxi-column>
-                  <dxi-column dataField="structure" caption="Structure" dataType="Text"></dxi-column>
                   <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
                   </dxi-column>
                   <div *dxTemplate="let data of 'statusTemplate'">
@@ -504,7 +518,7 @@
                     mode="row"
                     [allowUpdating]="false"
                     [allowDeleting]="false"
-                    [allowAdding]="true">
+                    [allowAdding]="false">
                   </dxo-editing>
                   <dxo-pager
                     [showPageSizeSelector]="false"

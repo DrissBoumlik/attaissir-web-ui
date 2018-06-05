@@ -59,7 +59,7 @@ export class ListComponent implements OnInit {
   }
 
   gotoShow(idContract: number) {
-    this.router.navigate(['../show/' + idContract], { relativeTo: this.route }).catch(
+    this.router.navigate([`/tiers/afficher/${idContract}`]).catch(
       err => {
         this.toastr.error(err.error.message);
       }
@@ -96,7 +96,7 @@ export class ListComponent implements OnInit {
    * @param {number} thirdId
    */
   onStartEdit(thirdId: number) {
-    this.router.navigate(['../edit/' + thirdId], { relativeTo: this.route }).catch(
+    this.router.navigate([`/tiers/modifier/${thirdId}`]).catch(
       err => {
         this.toastr.error(err.error.message);
       }

@@ -1,585 +1,590 @@
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
-      <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Dashboard</a>
+      <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableua de bord</a>
       <h2>Liste des contrats</h2>
-      <a class="siam-header-btn-new" routerLink="/contrats/add"><i class="fa fa-plus"></i></a>
+      <a class="siam-header-btn-new" routerLink="/contrats/ajouter"><i class="fa fa-plus"></i></a>
     </div>
   </div>
 </div>
 
 <div class="m-content">
-    <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-      <div class="m-portlet__body m-portlet__body--no-padding">
-        <dx-data-grid
-    id="gridContainer"
-    (onEditStart)="onEditcontrat($event)"
-    (onRowRemoving)="onDeleteContract($event)"
-    [dataSource]="contracts"
-    [remoteOperations]="true"
-    showBorders="true"
-    (onSelectionChanged)="selectionChanged($event)"
-    (onContentReady)="contentReady($event)"
-    [masterDetail]="{ enabled: false, template: 'detail' }"
-    KeyExpr="id">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body m-portlet__body--no-padding">
+      <dx-data-grid
+        id="gridContainer"
+        (onEditStart)="onEditcontrat($event)"
+        (onRowRemoving)="onDeleteContract($event)"
+        [dataSource]="contracts"
+        [remoteOperations]="true"
+        showBorders="true"
+        (onSelectionChanged)="selectionChanged($event)"
+        (onEditingStart)="onStartEdit($event.data.id)"
+        (onContentReady)="contentReady($event)"
+        [masterDetail]="{ enabled: false, template: 'detail' }"
+        KeyExpr="id">
 
-    <dxo-filter-row [visible]="true"></dxo-filter-row>
-    <dxo-header-filter [visible]="true"></dxo-header-filter>
-    <dxo-group-panel [visible]="true"></dxo-group-panel>
-    <dxo-scrolling mode="virtual"></dxo-scrolling>
-    <dxo-editing
-      mode="popup"
-      [useIcons]="true"
-      [allowDeleting]="true"
-      [allowEditing]="false"
-      [allowUpdating]="false">
-    </dxo-editing>
-    <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
-    <dxo-selection mode="multiple"></dxo-selection>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-group-panel [visible]="true"></dxo-group-panel>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+        <dxo-editing
+          mode="row"
+          [useIcons]="true"
+          [allowDeleting]="true"
+          [allowEditing]="false"
+          [allowUpdating]="false">
+        </dxo-editing>
+        <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+        <dxo-selection mode="multiple"></dxo-selection>
 
-    <dxi-column dataField="id" caption="Id Contrat">
-    </dxi-column>
-    <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
-    </dxi-column>
-    <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
-    </dxi-column>
-    <dxi-column dataField="contrat_type" caption="type de contrat" dataType="Text">
-    </dxi-column>
-    <dxi-column dataField="status" caption="Status">
-    </dxi-column>
-    <dxi-column dataField="third_last_name" caption="Nom agrégé" datatype="Text"></dxi-column>
-    <dxi-column dataField="third_first_name" caption="Prénom agrégé" datatype="Text"></dxi-column>
-    <dxi-column dataField="structure" caption="Structure" dataType="Text"> </dxi-column>
-    <dxi-column dataField="campaign_libelle" caption="Campagne" dataType="Text">
-    </dxi-column>
-    <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="Détails" allowColumnResizing="true">
-    </dxi-column>
-    <div *dxTemplate="let data of 'cellTemplate'">
-      <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="showDetails(data.data.id)"
-         class="fa fa-info-circle fa-5x"></i>
-    </div>
-
-
-    <!--<div *dxTemplate="let contract of 'detail'">
-      <div class="m-portlet m-portlet&#45;&#45;tabs">
-        <div class="m-portlet__head">
-          <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-              <h3 class="m-portlet__head-text" style="padding-left: 5%">
-                Informations supplementaire
-              </h3>
-            </div>
-          </div>
-          <div class="m-portlet__head-tools" style="float: left">
-            <ul class="nav nav-tabs m-tabs-line m-tabs-line&#45;&#45;right" role="tablist">
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link active show" data-toggle="tab" [href]="'#tab2'+contract.data.id"
-                   role="tab" aria-selected="true">
-                  <i class="flaticon-avatar"></i> Agrégé
-                </a>
-              </li>
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab" [href]="'#tab1'+contract.data.id" role="tab"
-                   aria-selected="false">
-                  <i class="flaticon-file"></i> Contrat
-                </a>
-              </li>
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab" [href]="'#tab3'+contract.data.id" role="tab"
-                   aria-selected="false">
-                  <i class="flaticon-info"></i> Structure
-                </a>
-              </li>
-            </ul>
-          </div>
+        <dxi-column dataField="id" caption="Id Contrat">
+        </dxi-column>
+        <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
+        </dxi-column>
+        <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
+        </dxi-column>
+        <dxi-column dataField="contrat_type" caption="type de contrat" dataType="Text">
+        </dxi-column>
+        <dxi-column dataField="status" cellTemplate="contractListTemplate" caption="Status">
+        </dxi-column>
+        <dxi-column dataField="third_last_name" caption="Nom agrégé" datatype="Text"></dxi-column>
+        <dxi-column dataField="third_first_name" caption="Prénom agrégé" datatype="Text"></dxi-column>
+        <dxi-column dataField="structure" caption="Structure" dataType="Text"></dxi-column>
+        <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="Détails" allowColumnResizing="true">
+        </dxi-column>
+        <div *dxTemplate="let data of 'cellTemplate'">
+          <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="showDetails(data.data.id)"
+             class="fa fa-info-circle fa-5x"></i>
         </div>
-        <div class="m-portlet__body">
-          <div class="tab-content">
-            <div class="tab-pane" [id]="'tab1'+contract.data.id" role="tabpanel">
+        <div *dxTemplate="let data of 'contractListTemplate'">
+                      <span [ngClass]="getStatusClr(data.value)">
+                            {{ data.value }}
+                        </span>
+        </div>
 
+        <!--<div *dxTemplate="let contract of 'detail'">
+          <div class="m-portlet m-portlet&#45;&#45;tabs">
+            <div class="m-portlet__head">
+              <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                  <h3 class="m-portlet__head-text" style="padding-left: 5%">
+                    Informations supplementaire
+                  </h3>
+                </div>
+              </div>
+              <div class="m-portlet__head-tools" style="float: left">
+                <ul class="nav nav-tabs m-tabs-line m-tabs-line&#45;&#45;right" role="tablist">
+                  <li class="nav-item m-tabs__item">
+                    <a class="nav-link m-tabs__link active show" data-toggle="tab" [href]="'#tab2'+contract.data.id"
+                       role="tab" aria-selected="true">
+                      <i class="flaticon-avatar"></i> Agrégé
+                    </a>
+                  </li>
+                  <li class="nav-item m-tabs__item">
+                    <a class="nav-link m-tabs__link" data-toggle="tab" [href]="'#tab1'+contract.data.id" role="tab"
+                       aria-selected="false">
+                      <i class="flaticon-file"></i> Contrat
+                    </a>
+                  </li>
+                  <li class="nav-item m-tabs__item">
+                    <a class="nav-link m-tabs__link" data-toggle="tab" [href]="'#tab3'+contract.data.id" role="tab"
+                       aria-selected="false">
+                      <i class="flaticon-info"></i> Structure
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div class="tab-pane active" [id]="'tab2'+contract.data.id" role="tabpanel">
-              <table>
-                <div class="card ">
-                  <h5 class="card-header">
-                    Informations générale
-                  </h5>
-                  <div class="card-body">
-                    <tr>
-                      <div class="row">
-                        <div class="col-md-6">
+            <div class="m-portlet__body">
+              <div class="tab-content">
+                <div class="tab-pane" [id]="'tab1'+contract.data.id" role="tabpanel">
+
+                </div>
+                <div class="tab-pane active" [id]="'tab2'+contract.data.id" role="tabpanel">
+                  <table>
+                    <div class="card ">
+                      <h5 class="card-header">
+                        Informations générale
+                      </h5>
+                      <div class="card-body">
+                        <tr>
                           <div class="row">
                             <div class="col-md-6">
                               <div class="row">
+                                <div class="col-md-6">
+                                  <div class="row">
+                                    <td>
+                                      <div class="col-md-3">
+                                        Nom:
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <div class="col-md-9">
+                                        <p class="font-weight-bold">{{ contract.data.third.last_name }}</p>
+                                      </div>
+                                    </td>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="row">
+                                    <td>
+                                      <div class="col-md-3">
+                                        Prénom:
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <div class="col-md-9">
+                                        <p class="font-weight-bold">{{ contract.data.third.first_name }}</p>
+                                      </div>
+                                    </td>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6" dir="rtl">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="row">
+                                    <td>
+                                      <div class="col-md-9">
+                                        الاسم الشخصي:
+                                      </div>
+                                    <td>
+                                    <td>
+                                      <div class="col-md-3">
+                                        <p class="font-weight-bold">{{ contract.data.third.ar_first_name }}</p>
+                                      </div>
+                                    </td>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="row">
+                                    <div class="col-md-9">
+                                      الاسم العائلي:
+                                    </div>
+                                    <div class="col-md-3">
+                                      <p class="font-weight-bold">{{ contract.data.third.ar_last_name }}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </tr>
+                        <hr>
+                        <tr>
+                          <div class="row">
+                            <div class="col-md-2">
+                              <div class="row">
                                 <td>
                                   <div class="col-md-3">
-                                    Nom:
+                                    CIN:
                                   </div>
                                 </td>
                                 <td>
                                   <div class="col-md-9">
-                                    <p class="font-weight-bold">{{ contract.data.third.last_name }}</p>
+                                    <p class="font-weight-bold">{{ contract.data.third.cin }}</p>
                                   </div>
                                 </td>
                               </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                               <div class="row">
                                 <td>
-                                  <div class="col-md-3">
-                                    Prénom:
+                                  <div class="col-6">
+                                    numéro de téléphone principal:
                                   </div>
                                 </td>
                                 <td>
-                                  <div class="col-md-9">
-                                    <p class="font-weight-bold">{{ contract.data.third.first_name }}</p>
+                                  <div class="col-6">
+                                    <p class="font-weight-bold">{{ contract.data.third.tel1 }}</p>
+                                  </div>
+                                </td>
+                              </div>
+                            </div>
+                            <div class="col-md-5">
+                              <div class="row">
+                                <td>
+                                  <div class="col-md-6">
+                                    numéro de téléphone secondaire:
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="col-md-6">
+                                    <p class="font-weight-bold">{{ contract.data.third.tel2 || 'N/A'}}</p>
                                   </div>
                                 </td>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div class="col-md-6" dir="rtl">
+                        </tr>
+                        <hr>
+                        <tr>
                           <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-7 container">
+                              <div class="row">
+                                <div class="col-md-6 container">
+                                  <div class="row">
+                                    <td>
+                                      <div class="col-md-1">
+                                        Email:
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <div class="col-md-11">
+                                        <p class="font-weight-bold">{{ contract.data.third.address_email }}</p>
+                                      </div>
+                                    </td>
+                                  </div>
+                                </div>
+                                <div class="col-md-6 container">
+                                  <div class="row">
+                                    <td>
+                                      <div class="col-md-6">
+                                        Situation familiale:
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <div class="col-md-6">
+                                        <p class="font-weight-bold">{{ contract.data.third.situation }}</p>
+                                      </div>
+                                    </td>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-5">
+                              <div class="row">
+                                <div class="col-md-7">
+                                  <div class="row">
+                                    <td>
+                                      <div class="col-md-2">
+                                        Education:
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <div class="col-md-10">
+                                        <p class="font-weight-bold">{{ contract.data.third.education_level }}</p>
+                                      </div>
+                                    </td>
+                                  </div>
+                                </div>
+                                <div class="col-md-5">
+                                  <div class="row">
+                                    <td>
+                                      <div class="col-md-6">
+                                        Nombre d'enfants:
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <div class="col-md-6">
+                                        <p class="font-weight-bold">{{ contract.data.third.children_number }}</p>
+                                      </div>
+                                    </td>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </tr>
+                      </div>
+                    </div>
+                  </table>
+                  <hr>
+                  <table>
+                    <div class="card ">
+                      <h5 class="card-header">
+                        Adresse
+                      </h5>
+                      <div class="card-body">
+                        <tr>
+                          <div class="row">
+                            <div class="col-md-3">
                               <div class="row">
                                 <td>
-                                  <div class="col-md-9">
-                                    الاسم الشخصي:
-                                  </div>
-                                <td>
-                                <td>
                                   <div class="col-md-3">
-                                    <p class="font-weight-bold">{{ contract.data.third.ar_first_name }}</p>
+                                    Adresse:
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="col-md-9">
+                                    <p class="font-weight-bold">{{ contract.data.third.address }}</p>
                                   </div>
                                 </td>
                               </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                               <div class="row">
-                                <div class="col-md-9">
-                                  الاسم العائلي:
-                                </div>
-                                <div class="col-md-3">
-                                  <p class="font-weight-bold">{{ contract.data.third.ar_last_name }}</p>
-                                </div>
+                                <td>
+                                  <div class="col-3">
+                                    Ville:
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="col-7">
+                                    <p class="font-weight-bold">{{ contract.data.third.city }}</p>
+                                  </div>
+                                </td>
                               </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="row">
+                                <td>
+                                  <div class="col-md-5">
+                                    Commune:
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="col-md-7">
+                                    <p class="font-weight-bold">{{ contract.data.third.commune }}</p>
+                                  </div>
+                                </td>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="row">
+                                <td>
+                                  <div class="col-md-5">
+                                    Code postale:
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="col-md-7">
+                                    <p class="font-weight-bold">{{ contract.data.third.postal_code }}</p>
+                                  </div>
+                                </td>
+                              </div>
+                            </div>
+                          </div>
+                        </tr>
+                      </div>
+                    </div>
+                  </table>
+                  <hr>
+                  <div class="card ">
+                    <h5 class="card-header">
+                      Informations techniques
+                    </h5>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                              <p class="font-weight-bold"></p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="row">
+                            <div class="col-md-6">
+                              Code AS400:
+                            </div>
+                            <div class="col-md-6">
+                              <p class="font-weight-bold">{{ contract.data.third.code_as400 }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="row">
+                            <div class="col-md-8">
+                              Registre de commerce:
+                            </div>
+                            <div class="col-md-4">
+                              <p class="font-weight-bold">{{ contract.data.third.rc }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="row">
+                            <div class="col-md-7">
+                              Numéro de patente:
+                            </div>
+                            <div class="col-md-5">
+                              <p class="font-weight-bold">{{ contract.data.third.patent_number }}</p>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </tr>
-                    <hr>
-                    <tr>
+                      <hr>
                       <div class="row">
+                        <div class="col-md-3">
+                          <div class="row">
+                            <div class="col-md-7">
+                              Identification fiscale:
+                            </div>
+                            <div class="col-md-3">
+                              <p class="font-weight-bold">{{ contract.data.third.if }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-5">
+                          <div class="row">
+                            <div class="col-7">
+                              Identifiant commun de l’entreprise:
+                            </div>
+                            <div class="col-3">
+                              <p class="font-weight-bold">{{ contract.data.third.ice }}</p>
+                            </div>
+                          </div>
+                        </div>
                         <div class="col-md-2">
                           <div class="row">
-                            <td>
-                              <div class="col-md-3">
-                                CIN:
-                              </div>
-                            </td>
-                            <td>
-                              <div class="col-md-9">
-                                <p class="font-weight-bold">{{ contract.data.third.cin }}</p>
-                              </div>
-                            </td>
-                          </div>
-                        </div>
-                        <div class="col-md-5">
-                          <div class="row">
-                            <td>
-                              <div class="col-6">
-                                numéro de téléphone principal:
-                              </div>
-                            </td>
-                            <td>
-                              <div class="col-6">
-                                <p class="font-weight-bold">{{ contract.data.third.tel1 }}</p>
-                              </div>
-                            </td>
-                          </div>
-                        </div>
-                        <div class="col-md-5">
-                          <div class="row">
-                            <td>
-                              <div class="col-md-6">
-                                numéro de téléphone secondaire:
-                              </div>
-                            </td>
-                            <td>
-                              <div class="col-md-6">
-                                <p class="font-weight-bold">{{ contract.data.third.tel2 || 'N/A'}}</p>
-                              </div>
-                            </td>
-                          </div>
-                        </div>
-                      </div>
-                    </tr>
-                    <hr>
-                    <tr>
-                      <div class="row">
-                        <div class="col-md-7 container">
-                          <div class="row">
-                            <div class="col-md-6 container">
-                              <div class="row">
-                                <td>
-                                  <div class="col-md-1">
-                                    Email:
-                                  </div>
-                                </td>
-                                <td>
-                                  <div class="col-md-11">
-                                    <p class="font-weight-bold">{{ contract.data.third.address_email }}</p>
-                                  </div>
-                                </td>
-                              </div>
+                            <div class="col-7">
+                              Retraité:
                             </div>
-                            <div class="col-md-6 container">
-                              <div class="row">
-                                <td>
-                                  <div class="col-md-6">
-                                    Situation familiale:
-                                  </div>
-                                </td>
-                                <td>
-                                  <div class="col-md-6">
-                                    <p class="font-weight-bold">{{ contract.data.third.situation }}</p>
-                                  </div>
-                                </td>
-                              </div>
+                            <div class="col-3">
+                              <p class="font-weight-bold" *ngIf="contract.data.third.retraite">Oui</p>
+                              <p class="font-weight-bold" *ngIf="!contract.data.third.retraite">Non</p>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-2">
                           <div class="row">
-                            <div class="col-md-7">
-                              <div class="row">
-                                <td>
-                                  <div class="col-md-2">
-                                    Education:
-                                  </div>
-                                </td>
-                                <td>
-                                  <div class="col-md-10">
-                                    <p class="font-weight-bold">{{ contract.data.third.education_level }}</p>
-                                  </div>
-                                </td>
-                              </div>
+                            <div class="col-7">
+                              Assuré:
                             </div>
-                            <div class="col-md-5">
-                              <div class="row">
-                                <td>
-                                  <div class="col-md-6">
-                                    Nombre d'enfants:
-                                  </div>
-                                </td>
-                                <td>
-                                  <div class="col-md-6">
-                                    <p class="font-weight-bold">{{ contract.data.third.children_number }}</p>
-                                  </div>
-                                </td>
-                              </div>
+                            <div class="col-3">
+                              <p class="font-weight-bold" *ngIf="contract.data.third.assurance">Oui</p>
+                              <p class="font-weight-bold" *ngIf="!contract.data.third.assurance">Non</p>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </tr>
+                    </div>
                   </div>
-                </div>
-              </table>
-              <hr>
-              <table>
-                <div class="card ">
-                  <h5 class="card-header">
-                    Adresse
-                  </h5>
-                  <div class="card-body">
-                    <tr>
-                      <div class="row">
-                        <div class="col-md-3">
-                          <div class="row">
-                            <td>
-                              <div class="col-md-3">
-                                Adresse:
-                              </div>
-                            </td>
-                            <td>
+                  <hr>
+                  <div class="card ">
+                    <h5 class="card-header">
+                      Information bancaire
+                    </h5>
+                    <div class="card-body">
+                      <div *ngFor="let bank_account of contract.data.third.bank_accounts; let i = index">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <div class="row">
                               <div class="col-md-9">
-                                <p class="font-weight-bold">{{ contract.data.third.address }}</p>
+                                Compte №:
                               </div>
-                            </td>
+                              <div class="col-md-3">
+                                <p class="font-weight-bold">{{ i }}</p>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="row">
-                            <td>
+                          <div class="col-md-3">
+                            <div class="row">
                               <div class="col-3">
-                                Ville:
+                                Banque:
                               </div>
-                            </td>
-                            <td>
-                              <div class="col-7">
-                                <p class="font-weight-bold">{{ contract.data.third.city }}</p>
+                              <div class="col-9">
+                                <p class="font-weight-bold">{{ bank_account.bank }}</p>
                               </div>
-                            </td>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="row">
-                            <td>
-                              <div class="col-md-5">
-                                Commune:
-                              </div>
-                            </td>
-                            <td>
-                              <div class="col-md-7">
-                                <p class="font-weight-bold">{{ contract.data.third.commune }}</p>
-                              </div>
-                            </td>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="row">
-                            <td>
-                              <div class="col-md-5">
-                                Code postale:
-                              </div>
-                            </td>
-                            <td>
-                              <div class="col-md-7">
-                                <p class="font-weight-bold">{{ contract.data.third.postal_code }}</p>
-                              </div>
-                            </td>
-                          </div>
-                        </div>
-                      </div>
-                    </tr>
-                  </div>
-                </div>
-              </table>
-              <hr>
-              <div class="card ">
-                <h5 class="card-header">
-                  Informations techniques
-                </h5>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <div class="row">
-                        <div class="col-md-6">
-                        </div>
-                        <div class="col-md-6">
-                          <p class="font-weight-bold"></p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="row">
-                        <div class="col-md-6">
-                          Code AS400:
-                        </div>
-                        <div class="col-md-6">
-                          <p class="font-weight-bold">{{ contract.data.third.code_as400 }}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="row">
-                        <div class="col-md-8">
-                          Registre de commerce:
-                        </div>
-                        <div class="col-md-4">
-                          <p class="font-weight-bold">{{ contract.data.third.rc }}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="row">
-                        <div class="col-md-7">
-                          Numéro de patente:
-                        </div>
-                        <div class="col-md-5">
-                          <p class="font-weight-bold">{{ contract.data.third.patent_number }}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <div class="row">
-                        <div class="col-md-7">
-                          Identification fiscale:
-                        </div>
-                        <div class="col-md-3">
-                          <p class="font-weight-bold">{{ contract.data.third.if }}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-5">
-                      <div class="row">
-                        <div class="col-7">
-                          Identifiant commun de l’entreprise:
-                        </div>
-                        <div class="col-3">
-                          <p class="font-weight-bold">{{ contract.data.third.ice }}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="row">
-                        <div class="col-7">
-                          Retraité:
-                        </div>
-                        <div class="col-3">
-                          <p class="font-weight-bold" *ngIf="contract.data.third.retraite">Oui</p>
-                          <p class="font-weight-bold" *ngIf="!contract.data.third.retraite">Non</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="row">
-                        <div class="col-7">
-                          Assuré:
-                        </div>
-                        <div class="col-3">
-                          <p class="font-weight-bold" *ngIf="contract.data.third.assurance">Oui</p>
-                          <p class="font-weight-bold" *ngIf="!contract.data.third.assurance">Non</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <hr>
-              <div class="card ">
-                <h5 class="card-header">
-                  Information bancaire
-                </h5>
-                <div class="card-body">
-                  <div *ngFor="let bank_account of contract.data.third.bank_accounts; let i = index">
-                    <div class="row">
-                      <div class="col-md-3">
-                        <div class="row">
-                          <div class="col-md-9">
-                            Compte №:
+                            </div>
                           </div>
                           <div class="col-md-3">
-                            <p class="font-weight-bold">{{ i }}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="row">
-                          <div class="col-3">
-                            Banque:
-                          </div>
-                          <div class="col-9">
-                            <p class="font-weight-bold">{{ bank_account.bank }}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="row">
-                          <div class="col-md-3">
-                            RIB:
-                          </div>
-                          <div class="col-md-9" style="float: right;">
-                            <p class="font-weight-bold">{{ bank_account.rib }}</p>
+                            <div class="row">
+                              <div class="col-md-3">
+                                RIB:
+                              </div>
+                              <div class="col-md-9" style="float: right;">
+                                <p class="font-weight-bold">{{ bank_account.rib }}</p>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="tab-pane" [id]="'tab3'+contract.data.id" role="tabpanel">
-              <div class="card ">
-                <h5 class="card-header">
-                  Informations générale
-                </h5>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="row">
-                            <div class="col-md-3">
-                              Libelle:
-                            </div>
-                            <div class="col-md-9">
-                              <p class="font-weight-bold">{{ contract.data.structure.libelle }}</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="row">
-                            <div class="col-md-3">
-                              Code:
-                            </div>
-                            <div class="col-md-9">
-                              <p class="font-weight-bold">{{ contract.data.structure.code }}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
+                <div class="tab-pane" [id]="'tab3'+contract.data.id" role="tabpanel">
+                  <div class="card ">
+                    <h5 class="card-header">
+                      Informations générale
+                    </h5>
+                    <div class="card-body">
                       <div class="row">
                         <div class="col-md-6">
                           <div class="row">
                             <div class="col-md-6">
-                              Ville:
+                              <div class="row">
+                                <div class="col-md-3">
+                                  Libelle:
+                                </div>
+                                <div class="col-md-9">
+                                  <p class="font-weight-bold">{{ contract.data.structure.libelle }}</p>
+                                </div>
+                              </div>
                             </div>
                             <div class="col-md-6">
-                              <p class="font-weight-bold">{{ contract.data.structure.city }}</p>
+                              <div class="row">
+                                <div class="col-md-3">
+                                  Code:
+                                </div>
+                                <div class="col-md-9">
+                                  <p class="font-weight-bold">{{ contract.data.structure.code }}</p>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="row">
-                            <div class="col-md-5">
-                              Code postale:
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  Ville:
+                                </div>
+                                <div class="col-md-6">
+                                  <p class="font-weight-bold">{{ contract.data.structure.city }}</p>
+                                </div>
+                              </div>
                             </div>
-                            <div class="col-md-7">
-                              <p class="font-weight-bold">{{ contract.data.structure.postal_code }}</p>
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-md-5">
+                                  Code postale:
+                                </div>
+                                <div class="col-md-7">
+                                  <p class="font-weight-bold">{{ contract.data.structure.postal_code }}</p>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-md-4">
+                      <hr>
                       <div class="row">
-                        <div class="col-md-3">
-                          Adresse:
-                        </div>
-                        <div class="col-md-9">
-                          <p class="font-weight-bold">{{ contract.data.structure.address }}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-8">
-                          numéro de téléphone principal:
-                        </div>
-                        <div class="col-4">
-                          <p class="font-weight-bold">{{ contract.data.structure.tel1 || 'N/A' }}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-8">
-                          numéro de téléphone secondaire:
+                        <div class="col-md-4">
+                          <div class="row">
+                            <div class="col-md-3">
+                              Adresse:
+                            </div>
+                            <div class="col-md-9">
+                              <p class="font-weight-bold">{{ contract.data.structure.address }}</p>
+                            </div>
+                          </div>
                         </div>
                         <div class="col-md-4">
-                          <p class="font-weight-bold">{{ contract.data.structure.tel2 || 'N/A'}}</p>
+                          <div class="row">
+                            <div class="col-8">
+                              numéro de téléphone principal:
+                            </div>
+                            <div class="col-4">
+                              <p class="font-weight-bold">{{ contract.data.structure.tel1 || 'N/A' }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="row">
+                            <div class="col-md-8">
+                              numéro de téléphone secondaire:
+                            </div>
+                            <div class="col-md-4">
+                              <p class="font-weight-bold">{{ contract.data.structure.tel2 || 'N/A'}}</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -588,11 +593,9 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>-->
+        </div>-->
 
-  </dx-data-grid>
-      </div>
+      </dx-data-grid>
     </div>
+  </div>
 </div>

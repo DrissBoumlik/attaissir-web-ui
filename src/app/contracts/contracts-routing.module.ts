@@ -13,10 +13,10 @@ const routes: Routes = [
     component: DefaultComponent,
     children: [
       { path: '', component: ListContractComponent },
-      { path: 'add', component: AddComponent },
-      { path: 'list', component: ListContractComponent },
-      { path: 'show/:id', component: DetailContractComponent },
-      { path: 'edit/:id', component: EditComponent },
+      { path: 'ajouter', component: AddComponent },
+      { path: 'liste', component: ListContractComponent },
+      { path: 'afficher/:id', component: DetailContractComponent },
+      { path: 'modifier/:id', component: EditComponent },
       { path: 'cards', component: CardsComponent }
     ]
   }

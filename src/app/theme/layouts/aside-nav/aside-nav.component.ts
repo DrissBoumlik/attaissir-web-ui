@@ -26,22 +26,22 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'Tiers',
         icon: 'flaticon-users',
-        url: '/tiers/list',
+        url: '/tiers/liste',
         description: 'Gestion des tiers',
         subMenu: [
-          { icon: 'flaticon-plus', name: 'New Aggregated'/*Nuveau agrégé*/, url: '/tiers/add' },
-          { icon: 'flaticon-list', name: 'Aggregated List'/*Liste des  agrégés*/, url: '/tiers/list' },
+          { icon: 'flaticon-plus', name: 'Nouveaux agrégé'/*Nuveau agrégé*/, url: '/tiers/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des agrégés'/*Liste des  agrégés*/, url: '/tiers/liste' },
         ],
         disabled: 'false'
       },
       {
         name: 'Contracts',
         icon: 'flaticon-file',
-        url: '/contrats/list',
+        url: '/contrats/liste',
         description: 'Gestion des Contracts',
         subMenu: [
-          { icon: 'flaticon-plus', name: 'New Contract', url: '/contrats/add' },
-          { icon: 'flaticon-list', name: 'Contracts List', url: '/contrats/list' },
+          { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste' },
         ],
         disabled: 'false'
       }

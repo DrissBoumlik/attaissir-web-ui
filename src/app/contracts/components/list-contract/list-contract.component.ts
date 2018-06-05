@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Contract } from '../../classes/contract';
-import { ContractsService } from '../../services/contracts.service';
-import { Third } from '../../../thirds/classes/third';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {Contract} from '../../classes/contract';
+import {ContractsService} from '../../services/contracts.service';
+import {Third} from '../../../thirds/classes/third';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {ToastrService} from 'ngx-toastr';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-list-contract',
@@ -13,19 +13,25 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ListContractComponent implements OnInit {
   contracts: any;
+  currentRowStatus: boolean;
 
 
   constructor(private contractsService: ContractsService,
-    private thirdService: ThirdsService,
-    private toastr: ToastrService,
-    private router: Router,
-    private route: ActivatedRoute) {
+              private thirdService: ThirdsService,
+              private toastr: ToastrService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.contractsService.getContracts().subscribe(
       (res: any) => {
-        this.contracts = res.data;
+        this.contracts = this.contractsService.dataFormatter(res, false);
+        this.contracts = this.contracts.map(contract => {
+          contract['third_name'] = (contract.third_civility)
+            ? `${contract.third_first_name} ${contract.third_last_name}` : contract.third_social_reason;
+          return contract;
+        });
       }
     );
   }
@@ -69,12 +75,58 @@ export class ListContractComponent implements OnInit {
   }
 
   showDetails(idContract: number) {
-    this.router.navigate(['../show/' + idContract], { relativeTo: this.route }).catch(
+    this.router.navigate([`/contrats/afficher/${idContract}`]).catch(
       err => {
         this.toastr.error(err);
       }
     );
   }
 
+  getStatusColor = (value: string): string => {
+    this.currentRowStatus = (value === 'encours');
+    switch (value) {
+      case 'inactif' : {
+        return 'badge badge-pill badge-warning';
+      }
+      case 'actif' : {
+        return 'badge badge-pill badge-success';
+      }
+      case 'encours' : {
+        return 'badge badge-pill badge-info';
+      }
+      default : {
+        return 'badge badge-pill badge-danger';
+      }
+    }
+  }
+
+  onStartEdit = (e) => {
+    this.router.navigate([`/contrats/modifier/${e.data.id}`]).catch(
+      err => {
+        this.toastr.error(err.error.message);
+      }
+    );
+  }
+
+
+  getStatusClr(value: string): string {
+    switch (value) {
+      case 'inactif' : {
+        return 'badge badge-pill badge-warning';
+      }
+      case 'actif' : {
+        return 'badge badge-pill badge-success';
+      }
+      case 'encours' : {
+        return 'badge badge-pill badge-info';
+      }
+      case 'suspendu' : {
+        return 'badge badge-pill badge-dark';
+      }
+      default : {
+        return 'badge badge-pill badge-danger';
+      }
+    }
+  }
 
 }

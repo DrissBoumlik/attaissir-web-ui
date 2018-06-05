@@ -14,6 +14,8 @@ import { ContractsModule } from './contracts/contracts.module';
 import { SharedModule } from './shared/shared.module';
 import { DetailContractComponent } from './contracts/components/detail-contract/detail-contract.component';
 import { FormsModule } from '@angular/forms';
+import {TokenInterceptor} from './auth/_services/token.interceptors';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     AppRoutingModule,
     ThemeRoutingModule,
+    HttpClientModule,
     ThirdsModule,
     AuthModule,
     ContractsModule,
@@ -39,6 +42,11 @@ import { FormsModule } from '@angular/forms';
     useValue: 'fr'
   },
     ScriptLoaderService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
