@@ -23,6 +23,7 @@ export class ShowComponent implements OnInit {
   documentsList = true;
   docTypes: any;
   filePath = [];
+  bank_accounts: any;
 
   constructor(private thirdService: ThirdsService,
               private route: ActivatedRoute,
@@ -37,6 +38,7 @@ export class ShowComponent implements OnInit {
         this.thirdService.getThird(+params.id).subscribe(
           (res: any) => {
             this.third = this.thirdService.dataFormatter(res, false);
+            this.bank_accounts = this.third.bank_accounts;
           },
           (error) => {
             this.router.navigate(['/404']).catch(
@@ -60,14 +62,13 @@ export class ShowComponent implements OnInit {
   }
 
   onRemoveBA(e: any) {
-    e.cancel = true;
     this.thirdService.deleteBankAccount(e.data.id).subscribe(
       () => {
-        this.toaster.success('Le compte bancaire a été supprimé avec succès.');
         e.cancel = false;
         this.third.bank_accounts = this.third.bank_accounts.filter(ba => {
           return ba.id !== e.data.id;
         });
+        this.toaster.success('Le compte bancaire a été supprimé avec succès.');
       },
       (err) => {
         this.toaster.error(err.message);
@@ -81,9 +82,11 @@ export class ShowComponent implements OnInit {
       rib: e.data.rib,
       third_party_id: this.third.id
     };
+    e.cancel = true;
     this.thirdService.addBankAccount(newBA).subscribe(
-      () => {
-        e.cancel = false;
+      ba => {
+        ba = this.thirdService.dataFormatter(ba, false);
+        this.third.bank_accounts.push(ba);
         this.toaster.success('Le compte bancaire a été ajouté avec succès.');
       },
       (err) => {
@@ -91,7 +94,6 @@ export class ShowComponent implements OnInit {
       }
     );
   }
-
 
   onUpdateBA(e: any) {
     console.log(e);
@@ -205,7 +207,7 @@ export class ShowComponent implements OnInit {
   }
 
   showDetails(idContract: number) {
-    this.router.navigate(['/contrats/show/' + idContract]).catch(
+    this.router.navigate([`/contrats/afficher/${idContract}`]).catch(
       err => {
         this.toaster.error(err);
       }

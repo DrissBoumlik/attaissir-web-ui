@@ -10,7 +10,7 @@ import { Campaign } from './campaign';
 
 export class Contract {
   id?: number;
-  code: string;
+  code?: string;
   application_date: Date;
   expiration_date: Date;
   signature_date: Date;

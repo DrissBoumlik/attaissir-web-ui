@@ -83,6 +83,7 @@ export class WizardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.maxYears = 5;
     this.tierData = 'tierData';
     this.groundsList = [];
     this.contract.application_date = new Date();
@@ -225,7 +226,6 @@ export class WizardComponent implements OnInit {
       this.toastr.error(error1.error.message);
     });
 
-    this.maxYears = 5;
     this.tierService.getThirds().subscribe(tiers => {
       this.tiers = this.tierService.dataFormatter(tiers, false);
       this.thirds = Third.getDataSource(this.tiers, 'cin');
@@ -292,6 +292,7 @@ export class WizardComponent implements OnInit {
     if (!this.contract.code_ormva) {
       this.toastr.error('Fill the contract fields first!');
     } else {
+      this.maxYears = (this.contract.contrat_type === 'annuel') ? 1 : 5;
       console.log(this.currentThird);
     }
   }
@@ -370,15 +371,19 @@ export class WizardComponent implements OnInit {
       });
       this.contractedArea.addMultiAreas({ 'contracted_surfaces': this.campaigns }).subscribe(data => {
         data = this.contractedArea.dataFormatter(data, false);
-        for (const ground of this.groundsList) {
-          this.agreementGroundService.addAgreementGround(ground).subscribe(d => {
-            d = this.contractedArea.dataFormatter(d, false);
-            console.log(d);
-            this.router.navigate([`/contrats/show/${contract['id']}`]);
-          }, error1 => {
-            this.toastr.error(error1.error.message);
-          });
-        }
+        this.groundsList = this.groundsList.map(ground => {
+          return {
+              ground_id: ground.id,
+              mode_worth: ground.mode_worth,
+              agreement_id: contract['id']
+          };
+        });
+        this.agreementGroundService.addAgreementGround({ 'agreement_grounds' : this.groundsList }).subscribe(d => {
+          d = this.contractedArea.dataFormatter(d, false);
+          this.router.navigate([`/contrats/afficher/${contract['id']}`]);
+        }, error1 => {
+          this.toastr.error(error1.error.message);
+        });
 
       }, error1 => {
         this.toastr.error(error1.error.message);

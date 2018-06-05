@@ -109,7 +109,8 @@ export class DetailContractComponent implements OnInit {
   addAvenant(idContract: number) {
     console.log(idContract);
   }
-  getStatusColor(value: string): string {
+
+  getStatusColor = (value: string): string => {
     switch (value) {
       case 'inactif' : {
         return 'badge badge-pill badge-warning';

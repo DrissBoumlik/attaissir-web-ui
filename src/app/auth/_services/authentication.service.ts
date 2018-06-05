@@ -1,28 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { environment } from '../../../environments/environment';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class AuthenticationService {
 
-  constructor(private http: Http) {
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
+  private options = {
+    headers: this.headers
+  };
+
+
+  constructor(private http: HttpClient) {
   }
 
   login(email: string, password: string) {
-    return this.http.post('/api/authenticate', JSON.stringify({ email: email, password: password }))
-      .map((response: Response) => {
-        // login successful if there's a jwt token in the response
-        const user = response.json();
-        if (user && user.token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-        }
-      });
+    return this.http.post(`${environment.apiUrl}/login`, JSON.stringify({ email: email, password: password }), this.options);
   }
 
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+  }
+
+  getToken = () => {
+    return JSON.parse(localStorage.getItem('currentUser')).token;
   }
 }

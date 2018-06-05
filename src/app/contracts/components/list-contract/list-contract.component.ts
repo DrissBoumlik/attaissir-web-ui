@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ListContractComponent implements OnInit {
   contracts: any;
+  currentRowStatus: boolean;
 
 
   constructor(private contractsService: ContractsService,
@@ -25,7 +26,12 @@ export class ListContractComponent implements OnInit {
   ngOnInit() {
     this.contractsService.getContracts().subscribe(
       (res: any) => {
-        this.contracts = res.data;
+        this.contracts = this.contractsService.dataFormatter(res, false);
+        this.contracts = this.contracts.map(contract => {
+          contract['third_name'] = (contract.third_civility)
+            ? `${contract.third_first_name} ${contract.third_last_name}` : contract.third_social_reason;
+          return contract;
+        });
       }
     );
   }
@@ -74,6 +80,24 @@ export class ListContractComponent implements OnInit {
         this.toastr.error(err);
       }
     );
+  }
+
+  getStatusColor = (value: string): string => {
+    this.currentRowStatus = (value === 'encours');
+    switch (value) {
+      case 'inactif' : {
+        return 'badge badge-pill badge-warning';
+      }
+      case 'actif' : {
+        return 'badge badge-pill badge-success';
+      }
+      case 'encours' : {
+        return 'badge badge-pill badge-info';
+      }
+      default : {
+        return 'badge badge-pill badge-danger';
+      }
+    }
   }
 
 

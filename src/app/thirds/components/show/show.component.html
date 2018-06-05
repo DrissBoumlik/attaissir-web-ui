@@ -227,14 +227,6 @@
                         </div>
                         <div class="form-group m-form__group row">
                           <label class="col-4 col-form-label">
-                            Code TVA
-                          </label>
-                          <div class="col-7">
-                            <input class="form-control m-input" type="text" [value]="third?.tva_code" readonly>
-                          </div>
-                        </div>
-                        <div class="form-group m-form__group row">
-                          <label class="col-4 col-form-label">
                             Identification fiscale
                           </label>
                           <div class="col-7">
@@ -321,7 +313,7 @@
                               class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
                               id="gridContainer"
                               [allowColumnReordering]="true"
-                              [dataSource]="third?.bank_accounts"
+                              [dataSource]="bank_accounts"
                               (onRowRemoving)="onRemoveBA($event)"
                               (onRowUpdating)="onUpdateBA($event)"
                               (onEditingStart)="onStartUpdate($event)"
