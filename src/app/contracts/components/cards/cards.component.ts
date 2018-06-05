@@ -42,6 +42,7 @@ export class CardsComponent implements OnInit {
     );
   }
 
+
   activateCards = (e) => {
     const cards = e.selectedItems.map(card => {
       return { id: card.id };
@@ -62,6 +63,7 @@ export class CardsComponent implements OnInit {
     });
     this.cardsService.massCards(cards, this.action).subscribe(d => {
       console.log(d);
+      this.cards = d['data'];
     }, err => {
       this.toastr.error(err.error.message);
     });

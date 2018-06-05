@@ -23,3 +23,11 @@
   font-size: 115%;
 }
 
+::ng-deep .buttons {
+  padding: 2px;
+  .dx-button{
+    color: #fff;
+    background-color: #34bfa3;
+  }
+}
+

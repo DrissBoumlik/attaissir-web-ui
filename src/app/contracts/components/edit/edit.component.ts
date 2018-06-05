@@ -49,7 +49,7 @@ export class EditComponent implements OnInit {
             this.id = params.id;
             this.contract = res.data;
             this.currentThird = res.data.third_party;
-            this.campaigns = res.data.campaigns;
+            // this.campaigns = res.data.campaigns;
             this.contractService.getStrcutureById(res.data.structure.id).subscribe(
               (struct: Structure) => {
                 this.structure = this.contractService.dataFormatter(struct, false);

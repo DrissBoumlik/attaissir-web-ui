@@ -5,8 +5,8 @@ import {ThirdsService} from '../../../../thirds/services/thirds.service';
 
 
 @Component({
-  selector: "app-index",
-  templateUrl: "./index.component.html",
+  selector: 'app-index',
+  templateUrl: './index.component.html',
   encapsulation: ViewEncapsulation.None,
 })
 export class IndexComponent implements OnInit, AfterViewInit {
@@ -21,7 +21,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
   }
   ngOnInit() {
-    //var _this = this;
+    // var _this = this;
     this.thirdsService.getStats().subscribe(data => {
       console.log(data);
       this.tilesList = [
@@ -29,7 +29,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         title: 'Contrats confirmés',
         subTitle: 'Nombre des contrats confirmés',
         value: data['actif'] + data['inactif'],
-        unit:'',
+        unit: '',
         icon: 'flaticon-interface-5',
         url: '',
         backgroundColor: '',
@@ -39,7 +39,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         title: 'Contrats en cours',
         subTitle: 'Nombre des contrats en cours',
         value: data['encours'],
-        unit:'',
+        unit: '',
         icon: 'flaticon-interface-9',
         url: '',
         backgroundColor: '',
@@ -49,7 +49,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         title: 'Superficie contractée',
         subTitle: 'Total superficie contractée ',
         value: data['sup_contracted'],
-        unit:'',
+        unit: '',
         icon: 'flaticon-background',
         url: '',
         backgroundColor: '',
@@ -59,7 +59,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         title: 'Agriculteurs',
         subTitle: 'Nombre des agriculteurs',
         value: data['aggregated'],
-        unit:'',
+        unit: '',
         icon: 'flaticon-users',
         url: '',
         backgroundColor: '',
@@ -86,16 +86,16 @@ export class IndexComponent implements OnInit, AfterViewInit {
         url: '/tiers/cartes',
         color: ''
       }
-    ]
-    
+    ];
+
     // Weather widget
-         let geoUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCbrcHPlSrzV06iOFSMXLvGOnOUSyv5UvE";
-      let weatherUrl = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?';
-      
-      function makePostRequest(url) {
+    const geoUrl = 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCbrcHPlSrzV06iOFSMXLvGOnOUSyv5UvE';
+    const weatherUrl = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?';
+
+    function makePostRequest(url) {
         return new Promise(
           (resolve, reject) => {
-            let request = new XMLHttpRequest();
+            const request = new XMLHttpRequest();
             request.open('POST', url);
             request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             request.responseType = 'json';
@@ -117,65 +117,65 @@ export class IndexComponent implements OnInit, AfterViewInit {
             });
             request.send();
           }
-        )
+        );
       }
-      
+
       function getGeoData(url) {
-        return makePostRequest(url)
+        return makePostRequest(url);
       }
-      
+
       function sendWeatherRequest(latLngObj) {
-        let urlForWeatherRequest = weatherUrl + "lat=" + latLngObj.lat + "&lon=" + latLngObj.lng + "&APPID=" + "163f98f0d415aec0ceb630bc76fbdd1d" + "&units=metric";
+        const urlForWeatherRequest = weatherUrl + 'lat=' + latLngObj.lat + '&lon='
+          + latLngObj.lng + '&APPID=' + '163f98f0d415aec0ceb630bc76fbdd1d' + '&units=metric';
         return makePostRequest(urlForWeatherRequest);
       }
-      
+
       function getWeatherData() {
         return getGeoData(geoUrl)
           .then((response) => {
-            let lat = response['location'].lat,
+            const lat = response['location'].lat,
                 lng = response['location'].lng;
             return {
               lat,
               lng
-            }
+            };
           })
           .then((latAndLng) => {
             return sendWeatherRequest(latAndLng)
               .then((weatherResponse) => {
                 return weatherResponse;
-              })
-          })
+              });
+          });
       }
 
-      getWeatherData().then( (res)=>{
-        let mainCond = res['weather'][0].main.toLowerCase();  
+      getWeatherData().then( (res) => {
+        const mainCond = res['weather'][0].main.toLowerCase();
         console.log(res);
         updateLocation(res['name']);
         updateTemperature(Math.round(res['main'].temp));
       })
-      
-      function updateLocation(location){
-        let place = document.getElementById('w-city');
+
+      function updateLocation(location) {
+        const place = document.getElementById('w-city');
         place.innerHTML = location;
       }
       function updateTemperature(value){
-        let temperatureCont = document.getElementById('w-temp');
+        const temperatureCont = document.getElementById('w-temp');
         temperatureCont.innerHTML = value;
       }
 
       setTimeAndDate();
-      function setTimeAndDate(){
-        let hourCont = document.getElementById('w-date-hour'),
-            dayw = document.getElementById('w-day'),
+      function setTimeAndDate() {
+        const hourCont: any = document.getElementById('w-date-hour'),
+            dayw: any = document.getElementById('w-day'),
             date = new Date,
             hours = date.getHours(),
             minutes = date.getMinutes(),
             day = date.getDate(),
-            dayOfWeek = date.getDay(),
-            month = date.getMonth()+1;
-        
-        dayOfWeek = (function(value){
-          switch (value){
+            month = date.getMonth() + 1;
+        let dayOfWeek: any = date.getDay();
+        dayOfWeek = ((value) => {
+          switch (value) {
             case 1: return 'Lundi';
             case 2: return 'Mardi';
             case 3: return 'Mercredi';
@@ -183,23 +183,23 @@ export class IndexComponent implements OnInit, AfterViewInit {
             case 5: return 'Vendredi';
             case 6: return 'Samedi';
             default: return 'Dimanche';
-          };
+          }
         })(dayOfWeek);
-        
-        hourCont.innerHTML = addZeroBefore(hours) + ":" + addZeroBefore(minutes);
+
+        hourCont.innerHTML = addZeroBefore(hours) + ':' + addZeroBefore(minutes);
         dayw.innerHTML = dayOfWeek;
       }
       function addZeroBefore(n) {
         return (n < 10 ? '0' : '') + n;
       }
   }
-  
-  
-  
+
+
+
   ngAfterViewInit() {
     this._script.loadScripts('app-index',
       ['assets/app/js/dashboard.js']);
-      
+
 
   }
 

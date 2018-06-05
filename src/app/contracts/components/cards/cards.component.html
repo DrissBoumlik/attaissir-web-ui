@@ -12,21 +12,29 @@
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body m-portlet__body--no-padding">
 
-      <dx-select-box id="select-prefix"
-                     [dataSource]="[
+      <div class="m-portlet__head">
+        <div class="m-portlet__head-tools">
+          <div class="buttons">
+            <dx-select-box id="select-prefix"
+                           [dataSource]="[
                       {name: 'Activate', action: 'activate'},
                       {name: 'Deactivate', action: 'deactivate'}
                       ]"
-                     placeholder= "Select title"
-                     displayExpr="name"
-                     valueExpr="action"
-                     (onValueChanged)="selectAction($event)">
-      </dx-select-box>
-      <dx-button
-        text="Appliquer"
-        [disabled]="!selectedItems?.length || !action"
-        (onClick)="doAction($event)">
-      </dx-button>
+                           placeholder= "Select action"
+                           displayExpr="name"
+                           valueExpr="action"
+                           (onValueChanged)="selectAction($event)">
+            </dx-select-box>
+            <dx-button
+              text="Appliquer"
+              [disabled]="!selectedItems?.length || !action"
+              (onClick)="doAction($event)">
+            </dx-button>
+          </div>
+        </div>
+
+      </div>
+
     <dx-data-grid
   id="gridContainer"
   [dataSource]="cards"
@@ -78,11 +86,8 @@
   </dxi-column>
   <dxi-column dataField="cda" caption="CDA" i18n-caption>
   </dxi-column>
-  <dxi-column dataField="status" cellTemplate="cellTemplate" caption="Status" i18n-caption>
+  <dxi-column dataField="status" caption="Status" i18n-caption>
   </dxi-column>
-  <div *dxTemplate="let data of 'cellTemplate'">
-    <i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-id-card fa-5x" [ngClass]="{'text-success': data !== 'inactif', 'text-danger': data === 'inactif'}"></i> {{ data }}
-  </div>
   <dxi-column dataField="zone" caption="Zone" i18n-caption>
   </dxi-column>
   <dxi-column dataField="sector" caption="Sector" i18n-caption>
