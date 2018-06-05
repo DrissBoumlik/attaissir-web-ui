@@ -33,10 +33,10 @@
                     <!--<a href="#" class="m-nav__link m-dropdown__toggle">-->
                     <span class="siam-user-pic-wrapper">
                         <span class="siam-user-pic">
-                          <span>Admin Graviton</span>
+                          <span>{{ currentUser.name }}</span>
                         </span>
                     </span>
-                    <span class="m-topbar__username">Admin Graviton</span>
+                    <span class="m-topbar__username">{{ currentUser.name }}</span>
                 </a>
                 <div class="m-dropdown__wrapper">
                   <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
@@ -49,10 +49,10 @@
                         </div>
                         <div class="m-card-user__details">
 													<span class="m-card-user__name m--font-weight-500">
-														Admin Graviton
+														{{ currentUser.name }}
 													</span>
                           <a href="" class="m-card-user__email m--font-weight-300 m-link">
-                            admin@graviton.ma
+                            {{ currentUser.email }}
                           </a>
                         </div>
                       </div>

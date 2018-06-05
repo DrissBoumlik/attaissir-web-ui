@@ -17,7 +17,6 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    console.log('2');
     return this.http.post(`${environment.apiUrl}/login`, JSON.stringify({ email: email, password: password }), this.options);
   }
 
@@ -27,6 +26,6 @@ export class AuthenticationService {
   }
 
   getToken = () => {
-    return JSON.parse(localStorage.getItem('currentUser')).token;
+    return JSON.parse(localStorage.getItem('currentUser')).data.token;
   }
 }
