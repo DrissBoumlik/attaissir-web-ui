@@ -5,11 +5,8 @@ import {Third} from '../../classes/third';
 import {ToastrService} from 'ngx-toastr';
 import {Contract} from '../../../contracts/classes/contract';
 import {Document} from '../../classes/document';
+import DevExpress from 'devextreme/bundles/dx.all';
 import {ContractsService} from '../../../contracts/services/contracts.service';
-import {CardsService} from '../../../contracts/services/cards.service';
-import {environment} from '../../../../environments/environment';
-declare const require: any;
-const $ = require('jquery');
 
 
 @Component({
@@ -26,6 +23,7 @@ export class ShowComponent implements OnInit {
   documentsList = true;
   docTypes: any;
   filePath = [];
+  bank_accounts: any;
 
   constructor(private thirdService: ThirdsService,
               private route: ActivatedRoute,
@@ -41,6 +39,7 @@ export class ShowComponent implements OnInit {
         this.thirdService.getThird(+params.id).subscribe(
           (res: any) => {
             this.third = this.thirdService.dataFormatter(res, false);
+            this.bank_accounts = this.third.bank_accounts;
 
           },
           (error) => {

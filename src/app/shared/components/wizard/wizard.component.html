@@ -191,7 +191,7 @@
         <dx-form id="form3"
                  [colCount]="4"
                  labelLocation="top"
-                 [readOnly]="isEdit"
+                 [readOnly]="isEdit || groundsList.length > 2"
                  [formData]="parcelForm">
 
           <dxi-item dataField="cda" i18n-label editorType="dxSelectBox" [editorOptions]="cdaEditorOptions">
@@ -201,17 +201,14 @@
                     [editorOptions]="zoneEditorOptions">
             <dxi-validation-rule type="required" message="Zone is required"></dxi-validation-rule>
           </dxi-item>
-          <dxi-item dataField="secteur" caption="Sector" i18n-caption editorType="dxSelectBox"
+          <dxi-item dataField="sector" caption="Sector" i18n-caption editorType="dxTextBox"
                     [editorOptions]="sectorEditorOptions">
-            <dxi-validation-rule type="required" message="Sector is required"></dxi-validation-rule>
           </dxi-item>
-          <dxi-item dataField="block" label="Bloc" i18n-caption editorType="dxSelectBox"
+          <dxi-item dataField="block" label="Bloc" i18n-caption editorType="dxTextBox"
                     [editorOptions]="blocEditorOptions">
-            <dxi-validation-rule type="required" message="Bloc is required"></dxi-validation-rule>
           </dxi-item>
           <dxi-item dataField="mle" caption="Mle" i18n-caption
                     [editorOptions]="matriculeEditorOptions">
-            <dxi-validation-rule type="required" message="Mle is required"></dxi-validation-rule>
           </dxi-item>
           >
           <dxi-item dataField="total_surface" caption="Total Sup" i18n-caption="Sup totale"
@@ -223,7 +220,7 @@
           </dxi-item>
 
           <dxi-item itemType="button"
-                    alignment="right" [buttonOptions]="addParcelOptions"></dxi-item>
+                    alignment="right" [disabled]="isEdit || groundsList.length > 2" [buttonOptions]="addParcelOptions"></dxi-item>
 
         </dx-form>
       </div>

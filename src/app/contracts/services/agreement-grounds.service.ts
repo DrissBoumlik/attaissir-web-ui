@@ -41,7 +41,7 @@ export class AgreementGroundsService {
    * @param AgreementGround
    * @returns {Observable<AgreementGround[]>}
    */
-  addAgreementGround(agreementGround: AgreementGround): Observable<AgreementGround[]> {
+  addAgreementGround(agreementGround: any): Observable<AgreementGround[]> {
     return this.http.post<AgreementGround[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(agreementGround), this.options);
   }
 

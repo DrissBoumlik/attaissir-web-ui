@@ -12,7 +12,7 @@ export class Ground {
   borough: string;
   cda: string;
   zone: string;
-  secteur: string;
+  sector: string;
   block: string;
   common_rural: string;
   total_surface: number;

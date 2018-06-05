@@ -7,3 +7,9 @@ input:read-only {
   font-weight: bold;
   border: none;
 }
+
+
+::ng-deep .badge {
+  text-align: left;
+  width: 65px;
+}
