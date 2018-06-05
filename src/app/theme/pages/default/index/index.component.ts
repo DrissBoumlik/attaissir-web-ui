@@ -12,7 +12,6 @@ import {ThirdsService} from '../../../../thirds/services/thirds.service';
 export class IndexComponent implements OnInit, AfterViewInit {
   shortcutsList: any;
   tilesList: any;
-  tilesData: any;
 
 
   constructor(
@@ -24,11 +23,12 @@ export class IndexComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     //var _this = this;
     this.thirdsService.getStats().subscribe(data => {
+      console.log(data);
       this.tilesList = [
       {
         title: 'Contrats confirmés',
         subTitle: 'Nombre des contrats confirmés',
-        value: data.actif + data.inactif,
+        value: data['actif'] + data['inactif'],
         unit:'',
         icon: 'flaticon-interface-5',
         url: '',
@@ -38,7 +38,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       {
         title: 'Contrats en cours',
         subTitle: 'Nombre des contrats en cours',
-        value: data.encours,
+        value: data['encours'],
         unit:'',
         icon: 'flaticon-interface-9',
         url: '',
@@ -48,7 +48,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       {
         title: 'Superficie contractée',
         subTitle: 'Total superficie contractée ',
-        value: data.sup_contracted,
+        value: data['sup_contracted'],
         unit:'',
         icon: 'flaticon-background',
         url: '',
@@ -58,7 +58,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       {
         title: 'Agriculteurs',
         subTitle: 'Nombre des agriculteurs',
-        value: data.aggregated,
+        value: data['aggregated'],
         unit:'',
         icon: 'flaticon-users',
         url: '',
@@ -71,13 +71,13 @@ export class IndexComponent implements OnInit, AfterViewInit {
       {
         title: 'Ajouter un nouveau agrégé',
         icon: 'flaticon-avatar',
-        url: '/tiers/add',
+        url: '/tiers/ajouter',
         color: ''
       },
       {
         title: 'Ajouter une nouvelle contrat d\'agrégation',
         icon: 'flaticon-interface-6',
-        url: '/contrats/add',
+        url: '/contrats/ajouter',
         color: ''
       },
       {
@@ -132,8 +132,8 @@ export class IndexComponent implements OnInit, AfterViewInit {
       function getWeatherData() {
         return getGeoData(geoUrl)
           .then((response) => {
-            let lat = response.location.lat,
-                lng = response.location.lng;
+            let lat = response['location'].lat,
+                lng = response['location'].lng;
             return {
               lat,
               lng
@@ -148,10 +148,10 @@ export class IndexComponent implements OnInit, AfterViewInit {
       }
 
       getWeatherData().then( (res)=>{
-        let mainCond = res.weather[0].main.toLowerCase();  
+        let mainCond = res['weather'][0].main.toLowerCase();  
         console.log(res);
-        updateLocation(res.name);
-        updateTemperature(Math.round(res.main.temp));
+        updateLocation(res['name']);
+        updateTemperature(Math.round(res['main'].temp));
       })
       
       function updateLocation(location){
