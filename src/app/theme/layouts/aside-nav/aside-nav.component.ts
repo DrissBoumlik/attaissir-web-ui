@@ -44,6 +44,13 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste' },
         ],
         disabled: 'false'
+      },
+      {
+        name: 'Cartes',
+        icon: 'flaticon-tabs',
+        url: '/tiers/cartes',
+        description: 'Generator des cards',
+        disabled: 'false'
       }
     ]
 

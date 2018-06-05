@@ -63,6 +63,10 @@ export class CardsService {
     });
   }
 
+  massCards(card: any): Observable<Card> {
+    return this.http.put<Card>(`${environment.apiUrl}/${this.routeName}/mass-activate`, JSON.stringify(card), this.options);
+  }
+
   /**
    * Delete a Card
    * @param id  the id of the Card intended to delete

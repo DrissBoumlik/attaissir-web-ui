@@ -83,7 +83,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       {
         title: 'Liste des cartes agriculteurs',
         icon: 'flaticon-tabs',
-        url: '/contrats/cards',
+        url: '/tiers/cartes',
         color: ''
       }
     ]

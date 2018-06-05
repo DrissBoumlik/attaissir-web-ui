@@ -56,6 +56,7 @@ export class WizardComponent implements OnInit {
   sectorEditorOptions: any;
   worthEditorOptions: any;
   expirationDateOptions: any;
+  contracteditorOptions: any;
 
   parcels: any[];
   maxYears: number;
@@ -83,6 +84,10 @@ export class WizardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.contracteditorOptions = {
+      label: 'Contract type',
+      items: (!this.isEdit) ? ['pluriannuel', 'annuel'] : ['avenant']
+    };
     this.maxYears = 5;
     this.tierData = 'tierData';
     this.groundsList = [];

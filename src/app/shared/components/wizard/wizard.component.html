@@ -115,7 +115,7 @@
           <dxi-item dataField="expiration_date" [editorOptions]="expirationDateOptions" i18n-label
                     editorType="dxDateBox"></dxi-item>
           <dxi-item dataField="contract_type" editorType="dxSelectBox" i18n-label
-                    [editorOptions]="{ label: 'Contract type', items: ['pluriannuel', 'annuel'] }"
+                    [editorOptions]="contracteditorOptions"
           ></dxi-item>
         <!--  <dxi-item dataField="superficie_total" [editorOptions]="{ label: 'Total superficie'}" i18n-label
                     editorType="dxNumberBox"></dxi-item>-->
@@ -139,7 +139,7 @@
       <form>
         <dx-form id="form2" *ngFor="let camp of campaigns; let i = index;"
                  [formData]="camp"
-                 [readOnly]="isEdit"
+                 [readOnly]="false"
                  labelLocation="top"
                  [showColonAfterLabel]="true"
                  [showValidationSummary]="true">
@@ -191,7 +191,7 @@
         <dx-form id="form3"
                  [colCount]="4"
                  labelLocation="top"
-                 [readOnly]="isEdit || groundsList.length > 2"
+                 [readOnly]="groundsList.length > 2"
                  [formData]="parcelForm">
 
           <dxi-item dataField="cda" i18n-label editorType="dxSelectBox" [editorOptions]="cdaEditorOptions">

@@ -40,6 +40,19 @@ export class CardsComponent implements OnInit {
       }
     );
   }
+
+  activateCards = (e) => {
+    const cards = e.selectedItems.map(card => {
+      return { id: card.id };
+    });
+    console.log(e.selectedItems);
+    this.cardsService.massCards({ cards: cards }).subscribe(d => {
+      console.log(d);
+    }, err => {
+      this.toastr.error(err.error.message);
+    });
+  }
+
   onRemoveThird = (e) => {
     console.log(e);
     this.cardsService.deleteCard(e).subscribe(
