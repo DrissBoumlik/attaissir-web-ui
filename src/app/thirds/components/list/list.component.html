@@ -1,9 +1,9 @@
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
-      <a class="siam-header-back-btn" routerLink="/tiers/list"><i class="fa fa-angle-left"></i> Dashboard</a>
+      <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Dashboard</a>
       <h2>Liste des tiers</h2>
-      <a class="siam-header-btn-new" routerLink="/tiers/add"><i class="fa fa-plus"></i></a>
+      <a class="siam-header-btn-new" routerLink="/tiers/ajouter"><i class="fa fa-plus"></i></a>
     </div>
 
   </div>
@@ -40,7 +40,7 @@
       mode="row"
       [useIcons]="true"
       [allowUpdating]="true"
-      [allowDeleting]="true">
+      [allowDeleting]="false">
     </dxo-editing>
     <dxo-selection mode="multiple"></dxo-selection>
 
@@ -67,10 +67,19 @@
     <dxo-group-panel [visible]="true"></dxo-group-panel>
     <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
-    <dxi-column dataField="first_name" caption="First name" i18n-caption>
+    <dxi-column dataField="first_name" caption="Prénom" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="last_name" caption="Last name" i18n-caption>
+    <dxi-column dataField="last_name" caption="Nom" i18n-caption>
     </dxi-column>
+    <!--<dxi-column dataField="cda" caption="CDA" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="zone" caption="ZONE" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="dets" cellTemplate="cellCard" caption="Carte" allowColumnResizing="true">
+    </dxi-column>
+    <div *dxTemplate="let data of 'cellCard'">
+      <i class="fa fa-id_card fa-5x" *ngIf=""></i>
+    </div>-->
     <dxi-column dataField="cin" caption="CIN" i18n-caption>
     </dxi-column>
     <dxi-column dataField="city" caption="City" i18n-caption>
@@ -78,9 +87,8 @@
     <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="Détails" allowColumnResizing="true">
     </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate'">
-      <a  (click)="gotoShow(data.data.id)">
-        <i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
-      </div>
+      <a  (click)="gotoShow(data.data.id)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
+    </div>
     </dx-data-grid>
 
     </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Third } from '../../classes/third';
 import { ToastrService } from 'ngx-toastr';
 import { ThirdsService } from '../../services/thirds.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -12,6 +13,7 @@ export class AddComponent implements OnInit {
 
   constructor(
     public tier: Third,
+    private router: Router,
     public thirdsService: ThirdsService,
     private toastr: ToastrService) { }
 
@@ -25,10 +27,10 @@ export class AddComponent implements OnInit {
   onFormSubmit = function(e) {
     console.log(this.tier);
     this.thirdsService.addThird(this.tier).subscribe(data => {
-      console.log(data);
-      this.tier = new Third();
+      data = this.thirdsService.dataFormatter(data, false);
       this.toastr.success(
         `New third party added successfully.`);
+      this.router.navigate(['/tiers/afficher/' + data.id]);
     }, err => {
       this.toastr.error(err.error.message);
     });

@@ -1,676 +1,503 @@
-<!-- BEGIN: Subheader -->
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
-    <div class="mr-auto">
-      <h3 class="m-subheader__title">
-        Fiche agriculture ({{ third?.first_name | uppercase }} {{ third?.last_name | uppercase }})
-      </h3>
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de board</a>
+      <h2>Fiche agriculture ({{ third?.first_name | uppercase }} {{ third?.last_name | uppercase }})</h2>
+      <a class="siam-header-btn-new" routerLink="/contrats/ajouter" title="Ajouter une contrat"><i class="fa fa-plus"></i></a>
     </div>
-    <div>
-      <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
-           m-dropdown-toggle="hover" aria-expanded="true">
-        <a href="#"
-           class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
-          <i class="la la-plus m--hide"></i>
-          <i class="la la-ellipsis-h"></i>
-        </a>
-        <div class="m-dropdown__wrapper">
-          <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-          <div class="m-dropdown__inner">
-            <div class="m-dropdown__body">
-              <div class="m-dropdown__content">
-                <ul class="m-nav">
-                  <li class="m-nav__section m-nav__section--first m--hide">
-										<span class="m-nav__section-text">
-											Quick Actions
-										</span>
-                  </li>
-                  <li class="m-nav__item">
-                    <a href="" class="m-nav__link">
-                      <i class="m-nav__link-icon flaticon-share"></i>
-                      <span class="m-nav__link-text">
-												Activity
-											</span>
-                    </a>
-                  </li>
-                  <li class="m-nav__item">
-                    <a href="" class="m-nav__link">
-                      <i class="m-nav__link-icon flaticon-chat-1"></i>
-                      <span class="m-nav__link-text">
-												Messages
-											</span>
-                    </a>
-                  </li>
-                  <li class="m-nav__item">
-                    <a href="" class="m-nav__link">
-                      <i class="m-nav__link-icon flaticon-info"></i>
-                      <span class="m-nav__link-text">
-												FAQ
-											</span>
-                    </a>
-                  </li>
-                  <li class="m-nav__item">
-                    <a href="" class="m-nav__link">
-                      <i class="m-nav__link-icon flaticon-lifebuoy"></i>
-                      <span class="m-nav__link-text">
-												Support
-											</span>
-                    </a>
-                  </li>
-                  <li class="m-nav__separator m-nav__separator--fit"></li>
-                  <li class="m-nav__item">
-                    <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
-                      Submit
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
   </div>
 </div>
-<!-- END: Subheader -->
+
 <div class="m-content">
-  <div class="row">
-    <!--  <div class="col-xl-3 col-lg-3">
-        <div class="m-portlet m-portlet&#45;&#45;full-height   m-portlet&#45;&#45;unair">
-          <div class="m-portlet__body">
-            <div class="m-card-profile">
-              <div class="m-card-profile__title m&#45;&#45;hide">
-                {{ third?.first_name | uppercase }} {{ third?.last_name }}
-              </div>
-              <div class="m-card-profile__pic">
-                <div class="m-card-profile__pic-wrapper">
-                  <avatar [letter]="'NA'" [background]="'#065c82'"
-                          [email]="third?.first_name + ' ' + third?.last_name | uppercase"
-                          [displayType]="'circle'"></avatar>
-                </div>
-              </div>
-              <div class="m-card-profile__details">
-                              <span class="m-card-profile__name">
-                {{ third?.first_name }} {{ third?.last_name }}
-                              </span>
-                <a href="" class="m-card-profile__email m-link">
-                  <strong>{{ third?.email }}</strong>
-                </a>
-              </div>
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body m-portlet__body--no-padding">
+
+        <div class="m-portlet m-portlet--full-height m-portlet--tabs   m-portlet--unair">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-tools">
+              <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+                <li class="nav-item m-tabs__item">
+                  <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
+                    <i class="flaticon-share m--hide"></i>
+                    Fiche
+                  </a>
+                </li>
+                <li class="nav-item m-tabs__item">
+                  <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab"
+                     (click)="getThirdAgreements(third?.id)">
+                    Contrats
+                  </a>
+                </li>
+                <li class="nav-item m-tabs__item">
+                  <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
+                    Comptes Bancaires
+                  </a>
+                </li>
+                <li class="nav-item m-tabs__item">
+                  <a class="nav-link m-tabs__link" data-toggle="tab" (click)="loadDocuments()"
+                     href="#m_user_profile_tab_4" role="tab">
+                    Documents
+                  </a>
+                </li>
+                <li class="nav-item m-tabs__item">
+                  <a class="nav-link m-tabs__link" data-toggle="tab"
+                     href="#m_user_profile_tab_5" role="tab">
+                    Cartes
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
-      </div>-->
-    <div class="col-xl-12 col-lg-12">
-      <div class="m-portlet m-portlet--full-height m-portlet--tabs   m-portlet--unair">
-        <div class="m-portlet__head">
-          <div class="m-portlet__head-tools">
-            <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
-                  <i class="flaticon-share m--hide"></i>
-                  Fiche
-                </a>
-              </li>
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab"
-                   (click)="getThirdAgreements(third?.id)">
-                  Contrats
-                </a>
-              </li>
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
-                  Comptes Bancaires
-                </a>
-              </li>
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab" (click)="loadDocuments()"
-                   href="#m_user_profile_tab_4" role="tab">
-                  Documents
-                </a>
-              </li>
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab"
-                   href="#m_user_profile_tab_5" role="tab">
-                  Cartes
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="m-portlet__head-tools">
-            <ul class="m-portlet__nav">
-              <li class="m-portlet__nav-item m-portlet__nav-item--last">
-                <div
-                  class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
-                  m-dropdown-toggle="hover" aria-expanded="true">
-                  <a href="#"
-                     class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
-                    <i class="la la-gear"></i>
-                  </a>
-                  <div class="m-dropdown__wrapper">
-                    <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-                    <div class="m-dropdown__inner">
-                      <div class="m-dropdown__body">
-                        <div class="m-dropdown__content">
-                          <ul class="m-nav">
-                            <li class="m-nav__section m-nav__section--first">
-															<span class="m-nav__section-text">
-																Quick Actions
-															</span>
-                            </li>
-                            <li class="m-nav__item">
-                              <a href="" class="m-nav__link">
-                                <i class="m-nav__link-icon flaticon-share"></i>
-                                <span class="m-nav__link-text">
-																	Create Post
-																</span>
-                              </a>
-                            </li>
-                            <li class="m-nav__item">
-                              <a href="" class="m-nav__link">
-                                <i class="m-nav__link-icon flaticon-chat-1"></i>
-                                <span class="m-nav__link-text">
-																	Send Messages
-																</span>
-                              </a>
-                            </li>
-                            <li class="m-nav__item">
-                              <a href="" class="m-nav__link">
-                                <i class="m-nav__link-icon flaticon-multimedia-2"></i>
-                                <span class="m-nav__link-text">
-																	Upload File
-																</span>
-                              </a>
-                            </li>
-                            <li class="m-nav__section">
-															<span class="m-nav__section-text">
-																Useful Links
-															</span>
-                            </li>
-                            <li class="m-nav__item">
-                              <a href="" class="m-nav__link">
-                                <i class="m-nav__link-icon flaticon-info"></i>
-                                <span class="m-nav__link-text">
-																	FAQ
-																</span>
-                              </a>
-                            </li>
-                            <li class="m-nav__item">
-                              <a href="" class="m-nav__link">
-                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
-                                <span class="m-nav__link-text">
-																	Support
-																</span>
-                              </a>
-                            </li>
-                            <li class="m-nav__separator m-nav__separator--fit m--hide"></li>
-                            <li class="m-nav__item m--hide">
-                              <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
-                                Submit
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="tab-content">
-          <div class="tab-pane active" id="m_user_profile_tab_1">
-            <div class="m-form m-form--fit m-form--label-align-right">
-              <div class="m-portlet__body">
-                <div class="row">
-                  <div class="col-xl-4 col-lg-4 col-md-4 ">
-                    <div class="form-group m-form__group row">
-                      <div class=" ml-auto">
-                        <h3 class="m-form__section">
-                          1. Informations générales
-                        </h3>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Nom complet
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text"
-                               [value]="third?.first_name + ' ' + third?.last_name"
-                               readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row" DIR="ltr">
-                      <label class="col-4 col-form-label">
-                        الاسم الكامل
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text"
-                               [value]="third?.ar_first_name + ' ' + third?.ar_last_name"
-                               readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        CIN
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.cin | uppercase" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Situation familiale
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.situation" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Date de naissance
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.date_birth | uppercase"
-                               readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row" *ngIf="third?.date_death">
-                      <label class="col-4 col-form-label">
-                        Date du décès
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.date_death | uppercase"
-                               readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        numéro de téléphone principal
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.tel1 | uppercase" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        numéro de téléphone secondaire
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.tel2 | uppercase" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Email
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.email" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Assurance.
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.assurance ? 'Oui' : 'Non'"
-                               readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Retraite.
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.retraite ? 'Oui' : 'Non'"
-                               readonly>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xl-4 col-lg-4 col-md-4 ">
-                    <div class="form-group m-form__group row">
-                      <div class="col-10 ml-auto">
-                        <h3 class="m-form__section">
-                          2.Adresse
-                        </h3>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Adresse
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.address" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Ville
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.city" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Commune
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.commune" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Rue
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.street" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Code postal
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.postal_code" readonly>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xl-4 col-lg-4 col-md-4">
-                    <div *ngIf="third?.social_reason">
+          <div class="tab-content">
+            <div class="tab-pane active" id="m_user_profile_tab_1">
+              <div class="m-form m-form--fit m-form--label-align-right">
+                <div class="m-portlet__body">
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-4 ">
                       <div class="form-group m-form__group row">
-                        <div class="col-10 ml-auto">
+                        <div class=" ml-auto">
                           <h3 class="m-form__section">
-                            3. Société
+                            1. Informations générales
                           </h3>
                         </div>
                       </div>
                       <div class="form-group m-form__group row">
                         <label class="col-4 col-form-label">
-                          Raison sociale
+                          Nom complet
                         </label>
                         <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.social_reason" readonly>
+                          <input class="form-control m-input" type="text"
+                                 [value]="third?.first_name + ' ' + third?.last_name"
+                                 readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row" DIR="ltr">
+                        <label class="col-4 col-form-label">
+                          الاسم الكامل
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text"
+                                 [value]="third?.ar_first_name + ' ' + third?.ar_last_name"
+                                 readonly>
                         </div>
                       </div>
                       <div class="form-group m-form__group row">
                         <label class="col-4 col-form-label">
-                          Numéro de patente
+                          CIN
                         </label>
                         <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.patent_number" readonly>
+                          <input class="form-control m-input" type="text" [value]="third?.cin | uppercase" readonly>
                         </div>
                       </div>
                       <div class="form-group m-form__group row">
                         <label class="col-4 col-form-label">
-                          Code TVA
+                          Situation familiale
                         </label>
                         <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.tva_code" readonly>
+                          <input class="form-control m-input" type="text" [value]="third?.situation" readonly>
                         </div>
                       </div>
                       <div class="form-group m-form__group row">
                         <label class="col-4 col-form-label">
-                          Identification fiscale
+                          Date de naissance
                         </label>
                         <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.if" readonly>
+                          <input class="form-control m-input" type="text" [value]="third?.date_birth | uppercase"
+                                 readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row" *ngIf="third?.date_death">
+                        <label class="col-4 col-form-label">
+                          Date du décès
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.date_death | uppercase"
+                                 readonly>
                         </div>
                       </div>
                       <div class="form-group m-form__group row">
                         <label class="col-4 col-form-label">
-                          Identifiant commun de l’entreprise.
+                          numéro de téléphone principal
                         </label>
                         <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.ice" readonly>
+                          <input class="form-control m-input" type="text" [value]="third?.tel1 | uppercase" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          numéro de téléphone secondaire
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.tel2 | uppercase" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          Email
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.email" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          Assurance.
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.assurance ? 'Oui' : 'Non'"
+                                 readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          Retraite.
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.retraite ? 'Oui' : 'Non'"
+                                 readonly>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 ">
+                      <div class="form-group m-form__group row">
+                        <div class="col-10 ml-auto">
+                          <h3 class="m-form__section">
+                            2.Adresse
+                          </h3>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          Adresse
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.address" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          Ville
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.city" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          Commune
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.commune" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-4 col-form-label">
+                          Code postal
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [value]="third?.postal_code" readonly>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4">
+                      <div *ngIf="third?.social_reason">
+                        <div class="form-group m-form__group row">
+                          <div class="col-10 ml-auto">
+                            <h3 class="m-form__section">
+                              3. Société
+                            </h3>
+                          </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                          <label class="col-4 col-form-label">
+                            Raison sociale
+                          </label>
+                          <div class="col-7">
+                            <input class="form-control m-input" type="text" [value]="third?.social_reason" readonly>
+                          </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                          <label class="col-4 col-form-label">
+                            Numéro de patente
+                          </label>
+                          <div class="col-7">
+                            <input class="form-control m-input" type="text" [value]="third?.patent_number" readonly>
+                          </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                          <label class="col-4 col-form-label">
+                            Code TVA
+                          </label>
+                          <div class="col-7">
+                            <input class="form-control m-input" type="text" [value]="third?.tva_code" readonly>
+                          </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                          <label class="col-4 col-form-label">
+                            Identification fiscale
+                          </label>
+                          <div class="col-7">
+                            <input class="form-control m-input" type="text" [value]="third?.if" readonly>
+                          </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                          <label class="col-4 col-form-label">
+                            Identifiant commun de l’entreprise.
+                          </label>
+                          <div class="col-7">
+                            <input class="form-control m-input" type="text" [value]="third?.ice" readonly>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
+                </div>
               </div>
             </div>
-          </div>
-          <div class="tab-pane" id="m_user_profile_tab_2">
-            <div class="m-portlet__body">
-              <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " id="ContractsgridContainer"
-                            [allowColumnReordering]="true"
-                            [dataSource]="contracts"
-                            [showColumnLines]="true"
-                            [showRowLines]="true"
-                            [showBorders]="true"
-                            [rowAlternationEnabled]="true"
-                            style="padding-top: 2vh"
-                            class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
-                            [noDataText]="'L\'agrégé ne dispose pas de contrat'"
-                            keyExpr="id">
-                <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
-                </dxi-column>
-                <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
-                </dxi-column>
-                <dxi-column dataField="contrat_type" caption="type de contrat" dataType="Text">
-                </dxi-column>
-                <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
-                </dxi-column>
-                <dxi-column dataField="structure.label" caption="Structure" dataType="Text"></dxi-column>
-                <dxi-column dataField="id" caption="Détails" cellTemplate="detsTemplate"></dxi-column>
-                <div *dxTemplate="let data of 'statusTemplate'">
+            <div class="tab-pane" id="m_user_profile_tab_2">
+              <div class="m-portlet__body">
+                <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
+                              id="ContractsgridContainer"
+                              [allowColumnReordering]="true"
+                              [dataSource]="contracts"
+                              [showColumnLines]="true"
+                              [showRowLines]="true"
+                              [showBorders]="true"
+                              [rowAlternationEnabled]="true"
+                              style="padding-top: 2vh"
+                              class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
+                              [noDataText]="'L\'agrégé ne dispose pas de contrat'"
+                              keyExpr="id">
+                  <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
+                  </dxi-column>
+                  <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
+                  </dxi-column>
+                  <dxi-column dataField="contrat_type" caption="type de contrat" dataType="Text">
+                  </dxi-column>
+                  <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
+                  </dxi-column>
+                  <dxi-column dataField="structure.label" caption="Structure" dataType="Text"></dxi-column>
+                  <dxi-column dataField="id" caption="Détails" cellTemplate="detsTemplate"></dxi-column>
+                  <div *dxTemplate="let data of 'statusTemplate'">
                       <span [ngClass]="getStatusColor(data.value)">
                             {{ data.value }}
                         </span>
-                </div>
-                <div *dxTemplate="let data of 'detsTemplate'">
-                  <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="showDetails(data.value)"
-                     class="fa fa-info-circle fa-5x"></i>
-                </div>
-                <dxo-remote-operations
-                  [sorting]="true"
-                  [paging]="false">
-                </dxo-remote-operations>
-                <dxo-selection mode="multiple"></dxo-selection>
-                <dxo-editing
-                  [useIcons]="true"
-                  mode="row"
-                  [allowUpdating]="false"
-                  [allowDeleting]="false"
-                  [allowAdding]="false">
-                </dxo-editing>
-                <dxo-pager
-                  [showPageSizeSelector]="false"
-                ></dxo-pager>
-              </dx-data-grid>
-            </div>
-          </div>
-          <div class="tab-pane" id="m_user_profile_tab_3">
-            <!-- <div class="d-flex align-items-center custom3">
-               <div class="mr-auto">
-                 <h3 class="m-subheader__title">
-                   Liste des comptes bancaires
-                 </h3>
-                 <hr>
-               </div>
-             </div>-->
-            <div class="m-portlet__body">
-              <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " id="gridContainer"
-                            [allowColumnReordering]="true"
-                            [dataSource]="third?.bank_accounts"
-                            (onRowRemoving)="onRemoveBA($event)"
-                            (onRowUpdating)="onUpdateBA($event)"
-                            (onEditingStart)="onStartUpdate($event)"
-                            [showColumnLines]="true"
-                            [showRowLines]="true"
-                            [showBorders]="true"
-                            (onRowInserting)="onAddBA($event)"
-                            [rowAlternationEnabled]="true"
-                            style="padding-top: 2vh"
-                            [noDataText]="'L\'agrégé ne dispose pas de compte bancaire'"
-                            keyExpr="id">
-                <dxi-column dataField="rib" format="#######  ################ ##">
-                  <dxi-validation-rule type="required"></dxi-validation-rule>
-                  <dxi-validation-rule
-                    type="pattern"
-                    [pattern]="patternRIB" message="Format RIB invalide"
-                  ></dxi-validation-rule>
-                </dxi-column>
-                <dxi-column dataField="bank" caption="Banque">
-                  <dxi-validation-rule type="required"></dxi-validation-rule>
-                  <dxi-validation-rule type="stringLength" [min]="2" [max]="50"
-                                       message="20 charactères max"></dxi-validation-rule>
-                </dxi-column>
-                <dxo-remote-operations
-                  [sorting]="true"
-                  [paging]="false">
-                </dxo-remote-operations>
-                <dxo-selection mode="multiple"></dxo-selection>
-                <dxo-editing
-                  [useIcons]="true"
-                  mode="row"
-                  [allowUpdating]="true"
-                  [allowDeleting]="true"
-                  [allowAdding]="true">
-                </dxo-editing>
-                <dxo-pager
-                  [showPageSizeSelector]="false"
-                ></dxo-pager>
-              </dx-data-grid>
-            </div>
-          </div>
-          <div class="tab-pane" id="m_user_profile_tab_4">
-            <div class="m-portlet__body">
-              <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " id="gridCont"
-                            [allowColumnReordering]="true"
-                            [dataSource]="documents"
-                            (onRowRemoving)="onRemoveDOC($event)"
-                            (onRowUpdating)="onUpdateDOC($event)"
-                            (onEditingStart)="onStartUpdateOrInsertDocument()"
-                            (onInsertingStart)="onStartUpdateOrInsertDocument()"
-                            [showColumnLines]="true"
-                            [showRowLines]="true"
-                            [showBorders]="true"
-                            (onRowInserting)="onAddDOC($event)"
-                            [rowAlternationEnabled]="true"
-                            style="padding-top: 2vh"
-                            [noDataText]="'L\'agrégé ne dispose pas de documents'"
-                            keyExpr="id">
-
-                <dxi-column dataField="label" caption="Type" [visible]="false">
-                  <dxo-lookup
-                    [dataSource]="docTypes"
-                    displayExpr="label"
-                    valueExpr="id">
-                  </dxo-lookup>
-                </dxi-column>
-
-                <dxi-column dataField="label" caption="Type"></dxi-column>
-
-                <dxi-column dataField="path" caption="Upload" editCellTemplate="cellTemplate2"
-                            [visible]="false"></dxi-column>
-
-                <dxi-column dataField="downloadPath" caption="Download" cellTemplate="cellTemplate"></dxi-column>
-
-                <div *dxTemplate="let data of 'cellTemplate'">
-                  <dx-button
-                    class="send"
-                    icon="fa fa-cloud-download"
-                    text="Download"
-                    (onClick)="downloadDocument(data)">
-                  </dx-button>
-                </div>
-                <div *dxTemplate="let data of 'cellTemplate2'">
-                  <div class="container">
-                    <dx-file-uploader
-                      selectButtonText="Ajouter un document"
-                      labelText="document"
-                      accept="*"
-                      uploadMode="useForm"
-                      [(value)]="filePath">
-                    </dx-file-uploader>
                   </div>
-                </div>
-                <dxo-remote-operations
-                  [sorting]="true"
-                  [paging]="false">
-                </dxo-remote-operations>
-                <dxo-selection mode="multiple"></dxo-selection>
-                <dxo-editing
-                  [useIcons]="true"
-                  mode="popup"
-                  [form]="{items: ['label', 'path']}"
-                  [allowUpdating]="true"
-                  [allowDeleting]="true"
-                  [allowAdding]="true">
-                  <dxo-popup
-                    title="Ajouter ou modifier"
-                    [showTitle]="true"
-                    [width]="700"
-                    [height]="345"
-                    [position]="{ my: 'center', at: 'center'}">
-                  </dxo-popup>
-                </dxo-editing>
-                <dxo-pager
-                  [showPageSizeSelector]="false"
-                ></dxo-pager>
-              </dx-data-grid>
+                  <div *dxTemplate="let data of 'detsTemplate'">
+                    <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="showDetails(data.value)"
+                       class="fa fa-info-circle fa-5x"></i>
+                  </div>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="false">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="multiple"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="row"
+                    [allowUpdating]="false"
+                    [allowDeleting]="false"
+                    [allowAdding]="false">
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="false"
+                  ></dxo-pager>
+                </dx-data-grid>
+              </div>
             </div>
-          </div>
-          <div class="tab-pane" id="m_user_profile_tab_5">
-            <!-- <div class="d-flex align-items-center custom3">
-               <div class="mr-auto">
-                 <h3 class="m-subheader__title">
-                   Liste des comptes bancaires
-                 </h3>
-                 <hr>
-               </div>
-             </div>-->
-            <div class="m-portlet__body">
-              <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " id="CardsgridContainer"
-                            [allowColumnReordering]="true"
-                            [dataSource]="third?.cards"
-                            [showColumnLines]="true"
-                            [showRowLines]="true"
-                            [showBorders]="true"
-                            [rowAlternationEnabled]="true"
-                            style="padding-top: 2vh"
-                            [noDataText]="'L\'agrégé ne dispose pas de carte agriculteur'"
-                            keyExpr="id">
-                <dxi-column dataField="code_rfid" caption="Serial">
-                </dxi-column>
-                <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
-                </dxi-column>
-                <dxi-column dataField="status" caption="Action" cellTemplate="actionsTemplate">
-                </dxi-column>
-                <div *dxTemplate="let data of 'statusTemplate'">
+            <div class="tab-pane" id="m_user_profile_tab_3">
+              <!-- <div class="d-flex align-items-center custom3">
+                 <div class="mr-auto">
+                   <h3 class="m-subheader__title">
+                     Liste des comptes bancaires
+                   </h3>
+                   <hr>
+                 </div>
+               </div>-->
+              <div class="m-portlet__body">
+                <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
+                              class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
+                              id="gridContainer"
+                              [allowColumnReordering]="true"
+                              [dataSource]="third?.bank_accounts"
+                              (onRowRemoving)="onRemoveBA($event)"
+                              (onRowUpdating)="onUpdateBA($event)"
+                              (onEditingStart)="onStartUpdate($event)"
+                              [showColumnLines]="true"
+                              [showRowLines]="true"
+                              [showBorders]="true"
+                              (onRowInserting)="onAddBA($event)"
+                              [rowAlternationEnabled]="true"
+                              style="padding-top: 2vh"
+                              [noDataText]="'L\'agrégé ne dispose pas de compte bancaire'"
+                              keyExpr="id">
+                  <dxi-column dataField="rib" format="#######  ################ ##">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                    <dxi-validation-rule
+                      type="pattern"
+                      [pattern]="patternRIB" message="Format RIB invalide"
+                    ></dxi-validation-rule>
+                  </dxi-column>
+                  <dxi-column dataField="bank" caption="Banque">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                    <dxi-validation-rule type="stringLength" [min]="2" [max]="50"
+                                         message="20 charactères max"></dxi-validation-rule>
+                  </dxi-column>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="false">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="multiple"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="row"
+                    [allowUpdating]="true"
+                    [allowDeleting]="true"
+                    [allowAdding]="true">
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="false"
+                  ></dxo-pager>
+                </dx-data-grid>
+              </div>
+            </div>
+            <div class="tab-pane" id="m_user_profile_tab_4">
+              <div class="m-portlet__body">
+                <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
+                              id="gridCont"
+                              [allowColumnReordering]="true"
+                              [dataSource]="documents"
+                              (onRowRemoving)="onRemoveDOC($event)"
+                              (onRowUpdating)="onUpdateDOC($event)"
+                              (onEditingStart)="onStartUpdateOrInsertDocument()"
+                              (onInsertingStart)="onStartUpdateOrInsertDocument()"
+                              [showColumnLines]="true"
+                              [showRowLines]="true"
+                              [showBorders]="true"
+                              (onRowInserting)="onAddDOC($event)"
+                              [rowAlternationEnabled]="true"
+                              style="padding-top: 2vh"
+                              [noDataText]="'L\'agrégé ne dispose pas de documents'"
+                              keyExpr="id">
+
+                  <dxi-column dataField="label" caption="Type" [visible]="false">
+                    <dxo-lookup
+                      [dataSource]="docTypes"
+                      displayExpr="label"
+                      valueExpr="id">
+                    </dxo-lookup>
+                  </dxi-column>
+
+                  <dxi-column dataField="label" caption="Type"></dxi-column>
+
+                  <dxi-column dataField="path" caption="Upload" editCellTemplate="cellTemplate2"
+                              [visible]="false"></dxi-column>
+
+                  <dxi-column dataField="downloadPath" caption="Download" cellTemplate="cellTemplate"></dxi-column>
+
+                  <div *dxTemplate="let data of 'cellTemplate'">
+                    <dx-button
+                      class="send"
+                      icon="fa fa-cloud-download"
+                      text="Download"
+                      (onClick)="downloadDocument(data)">
+                    </dx-button>
+                  </div>
+                  <div *dxTemplate="let data of 'cellTemplate2'">
+                    <div class="container">
+                      <dx-file-uploader
+                        selectButtonText="Ajouter un document"
+                        labelText="document"
+                        accept="*"
+                        uploadMode="useForm"
+                        [(value)]="filePath">
+                      </dx-file-uploader>
+                    </div>
+                  </div>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="false">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="multiple"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="popup"
+                    [form]="{items: ['label', 'path']}"
+                    [allowUpdating]="true"
+                    [allowDeleting]="true"
+                    [allowAdding]="true">
+                    <dxo-popup
+                      title="Ajouter ou modifier"
+                      [showTitle]="true"
+                      [width]="700"
+                      [height]="345"
+                      [position]="{ my: 'center', at: 'center'}">
+                    </dxo-popup>
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="false"
+                  ></dxo-pager>
+                </dx-data-grid>
+              </div>
+            </div>
+            <div class="tab-pane" id="m_user_profile_tab_5">
+              <!-- <div class="d-flex align-items-center custom3">
+                 <div class="mr-auto">
+                   <h3 class="m-subheader__title">
+                     Liste des comptes bancaires
+                   </h3>
+                   <hr>
+                 </div>
+               </div>-->
+              <div class="m-portlet__body">
+                <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
+                              id="CardsgridContainer"
+                              [allowColumnReordering]="true"
+                              [dataSource]="third?.cards"
+                              [showColumnLines]="true"
+                              [showRowLines]="true"
+                              [showBorders]="true"
+                              [rowAlternationEnabled]="true"
+                              style="padding-top: 2vh"
+                              [noDataText]="'L\'agrégé ne dispose pas de carte agriculteur'"
+                              keyExpr="id">
+                  <dxi-column dataField="code_rfid" caption="Serial">
+                  </dxi-column>
+                  <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
+                  </dxi-column>
+                  <dxi-column dataField="status" caption="Action" cellTemplate="actionsTemplate">
+                  </dxi-column>
+                  <div *dxTemplate="let data of 'statusTemplate'">
                   <span [ngClass]="getStatusColor(data.value)">
                     {{ data.value }}
                   </span>
-                </div>
-                <div *dxTemplate="let data of 'actionsTemplate'">
-                  <dx-button [text]="getAdequateAction(data.value)"
-                             *ngIf="data.value === 'actif' || data.value === 'inactif'"></dx-button>
-                </div>
-                <dxo-remote-operations
-                  [sorting]="true"
-                  [paging]="true">
-                </dxo-remote-operations>
-                <dxo-selection mode="multiple"></dxo-selection>
-                <dxo-editing
-                  [useIcons]="true"
-                  mode="row"
-                  [allowUpdating]="false"
-                  [allowDeleting]="false"
-                  [allowAdding]="true">
-                </dxo-editing>
-                <dxo-pager
-                  [showPageSizeSelector]="true"
-                ></dxo-pager>
-              </dx-data-grid>
+                  </div>
+                  <div *dxTemplate="let data of 'actionsTemplate'">
+                    <dx-button [text]="getAdequateAction(data.value)"
+                               *ngIf="data.value === 'actif' || data.value === 'inactif'"></dx-button>
+                  </div>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="true">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="multiple"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="row"
+                    [allowUpdating]="false"
+                    [allowDeleting]="false"
+                    [allowAdding]="true">
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="true"
+                  ></dxo-pager>
+                </dx-data-grid>
+              </div>
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>

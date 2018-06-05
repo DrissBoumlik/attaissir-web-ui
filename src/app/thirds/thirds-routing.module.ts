@@ -18,22 +18,22 @@ const routes: Routes = [
         data: { title: 'Heroes List' }
       },
       {
-        path: 'add',
+        path: 'ajouter',
         component: AddComponent,
         data: { title: 'Heroes List' }
       },
       {
-        path: 'edit/:id',
+        path: 'modifier/:id',
         component: EditComponent,
         data: { title: 'Heroes List' }
       },
       {
-        path: 'show/:id',
+        path: 'afficher/:id',
         component: ShowComponent,
         data: { title: 'Heroes List' }
       },
       {
-        path: 'list',
+        path: 'liste',
         component: ListComponent,
         data: { title: 'Heroes List' }
       }
