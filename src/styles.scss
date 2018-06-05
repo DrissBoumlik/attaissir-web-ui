@@ -150,6 +150,7 @@
 .m-aside-left-fixed .m-aside-left {
     position: fixed;
     top:0;
+        z-index: 10000000;
 }
 
 
@@ -299,11 +300,11 @@ body {
     color: #3c3c3c;
 }
 .siam-page-header .siam-header-btn-new {
-    font-size: 20px;
+font-size: 20px;
     position: absolute;
     z-index: 20;
     right: 0;
-    margin: 26px 60px 0;
+    margin: -24px 60px 0;
     transition: background-color 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.2s ease-in-out;
     transition: background-color 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.2s ease-in-out;
     transition: background-color 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
@@ -699,6 +700,7 @@ background: linear-gradient(to bottom, #567ba2, #435e7b);
     display: block;
     width: 325px;
     margin-top: 2px;
+    background-color: transparent;
 }
 .siam-search-form-header .search-form i {
 float: left;
@@ -832,4 +834,174 @@ float: left;
 .m-aside-left--minimize .m-aside-menu .m-menu__nav > .m-menu__item > .m-menu__link .m-menu__link-icon {
     color: rgba(255, 255, 255, 0.8) !important;
     font-size: 20px;
+}
+/* Dashboard Intro */
+.siam-dashboard-intro {
+    background-color: #55C968;
+    padding: 80px;
+    color: #fff;
+    padding-top: 60px;
+    padding-bottom: 160px;
+    position: relative;
+}
+.siam-dashboard-intro:after {
+    background-color: #4ebb5e;
+    content: '';
+    position: absolute;
+    top: -150px;
+    right: -100px;
+    bottom: 0;
+    height: 500px;
+    width: 500px;
+    transform: rotate(20deg);
+}
+.siam-dashboard-intro:before {
+    background-color: #4ebb5e78;
+    content: '';
+    position: absolute;
+    top: -150px;
+    right: -100px;
+    bottom: 0;
+    height: 500px;
+    width: 500px;
+    -webkit-transform: rotate(30deg);
+    transform: rotate(30deg);
+}
+.siam-dashboard-intro .siam-dashboard-intro-wm .siam-dashboard-intro-wm-title {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    margin: 20px 0 0;
+}
+.siam-dashboard-intro .siam-dashboard-intro-wm .siam-dashboard-intro-wm-subtitle {
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 72px;
+    margin: 0 0 36px;
+}
+.siam-dashboard-intro .siam-dashboard-intro-wm {
+    position: relative;
+    z-index: 1000;
+}
+.siam-dashboard-shortcuts {
+overflow: hidden;
+    z-index: 1000;
+    position: relative;
+}
+.siam-dashboard-shortcuts-item {
+    float: left;
+    margin-right: 55px;
+    cursor:pointer;
+}
+.siam-dashboard-shortcuts-item:hover .siam-dashboard-si-icon-wrapper {
+    background-color:#fff;
+}
+.siam-dashboard-shortcuts-item:hover .siam-dashboard-si-icon i {
+    color:#55ca67;
+}
+.siam-dashboard-shortcuts-item .siam-dashboard-si-icon-wrapper {
+    border: 4px solid #fff;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    margin: 0 auto;
+}
+.siam-dashboard-shortcuts-item .siam-dashboard-si-icon {
+    text-align:center;
+}
+
+.siam-dashboard-shortcuts-item .siam-dashboard-si-icon i {
+    font-size: 55px;
+    height: 72px;
+    margin: 20px;
+    width: 72px;
+    color: #fff;
+    line-height: 110px;
+}
+.siam-dashboard-shortcuts-item .siam-dashboard-si-title {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 16px;
+    max-width: 140px;
+    padding: 0 8px;
+    text-align: center;
+}
+
+/* Dashboard tiles */
+.siam-dashboard-tiles {
+margin-top: -40px;
+    margin: -68px 0px 60px 80px;
+    overflow: hidden;
+    padding-bottom: 20px;
+    position: relative;
+}
+.siam-dashboard-tiles .siam-dashboard-tiles-item {
+    box-shadow: 0 1px 15px 1px rgba(69, 65, 78, 0.14);
+    background-color: #fff;
+    background: linear-gradient(to bottom, #fff, #edf0f3);
+    float: left;
+    padding: 20px 30px;
+    width: 21%;
+    margin-left: 14px;
+    min-height: 160px;
+    position: relative;
+    overflow: hidden;
+}
+.siam-dashboard-tiles .siam-dashboard-tiles-item .siam-dashboard-tiles-item-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+.siam-dashboard-tiles .siam-dashboard-tiles-item .siam-dashboard-tiles-item-value {
+    font-size: 45px;
+    font-weight: 800;
+}
+.siam-dashboard-tiles .siam-dashboard-tiles-item .siam-dashboard-tiles-item-icon {
+    position: absolute;
+    right: -29px;
+    bottom: -50px;
+    opacity: 0.1;
+    -webkit-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+}
+.siam-dashboard-tiles .siam-dashboard-tiles-item .siam-dashboard-tiles-item-icon i {
+        font-size: 120px;
+    color: #737373;
+}
+:focus {
+    outline:none;
+}
+/* Weather widget */
+.weather-widget {
+    position: relative;
+    margin: 26px auto;
+    border-radius: 14px;
+    color: #fff;
+    z-index: 50;
+}
+.weather-widget .weather-widget-city {
+font-size: 28px;
+    font-weight: 500;
+    color: #378c44;
+    line-height: 20px;
+}
+.weather-widget .weather-widget-date {
+    font-size: 16px;
+    font-weight: 500;
+    color: #378c44;
+}
+.weather-widget .weather-widget-temp {
+    font-weight: 700;
+    font-size: 55px;
+    color: #378c44;
+    line-height: 60px;
+}
+.weather-widget .weather-widget-temp:after {
+    content: '°C';
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 42px;
+    vertical-align: top;
 }
