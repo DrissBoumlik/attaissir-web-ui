@@ -170,11 +170,11 @@ export class ShowComponent implements OnInit {
 
   loadDocuments() {
     this.documents = this.third.documents.map(doc => {
-      return doc = {
+      return {
         downloadPath: doc.path,
         id: doc.id,
         path: doc.path,
-        label: doc.type.label
+        label: doc['type'].label
       };
     });
     console.log(this.documents);
@@ -246,7 +246,7 @@ export class ShowComponent implements OnInit {
       return card.id === idCarte;
     });
     carte.status = carte.status === 'actif' ? 'inactif' : 'actif';
-    this.carteService.editCard(carte).subscribe(
+    this.cardsService.editCard(carte).subscribe(
       (res) => {
         console.log('res : ' + res);
       },

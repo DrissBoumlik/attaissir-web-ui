@@ -24,6 +24,7 @@ export class Contract {
   third_id?: number;
   structure?: Structure;
   structure_id?: number;
+  documents?: any;
   created_at?: Date;
   updated_at?: Date;
 

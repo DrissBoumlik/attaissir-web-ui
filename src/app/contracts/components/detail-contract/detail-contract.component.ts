@@ -85,7 +85,7 @@ export class DetailContractComponent implements OnInit {
   }
 
   onRemoveDOC(e: any) {
-    this.thirdService.deleteDocument(e.data.id).subscribe(
+    this.thirdsService.deleteDocument(e.data.id).subscribe(
       (res) => {
         this.toaster.success('Le document a été supprimé avec succès.');
       },
