@@ -4,8 +4,8 @@ import { ListComponent } from './components/list/list.component';
 import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ShowComponent } from './components/show/show.component';
-import { IndexComponent } from './components/index/index.component';
 import { DefaultComponent } from '../theme/pages/default/default.component';
+import {CardsComponent} from '../contracts/components/cards/cards.component';
 
 const routes: Routes = [
   {
@@ -36,7 +36,8 @@ const routes: Routes = [
         path: 'liste',
         component: ListComponent,
         data: { title: 'Heroes List' }
-      }
+      },
+      { path: 'cartes', component: CardsComponent }
     ]
   }
 ];
