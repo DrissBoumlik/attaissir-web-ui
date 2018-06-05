@@ -114,15 +114,10 @@ export class ThirdsService {
     return this.http.put(`${environment.apiUrl}/bank-accounts/${id}`, newBA, this.options);
   }
 
-  loadDocuments(idThird: number): any {
-    const doc1 = new Document();
-    doc1.id = 1;
-    doc1.path = 'http://rusenergyweek.com/upload/iblock/1b9/1b9cb0045fcda0e07be921ec922f5191.pdf';
-    doc1.label = 'CIN';
-    doc1.downloadPath = doc1.path;
-    return [doc1];
-    /*return this.http.get(`${environment.apiUrl}/documents/${idThird}`, this.options);*/
+  /*loadDocuments(idThird: number): any {
+    return this.http.get(`${environment.apiUrl}/documents/${idThird}`, this.options);
   }
+*/
 
   getDocTypes(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/document-types/`, this.options);
@@ -132,11 +127,29 @@ export class ThirdsService {
     const formData: FormData = new FormData();
     formData.append('document', file, file.name);
     return this.http
-      .post(`${environment.apiUrl}/documents`, formData, {headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})});
+      .post(`${environment.apiUrl}/documents`, formData);
   }
 
   putDocumentInfo(docInfo: any, id: number): Observable<any> {
     return this.http.put(`${environment.apiUrl}/documents/${id}`,
       docInfo, this.options);
+  }
+
+  /**
+   *
+   * @param {number} id
+   * @returns {Observale<ant>}
+   */
+  getDocType(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/document-types/${id}`, this.options);
+  }
+
+  /**
+   *
+   * @param {number} idDocument
+   * @returns {Observable<any>}
+   */
+  deleteDocument(idDocument: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/documents/${idDocument}`, this.options);
   }
 }

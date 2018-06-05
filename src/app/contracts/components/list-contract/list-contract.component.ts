@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Contract } from '../../classes/contract';
-import { ContractsService } from '../../services/contracts.service';
-import { Third } from '../../../thirds/classes/third';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {Contract} from '../../classes/contract';
+import {ContractsService} from '../../services/contracts.service';
+import {Third} from '../../../thirds/classes/third';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {ToastrService} from 'ngx-toastr';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-list-contract',
@@ -16,10 +16,10 @@ export class ListContractComponent implements OnInit {
 
 
   constructor(private contractsService: ContractsService,
-    private thirdService: ThirdsService,
-    private toastr: ToastrService,
-    private router: Router,
-    private route: ActivatedRoute) {
+              private thirdService: ThirdsService,
+              private toastr: ToastrService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -76,5 +76,25 @@ export class ListContractComponent implements OnInit {
     );
   }
 
+
+  getStatusClr(value: string): string {
+    switch (value) {
+      case 'inactif' : {
+        return 'badge badge-pill badge-warning';
+      }
+      case 'actif' : {
+        return 'badge badge-pill badge-success';
+      }
+      case 'encours' : {
+        return 'badge badge-pill badge-info';
+      }
+      case 'suspendu' : {
+        return 'badge badge-pill badge-dark';
+      }
+      default : {
+        return 'badge badge-pill badge-danger';
+      }
+    }
+  }
 
 }

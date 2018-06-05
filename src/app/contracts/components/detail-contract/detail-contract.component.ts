@@ -10,6 +10,9 @@ import {environment} from '../../../../environments/environment';
 import {CardsService} from '../../services/cards.service';
 import {ToastrService} from 'ngx-toastr';
 
+declare const require: any;
+const $ = require('jquery');
+
 @Component({
   selector: 'app-detail-contract',
   templateUrl: './detail-contract.component.html',
@@ -25,6 +28,9 @@ export class DetailContractComponent implements OnInit {
   filePath = [];
   id: number;
   avenants: any;
+  canValidateContract: boolean;
+  hasRightAttatchment: boolean;
+  isContractEncours: boolean;
 
   constructor(private contractService: ContractsService,
               private route: ActivatedRoute,
@@ -44,6 +50,13 @@ export class DetailContractComponent implements OnInit {
             this.third = res.data.third_party;
             this.campagnes = res.data.campaigns;
             this.documents = res.data.documents;
+            this.avenants = res.data.avenants;
+            this.isContractEncours = this.contract.status === 'encours';
+            /* this.hasRightAttatchment = this.documents.find(doc => {
+               return doc.type.id === 5;
+             });*/
+
+
             this.contractService.getStrcutureById(res.data.structure.id).subscribe(
               (struct: Structure) => {
                 this.structure = this.contractService.dataFormatter(struct, false);
@@ -68,29 +81,30 @@ export class DetailContractComponent implements OnInit {
         this.docTypes = this.thirdsService.dataFormatter(res, false);
       }
     );
-    this.contractService.getContracts().subscribe(
-      (res: any) => {
-        this.avenants = res.data;
+
+  }
+
+  onRemoveDOC(e: any) {
+    this.thirdService.deleteDocument(e.data.id).subscribe(
+      (res) => {
+        this.toaster.success('Le document a été supprimé avec succès.');
+      },
+      (err) => {
+        this.toaster.error(err.message);
       }
     );
   }
 
-  download() {
-    this.cardService.getDoc(this.id).subscribe(data => {
-      console.log(data);
-    }, error1 => {
-      console.log(error1);
-    });
-  }
-
   onAddDOC(e: any) {
-    console.log(e);
-    console.log(this.filePath);
+    const d = new $.Deferred();
     const newDoc = {
       type: e.data.label,
       file: this.filePath[0]
     };
-    console.log(newDoc);
+    e.cancel = true;
+    e.data.label = this.docTypes.find(dt => {
+      return dt.id === newDoc.type;
+    }).label;
     this.thirdsService.addDocument(newDoc.file).subscribe(
       res => {
         this.thirdsService.putDocumentInfo({
@@ -98,17 +112,36 @@ export class DetailContractComponent implements OnInit {
           document_type_id: newDoc.type
         }, res.data.id).subscribe(
           result => {
-            console.log(result);
+            e.data.downloadPath = result.data.path;
+            d.resolve();
           }
         );
       }, error => {
         console.log(error);
       });
+    e.cancel = d.promise();
   }
+
+  loadDocuments() {
+    this.documents = this.contract.documents.map(doc => {
+      return doc = {
+        downloadPath: doc.path,
+        id: doc.id,
+        path: doc.path,
+        label: doc.type.label
+      };
+    });
+  }
+
+  downloadDocument(data: any) {
+    window.open(`${environment.apiUrl}/storage/${data.value}`);
+  }
+
 
   addAvenant(idContract: number) {
     console.log(idContract);
   }
+
   getStatusColor(value: string): string {
     switch (value) {
       case 'inactif' : {
@@ -120,10 +153,27 @@ export class DetailContractComponent implements OnInit {
       case 'encours' : {
         return 'badge badge-pill badge-info';
       }
+      case 'suspendu' : {
+        return 'badge badge-pill badge-dark';
+      }
       default : {
         return 'badge badge-pill badge-danger';
       }
     }
+  }
+
+  activateContrat() {
+    console.log(1);
+    this.contractService.activateContract(this.contract.id).subscribe(
+      (res) => {
+        this.contract.status = 'actif';
+        this.isContractEncours = false;
+        this.toaster.success('Le contrat a été activé avec succés');
+      },
+      (err) => {
+        this.toaster.error('Prière de joindre un contrat avant de valider');
+      }
+    );
   }
 }
 

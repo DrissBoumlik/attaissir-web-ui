@@ -53,6 +53,7 @@
             <div class="tab-pane active" id="m_user_profile_tab_1">
               <div class="m-form m-form--fit m-form--label-align-right">
                 <div class="m-portlet__body">
+                  <hr>
                   <div class="row">
                     <div class="col-xl-4 col-lg-4 col-md-4 ">
                       <div class="form-group m-form__group row">
@@ -406,7 +407,6 @@
                     </dx-button>
                   </div>
                   <div *dxTemplate="let data of 'cellTemplate2'">
-                    <div class="container">
                       <dx-file-uploader
                         selectButtonText="Ajouter un document"
                         labelText="document"
@@ -414,7 +414,6 @@
                         uploadMode="useForm"
                         [(value)]="filePath">
                       </dx-file-uploader>
-                    </div>
                   </div>
                   <dxo-remote-operations
                     [sorting]="true"
@@ -467,7 +466,7 @@
                   </dxi-column>
                   <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
                   </dxi-column>
-                  <dxi-column dataField="status" caption="Action" cellTemplate="actionsTemplate">
+                  <dxi-column dataField="id" caption="Action" cellTemplate="actionsTemplate">
                   </dxi-column>
                   <div *dxTemplate="let data of 'statusTemplate'">
                   <span [ngClass]="getStatusColor(data.value)">
@@ -476,7 +475,7 @@
                   </div>
                   <div *dxTemplate="let data of 'actionsTemplate'">
                     <dx-button [text]="getAdequateAction(data.value)"
-                               *ngIf="data.value === 'actif' || data.value === 'inactif'"></dx-button>
+                                (click)="switchCarteStatus(data.value)"></dx-button>
                   </div>
                   <dxo-remote-operations
                     [sorting]="true"

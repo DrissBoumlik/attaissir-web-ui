@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
 import { Card } from '../../contracts/classes/card';
+import {Document} from './document';
 
 
 @Injectable({
@@ -46,6 +47,7 @@ export class Third {
   etat: boolean;
   isCorporation: boolean;
   cards: Card[];
+  documents: Document[];
   actionsPermission: any;
   bank_accounts: any;
   morale?: boolean;
