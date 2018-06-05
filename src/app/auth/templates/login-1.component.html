@@ -39,7 +39,7 @@
 								Enter your email to reset your password:
 							</div>
 						</div>
-						<form (ngSubmit)="f.form.valid" #f="ngForm" class="m-login__form m-form" action="">
+						<form (ngSubmit)="f.form.valid && forgotPass()" #f="ngForm" class="m-login__form m-form" action="">
 							<ng-template #alertForgotPass></ng-template>
 							<div class="form-group m-form__group">
 								<input class="form-control m-input" type="text" placeholder="Email" name="email" [(ngModel)]="model.email" #email="ngModel" id="m_email" autocomplete="off">
