@@ -1,7 +1,7 @@
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
-      <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Dashboard</a>
+      <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableua de bord</a>
       <h2>Liste des contrats</h2>
       <a class="siam-header-btn-new" routerLink="/contrats/ajouter"><i class="fa fa-plus"></i></a>
     </div>
@@ -50,8 +50,6 @@
         <dxi-column dataField="third_last_name" caption="Nom agrégé" datatype="Text"></dxi-column>
         <dxi-column dataField="third_first_name" caption="Prénom agrégé" datatype="Text"></dxi-column>
         <dxi-column dataField="structure" caption="Structure" dataType="Text"></dxi-column>
-        <dxi-column dataField="campaign_libelle" caption="Campagne" dataType="Text">
-        </dxi-column>
         <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="Détails" allowColumnResizing="true">
         </dxi-column>
         <div *dxTemplate="let data of 'cellTemplate'">

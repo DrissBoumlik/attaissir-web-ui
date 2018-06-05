@@ -131,14 +131,14 @@ export class ShowComponent implements OnInit {
   }
 
   onRemoveDOC(e: any) {
-        this.thirdService.deleteDocument(e.data.id).subscribe(
-          (res) => {
-            this.toaster.success('Le document a été supprimé avec succès.');
-          },
-          (err) => {
-            this.toaster.error(err.message);
-          }
-        );
+    this.thirdService.deleteDocument(e.data.id).subscribe(
+      (res) => {
+        this.toaster.success('Le document a été supprimé avec succès.');
+      },
+      (err) => {
+        this.toaster.error(err.message);
+      }
+    );
   }
 
   onAddDOC(e: any) {
@@ -169,15 +169,18 @@ export class ShowComponent implements OnInit {
   }
 
   loadDocuments() {
-    this.documents = this.third.documents.map(doc => {
-      return {
-        downloadPath: doc.path,
-        id: doc.id,
-        path: doc.path,
-        label: doc['type'].label
-      };
-    });
-    console.log(this.documents);
+    this.thirdService.getThird(this.third.id).subscribe(
+      (res: any) => {
+        this.documents = res.data.documents.map(doc => {
+          return doc = {
+            downloadPath: doc.path,
+            id: doc.id,
+            path: doc.path,
+            label: doc.type.label
+          };
+        });
+      }
+    );
   }
 
   downloadDocument(data: any) {
@@ -254,5 +257,12 @@ export class ShowComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  canHaveAction(id: number) {
+    const carte = this.third.cards.find(card => {
+      return card.id === id;
+    });
+    return carte.status === 'actif' || carte.status === 'inactif';
   }
 }
