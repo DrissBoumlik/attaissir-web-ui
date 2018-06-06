@@ -86,7 +86,8 @@ export class WizardComponent implements OnInit {
   ngOnInit() {
     this.contracteditorOptions = {
       label: 'Contract type',
-      items: (!this.isEdit) ? ['pluriannuel', 'annuel'] : ['avenant']
+      value: 'pluriannuel',
+      items: ['pluriannuel', 'annuel']
     };
     this.maxYears = 5;
     this.tierData = 'tierData';
@@ -360,9 +361,19 @@ export class WizardComponent implements OnInit {
 
   finishFunction(e) {
     e.preventDefault();
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const tenant = currentUser.data.tenants[0];
     this.contract.third_party_id = this.currentThird.id;
+    this.contract.signature_date = new Date();
     this.contract.culture_type = 'cas'; // TO receive from structure
-    this.contract.structure_id = 1; // TO receive from structure
+    this.contract.structure_id = tenant.id; // TO receive from structure
+    if (this.isEdit) {
+      this.contract.agreement_id = this.contract.id;
+      this.contract.type = 'avenant';
+      this.contract.contrat_type = 'annuel';
+    } else {
+      this.contract.type = 'contrat';
+    }
     this.contractService.addContract(this.contract).subscribe(contract => {
       contract = this.contractService.dataFormatter(contract, false);
 

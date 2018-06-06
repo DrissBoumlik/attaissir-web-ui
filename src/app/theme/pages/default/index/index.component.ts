@@ -47,7 +47,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       },
       {
         title: 'Superficie contractée',
-        subTitle: 'Total superficie contractée ',
+        subTitle: 'Totale superficie contractée ',
         value: data['sup_contracted'],
         unit: '',
         icon: 'flaticon-background',
@@ -56,8 +56,8 @@ export class IndexComponent implements OnInit, AfterViewInit {
         textColor: ''
       },
       {
-        title: 'Agriculteurs',
-        subTitle: 'Nombre des agriculteurs',
+        title: 'Agrégés',
+        subTitle: 'Nombre des agrégés',
         value: data['aggregated'],
         unit: '',
         icon: 'flaticon-users',
@@ -65,7 +65,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         backgroundColor: '',
         textColor: ''
       }
-    ]
+    ];
     });
     this.shortcutsList = [
       {
@@ -75,13 +75,13 @@ export class IndexComponent implements OnInit, AfterViewInit {
         color: ''
       },
       {
-        title: 'Ajouter une nouvelle contrat d\'agrégation',
+        title: 'Ajouter un nouveau contrat d\'agrégation',
         icon: 'flaticon-interface-6',
         url: '/contrats/ajouter',
         color: ''
       },
       {
-        title: 'Liste des cartes agriculteurs',
+        title: 'Liste des cartes agrégés',
         icon: 'flaticon-tabs',
         url: '/tiers/cartes',
         color: ''

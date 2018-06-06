@@ -28,16 +28,12 @@ export class EditComponent implements OnInit {
         this.thirdsService.getThird(this.id)
           .subscribe(data => {
             this.tier = this.thirdsService.dataFormatter(data, false);
-            Object.getOwnPropertyNames(this.tier).filter(attr => {
-              if (!attr) {
-                delete this.tier[attr];
-              }
-              return attr;
-            });
             if (this.tier.social_reason || this.tier.patent_number || this.tier.ice
               || this.tier.rc || this.tier.tva_code || this.tier.if) {
               this.tier.isCorporation = true;
             }
+            console.log(delete this.tier.tel1);
+            console.log(this.tier);
           }, error1 => {
             this.toastr.warning('User not found.');
             this.location.back();

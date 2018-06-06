@@ -12,10 +12,17 @@ import { ThirdsModule } from './thirds/thirds.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ContractsModule } from './contracts/contracts.module';
 import { SharedModule } from './shared/shared.module';
-import { DetailContractComponent } from './contracts/components/detail-contract/detail-contract.component';
 import { FormsModule } from '@angular/forms';
 import {TokenInterceptor} from './auth/_services/token.interceptors';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {
+  DxDataGridModule,
+  DxFileUploaderModule,
+  DxLookupModule,
+  DxPopupModule,
+  DxSelectBoxModule,
+  DxTemplateModule
+} from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -34,9 +41,21 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
     AuthModule,
     ContractsModule,
     SharedModule,
+    DxTemplateModule,
+    DxDataGridModule,
+    DxPopupModule,
+    DxLookupModule,
+    DxFileUploaderModule,
+    DxSelectBoxModule,
     ToastrModule.forRoot(),
   ],
-  exports: [],
+  exports: [
+    DxTemplateModule,
+    DxDataGridModule,
+    DxPopupModule,
+    DxFileUploaderModule,
+    DxSelectBoxModule,
+  ],
   providers: [{
     provide: LOCALE_ID,
     useValue: 'fr'

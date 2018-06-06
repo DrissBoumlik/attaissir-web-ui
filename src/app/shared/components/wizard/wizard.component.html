@@ -8,7 +8,7 @@
 
       <div *ngIf="!addThird">
         <div class="left">
-          <h5 class="mb-3">Thirds parties list</h5>
+          <h5 class="mb-3">Liste des tiers</h5>
           <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
             <div class="m-portlet__body  m-portlet__body--no-padding">
 
@@ -37,9 +37,9 @@
         <div class="right">
           <div class="siam-empty-page" *ngIf="!currentThird.cin">
             <div class="siam-empty-page-content">
-              <h2>Choose third party</h2>
-              <p>You choose third party from list on left <br>or create new one</p>
-              <button class="btn btn-large" (click)="addThird = true"><span i18n>Add Third party</span></button>
+              <h2>Choisissez un tiers</h2>
+              <p>Vous choisissez un tiers dans la liste à gauche <br>ou en créer un nouveau</p>
+              <button class="btn btn-large" (click)="addThird = true"><span i18n>Ajouter un tiers</span></button>
             </div>
           </div>
           <div *ngIf="currentThird.cin">
@@ -114,8 +114,8 @@
           <dxi-item dataField="code_ormva" [editorOptions]="{ label: 'Code ORMVA'}" i18n-labe></dxi-item>
           <dxi-item dataField="expiration_date" [editorOptions]="expirationDateOptions" i18n-label
                     editorType="dxDateBox"></dxi-item>
-          <dxi-item dataField="contract_type" editorType="dxSelectBox" i18n-label
-                    [editorOptions]="contracteditorOptions"
+          <dxi-item dataField="contrat_type" editorType="dxSelectBox" i18n-label
+                    [editorOptions]="contracteditorOptions" *ngIf="!isEdit"
           ></dxi-item>
         <!--  <dxi-item dataField="superficie_total" [editorOptions]="{ label: 'Total superficie'}" i18n-label
                     editorType="dxNumberBox"></dxi-item>-->
@@ -162,12 +162,12 @@
             <dxi-item
               *ngIf="(camp.start_date === campaigns[campaigns.length - 1].start_date) && (campaigns.length < maxYears)"
               itemType="button"
-              alignment="left"
+              alignment="bottom"
               [buttonOptions]="addButtonOptions">
             </dxi-item>
             <dxi-item *ngIf="(camp.start_date === campaigns[campaigns.length -1].start_date) && (campaigns.length > 1)"
                       itemType="button"
-                      alignment="left"
+                      alignment="bottom"
                       [buttonOptions]="removeButtonOptions">
             </dxi-item>
           </dxi-item>
@@ -248,7 +248,6 @@
             [visible]="true">
           </dxo-pager>
           <dxo-paging [pageSize]="10"></dxo-paging>
-
 
           <dxi-column dataField="id" caption="Id" i18n-caption></dxi-column>
           <dxi-column dataField="mle" caption="Mle" i18n-caption></dxi-column>

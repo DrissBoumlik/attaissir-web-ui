@@ -4,7 +4,7 @@
 
       <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
 
-      <h2>Liste des tiers</h2>
+      <h2>Liste des agrégés</h2>
       <a class="siam-header-btn-new" routerLink="/tiers/ajouter"><i class="fa fa-plus"></i></a>
     </div>
 
@@ -66,7 +66,7 @@
 
     <dxo-search-panel [visible]="true"></dxo-search-panel>
 
-    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-group-panel [visible]="true" emptyPanelText="Faites glisser un en-tête de colonne ici pour le grouper par cette colonne"></dxo-group-panel>
     <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
     <dxi-column dataField="first_name" caption="Prénom" i18n-caption>

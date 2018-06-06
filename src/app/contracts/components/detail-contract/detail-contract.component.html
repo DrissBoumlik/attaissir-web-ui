@@ -501,9 +501,6 @@
                   </dxi-column>
                   <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
                   </dxi-column>
-                  <dxi-column dataField="signature_date" caption="Date de signature" dataType="date"></dxi-column>
-                  <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
-                  </dxi-column>
                   <div *dxTemplate="let data of 'statusTemplate'">
                         <span [ngClass]="getStatusColor(data.value)">
                           {{ data.value }}

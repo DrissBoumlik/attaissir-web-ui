@@ -15,6 +15,7 @@ export class Contract {
   expiration_date: Date;
   signature_date: Date;
   code_ormva: string;
+  type: string;
   culture_type: string; // ['cas', 'bas'])->nullable();
   contrat_type: string; // ['pluriannuel', 'annuel', 'avenant'])->nullable();
   status: string; // ['encours', 'actif', 'inactif', 'suspendu', 'bloque', 'exprire'])->default('encours');
@@ -24,6 +25,7 @@ export class Contract {
   third_id?: number;
   structure?: Structure;
   structure_id?: number;
+  agreement_id?: number;
   documents?: any;
   created_at?: Date;
   updated_at?: Date;

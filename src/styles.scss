@@ -4,7 +4,9 @@
 @import "assets/vendors/functions";
 
 /* Graviton Custom style */
-
+span.dx-field-item-required-mark {
+  color: #f00;
+}
 /* aside */
 .m-aside-left.m-aside-left--skin-dark {
     background-color: #262F3D;
@@ -107,7 +109,7 @@
     white-space: nowrap;
 }
 .m-menu__link-icon {
-   display:none; 
+   display:none;
 }
 
 .m-aside-menu .m-menu__nav>.m-menu__item>.m-menu__link {
@@ -479,7 +481,7 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
     border: 1px solid #b8c0c7;
     color: #5e5e5e;
 }
-.btn-cons{	
+.btn-cons{
 	margin-right: 5px;
 	min-width: 120px;
 	margin-bottom: 8px;
@@ -487,7 +489,7 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
 .btn-social{
 	font-size: 20px;
     margin: 10px;
-	
+
 }
 .btn-social:hover, .btn-social:focus, .btn-social:active, .btn-social.active, .btn-social.disabled, .btn-social[disabled] {
 	color:#2d8ebf;

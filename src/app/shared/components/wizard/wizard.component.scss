@@ -121,6 +121,10 @@
   opacity: 0.7;
 }
 
+::ng-deep .dx-first-row .dx-field-button-item .dx-field-item .dx-col-10 {
+  padding-top: 22px;
+}
+
 aw-wizard-step[_ngcontent-c1] div[_ngcontent-c1] {
   padding: 4px;
 }

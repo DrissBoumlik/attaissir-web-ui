@@ -84,7 +84,7 @@
         <dxo-label
           text="Code postal" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="numeric" [min]="0" message="Vous ne pouvez pas avoir un code postal négatif."
+        <dxi-validation-rule type="numeric" *ngIf="tier.tel1" [min]="0" message="Vous ne pouvez pas avoir un code postal négatif."
                              i18n-message></dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="city">
@@ -124,7 +124,7 @@
         <dxo-label
           text="Email" i18n-text>
         </dxo-label>
-        <dxi-validation-rule
+        <dxi-validation-rule *ngIf="tier.tel1"
           type="email"
           message="Ce n'est pas une adresse email valide."
           i18n-message
@@ -141,6 +141,7 @@
         </dxo-label>
         <dxi-validation-rule
           type="pattern"
+          *ngIf="tier.tel1"
           [pattern]="phonePattern"
           message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
         </dxi-validation-rule>
@@ -153,7 +154,7 @@
         <dxo-label
           text="Telephone 2" i18n-text>
         </dxo-label>
-        <dxi-validation-rule *ngIf="!isEdit"
+        <dxi-validation-rule *ngIf="tier.tel1"
                              type="pattern"
                              [pattern]="phonePattern"
                              message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>

@@ -24,10 +24,10 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
     this.mainMenu = [
       {
-        name: 'Tiers',
+        name: 'Agrégés',
         icon: 'flaticon-users',
         url: '/tiers/liste',
-        description: 'Gestion des tiers',
+        description: 'Gestion des agrégés',
         subMenu: [
           { icon: 'flaticon-plus', name: 'Nouveaux agrégé'/*Nuveau agrégé*/, url: '/tiers/ajouter' },
           { icon: 'flaticon-list', name: 'Liste des agrégés'/*Liste des  agrégés*/, url: '/tiers/liste' },
