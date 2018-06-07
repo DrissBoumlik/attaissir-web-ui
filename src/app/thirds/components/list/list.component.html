@@ -18,6 +18,7 @@
     id="gridContainer"
     [dataSource]="third_parties"
     [columnHidingEnabled]="true"
+    [allowColumnResizing]="false"
     [allowColumnReordering]="true"
     [remoteOperations]="{ groupPaging: true }"
     (onEditingStart)="onStartEdit($event.data.id)"
@@ -69,7 +70,7 @@
     <dxo-group-panel [visible]="true" emptyPanelText="Faites glisser un en-tête de colonne ici pour le grouper par cette colonne"></dxo-group-panel>
     <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
-    <dxi-column dataField="first_name" caption="Prénom" i18n-caption>
+    <dxi-column dataField="first_name" allowHiding="true" hidden="hidden" caption="Prénom" >
     </dxi-column>
     <dxi-column dataField="last_name" caption="Nom" i18n-caption>
     </dxi-column>

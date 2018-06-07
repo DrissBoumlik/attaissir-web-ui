@@ -32,7 +32,7 @@
                 </li>
                 <li class="nav-item m-tabs__item">
                   <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_4" role="tab">
-                    Structure
+                    Site
                   </a>
                 </li>
                 <li class="nav-item m-tabs__item">
@@ -43,7 +43,7 @@
                 <li class="nav-item m-tabs__item">
                   <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_5"
                      (click)="loadDocuments()" role="tab">
-                    Attachments
+                    Documents
                   </a>
                 </li>
                 <li class="nav-item m-tabs__item">
@@ -297,7 +297,7 @@
                             [showBorders]="true"
                             [rowAlternationEnabled]="true"
                             style="padding-top: 2vh"
-                            [noDataText]="'L\'agrégé ne dispose pas de carte agriculteur'"
+                            [noDataText]="'Le contrat ne dispose pas de  campagne'"
                             keyExpr="id">
                 <dxi-column dataField="campaign.label" caption="Libelle"></dxi-column>
                 <!--<dxi-column dataField="campaign.start_date" caption="Date de début"></dxi-column>
@@ -308,7 +308,7 @@
                   [sorting]="true"
                   [paging]="false">
                 </dxo-remote-operations>
-                <dxo-selection mode="multiple"></dxo-selection>
+                <dxo-selection mode="none"></dxo-selection>
                 <dxo-editing
                   [useIcons]="true"
                   mode="row"
@@ -328,7 +328,7 @@
                   <div class="form-group m-form__group row">
                     <div class="col-10 ml-auto">
                       <h3 class="m-form__section">
-                        1. Informations sur la structure
+                        1. Informations sur le site
                       </h3>
                     </div>
                   </div>
@@ -410,7 +410,8 @@
               </div>
             </div>
             <div class="tab-pane" id="m_user_profile_tab_5">
-              <dx-data-grid id="gridCont"
+              <dx-data-grid
+                            id="gridCont"
                             [allowColumnReordering]="true"
                             [dataSource]="documents"
                             [showColumnLines]="true"
@@ -419,7 +420,7 @@
                             (onRowInserting)="onAddDOC($event)"
                             [rowAlternationEnabled]="true"
                             style="padding-top: 2vh"
-                            [noDataText]="'Le contrat ne dispose pas de documents'"
+                            [noDataText]="'Le contrat ne dispose pas de documents joints hors contrat'"
                             keyExpr="id">
 
                 <dxi-column dataField="label" caption="Type" [visible]="false">
@@ -432,10 +433,10 @@
 
                 <dxi-column dataField="label" caption="Type"></dxi-column>
 
-                <dxi-column dataField="path" caption="Upload" editCellTemplate="cellTemplate2"
+                <dxi-column dataField="path" caption="Charger" editCellTemplate="cellTemplate2"
                             [visible]="false"></dxi-column>
 
-                <dxi-column dataField="downloadPath" caption="Download" cellTemplate="cellTemplate"></dxi-column>
+                <dxi-column dataField="downloadPath" caption="Télécharger" cellTemplate="cellTemplate"></dxi-column>
 
                 <div *dxTemplate="let data of 'cellTemplate'">
                   <dx-button
@@ -446,21 +447,19 @@
                   </dx-button>
                 </div>
                 <div *dxTemplate="let data of 'cellTemplate2'">
-                  <div class="container">
-                    <dx-file-uploader
-                      selectButtonText="Ajouter un document"
-                      labelText="document"
-                      accept="*"
-                      uploadMode="useForm"
-                      [(value)]="filePath">
-                    </dx-file-uploader>
-                  </div>
+                  <dx-file-uploader
+                    selectButtonText="Ajouter un document"
+                    labelText="document"
+                    accept="*"
+                    uploadMode="useForm"
+                    [(value)]="filePath">
+                  </dx-file-uploader>
                 </div>
                 <dxo-remote-operations
                   [sorting]="true"
                   [paging]="false">
                 </dxo-remote-operations>
-                <dxo-selection mode="multiple"></dxo-selection>
+                <dxo-selection mode="none"></dxo-selection>
                 <dxo-editing
                   [useIcons]="true"
                   mode="popup"

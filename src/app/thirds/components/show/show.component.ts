@@ -248,13 +248,15 @@ export class ShowComponent implements OnInit {
     const carte = this.third.cards.find(card => {
       return card.id === idCarte;
     });
-    carte.status = carte.status === 'actif' ? 'inactif' : 'actif';
-    this.cardsService.editCard(carte).subscribe(
+    const action = carte.status = carte.status === 'actif' ? 'activate' : 'deactivate';
+    this.cardsService.massCards([idCarte], action).subscribe(
       (res) => {
-        console.log('res : ' + res);
+        console.log(res);
+        carte.status = carte.status === 'actif' ? 'inactif' : 'actif';
       },
       (err) => {
         console.log(err);
+        this.toaster.error(err);
       }
     );
   }
@@ -265,4 +267,22 @@ export class ShowComponent implements OnInit {
     });
     return carte.status === 'actif' || carte.status === 'inactif';
   }
+
+
+  DeclareStolen(idCarte: number) {
+    const carte = this.third.cards.find(card => {
+      return card.id === idCarte;
+    });
+    carte.status = 'perdu';
+    this.cardsService.editCard(carte).subscribe(
+      (res) => {
+        console.log('res : ' + res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+
 }

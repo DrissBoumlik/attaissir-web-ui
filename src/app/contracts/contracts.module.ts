@@ -11,6 +11,8 @@ import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { SharedModule } from '../shared/shared.module';
 import { CardsComponent } from './components/cards/cards.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devextreme-angular';
 
 
 @NgModule({
@@ -19,6 +21,10 @@ import { CardsComponent } from './components/cards/cards.component';
     CommonModule,
     ThirdsModule,
     ContractsRoutingModule,
+    DxCheckBoxModule,
+    DxFileUploaderModule,
+    DxSelectBoxModule,
+    NgbModule.forRoot(),
   ],
   declarations: [
     ListContractComponent,

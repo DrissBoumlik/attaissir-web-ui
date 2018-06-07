@@ -3,7 +3,7 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor, HttpResponse, HttpErrorResponse
+  HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from './authentication.service';
@@ -24,3 +24,4 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request);
   }
 }
+
