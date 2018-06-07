@@ -389,12 +389,12 @@ export class WizardComponent implements OnInit {
         data = this.contractedArea.dataFormatter(data, false);
         this.groundsList = this.groundsList.map(ground => {
           return {
-              ground_id: ground.id,
-              mode_worth: ground.mode_worth,
-              agreement_id: contract['id']
+            ground_id: ground.id,
+            mode_worth: ground.mode_worth,
+            agreement_id: contract['id']
           };
         });
-        this.agreementGroundService.addAgreementGround({ 'agreement_grounds' : this.groundsList }).subscribe(d => {
+        this.agreementGroundService.addAgreementGround({ 'agreement_grounds': this.groundsList }).subscribe(d => {
           d = this.contractedArea.dataFormatter(d, false);
           this.router.navigate([`/contrats/afficher/${contract['id']}`]);
         }, error1 => {

@@ -130,7 +130,7 @@
 			</div>
 		</div>
   </aw-wizard-step>
-  <aw-wizard-step stepTitle="3. Superficie contractée" [canEnter]="!!contract.code_ormva"
+  <aw-wizard-step stepTitle="3. Superficie contractée (ha)" [canEnter]="!!contract.code_ormva"
                   (stepExit)="goToParcels()"
                   [navigationSymbol]="{ symbol: '&#xf19f;', fontFamily: 'Flaticon'}"
                   i18n-step-title>
@@ -155,7 +155,7 @@
 
             <dxi-item dataField="area" editorType="dxNumberBox" [colSpan]="5">
               <dxo-label
-                text="Superficie" i18n-text>
+                text="Superficie (ha)" i18n-text>
               </dxo-label>
             </dxi-item>
 
@@ -211,11 +211,11 @@
                     [editorOptions]="matriculeEditorOptions">
           </dxi-item>
           >
-          <dxi-item dataField="total_surface" caption="Total Sup" i18n-caption="Sup totale"
+          <dxi-item dataField="total_surface" caption="Superficie totale (ha)"
                     editorType="dxNumberBox"></dxi-item>
-          <dxi-item dataField="bare_surface" caption="Bare Sup" i18n-caption="Sup annuelle"
+          <dxi-item dataField="bare_surface" caption="Superficie contracté (ha)"
                     editorType="dxNumberBox"></dxi-item>
-          <dxi-item dataField="mode_worth" caption="Mode de valeur" i18n-caption editorType="dxSelectBox"
+          <dxi-item dataField="mode_worth" caption="Mode valoire" i18n-caption editorType="dxSelectBox"
                     [editorOptions]="worthEditorOptions">
           </dxi-item>
 
@@ -253,10 +253,10 @@
           <dxi-column dataField="mle" caption="Mle" i18n-caption></dxi-column>
           <dxi-column dataField="cda" caption="CDA" i18n-caption></dxi-column>
           <dxi-column dataField="zone" caption="Zone" i18n-caption></dxi-column>
-          <dxi-column dataField="sector" caption="Sector" i18n-caption></dxi-column>
-          <dxi-column dataField="block" caption="Block" i18n-caption></dxi-column>
-          <dxi-column dataField="total_surface" caption="Total Sup" i18n-caption></dxi-column>
-          <dxi-column dataField="bare_surface" caption="Bare Sup" i18n-caption></dxi-column>
+          <dxi-column dataField="sector" caption="Secteur" i18n-caption></dxi-column>
+          <dxi-column dataField="block" caption="Bloc" i18n-caption></dxi-column>
+          <dxi-column dataField="total_surface" caption="Superficie totale" i18n-caption></dxi-column>
+          <dxi-column dataField="bare_surface" caption="Superficie contracté" i18n-caption></dxi-column>
 
         </dx-data-grid>
       </div>

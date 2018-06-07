@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ThirdsService} from '../../services/thirds.service';
-import {Third} from '../../classes/third';
-import {ToastrService} from 'ngx-toastr';
-import {Contract} from '../../../contracts/classes/contract';
-import {Document} from '../../classes/document';
-import {ContractsService} from '../../../contracts/services/contracts.service';
-import {CardsService} from '../../../contracts/services/cards.service';
-import {environment} from '../../../../environments/environment';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ThirdsService } from '../../services/thirds.service';
+import { Third } from '../../classes/third';
+import { ToastrService } from 'ngx-toastr';
+import { Contract } from '../../../contracts/classes/contract';
+import { Document } from '../../classes/document';
+import { ContractsService } from '../../../contracts/services/contracts.service';
+import { CardsService } from '../../../contracts/services/cards.service';
+import { environment } from '../../../../environments/environment';
 
 declare const require: any;
 const $ = require('jquery');
@@ -29,11 +29,11 @@ export class ShowComponent implements OnInit {
   bank_accounts: any;
 
   constructor(private thirdService: ThirdsService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private toaster: ToastrService,
-              private contractService: ContractsService,
-              private cardsService: CardsService) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private toaster: ToastrService,
+    private contractService: ContractsService,
+    private cardsService: CardsService) {
   }
 
   ngOnInit() {
@@ -189,16 +189,16 @@ export class ShowComponent implements OnInit {
 
   getStatusColor(value: string): string {
     switch (value) {
-      case 'inactif' : {
+      case 'inactif': {
         return 'badge badge-pill badge-warning';
       }
-      case 'actif' : {
+      case 'actif': {
         return 'badge badge-pill badge-success';
       }
-      case 'encours' : {
+      case 'encours': {
         return 'badge badge-pill badge-info';
       }
-      default : {
+      default: {
         return 'badge badge-pill badge-danger';
       }
     }
@@ -210,10 +210,10 @@ export class ShowComponent implements OnInit {
       return card.id === idCarte;
     }).status;
     switch (value) {
-      case 'inactif' : {
+      case 'inactif': {
         return 'Activer';
       }
-      default : {
+      default: {
         return 'Désactiver';
       }
     }
@@ -248,13 +248,15 @@ export class ShowComponent implements OnInit {
     const carte = this.third.cards.find(card => {
       return card.id === idCarte;
     });
-    carte.status = carte.status === 'actif' ? 'inactif' : 'actif';
-    this.cardsService.editCard(carte).subscribe(
+    const action = carte.status = carte.status === 'actif' ? 'activate' : 'deactivate';
+    this.cardsService.massCards([idCarte], action).subscribe(
       (res) => {
-        console.log('res : ' + res);
+        console.log(res);
+        carte.status = carte.status === 'actif' ? 'inactif' : 'actif';
       },
       (err) => {
         console.log(err);
+        this.toaster.error(err);
       }
     );
   }
@@ -265,4 +267,22 @@ export class ShowComponent implements OnInit {
     });
     return carte.status === 'actif' || carte.status === 'inactif';
   }
+
+
+  DeclareStolen(idCarte: number) {
+    const carte = this.third.cards.find(card => {
+      return card.id === idCarte;
+    });
+    carte.status = 'perdu';
+    this.cardsService.editCard(carte).subscribe(
+      (res) => {
+        console.log('res : ' + res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+
 }

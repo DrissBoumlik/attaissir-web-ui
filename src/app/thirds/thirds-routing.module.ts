@@ -5,7 +5,7 @@ import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ShowComponent } from './components/show/show.component';
 import { DefaultComponent } from '../theme/pages/default/default.component';
-import {CardsComponent} from '../contracts/components/cards/cards.component';
+import { CardsComponent } from '../contracts/components/cards/cards.component';
 
 const routes: Routes = [
   {
