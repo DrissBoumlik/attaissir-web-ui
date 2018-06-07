@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Third } from '../../../thirds/classes/third';
-import { Structure } from '../../classes/structure';
-import { Contract } from '../../classes/contract';
+import { Third } from '../../../classes/third';
+import { Structure } from '../../../classes/structure';
+import { Contract } from '../../../classes/contract';
 
 @Component({
   selector: 'app-add',

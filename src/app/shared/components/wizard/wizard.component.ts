@@ -1,19 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Third } from '../../../thirds/classes/third';
+import { Third } from '../../../classes/third';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
-import { Contract } from '../../../contracts/classes/contract';
-import { Structure } from '../../../contracts/classes/structure';
+import { Contract } from '../../../classes/contract';
+import { Structure } from '../../../classes/structure';
 import { CampaignService } from '../../../contracts/services/campaign.service';
 import { GroundsService } from '../../../contracts/services/grounds.service';
 import { ZonesService } from '../../../contracts/services/zones.service';
 import { ContractsService } from '../../../contracts/services/contracts.service';
-import { Zone } from '../../../contracts/classes/zone';
-import { ContractedArea } from '../../../contracts/classes/contracted-area';
+import { Zone } from '../../../classes/zone';
+import { ContractedArea } from '../../../classes/contracted-area';
 import { ContractedAreaService } from '../../../contracts/services/contracted-area.service';
-import { AgreementGround } from '../../../contracts/classes/agreement-ground';
+import { AgreementGround } from '../../../classes/agreement-ground';
 import { AgreementGroundsService } from '../../../contracts/services/agreement-grounds.service';
-import { Campaign } from '../../../contracts/classes/campaign';
+import { Campaign } from '../../../classes/campaign';
 import { Router } from '@angular/router';
 
 

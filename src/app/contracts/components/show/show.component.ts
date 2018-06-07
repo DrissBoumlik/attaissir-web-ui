@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Contract } from '../../classes/contract';
+import { Contract } from '../../../classes/contract';
 import { ContractsService } from '../../services/contracts.service';
 import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
-import { Structure } from '../../classes/structure';
-import { Third } from '../../../thirds/classes/third';
+import { Structure } from '../../../classes/structure';
+import { Third } from '../../../classes/third';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { Document } from '../../../thirds/classes/document';
+import { Document } from '../../../classes/document';
 import { environment } from '../../../../environments/environment';
 import { CardsService } from '../../services/cards.service';
 import { ToastrService } from 'ngx-toastr';
@@ -15,10 +15,10 @@ const $ = require('jquery');
 
 @Component({
   selector: 'app-detail-contract',
-  templateUrl: './detail-contract.component.html',
-  styleUrls: ['./detail-contract.component.scss']
+  templateUrl: './show.component.html',
+  styleUrls: ['./show.component.scss']
 })
-export class DetailContractComponent implements OnInit {
+export class ShowComponent implements OnInit {
   contract: Contract;
   structure: Structure;
   third: Third;

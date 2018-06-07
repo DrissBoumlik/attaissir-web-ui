@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { CardsService } from '../../services/cards.service';
+import { CardsService } from '../../../contracts/services/cards.service';
 import { Card } from 'primeng/card';
 
 @Component({

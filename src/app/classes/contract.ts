@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Third } from '../../thirds/classes/third';
+import { Third } from './third';
 import { Structure } from './structure';
 import { Campaign } from './campaign';
 

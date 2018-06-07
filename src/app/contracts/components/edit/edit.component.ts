@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Contract } from '../../classes/contract';
-import { Third } from '../../../thirds/classes/third';
-import { Structure } from '../../classes/structure';
+import { Contract } from '../../../classes/contract';
+import { Third } from '../../../classes/third';
+import { Structure } from '../../../classes/structure';
 import { Location } from '@angular/common';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { ActivatedRoute, Router } from '@angular/router';

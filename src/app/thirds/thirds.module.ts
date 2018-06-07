@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 
 
 import {
-  DxButtonModule, DxDataGridModule, DxFileUploaderModule, DxFormModule, DxRadioGroupModule, DxSelectBoxModule,
+  DxButtonModule, DxDataGridModule, DxFileUploaderModule, DxRadioGroupModule, DxSelectBoxModule,
   DxSwitchModule, DxTemplateModule
 } from 'devextreme-angular';
 import { FormsModule } from '@angular/forms';
 import { ThirdsRoutingModule } from './thirds-routing.module';
-import { TiersFormComponent } from './components/tiers-form/tiers-form.component';
 import { IndexComponent } from './components/index/index.component';
 import { AddComponent } from './components/add/add.component';
 import { ListComponent } from './components/list/list.component';
@@ -16,13 +15,15 @@ import { ShowComponent } from './components/show/show.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AvatarModule } from 'ng2-avatar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CardsComponent } from './components/cards/cards.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     ThirdsRoutingModule,
     DxDataGridModule,
-    DxFormModule,
     FormsModule,
     DxButtonModule,
     DxRadioGroupModule,
@@ -34,19 +35,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AvatarModule.forRoot(),
   ],
   exports: [
-    TiersFormComponent,
-    DxFormModule,
     FormsModule,
     DxTemplateModule,
     DxDataGridModule
   ],
   declarations: [
-    TiersFormComponent,
     IndexComponent,
     AddComponent,
     EditComponent,
     ShowComponent,
-    ListComponent
+    ListComponent,
+    CardsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

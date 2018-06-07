@@ -43,7 +43,6 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/devextreme-intl/dist/devextreme-intl.min.js",
               "node_modules/dragula/dist/dragula.js"
             ]
           },
@@ -104,7 +103,6 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/devextreme-intl/dist/devextreme-intl.min.js",
               "node_modules/dragula/dist/dragula.js"
             ]
           }

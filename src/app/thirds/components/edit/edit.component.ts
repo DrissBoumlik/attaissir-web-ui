@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ThirdsService } from '../../services/thirds.service';
-import { Third } from '../../classes/third';
+import { Third } from '../../../classes/third';
 import { ToastrService } from 'ngx-toastr';
 
 

@@ -1,17 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Contract } from '../../classes/contract';
+import { Contract } from '../../../classes/contract';
 import { ContractsService } from '../../services/contracts.service';
-import { Third } from '../../../thirds/classes/third';
+import { Third } from '../../../classes/third';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-contract',
-  templateUrl: './list-contract.component.html',
-  styleUrls: ['./list-contract.component.scss']
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss']
 })
-export class ListContractComponent implements OnInit {
+export class ListComponent implements OnInit {
   contracts: any;
   currentRowStatus: boolean;
 

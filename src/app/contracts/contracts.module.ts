@@ -3,14 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { ContractsRoutingModule } from './contracts-routing.module';
 import { ThirdsModule } from '../thirds/thirds.module';
-import { ListContractComponent } from './components/list-contract/list-contract.component';
+import { ListComponent } from './components/list/list.component';
 import { ContractsService } from './services/contracts.service';
-import { DetailContractComponent } from './components/detail-contract/detail-contract.component';
-import { AvenantComponent } from './components/avenant/avenant.component';
+import { ShowComponent } from './components/show/show.component';
 import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { SharedModule } from '../shared/shared.module';
-import { CardsComponent } from './components/cards/cards.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devextreme-angular';
 
@@ -27,12 +25,10 @@ import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devex
     NgbModule.forRoot(),
   ],
   declarations: [
-    ListContractComponent,
-    DetailContractComponent,
-    AvenantComponent,
+    ListComponent,
+    ShowComponent,
     AddComponent,
     EditComponent,
-    CardsComponent,
   ],
   providers: [ContractsService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

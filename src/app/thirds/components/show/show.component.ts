@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ThirdsService } from '../../services/thirds.service';
-import { Third } from '../../classes/third';
+import { Third } from '../../../classes/third';
 import { ToastrService } from 'ngx-toastr';
-import { Contract } from '../../../contracts/classes/contract';
-import { Document } from '../../classes/document';
+import { Contract } from '../../../classes/contract';
+import { Document } from '../../../classes/document';
 import { ContractsService } from '../../../contracts/services/contracts.service';
 import { CardsService } from '../../../contracts/services/cards.service';
 import { environment } from '../../../../environments/environment';
