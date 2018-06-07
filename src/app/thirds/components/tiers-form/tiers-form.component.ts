@@ -37,7 +37,7 @@ export class TiersFormComponent implements OnInit {
   ngOnInit() {
     this.tierData = 'tierData';
     this.buttonOptions = {
-      text: (!this.isEdit) ? 'Add' : 'Update',
+      text: (!this.isEdit) ? 'Ajouter' : 'Modifier',
       type: 'success',
       useSubmitBehavior: true
     };
@@ -104,7 +104,7 @@ export class TiersFormComponent implements OnInit {
       valueExpr: 'ID'
     };
     this.dateOptions = {
-      invalidDateMessage: 'The date must have the following format: dd/MM/yyyy',
+      invalidDateMessage: 'La date doit avoir le format suivant: jj/MM/aaaa',
       calendarOptions: {
         dateSerializationFormat: 'dd/MM/yyyy',
         displayFormat: 'yyyy-MM-dd',
@@ -119,7 +119,7 @@ export class TiersFormComponent implements OnInit {
           ID: 'virement'
         },
         {
-          Name: 'Cheque',
+          Name: 'Chéque',
           ID: 'cheque'
         }
       ],
