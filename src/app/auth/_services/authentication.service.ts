@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { environment } from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthenticationService {
@@ -13,7 +14,8 @@ export class AuthenticationService {
   };
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient/*,
+              public jwtHelper: JwtHelperService*/) {
   }
 
   login(email: string, password: string) {
@@ -24,6 +26,14 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
   }
+
+  /*
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    // Check whether the token is expired and return
+    // true or false
+    return !this.jwtHelper.isTokenExpired(token);
+  }*/
 
   getToken = () => {
     return JSON.parse(localStorage.getItem('currentUser')).data.token;

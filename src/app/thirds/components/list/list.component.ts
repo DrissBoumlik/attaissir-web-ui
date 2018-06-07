@@ -83,7 +83,7 @@ export class ListComponent implements OnInit {
   onRemoveThird(thirdId: number): any {
     this.tierService.deleteThird(thirdId).subscribe(
       (res) => {
-        this.toastr.success('User deleted successfully');
+        this.toastr.success('Nouveau agrégé ajouté avec succès.');
       },
       (err) => {
         this.toastr.error(err.error.message);

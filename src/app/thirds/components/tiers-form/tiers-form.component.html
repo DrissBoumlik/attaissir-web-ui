@@ -51,14 +51,14 @@
       <dxi-item itemType="group" caption="" [colCount]="2" i18n-caption>
         <dxi-item dataField="ar_first_name">
           <dxo-label
-            text="Prénom (Arabic)" i18n-text>
+            text="Prénom (Arabe)" i18n-text>
           </dxo-label>
           <dxi-validation-rule type="required" message="Prénom (Arabe) est obligatoire"
                                i18n-message></dxi-validation-rule>
         </dxi-item>
         <dxi-item dataField="ar_last_name" [editorOptions]="{ placeholder: '' }">
           <dxo-label
-            text="Nom (Arabic)" i18n-text>
+            text="Nom (Arabe)" i18n-text>
           </dxo-label>
           <dxi-validation-rule type="required" message="Nom (Arabe) est obligatoire"
                                i18n-message></dxi-validation-rule>
@@ -71,9 +71,9 @@
       <dxi-item dataField="gender"
                 editorType="dxSelectBox" [editorOptions]="gender">
         <dxo-label
-          text="Sexe" i18n-text>
+          text="Gender" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="required" message="Sexe est obligatoire" i18n-message></dxi-validation-rule>
+        <dxi-validation-rule type="required" message="Gender est obligatoire" i18n-message></dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="address">
         <dxo-label
@@ -84,7 +84,7 @@
         <dxo-label
           text="Code postal" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="numeric" *ngIf="tier.tel1" [min]="0" message="Vous ne pouvez pas avoir un code postal négatif."
+        <dxi-validation-rule type="numeric" *ngIf="tier.postal_code" [min]="0" message="Vous ne pouvez pas avoir un code postal négatif."
                              i18n-message></dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="city">
@@ -154,7 +154,7 @@
         <dxo-label
           text="Telephone 2" i18n-text>
         </dxo-label>
-        <dxi-validation-rule *ngIf="tier.tel1"
+        <dxi-validation-rule *ngIf="tier.tel2"
                              type="pattern"
                              [pattern]="phonePattern"
                              message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
@@ -166,7 +166,6 @@
         </dxo-label>
       </dxi-item>
 
-      {{ tier.situation }}
       <dxi-item dataField="situation"
                 editorType="dxSelectBox" [editorOptions]="situation">
         <dxo-label

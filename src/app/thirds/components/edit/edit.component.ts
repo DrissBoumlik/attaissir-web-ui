@@ -35,11 +35,11 @@ export class EditComponent implements OnInit {
             console.log(delete this.tier.tel1);
             console.log(this.tier);
           }, error1 => {
-            this.toastr.warning('User not found.');
+            this.toastr.warning('Utilisateur non trouvé.');
             this.location.back();
           });
       } else {
-        this.toastr.warning('ID not provided.');
+        this.toastr.warning('ID non fourni.');
         this.location.back();
       }
     });
@@ -52,7 +52,7 @@ export class EditComponent implements OnInit {
   onFormSubmit = function(e) {
     this.thirdsService.editThird(this.tier).subscribe(data => {
       this.toastr.success(
-        `${this.tier.first_name.toUpperCase()} ${this.tier.last_name.toUpperCase()} information's edited successfully`
+        `${this.tier.first_name.toUpperCase()} ${this.tier.last_name.toUpperCase()} informations modifiées avec succès`
       );
     }, err => {
       this.toastr.error(err.error.message);

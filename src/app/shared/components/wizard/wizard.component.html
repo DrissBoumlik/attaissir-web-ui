@@ -8,7 +8,7 @@
 
       <div *ngIf="!addThird">
         <div class="left">
-          <h5 class="mb-3">Liste des tiers</h5>
+          <h5 class="mb-3">Liste des agrégé</h5>
           <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
             <div class="m-portlet__body  m-portlet__body--no-padding">
 
@@ -37,9 +37,9 @@
         <div class="right">
           <div class="siam-empty-page" *ngIf="!currentThird.cin">
             <div class="siam-empty-page-content">
-              <h2>Choisissez un tiers</h2>
-              <p>Vous choisissez un tiers dans la liste à gauche <br>ou en créer un nouveau</p>
-              <button class="btn btn-large" (click)="addThird = true"><span i18n>Ajouter un tiers</span></button>
+              <h2>Choisissez un agrégé</h2>
+              <p>Vous choisissez un agrégé dans la liste à gauche <br>ou en créer un nouveau</p>
+              <button class="btn btn-large" (click)="addThird = true"><span i18n>Ajouter un agrégé</span></button>
             </div>
           </div>
           <div *ngIf="currentThird.cin">
@@ -83,20 +83,20 @@
     <!-- End Agreggated Informations -->
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5"  *ngIf="!addThird">
 			<div class="m-form__actionss">
-				<button type="button" class="btn btn-success float-right"  awNextStep i18n>Next Step</button>
-				<button class="btn float-right mr-3" *ngIf="!!currentThird.cin" (click)="addThird = true"><span i18n>Add Third party</span></button>
+				<button type="button" class="btn btn-success float-right"  awNextStep i18n>Étape suivante</button>
+				<button class="btn float-right mr-3" *ngIf="!!currentThird.cin" (click)="addThird = true"><span i18n>Ajouer un agrégé</span></button>
 			</div>
 		</div>
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5"  *ngIf="addThird">
 			<div class="m-form__actionss">
-				<button class="btn btn-success float-right" (click)="saveThird()"><span i18n>Save</span></button>
-				<button class="btn  float-right mr-3" (click)="cancelThird()"><span i18n>Cancel</span></button>
+				<button class="btn btn-success float-right" (click)="saveThird()"><span i18n>Sauvegarder</span></button>
+				<button class="btn  float-right mr-3" (click)="cancelThird()"><span i18n>Anuller</span></button>
 			</div>
 		</div>
 
   </aw-wizard-step>
 
-  <aw-wizard-step stepTitle="2. Contract Informations" [canEnter]="!!currentThird.cin"
+  <aw-wizard-step stepTitle="2. Informations contrat" [canEnter]="!!currentThird.cin"
                   (stepExit)="goToArea()"
                   [navigationSymbol]="{ symbol: '&#xf151;', fontFamily: 'Flaticon'}"
                   i18n-step-title>
@@ -109,7 +109,7 @@
                [formData]="contract">
 
         <dxi-item itemType="group" [colCount]="2">
-          <dxi-item dataField="application_date" [editorOptions]="{ label: 'Application date'}" i18n-label
+          <dxi-item dataField="application_date" [editorOptions]="{ label: 'Date d\'application'}" i18n-label
                     editorType="dxDateBox"></dxi-item>
           <dxi-item dataField="code_ormva" [editorOptions]="{ label: 'Code ORMVA'}" i18n-labe></dxi-item>
           <dxi-item dataField="expiration_date" [editorOptions]="expirationDateOptions" i18n-label
@@ -126,11 +126,11 @@
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5">
 			<div class="m-form__actionss">
         <button type="button" class="btn default float-left" awPreviousStep i18n>Previous Step</button>
-        <button type="button" class="btn btn-success float-right" awNextStep i18n>Next Step</button>
+        <button type="button" class="btn btn-success float-right" awNextStep i18n>Étape suivante</button>
 			</div>
 		</div>
   </aw-wizard-step>
-  <aw-wizard-step stepTitle="3. Contracted area" [canEnter]="!!contract.code_ormva"
+  <aw-wizard-step stepTitle="3. Superficie contractée" [canEnter]="!!contract.code_ormva"
                   (stepExit)="goToParcels()"
                   [navigationSymbol]="{ symbol: '&#xf19f;', fontFamily: 'Flaticon'}"
                   i18n-step-title>
@@ -176,12 +176,12 @@
     </div>
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5">
 			<div class="m-form__actionss">
-        <button type="button" class="btn default float-left" awPreviousStep i18n>Previous Step</button>
-        <button type="button" class="btn btn-success float-right" awNextStep i18n>Next Step</button>
+        <button type="button" class="btn default float-left" awPreviousStep i18n>Étape précédente</button>
+        <button type="button" class="btn btn-success float-right" awNextStep i18n>Étape suivante</button>
 			</div>
 		</div>
   </aw-wizard-step>
-  <aw-wizard-step stepTitle="4. Parcel" [canEnter]="!!currentThird.cin && (campaigns.length > 0 && campaigns[0].area > 0)"
+  <aw-wizard-step stepTitle="4. Parcelle" [canEnter]="!!currentThird.cin && (campaigns.length > 0 && campaigns[0].area > 0)"
                   i18n-step-title
                   [navigationSymbol]="{ symbol: '&#xf1a0;', fontFamily: 'Flaticon'}">
 
@@ -195,19 +195,19 @@
                  [formData]="parcelForm">
 
           <dxi-item dataField="cda" i18n-label editorType="dxSelectBox" [editorOptions]="cdaEditorOptions">
-            <dxi-validation-rule type="required" message="CDA is required"></dxi-validation-rule>
+            <dxi-validation-rule type="required" message="CDA est obligatoire"></dxi-validation-rule>
           </dxi-item>
           <dxi-item dataField="zone" caption="Zone" i18n-caption editorType="dxSelectBox"
                     [editorOptions]="zoneEditorOptions">
-            <dxi-validation-rule type="required" message="Zone is required"></dxi-validation-rule>
+            <dxi-validation-rule type="required" message="Zone est obligatoire"></dxi-validation-rule>
           </dxi-item>
-          <dxi-item dataField="sector" caption="Sector" i18n-caption editorType="dxTextBox"
+          <dxi-item dataField="sector" caption="Secteur" i18n-caption editorType="dxTextBox"
                     [editorOptions]="sectorEditorOptions">
           </dxi-item>
           <dxi-item dataField="block" label="Bloc" i18n-caption editorType="dxTextBox"
                     [editorOptions]="blocEditorOptions">
           </dxi-item>
-          <dxi-item dataField="mle" caption="Mle" i18n-caption
+          <dxi-item dataField="mle" caption="Matricule" i18n-caption
                     [editorOptions]="matriculeEditorOptions">
           </dxi-item>
           >
@@ -215,7 +215,7 @@
                     editorType="dxNumberBox"></dxi-item>
           <dxi-item dataField="bare_surface" caption="Bare Sup" i18n-caption="Sup annuelle"
                     editorType="dxNumberBox"></dxi-item>
-          <dxi-item dataField="mode_worth" caption="Mode of worth" i18n-caption editorType="dxSelectBox"
+          <dxi-item dataField="mode_worth" caption="Mode de valeur" i18n-caption editorType="dxSelectBox"
                     [editorOptions]="worthEditorOptions">
           </dxi-item>
 

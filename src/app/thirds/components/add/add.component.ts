@@ -29,7 +29,7 @@ export class AddComponent implements OnInit {
     this.thirdsService.addThird(this.tier).subscribe(data => {
       data = this.thirdsService.dataFormatter(data, false);
       this.toastr.success(
-        `New third party added successfully.`);
+        `Nouveau agrégé ajouté avec succès.`);
       this.router.navigate(['/tiers/afficher/' + data.id]);
     }, err => {
       this.toastr.error(err.error.message);

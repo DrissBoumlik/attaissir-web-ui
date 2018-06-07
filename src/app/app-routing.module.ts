@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'tiers/liste',
+    redirectTo: 'index',
     pathMatch: 'full',
     data: { title: 'Heroes List' }
   },

@@ -85,7 +85,7 @@ export class WizardComponent implements OnInit {
 
   ngOnInit() {
     this.contracteditorOptions = {
-      label: 'Contract type',
+      label: 'Type contrat',
       value: 'pluriannuel',
       items: ['pluriannuel', 'annuel']
     };
@@ -94,7 +94,7 @@ export class WizardComponent implements OnInit {
     this.groundsList = [];
     this.contract.application_date = new Date();
     this.expirationDateOptions = {
-      label: 'Expiration date',
+      label: 'Date d\'expiration',
       value: new Date(2019, 3, 27),
       min: this.contract.application_date
     };
@@ -115,7 +115,7 @@ export class WizardComponent implements OnInit {
       mode_worth: null
     };
     this.addParcelOptions = {
-      text: 'Add parcel',
+      text: 'Ajouter parcelle',
       icon: 'plus',
       type: 'success',
       useSubmitBehavior: false,
@@ -281,14 +281,14 @@ export class WizardComponent implements OnInit {
     };
 
     this.aggregatedOptions = {
-      label: 'Culture type',
+      label: 'Type culture',
       items: ['cas', 'bas']
     };
   }
 
   goToContractInfo = () => {
     if (!this.currentThird.cin) {
-      this.toastr.error('Select or create a Aggregated first!');
+      this.toastr.error('Sélectionnez ou créez un agrégé pour avancer!');
     } else {
       console.log(this.currentThird);
     }
@@ -296,7 +296,7 @@ export class WizardComponent implements OnInit {
 
   goToArea = () => {
     if (!this.contract.code_ormva) {
-      this.toastr.error('Fill the contract fields first!');
+      this.toastr.error('Remplissez les champs du contrat pour avancer!');
     } else {
       this.maxYears = (this.contract.contrat_type === 'annuel') ? 1 : 5;
       console.log(this.currentThird);
@@ -306,9 +306,9 @@ export class WizardComponent implements OnInit {
 
   goToParcels = () => {
     if (!this.currentThird.cin) {
-      this.toastr.error('Select or create a Aggregated first!');
+      this.toastr.error('Sélectionnez ou créez un agrégé pour avancer!');
     } else if (this.campaigns.length <= 0 || this.campaigns[0].area <= 0) {
-      this.toastr.error('Select at least one campaign to continue and area shoyuld be greater then 0!');
+      this.toastr.error('Sélectionnez au moins une campagne pour continuer et la superficie doit être supérieure à 0!');
     } else {
       console.log(this.currentThird);
       console.log(this.campaigns);
@@ -321,7 +321,7 @@ export class WizardComponent implements OnInit {
       this.tier = new Third();
       this.currentThird = data[0];
       this.toastr.success(
-        `New third party added successfully.`);
+        `Nouveau agrégé ajouté avec succès.`);
     }, err => {
       this.toastr.error(err.error.message);
     });
@@ -332,7 +332,7 @@ export class WizardComponent implements OnInit {
       this.tier = new Third();
       this.currentThird = data[0];
       this.toastr.success(
-        `New third party added successfully.`);
+        `Nouveau agrégé ajouté avec succès.`);
     }, err => {
       this.toastr.error(err.error.message);
     });
