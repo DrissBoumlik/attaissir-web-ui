@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {Contract} from '../../classes/contract';
-import {ContractsService} from '../../services/contracts.service';
-import {ActivatedRoute, Router, RouterLinkActive} from '@angular/router';
-import {Structure} from '../../classes/structure';
-import {Third} from '../../../thirds/classes/third';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {Document} from '../../../thirds/classes/document';
-import {environment} from '../../../../environments/environment';
-import {CardsService} from '../../services/cards.service';
-import {ToastrService} from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
+import { Contract } from '../../classes/contract';
+import { ContractsService } from '../../services/contracts.service';
+import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
+import { Structure } from '../../classes/structure';
+import { Third } from '../../../thirds/classes/third';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { Document } from '../../../thirds/classes/document';
+import { environment } from '../../../../environments/environment';
+import { CardsService } from '../../services/cards.service';
+import { ToastrService } from 'ngx-toastr';
 
 declare const require: any;
 const $ = require('jquery');
@@ -33,11 +33,11 @@ export class DetailContractComponent implements OnInit {
   isContractEncours: boolean;
 
   constructor(private contractService: ContractsService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private thirdsService: ThirdsService,
-              public cardService: CardsService,
-              private toaster: ToastrService) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private thirdsService: ThirdsService,
+    public cardService: CardsService,
+    private toaster: ToastrService) {
   }
 
   ngOnInit() {
@@ -125,14 +125,14 @@ export class DetailContractComponent implements OnInit {
   loadDocuments() {
     this.contractService.getContract(this.contract.id).subscribe(
       (res: any) => {
-          this.documents = res.data.documents.map(doc => {
-            return doc = {
-              downloadPath: doc.path,
-              id: doc.id,
-              path: doc.path,
-              label: doc.type.label
-            };
-          });
+        this.documents = res.data.documents.map(doc => {
+          return doc = {
+            downloadPath: doc.path,
+            id: doc.id,
+            path: doc.path,
+            label: doc.type.label
+          };
+        });
       }
     );
   }
@@ -148,19 +148,19 @@ export class DetailContractComponent implements OnInit {
 
   getStatusColor(value: string): string {
     switch (value) {
-      case 'inactif' : {
+      case 'inactif': {
         return 'alert alert-warning';
       }
-      case 'actif' : {
+      case 'actif': {
         return 'alert alert-success';
       }
-      case 'encours' : {
+      case 'encours': {
         return 'alert alert-info';
       }
-      case 'suspendu' : {
+      case 'suspendu': {
         return 'alert alert-danger';
       }
-      default : {
+      default: {
         return 'alert alert-primary';
       }
     }

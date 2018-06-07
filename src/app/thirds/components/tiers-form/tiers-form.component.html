@@ -8,27 +8,27 @@
            validationGroup="{{ tierData }}">
 
 
-    <!--<dxi-item itemType="group" [colCount]="3" caption="Third party type" i18n-caption>
+    <dxi-item itemType="group" [colCount]="3" caption="Type agrégé" i18n-caption>
 
       <dxi-item editorType="dxCheckBox" dataField="types[0].service_provider">
         <dxo-label
-          text="Service provider" i18n-text="Fournisseur de prestation">
+          text="Fournisseur de prestation" i18n-text="Fournisseur de prestation">
         </dxo-label>
       </dxi-item>
 
       <dxi-item editorType="dxCheckBox" dataField="types[0].cutting_supplier">
         <dxo-label
-          text="Cutting supplier" i18n-text="Fournisseur de bouture">
+          text="Fournisseur de bouture" i18n-text="Fournisseur de bouture">
         </dxo-label>
       </dxi-item>
 
       <dxi-item editorType="dxCheckBox" dataField="types[0].aggregated" [checked]="true">
         <dxo-label
-          text="Aggregated" i18n-text="Agrégé">
+          text="Agrégé" i18n-text="Agrégé">
         </dxo-label>
       </dxi-item>
 
-    </dxi-item>-->
+    </dxi-item>
 
 
     <dxi-item itemType="group" caption="Informations Générale" [colCount]="2" i18n-caption>
@@ -80,11 +80,11 @@
           text="Adresse" i18n-text>
         </dxo-label>
       </dxi-item>
-      <dxi-item dataField="postal_code" editorType="dxNumberBox">
+      <dxi-item dataField="postal_code" editorType="dxNumberBox" [editorOptions]="{ value: 0, min: 0 }">
         <dxo-label
           text="Code postal" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="numeric" *ngIf="tier.postal_code" [min]="0" message="Vous ne pouvez pas avoir un code postal négatif."
+        <dxi-validation-rule type="numeric"  *ngIf="tier.postal_code" [min]="0" message="Vous ne pouvez pas avoir un code postal négatif."
                              i18n-message></dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="city">
@@ -132,7 +132,7 @@
         </dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="tel1" [editorOptions]="{
-                    mask: '00 0000 0000',
+                    mask: '00 000 00000',
                     useMaskedValue: true,
                     maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
                 }">
@@ -147,7 +147,7 @@
         </dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="tel2" [editorOptions]="{
-                    mask: '00 0000 0000',
+                    mask: '00 000 00000',
                     useMaskedValue: true,
                     maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
                 }">
@@ -172,11 +172,11 @@
           text="Situation Familiale" i18n-text>
         </dxo-label>
       </dxi-item>
-      <dxi-item dataField="children_number" editorType="dxNumberBox">
+      <dxi-item dataField="children_number" editorType="dxNumberBox" [editorOptions]="{ value: 0, min: 0 }">
         <dxo-label
           text="Nombre d'enfants" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="numeric" [min]="0" message="Vous ne pouvez pas avoir des enfants négatifs."
+        <dxi-validation-rule type="numeric" [min]="0"  message="Vous ne pouvez pas avoir des enfants négatifs."
                              i18n-message></dxi-validation-rule>
       </dxi-item>
 
@@ -199,11 +199,11 @@
     </dxi-item>
 
 
-    <!--<dxi-item itemType="group" [colCount]="2" caption="Billing" i18n-caption>
+    <dxi-item itemType="group" [colCount]="2" caption="Facturation" i18n-caption>
 
       <dxi-item dataField="bank_accounts[0].bank">
         <dxo-label
-          text="Bank name" i18n-text>
+          text="Nom de banque" i18n-text>
         </dxo-label>
       </dxi-item>
 
@@ -211,7 +211,7 @@
       <dxi-item dataField="bank_accounts[0].rib" [editorOptions]="{
                     mask: '000000 0000000000000000 00',
                     useMaskedValue: false,
-                    maskInvalidMessage: 'RIB is incorrect'
+                    maskInvalidMessage: 'RIB est obligatoire'
                 }">
         <dxo-label
           text="RIB" i18n-text>
@@ -219,10 +219,10 @@
         <dxi-validation-rule
           type="pattern"
           [pattern]="ribPattern"
-          message="RIB is incorrect" i18n-message>
+          message="RIB est obligatoire" i18n-message>
         </dxi-validation-rule>
       </dxi-item>
-    </dxi-item>-->
+    </dxi-item>
 
     <dxi-item dataField="morale" editorType="dxSwitch" (change)="onMoraleChanged($event)">
       <dxo-label

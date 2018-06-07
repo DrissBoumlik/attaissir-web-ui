@@ -57,6 +57,7 @@ export class WizardComponent implements OnInit {
   worthEditorOptions: any;
   expirationDateOptions: any;
   contracteditorOptions: any;
+  totalSupEditorOptions
 
   parcels: any[];
   maxYears: number;
@@ -84,10 +85,23 @@ export class WizardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.totalSupEditorOptions = {
+    };
     this.contracteditorOptions = {
       label: 'Type contrat',
       value: 'pluriannuel',
-      items: ['pluriannuel', 'annuel']
+      dataSource: [
+        {
+          Name: 'Pluriannuel',
+          Id: 'pluriannuel'
+        },
+        {
+          Name: 'Annuel',
+          Id: 'annuel'
+        }
+      ],
+      displayExpr: 'Name',
+      valueExpr: 'Id'
     };
     this.maxYears = 5;
     this.tierData = 'tierData';
@@ -100,7 +114,22 @@ export class WizardComponent implements OnInit {
     };
 
     this.worthEditorOptions = {
-      items: ['propritaire', 'location', 'procuration']
+      dataSource: [
+        {
+          Name: 'Propriété',
+          Id: 'propriété'
+        },
+        {
+          Name: 'Location',
+          Id: 'location'
+        },
+        {
+          Name: 'Procuration',
+          Id: 'procuration'
+        }
+      ],
+      displayExpr: 'Name',
+      valueExpr: 'Id'
     };
     this.allMode = 'allPages';
     this.checkBoxesMode = 'onClick';
@@ -389,12 +418,12 @@ export class WizardComponent implements OnInit {
         data = this.contractedArea.dataFormatter(data, false);
         this.groundsList = this.groundsList.map(ground => {
           return {
-              ground_id: ground.id,
-              mode_worth: ground.mode_worth,
-              agreement_id: contract['id']
+            ground_id: ground.id,
+            mode_worth: ground.mode_worth,
+            agreement_id: contract['id']
           };
         });
-        this.agreementGroundService.addAgreementGround({ 'agreement_grounds' : this.groundsList }).subscribe(d => {
+        this.agreementGroundService.addAgreementGround({ 'agreement_grounds': this.groundsList }).subscribe(d => {
           d = this.contractedArea.dataFormatter(d, false);
           this.router.navigate([`/contrats/afficher/${contract['id']}`]);
         }, error1 => {

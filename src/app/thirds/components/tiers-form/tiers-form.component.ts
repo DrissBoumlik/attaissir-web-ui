@@ -44,28 +44,28 @@ export class TiersFormComponent implements OnInit {
     this.education_level = {
       dataSource: [
         {
-          Name: 'Primary',
+          Name: 'Primaire',
           ID: 'primaire'
         },
         {
-          Name: 'Secondary school',
-          ID: 'secondaire college'
+          Name: 'Secondaire collège',
+          ID: 'secondaire collège'
         },
         {
-          Name: 'Secondary qualifying',
+          Name: 'Secondaire qualifiant',
           ID: 'secondaire qualifiant'
         },
         {
-          Name: 'High school',
+          Name: 'Bachelier',
           ID: 'bachelier'
         },
         {
-          Name: 'Higher education',
-          ID: 'enseignement superieur'
+          Name: 'Enseignement supérieur',
+          ID: 'enseignement supérieur'
         },
         {
-          Name: 'Illiterate',
-          ID: 'ignorant'
+          Name: 'Sans',
+          ID: 'aucun'
         }
       ],
       displayExpr: 'Name',
@@ -75,14 +75,14 @@ export class TiersFormComponent implements OnInit {
       dataSource: [
         {
           Name: 'Célibataire',
-          ID: 'celibataire'
+          ID: 'célibataire'
         },
         {
-          Name: 'Marier',
+          Name: 'Marié',
           ID: 'marier'
         },
         {
-          Name: 'Divorcer',
+          Name: 'Divorcé',
           ID: 'divorcer'
         }
       ],
@@ -119,15 +119,15 @@ export class TiersFormComponent implements OnInit {
           ID: 'virement'
         },
         {
-          Name: 'Chéque',
-          ID: 'cheque'
+          Name: 'Chèque',
+          ID: 'chèque'
         }
       ],
       layout: 'horizontal',
       displayExpr: 'Name',
       valueExpr: 'ID'
     };
-    this.phonePattern = /^0[5|6|7]\s*\d{4}\s*\d{4}$/;
+    this.phonePattern = /^0[5|6|7]\s*\d{3}\s*\d{5}$/;
     this.ribPattern = /^\d{6}\s*\d{16}\s*\d{2}$/;
   }
 

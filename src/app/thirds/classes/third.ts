@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
 import { Card } from '../../contracts/classes/card';
-import {Document} from './document';
+import { Document } from './document';
 
 
 @Injectable({

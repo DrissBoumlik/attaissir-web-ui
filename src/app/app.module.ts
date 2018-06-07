@@ -13,8 +13,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { ContractsModule } from './contracts/contracts.module';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
-import {TokenInterceptor} from './auth/_services/token.interceptors';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { TokenInterceptor } from './auth/_services/token.interceptors';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
   DxDataGridModule,
   DxFileUploaderModule,
@@ -61,11 +61,11 @@ import {
     useValue: 'fr'
   },
     ScriptLoaderService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

@@ -48,10 +48,10 @@ export class AuthComponent implements OnInit {
       'assets/vendors/base/vendors.bundle.js',
       'assets/demo/demo12/base/scripts.bundle.js'], true).then(() => {
         Helpers.setLoading(false);
-      this.handleFormSwitch();
-      this.handleSignInFormSubmit();
-      this.handleSignUpFormSubmit();
-      this.handleForgetPasswordFormSubmit();
+        this.handleFormSwitch();
+        this.handleSignInFormSubmit();
+        this.handleSignUpFormSubmit();
+        this.handleForgetPasswordFormSubmit();
       });
     // Set page height
     document.getElementById('m_login').style.height = (screen.height - 118) + 'px';
