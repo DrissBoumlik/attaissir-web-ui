@@ -6,17 +6,20 @@ import { Injectable } from '@angular/core';
 
 export class Structure {
   id?: number;
-  label: string;
+  name: string;
   code: string;
+  email: string;
   city: string;
   address: string;
-  postal_code: number;
+  zip_code: number;
   tel1: string;
   tel2: string;
   fax: string;
-  email: string;
   logo: string;
-  type: any;
+  type: any; // 'site', 'division'
+  parameters?: string;
+  costum_fields?: string;
+  parent_id?: number;
   created_at?: Date;
   updated_at?: Date;
 

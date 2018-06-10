@@ -38,6 +38,7 @@ export class HeaderNavComponent implements OnInit, AfterViewInit {
 
   changeTenant = (id) => {
     localStorage.setItem('tenantId', id);
+    this.tenant = localStorage.getItem('tenantId');
   }
 
 }

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 export class Campaign {
   id?: number;
-  label: number;
+  name: string;
   start_date: Date;
   end_date: Date;
   description: string;

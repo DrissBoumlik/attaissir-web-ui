@@ -51,7 +51,7 @@ import {JasperoAlertsModule} from '@jaspero/ng-alerts';
     DxSelectBoxModule,
     DxPopupModule,
     JasperoAlertsModule.forRoot(),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot()
   ],
   exports: [
     DxTemplateModule,

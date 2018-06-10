@@ -3,6 +3,7 @@ import { locale } from 'devextreme/localization';
 import 'devextreme-intl';
 import { Third } from '../../../classes/third';
 import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {Helper} from '../../../classes/helper';
 
 @Component({
   selector: 'app-tiers-form',
@@ -43,24 +44,24 @@ export class TiersFormComponent implements OnInit {
       this.vars = data;
 
       this.education_degree = {
-        dataSource: this.dataSourceformatter(this.vars['education_degree']),
+        dataSource: Helper.dataSourceformatter(this.vars['education_degree']),
         displayExpr: 'Name',
         valueExpr: 'ID'
       };
 
       this.civil_status = {
-        dataSource: this.dataSourceformatter(this.vars['civil_status']),
+        dataSource: Helper.dataSourceformatter(this.vars['civil_status']),
         displayExpr: 'Name',
         valueExpr: 'ID'
       };
 
       this.sexe = {
-        dataSource: this.dataSourceformatter(this.vars['sexe']),
+        dataSource: Helper.dataSourceformatter(this.vars['sexe']),
         displayExpr: 'Name',
         valueExpr: 'ID'
       };
       this.payment_method = {
-        dataSource: this.dataSourceformatter(this.vars['payment_method']),
+        dataSource: Helper.dataSourceformatter(this.vars['payment_method']),
         layout: 'horizontal',
         displayExpr: 'Name',
         valueExpr: 'ID'
@@ -91,15 +92,6 @@ export class TiersFormComponent implements OnInit {
     this.ribKeyPattern = /^\d{2}$/;
   }
 
-
-  dataSourceformatter = (data) => {
-    return Object.keys(data).map((key) => {
-      return {
-        Name: data[key],
-        ID: key
-      };
-    });
-  }
 
   /**
    * Update civility value

@@ -22,4 +22,18 @@ export class Helper {
     params += `&requireTotalCount=1`;
     return params;
   }
+
+  /**
+   * Map Array and return a Dx datasource
+   * @param data
+   * @returns {{Name: any; ID: string}[]}
+   */
+  public static dataSourceformatter = (data) => {
+    return Object.keys(data).map((key) => {
+      return {
+        Name: data[key],
+        ID: key
+      };
+    });
+  }
 }

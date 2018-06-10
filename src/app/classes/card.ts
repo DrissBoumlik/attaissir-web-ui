@@ -8,25 +8,15 @@ import { Third } from './third';
 
 export class Card {
   id?: number;
-  code_rfid?: string;
-  serial: string;
+  rfid?: string;
+  name: string;
   status: string; // ['actif', 'inactif', 'perdue']
   description: string;
   printed_at: Date;
-  perimeter: string;
-  region: string;
-  borough: string;
-  cda: string;
-  zone: string;
-  sector: string;
-  block: string;
-  cin: string;
-  last_name: string;
-  first_name: string;
-  social_reason: string;
-  ice: 180250172344;
-  structure: Structure;
-  third_party?: Third;
+  costum_fields: string;
+  soil_id?: number;
+  structure_id?: number;
+  third_party_id?: number;
   created_at?: Date;
   updated_at?: Date;
 

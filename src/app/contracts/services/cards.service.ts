@@ -27,6 +27,14 @@ export class CardsService {
   }
 
   /**
+   * Get a collection of Cards
+   * @returns {Observable<Card[]>}
+   */
+  getCardsDx(params: any): Observable<Card[]> {
+    return this.http.post<Card[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), this.options);
+  }
+
+  /**
    * Get a Card
    * @param id
    * @returns {Observable<Card[]>}

@@ -48,20 +48,6 @@ export class ListComponent implements OnInit {
           });
       }
     });
-    /*
-    this.tierService.getThirds().subscribe(third_parties => {
-      this.third_parties = this.tiers = this.tierService.dataFormatter(third_parties, false);
-      this.third_parties = this.third_parties.map(val => {
-        delete val.civility;
-        delete val.code_siam;
-        delete val.types;
-
-        val = this.renameObj(val, 'rc', 'Business register');
-        val = this.renameObj(val, 'if', 'Tax identification');
-        return val;
-      });
-      this.third_parties_count = this.third_parties.length;
-    });*/
   }
 
   /**

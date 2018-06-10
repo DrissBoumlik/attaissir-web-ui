@@ -4,7 +4,7 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Contrat Agrégat-Agrégés {{ contract.code }}</h2>
-      <a class="siam-header-btn-new" href="javascript::void(0)" (click)="downloadContract()" download=""><i
+      <a class="siam-header-btn-new" href="#" (click)="downloadContract()" download=""><i
         class="fa fa-download"></i></a>
     </div>
   </div>
@@ -113,7 +113,7 @@
                       Type de contract
                     </label>
                     <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="contract?.contrat_type" readonly>
+                      <input class="form-control m-input" type="text" [value]="contract?.type" readonly>
                     </div>
                   </div>
                   <div class="form-group m-form__group row">
@@ -299,7 +299,7 @@
                             style="padding-top: 2vh"
                             [noDataText]="'Le contrat ne dispose pas de  campagne'"
                             keyExpr="id">
-                <dxi-column dataField="campaign.label" caption="Libelle"></dxi-column>
+                <dxi-column dataField="campaign.name" caption="Libelle"></dxi-column>
                 <!--<dxi-column dataField="campaign.start_date" caption="Date de début"></dxi-column>
                 <dxi-column dataField="campaign.end_date" caption="Date de fin"></dxi-column>-->
                 <dxi-column dataField="contracted_surface" caption="Surface contracté"></dxi-column>
@@ -338,7 +338,7 @@
                     </label>
                     <div class="col-7">
                       <input class="form-control m-input" type="text"
-                             [value]="structure?.label ? structure?.label : 'N/A'"
+                             [value]="structure?.name ? structure?.name : 'N/A'"
                              readonly>
                     </div>
                   </div>
@@ -375,7 +375,7 @@
                     </label>
                     <div class="col-7">
                       <input class="form-control m-input" type="text"
-                             [value]="structure?.postal_code ? structure?.postal_code : 'N/A'" readonly>
+                             [value]="structure?.zip_code ? structure?.zip_code : 'N/A'" readonly>
                     </div>
                   </div>
                   <div class="form-group m-form__group row">

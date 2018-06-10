@@ -32,9 +32,10 @@
                 <a href="#" (click)="showMenu()" (blur)="hideMenu()" class="m-nav__link m-dropdown__toggle">
                     <!--<a href="#" class="m-nav__link m-dropdown__toggle">-->
                     <span class="siam-user-pic-wrapper">
-                        <span class="siam-user-pic">
+                      <avatar [email]="currentUser.email" [displayType]="'circle'" [size]="30"></avatar>
+                        <!--<span class="siam-user-pic">
                           <span>{{ currentUser.name }}</span>
-                        </span>
+                        </span>-->
                     </span>
                     <span class="m-topbar__username">{{ currentUser.name }}</span>
                 </a>
@@ -44,8 +45,7 @@
                     <div class="m-dropdown__header m--align-center">
                       <div class="m-card-user m-card-user--skin-light">
                         <div class="m-card-user__pic">
-                          <img src="./assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless"
-                               alt=""/>
+                          <avatar [email]="currentUser.email" [displayType]="'circle'"></avatar>
                         </div>
                         <div class="m-card-user__details">
 													<span class="m-card-user__name m--font-weight-500">
@@ -78,13 +78,12 @@
 															</span>
                             </a>
                           </li>
-                          <li class="m-nav__item">
-                            <a  href="#" class="m-nav__link" *ngFor="let t of tenants; let i = index">
-                              <i class="m-nav__link-icon flaticon-business"></i>
+                          <li class="m-nav__item" *ngFor="let t of tenants; let i = index">
+                            <a  href="#" class="m-nav__link">
+                              <i class="m-nav__link-icon flaticon-location"></i>
                               <span class="m-nav__link-text" (click)="changeTenant(t.id)">
 																{{ t.libelle }}
-                                <span *ngIf="t.id === tenant">
-                                  (current)
+                                <span *ngIf="t.id == tenant" class="current-site fa fa-check text-success">
                                 </span>
 															</span>
                             </a>
