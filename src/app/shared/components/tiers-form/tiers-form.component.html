@@ -126,17 +126,6 @@
         </dxo-label>
       </dxi-item>
 
-      <dxi-item dataField="email">
-        <dxo-label
-          text="Email" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule *ngIf="tier.tel1"
-          type="email"
-          message="Ce n'est pas une adresse email valide."
-          i18n-message
-        >
-        </dxi-validation-rule>
-      </dxi-item>
       <dxi-item dataField="tel1" [editorOptions]="{
                     mask: '00 000 00000',
                     useMaskedValue: true,
@@ -164,6 +153,18 @@
                              type="pattern"
                              [pattern]="phonePattern"
                              message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
+        </dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="email">
+        <dxo-label
+          text="Email" i18n-text>
+        </dxo-label>
+        <dxi-validation-rule *ngIf="tier.tel1"
+                             type="email"
+                             message="Ce n'est pas une adresse email valide."
+                             i18n-message
+        >
         </dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="education_degree" editorType="dxSelectBox" [editorOptions]="education_degree">

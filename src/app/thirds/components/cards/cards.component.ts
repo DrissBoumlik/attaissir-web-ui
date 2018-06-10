@@ -27,7 +27,8 @@ export class CardsComponent implements OnInit {
       });
     },
       (err) => {
-        this.toastr.error(err.error.message);
+      throw err;
+        // this.toastr.error(err.error.message);
       });
   }
 
@@ -37,7 +38,8 @@ export class CardsComponent implements OnInit {
         this.toastr.success('Le compte bancaire a été modifié avec succès.');
       },
       (err) => {
-        this.toastr.error(err.error.message);
+        throw err;
+        // this.toastr.error(err.error.message);
       }
     );
   }
@@ -48,7 +50,6 @@ export class CardsComponent implements OnInit {
       return { id: card.id };
     });
     console.log(e.selectedItems);
-
   }
 
   selectAction = (e) => {
@@ -65,7 +66,8 @@ export class CardsComponent implements OnInit {
       console.log(d);
       this.cards = d['data'];
     }, err => {
-      this.toastr.error(err.error.message);
+      throw err;
+      // this.toastr.error(err.error.message);
     });
   }
 
@@ -77,7 +79,8 @@ export class CardsComponent implements OnInit {
       },
       (err) => {
         e.cancel = false;
-        this.toastr.error(err.error.message);
+        throw err;
+        // this.toastr.error(err.error.message);
       }
     );
   }
