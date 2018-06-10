@@ -32,7 +32,8 @@ export class AddComponent implements OnInit {
         `Nouveau agrégé ajouté avec succès.`);
       this.router.navigate(['/tiers/afficher/' + data.id]);
     }, err => {
-      this.toastr.error(err.error.message);
+      throw err;
+      // this.toastr.error(err.error.message);
     });
     e.preventDefault();
   };

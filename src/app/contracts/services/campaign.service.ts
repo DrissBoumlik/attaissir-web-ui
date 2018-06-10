@@ -22,8 +22,8 @@ export class CampaignService {
    * Get a collection of Campaigns
    * @returns {Observable<Campaign[]>}
    */
-  getCampaigns(): Observable<Campaign[]> {
-    return this.http.get<Campaign[]>(`${environment.apiUrl}/${this.routeName}`);
+  getCampaigns(params?: string): Observable<Campaign[]> {
+    return this.http.get<Campaign[]>(`${environment.apiUrl}/${this.routeName}${params}`);
   }
 
 

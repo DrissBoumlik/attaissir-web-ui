@@ -20,10 +20,11 @@ export class AgreementGroundsService {
 
   /**
    * Get a collection of AgreementGrounds
+   * @param {string} params
    * @returns {Observable<AgreementGround[]>}
    */
-  getAgreementGrounds(): Observable<AgreementGround[]> {
-    return this.http.get<AgreementGround[]>(`${environment.apiUrl}/${this.routeName}`);
+  getAgreementGrounds(params?: string): Observable<AgreementGround[]> {
+    return this.http.get<AgreementGround[]>(`${environment.apiUrl}/${this.routeName}${params}`);
   }
 
 

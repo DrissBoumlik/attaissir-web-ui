@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {NgModule, LOCALE_ID, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ThemeComponent } from './theme/theme.component';
@@ -23,7 +23,8 @@ import {
   DxSelectBoxModule,
   DxTemplateModule
 } from 'devextreme-angular';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {SiamErrorHandler} from './classes/siam-error-handler';
+import {JasperoAlertsModule} from '@jaspero/ng-alerts';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DxLookupModule,
     DxFileUploaderModule,
     DxSelectBoxModule,
+    DxPopupModule,
+    JasperoAlertsModule.forRoot(),
     ToastrModule.forRoot(),
   ],
   exports: [
@@ -66,6 +69,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
+  },
+  {
+    provide: ErrorHandler,
+    useClass: SiamErrorHandler
   }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

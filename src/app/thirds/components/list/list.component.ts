@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ThirdsService } from '../../services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
-import { Third } from '../../../classes/third';
+import CustomStore from 'devextreme/data/custom_store';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-list',
@@ -24,11 +25,30 @@ export class ListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService) {
-
+    this.third_parties = {};
     this.third_parties_count = 0;
   }
 
+  getGender = (data) => {
+    return (data.gender === 'm') ? 'fa-male' : 'fa-female';
+  }
+
   ngOnInit() {
+    this.third_parties.store = new CustomStore({
+      load: (loadOptions: any) => {
+        return this.tierService.getThirdsDx(loadOptions)
+          .toPromise()
+          .then(response => {
+            console.log(response);
+            const json = response;
+            return json;
+          })
+          .catch(error => {
+            throw error;
+          });
+      }
+    });
+    /*
     this.tierService.getThirds().subscribe(third_parties => {
       this.third_parties = this.tiers = this.tierService.dataFormatter(third_parties, false);
       this.third_parties = this.third_parties.map(val => {
@@ -41,7 +61,7 @@ export class ListComponent implements OnInit {
         return val;
       });
       this.third_parties_count = this.third_parties.length;
-    });
+    });*/
   }
 
   /**

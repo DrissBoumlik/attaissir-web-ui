@@ -12,50 +12,55 @@ import { Document } from './document';
 export class Third {
 
   id?: number;
-  types: any;
+
   code_as400: string;
-  civility: string;
-  social_reason: string;
+  type: string; // 'legal', 'natural'
+  company_name: string;
   rc: string;
   patent_number: string;
   if: string;
   ice: string;
+  cin: string;
   last_name: string;
   first_name: string;
-  ar_last_name: string;
-  ar_first_name: string;
-  cin: string;
-  date_birth: Date;
-  date_death: Date;
-  gender: string;
+  last_name_ar: string;
+  first_name_ar: string;
+  email: string;
+  birth_date: Date;
+  death_date: Date;
+  sexe: string; // 'f', 'm'
   address: string;
   city: string;
-  street: string;
+  district: string;
+  commandment: string;
   commune: string;
-  postal_code: number;
+  region: string;
+  zip_code: number;
   tel1: string;
   tel2: string;
-  email: string;
-  situation: string;
+  civil_status: string; // 'single', 'married', 'divorce'
   children_number: number;
-  assurance: string;
-  retraite: string;
-  education_level: string;
-  tva_code: number;
-  payement_mode: string;
-  dette: number;
-  etat: boolean;
-  isCorporation: boolean;
-  cards: Card[];
-  documents: Document[];
-  actionsPermission: any;
-  bank_accounts: any;
+  is_insured: boolean;
+  is_retired: boolean;
+  tva_code: string;
+  education_degree: string; // 'primary', 'junior', 'senior', 'higher', 'none'
+  payment_method: string; // 'transfer', 'cheque'
+  bank_code: string;
+  bank_account_number: string;
+  bank_rib_key: string;
+  bank_name: string;
+  costum_fields: string;
+
   morale?: boolean;
-  borough: string;
-  commandment: string;
-  region: string;
+  third_party_structure_types?: string;
+
+  documents: Document[];
+  cards?: Card[];
+  types?: any;
   created_at?: Date;
   updated_at?: Date;
+
+
 
   constructor() {
     /*this.types = [
@@ -71,11 +76,10 @@ export class Third {
           rib: null
       }
     ];*/
-    this.etat = true;
-    this.isCorporation = false;
-    this.payement_mode = 'virement';
+    this.payment_method = 'transfer';
     this.morale = false;
-    this.civility = (this.morale) ? 'morale' : 'physique';
+    this.third_party_structure_types = 'aggregated';
+    this.type = (this.morale) ? 'legal' : 'natural';
   }
   /**
    * Devextreme data source

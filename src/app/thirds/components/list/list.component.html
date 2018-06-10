@@ -20,7 +20,7 @@
     [columnHidingEnabled]="true"
     [allowColumnResizing]="false"
     [allowColumnReordering]="true"
-    [remoteOperations]="{ groupPaging: true }"
+    [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
     (onEditingStart)="onStartEdit($event.data.id)"
     (onRowRemoving)="onRemoveThird($event.data.id)"
 >
@@ -67,13 +67,20 @@
 
     <dxo-search-panel [visible]="true"></dxo-search-panel>
 
-    <dxo-group-panel [visible]="true" emptyPanelText="Faites glisser un en-tête de colonne ici pour le grouper par cette colonne"></dxo-group-panel>
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
     <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
     <dxi-column dataField="first_name" allowHiding="true" hidden="hidden" caption="Prénom" >
     </dxi-column>
     <dxi-column dataField="last_name" caption="Nom" i18n-caption>
     </dxi-column>
+    <dxi-column dataField="last_name_ar" caption="Nom (Arabe)" [visible]="false" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="first_name_ar" caption="Prénom (Arabe)" [visible]="false" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="date_birth" caption="Date de naissance" [visible]="false" i18n-caption>
+    </dxi-column>
+
     <!--<dxi-column dataField="cda" caption="CDA" i18n-caption>
     </dxi-column>
     <dxi-column dataField="zone" caption="ZONE" i18n-caption>
@@ -83,9 +90,30 @@
     <div *dxTemplate="let data of 'cellCard'">
       <i class="fa fa-id_card fa-5x" *ngIf=""></i>
     </div>-->
+
+    <dxi-column dataField="gender" cellTemplate="cellTemplate1" [visible]="false" caption="Genre" allowColumnResizing="true">
+    </dxi-column>
+    <div *dxTemplate="let data of 'cellTemplate1'">
+      <i style="font-size: 150%; align-content: center; cursor: pointer" class="fa {{ getGender(data.data) }} fa-5x"></i>
+    </div>
     <dxi-column dataField="cin" caption="CIN" i18n-caption>
     </dxi-column>
+
+    <dxi-column dataField="tel1" caption="Téléphone 1" [visible]="false" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="tel2" caption="Téléphone 2" [visible]="false" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="email" caption="Email" [visible]="false" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="address" caption="Adress" [visible]="false" i18n-caption>
+    </dxi-column>
     <dxi-column dataField="city" caption="Ville" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="commune" caption="Commune" [visible]="false" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="situation" caption="Situation" [visible]="false" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="children_number" caption="Nombre d'enfants" [visible]="false" i18n-caption>
     </dxi-column>
     <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="Détails" allowColumnResizing="true">
     </dxi-column>

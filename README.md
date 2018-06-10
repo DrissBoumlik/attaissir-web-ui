@@ -59,12 +59,14 @@ snyk test
 
 # Workarounds
 
-Edit in file `node_modules/jszip/lib/readable-stream-browser.js`
-```javascript
- // Change
- module.exports = require("stream");
- // To  
- module.exports = require("readable-stream");
+
+ Copy the file in
+ 
+ `ng-alerts.metadata.json`
+ 
+ To
+ 
+ `node_modules/@jaspero/ng-alerts`
 
 ```
 

@@ -30,12 +30,13 @@ export class AuthenticationService {
   /*
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    // Check whether the token is expired and return
-    // true or false
     return !this.jwtHelper.isTokenExpired(token);
   }*/
 
   getToken = () => {
     return JSON.parse(localStorage.getItem('currentUser')).data.token;
+  }
+  getTanent = () => {
+    return JSON.parse(localStorage.getItem('tenantId'));
   }
 }

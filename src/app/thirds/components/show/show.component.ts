@@ -42,7 +42,7 @@ export class ShowComponent implements OnInit {
         this.thirdService.getThird(+params.id).subscribe(
           (res: any) => {
             this.third = this.thirdService.dataFormatter(res, false);
-            this.bank_accounts = this.third.bank_accounts;
+            this.bank_accounts = this.third.bank_account_number;
 
           },
           (error) => {
@@ -72,9 +72,9 @@ export class ShowComponent implements OnInit {
       () => {
         this.toaster.success('Le compte bancaire a été supprimé avec succès.');
         e.cancel = false;
-        this.third.bank_accounts = this.third.bank_accounts.filter(ba => {
+        /*this.third.bank_accounts = this.third.bank_account_number.filter(ba => {
           return ba.id !== e.data.id;
-        });
+        });*/
       },
       (err) => {
         this.toaster.error(err.message);

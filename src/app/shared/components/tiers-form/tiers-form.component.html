@@ -7,12 +7,12 @@
            labelLocation="top"
            validationGroup="{{ tierData }}">
 
+    <!--<dxi-item itemType="group" [colCount]="3" caption="Type d'agrégé" i18n-caption>
 
-    <dxi-item itemType="group" [colCount]="3" caption="Type agrégé" i18n-caption>
-
-      <dxi-item editorType="dxCheckBox" dataField="types[0].service_provider">
+      <dxi-item editorType="dxCheckBox" dataField="types[0].mechanization_provider"
+                *ngFor="let v of vars.third_party_structure_types">
         <dxo-label
-          text="Fournisseur de prestation" i18n-text="Fournisseur de prestation">
+          text="{{ v }}" i18n-text="Fournisseur de prestation">
         </dxo-label>
       </dxi-item>
 
@@ -28,8 +28,7 @@
         </dxo-label>
       </dxi-item>
 
-    </dxi-item>
-
+    </dxi-item>-->
 
     <dxi-item itemType="group" caption="Informations Générale" [colCount]="2" i18n-caption>
 
@@ -49,14 +48,14 @@
       </dxi-item>
 
       <dxi-item itemType="group" caption="" [colCount]="2" i18n-caption>
-        <dxi-item dataField="ar_first_name">
+        <dxi-item dataField="first_name_ar">
           <dxo-label
             text="Prénom (Arabe)" i18n-text>
           </dxo-label>
           <dxi-validation-rule type="required" message="Prénom (Arabe) est obligatoire"
                                i18n-message></dxi-validation-rule>
         </dxi-item>
-        <dxi-item dataField="ar_last_name" [editorOptions]="{ placeholder: '' }">
+        <dxi-item dataField="last_name_ar" [editorOptions]="{ placeholder: '' }">
           <dxo-label
             text="Nom (Arabe)" i18n-text>
           </dxo-label>
@@ -68,23 +67,23 @@
       <dxi-item dataField="cin" [disabled]="isEdit">
         <dxi-validation-rule type="required" message="CIN est obligatoire" i18n-message></dxi-validation-rule>
       </dxi-item>
-      <dxi-item dataField="gender"
-                editorType="dxSelectBox" [editorOptions]="gender">
+      <dxi-item dataField="sexe"
+                editorType="dxSelectBox" [editorOptions]="sexe">
         <dxo-label
-          text="Gender" i18n-text>
+          text="Sexe" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="required" message="Gender est obligatoire" i18n-message></dxi-validation-rule>
+        <dxi-validation-rule type="required" message="Sexe est obligatoire" i18n-message></dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="address">
         <dxo-label
           text="Adresse" i18n-text>
         </dxo-label>
       </dxi-item>
-      <dxi-item dataField="postal_code" editorType="dxNumberBox" [editorOptions]="{ value: 0, min: 0 }">
+      <dxi-item dataField="zip_code" editorType="dxNumberBox" [editorOptions]="{ min: 0 }">
         <dxo-label
           text="Code postal" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="numeric"  *ngIf="tier.postal_code" [min]="0" message="Vous ne pouvez pas avoir un code postal négatif."
+        <dxi-validation-rule type="numeric"  *ngIf="tier.zip_code" [min]="0" message="Vous ne pouvez pas avoir un code postal négatif."
                              i18n-message></dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="city">
@@ -93,7 +92,7 @@
         </dxo-label>
       </dxi-item>
 
-      <dxi-item dataField="borough">
+      <dxi-item dataField="district">
         <dxo-label
           text="Arrondissement" i18n-text>
         </dxo-label>
@@ -108,6 +107,13 @@
       <dxi-item dataField="region">
         <dxo-label
           text="Région" i18n-text>
+        </dxo-label>
+      </dxi-item>
+
+
+      <dxi-item dataField="commune">
+        <dxo-label
+          text="Commune" i18n-text>
         </dxo-label>
       </dxi-item>
 
@@ -160,14 +166,14 @@
                              message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
         </dxi-validation-rule>
       </dxi-item>
-      <dxi-item dataField="education_level" editorType="dxSelectBox" [editorOptions]="education_level">
+      <dxi-item dataField="education_degree" editorType="dxSelectBox" [editorOptions]="education_degree">
         <dxo-label
           text="Niveau d`instruction" i18n-text>
         </dxo-label>
       </dxi-item>
 
-      <dxi-item dataField="situation"
-                editorType="dxSelectBox" [editorOptions]="situation">
+      <dxi-item dataField="civil_status"
+                editorType="dxSelectBox" [editorOptions]="civil_status">
         <dxo-label
           text="Situation Familiale" i18n-text>
         </dxo-label>
@@ -181,17 +187,17 @@
       </dxi-item>
 
 
-      <dxi-item editorType="dxCheckBox" dataField="assurance">
+      <dxi-item editorType="dxCheckBox" dataField="is_insured">
         <dxo-label
           text="Assurance" i18n-text>
         </dxo-label>
       </dxi-item>
-      <dxi-item editorType="dxCheckBox" dataField="retraite">
+      <dxi-item editorType="dxCheckBox" dataField="is_retired">
         <dxo-label
           text="Retraite" i18n-text>
         </dxo-label>
       </dxi-item>
-      <dxi-item dataField="payement_mode" editorType="dxRadioGroup" [editorOptions]="payment_mode" [colSpan]="2">
+      <dxi-item dataField="payment_method" editorType="dxRadioGroup" [editorOptions]="payment_method" [colSpan]="2">
         <dxo-label
           text="Mode de paiement" i18n-text>
         </dxo-label>
@@ -200,26 +206,54 @@
 
 
     <dxi-item itemType="group" [colCount]="2" caption="Facturation" i18n-caption>
-
-      <dxi-item dataField="bank_accounts[0].bank">
+      <dxi-item dataField="bank_name">
         <dxo-label
           text="Nom de banque" i18n-text>
         </dxo-label>
       </dxi-item>
 
-
-      <dxi-item dataField="bank_accounts[0].rib" [editorOptions]="{
-                    mask: '000000 0000000000000000 00',
+      <dxi-item dataField="bank_account_number" [editorOptions]="{
+                    mask: '0000000000000000',
                     useMaskedValue: false,
-                    maskInvalidMessage: 'RIB est obligatoire'
+                    maskInvalidMessage: 'Numero compte banquaire est invalide'
                 }">
         <dxo-label
-          text="RIB" i18n-text>
+          text="Numero compte banquaire" i18n-text>
         </dxo-label>
-        <dxi-validation-rule
+        <dxi-validation-rule *ngIf="tier.bank_account_number"
           type="pattern"
-          [pattern]="ribPattern"
-          message="RIB est obligatoire" i18n-message>
+          [pattern]="accountBankPattern"
+          message="Numero compte banquaire est invalide" i18n-message>
+        </dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="bank_code" [editorOptions]="{
+                    mask: '000000',
+                    useMaskedValue: false,
+                    maskInvalidMessage: 'Numero compte banquaire est invalide'
+                }">
+        <dxo-label
+          text="Code banquaire" i18n-text>
+        </dxo-label>
+        <dxi-validation-rule *ngIf="tier.bank_account_number"
+                             type="pattern"
+                             [pattern]="codeBankPattern"
+                             message="Numero compte banquaire est invalide" i18n-message>
+        </dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="bank_rib_key" editorType="dxNumberBox"  [editorOptions]="{
+                    mask: '00',
+                    useMaskedValue: false,
+                    maskInvalidMessage: 'Numero compte banquaire est invalide'
+                }">
+        <dxo-label
+          text="Clé RIB banquaire" i18n-text>
+        </dxo-label>
+        <dxi-validation-rule *ngIf="tier.bank_account_number"
+                             type="pattern"
+                             [pattern]="ribKeyPattern"
+                             message="Clé RIB banquaire est invalide" i18n-message>
         </dxi-validation-rule>
       </dxi-item>
     </dxi-item>
@@ -233,7 +267,7 @@
     <dxi-item itemType="group" caption="Société"
               [colCount]="2" i18n-caption="Personne morale" *ngIf="tier.morale">
 
-      <dxi-item dataField="social_reason">
+      <dxi-item dataField="company_name">
         <dxo-label
           text="Raison sociale">
         </dxo-label>
@@ -269,7 +303,6 @@
           text="Code TVA" i18n-text>
         </dxo-label>
       </dxi-item>
-
 
     </dxi-item>
 

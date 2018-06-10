@@ -382,7 +382,9 @@ export class WizardComponent implements OnInit {
   }
 
   listSelectionChanged = (e) => {
-    this.currentThird = e.addedItems[0];
+    if (!this.isEdit) {
+      this.currentThird = e.addedItems[0];
+    }
   }
 
   logEvent(e) {
@@ -416,14 +418,15 @@ export class WizardComponent implements OnInit {
       });
       this.contractedArea.addMultiAreas({ 'contracted_surfaces': this.campaigns }).subscribe(data => {
         data = this.contractedArea.dataFormatter(data, false);
-        this.groundsList = this.groundsList.map(ground => {
+        const groundsList = this.groundsList.map(ground => {
           return {
             ground_id: ground.id,
             mode_worth: ground.mode_worth,
-            agreement_id: contract['id']
+            agreement_id: contract['id'],
+            annuel_surface: ground.annuel_surface
           };
         });
-        this.agreementGroundService.addAgreementGround({ 'agreement_grounds': this.groundsList }).subscribe(d => {
+        this.agreementGroundService.addAgreementGround({ 'agreement_grounds': groundsList }).subscribe(d => {
           d = this.contractedArea.dataFormatter(d, false);
           this.router.navigate([`/contrats/afficher/${contract['id']}`]);
         }, error1 => {

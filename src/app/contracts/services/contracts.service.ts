@@ -18,7 +18,7 @@ export class ContractsService {
   };
 
   constructor(public http: HttpClient) {
-    this.routeName = 'agreements';
+    this.routeName = 'contracts';
   }
 
   /**

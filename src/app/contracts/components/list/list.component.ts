@@ -5,6 +5,8 @@ import { Third } from '../../../classes/third';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
+import DevExpress from 'devextreme/bundles/dx.all';
+import CustomStore = DevExpress.data.CustomStore;
 
 @Component({
   selector: 'app-list-contract',
@@ -21,6 +23,32 @@ export class ListComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute) {
+    /*this.contracts.store = new CustomStore({
+      load: function (loadOptions: any) {
+        let params = '?';
+
+        params += 'skip=' + loadOptions.skip || 0;
+        params += '&take=' + loadOptions.take || 12;
+
+        if(loadOptions.sort) {
+          params += '&orderby=' + loadOptions.sort[0].selector;
+          if(loadOptions.sort[0].desc) {
+            params += ' desc';
+          }
+        }
+        return http.get('https://js.devexpress.com/Demos/WidgetsGallery/data/orderItems' + params)
+          .toPromise()
+          .then(response => {
+            var json = response.json();
+
+            return {
+              data: json.items,
+              totalCount: json.totalCount
+            }
+          })
+          .catch(error => { throw 'Data Loading Error' });
+      }
+    });*/
   }
 
   ngOnInit() {

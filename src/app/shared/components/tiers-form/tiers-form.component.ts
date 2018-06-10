@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { locale } from 'devextreme/localization';
 import 'devextreme-intl';
 import { Third } from '../../../classes/third';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
 
 @Component({
   selector: 'app-tiers-form',
@@ -20,88 +21,60 @@ export class TiersFormComponent implements OnInit {
   @Input() readOnly?: boolean;
 
   buttonOptions: any;
-  education_level: any;
-  situation: any;
+  vars: any;
+  education_degree: any;
+  civil_status: any;
   dateOptions: any;
-  gender: any;
-  payment_mode: any;
+  sexe: any;
+  payment_method: any;
   phonePattern: any;
-  ribPattern: any;
+  codeBankPattern: any;
+  accountBankPattern: any;
+  ribKeyPattern: any;
   locale: string;
   tierData: string;
 
-  constructor() {
+  constructor(public thirdsServices: ThirdsService) {
     locale('fr');
   }
 
   ngOnInit() {
+    this.thirdsServices.getThirdsVars().subscribe(data => {
+      this.vars = data;
+
+      this.education_degree = {
+        dataSource: this.dataSourceformatter(this.vars['education_degree']),
+        displayExpr: 'Name',
+        valueExpr: 'ID'
+      };
+
+      this.civil_status = {
+        dataSource: this.dataSourceformatter(this.vars['civil_status']),
+        displayExpr: 'Name',
+        valueExpr: 'ID'
+      };
+
+      this.sexe = {
+        dataSource: this.dataSourceformatter(this.vars['sexe']),
+        displayExpr: 'Name',
+        valueExpr: 'ID'
+      };
+      this.payment_method = {
+        dataSource: this.dataSourceformatter(this.vars['payment_method']),
+        layout: 'horizontal',
+        displayExpr: 'Name',
+        valueExpr: 'ID'
+      };
+
+    }, error1 => {
+      throw error1;
+    });
+
     this.tierData = 'tierData';
     this.buttonOptions = {
       text: (!this.isEdit) ? 'Ajouter' : 'Modifier',
       type: 'success',
       useSubmitBehavior: true
-    };
-    this.education_level = {
-      dataSource: [
-        {
-          Name: 'Primaire',
-          ID: 'primaire'
-        },
-        {
-          Name: 'Secondaire collège',
-          ID: 'secondaire collège'
-        },
-        {
-          Name: 'Secondaire qualifiant',
-          ID: 'secondaire qualifiant'
-        },
-        {
-          Name: 'Bachelier',
-          ID: 'bachelier'
-        },
-        {
-          Name: 'Enseignement supérieur',
-          ID: 'enseignement supérieur'
-        },
-        {
-          Name: 'Sans',
-          ID: 'aucun'
-        }
-      ],
-      displayExpr: 'Name',
-      valueExpr: 'ID'
-    };
-    this.situation = {
-      dataSource: [
-        {
-          Name: 'Célibataire',
-          ID: 'célibataire'
-        },
-        {
-          Name: 'Marié',
-          ID: 'marier'
-        },
-        {
-          Name: 'Divorcé',
-          ID: 'divorcer'
-        }
-      ],
-      displayExpr: 'Name',
-      valueExpr: 'ID'
-    };
-    this.gender = {
-      items: [
-        {
-          Name: 'Homme',
-          ID: 'm'
-        },
-        {
-          Name: 'Femme',
-          ID: 'f'
-        }
-      ],
-      displayExpr: 'Name',
-      valueExpr: 'ID'
     };
     this.dateOptions = {
       invalidDateMessage: 'La date doit avoir le format suivant: jj/MM/aaaa',
@@ -112,23 +85,20 @@ export class TiersFormComponent implements OnInit {
       },
       width: '100%'
     };
-    this.payment_mode = {
-      dataSource: [
-        {
-          Name: 'Virement',
-          ID: 'virement'
-        },
-        {
-          Name: 'Chèque',
-          ID: 'chèque'
-        }
-      ],
-      layout: 'horizontal',
-      displayExpr: 'Name',
-      valueExpr: 'ID'
-    };
     this.phonePattern = /^0[5|6|7]\s*\d{3}\s*\d{5}$/;
-    this.ribPattern = /^\d{6}\s*\d{16}\s*\d{2}$/;
+    this.accountBankPattern = /^\d{16}$/;
+    this.codeBankPattern = /^\d{6}$/;
+    this.ribKeyPattern = /^\d{2}$/;
+  }
+
+
+  dataSourceformatter = (data) => {
+    return Object.keys(data).map((key) => {
+      return {
+        Name: data[key],
+        ID: key
+      };
+    });
   }
 
   /**
@@ -136,7 +106,7 @@ export class TiersFormComponent implements OnInit {
    * @param e
    */
   onMoraleChanged = (e) => {
-    this.tier.civility = (this.tier.morale) ? 'morale' : 'physique';
+    this.tier.type = (this.tier.morale) ? 'morale' : 'physique';
   }
 
 }

@@ -12,6 +12,7 @@ import { HrefPreventDefaultDirective } from '../../_directives/href-prevent-defa
 import { UnwrapTagDirective } from '../../_directives/unwrap-tag.directive';
 import { SubHeaderComponent } from './sub-header/sub-header.component';
 
+
 @NgModule({
   declarations: [
     HeaderNavComponent,
@@ -23,7 +24,7 @@ import { SubHeaderComponent } from './sub-header/sub-header.component';
     TooltipsComponent,
     HrefPreventDefaultDirective,
     UnwrapTagDirective,
-    SubHeaderComponent,
+    SubHeaderComponent
   ],
   exports: [
     HeaderNavComponent,

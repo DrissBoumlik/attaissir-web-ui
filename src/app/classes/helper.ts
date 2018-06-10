@@ -1,0 +1,25 @@
+export class Helper {
+
+  /**
+   * Map to format and return request params used in DxGrid
+   * @param loadOptions
+   * @returns {string}
+   */
+  public static mapParams = (loadOptions: any) => {
+    console.log(loadOptions);
+    let params = '?';
+
+    params += 'skip=' + loadOptions.skip || 0;
+    params += '&take=' + loadOptions.take || 12;
+
+    if (loadOptions.sort) {
+      params += '&orderby=' + loadOptions.sort[0].selector;
+      if (loadOptions.sort[0].desc) {
+        params += ' desc';
+      }
+    }
+
+    params += `&requireTotalCount=1`;
+    return params;
+  }
+}
