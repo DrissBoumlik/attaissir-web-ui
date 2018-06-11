@@ -31,7 +31,11 @@ export class CardsService {
    * @returns {Observable<Card[]>}
    */
   getCardsDx(params: any): Observable<Card[]> {
-    return this.http.post<Card[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params));
+    return this.http.post<Card[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**
@@ -49,7 +53,11 @@ export class CardsService {
    * @returns {Observable<Card[]>}
    */
   addCard(card: Card): Observable<Card[]> {
-    return this.http.post<Card[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(card));
+    return this.http.post<Card[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(card), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   getDoc(id: number): Observable<Card[]> {
@@ -78,7 +86,11 @@ export class CardsService {
         name: action,
         ids: card
       }
-    }));
+    }), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**
@@ -87,7 +99,11 @@ export class CardsService {
    * @returns {Observable<any>}
    */
   deleteCard(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**

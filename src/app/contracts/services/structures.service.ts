@@ -41,7 +41,11 @@ export class StructuresService {
    * @returns {Observable<Structure[]>}
    */
   addStructure(structure: Structure): Observable<Structure[]> {
-    return this.http.post<Structure[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(structure));
+    return this.http.post<Structure[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(structure), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**
@@ -50,7 +54,11 @@ export class StructuresService {
    * @returns {Observable<Structure>}
    */
   editStructure(structure: Structure): Observable<Structure> {
-    return this.http.put<Structure>(`${environment.apiUrl}/${this.routeName}/${structure.id}`, JSON.stringify(structure));
+    return this.http.put<Structure>(`${environment.apiUrl}/${this.routeName}/${structure.id}`, JSON.stringify(structure), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**
@@ -59,7 +67,11 @@ export class StructuresService {
    * @returns {Observable<any>}
    */
   deleteStructure(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**

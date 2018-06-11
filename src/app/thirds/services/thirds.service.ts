@@ -37,7 +37,11 @@ export class ThirdsService {
    * @returns {Observable<Third[]>}
    */
   getThirdsDx(params?: any): Observable<Third[]> {
-    return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params));
+    return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**
@@ -56,6 +60,7 @@ export class ThirdsService {
    */
   getThird(id: number, isEdit?: boolean): Observable<Third> {
     const edit = (isEdit) ? '?edit' : '';
+    console.log(`${environment.apiUrl}/${this.routeName}/${id}${edit}`);
     return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/${id}${edit}`);
   }
 
@@ -74,7 +79,11 @@ export class ThirdsService {
    * @returns {Observable<Third[]>}
    */
   addThird(third: Third): Observable<Third[]> {
-    return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(third));
+    return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(third), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**
@@ -83,7 +92,11 @@ export class ThirdsService {
    * @returns {Observable<Third>}
    */
   editThird(third: Third): Observable<Third> {
-    return this.http.put<Third>(`${environment.apiUrl}/${this.routeName}/${third.id}`, JSON.stringify(third));
+    return this.http.put<Third>(`${environment.apiUrl}/${this.routeName}/${third.id}`, JSON.stringify(third), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**
@@ -92,7 +105,11 @@ export class ThirdsService {
    * @returns {Observable<any>}
    */
   deleteThird = (id: number): Observable<any> => {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**
@@ -111,7 +128,11 @@ export class ThirdsService {
    * @returns {Observable<any>}
    */
   deleteBankAccount(idBankAccount: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/bank-accounts/${idBankAccount}`);
+    return this.http.delete(`${environment.apiUrl}/bank-accounts/${idBankAccount}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**
@@ -120,7 +141,11 @@ export class ThirdsService {
    * @param data
    */
   addBankAccount(data: { rib: string, bank: string, third_party_id: number }): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/bank-accounts`, data);
+    return this.http.post(`${environment.apiUrl}/bank-accounts`, data, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**
@@ -130,7 +155,11 @@ export class ThirdsService {
    * @param id
    */
   updateBankAccount(newBA: { rib: string, bank: string, third_party_id: number }, id: number): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/bank-accounts/${id}`, newBA);
+    return this.http.put(`${environment.apiUrl}/bank-accounts/${id}`, newBA, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /*loadDocuments(idThird: number): any {
@@ -142,16 +171,23 @@ export class ThirdsService {
     return this.http.get(`${environment.apiUrl}/documents/vars`);
   }
 
-  addDocument(file: File): Observable<any> {
+  addDocument(file: File, type: string, contract_id?: string, third_id?: string): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('document', file, file.name);
+    formData.append('type', type);
+    formData.append('contract_id', contract_id);
+    formData.append('third_party_id', third_id);
     return this.http
       .post(`${environment.apiUrl}/documents`, formData);
   }
 
   putDocumentInfo(docInfo: any, id: number): Observable<any> {
     return this.http.put(`${environment.apiUrl}/documents/${id}`,
-      docInfo);
+      docInfo, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
   }
 
   /**
@@ -169,6 +205,10 @@ export class ThirdsService {
    * @returns {Observable<any>}
    */
   deleteDocument(idDocument: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/documents/${idDocument}`);
+    return this.http.delete(`${environment.apiUrl}/documents/${idDocument}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 }

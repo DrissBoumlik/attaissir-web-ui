@@ -30,7 +30,11 @@ export class ContractsService {
   }
 
   getContractsDx(params: any): Observable<Contract[]> {
-    return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params));
+    return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
   /**
    * Get a Contracts
@@ -48,7 +52,11 @@ export class ContractsService {
    * @returns {Observable<Contract[]>}
    */
   addContract(contract: Contract): Observable<Contract[]> {
-    return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(contract));
+    return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(contract), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
 
   }
 
@@ -59,7 +67,11 @@ export class ContractsService {
    * @returns {Observable<Contract>}
    */
   editContract(contract: Contract): Observable<Contract> {
-    return this.http.put<Contract>(`${environment.apiUrl}/${this.routeName}/${contract.id}`, JSON.stringify(contract));
+    return this.http.put<Contract>(`${environment.apiUrl}/${this.routeName}/${contract.id}`, JSON.stringify(contract), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
 
   }
 
@@ -69,7 +81,11 @@ export class ContractsService {
    * @returns {Observable<any>}
    */
   deleteContract(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**
@@ -96,7 +112,11 @@ export class ContractsService {
    * @param {number} idContrat
    */
   activateContract(idContrat: number): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/${this.routeName}/${idContrat}/activate`, '');
+    return this.http.put(`${environment.apiUrl}/${this.routeName}/${idContrat}/activate`, '', {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
 

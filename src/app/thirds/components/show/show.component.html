@@ -375,7 +375,7 @@
                               [noDataText]="'L\'agrégé ne dispose pas de documents joints'"
                               keyExpr="id">
 
-                  <dxi-column dataField="type" caption="Type" [visible]="false">
+                  <dxi-column dataField="Name" caption="Type" [visible]="false">
                     <dxo-lookup
                       [dataSource]="docTypes"
                       displayExpr="Name"
@@ -383,7 +383,7 @@
                     </dxo-lookup>
                   </dxi-column>
 
-                  <dxi-column dataField="label" caption="Type"></dxi-column>
+                  <dxi-column dataField="Name" caption="Type"></dxi-column>
 
                   <dxi-column dataField="path" caption="Charger" editCellTemplate="cellTemplate2"
                               [visible]="false"></dxi-column>

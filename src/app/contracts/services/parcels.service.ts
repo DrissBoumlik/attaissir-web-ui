@@ -42,7 +42,11 @@ export class ParcelsService {
    * @returns {Observable<Parcel[]>}
    */
   addParcel(parcel: any): Observable<Parcel[]> {
-    return this.http.post<Parcel[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(parcel));
+    return this.http.post<Parcel[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(parcel), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
 
@@ -53,7 +57,11 @@ export class ParcelsService {
    */
   editParcel(parcel: Parcel): Observable<Parcel> {
     return this.http.put<Parcel>(`${environment.apiUrl}/${this.routeName}/${parcel.id}`,
-      JSON.stringify(Parcel));
+      JSON.stringify(Parcel), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
   }
 
   /**
@@ -62,7 +70,11 @@ export class ParcelsService {
    * @returns {Observable<any>}
    */
   deleteParcel(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   /**

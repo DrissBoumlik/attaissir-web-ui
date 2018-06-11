@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ThirdsService } from '../../services/thirds.service';
-import { Third } from '../../../classes/third';
-import { ToastrService } from 'ngx-toastr';
-import { Contract } from '../../../classes/contract';
-import { Document } from '../../../classes/document';
-import { ContractsService } from '../../../contracts/services/contracts.service';
-import { CardsService } from '../../../contracts/services/cards.service';
-import { environment } from '../../../../environments/environment';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ThirdsService} from '../../services/thirds.service';
+import {Third} from '../../../classes/third';
+import {ToastrService} from 'ngx-toastr';
+import {Contract} from '../../../classes/contract';
+import {Document} from '../../../classes/document';
+import {ContractsService} from '../../../contracts/services/contracts.service';
+import {CardsService} from '../../../contracts/services/cards.service';
+import {environment} from '../../../../environments/environment';
 import {Helper} from '../../../classes/helper';
 
 declare const require: any;
@@ -31,17 +31,17 @@ export class ShowComponent implements OnInit {
   bank_accounts: any;
 
   constructor(private thirdService: ThirdsService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private toaster: ToastrService,
-    private contractService: ContractsService,
-    private cardsService: CardsService) {
+              private route: ActivatedRoute,
+              private router: Router,
+              private toaster: ToastrService,
+              private contractService: ContractsService,
+              private cardsService: CardsService) {
   }
 
   ngOnInit() {
     this.route.params.subscribe(
       params => {
-        this.thirdService.getThird(+params.id).subscribe(
+        this.thirdService.getThird(+params.id, false).subscribe(
           (res: any) => {
             this.third = this.thirdService.dataFormatter(res, false);
             this.bank_accounts = [{
@@ -166,20 +166,13 @@ export class ShowComponent implements OnInit {
       file: this.filePath[0]
     };
     e.cancel = true;
-    e.data.name = this.docTypes.find(dt => {
+    /*e.data.name = this.docTypes.find(dt => {
       return dt.id === newDoc.type;
-    }).name;
-    this.thirdService.addDocument(newDoc.file).subscribe(
+    }).name;*/
+    this.thirdService.addDocument(newDoc.file, newDoc.type, null, this.third.id.toString()).subscribe(
       res => {
-        this.thirdService.putDocumentInfo({
-          third_party_id: this.third.id,
-          document_type_id: newDoc.type
-        }, res.data.id).subscribe(
-          result => {
-            e.data.downloadPath = res.data.path;
-            d.resolve();
-          }
-        );
+        e.data.downloadPath = res.data.path;
+        d.resolve();
       }, error => {
         console.log(error);
       });

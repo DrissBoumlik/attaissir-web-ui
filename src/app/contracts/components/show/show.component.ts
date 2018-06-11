@@ -111,9 +111,11 @@ export class ShowComponent implements OnInit {
     /*e.data.name = this.docTypes.find(dt => {
       return dt.id === newDoc.type;
     }).name;*/
-    this.thirdsService.addDocument(newDoc.file).subscribe(
+    this.thirdsService.addDocument(newDoc.file, newDoc.type, this.contract.id.toString(), this.third.id.toString()).subscribe(
       res => {
-        this.thirdsService.putDocumentInfo({
+        d.resolve();
+
+        /*this.thirdsService.putDocumentInfo({
           contract_id: this.contract.id,
           type: newDoc.type
         }, res.data.id).subscribe(
@@ -121,7 +123,7 @@ export class ShowComponent implements OnInit {
             e.data.downloadPath = result.data.path;
             d.resolve();
           }
-        );
+        );*/
       }, error => {
         console.log(error);
       });
