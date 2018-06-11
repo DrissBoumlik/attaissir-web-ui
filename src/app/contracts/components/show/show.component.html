@@ -5,7 +5,7 @@
 
       <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Liste des contrats</a>
       <h2>Contrat Agrégat-Agrégés {{ contract?.code }}</h2>
-      <a class="siam-header-btn-new" href="#" (click)="downloadContract()" target="_blank"><i
+      <a class="siam-header-btn-new" href="#" (click)="downloadContract()" download=""><i
         class="fa fa-print"></i></a>
     </div>
   </div>
@@ -324,12 +324,11 @@
                             [showBorders]="true"
                             [rowAlternationEnabled]="true"
                             style="padding-top: 2vh"
-                            [noDataText]="'Le contrat ne dispose pas de  campagne'"
-                            keyExpr="id">
-                <dxi-column dataField="campaign.name" caption="Libelle"></dxi-column>
+                            [noDataText]="'Le contrat ne dispose pas de  campagne'">
+                <dxi-column dataField="campaign" caption="Campagne"></dxi-column>
                 <!--<dxi-column dataField="campaign.start_date" caption="Date de début"></dxi-column>
                 <dxi-column dataField="campaign.end_date" caption="Date de fin"></dxi-column>-->
-                <dxi-column dataField="contracted_surface" caption="Surface contracté"></dxi-column>
+                <dxi-column dataField="surface" caption="Surface contracté"></dxi-column>
                 <!--<dxi-column dataField="campaign.description" caption="Description"></dxi-column>-->
                 <dxo-remote-operations
                   [sorting]="true"
@@ -461,8 +460,8 @@
                 <dxi-column dataField="label" caption="Type" [visible]="false">
                   <dxo-lookup
                     [dataSource]="docTypes"
-                    displayExpr="label"
-                    valueExpr="Id">
+                    displayExpr="Name"
+                    valueExpr="ID">
                   </dxo-lookup>
                 </dxi-column>
 

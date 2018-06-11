@@ -23,8 +23,7 @@
                   </a>
                 </li>
                 <li class="nav-item m-tabs__item">
-                  <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab"
-                     (click)="getThirdAgreements(third?.id)">
+                  <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
                     Contrats
                   </a>
                 </li>
@@ -284,7 +283,7 @@
                   </dxi-column>
                   <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
                   </dxi-column>
-                  <dxi-column dataField="contrat_type" caption="type de contrat" dataType="Text">
+                  <dxi-column dataField="type" caption="type de contrat" dataType="Text">
                   </dxi-column>
                   <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
                   </dxi-column>
@@ -317,7 +316,7 @@
                 </dx-data-grid>
             </div>
             <div class="tab-pane" id="m_user_profile_tab_3">
-              <dx-data-grid 
+              <dx-data-grid
                               id="gridContainer"
                               [allowColumnReordering]="true"
                               [dataSource]="bank_accounts"
@@ -375,22 +374,22 @@
                               style="padding-top: 2vh"
                               [noDataText]="'L\'agrégé ne dispose pas de documents joints'"
                               keyExpr="id">
-      
-                  <dxi-column dataField="label" caption="Type" [visible]="false">
+
+                  <dxi-column dataField="type" caption="Type" [visible]="false">
                     <dxo-lookup
                       [dataSource]="docTypes"
-                      displayExpr="label"
-                      valueExpr="id">
+                      displayExpr="Name"
+                      valueExpr="ID">
                     </dxo-lookup>
                   </dxi-column>
-      
+
                   <dxi-column dataField="label" caption="Type"></dxi-column>
-      
+
                   <dxi-column dataField="path" caption="Charger" editCellTemplate="cellTemplate2"
                               [visible]="false"></dxi-column>
-      
+
                   <dxi-column dataField="downloadPath" caption="Télécharger" cellTemplate="cellTemplate"></dxi-column>
-      
+
                   <div *dxTemplate="let data of 'cellTemplate'">
                     <dx-button
                       class="send"
@@ -437,7 +436,7 @@
               <dx-data-grid
                               id="CardsgridContainer"
                               [allowColumnReordering]="true"
-                              [dataSource]="third?.cards"
+                              [dataSource]="cards"
                               [showColumnLines]="true"
                               [showRowLines]="true"
                               [showBorders]="true"
@@ -445,7 +444,7 @@
                               style="padding-top: 2vh"
                               [noDataText]="'L\'agrégé ne dispose pas de carte agriculteur'"
                               keyExpr="id">
-                  <dxi-column dataField="code_rfid" caption="Serial">
+                  <dxi-column dataField="rfid" caption="Serial">
                   </dxi-column>
                   <dxi-column width="100" dataField="status" caption="Status" cellTemplate="statusTemplate">
                   </dxi-column>

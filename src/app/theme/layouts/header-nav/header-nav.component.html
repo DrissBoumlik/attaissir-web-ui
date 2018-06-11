@@ -51,7 +51,7 @@
                               <span class="m-nav__section-text">Section</span>
                           </li>
                           <li class="m-nav__item" *ngFor="let t of tenants; let i = index">
-                            <a  href="#" class="m-nav__link">
+                            <a  routerLink="/" class="m-nav__link">
                               <i class="m-menu__link-bullet m-menu__link-bullet--dot {{t.division_id == tenant ? 'active' : ''}}"><span></span></i>
                               <span class="m-nav__link-text" (click)="changeTenant(t.division_id)">
 																{{ t.division }}

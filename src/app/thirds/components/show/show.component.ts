@@ -8,6 +8,7 @@ import { Document } from '../../../classes/document';
 import { ContractsService } from '../../../contracts/services/contracts.service';
 import { CardsService } from '../../../contracts/services/cards.service';
 import { environment } from '../../../../environments/environment';
+import {Helper} from '../../../classes/helper';
 
 declare const require: any;
 const $ = require('jquery');
@@ -22,6 +23,7 @@ export class ShowComponent implements OnInit {
   third: Third;
   contracts: Contract[];
   documents: any;
+  cards: any;
   patternRIB: any = /^\d{24}$/i;
   documentsList = true;
   docTypes: any;
@@ -48,7 +50,10 @@ export class ShowComponent implements OnInit {
               bank_code: this.third.bank_code,
               bank_rib_key: this.third.bank_rib_key
             }];
-
+            this.contracts = this.third['contracts'];
+            this.cards = this.third.cards;
+            console.log(this.cards);
+            console.log(res);
           },
           (error) => {
             this.router.navigate(['/404']).catch(
@@ -62,7 +67,8 @@ export class ShowComponent implements OnInit {
     );
     this.thirdService.getDocTypes().subscribe(
       (res: any) => {
-        this.docTypes = this.thirdService.dataFormatter(res, false);
+        this.docTypes = Helper.dataSourceformatter(res);
+        console.log(this.docTypes);
         /* this.docTypes = this.docTypes.map((type: any) => {
            type.id = Number.parseInt(type.id);
            return type;
@@ -156,13 +162,13 @@ export class ShowComponent implements OnInit {
   onAddDOC(e: any) {
     const d = new $.Deferred();
     const newDoc = {
-      type: e.data.label,
+      type: e.data.name,
       file: this.filePath[0]
     };
     e.cancel = true;
-    e.data.label = this.docTypes.find(dt => {
+    e.data.name = this.docTypes.find(dt => {
       return dt.id === newDoc.type;
-    }).label;
+    }).name;
     this.thirdService.addDocument(newDoc.file).subscribe(
       res => {
         this.thirdService.putDocumentInfo({
@@ -188,7 +194,7 @@ export class ShowComponent implements OnInit {
             downloadPath: doc.path,
             id: doc.id,
             path: doc.path,
-            label: doc.type.label
+            name: doc.type.name
           };
         });
       }
@@ -231,8 +237,8 @@ export class ShowComponent implements OnInit {
     }
   }
 
-  getThirdAgreements = (idThird: number) => {
-    this.contractService.getContracts().subscribe(
+  /*getThirdAgreements = (idThird: number) => {
+    this.contractService.getContractsByAgregre(idThird).subscribe(
       (res: any) => {
         this.contracts = [];
         res.data.forEach(contract => {
@@ -246,7 +252,7 @@ export class ShowComponent implements OnInit {
         });
       }
     );
-  }
+  }*/
 
   showDetails(idContract: number) {
     this.router.navigate(['/contrats/show/' + idContract]).catch(

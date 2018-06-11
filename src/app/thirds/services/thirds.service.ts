@@ -146,7 +146,7 @@ export class ThirdsService {
     const formData: FormData = new FormData();
     formData.append('document', file, file.name);
     return this.http
-      .post(`${environment.apiUrl}/documents`, formData);
+      .post(`${environment.apiUrl}/documents`, formData, {headers: new HttpHeaders({'Content-Type': 'multipart/form-data'})});
   }
 
   putDocumentInfo(docInfo: any, id: number): Observable<any> {

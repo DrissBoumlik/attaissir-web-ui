@@ -42,6 +42,7 @@ export class ShowComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.route.params.subscribe(
       params => {
         this.contractService.getContract(+params.id).subscribe(
@@ -49,7 +50,7 @@ export class ShowComponent implements OnInit {
             this.id = params.id;
             this.contract = res.data;
             this.third = res.data.third_party;
-            this.campagnes = res.data.campaigns;
+            this.campagnes = res.data.contracted_surface;
             this.documents = res.data.documents;
             this.avenants = res.data.amendments;
             this.isContractEncours = this.contract.status === 'encours';
@@ -64,15 +65,15 @@ export class ShowComponent implements OnInit {
               },
               (err) => {
                 console.log(err);
-              }
+              }Object
             );*/
           },
           (error) => {
-            /*this.router.navigate(['/404']).catch(
+            this.router.navigate(['/404']).catch(
               err => {
                 console.log(err);
               }
-            );*/
+            );
           }
         );
       }
@@ -80,6 +81,7 @@ export class ShowComponent implements OnInit {
     this.thirdsService.getDocTypes().subscribe(
       (res: any) => {
         this.docTypes = Helper.dataSourceformatter(res);
+        console.log(this.docTypes);
       }
     );
 
@@ -99,13 +101,13 @@ export class ShowComponent implements OnInit {
   onAddDOC(e: any) {
     const d = new $.Deferred();
     const newDoc = {
-      type: e.data.label,
+      type: e.data.name,
       file: this.filePath[0]
     };
     e.cancel = true;
-    e.data.label = this.docTypes.find(dt => {
+    e.data.name = this.docTypes.find(dt => {
       return dt.id === newDoc.type;
-    }).label;
+    }).name;
     this.thirdsService.addDocument(newDoc.file).subscribe(
       res => {
         this.thirdsService.putDocumentInfo({
@@ -131,7 +133,7 @@ export class ShowComponent implements OnInit {
             downloadPath: doc.path,
             id: doc.id,
             path: doc.path,
-            label: doc.type.label
+            name: doc.type.name
           };
         });
       }
@@ -183,21 +185,12 @@ export class ShowComponent implements OnInit {
 
 
   downloadContract() {
-    let thefile = {};
     this.contractService.printContract(this.contract.id).subscribe(data => {
-        thefile = new Blob([data], { type: 'application/pdf' });
-        console.log(data);
-        const url = window.URL.createObjectURL(thefile);
-        window.open(url);
-      },
-        error => {
-          console.log(error);
-          console.log('Error downloading the file.');
-        },
-        () => {
-      console.log('Completed file download.');
+      console.log(data['data']['file']);
+      window.open(data['data']['file']);
+    }, err => {
+      throw err;
     });
-
 
   }
 

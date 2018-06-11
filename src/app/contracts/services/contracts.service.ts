@@ -102,7 +102,6 @@ export class ContractsService {
 
 
   printContract(idContract: number): any {
-    // window.open(`${environment.apiUrl}/${this.routeName}/${idContract}/prints`);
-    return this.http.get(`${environment.apiUrl}/${this.routeName}/${idContract}/prints`, {responseType: 'blob'});
+    return this.http.get(`${environment.apiUrl}/${this.routeName}/${idContract}/prints`);
   }
 }

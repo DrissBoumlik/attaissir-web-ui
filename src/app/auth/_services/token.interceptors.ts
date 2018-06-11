@@ -21,7 +21,6 @@ export class TokenInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${this.auth.getToken()}`,
           Tenant: this.auth.getTanent(),
           'Content-Type': 'application/json',
-          Accept: 'application/json',
           charset: 'UTF-8'
         }
       });
