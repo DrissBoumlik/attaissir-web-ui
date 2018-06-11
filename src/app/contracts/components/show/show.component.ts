@@ -52,7 +52,6 @@ export class ShowComponent implements OnInit {
             this.contract = res.data;
             this.third = res.data.third_party;
             this.campagnes = res.data.contracted_surface;
-            this.documents = res.data.documents;
             this.avenants = res.data.amendments;
             this.parcels = res.data.parcels;
             this.isContractEncours = this.contract.status === 'encours';
@@ -113,6 +112,7 @@ export class ShowComponent implements OnInit {
     }).name;*/
     this.thirdsService.addDocument(newDoc.file, newDoc.type, this.contract.id.toString(), this.third.id.toString()).subscribe(
       res => {
+        this.loadDocuments();
         d.resolve();
 
         /*this.thirdsService.putDocumentInfo({
@@ -138,7 +138,7 @@ export class ShowComponent implements OnInit {
             downloadPath: doc.path,
             id: doc.id,
             path: doc.path,
-            name: doc.type.name
+            name: doc.type
           };
         });
       }

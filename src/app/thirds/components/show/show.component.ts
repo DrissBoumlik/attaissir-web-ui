@@ -171,7 +171,7 @@ export class ShowComponent implements OnInit {
     }).name;*/
     this.thirdService.addDocument(newDoc.file, newDoc.type, null, this.third.id.toString()).subscribe(
       res => {
-        e.data.downloadPath = res.data.path;
+        this.loadDocuments();
         d.resolve();
       }, error => {
         console.log(error);
@@ -187,7 +187,7 @@ export class ShowComponent implements OnInit {
             downloadPath: doc.path,
             id: doc.id,
             path: doc.path,
-            name: doc.type.name
+            name: doc.type
           };
         });
       }
