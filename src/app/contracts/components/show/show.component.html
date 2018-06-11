@@ -2,10 +2,11 @@
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
-      <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+
+      <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Liste des contrats</a>
       <h2>Contrat Agrégat-Agrégés {{ contract?.code }}</h2>
       <a class="siam-header-btn-new" href="#" (click)="downloadContract()" download=""><i
-        class="fa fa-download"></i></a>
+        class="fa fa-print"></i></a>
     </div>
   </div>
 </div>
@@ -16,9 +17,7 @@
     <div class="m-portlet__body">
       <div class="row">
         <div class="col-xl-12 col-lg-12">
-          <div class="m-portlet__head">
-            <div class="m-portlet__head-tools">
-              <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+          <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
                 <li class="nav-item m-tabs__item">
                   <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
                     <i class="flaticon-share m--hide"></i>
@@ -52,228 +51,264 @@
                   </a>
                 </li>
               </ul>
-            </div>
-          </div>
           <div class="tab-content">
             <div class="tab-pane active" id="m_user_profile_tab_1">
-              <div class="m-form m-form--fit m-form--label-align-right">
+              <div class="m-form m-form--fit">
                 <div class="m-portlet__body">
-                  <hr>
-                  <div class="form-group m-form__group row">
-                    <div class="col-10 ml-auto">
+                  <div class="row">
+                    <div class="col-12">
                       <h3 class="m-form__section">
-                        1. Informations générales
+                        Informations générales
                       </h3>
                     </div>
                   </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Date d'application
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="contract?.application_date"
-                             readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Date d'expiration
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="contract?.expiration_date" readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Date de signature
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="contract?.signature_date"
-                             readonly>
-                    </div>
-                  </div>
-                  <!--<div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Type de culture
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="contract?.culture_type" readonly>
-                    </div>
-                  </div>-->
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Type de contract
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="contract?.type" readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Status
-                    </label>
-                    <div class="col-7">
+                  <div class="row">
+                    <div class="col-4">
                       <div class="row">
-                        <div class="col-3">
-                          <div [ngClass]="getStatusColor(contract?.status)" class="alert alert-primary" role="alert">
-                            {{ contract?.status }}
-                          </div>
-                        </div>
-                        <div class="col-9">
-                          <div style="float: right" *ngIf="isContractEncours">
-                            <dx-button [text]="'Valider'" [type]="'success'" (onClick)="activateContrat()"></dx-button>
-                          </div>
+                        <label class="col-12">
+                          Date d'application
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="contract?.application_date">{{ contract?.application_date }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!contract?.application_date">Pas de données</p>
                         </div>
                       </div>
-                      <!--<input class="form-control m-input" type="text" [value]="" readonly>-->
+                      <div class="row">
+                        <label class="col-12">
+                          Type de culture
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="contract?.culture_type">{{ contract?.culture_type }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!contract?.culture_type">Pas de données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Date d'expiration
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="contract?.expiration_date">{{ contract?.expiration_date }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!contract?.expiration_date">Pas de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Type de contract
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="contract?.type">{{ contract?.type }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!contract?.type">Pas de données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Date de signature
+                        </label>
+                        <div class="col-12">
+                           <p class="siam-form-input-value" *ngIf="contract?.signature_date">{{ contract?.signature_date }}</p>
+                           <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!contract?.signature_date">Pas de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Status
+                        </label>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-3">
+                              <div [ngClass]="getStatusColor(contract?.status)" class="m-badge m-badge--primary m-badge--wide" role="alert">
+                                {{ contract?.status }}
+                              </div>
+                            </div>
+                            <div class="col-9">
+                              <div *ngIf="isContractEncours">
+                                <dx-button [text]="'Valider'" [type]="'success'" (onClick)="activateContrat()"></dx-button>
+                              </div>
+                            </div>
+                          </div>
+                          <!--<input class="form-control m-input" type="text" [value]="" readonly>-->
+                        </div>
+                      </div>
                     </div>
                   </div>
+
                   <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
                 </div>
               </div>
             </div>
             <div class="tab-pane " id="m_user_profile_tab_2">
-              <div class="m-form m-form--fit m-form--label-align-right">
+              <div class="m-form m-form--fit">
                 <div class="m-portlet__body">
-                  <hr>
                   <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-6">
-                      <div class="form-group m-form__group row">
-                        <div class="col-10 ml-auto">
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                      <div class="row">
+                        <div class="col-12">
                           <h3 class="m-form__section">
-                            1. Informations générales
+                            Informations générales
                           </h3>
                         </div>
                       </div>
-                      <div class="form-group m-form__group row">
-                        <label class="col-4 col-form-label">
-                          Nom complet
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text"
-                                 [value]="third?.first_name + ' ' + third?.last_name"
-                                 readonly>
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="row">
+                            <label class="col-12">
+                              Nom complet
+                            </label>
+                            <div class="col-12">
+                               <p class="siam-form-input-value">{{ third?.first_name }} {{ third?.last_name }}</p>
+                            </div>
+                          </div>
+                          <div class="row" DIR="ltr">
+                            <label class="col-12">
+                              الاسم الكامل
+                            </label>
+                            <div class="col-12">
+                               <p class="siam-form-input-value">{{ third?.first_name_ar }} {{ third?.last_name_ar }}</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              CIN
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.cin">{{ third?.cin }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.cin">Pas de données</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="row">
+                            <label class="col-12">
+                              Date du décès
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.death_date">{{ third?.death_date | uppercase }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.death_date">Pas de données</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              numéro de téléphone 1
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.tel1">{{ third?.tel1 | uppercase }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.tel1">Pas de données</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              numéro de téléphone 2
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.tel2">{{ third?.tel2}}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.tel2">Pas de données</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="row">
+                            <label class="col-12">
+                              Email
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.email">{{ third?.email}}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.email">Pas de données</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              Assurance.
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.is_insured !== null">{{  third?.is_insured ? 'Oui' : 'Non' }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="third?.is_insured == null">Pas de données</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              Retraite.
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.is_retired !== null">{{  third?.is_retired ? 'Oui' : 'Non' }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="third?.is_retired == null">Pas de données</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div class="form-group m-form__group row" DIR="ltr">
-                        <label class="col-4 col-form-label">
-                          الاسم الكامل
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text"
-                                 [value]="third?.first_name_ar + ' ' + third?.last_name_ar"
-                                 readonly>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label class="col-4 col-form-label">
-                          CIN
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.cin | uppercase" readonly>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row" *ngIf="third?.death_date">
-                        <label class="col-4 col-form-label">
-                          Date du décès
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.death_date | uppercase"
-                                 readonly>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label class="col-4 col-form-label">
-                          numéro de téléphone 1
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.tel1 | uppercase" readonly>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label class="col-4 col-form-label">
-                          numéro de téléphone 2
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.tel2 | uppercase" readonly>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label class="col-4 col-form-label">
-                          Email
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.email" readonly>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label class="col-4 col-form-label">
-                          Assurance.
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.is_insured ? 'Oui' : 'Non'"
-                                 readonly>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label class="col-4 col-form-label">
-                          Retraite.
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.is_retired ? 'Oui' : 'Non'"
-                                 readonly>
-                        </div>
-                      </div>
+
+
+
+
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6">
+                    <div class="col-xl-12 col-lg-12 col-md-12">
                       <div *ngIf="third?.company_name">
-                        <div class="form-group m-form__group row">
-                          <div class="col-10 ml-auto">
+                        <div class="row">
+                          <div class="col-12">
                             <h3 class="m-form__section">
-                              2. Société
+                              Société
                             </h3>
                           </div>
                         </div>
-                        <div class="form-group m-form__group row">
-                          <label class="col-4 col-form-label">
-                            Raison sociale
-                          </label>
-                          <div class="col-7">
-                            <input class="form-control m-input" type="text" [value]="third?.company_name" readonly>
+                        <div class="row">
+                          <div class="col-4">
+                            <div class="row">
+                              <label class="col-12">
+                                Raison sociale
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.company_name">{{ third?.company_name}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.company_name">Pas de données</p>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <label class="col-12">
+                                Numéro de patente
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.patent_number">{{ third?.patent_number}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.patent_number">Pas de données</p>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div class="form-group m-form__group row">
-                          <label class="col-4 col-form-label">
-                            Numéro de patente
-                          </label>
-                          <div class="col-7">
-                            <input class="form-control m-input" type="text" [value]="third?.patent_number" readonly>
+                          <div class="col-4">
+                            <div class="row">
+                              <label class="col-12">
+                                Code TVA
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.tva_code">{{ third?.tva_code}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.tva_code">Pas de données</p>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <label class="col-12">
+                                Identification fiscale
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.if">{{ third?.if}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.if">Pas de données</p>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div class="form-group m-form__group row">
-                          <label class="col-4 col-form-label">
-                            Code TVA
-                          </label>
-                          <div class="col-7">
-                            <input class="form-control m-input" type="text" [value]="third?.tva_code" readonly>
-                          </div>
-                        </div>
-                        <div class="form-group m-form__group row">
-                          <label class="col-4 col-form-label">
-                            Identification fiscale
-                          </label>
-                          <div class="col-7">
-                            <input class="form-control m-input" type="text" [value]="third?.if" readonly>
-                          </div>
-                        </div>
-                        <div class="form-group m-form__group row">
-                          <label class="col-4 col-form-label">
+                          <div class="col-4">
+                            <div class="row">
+                          <label class="col-12">
                             Identifiant commun de l’entreprise.
                           </label>
-                          <div class="col-7">
-                            <input class="form-control m-input" type="text" [value]="third?.ice" readonly>
+                          <div class="col-12">
+                            <p class="siam-form-input-value" *ngIf="third?.ice">{{ third?.ice}}</p>
+                            <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.ice">Pas de données</p>
                           </div>
                         </div>
+                          </div>
+                        </div>
+
+
+
                       </div>
                     </div>
                   </div>
@@ -314,89 +349,97 @@
               </dx-data-grid>
             </div>
             <div class="tab-pane" id="m_user_profile_tab_4">
-              <div class="m-form m-form--fit m-form--label-align-right">
+              <div class="m-form m-form--fit">
                 <div class="m-portlet__body">
-                  <hr>
-                  <div class="form-group m-form__group row">
-                    <div class="col-10 ml-auto">
+                  <div class="row">
+                    <div class="col-12">
                       <h3 class="m-form__section">
-                        1. Informations sur le site
+                        Informations sur le site
                       </h3>
                     </div>
                   </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Libelle
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text"
-                             [value]="structure?.name ? structure?.name : 'N/A'"
-                             readonly>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Libelle
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.name">{{ structure?.name }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.name">Pas de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Code
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.code">{{ structure?.code }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.code">Pas de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Ville
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.city">{{ structure?.city }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.city">Pas de données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Adresse
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.address">{{ structure?.address }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.address">Pas de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Code postale
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.zip_code">{{ structure?.zip_code }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.zip_code">Pas de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Email
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.email">{{ structure?.email }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.email">Pas de données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Numéro de téléphone 1:
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.tel1">{{ structure?.tel1 }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.tel1">Pas de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Numéro de téléphone 2:
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.tel2">{{ structure?.tel2 }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.tel2">Pas de données</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Code
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="structure?.code" readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Ville
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text"
-                             [value]="structure?.city ? structure?.city : 'N/A'"
-                             readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Adresse
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text"
-                             [value]="structure?.address ? structure?.address : 'N/A'" readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Code postale
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text"
-                             [value]="structure?.zip_code ? structure?.zip_code : 'N/A'" readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Email
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text"
-                             [value]="structure?.email ? structure?.email : 'N/A'" readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Numéro de téléphone 1:
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text"
-                             [value]="structure?.tel1 ? structure?.tel1 : 'N/A'" readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
-                      Numéro de téléphone 2:
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text"
-                             [value]="structure?.tel2 ? structure?.tel2 : 'N/A'" readonly>
-                    </div>
-                  </div>
+
+
                   <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
                 </div>
               </div>

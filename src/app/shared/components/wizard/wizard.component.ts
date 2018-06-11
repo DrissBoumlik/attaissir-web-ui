@@ -355,7 +355,7 @@ export class WizardComponent implements OnInit {
     const tenantId = localStorage.getItem('tenantId');
     this.contract.third_party_id = this.currentThird.id;
     this.contract.signature_date = new Date();
-    this.contract.structure_id = tenantId;
+    this.contract.structure_id = Number(tenantId);
     if (this.isEdit) {
       this.contract.parent_id = this.contract.id;
       this.contract.type = 'annual';

@@ -89,8 +89,8 @@ export class IndexComponent implements OnInit, AfterViewInit {
     ];
 
     // Weather widget
-    const geoUrl = 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCbrcHPlSrzV06iOFSMXLvGOnOUSyv5UvE';
-    const weatherUrl = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?';
+    const geoUrl = 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAakT7k-8wOIl2UDTZfVrFs-XjLdO9Gvyk';
+    const weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?';
 
     function makePostRequest(url) {
       return new Promise(
@@ -133,6 +133,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     function getWeatherData() {
       return getGeoData(geoUrl)
         .then((response) => {
+          console.log(response);
           const lat = response['location'].lat,
             lng = response['location'].lng;
           return {
@@ -165,6 +166,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     }
 
     setTimeAndDate();
+
     function setTimeAndDate() {
       const hourCont: any = document.getElementById('w-date-hour'),
         dayw: any = document.getElementById('w-day'),
@@ -192,6 +194,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     function addZeroBefore(n) {
       return (n < 10 ? '0' : '') + n;
     }
+
   }
 
 

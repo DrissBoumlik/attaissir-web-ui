@@ -202,16 +202,16 @@ export class ShowComponent implements OnInit {
   getStatusColor(value: string): string {
     switch (value) {
       case 'inactif': {
-        return 'badge badge-pill badge-warning';
+        return 'm-badge m-badge--wide m-badge--warning';
       }
       case 'actif': {
-        return 'badge badge-pill badge-success';
+        return 'm-badge m-badge--wide m-badge--success';
       }
       case 'encours': {
-        return 'badge badge-pill badge-info';
+        return 'm-badge m-badge--wide m-badge--info';
       }
       default: {
-        return 'badge badge-pill badge-danger';
+        return 'm-badge m-badge--wide m-badge--danger';
       }
     }
   }
