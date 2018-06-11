@@ -6,6 +6,10 @@ import { Injectable } from '@angular/core';
 
 export class Parcel {
   id?: number;
+  agricultural_cycle: string;
+  code_ormva: string;
+  annuel_surface: number;
+  tenure: string; // 'property', 'lease', 'procuration'
   exploited_surface: number;
   manuel_surface: number;
   gps_surface: number;
@@ -13,11 +17,11 @@ export class Parcel {
   abandoned_surface: number;
   cleared_surface: number;
   stricken_surface: number;
-  irrigation_mode: string; // ['gravitaire', 'aspersif'];
-  coords_geo: string;
+  irrigation_mode: string; // 'gravity', 'sprinkling'
+  coordinate: string;
   costum_fields: string;
-  ground_id: number;
-  contracted_area_id: number;
-  created_at?: number;
-  updated_at?: number;
+  soil_id?: number;
+  contract_id?: number;
+  created_at?: Date;
+  updated_at?: Date;
 }

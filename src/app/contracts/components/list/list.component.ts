@@ -5,6 +5,9 @@ import { Third } from '../../../classes/third';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
+import CustomStore from 'devextreme/data/custom_store';
+import 'rxjs/add/operator/toPromise';
+import 'devextreme/integration/jquery';
 
 @Component({
   selector: 'app-list-contract',
@@ -14,26 +17,37 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ListComponent implements OnInit {
   contracts: any;
   currentRowStatus: boolean;
-
+  contract_status: string;
 
   constructor(private contractsService: ContractsService,
     private thirdService: ThirdsService,
     private toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute) {
+    this.contracts = {};
   }
 
   ngOnInit() {
-    this.contractsService.getContracts().subscribe(
-      (res: any) => {
-        this.contracts = this.contractsService.dataFormatter(res, false);
-        this.contracts = this.contracts.map(contract => {
-          contract['third_name'] = (contract.third_civility)
-            ? `${contract.third_first_name} ${contract.third_last_name}` : contract.third_social_reason;
-          return contract;
-        });
+    this.contractsService.getContractsVars().subscribe(data => {
+      this.contract_status = data['contract_status'];
+    }, error1 => {
+      throw error1;
+    });
+    this.contracts.store = new CustomStore({
+      load: (loadOptions: any) => {
+        return this.contractsService.getContractsDx(loadOptions)
+          .toPromise()
+          .then(response => {
+            console.log(response);
+            const json = response;
+
+            return json;
+          })
+          .catch(error => {
+            throw error;
+          });
       }
-    );
+    });
   }
 
   onEditcontrat(contrat: any) {
@@ -69,7 +83,7 @@ export class ListComponent implements OnInit {
         event.cancel = false;
       },
       (err) => {
-        this.toastr.error(err.error.message);
+        throw err; // this.toastr.error(err.error.message);
       }
     );
   }
@@ -77,7 +91,7 @@ export class ListComponent implements OnInit {
   showDetails(idContract: number) {
     this.router.navigate([`/contrats/afficher/${idContract}`]).catch(
       err => {
-        this.toastr.error(err);
+        throw err; // this.toastr.error(err.error.message);
       }
     );
   }
@@ -103,7 +117,7 @@ export class ListComponent implements OnInit {
   onStartEdit = (e) => {
     this.router.navigate([`/contrats/modifier/${e.data.id}`]).catch(
       err => {
-        this.toastr.error(err.error.message);
+        throw err; // this.toastr.error(err.error.message);
       }
     );
   }
@@ -117,7 +131,7 @@ export class ListComponent implements OnInit {
       case 'actif': {
         return 'badge badge-pill badge-success';
       }
-      case 'encours': {
+      case 'inprogress': {
         return 'badge badge-pill badge-info';
       }
       case 'suspendu': {
@@ -127,6 +141,20 @@ export class ListComponent implements OnInit {
         return 'badge badge-pill badge-danger';
       }
     }
+  }
+
+  onCellPrepared = (e) => {
+    if (e.columnIndex === 9) {
+      if (typeof e.key !== 'undefined') {
+        if (e.key.status !== 'inprogress') {
+          e.cellElement.find('.dx-link-delete').remove();
+        }
+      }
+    }
+  }
+
+  getStatus(value: string): string {
+    return this.contract_status[value].toUpperCase();
   }
 
 }

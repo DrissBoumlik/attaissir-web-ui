@@ -4,7 +4,7 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Contrat Agrégat-Agrégés {{ contract.code }}</h2>
-      <a class="siam-header-btn-new" href="javascript::void(0)" (click)="downloadContract()" download=""><i
+      <a class="siam-header-btn-new" href="#" (click)="downloadContract()" download=""><i
         class="fa fa-download"></i></a>
     </div>
   </div>
@@ -94,14 +94,6 @@
                   </div>
                   <div class="form-group m-form__group row">
                     <label class="col-2 col-form-label">
-                      Code ORMVA
-                    </label>
-                    <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="contract?.code_ormva" readonly>
-                    </div>
-                  </div>
-                  <div class="form-group m-form__group row">
-                    <label class="col-2 col-form-label">
                       Type de culture
                     </label>
                     <div class="col-7">
@@ -113,7 +105,7 @@
                       Type de contract
                     </label>
                     <div class="col-7">
-                      <input class="form-control m-input" type="text" [value]="contract?.contrat_type" readonly>
+                      <input class="form-control m-input" type="text" [value]="contract?.type" readonly>
                     </div>
                   </div>
                   <div class="form-group m-form__group row">
@@ -169,7 +161,7 @@
                         </label>
                         <div class="col-7">
                           <input class="form-control m-input" type="text"
-                                 [value]="third?.ar_first_name + ' ' + third?.ar_last_name"
+                                 [value]="third?.first_name_ar + ' ' + third?.last_name_ar"
                                  readonly>
                         </div>
                       </div>
@@ -181,12 +173,12 @@
                           <input class="form-control m-input" type="text" [value]="third?.cin | uppercase" readonly>
                         </div>
                       </div>
-                      <div class="form-group m-form__group row" *ngIf="third?.date_death">
+                      <div class="form-group m-form__group row" *ngIf="third?.death_date">
                         <label class="col-4 col-form-label">
                           Date du décès
                         </label>
                         <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.date_death | uppercase"
+                          <input class="form-control m-input" type="text" [value]="third?.death_date | uppercase"
                                  readonly>
                         </div>
                       </div>
@@ -219,7 +211,7 @@
                           Assurance.
                         </label>
                         <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.assurance ? 'Oui' : 'Non'"
+                          <input class="form-control m-input" type="text" [value]="third?.is_insured ? 'Oui' : 'Non'"
                                  readonly>
                         </div>
                       </div>
@@ -228,13 +220,13 @@
                           Retraite.
                         </label>
                         <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.retraite ? 'Oui' : 'Non'"
+                          <input class="form-control m-input" type="text" [value]="third?.is_retired ? 'Oui' : 'Non'"
                                  readonly>
                         </div>
                       </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6">
-                      <div *ngIf="third?.social_reason">
+                      <div *ngIf="third?.company_name">
                         <div class="form-group m-form__group row">
                           <div class="col-10 ml-auto">
                             <h3 class="m-form__section">
@@ -247,7 +239,7 @@
                             Raison sociale
                           </label>
                           <div class="col-7">
-                            <input class="form-control m-input" type="text" [value]="third?.social_reason" readonly>
+                            <input class="form-control m-input" type="text" [value]="third?.company_name" readonly>
                           </div>
                         </div>
                         <div class="form-group m-form__group row">
@@ -299,7 +291,7 @@
                             style="padding-top: 2vh"
                             [noDataText]="'Le contrat ne dispose pas de  campagne'"
                             keyExpr="id">
-                <dxi-column dataField="campaign.label" caption="Libelle"></dxi-column>
+                <dxi-column dataField="campaign.name" caption="Libelle"></dxi-column>
                 <!--<dxi-column dataField="campaign.start_date" caption="Date de début"></dxi-column>
                 <dxi-column dataField="campaign.end_date" caption="Date de fin"></dxi-column>-->
                 <dxi-column dataField="contracted_surface" caption="Surface contracté"></dxi-column>
@@ -338,7 +330,7 @@
                     </label>
                     <div class="col-7">
                       <input class="form-control m-input" type="text"
-                             [value]="structure?.label ? structure?.label : 'N/A'"
+                             [value]="structure?.name ? structure?.name : 'N/A'"
                              readonly>
                     </div>
                   </div>
@@ -375,7 +367,7 @@
                     </label>
                     <div class="col-7">
                       <input class="form-control m-input" type="text"
-                             [value]="structure?.postal_code ? structure?.postal_code : 'N/A'" readonly>
+                             [value]="structure?.zip_code ? structure?.zip_code : 'N/A'" readonly>
                     </div>
                   </div>
                   <div class="form-group m-form__group row">

@@ -18,7 +18,7 @@ export class ContractsService {
   };
 
   constructor(public http: HttpClient) {
-    this.routeName = 'agreements';
+    this.routeName = 'contracts';
   }
 
   /**
@@ -29,6 +29,13 @@ export class ContractsService {
     return this.http.get<Contract[]>(`${environment.apiUrl}/${this.routeName}`);
   }
 
+  getContractsVars(): Observable<Contract[]> {
+    return this.http.get<Contract[]>(`${environment.apiUrl}/${this.routeName}/vars`);
+  }
+
+  getContractsDx(params: any): Observable<Contract[]> {
+    return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), this.options);
+  }
   /**
    * Get a Contracts
    * @param id

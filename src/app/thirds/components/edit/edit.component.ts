@@ -25,12 +25,12 @@ export class EditComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
       if (this.id) {
-        this.thirdsService.getThird(this.id)
+        this.thirdsService.getThird(this.id, true)
           .subscribe(data => {
             this.tier = this.thirdsService.dataFormatter(data, false);
-            if (this.tier.social_reason || this.tier.patent_number || this.tier.ice
+            if (this.tier.company_name || this.tier.patent_number || this.tier.ice
               || this.tier.rc || this.tier.tva_code || this.tier.if) {
-              this.tier.isCorporation = true;
+              this.tier.morale = true;
             }
             console.log(delete this.tier.tel1);
             console.log(this.tier);
@@ -55,7 +55,8 @@ export class EditComponent implements OnInit {
         `${this.tier.first_name.toUpperCase()} ${this.tier.last_name.toUpperCase()} informations modifiées avec succès`
       );
     }, err => {
-      this.toastr.error(err.error.message);
+      throw err;
+      // this.toastr.error(err.error.message);
     });
 
 

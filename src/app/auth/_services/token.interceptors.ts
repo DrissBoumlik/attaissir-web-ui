@@ -3,10 +3,11 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor, HttpResponse, HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from './authentication.service';
+import 'rxjs/add/operator/retry';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -17,7 +18,8 @@ export class TokenInterceptor implements HttpInterceptor {
     if (JSON.parse(localStorage.getItem('currentUser'))) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${this.auth.getToken()}`
+          Authorization: `Bearer ${this.auth.getToken()}`,
+          Tanant: this.auth.getTanent()
         }
       });
     }

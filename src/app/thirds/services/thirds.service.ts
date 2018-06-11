@@ -32,6 +32,22 @@ export class ThirdsService {
   }
 
   /**
+   * Get a collection of Third parties variables to be used in dropdowns in third parties forms
+   * @returns {Observable<Third[]>}
+   */
+  getThirdsVars(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/${this.routeName}/vars`);
+  }
+
+  /**
+   * Get a collection of Third parties
+   * @returns {Observable<Third[]>}
+   */
+  getThirdsDx(params?: any): Observable<Third[]> {
+    return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), this.options);
+  }
+
+  /**
    * Get a collection of any parties
    * @returns {Observable<any[]>}
    */
@@ -45,8 +61,9 @@ export class ThirdsService {
    * @param id
    * @returns {Observable<Third[]>}
    */
-  getThird(id: number): Observable<Third> {
-    return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/${id}`);
+  getThird(id: number, isEdit?: boolean): Observable<Third> {
+    const edit = (isEdit) ? '?edit' : '';
+    return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/${id}${edit}`);
   }
 
   /**

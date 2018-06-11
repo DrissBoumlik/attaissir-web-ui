@@ -11,6 +11,8 @@ import { RouterModule } from '@angular/router';
 import { HrefPreventDefaultDirective } from '../../_directives/href-prevent-default.directive';
 import { UnwrapTagDirective } from '../../_directives/unwrap-tag.directive';
 import { SubHeaderComponent } from './sub-header/sub-header.component';
+import {AvatarModule} from 'ng2-avatar';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +25,7 @@ import { SubHeaderComponent } from './sub-header/sub-header.component';
     TooltipsComponent,
     HrefPreventDefaultDirective,
     UnwrapTagDirective,
-    SubHeaderComponent,
+    SubHeaderComponent
   ],
   exports: [
     HeaderNavComponent,
@@ -38,6 +40,7 @@ import { SubHeaderComponent } from './sub-header/sub-header.component';
   imports: [
     CommonModule,
     RouterModule,
+    AvatarModule.forRoot()
   ]
 })
 export class LayoutModule {

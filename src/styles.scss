@@ -338,6 +338,11 @@ font-size: 20px;
 .siam-page-header .siam-header-back-btn:hover {
     color: #363f46;
 }
+
+.current-site {
+  padding-right: 25px;
+}
+
 .siam-page-header .siam-header-back-btn i {
     margin-right: 6px;
     font-size: 16px;
@@ -346,7 +351,10 @@ font-size: 20px;
 .siam-user-pic-wrapper {
         display: table-cell;
     vertical-align:middle;
+  padding-right: 15px;
 }
+
+
 .siam-user-pic {
     width: 35px;
     height: 35px;

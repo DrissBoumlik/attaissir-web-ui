@@ -11,17 +11,34 @@ declare let mLayout: any;
 })
 export class HeaderNavComponent implements OnInit, AfterViewInit {
   currentUser: any;
+  displayMenu: boolean;
+  tenants: any;
+  tenant: string;
 
   constructor() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.currentUser = this.currentUser.data;
-
   }
   ngOnInit() {
+    const data = JSON.parse(localStorage.getItem('currentUser'));
+    this.tenants = data.data.tenants;
+    this.tenant = localStorage.getItem('tenantId');
   }
   ngAfterViewInit() {
     mLayout.initHeader();
+  }
 
+  showMenu = (): void => {
+    this.displayMenu = true;
+  }
+
+  hideMenu = (): void => {
+    this.displayMenu = true;
+  }
+
+  changeTenant = (id) => {
+    localStorage.setItem('tenantId', id);
+    this.tenant = localStorage.getItem('tenantId');
   }
 
 }

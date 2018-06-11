@@ -78,7 +78,7 @@ export class AuthComponent implements OnInit {
   }
 
   displaySignUpForm() {
-    let login = document.getElementById('m_login');
+    const login = document.getElementById('m_login');
     mUtil.removeClass(login, 'm-login--forget-password');
     mUtil.removeClass(login, 'm-login--signin');
 

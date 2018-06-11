@@ -42,7 +42,12 @@ export class ShowComponent implements OnInit {
         this.thirdService.getThird(+params.id).subscribe(
           (res: any) => {
             this.third = this.thirdService.dataFormatter(res, false);
-            this.bank_accounts = this.third.bank_accounts;
+            this.bank_accounts = [{
+              bank_name: this.third.bank_name,
+              bank_account_number: this.third.bank_account_number,
+              bank_code: this.third.bank_code,
+              bank_rib_key: this.third.bank_rib_key
+            }];
 
           },
           (error) => {
@@ -68,16 +73,23 @@ export class ShowComponent implements OnInit {
 
   onRemoveBA(e: any) {
     e.cancel = true;
-    this.thirdService.deleteBankAccount(e.data.id).subscribe(
+    console.log(e.data);
+    e.data['id'] = this.third.id;
+    e.data['bank_code'] = '';
+    e.data['bank_account_number'] = '';
+    e.data['bank_rib_key'] = '';
+    e.data['bank_name'] = '';
+
+    this.thirdService.editThird(e.data).subscribe(
       () => {
         this.toaster.success('Le compte bancaire a été supprimé avec succès.');
         e.cancel = false;
-        this.third.bank_accounts = this.third.bank_accounts.filter(ba => {
+        /*this.third.bank_accounts = this.third.bank_account_number.filter(ba => {
           return ba.id !== e.data.id;
-        });
+        });*/
       },
       (err) => {
-        this.toaster.error(err.message);
+        throw err; // this.toaster.error(err.message);
       }
     );
   }
@@ -94,7 +106,7 @@ export class ShowComponent implements OnInit {
         this.toaster.success('Le compte bancaire a été ajouté avec succès.');
       },
       (err) => {
-        this.toaster.error(err.error.message);
+        throw err; // this.toaster.error(err.message);
       }
     );
   }
@@ -113,7 +125,7 @@ export class ShowComponent implements OnInit {
       },
       (err) => {
         e.cancel = false;
-        this.toaster.error(err.error.message);
+        throw err; // this.toaster.error(err.message);
       }
     );
   }
@@ -136,7 +148,7 @@ export class ShowComponent implements OnInit {
         this.toaster.success('Le document a été supprimé avec succès.');
       },
       (err) => {
-        this.toaster.error(err.message);
+        throw err; // this.toaster.error(err.message);
       }
     );
   }

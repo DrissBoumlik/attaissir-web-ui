@@ -16,9 +16,9 @@
                 class="list"
                 [dataSource]="thirds"
                 [grouped]="false"
-                [searchEnabled]="true"
+                [searchEnabled]="!isEdit"
                 selectionMode="single"
-                [readOnly]="false"
+                [readOnly]="isEdit"
                 height="100%"
                 [selectedItemKeys]="[currentThird?.id]"
                 (onSelectionChanged)=listSelectionChanged($event)
@@ -111,7 +111,6 @@
         <dxi-item itemType="group" [colCount]="2">
           <dxi-item dataField="application_date" [editorOptions]="{ label: 'Date d\'application'}" i18n-label
                     editorType="dxDateBox"></dxi-item>
-          <dxi-item dataField="code_ormva" [editorOptions]="{ label: 'Code ORMVA'}" i18n-labe></dxi-item>
           <dxi-item dataField="expiration_date" [editorOptions]="expirationDateOptions" i18n-label
                     editorType="dxDateBox"></dxi-item>
           <dxi-item dataField="contrat_type" editorType="dxSelectBox" i18n-label
@@ -130,7 +129,7 @@
 			</div>
 		</div>
   </aw-wizard-step>
-  <aw-wizard-step stepTitle="3. Superficie contractée (ha)" [canEnter]="!!contract.code_ormva"
+  <aw-wizard-step stepTitle="3. Superficie contractée" [canEnter]="!!contract.application_date"
                   (stepExit)="goToParcels()"
                   [navigationSymbol]="{ symbol: '&#xf19f;', fontFamily: 'Flaticon'}"
                   i18n-step-title>
@@ -146,14 +145,14 @@
 
           <dxi-item itemType="group" caption="" [colCount]="12"
                     [attr.data-index]="i">
-            <dxi-item dataField="campaignYear" [editorOptions]="{ value: camp?.label }" [colSpan]="5"
+            <dxi-item dataField="campaign" [editorOptions]="{ value: camp?.campaign }" [colSpan]="5"
                       [disabled]="true">
               <dxo-label
                 text="Campaign" i18n-text>
               </dxo-label>
             </dxi-item>
 
-            <dxi-item dataField="area" editorType="dxNumberBox" [colSpan]="5">
+            <dxi-item dataField="surface" editorType="dxNumberBox" [colSpan]="5">
               <dxo-label
                 text="Superficie (ha)" i18n-text>
               </dxo-label>
@@ -213,7 +212,7 @@
           >
           <dxi-item dataField="total_surface" caption="Superficie totale (ha)" [editorOptions]="totalSupEditorOptions"
                     editorType="dxNumberBox"></dxi-item>
-          <dxi-item dataField="bare_surface" caption="Superficie contracté (ha)"
+          <dxi-item dataField="annuel_surface" caption="Superficie contracté (ha)"
                     editorType="dxNumberBox"></dxi-item>
           <dxi-item dataField="mode_worth" caption="Mode valoire" i18n-caption editorType="dxSelectBox"
                     [editorOptions]="worthEditorOptions">
@@ -257,7 +256,7 @@
           <dxi-column dataField="sector" caption="Secteur" i18n-caption></dxi-column>
           <dxi-column dataField="block" caption="Bloc" i18n-caption></dxi-column>
           <dxi-column dataField="total_surface" caption="Superficie totale" i18n-caption></dxi-column>
-          <dxi-column dataField="bare_surface" caption="Superficie contracté" i18n-caption></dxi-column>
+          <dxi-column dataField="annuel_surface" caption="Superficie contracté" i18n-caption></dxi-column>
 
         </dx-data-grid>
       </div>
