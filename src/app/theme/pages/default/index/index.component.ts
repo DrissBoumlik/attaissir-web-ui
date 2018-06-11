@@ -166,7 +166,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     }
 
     setTimeAndDate();
-    
+
     function setTimeAndDate() {
       const hourCont: any = document.getElementById('w-date-hour'),
         dayw: any = document.getElementById('w-day'),
@@ -194,7 +194,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     function addZeroBefore(n) {
       return (n < 10 ? '0' : '') + n;
     }
-    
+
   }
 
 

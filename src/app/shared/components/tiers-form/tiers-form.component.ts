@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { locale } from 'devextreme/localization';
 import 'devextreme-intl';
 import { Third } from '../../../classes/third';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {Helper} from '../../../classes/helper';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { Helper } from '../../../classes/helper';
 
 @Component({
   selector: 'app-tiers-form',

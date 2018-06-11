@@ -12,494 +12,488 @@
 
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body m-portlet__body--no-padding">
-
-      <div class="m-portlet m-portlet--full-height m-portlet--tabs   m-portlet--unair">
-        <div class="m-portlet__head">
-          <div class="m-portlet__head-tools">
-            <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
-                  <i class="flaticon-share m--hide"></i>
-                  Fiche
-                </a>
-              </li>
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab"
-                   (click)="getThirdAgreements(third?.id)">
-                  Contrats
-                </a>
-              </li>
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
-                  Comptes Bancaires
-                </a>
-              </li>
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab" (click)="loadDocuments()"
-                   href="#m_user_profile_tab_4" role="tab">
-                  Documents joints
-                </a>
-              </li>
-              <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab"
-                   href="#m_user_profile_tab_5" role="tab">
-                  Cartes
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="tab-content">
-          <div class="tab-pane active" id="m_user_profile_tab_1">
-            <div class="m-form m-form--fit m-form--label-align-right">
-              <div class="m-portlet__body">
-                <hr>
-                <div class="row">
-                  <div class="col-xl-4 col-lg-4 col-md-4 ">
-                    <div class="form-group m-form__group row">
-                      <div class=" ml-auto">
-                        <h3 class="m-form__section">
-                          1. Informations générales
-                        </h3>
+    <div class="m-portlet__body">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12">
+          <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+                <li class="nav-item m-tabs__item">
+                  <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
+                    <i class="flaticon-share m--hide"></i>
+                    Fiche
+                  </a>
+                </li>
+                <li class="nav-item m-tabs__item">
+                  <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab"
+                     (click)="getThirdAgreements(third?.id)">
+                    Contrats
+                  </a>
+                </li>
+                <li class="nav-item m-tabs__item">
+                  <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
+                    Comptes Bancaires
+                  </a>
+                </li>
+                <li class="nav-item m-tabs__item">
+                  <a class="nav-link m-tabs__link" data-toggle="tab" (click)="loadDocuments()"
+                     href="#m_user_profile_tab_4" role="tab">
+                    Documents joints
+                  </a>
+                </li>
+                <li class="nav-item m-tabs__item">
+                  <a class="nav-link m-tabs__link" data-toggle="tab"
+                     href="#m_user_profile_tab_5" role="tab">
+                    Cartes
+                  </a>
+                </li>
+              </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="m_user_profile_tab_1">
+              <div class="m-form m-form--fit">
+                <div class="m-portlet__body">
+                  <div class="row">
+                    <div class="col-12">
+                      <h3 class="m-form__section">
+                        Informations générales
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Nom complet
+                        </label>
+                        <div class="col-12">
+                            <p class="siam-form-input-value">{{ third?.first_name }} {{ third?.last_name }}</p>
+                        </div>
+                      </div>
+                      <div class="row" DIR="ltr">
+                        <label class="col-12">
+                          الاسم الكامل
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value">{{ third?.first_name_ar }} {{ third?.last_name_ar }}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          CIN
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.cin">{{ third?.cin | uppercase }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.cin">Pas de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Assurance.
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.is_insured !== null">{{ third?.is_insured ? 'Oui' : 'Non' }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="third?.is_insured == null">Pas de données</p>
+                        </div>
                       </div>
                     </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Nom complet
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text"
-                               [value]="third?.first_name ? third?.first_name + ' ' + third?.last_name : 'N/A'"
-                               readonly>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Situation familiale
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.civil_status">{{ third?.civil_status }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.civil_status">Pas de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Date de naissance
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.birth_date">{{ third?.birth_date }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.birth_date">Pas de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Date du décès
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.death_date">{{ third?.death_date }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.death_date">Pas de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Retraite.
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.is_retired !== null">{{ third?.is_retired ? 'Oui' : 'Non' }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="third?.is_retired == null">Pas de données</p>
+                        </div>
                       </div>
                     </div>
-                    <div class="form-group m-form__group row" DIR="ltr">
-                      <label class="col-4 col-form-label">
-                        الاسم الكامل
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text"
-                               [value]="third?.first_name_ar ? third?.first_name_ar + ' ' + third?.last_name_ar : 'N/A'"
-                               readonly>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Téléphone 1
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.tel1">{{ third?.tel1 }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.tel1">Pas de données</p>
+                        </div>
                       </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        CIN
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.cin | uppercase" readonly>
+                      <div class="row">
+                        <label class="col-12">
+                          Téléphone 2
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.tel2">{{ third?.tel2 }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.tel2">Pas de données</p>
+                        </div>
                       </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Situation familiale
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.civil_status ? third?.civil_status : 'N/A'" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Date de naissance
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.birth_date ? third?.birth_date : 'N/A' | uppercase"
-                               readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row" *ngIf="third?.death_date">
-                      <label class="col-4 col-form-label">
-                        Date du décès
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.death_date | uppercase"
-                               readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        téléphone 1
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.tel1 ? third?.tel1 : 'N/A' | uppercase" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        téléphone 2
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.tel2 ? third?.tel2 : 'N/A' | uppercase" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Email
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.email ? third?.email : 'N/A'" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Assurance.
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.is_insured ? 'Oui' : 'Non'"
-                               readonly>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Retraite.
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.is_retired ? 'Oui' : 'Non'"
-                               readonly>
+                      <div class="row">
+                        <label class="col-12">
+                          Email
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.email">{{ third?.email }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.email">Pas de données</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-xl-4 col-lg-4 col-md-4 ">
-                    <div class="form-group m-form__group row">
-                      <div class="col-10 ml-auto">
-                        <h3 class="m-form__section">
-                          2.Adresse
-                        </h3>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
+                  <div class="row">
+                    <div class="col-12">
+                      <h3 class="m-form__section">
                         Adresse
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.address ? third?.address : 'N/A'" readonly>
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Adresse
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.address">{{ third?.address}}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.address">Pas de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Ville
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.city">{{ third?.city}}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.city">Pas de données</p>
+                        </div>
                       </div>
                     </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Ville
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.city ? third?.city : 'N/A'" readonly>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Commune
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.commune">{{ third?.commune}}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.commune">Pas de données</p>
+                        </div>:
                       </div>
                     </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Commune
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.commune  ?  third?.commune : 'N/A'" readonly>
-                      </div>:
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label class="col-4 col-form-label">
-                        Code postal
-                      </label>
-                      <div class="col-7">
-                        <input class="form-control m-input" type="text" [value]="third?.zip_code ? third?.zip_code  : 'N/A'" readonly>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Code postal
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.zip_code">{{ third?.zip_code}}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.zip_code">Pas de données</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-xl-4 col-lg-4 col-md-4">
-                    <div *ngIf="third?.company_name">
-                      <div class="form-group m-form__group row">
-                        <div class="col-10 ml-auto">
-                          <h3 class="m-form__section">
-                            3. Société
-                          </h3>
+                  <div class="row">
+                    <div class="col-12">
+                      <h3 class="m-form__section">
+                        Société
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                        <div class="row">
+                          <label class="col-12">
+                            Raison sociale
+                          </label>
+                          <div class="col-12">
+                            <p class="siam-form-input-value" *ngIf="third?.company_name">{{ third?.company_name}}</p>
+                            <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.company_name">Pas de données</p>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label class="col-4 col-form-label">
-                          Raison sociale
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.company_name ? third?.company_name : 'N/A'" readonly>
+                        <div class="row">
+                          <label class="col-12">
+                            patente
+                          </label>
+                          <div class="col-12">
+                            <p class="siam-form-input-value" *ngIf="third?.patent_number">{{ third?.patent_number}}</p>
+                            <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.patent_number">Pas de données</p>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label class="col-4 col-form-label">
-                          patente
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.patent_number ? third?.patent_number : 'N/A'" readonly>
+
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                          <label class="col-12">
+                            Identification fiscale
+                          </label>
+                          <div class="col-12">
+                            <p class="siam-form-input-value" *ngIf="third?.if">{{ third?.if}}</p>
+                            <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.if">Pas de données</p>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label class="col-4 col-form-label">
-                          Identification fiscale
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.if ? third?.if : 'N/A'" readonly>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                          <label class="col-12">
+                            Identifiant commun de l’entreprise.
+                          </label>
+                          <div class="col-12">
+                            <p class="siam-form-input-value" *ngIf="third?.ice">{{ third?.ice}}</p>
+                            <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.ice">Pas de données</p>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label class="col-4 col-form-label">
-                          Identifiant commun de l’entreprise.
-                        </label>
-                        <div class="col-7">
-                          <input class="form-control m-input" type="text" [value]="third?.ice ? third?.ice : 'N/A'" readonly>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="tab-pane" id="m_user_profile_tab_2">
-            <div class="m-portlet__body">
-              <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
-                            id="ContractsgridContainer"
-                            [allowColumnReordering]="true"
-                            [dataSource]="contracts"
-                            [showColumnLines]="true"
-                            [showRowLines]="true"
-                            [showBorders]="true"
-                            [rowAlternationEnabled]="true"
-                            style="padding-top: 2vh"
-                            class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
-                            [noDataText]="'L\'agrégé ne dispose pas de contrat'"
-                            keyExpr="id">
-                <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
-                </dxi-column>
-                <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
-                </dxi-column>
-                <dxi-column dataField="contrat_type" caption="type de contrat" dataType="Text">
-                </dxi-column>
-                <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
-                </dxi-column>
-                <dxi-column dataField="structure.label" caption="Structure" dataType="Text"></dxi-column>
-                <dxi-column dataField="id" caption="Détails" cellTemplate="detsTemplate"></dxi-column>
-                <div *dxTemplate="let data of 'statusTemplate'">
-                      <span [ngClass]="getStatusColor(data.value)">
-                            {{ data.value }}
-                        </span>
-                </div>
-                <div *dxTemplate="let data of 'detsTemplate'">
-                  <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="showDetails(data.value)"
-                     class="fa fa-info-circle fa-5x"></i>
-                </div>
-                <dxo-remote-operations
-                  [sorting]="true"
-                  [paging]="false">
-                </dxo-remote-operations>
-                <dxo-selection mode="multiple"></dxo-selection>
-                <dxo-editing
-                  [useIcons]="true"
-                  mode="row"
-                  [allowUpdating]="false"
-                  [allowDeleting]="false"
-                  [allowAdding]="false">
-                </dxo-editing>
-                <dxo-pager
-                  [showPageSizeSelector]="false"
-                ></dxo-pager>
-              </dx-data-grid>
+            <div class="tab-pane" id="m_user_profile_tab_2">
+              <dx-data-grid
+                              id="ContractsgridContainer"
+                              [allowColumnReordering]="true"
+                              [dataSource]="contracts"
+                              [showColumnLines]="true"
+                              [showRowLines]="true"
+                              [showBorders]="true"
+                              [rowAlternationEnabled]="true"
+                              style="padding-top: 2vh"
+                              [noDataText]="'L\'agrégé ne dispose pas de contrat'"
+                              keyExpr="id">
+                  <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
+                  </dxi-column>
+                  <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
+                  </dxi-column>
+                  <dxi-column dataField="contrat_type" caption="type de contrat" dataType="Text">
+                  </dxi-column>
+                  <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
+                  </dxi-column>
+                  <dxi-column dataField="structure.label" caption="Structure" dataType="Text"></dxi-column>
+                  <dxi-column dataField="id" caption="Détails" cellTemplate="detsTemplate"></dxi-column>
+                  <div *dxTemplate="let data of 'statusTemplate'">
+                        <span [ngClass]="getStatusColor(data.value)">
+                              {{ data.value }}
+                          </span>
+                  </div>
+                  <div *dxTemplate="let data of 'detsTemplate'">
+                    <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="showDetails(data.value)"
+                       class="fa fa-info-circle fa-5x"></i>
+                  </div>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="false">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="multiple"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="row"
+                    [allowUpdating]="false"
+                    [allowDeleting]="false"
+                    [allowAdding]="false">
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="false"
+                  ></dxo-pager>
+                </dx-data-grid>
             </div>
-          </div>
-          <div class="tab-pane" id="m_user_profile_tab_3">
-            <!-- <div class="d-flex align-items-center custom3">
-               <div class="mr-auto">
-                 <h3 class="m-subheader__title">
-                   Liste des comptes bancaires
-                 </h3>
-                 <hr>
-               </div>
-             </div>-->
-            <div class="m-portlet__body">
-              <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
-                            class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
-                            id="gridContainer"
-                            [allowColumnReordering]="true"
-                            [dataSource]="bank_accounts"
-                            (onRowRemoving)="onRemoveBA($event)"
-                            (onRowUpdating)="onUpdateBA($event)"
-                            (onEditingStart)="onStartUpdate($event)"
-                            [showColumnLines]="true"
-                            [showRowLines]="true"
-                            [showBorders]="true"
-                            (onRowInserting)="onAddBA($event)"
-                            [rowAlternationEnabled]="true"
-                            style="padding-top: 2vh"
-                            [noDataText]="'L\'agrégé ne dispose pas de compte bancaire'">
-                <dxi-column dataField="bank_name" caption="Banque name">
-                  <dxi-validation-rule type="required"></dxi-validation-rule>
-                </dxi-column>
-                <dxi-column dataField="bank_account_number" caption="Numero compte banquaire">
-                  <dxi-validation-rule type="required"></dxi-validation-rule>
-                </dxi-column>
-                <dxi-column dataField="bank_code" caption="Code banquaire">
-                  <dxi-validation-rule type="required"></dxi-validation-rule>
-                </dxi-column>
-                <dxi-column dataField="bank_rib_key" caption="Clé RIB banquaire">
-                  <dxi-validation-rule type="required"></dxi-validation-rule>
-                </dxi-column>
-                <dxo-remote-operations
-                  [sorting]="true"
-                  [paging]="false">
-                </dxo-remote-operations>
-                <dxo-selection mode="multiple"></dxo-selection>
-                <dxo-editing
-                  [useIcons]="true"
-                  mode="row"
-                  [allowUpdating]="false"
-                  [allowDeleting]="false"
-                  [allowAdding]="false">
-                </dxo-editing>
-                <dxo-pager
-                  [showPageSizeSelector]="false"
-                ></dxo-pager>
-              </dx-data-grid>
+            <div class="tab-pane" id="m_user_profile_tab_3">
+              <dx-data-grid 
+                              id="gridContainer"
+                              [allowColumnReordering]="true"
+                              [dataSource]="bank_accounts"
+                              (onRowRemoving)="onRemoveBA($event)"
+                              (onRowUpdating)="onUpdateBA($event)"
+                              (onEditingStart)="onStartUpdate($event)"
+                              [showColumnLines]="true"
+                              [showRowLines]="true"
+                              [showBorders]="true"
+                              (onRowInserting)="onAddBA($event)"
+                              [rowAlternationEnabled]="true"
+                              style="padding-top: 2vh"
+                              [noDataText]="'L\'agrégé ne dispose pas de compte bancaire'">
+                  <dxi-column dataField="bank_name" caption="Banque name">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                  </dxi-column>
+                  <dxi-column dataField="bank_account_number" caption="Numero compte banquaire">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                  </dxi-column>
+                  <dxi-column dataField="bank_code" caption="Code banquaire">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                  </dxi-column>
+                  <dxi-column dataField="bank_rib_key" caption="Clé RIB banquaire">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                  </dxi-column>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="false">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="multiple"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="row"
+                    [allowUpdating]="false"
+                    [allowDeleting]="false"
+                    [allowAdding]="false">
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="false"
+                  ></dxo-pager>
+                </dx-data-grid>
             </div>
-          </div>
-          <div class="tab-pane" id="m_user_profile_tab_4">
-            <div class="m-portlet__body">
-              <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
-                            id="gridCont"
-                            [allowColumnReordering]="true"
-                            [dataSource]="documents"
-                            (onRowRemoving)="onRemoveDOC($event)"
-                            (onRowUpdating)="onUpdateDOC($event)"
-                            [showColumnLines]="true"
-                            [showRowLines]="true"
-                            [showBorders]="true"
-                            (onRowInserting)="onAddDOC($event)"
-                            [rowAlternationEnabled]="true"
-                            style="padding-top: 2vh"
-                            [noDataText]="'L\'agrégé ne dispose pas de documents joints'"
-                            keyExpr="id">
-
-                <dxi-column dataField="label" caption="Type" [visible]="false">
-                  <dxo-lookup
-                    [dataSource]="docTypes"
-                    displayExpr="label"
-                    valueExpr="id">
-                  </dxo-lookup>
-                </dxi-column>
-
-                <dxi-column dataField="label" caption="Type"></dxi-column>
-
-                <dxi-column dataField="path" caption="Charger" editCellTemplate="cellTemplate2"
-                            [visible]="false"></dxi-column>
-
-                <dxi-column dataField="downloadPath" caption="Télécharger" cellTemplate="cellTemplate"></dxi-column>
-
-                <div *dxTemplate="let data of 'cellTemplate'">
-                  <dx-button
-                    class="send"
-                    icon="fa fa-cloud-download"
-                    text="Download"
-                    (onClick)="downloadDocument(data)">
-                  </dx-button>
-                </div>
-                <div *dxTemplate="let data of 'cellTemplate2'">
-                  <dx-file-uploader
-                    selectButtonText="Ajouter un document"
-                    labelText="document"
-                    accept="*"
-                    uploadMode="useForm"
-                    [(value)]="filePath" style="padding-bottom: 100px">
-                  </dx-file-uploader>
-                </div>
-                <dxo-remote-operations
-                  [sorting]="true"
-                  [paging]="false">
-                </dxo-remote-operations>
-                <dxo-selection mode="multiple"></dxo-selection>
-                <dxo-editing
-                  [useIcons]="true"
-                  mode="popup"
-                  [form]="{items: ['label', 'path']}"
-                  [allowUpdating]="true"
-                  [allowDeleting]="true"
-                  [allowAdding]="true">
-                  <dxo-popup
-                    title="Ajouter ou modifier"
-                    [showTitle]="true"
-                    [width]="700"
-                    [height]="345"
-                    [position]="{ my: 'center', at: 'center'}">
-                  </dxo-popup>
-                </dxo-editing>
-                <dxo-pager
-                  [showPageSizeSelector]="false"
-                ></dxo-pager>
-              </dx-data-grid>
+            <div class="tab-pane" id="m_user_profile_tab_4">
+              <dx-data-grid
+                              id="gridCont"
+                              [allowColumnReordering]="true"
+                              [dataSource]="documents"
+                              (onRowRemoving)="onRemoveDOC($event)"
+                              (onRowUpdating)="onUpdateDOC($event)"
+                              [showColumnLines]="true"
+                              [showRowLines]="true"
+                              [showBorders]="true"
+                              (onRowInserting)="onAddDOC($event)"
+                              [rowAlternationEnabled]="true"
+                              style="padding-top: 2vh"
+                              [noDataText]="'L\'agrégé ne dispose pas de documents joints'"
+                              keyExpr="id">
+      
+                  <dxi-column dataField="label" caption="Type" [visible]="false">
+                    <dxo-lookup
+                      [dataSource]="docTypes"
+                      displayExpr="label"
+                      valueExpr="id">
+                    </dxo-lookup>
+                  </dxi-column>
+      
+                  <dxi-column dataField="label" caption="Type"></dxi-column>
+      
+                  <dxi-column dataField="path" caption="Charger" editCellTemplate="cellTemplate2"
+                              [visible]="false"></dxi-column>
+      
+                  <dxi-column dataField="downloadPath" caption="Télécharger" cellTemplate="cellTemplate"></dxi-column>
+      
+                  <div *dxTemplate="let data of 'cellTemplate'">
+                    <dx-button
+                      class="send"
+                      icon="fa fa-cloud-download"
+                      text="Download"
+                      (onClick)="downloadDocument(data)">
+                    </dx-button>
+                  </div>
+                  <div *dxTemplate="let data of 'cellTemplate2'">
+                    <dx-file-uploader
+                      selectButtonText="Ajouter un document"
+                      labelText="document"
+                      accept="*"
+                      uploadMode="useForm"
+                      [(value)]="filePath" style="padding-bottom: 100px">
+                    </dx-file-uploader>
+                  </div>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="false">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="multiple"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="popup"
+                    [form]="{items: ['label', 'path']}"
+                    [allowUpdating]="true"
+                    [allowDeleting]="true"
+                    [allowAdding]="true">
+                    <dxo-popup
+                      title="Ajouter ou modifier"
+                      [showTitle]="true"
+                      [width]="700"
+                      [height]="345"
+                      [position]="{ my: 'center', at: 'center'}">
+                    </dxo-popup>
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="false"
+                  ></dxo-pager>
+                </dx-data-grid>
             </div>
-          </div>
-          <div class="tab-pane" id="m_user_profile_tab_5">
-            <!-- <div class="d-flex align-items-center custom3">
-               <div class="mr-auto">
-                 <h3 class="m-subheader__title">
-                   Liste des comptes bancaires
-                 </h3>
-                 <hr>
-               </div>
-             </div>-->
-            <div class="m-portlet__body">
-              <dx-data-grid class=" m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded "
-                            id="CardsgridContainer"
-                            [allowColumnReordering]="true"
-                            [dataSource]="third?.cards"
-                            [showColumnLines]="true"
-                            [showRowLines]="true"
-                            [showBorders]="true"
-                            [rowAlternationEnabled]="true"
-                            style="padding-top: 2vh"
-                            [noDataText]="'L\'agrégé ne dispose pas de carte agriculteur'"
-                            keyExpr="id">
-                <dxi-column dataField="code_rfid" caption="Serial">
-                </dxi-column>
-                <dxi-column width="100" dataField="status" caption="Status" cellTemplate="statusTemplate">
-                </dxi-column>
-                <dxi-column  width="200" dataField="printed_at" caption="status d'impression" cellTemplate="printed_atStatusTemplate">
-                </dxi-column>
-                <dxi-column dataField="id" caption="Action" cellTemplate="actionsTemplate">
-                </dxi-column>
-                <div *dxTemplate="let data of 'statusTemplate'">
-                  <span [ngClass]="getStatusColor(data.value)">
-                    {{ data.value }}
-                  </span>
-                </div>
-                <div *dxTemplate="let data of 'actionsTemplate'">
-                  <div class="row" style="align-content: center">
-                    <div class="col-4">
-                      <dx-button [text]="getAdequateAction(data.value)"
-                                 (click)="switchCarteStatus(data.value)" *ngIf="canHaveAction(data.value)"></dx-button>
-                    </div>
-                    <div class="col-8">
-                      <dx-button [text]="'Déclarer perdu'"
-                                 (click)="DeclareStolen(data.value)" *ngIf="canHaveAction(data.value)"></dx-button>
+            <div class="tab-pane" id="m_user_profile_tab_5">
+              <dx-data-grid
+                              id="CardsgridContainer"
+                              [allowColumnReordering]="true"
+                              [dataSource]="third?.cards"
+                              [showColumnLines]="true"
+                              [showRowLines]="true"
+                              [showBorders]="true"
+                              [rowAlternationEnabled]="true"
+                              style="padding-top: 2vh"
+                              [noDataText]="'L\'agrégé ne dispose pas de carte agriculteur'"
+                              keyExpr="id">
+                  <dxi-column dataField="code_rfid" caption="Serial">
+                  </dxi-column>
+                  <dxi-column width="100" dataField="status" caption="Status" cellTemplate="statusTemplate">
+                  </dxi-column>
+                  <dxi-column  width="200" dataField="printed_at" caption="status d'impression" cellTemplate="printed_atStatusTemplate">
+                  </dxi-column>
+                  <dxi-column dataField="id" caption="Action" cellTemplate="actionsTemplate">
+                  </dxi-column>
+                  <div *dxTemplate="let data of 'statusTemplate'">
+                    <span [ngClass]="getStatusColor(data.value)">
+                      {{ data.value }}
+                    </span>
+                  </div>
+                  <div *dxTemplate="let data of 'actionsTemplate'">
+                    <div class="row" style="align-content: center">
+                      <div class="col-4">
+                        <dx-button [text]="getAdequateAction(data.value)"
+                                   (click)="switchCarteStatus(data.value)" *ngIf="canHaveAction(data.value)"></dx-button>
+                      </div>
+                      <div class="col-8">
+                        <dx-button [text]="'Déclarer perdu'"
+                                   (click)="DeclareStolen(data.value)" *ngIf="canHaveAction(data.value)"></dx-button>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div *dxTemplate="let date of 'printed_atStatusTemplate'">
-                   <span ngClass="badge badge-pill badge-success" *ngIf="data">
-                     imprimé.
-                  </span>
-                  <span ngClass="badge badge-pill badge-warning" *ngIf="!data">
-                    en cours d'impression.
-                  </span>
-                </div>
-                <dxo-remote-operations
-                  [sorting]="true"
-                  [paging]="true">
-                </dxo-remote-operations>
-                <dxo-selection mode="multiple"></dxo-selection>
-                <dxo-editing
-                  [useIcons]="true"
-                  mode="row"
-                  [allowUpdating]="false"
-                  [allowDeleting]="false"
-                  [allowAdding]="false">
-                </dxo-editing>
-                <dxo-pager
-                  [showPageSizeSelector]="true"
-                ></dxo-pager>
-              </dx-data-grid>
+                  <div *dxTemplate="let date of 'printed_atStatusTemplate'">
+                     <span ngClass="m-badge m-badge--success m-badge--wide" *ngIf="data">
+                       imprimé.
+                    </span>
+                    <span ngClass="m-badge m-badge--warning m-badge--wide" *ngIf="!data">
+                      en cours d'impression.
+                    </span>
+                  </div>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="true">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="multiple"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="row"
+                    [allowUpdating]="false"
+                    [allowDeleting]="false"
+                    [allowAdding]="false">
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="true"
+                  ></dxo-pager>
+                </dx-data-grid>
             </div>
           </div>
         </div>

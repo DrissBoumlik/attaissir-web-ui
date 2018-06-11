@@ -27,7 +27,7 @@ export class CardsComponent implements OnInit {
       });
     },
       (err) => {
-      throw err;
+        throw err;
         // this.toastr.error(err.error.message);
       });
   }

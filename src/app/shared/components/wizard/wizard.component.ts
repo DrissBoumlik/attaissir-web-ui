@@ -15,7 +15,7 @@ import { AgreementGround } from '../../../classes/agreement-ground';
 import { AgreementGroundsService } from '../../../contracts/services/agreement-grounds.service';
 import { Campaign } from '../../../classes/campaign';
 import { Router } from '@angular/router';
-import {Helper} from '../../../classes/helper';
+import { Helper } from '../../../classes/helper';
 
 
 @Component({
@@ -274,7 +274,8 @@ export class WizardComponent implements OnInit {
     this.campaigns = [
       {
         campaign: `${year}/${Number(year) + 1}`,
-        surface: 0}
+        surface: 0
+      }
     ];
 
     this.navBarLayout = 'large-filled-symbols';
