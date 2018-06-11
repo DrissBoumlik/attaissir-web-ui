@@ -43,7 +43,7 @@ export class ThirdsService {
    * Get a collection of Third parties
    * @returns {Observable<Third[]>}
    */
-  getThirdsDx(params: any): Observable<Third[]> {
+  getThirdsDx(params?: any): Observable<Third[]> {
     return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), this.options);
   }
 

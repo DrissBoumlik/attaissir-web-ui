@@ -86,6 +86,13 @@ export class WizardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tierService.getThirdsDx().subscribe(tiers => {
+      this.tiers = this.tierService.dataFormatter(tiers, false);
+      this.thirds = Third.getDataSource(this.tiers, 'cin');
+    }, error1 => {
+      this.toastr.error(error1.error.message);
+    });
+
     this.contractService.getContractsVars().subscribe((data) => {
       this.contracteditorOptions = {
         label: 'Type contrat',
@@ -103,6 +110,7 @@ export class WizardComponent implements OnInit {
     }, error1 => {
       throw error1;
     });
+
     this.totalSupEditorOptions = {
     };
 
@@ -245,17 +253,10 @@ export class WizardComponent implements OnInit {
       this.toastr.error(error1.error.message);
     });
 
-    this.tierService.getThirds().subscribe(tiers => {
-      this.tiers = this.tierService.dataFormatter(tiers, false);
-      this.thirds = Third.getDataSource(this.tiers, 'cin');
-    }, error1 => {
-      this.toastr.error(error1.error.message);
-    });
-
     this.addThird = false;
 
 
-    this.campaignService.getCampaigns().subscribe(camp => {
+    /*this.campaignService.getCampaigns().subscribe(camp => {
       this.campaignsRes = this.campaignService.dataFormatter(camp, false);
       this.campaigns = this.campaignsRes.map(c => {
         c['hidded'] = true;
@@ -268,7 +269,13 @@ export class WizardComponent implements OnInit {
       }
     }, error1 => {
       this.toastr.error(error1.error.message);
-    });
+    });*/
+    const year = new Date().getFullYear();
+    this.campaigns = [
+      {
+        campaign: `${year}/${Number(year) + 1}`,
+        surface: 0}
+    ];
 
     this.navBarLayout = 'large-filled-symbols';
 
@@ -308,7 +315,7 @@ export class WizardComponent implements OnInit {
   }
 
   goToArea = () => {
-    if (!this.contract.code_ormva) {
+    if (!this.contract.application_date) {
       this.toastr.error('Remplissez les champs du contrat pour avancer!');
     } else {
       this.maxYears = (this.contract.type === 'annuel') ? 1 : 5;

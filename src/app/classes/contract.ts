@@ -14,7 +14,6 @@ export class Contract {
   application_date: Date;
   expiration_date: Date;
   signature_date: Date;
-  code_ormva: string;
   culture_type: string; // ['cas', 'bas'])->nullable();
   type: string; // [''multiyear', 'annual''])->nullable();
   status: string; // 'draft','inprogress', 'actif', 'inactif', 'suspended', 'blocked', 'expired';
