@@ -9,7 +9,6 @@ import { ShowComponent } from './components/show/show.component';
 import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { SharedModule } from '../shared/shared.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devextreme-angular';
 
 
@@ -22,7 +21,6 @@ import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devex
     DxCheckBoxModule,
     DxFileUploaderModule,
     DxSelectBoxModule,
-    NgbModule.forRoot(),
   ],
   declarations: [
     ListComponent,
@@ -30,7 +28,6 @@ import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devex
     AddComponent,
     EditComponent,
   ],
-  providers: [ContractsService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ContractsModule {

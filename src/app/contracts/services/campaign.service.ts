@@ -42,7 +42,7 @@ export class CampaignService {
    * @returns {Observable<Campaign[]>}
    */
   addCampaign(campaign: Campaign): Observable<Campaign[]> {
-    return this.http.post<Campaign[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(campaign), this.options);
+    return this.http.post<Campaign[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(campaign));
   }
 
 
@@ -52,7 +52,7 @@ export class CampaignService {
    * @returns {Observable<Campaign>}
    */
   editCampaign(campaign: Campaign): Observable<Campaign> {
-    return this.http.put<Campaign>(`${environment.apiUrl}/${this.routeName}/${campaign.id}`, JSON.stringify(campaign), this.options);
+    return this.http.put<Campaign>(`${environment.apiUrl}/${this.routeName}/${campaign.id}`, JSON.stringify(campaign));
   }
 
   /**
@@ -61,7 +61,7 @@ export class CampaignService {
    * @returns {Observable<any>}
    */
   deleteCampaign(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, this.options);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
   }
 
   /**

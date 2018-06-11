@@ -41,7 +41,7 @@ export class StructuresService {
    * @returns {Observable<Structure[]>}
    */
   addStructure(structure: Structure): Observable<Structure[]> {
-    return this.http.post<Structure[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(structure), this.options);
+    return this.http.post<Structure[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(structure));
   }
 
   /**
@@ -50,7 +50,7 @@ export class StructuresService {
    * @returns {Observable<Structure>}
    */
   editStructure(structure: Structure): Observable<Structure> {
-    return this.http.put<Structure>(`${environment.apiUrl}/${this.routeName}/${structure.id}`, JSON.stringify(structure), this.options);
+    return this.http.put<Structure>(`${environment.apiUrl}/${this.routeName}/${structure.id}`, JSON.stringify(structure));
   }
 
   /**
@@ -59,7 +59,7 @@ export class StructuresService {
    * @returns {Observable<any>}
    */
   deleteStructure(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, this.options);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
   }
 
   /**

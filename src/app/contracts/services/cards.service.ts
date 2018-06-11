@@ -31,7 +31,7 @@ export class CardsService {
    * @returns {Observable<Card[]>}
    */
   getCardsDx(params: any): Observable<Card[]> {
-    return this.http.post<Card[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), this.options);
+    return this.http.post<Card[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params));
   }
 
   /**
@@ -49,11 +49,11 @@ export class CardsService {
    * @returns {Observable<Card[]>}
    */
   addCard(card: Card): Observable<Card[]> {
-    return this.http.post<Card[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(card), this.options);
+    return this.http.post<Card[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(card));
   }
 
   getDoc(id: number): Observable<Card[]> {
-    return this.http.get<Card[]>(`${environment.apiUrl}/agreements/${id}/prints`, this.options);
+    return this.http.get<Card[]>(`${environment.apiUrl}/agreements/${id}/prints`);
   }
 
   /**
@@ -78,7 +78,7 @@ export class CardsService {
         name: action,
         ids: card
       }
-    }), this.options);
+    }));
   }
 
   /**
@@ -87,7 +87,7 @@ export class CardsService {
    * @returns {Observable<any>}
    */
   deleteCard(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, this.options);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
   }
 
   /**

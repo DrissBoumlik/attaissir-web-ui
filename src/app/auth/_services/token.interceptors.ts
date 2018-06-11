@@ -19,7 +19,10 @@ export class TokenInterceptor implements HttpInterceptor {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${this.auth.getToken()}`,
-          Tanant: this.auth.getTanent()
+          Tenant: this.auth.getTanent(),
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          charset: 'UTF-8'
         }
       });
     }

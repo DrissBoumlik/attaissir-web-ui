@@ -5,7 +5,7 @@
 
       <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Liste des contrats</a>
       <h2>Contrat Agrégat-Agrégés {{ contract?.code }}</h2>
-      <a class="siam-header-btn-new" href="#" (click)="downloadContract()" download=""><i
+      <a class="siam-header-btn-new" href="#" (click)="downloadContract()" target="_blank"><i
         class="fa fa-print"></i></a>
     </div>
   </div>
@@ -462,7 +462,7 @@
                   <dxo-lookup
                     [dataSource]="docTypes"
                     displayExpr="label"
-                    valueExpr="id">
+                    valueExpr="Id">
                   </dxo-lookup>
                 </dxi-column>
 

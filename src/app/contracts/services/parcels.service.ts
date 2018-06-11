@@ -42,7 +42,7 @@ export class ParcelsService {
    * @returns {Observable<Parcel[]>}
    */
   addParcel(parcel: any): Observable<Parcel[]> {
-    return this.http.post<Parcel[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(parcel), this.options);
+    return this.http.post<Parcel[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(parcel));
   }
 
 
@@ -53,7 +53,7 @@ export class ParcelsService {
    */
   editParcel(parcel: Parcel): Observable<Parcel> {
     return this.http.put<Parcel>(`${environment.apiUrl}/${this.routeName}/${parcel.id}`,
-      JSON.stringify(Parcel), this.options);
+      JSON.stringify(Parcel));
   }
 
   /**
@@ -62,7 +62,7 @@ export class ParcelsService {
    * @returns {Observable<any>}
    */
   deleteParcel(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, this.options);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
   }
 
   /**

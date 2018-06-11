@@ -12,10 +12,6 @@ import { Contract } from '../../classes/contract';
 export class ContractsService {
 
   routeName: string;
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
-  private options = {
-    headers: this.headers
-  };
 
   constructor(public http: HttpClient) {
     this.routeName = 'contracts';
@@ -34,7 +30,7 @@ export class ContractsService {
   }
 
   getContractsDx(params: any): Observable<Contract[]> {
-    return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), this.options);
+    return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params));
   }
   /**
    * Get a Contracts
@@ -52,7 +48,7 @@ export class ContractsService {
    * @returns {Observable<Contract[]>}
    */
   addContract(contract: Contract): Observable<Contract[]> {
-    return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(contract), this.options);
+    return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(contract));
 
   }
 
@@ -63,7 +59,7 @@ export class ContractsService {
    * @returns {Observable<Contract>}
    */
   editContract(contract: Contract): Observable<Contract> {
-    return this.http.put<Contract>(`${environment.apiUrl}/${this.routeName}/${contract.id}`, JSON.stringify(contract), this.options);
+    return this.http.put<Contract>(`${environment.apiUrl}/${this.routeName}/${contract.id}`, JSON.stringify(contract));
 
   }
 
@@ -73,7 +69,7 @@ export class ContractsService {
    * @returns {Observable<any>}
    */
   deleteContract(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, this.options);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
   }
 
   /**
@@ -92,7 +88,7 @@ export class ContractsService {
    * @returns {Observable<any>}
    */
   getStrcutureById(id: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/structures/${id}`, this.options);
+    return this.http.get(`${environment.apiUrl}/structures/${id}`);
   }
 
   /**
@@ -100,12 +96,13 @@ export class ContractsService {
    * @param {number} idContrat
    */
   activateContract(idContrat: number): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/${this.routeName}/${idContrat}/activate`, this.options);
+    return this.http.put(`${environment.apiUrl}/${this.routeName}/${idContrat}/activate`, '');
   }
 
 
 
-  printContract(idContract: number): void {
-    window.open(`${environment.apiUrl}/${this.routeName}/${idContract}/prints`);
+  printContract(idContract: number): any {
+    // window.open(`${environment.apiUrl}/${this.routeName}/${idContract}/prints`);
+    return this.http.get(`${environment.apiUrl}/${this.routeName}/${idContract}/prints`, {responseType: 'blob'});
   }
 }

@@ -50,24 +50,36 @@
 
             <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
 
-              <dxi-item dataField="first_name" [disabled]="true"></dxi-item>
-              <dxi-item dataField="last_name" [disabled]="true"></dxi-item>
-              <dxi-item dataField="first_name_ar" [disabled]="true"></dxi-item>
-              <dxi-item dataField="last_name_ar" [disabled]="true"></dxi-item>
+              <dxi-item dataField="first_name" [disabled]="true">
+                <dxo-label text="Prénom"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="last_name" [disabled]="true">
+                <dxo-label text="Nom"></dxo-label></dxi-item>
+              <dxi-item dataField="first_name_ar" [disabled]="true">
+                <dxo-label text="Prénom (Arabe)"></dxo-label></dxi-item>
+              <dxi-item dataField="last_name_ar" [disabled]="true">
+                <dxo-label text="Nom (Arabe)"></dxo-label></dxi-item>
               <dxi-item dataField="id" [disabled]="true"></dxi-item>
-              <dxi-item dataField="date_birth" [editorOptions]="{ width: '100%'}" [disabled]="true"></dxi-item>
+              <dxi-item dataField="birth_date" [editorOptions]="{ width: '100%'}" [disabled]="true">
+                <dxo-label text="Date de naissance"></dxo-label></dxi-item>
 
             </dxi-item>
             <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
               <dxi-item itemType="group">
-                <dxi-item dataField="address" [disabled]="true"></dxi-item>
-                <dxi-item dataField="city" [disabled]="true"></dxi-item>
-                <dxi-item dataField="postal_code" [disabled]="true"></dxi-item>
+                <dxi-item dataField="address" [disabled]="true">
+                  <dxo-label text="Adresse"></dxo-label></dxi-item>
+                <dxi-item dataField="city" [disabled]="true">
+                  <dxo-label text="Ville"></dxo-label></dxi-item>
+                <dxi-item dataField="zip_code" [disabled]="true">
+                  <dxo-label text="Code postale"></dxo-label></dxi-item>
               </dxi-item>
               <dxi-item itemType="group">
-                <dxi-item dataField="email" [label]="{text: 'Email'}" [disabled]="true"></dxi-item>
-                <dxi-item dataField="tel1" [label]="{text: 'Telephone 1'}" [disabled]="true"></dxi-item>
-                <dxi-item dataField="tel2" [label]="{text: 'Telephone 2'}" [disabled]="true"></dxi-item>
+                <dxi-item dataField="email" [label]="{text: 'Email'}" [disabled]="true">
+                  <dxo-label text="Email"></dxo-label></dxi-item>
+                <dxi-item dataField="tel1" [label]="{text: 'Telephone 1'}" [disabled]="true">
+                  <dxo-label text="Téléphone 1"></dxo-label></dxi-item>
+                <dxi-item dataField="tel2" [label]="{text: 'Telephone 2'}" [disabled]="true">
+                  <dxo-label text="Téléphone"></dxo-label></dxi-item>
               </dxi-item>
             </dxi-item>
           </dx-form>

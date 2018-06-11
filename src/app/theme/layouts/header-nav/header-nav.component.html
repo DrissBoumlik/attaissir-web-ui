@@ -27,7 +27,7 @@
               </div>
           </div>
         </div>
-        
+
         <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general">
           <div class="m-stack__item m-topbar__nav-wrapper">
 
@@ -46,15 +46,15 @@
                     <div class="m-dropdown__body">
                       <div class="m-dropdown__content">
                         <ul class="m-nav m-nav--skin-light">
-                          
+
                           <li class="m-nav__section m-nav__section--first">
                               <span class="m-nav__section-text">Section</span>
                           </li>
                           <li class="m-nav__item" *ngFor="let t of tenants; let i = index">
                             <a  href="#" class="m-nav__link">
-                              <i class="m-menu__link-bullet m-menu__link-bullet--dot {{t.id == tenant ? 'active' : ''}}"><span></span></i>
-                              <span class="m-nav__link-text" (click)="changeTenant(t.id)">
-																{{ t.libelle }}
+                              <i class="m-menu__link-bullet m-menu__link-bullet--dot {{t.division_id == tenant ? 'active' : ''}}"><span></span></i>
+                              <span class="m-nav__link-text" (click)="changeTenant(t.division_id)">
+																{{ t.division }}
 															</span>
                             </a>
                           </li>

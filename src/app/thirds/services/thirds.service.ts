@@ -2,19 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Third } from '../../classes/third';
-import { } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Document } from '../../classes/document';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThirdsService {
-
-  public headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
-  private options = {
-    headers: this.headers
-  };
 
   routeName: string;
 
@@ -44,7 +37,7 @@ export class ThirdsService {
    * @returns {Observable<Third[]>}
    */
   getThirdsDx(params?: any): Observable<Third[]> {
-    return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), this.options);
+    return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params));
   }
 
   /**
@@ -81,7 +74,7 @@ export class ThirdsService {
    * @returns {Observable<Third[]>}
    */
   addThird(third: Third): Observable<Third[]> {
-    return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(third), this.options);
+    return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(third));
   }
 
   /**
@@ -90,7 +83,7 @@ export class ThirdsService {
    * @returns {Observable<Third>}
    */
   editThird(third: Third): Observable<Third> {
-    return this.http.put<Third>(`${environment.apiUrl}/${this.routeName}/${third.id}`, JSON.stringify(third), this.options);
+    return this.http.put<Third>(`${environment.apiUrl}/${this.routeName}/${third.id}`, JSON.stringify(third));
   }
 
   /**
@@ -99,7 +92,7 @@ export class ThirdsService {
    * @returns {Observable<any>}
    */
   deleteThird = (id: number): Observable<any> => {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, this.options);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
   }
 
   /**
@@ -118,7 +111,7 @@ export class ThirdsService {
    * @returns {Observable<any>}
    */
   deleteBankAccount(idBankAccount: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/bank-accounts/${idBankAccount}`, this.options);
+    return this.http.delete(`${environment.apiUrl}/bank-accounts/${idBankAccount}`);
   }
 
   /**
@@ -127,7 +120,7 @@ export class ThirdsService {
    * @param data
    */
   addBankAccount(data: { rib: string, bank: string, third_party_id: number }): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/bank-accounts`, data, this.options);
+    return this.http.post(`${environment.apiUrl}/bank-accounts`, data);
   }
 
   /**
@@ -137,16 +130,16 @@ export class ThirdsService {
    * @param id
    */
   updateBankAccount(newBA: { rib: string, bank: string, third_party_id: number }, id: number): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/bank-accounts/${id}`, newBA, this.options);
+    return this.http.put(`${environment.apiUrl}/bank-accounts/${id}`, newBA);
   }
 
   /*loadDocuments(idThird: number): any {
-    return this.http.get(`${environment.apiUrl}/documents/${idThird}`, this.options);
+    return this.http.get(`${environment.apiUrl}/documents/${idThird}`);
   }
 */
 
   getDocTypes(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/document-types/`, this.options);
+    return this.http.get(`${environment.apiUrl}/documents/vars`);
   }
 
   addDocument(file: File): Observable<any> {
@@ -158,7 +151,7 @@ export class ThirdsService {
 
   putDocumentInfo(docInfo: any, id: number): Observable<any> {
     return this.http.put(`${environment.apiUrl}/documents/${id}`,
-      docInfo, this.options);
+      docInfo);
   }
 
   /**
@@ -167,7 +160,7 @@ export class ThirdsService {
    * @returns {Observale<ant>}
    */
   getDocType(id: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/document-types/${id}`, this.options);
+    return this.http.get(`${environment.apiUrl}/document-types/${id}`);
   }
 
   /**
@@ -176,6 +169,6 @@ export class ThirdsService {
    * @returns {Observable<any>}
    */
   deleteDocument(idDocument: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/documents/${idDocument}`, this.options);
+    return this.http.delete(`${environment.apiUrl}/documents/${idDocument}`);
   }
 }

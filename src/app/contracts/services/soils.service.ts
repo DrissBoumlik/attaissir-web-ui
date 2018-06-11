@@ -41,7 +41,7 @@ export class SoilsService {
    * @returns {Observable<Ground[]>}
    */
   addGround(ground: Ground): Observable<Ground[]> {
-    return this.http.post<Ground[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(ground), this.options);
+    return this.http.post<Ground[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(ground));
   }
 
   /**
@@ -50,7 +50,7 @@ export class SoilsService {
    * @returns {Observable<Ground>}
    */
   editGround(ground: Ground): Observable<Ground> {
-    return this.http.put<Ground>(`${environment.apiUrl}/${this.routeName}/${ground.id}`, JSON.stringify(ground), this.options);
+    return this.http.put<Ground>(`${environment.apiUrl}/${this.routeName}/${ground.id}`, JSON.stringify(ground));
   }
 
   /**
@@ -59,7 +59,7 @@ export class SoilsService {
    * @returns {Observable<any>}
    */
   deleteGround(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, this.options);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
   }
 
   /**

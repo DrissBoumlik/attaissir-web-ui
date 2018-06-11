@@ -53,7 +53,7 @@ export class ZonesService {
    * @returns {Observable<Zone[]>}
    */
   addZone(zone: Zone): Observable<Zone[]> {
-    return this.http.post<Zone[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(zone), this.options);
+    return this.http.post<Zone[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(zone));
   }
 
   /**
@@ -62,7 +62,7 @@ export class ZonesService {
    * @returns {Observable<Zone>}
    */
   editZone(zone: Zone): Observable<Zone> {
-    return this.http.put<Zone>(`${environment.apiUrl}/${this.routeName}/${zone.id}`, JSON.stringify(zone), this.options);
+    return this.http.put<Zone>(`${environment.apiUrl}/${this.routeName}/${zone.id}`, JSON.stringify(zone));
   }
 
   /**
@@ -71,7 +71,7 @@ export class ZonesService {
    * @returns {Observable<any>}
    */
   deleteZone(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, this.options);
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`);
   }
 
   /**

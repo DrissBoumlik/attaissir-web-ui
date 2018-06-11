@@ -9,6 +9,7 @@ import { Document } from '../../../classes/document';
 import { environment } from '../../../../environments/environment';
 import { CardsService } from '../../services/cards.service';
 import { ToastrService } from 'ngx-toastr';
+import {Helper} from '../../../classes/helper';
 
 declare const require: any;
 const $ = require('jquery');
@@ -50,21 +51,21 @@ export class ShowComponent implements OnInit {
             this.third = res.data.third_party;
             this.campagnes = res.data.campaigns;
             this.documents = res.data.documents;
-            this.avenants = res.data.avenants;
+            this.avenants = res.data.amendments;
             this.isContractEncours = this.contract.status === 'encours';
             /* this.hasRightAttatchment = this.documents.find(doc => {
                return doc.type.id === 5;
              });*/
 
 
-            this.contractService.getStrcutureById(res.data.structure.id).subscribe(
+            /*this.contractService.getStrcutureById(res.data.structure.id).subscribe(
               (struct: Structure) => {
                 this.structure = this.contractService.dataFormatter(struct, false);
               },
               (err) => {
                 console.log(err);
               }
-            );
+            );*/
           },
           (error) => {
             /*this.router.navigate(['/404']).catch(
@@ -78,7 +79,7 @@ export class ShowComponent implements OnInit {
     );
     this.thirdsService.getDocTypes().subscribe(
       (res: any) => {
-        this.docTypes = this.thirdsService.dataFormatter(res, false);
+        this.docTypes = Helper.dataSourceformatter(res);
       }
     );
 
@@ -182,7 +183,22 @@ export class ShowComponent implements OnInit {
 
 
   downloadContract() {
-    this.contractService.printContract(this.contract.id);
+    let thefile = {};
+    this.contractService.printContract(this.contract.id).subscribe(data => {
+        thefile = new Blob([data], { type: 'application/pdf' });
+        console.log(data);
+        const url = window.URL.createObjectURL(thefile);
+        window.open(url);
+      },
+        error => {
+          console.log(error);
+          console.log('Error downloading the file.');
+        },
+        () => {
+      console.log('Completed file download.');
+    });
+
+
   }
 
 }

@@ -360,7 +360,7 @@ export class WizardComponent implements OnInit {
       this.contract.parent_id = this.contract.id;
       this.contract.type = 'annual';
     }
-    this.contract.contracted_surface = JSON.stringify(this.campaigns);
+    this.contract.contracted_surface = this.campaigns;
     this.contract.compaign_surface = this.campaigns[0].surface;
 
     this.contractService.addContract(this.contract).subscribe(contract => {
