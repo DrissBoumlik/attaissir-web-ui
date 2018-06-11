@@ -3,7 +3,7 @@
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Contrat Agrégat-Agrégés {{ contract.code }}</h2>
+      <h2>Contrat Agrégat-Agrégés {{ contract?.code }}</h2>
       <a class="siam-header-btn-new" href="#" (click)="downloadContract()" download=""><i
         class="fa fa-download"></i></a>
     </div>
@@ -92,14 +92,14 @@
                              readonly>
                     </div>
                   </div>
-                  <div class="form-group m-form__group row">
+                  <!--<div class="form-group m-form__group row">
                     <label class="col-2 col-form-label">
                       Type de culture
                     </label>
                     <div class="col-7">
                       <input class="form-control m-input" type="text" [value]="contract?.culture_type" readonly>
                     </div>
-                  </div>
+                  </div>-->
                   <div class="form-group m-form__group row">
                     <label class="col-2 col-form-label">
                       Type de contract

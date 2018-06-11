@@ -113,7 +113,7 @@
                     editorType="dxDateBox"></dxi-item>
           <dxi-item dataField="expiration_date" [editorOptions]="expirationDateOptions" i18n-label
                     editorType="dxDateBox"></dxi-item>
-          <dxi-item dataField="contrat_type" editorType="dxSelectBox" i18n-label
+          <dxi-item dataField="type" editorType="dxSelectBox" i18n-label
                     [editorOptions]="contracteditorOptions" *ngIf="!isEdit"
           ></dxi-item>
         <!--  <dxi-item dataField="superficie_total" [editorOptions]="{ label: 'Total superficie'}" i18n-label
@@ -159,12 +159,12 @@
             </dxi-item>
 
             <dxi-item
-              *ngIf="(camp.start_date === campaigns[campaigns.length - 1].start_date) && (campaigns.length < maxYears)"
+              *ngIf="(campaigns[campaigns.length - 1].campaign === camp.campaign) && (campaigns.length < maxYears)"
               itemType="button"
               alignment="bottom"
               [buttonOptions]="addButtonOptions">
             </dxi-item>
-            <dxi-item *ngIf="(camp.start_date === campaigns[campaigns.length -1].start_date) && (campaigns.length > 1)"
+            <dxi-item *ngIf="(campaigns[campaigns.length - 1].campaign === camp.campaign) && (campaigns.length > 1)"
                       itemType="button"
                       alignment="bottom"
                       [buttonOptions]="removeButtonOptions">
@@ -180,7 +180,7 @@
 			</div>
 		</div>
   </aw-wizard-step>
-  <aw-wizard-step stepTitle="4. Parcelle" [canEnter]="!!currentThird.cin && (campaigns.length > 0 && campaigns[0].area > 0)"
+  <aw-wizard-step stepTitle="4. Parcelle" [canEnter]="!!currentThird.cin && (campaigns.length > 0 && campaigns[0].surface > 0)"
                   i18n-step-title
                   [navigationSymbol]="{ symbol: '&#xf1a0;', fontFamily: 'Flaticon'}">
 
@@ -194,33 +194,41 @@
                  [formData]="parcelForm">
 
           <dxi-item dataField="cda" i18n-label editorType="dxSelectBox" [editorOptions]="cdaEditorOptions">
+            <dxo-label text="CDA"></dxo-label>
             <dxi-validation-rule type="required" message="CDA est obligatoire"></dxi-validation-rule>
           </dxi-item>
-          <dxi-item dataField="zone" caption="Zone" i18n-caption editorType="dxSelectBox"
+          <dxi-item dataField="zone" caption="Zone" i18n-caption editorType="dxSelectBox"Étape précédente
                     [editorOptions]="zoneEditorOptions">
+            <dxo-label text="Zone"></dxo-label>
             <dxi-validation-rule type="required" message="Zone est obligatoire"></dxi-validation-rule>
           </dxi-item>
-          <dxi-item dataField="sector" caption="Secteur" i18n-caption editorType="dxTextBox"
+          <dxi-item dataField="sector" editorType="dxTextBox"
                     [editorOptions]="sectorEditorOptions">
+            <dxo-label text="Secteur"></dxo-label>
           </dxi-item>
-          <dxi-item dataField="block" label="Bloc" i18n-caption editorType="dxTextBox"
+          <dxi-item dataField="block" Secteur i18n-caption editorType="dxTextBox"
                     [editorOptions]="blocEditorOptions">
+            <dxo-label text="bloc"></dxo-label>
           </dxi-item>
-          <dxi-item dataField="mle" caption="Matricule" i18n-caption
-                    [editorOptions]="matriculeEditorOptions">
+          <dxi-item dataField="registration_number" i18n-caption>
+            <dxo-label text="Matricule"></dxo-label>
           </dxi-item>
           >
-          <dxi-item dataField="total_surface" caption="Superficie totale (ha)" [editorOptions]="totalSupEditorOptions"
-                    editorType="dxNumberBox"></dxi-item>
-          <dxi-item dataField="annuel_surface" caption="Superficie contracté (ha)"
-                    editorType="dxNumberBox"></dxi-item>
-          <dxi-item dataField="mode_worth" caption="Mode valoire" i18n-caption editorType="dxSelectBox"
+          <dxi-item dataField="total_surface"  [editorOptions]="{ label: 'Superficie totale (ha)'}"
+                    editorType="dxNumberBox">
+            <dxo-label text="Superficie totale (ha)"></dxo-label>
+          </dxi-item>
+         <dxi-item dataField="annuel_surface"
+                    editorType="dxNumberBox">
+            <dxo-label text="Superficie contracté (ha)"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="tenure" i18n-caption editorType="dxSelectBox"
                     [editorOptions]="worthEditorOptions">
+            <dxo-label text="Mode valoire"></dxo-label>
           </dxi-item>
 
           <dxi-item itemType="button"
-                    alignment="right" [disabled]="groundsList.length > 2" [buttonOptions]="addParcelOptions"></dxi-item>
-
+                    alignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === '')" [buttonOptions]="addParcelOptions"></dxi-item>
         </dx-form>
       </div>
 
@@ -249,7 +257,7 @@
           <dxo-paging [pageSize]="10"></dxo-paging>
 
           <dxi-column dataField="id" caption="ID" i18n-caption></dxi-column>
-          <dxi-column dataField="mle" caption="Matricule" i18n-caption></dxi-column>
+          <dxi-column dataField="registration_number" caption="Matricule" i18n-caption></dxi-column>
           <dxi-column dataField="cda" caption="CDA" i18n-caption></dxi-column>
           <dxi-column dataField="zone" caption="Zone" i18n-caption></dxi-column>
 
@@ -263,8 +271,8 @@
     </div>
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5">
 			<div class="m-form__actionss">
-        <button type="button" class="btn default float-left" awPreviousStep i18n>Previous Step</button>
-        <button type="button" class="btn btn-success float-right" *ngIf="" (click)="finishFunction($event)" i18n>Finish</button>
+        <button type="button" class="btn default float-left" awPreviousStep i18n>Étape précédente</button>
+        <button type="button" class="btn btn-success float-right" *ngIf="groundsList.length > 0" (click)="finishFunction($event)" i18n>Finir</button>
 			</div>
 		</div>
   </aw-wizard-step>

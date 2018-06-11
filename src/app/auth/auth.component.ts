@@ -6,7 +6,6 @@ import { AlertService } from './_services/alert.service';
 import { UserService } from './_services/user.service';
 import { AlertComponent } from './_directives/alert.component';
 import { Helpers } from '../helpers';
-
 declare let $: any;
 declare let mUtil: any;
 
@@ -64,7 +63,9 @@ export class AuthComponent implements OnInit {
     this._authService.login(this.model.email, this.model.password).subscribe(
       data => {
         if (data) {
-          localStorage.setItem('currentUser', JSON.stringify(data));
+          const currentUser = JSON.stringify(data);
+          localStorage.setItem('currentUser', currentUser);
+          localStorage.setItem('tenantId', currentUser['data']['tenants'][0]['id']);
         }
         this._router.navigate([this.returnUrl]);
       },
@@ -87,7 +88,7 @@ export class AuthComponent implements OnInit {
   }
 
   displaySignInForm() {
-    let login = document.getElementById('m_login');
+    const login = document.getElementById('m_login');
     mUtil.removeClass(login, 'm-login--forget-password');
     mUtil.removeClass(login, 'm-login--signup');
     try {
@@ -100,7 +101,7 @@ export class AuthComponent implements OnInit {
   }
 
   displayForgetPasswordForm() {
-    let login = document.getElementById('m_login');
+    const login = document.getElementById('m_login');
     mUtil.removeClass(login, 'm-login--signin');
     mUtil.removeClass(login, 'm-login--signup');
 
@@ -166,14 +167,14 @@ export class AuthComponent implements OnInit {
 
   showAlert(target) {
     this[target].clear();
-    let factory = this.cfr.resolveComponentFactory(AlertComponent);
-    let ref = this[target].createComponent(factory);
+    const factory = this.cfr.resolveComponentFactory(AlertComponent);
+    const ref = this[target].createComponent(factory);
     ref.changeDetectorRef.detectChanges();
   }
 
   handleSignInFormSubmit() {
     $('#m_login_signin_submit').click((e) => {
-      let form = $(e.target).closest('form');
+      const form = $(e.target).closest('form');
       form.validate({
         rules: {
           email: {
@@ -194,8 +195,8 @@ export class AuthComponent implements OnInit {
 
   handleSignUpFormSubmit() {
     document.getElementById('m_login_signup_submit').addEventListener('click', (e) => {
-      let btn = $(e.target);
-      let form = $(e.target).closest('form');
+      const btn = $(e.target);
+      const form = $(e.target).closest('form');
       form.validate({
         rules: {
           fullname: {
@@ -225,8 +226,8 @@ export class AuthComponent implements OnInit {
 
   handleForgetPasswordFormSubmit() {
     document.getElementById('m_login_forget_password_submit').addEventListener('click', (e) => {
-      let btn = $(e.target);
-      let form = $(e.target).closest('form');
+      const btn = $(e.target);
+      const form = $(e.target).closest('form');
       form.validate({
         rules: {
           email: {

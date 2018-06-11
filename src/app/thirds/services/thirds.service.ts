@@ -52,7 +52,7 @@ export class ThirdsService {
    * @returns {Observable<any[]>}
    */
   getStats(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/agreements/kpi`);
+    return this.http.get<any[]>(`${environment.apiUrl}/contracts/kpi`);
   }
 
 

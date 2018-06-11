@@ -4,18 +4,13 @@ import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
 import { Contract } from '../../../classes/contract';
 import { Structure } from '../../../classes/structure';
-import { CampaignService } from '../../../contracts/services/campaign.service';
-import { GroundsService } from '../../../contracts/services/grounds.service';
+import { SoilsService } from '../../../contracts/services/soils.service';
 import { ZonesService } from '../../../contracts/services/zones.service';
 import { ContractsService } from '../../../contracts/services/contracts.service';
 import { Zone } from '../../../classes/zone';
-import { ContractedArea } from '../../../classes/contracted-area';
-import { ContractedAreaService } from '../../../contracts/services/contracted-area.service';
-import { AgreementGround } from '../../../classes/agreement-ground';
-import { AgreementGroundsService } from '../../../contracts/services/agreement-grounds.service';
-import { Campaign } from '../../../classes/campaign';
 import { Router } from '@angular/router';
-import {Helper} from '../../../classes/helper';
+import { Helper } from '../../../classes/helper';
+import {ParcelsService} from '../../../contracts/services/parcels.service';
 
 
 @Component({
@@ -43,16 +38,11 @@ export class WizardComponent implements OnInit {
   zones: any;
   sectors: any;
   blocs: any;
-  grounds: any;
-  mles: any;
   mle: any;
   parcelForm: any;
-  campaignsRes: any[];
-  currentParcel: any[];
 
   cdaEditorOptions: any;
   zoneEditorOptions: any;
-  matriculeEditorOptions: any;
   blocEditorOptions: any;
   sectorEditorOptions: any;
   worthEditorOptions: any;
@@ -60,7 +50,6 @@ export class WizardComponent implements OnInit {
   contracteditorOptions: any;
   totalSupEditorOptions: any;
 
-  parcels: any[];
   maxYears: number;
   structures: any;
   addThird: boolean;
@@ -74,14 +63,13 @@ export class WizardComponent implements OnInit {
 
   constructor(public tier: Third,
     public tierService: ThirdsService,
-    public campaignService: CampaignService,
     private toastr: ToastrService,
     private thirdService: ThirdsService,
-    private groundService: GroundsService,
+    private soilsService: SoilsService,
     private zoneService: ZonesService,
     private contractService: ContractsService,
-    private contractedArea: ContractedAreaService,
-    private agreementGroundService: AgreementGroundsService,
+    private contractedArea: ParcelsService,
+    private parcelsService: ParcelsService,
     private router: Router) {
   }
 
@@ -99,22 +87,21 @@ export class WizardComponent implements OnInit {
         value: 'annual',
         dataSource: Helper.dataSourceformatter(data['contract_types']),
         displayExpr: 'Name',
-        valueExpr: 'Id'
+        valueExpr: 'ID'
       };
 
       this.worthEditorOptions = {
+        label: 'Mode valoire',
         dataSource: Helper.dataSourceformatter(data['tenure']),
         displayExpr: 'Name',
-        valueExpr: 'Id'
+        valueExpr: 'ID'
       };
     }, error1 => {
       throw error1;
     });
 
-    this.totalSupEditorOptions = {
-    };
+    this.totalSupEditorOptions = {};
 
-    this.maxYears = 5;
     this.tierData = 'tierData';
     this.groundsList = [];
     this.contract.application_date = new Date();
@@ -130,10 +117,10 @@ export class WizardComponent implements OnInit {
       zone: null,
       secteur: null,
       block: null,
-      mle: null,
+      registration_number: null,
       total_surface: null,
-      yearly_surface: null,
-      mode_worth: null
+      annuel_surface: null,
+      tenure: null
     };
     this.addParcelOptions = {
       text: 'Ajouter parcelle',
@@ -146,17 +133,19 @@ export class WizardComponent implements OnInit {
         z.zone_type_id = 7;
         z.code = e.mle;
 
-        this.groundService.addGround(this.parcelForm).subscribe(ground => {
-          ground = this.groundService.dataFormatter(ground, false);
+        this.soilsService.addGround(this.parcelForm).subscribe(ground => {
+          ground = this.soilsService.dataFormatter(ground, false);
+          ground['tenure'] = this.parcelForm.tenure;
+          ground['annuel_surface'] = this.parcelForm.annuel_surface;
           this.parcelForm = {
             cda: null,
             zone: null,
-            secteur: null,
+            sector: null,
             block: null,
-            mle: null,
+            registration_number: null,
             total_surface: null,
-            yearly_surface: null,
-            mode_worth: null
+            annuel_surface: null,
+            tenure: null
           };
           this.groundsList.push(ground);
         }, error1 => {
@@ -166,67 +155,52 @@ export class WizardComponent implements OnInit {
     };
     this.zoneService.getCDAs().subscribe(cda => {
       // CDA
-      this.cdas = this.zoneService.dataFormatter(cda, false).zones;
+      this.cdas = this.zoneService.dataFormatter(cda, true);
       this.cdaEditorOptions = {
+        label: 'CDA',
         items: this.cdas,
         displayExpr: 'name',
-        valueExpr: 'name',
+        valueExpr: 'code',
         value: '',
         searchEnabled: true,
         onSelectionChanged: (e) => {
           // Zone
           if (e.selectedItem) {
-            this.zoneService.getZonesByCDA(e.selectedItem.id).subscribe(zone => {
-              this.zones = this.zoneService.dataFormatter(zone, false).zones;
+            this.zoneService.getZonesByCDA(e.selectedItem.code).subscribe(zone => {
+              this.zones = this.zoneService.dataFormatter(zone, true);
               this.zoneEditorOptions = {
+                label: 'Zone',
                 items: this.zones,
                 displayExpr: 'name',
-                valueExpr: 'name',
+                valueExpr: 'code',
                 value: '',
                 searchEnabled: true,
                 onSelectionChanged: (event) => {
                   // Sector
                   if (event.selectedItem) {
-                    this.zoneService.getSectors(event.selectedItem.id).subscribe(secteur => {
-                      this.sectors = this.zoneService.dataFormatter(secteur, false).zones;
+                    this.zoneService.getSectors(event.selectedItem.code).subscribe(secteur => {
+                      this.sectors = this.zoneService.dataFormatter(secteur, true);
                       this.sectorEditorOptions = {
+                        label: 'Secteur',
                         items: this.sectors,
                         displayExpr: 'name',
-                        valueExpr: 'name',
+                        valueExpr: 'code',
                         value: '',
                         searchEnabled: true,
                         onSelectionChanged: (event1) => {
                           // Bloc
                           if (event1.selectedItem) {
                             this.block_id = event1.selectedItem.id;
-                            this.zoneService.getBlocs(event1.selectedItem.id).subscribe(block => {
-                              this.blocs = this.zoneService.dataFormatter(block, false).zones;
+                            this.zoneService.getBlocs(event1.selectedItem.code).subscribe(block => {
+                              this.blocs = this.zoneService.dataFormatter(block, true);
                               this.blocEditorOptions = {
+                                label: 'Bloc',
                                 items: this.blocs,
                                 displayExpr: 'name',
-                                valueExpr: 'name',
+                                valueExpr: 'code',
                                 value: '',
                                 searchEnabled: true,
                                 onSelectionChanged: (e2) => {
-                                  // Ground
-                                  if (e2.selectedItem) {
-                                    this.zoneService.getBlocs(e2.selectedItem.id).subscribe(ground => {
-                                      this.mles = this.zoneService.dataFormatter(ground, false).zones;
-                                      this.matriculeEditorOptions = {
-                                        editorType: 'dxSelectBox',
-                                        items: this.mles,
-                                        displayExpr: 'name',
-                                        valueExpr: 'name',
-                                        value: '',
-                                        searchEnabled: true,
-                                        onSelectionChanged: (e1) => {
-                                          console.log(e1);
-                                        }
-                                      };
-                                    }, error1 => {
-                                      this.toastr.error(error1.error.message);
-                                    });
-                                  }
                                 }
                               };
                             }, error1 => {
@@ -255,26 +229,12 @@ export class WizardComponent implements OnInit {
 
     this.addThird = false;
 
-
-    /*this.campaignService.getCampaigns().subscribe(camp => {
-      this.campaignsRes = this.campaignService.dataFormatter(camp, false);
-      this.campaigns = this.campaignsRes.map(c => {
-        c['hidded'] = true;
-        c['area'] = 0;
-        return c;
-      });
-      if (this.campaigns.length > 0) {
-        this.campaigns[0]['hidded'] = false;
-        this.campaigns = this.campaignsRes.filter(c => !c.hidded);
-      }
-    }, error1 => {
-      this.toastr.error(error1.error.message);
-    });*/
-    const year = new Date().getFullYear();
+    let year = new Date().getFullYear();
     this.campaigns = [
       {
         campaign: `${year}/${Number(year) + 1}`,
-        surface: 0}
+        surface: 0
+      }
     ];
 
     this.navBarLayout = 'large-filled-symbols';
@@ -286,8 +246,13 @@ export class WizardComponent implements OnInit {
       useSubmitBehavior: false,
       validationGroup: 'tierData',
       onClick: (e) => {
-        const tmp = this.campaignsRes[this.campaigns.length];
-        this.campaigns.push(tmp);
+        year += 1;
+        this.campaigns.push(
+          {
+            campaign: `${year}/${Number(year) + 1}`,
+            surface: 0
+          });
+        console.log(this.campaigns);
       }
     };
     this.removeButtonOptions = {
@@ -318,8 +283,8 @@ export class WizardComponent implements OnInit {
     if (!this.contract.application_date) {
       this.toastr.error('Remplissez les champs du contrat pour avancer!');
     } else {
-      this.maxYears = (this.contract.type === 'annuel') ? 1 : 5;
-      console.log(this.currentThird);
+      this.maxYears = (this.contract.type === 'annual') ? 1 : 5;
+      console.log(this.contract);
     }
   }
 
@@ -327,7 +292,7 @@ export class WizardComponent implements OnInit {
   goToParcels = () => {
     if (!this.currentThird.cin) {
       this.toastr.error('Sélectionnez ou créez un agrégé pour avancer!');
-    } else if (this.campaigns.length <= 0 || this.campaigns[0].area <= 0) {
+    } else if (this.campaigns.length <= 0 || this.campaigns[0].surface <= 0) {
       this.toastr.error('Sélectionnez au moins une campagne pour continuer et la superficie doit être supérieure à 0!');
     } else {
       console.log(this.currentThird);
@@ -382,27 +347,48 @@ export class WizardComponent implements OnInit {
   }
 
   finishFunction(e) {
+    console.log(this.campaigns);
+    console.log(this.currentThird);
+    console.log(this.contract);
+    console.log(this.groundsList);
     e.preventDefault();
-    const tenantId = JSON.parse(localStorage.getItem('tenantId'));
+    const tenantId = localStorage.getItem('tenantId');
     this.contract.third_party_id = this.currentThird.id;
     this.contract.signature_date = new Date();
     this.contract.structure_id = tenantId;
     if (this.isEdit) {
       this.contract.parent_id = this.contract.id;
+      this.contract.type = 'annual';
     }
+    this.contract.contracted_surface = JSON.stringify(this.campaigns);
+    this.contract.compaign_surface = this.campaigns[0].surface;
 
-    this.contract.type = 'annuel';
     this.contractService.addContract(this.contract).subscribe(contract => {
       contract = this.contractService.dataFormatter(contract, false);
 
-      this.campaigns = this.campaigns.map(c => {
+      this.groundsList.map((soil) => {
+        console.log(soil);
+        const soilObject = {
+          soil_id: soil.id,
+          tenure: soil.tenure,
+          contract_id: contract['id'],
+          annuel_surface: soil.annuel_surface
+        }
+        console.log(soilObject);
 
-        return {
-          contracted_surface: c.area,
-          agreement_id: contract['id'],
-          campaign_id: c.id
-        };
+        this.parcelsService.addParcel( soilObject ).subscribe(d => {
+          d = this.parcelsService.dataFormatter(d, false);
+          this.router.navigate([`/contrats/afficher/${contract['id']}`]);
+        }, error1 => {
+          this.toastr.error(error1.error.message);
+        });
+        return soil;
       });
+    }, error1 => {
+      throw error1;
+    });
+    /*
+      /*
       this.contractedArea.addMultiAreas({ 'contracted_surfaces': this.campaigns }).subscribe(data => {
         data = this.contractedArea.dataFormatter(data, false);
         const groundsList = this.groundsList.map(ground => {
@@ -422,9 +408,9 @@ export class WizardComponent implements OnInit {
 
       }, error1 => {
         this.toastr.error(error1.error.message);
-      });
-    }, error1 => {
+      });*/
+    /*}, error1 => {
       this.toastr.error(error1.error.message);
-    });
+    });*/
   }
 }

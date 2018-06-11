@@ -1,11 +1,11 @@
-import {ErrorHandler, Injectable, Input} from '@angular/core';
-import {HttpErrorResponse} from '@angular/common/http';
-import {AlertsService} from '@jaspero/ng-alerts';
+import { ErrorHandler, Injectable, Input } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AlertsService } from '@jaspero/ng-alerts';
 
 @Injectable()
 export class SiamErrorHandler implements ErrorHandler {
 
-  constructor(public alert2: AlertsService) {}
+  constructor(public alert2: AlertsService) { }
 
   handleError = (error: any): void => {
     console.log(error);

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class GroundsService {
+export class SoilsService {
   private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
   private options = {
     headers: this.headers
@@ -15,7 +15,7 @@ export class GroundsService {
 
   routeName: string;
   constructor(public http: HttpClient) {
-    this.routeName = 'grounds';
+    this.routeName = 'soils';
   }
 
   /**

@@ -23,19 +23,19 @@ export class ZonesService {
    * @returns {Observable<Zone[]>}
    */
   getZones(): Observable<Zone[]> {
-    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}`);
+    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}-type`);
   }
   getCDAs(): Observable<Zone[]> {
-    return this.http.get<Zone[]>(`${environment.apiUrl}/zone-types/4/${this.routeName}`);
+    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}-type?type=cda`);
   }
-  getZonesByCDA(id: number): Observable<Zone[]> {
-    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}/${id}/parent`);
+  getZonesByCDA(code: number): Observable<Zone[]> {
+    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}-type?type=zone&code=${code}`);
   }
-  getSectors(id: number): Observable<Zone[]> {
-    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}/${id}/parent`);
+  getSectors(code: number): Observable<Zone[]> {
+    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}-type?type=secteur&code=${code}`);
   }
-  getBlocs(id: number): Observable<Zone[]> {
-    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}/${id}/parent`);
+  getBlocs(code: number): Observable<Zone[]> {
+    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}-type?type=bloc&code=${code}`);
   }
 
   /**

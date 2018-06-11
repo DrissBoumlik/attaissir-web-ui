@@ -18,7 +18,7 @@ export class Soils {
   total_surface: number;
   bare_surface: number;
   identified_surface: number;
-  soil_number: number;
+  soil_id: number;
   culture_number: number;
   legal_status: string;
   coordinate: string;

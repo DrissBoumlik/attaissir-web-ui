@@ -106,6 +106,6 @@ export class ContractsService {
 
 
   printContract(idContract: number): void {
-    window.open(`${environment.apiUrl}/agreements/${idContract}/prints`);
+    window.open(`${environment.apiUrl}/${this.routeName}/${idContract}/prints`);
   }
 }
