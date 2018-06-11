@@ -40,6 +40,11 @@
                   </a>
                 </li>
                 <li class="nav-item m-tabs__item">
+                  <a class="nav-link m-tabs__link" data-toggle="tab" href="#parcelles" role="tab">
+                    Parcelles
+                  </a>
+                </li>
+                <li class="nav-item m-tabs__item">
                   <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_5"
                      (click)="loadDocuments()" role="tab">
                     Documents
@@ -347,6 +352,37 @@
                 ></dxo-pager>
               </dx-data-grid>
             </div>
+
+            <div class="tab-pane" id="parcelles">
+              <dx-data-grid id="ParcelsGridContainer"
+                            [allowColumnReordering]="true"
+                            [dataSource]="parcels"
+                            [showColumnLines]="true"
+                            [showRowLines]="true"
+                            [showBorders]="true"
+                            [rowAlternationEnabled]="true"
+                            style="padding-top: 2vh"
+                            [noDataText]="'Le contrat ne dispose pas de parcels'">
+
+                <dxi-column dataField="annuel_surface" caption="Superficie annual"></dxi-column>
+                <dxi-column dataField="tenure" caption="Site"></dxi-column>
+                <dxo-remote-operations
+                  [sorting]="true"
+                  [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-editing
+                  [useIcons]="true"
+                  mode="row"
+                  [allowUpdating]="false"
+                  [allowDeleting]="false"
+                  [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                  [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </div>
             <div class="tab-pane" id="m_user_profile_tab_4">
               <div class="m-form m-form--fit">
                 <div class="m-portlet__body">
@@ -444,75 +480,77 @@
               </div>
             </div>
             <div class="tab-pane" id="m_user_profile_tab_5">
-              <dx-data-grid
-                            id="gridCont"
-                            [allowColumnReordering]="true"
-                            [dataSource]="documents"
-                            [showColumnLines]="true"
-                            [showRowLines]="true"
-                            [showBorders]="true"
-                            (onRowInserting)="onAddDOC($event)"
-                            [rowAlternationEnabled]="true"
-                            style="padding-top: 2vh"
-                            [noDataText]="'Le contrat ne dispose pas de documents joints hors contrat'"
-                            keyExpr="id">
+              <form id="form">
+                <dx-data-grid
+                  id="gridCont"
+                  [allowColumnReordering]="true"
+                  [dataSource]="documents"
+                  [showColumnLines]="true"
+                  [showRowLines]="true"
+                  [showBorders]="true"
+                  (onRowInserting)="onAddDOC($event)"
+                  [rowAlternationEnabled]="true"
+                  style="padding-top: 2vh"
+                  [noDataText]="'Le contrat ne dispose pas de documents joints hors contrat'"
+                  keyExpr="id">
 
-                <dxi-column dataField="label" caption="Type" [visible]="false">
-                  <dxo-lookup
-                    [dataSource]="docTypes"
-                    displayExpr="Name"
-                    valueExpr="ID">
-                  </dxo-lookup>
-                </dxi-column>
+                  <dxi-column dataField="name" caption="Type" [visible]="false">
+                    <dxo-lookup
+                      [dataSource]="docTypes"
+                      displayExpr="Name"
+                      valueExpr="ID">
+                    </dxo-lookup>
+                  </dxi-column>
 
-                <dxi-column dataField="label" caption="Type"></dxi-column>
+                  <dxi-column dataField="name" caption="Type"></dxi-column>
 
-                <dxi-column dataField="path" caption="Charger" editCellTemplate="cellTemplate2"
-                            [visible]="false"></dxi-column>
+                  <dxi-column dataField="path" caption="Charger" editCellTemplate="cellTemplate2"
+                              [visible]="false"></dxi-column>
 
-                <dxi-column dataField="downloadPath" caption="Télécharger" cellTemplate="cellTemplate"></dxi-column>
+                  <dxi-column dataField="downloadPath" caption="Télécharger" cellTemplate="cellTemplate"></dxi-column>
 
-                <div *dxTemplate="let data of 'cellTemplate'">
-                  <dx-button
-                    class="send"
-                    icon="fa fa-cloud-download"
-                    text="Download"
-                    (onClick)="downloadDocument(data)">
-                  </dx-button>
-                </div>
-                <div *dxTemplate="let data of 'cellTemplate2'">
-                  <dx-file-uploader
-                    selectButtonText="Ajouter un document"
-                    labelText="document"
-                    accept="*"
-                    uploadMode="useForm"
-                    [(value)]="filePath">
-                  </dx-file-uploader>
-                </div>
-                <dxo-remote-operations
-                  [sorting]="true"
-                  [paging]="false">
-                </dxo-remote-operations>
-                <dxo-selection mode="none"></dxo-selection>
-                <dxo-editing
-                  [useIcons]="true"
-                  mode="popup"
-                  [form]="{items: ['label', 'path']}"
-                  [allowUpdating]="true"
-                  [allowDeleting]="true"
-                  [allowAdding]="true">
-                  <dxo-popup
-                    title="Ajouter ou modifier"
-                    [showTitle]="true"
-                    [width]="700"
-                    [height]="345"
-                    [position]="{ my: 'center', at: 'center'}">
-                  </dxo-popup>
-                </dxo-editing>
-                <dxo-pager
-                  [showPageSizeSelector]="false"
-                ></dxo-pager>
-              </dx-data-grid>
+                  <div *dxTemplate="let data of 'cellTemplate'">
+                    <dx-button
+                      class="send"
+                      icon="fa fa-cloud-download"
+                      text="Download"
+                      (onClick)="downloadDocument(data)">
+                    </dx-button>
+                  </div>
+                  <div *dxTemplate="let data of 'cellTemplate2'">
+                    <dx-file-uploader
+                      selectButtonText="Ajouter un document"
+                      labelText="document"
+                      accept="*"
+                      uploadMode="useForm"
+                      [(value)]="filePath">
+                    </dx-file-uploader>
+                  </div>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="false">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="none"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="popup"
+                    [form]="{items: ['name', 'path']}"
+                    [allowUpdating]="true"
+                    [allowDeleting]="true"
+                    [allowAdding]="true">
+                    <dxo-popup
+                      title="Ajouter ou modifier"
+                      [showTitle]="true"
+                      [width]="700"
+                      [height]="345"
+                      [position]="{ my: 'center', at: 'center'}">
+                    </dxo-popup>
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="false"
+                  ></dxo-pager>
+                </dx-data-grid>
+              </form>
             </div>
             <div class="tab-pane" id="m_user_profile_tab_6">
               <div class="m-portlet__body">

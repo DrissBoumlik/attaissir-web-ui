@@ -29,6 +29,7 @@ export class ShowComponent implements OnInit {
   filePath = [];
   id: number;
   avenants: any;
+  parcels: any;
   canValidateContract: boolean;
   hasRightAttatchment: boolean;
   isContractEncours: boolean;
@@ -53,6 +54,7 @@ export class ShowComponent implements OnInit {
             this.campagnes = res.data.contracted_surface;
             this.documents = res.data.documents;
             this.avenants = res.data.amendments;
+            this.parcels = res.data.parcels;
             this.isContractEncours = this.contract.status === 'encours';
             /* this.hasRightAttatchment = this.documents.find(doc => {
                return doc.type.id === 5;
@@ -104,15 +106,16 @@ export class ShowComponent implements OnInit {
       type: e.data.name,
       file: this.filePath[0]
     };
+    console.log(e);
     e.cancel = true;
-    e.data.name = this.docTypes.find(dt => {
+    /*e.data.name = this.docTypes.find(dt => {
       return dt.id === newDoc.type;
-    }).name;
+    }).name;*/
     this.thirdsService.addDocument(newDoc.file).subscribe(
       res => {
         this.thirdsService.putDocumentInfo({
-          agreement_id: this.contract.id,
-          document_type_id: newDoc.type
+          contract_id: this.contract.id,
+          type: newDoc.type
         }, res.data.id).subscribe(
           result => {
             e.data.downloadPath = result.data.path;

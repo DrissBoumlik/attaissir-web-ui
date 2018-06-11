@@ -16,13 +16,16 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (JSON.parse(localStorage.getItem('currentUser'))) {
+      const headers = {
+        Authorization: `Bearer ${this.auth.getToken()}`,
+        Tenant: this.auth.getTanent(),
+        'Content-Type': 'application/json',
+        charset: 'UTF-8'
+      };
+      /*headers['Content-Type'] = (request.headers.get('Content-Type') !== 'multipart/form-data')
+        ? 'application/json' : 'multipart/form-data';*/
       request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${this.auth.getToken()}`,
-          Tenant: this.auth.getTanent(),
-          'Content-Type': 'application/json',
-          charset: 'UTF-8'
-        }
+        setHeaders: headers
       });
     }
     return next.handle(request);
