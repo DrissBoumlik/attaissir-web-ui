@@ -112,7 +112,7 @@ export class ContractsService {
    * @param {number} idContrat
    */
   activateContract(idContrat: number): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/${this.routeName}/${idContrat}/activate`, '', {
+    return this.http.put(`${environment.apiUrl}/${this.routeName}/${idContrat}/activate`, null, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

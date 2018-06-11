@@ -187,7 +187,7 @@ export class ShowComponent implements OnInit {
             downloadPath: doc.path,
             id: doc.id,
             path: doc.path,
-            name: doc.type
+            name: doc.name
           };
         });
       }

@@ -54,7 +54,7 @@ export class ShowComponent implements OnInit {
             this.campagnes = res.data.contracted_surface;
             this.avenants = res.data.amendments;
             this.parcels = res.data.parcels;
-            this.isContractEncours = this.contract.status === 'encours';
+            this.isContractEncours = this.contract.status === 'inprogress';
             /* this.hasRightAttatchment = this.documents.find(doc => {
                return doc.type.id === 5;
              });*/

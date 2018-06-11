@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Third } from '../../classes/third';
-import { environment } from '../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Third} from '../../classes/third';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -175,8 +175,10 @@ export class ThirdsService {
     const formData: FormData = new FormData();
     formData.append('document', file, file.name);
     formData.append('type', type);
-    formData.append('contract_id', contract_id);
     formData.append('third_party_id', third_id);
+    if (contract_id) {
+      formData.append('contract_id', contract_id);
+    }
     return this.http
       .post(`${environment.apiUrl}/documents`, formData);
   }
