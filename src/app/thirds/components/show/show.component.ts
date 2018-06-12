@@ -43,7 +43,9 @@ export class ShowComponent implements OnInit {
       params => {
         this.thirdService.getThird(+params.id, false).subscribe(
           (res: any) => {
+            console.log(res);
             this.third = this.thirdService.dataFormatter(res, false);
+            console.log(this.third);
             this.bank_accounts = [{
               bank_name: this.third.bank_name,
               bank_account_number: this.third.bank_account_number,
@@ -180,7 +182,7 @@ export class ShowComponent implements OnInit {
   }
 
   loadDocuments() {
-    this.thirdService.getThird(this.third.id).subscribe(
+    this.thirdService.getThird(this.third.id, false).subscribe(
       (res: any) => {
         this.documents = res.data.documents.map(doc => {
           return doc = {

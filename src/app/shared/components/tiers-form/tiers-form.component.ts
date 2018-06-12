@@ -47,14 +47,14 @@ export class TiersFormComponent implements OnInit {
         dataSource: Helper.dataSourceformatter(this.vars['education_degree']),
         displayExpr: 'Name',
         valueExpr: 'ID',
-        value: Helper.dataSourceformatter(this.vars['education_degree'])[0].ID
+        // value: Helper.dataSourceformatter(this.vars['education_degree'])[0].ID
       };
 
       this.civil_status = {
         dataSource: Helper.dataSourceformatter(this.vars['civil_status']),
         displayExpr: 'Name',
         valueExpr: 'ID',
-        value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
+        // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
       };
 
       this.sexe = {

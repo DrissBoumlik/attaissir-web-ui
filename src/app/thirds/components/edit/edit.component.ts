@@ -25,14 +25,15 @@ export class EditComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
       if (this.id) {
+        console.log(this.id);
         this.thirdsService.getThird(this.id, true)
           .subscribe(data => {
+            console.log(data);
             this.tier = this.thirdsService.dataFormatter(data, false);
             if (this.tier.company_name || this.tier.patent_number || this.tier.ice
               || this.tier.rc || this.tier.tva_code || this.tier.if) {
               this.tier.morale = true;
             }
-            console.log(delete this.tier.tel1);
             console.log(this.tier);
           }, error1 => {
             this.toastr.warning('Utilisateur non trouvé.');
