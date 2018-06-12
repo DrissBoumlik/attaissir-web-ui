@@ -92,8 +92,6 @@
                           <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.sexe">Pas de données</p>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-4">
                       <div class="row">
                         <label class="col-12">
                           Situation familiale
@@ -101,6 +99,17 @@
                         <div class="col-12">
                           <p class="siam-form-input-value" *ngIf="third?.civil_status">{{ third?.civil_status }}</p>
                           <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.civil_status">Pas de données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Code client
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.code">{{ third?.code }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.code">Pas de données</p>
                         </div>
                       </div>
                       <div class="row">
