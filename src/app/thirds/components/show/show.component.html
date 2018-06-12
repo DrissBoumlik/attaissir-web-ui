@@ -3,8 +3,13 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de board</a>
       <h2>Fiche agriculteur ({{ third?.first_name | uppercase }} {{ third?.last_name | uppercase }})</h2>
+<<<<<<< HEAD
       <a class="siam-header-btn-new" routerLink="/contrats/ajouter" title="Ajouter une contrat"><i
         class="fa fa-plus"></i></a>
+=======
+      <a class="siam-header-btn-new" routerLink="/tiers/modifier/{{ third?.id }}" title="Ajouter une contrat"><i
+        class="fa fa-edit"></i></a>
+>>>>>>> d67c711c35e47ef27ba5753f8cd4d21c5da84cfe
     </div>
 
   </div>
@@ -85,15 +90,13 @@
                       </div>
                       <div class="row">
                         <label class="col-12">
-                          Assurance.
+                          Sexe.
                         </label>
                         <div class="col-12">
-                          <p class="siam-form-input-value" *ngIf="third?.is_insured !== null">{{ third?.is_insured ? 'Oui' : 'Non' }}</p>
-                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="third?.is_insured == null">Pas de données</p>
+                          <p class="siam-form-input-value" *ngIf="third?.sexe !== null">{{ third?.sexe }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.sexe">Pas de données</p>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-4">
                       <div class="row">
                         <label class="col-12">
                           Situation familiale
@@ -101,6 +104,17 @@
                         <div class="col-12">
                           <p class="siam-form-input-value" *ngIf="third?.civil_status">{{ third?.civil_status }}</p>
                           <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.civil_status">Pas de données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Code client
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.code">{{ third?.code }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.code">Pas de données</p>
                         </div>
                       </div>
                       <div class="row">
@@ -159,6 +173,15 @@
                           <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.email">Pas de données</p>
                         </div>
                       </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Assurance.
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.is_insured !== null">{{ third?.is_insured ? 'Oui' : 'Non' }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="third?.is_insured == null">Pas de données</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="row">
@@ -206,8 +229,8 @@
                           Code postal
                         </label>
                         <div class="col-12">
-                          <p class="siam-form-input-value" *ngIf="third?.zip_code">{{ third?.zip_code}}</p>
-                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.zip_code">Pas de données</p>
+                          <p class="siam-form-input-value" *ngIf="third?.zip_code !== null">{{ third?.zip_code}}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="third?.zip_code === null">Pas de données</p>
                         </div>
                       </div>
                     </div>
@@ -330,16 +353,16 @@
                               [rowAlternationEnabled]="true"
                               style="padding-top: 2vh"
                               [noDataText]="'L\'agrégé ne dispose pas de compte bancaire'">
-                  <dxi-column dataField="bank_name" caption="Banque name">
+                  <dxi-column dataField="bank_name" caption="Dénomination">
                     <dxi-validation-rule type="required"></dxi-validation-rule>
                   </dxi-column>
-                  <dxi-column dataField="bank_account_number" caption="Numero compte banquaire">
+                  <dxi-column dataField="bank_account_number" caption="Numero de compte bancaire">
                     <dxi-validation-rule type="required"></dxi-validation-rule>
                   </dxi-column>
-                  <dxi-column dataField="bank_code" caption="Code banquaire">
+                  <dxi-column dataField="bank_code" caption="Code bancaire">
                     <dxi-validation-rule type="required"></dxi-validation-rule>
                   </dxi-column>
-                  <dxi-column dataField="bank_rib_key" caption="Clé RIB banquaire">
+                  <dxi-column dataField="bank_rib_key" caption="Clé RIB bancaire">
                     <dxi-validation-rule type="required"></dxi-validation-rule>
                   </dxi-column>
                   <dxo-remote-operations

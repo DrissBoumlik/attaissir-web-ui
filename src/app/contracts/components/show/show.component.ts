@@ -50,6 +50,7 @@ export class ShowComponent implements OnInit {
           (res: any) => {
             this.id = params.id;
             this.contract = res.data;
+            console.log(this.contract);
             this.third = res.data.third_party;
             this.campagnes = res.data.contracted_surface;
             this.avenants = res.data.amendments;
@@ -159,11 +160,11 @@ export class ShowComponent implements OnInit {
       case 'inactif': {
         return 'alert alert-warning';
       }
+      case 'inprogress': {
+        return 'alert alert-info';
+      }
       case 'actif': {
         return 'alert alert-success';
-      }
-      case 'encours': {
-        return 'alert alert-info';
       }
       case 'suspendu': {
         return 'alert alert-danger';

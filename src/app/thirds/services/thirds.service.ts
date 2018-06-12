@@ -56,12 +56,13 @@ export class ThirdsService {
   /**
    * Get a Third parties
    * @param id
+   * @param isEdit
    * @returns {Observable<Third[]>}
    */
   getThird(id: number, isEdit?: boolean): Observable<Third> {
     const edit = (isEdit) ? '?edit' : '';
     console.log(`${environment.apiUrl}/${this.routeName}/${id}${edit}`);
-    return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/${id}${edit}`);
+    return this.http.get(`${environment.apiUrl}/${this.routeName}/${id}${edit}`);
   }
 
   /**

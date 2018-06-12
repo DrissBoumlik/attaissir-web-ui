@@ -30,7 +30,7 @@
 
     </dxi-item>-->
 
-    <dxi-item itemType="group" caption="Informations Générale" [colCount]="2" i18n-caption>
+    <dxi-item itemType="group" caption="Informations Générales" [colCount]="2" i18n-caption>
 
       <dxi-item itemType="group" caption="" [colCount]="2" i18n-caption>
         <dxi-item dataField="first_name">
@@ -64,7 +64,11 @@
         </dxi-item>
       </dxi-item>
 
-      <dxi-item dataField="cin" [disabled]="isEdit">
+      <dxi-item dataField="cin" [disabled]="isEdit" [editorOptions]="{
+                    mask: 'AAAAAAA',
+                    useMaskedValue: true,
+                    maskInvalidMessage: 'format CIN invalide.'
+                }">
         <dxi-validation-rule type="required" message="CIN est obligatoire" i18n-message></dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="sexe"
@@ -83,7 +87,8 @@
         <dxo-label
           text="Code postal" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="numeric"  *ngIf="tier.zip_code" [min]="0" message="Vous ne pouvez pas avoir un code postal négatif."
+        <dxi-validation-rule type="numeric" *ngIf="tier.zip_code" [min]="0"
+                             message="Vous ne pouvez pas avoir un code postal négatif."
                              i18n-message></dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="city">
@@ -118,7 +123,7 @@
       </dxi-item>
 
       <dxi-item
-        dataField="date_birth"
+        dataField="birth_date"
         editorType="dxDateBox"
         [editorOptions]="dateOptions">
         <dxo-label
@@ -171,6 +176,8 @@
         <dxo-label
           text="Niveau d`instruction" i18n-text>
         </dxo-label>
+        <dxi-validation-rule type="required" message="Situation familiale est obligatoire"
+                             i18n-message></dxi-validation-rule>
       </dxi-item>
 
       <dxi-item dataField="civil_status"
@@ -178,13 +185,17 @@
         <dxo-label
           text="Situation Familiale" i18n-text>
         </dxo-label>
+        <dxi-validation-rule type="required" message="Situation familiale est obligatoire"
+                             i18n-message></dxi-validation-rule>
       </dxi-item>
-      <dxi-item dataField="children_number" editorType="dxNumberBox" [editorOptions]="{ value: 0, min: 0 }">
+      <dxi-item dataField="children_number" editorType="dxNumberBox"
+                [editorOptions]="{ value: !isEdit ? 0 : tier?.children_number, min: 0 }">
         <dxo-label
           text="Nombre d'enfants" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="numeric" [min]="0"  message="Vous ne pouvez pas avoir des enfants négatifs."
+        <dxi-validation-rule type="numeric" [min]="0" message="Vous ne pouvez pas avoir des enfants négatifs."
                              i18n-message></dxi-validation-rule>
+
       </dxi-item>
 
 
@@ -222,9 +233,9 @@
           text="Numero compte banquaire" i18n-text>
         </dxo-label>
         <dxi-validation-rule *ngIf="tier.bank_account_number"
-          type="pattern"
-          [pattern]="accountBankPattern"
-          message="Numero compte banquaire est invalide" i18n-message>
+                             type="pattern"
+                             [pattern]="accountBankPattern"
+                             message="Numero compte banquaire est invalide" i18n-message>
         </dxi-validation-rule>
       </dxi-item>
 
@@ -243,7 +254,7 @@
         </dxi-validation-rule>
       </dxi-item>
 
-      <dxi-item dataField="bank_rib_key" editorType="dxNumberBox"  [editorOptions]="{
+      <dxi-item dataField="bank_rib_key" editorType="dxNumberBox" [editorOptions]="{
                     mask: '00',
                     useMaskedValue: false,
                     maskInvalidMessage: 'Numero compte banquaire est invalide'
@@ -288,7 +299,7 @@
 
       <dxi-item dataField="if">
         <dxo-label
-          text="Identification fiscale" >
+          text="Identification fiscale">
         </dxo-label>
       </dxi-item>
 
@@ -317,9 +328,9 @@
     <hr>
 
     <dxi-item
-              itemType="button"
-              alignment="left"
-              [buttonOptions]="buttonOptions">
+      itemType="button"
+      alignment="left"
+      [buttonOptions]="buttonOptions">
     </dxi-item>
   </dx-form>
 </form>
