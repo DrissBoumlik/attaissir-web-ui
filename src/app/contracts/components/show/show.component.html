@@ -5,7 +5,7 @@
 
       <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Liste des
         contrats</a>
-      <h2>Contrat Agrégat-Agrégés {{ contract?.code }}</h2>
+      <h2>{{ (contract?.parent_id !== null) ? 'Contrat' : 'Avenant'}} Agrégat-Agrégé {{ contract?.code }}</h2>
       <a class="siam-header-btn-new" href="#" (click)="downloadContract()" download=""><i
         class="fa fa-print"></i></a>
     </div>
@@ -51,7 +51,7 @@
                 Documents
               </a>
             </li>
-            <li class="nav-item m-tabs__item">
+            <li class="nav-item m-tabs__item" *ngIf="contract?.parent_id !== null">
               <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_6" role="tab">
                 Avenants
               </a>
@@ -124,7 +124,7 @@
                     <div class="col-4">
                       <div class="row">
                         <label class="col-12">
-                          Type de contract
+                          Type de contrat
                         </label>
                         <div class="col-12">
                           <p class="siam-form-input-value" *ngIf="contract?.type">{{ contract?.type }}</p>
@@ -218,7 +218,7 @@
                           </div>
                           <div class="row">
                             <label class="col-12">
-                              numéro de téléphone 1
+                              Numéro de téléphone 1
                             </label>
                             <div class="col-12">
                               <p class="siam-form-input-value" *ngIf="third?.tel1">{{ third?.tel1 | uppercase }}</p>
@@ -228,7 +228,7 @@
                           </div>
                           <div class="row">
                             <label class="col-12">
-                              numéro de téléphone 2
+                              Numéro de téléphone 2
                             </label>
                             <div class="col-12">
                               <p class="siam-form-input-value" *ngIf="third?.tel2">{{ third?.tel2}}</p>
@@ -365,7 +365,7 @@
                 <dxi-column dataField="campaign" caption="Campagne"></dxi-column>
                 <!--<dxi-column dataField="campaign.start_date" caption="Date de début"></dxi-column>
                 <dxi-column dataField="campaign.end_date" caption="Date de fin"></dxi-column>-->
-                <dxi-column dataField="surface" caption="Surface contracté"></dxi-column>
+                <dxi-column dataField="surface" caption="Surface contractée"></dxi-column>
                 <!--<dxi-column dataField="campaign.description" caption="Description"></dxi-column>-->
                 <dxo-remote-operations
                   [sorting]="true"
@@ -394,7 +394,7 @@
                             [rowAlternationEnabled]="true"
                             style="padding-top: 2vh"
                             [noDataText]="'Le contrat ne dispose pas de parcels'">
-                <dxi-column dataField="perimeter" caption="Perimeter"></dxi-column>
+                <dxi-column dataField="perimeter" caption="Périmetre"></dxi-column>
                 <dxi-column dataField="region" caption="Région"></dxi-column>
                 <dxi-column dataField="district" caption="Arrondissement"></dxi-column>
                 <dxi-column dataField="rural_commune" caption="Commune rurale"></dxi-column>
@@ -403,7 +403,7 @@
                 <dxi-column dataField="sector" caption="Secteur"></dxi-column>
                 <dxi-column dataField="block" caption="Bloc"></dxi-column>
                 <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
-                <dxi-column dataField="annuel_surface" caption="Superficie annuel"></dxi-column>
+                <dxi-column dataField="annuel_surface" caption="Superficie annuelle"></dxi-column>
                 <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
                 <dxo-remote-operations
                   [sorting]="true"
@@ -560,7 +560,7 @@
                     <dx-button
                       class="send"
                       icon="fa fa-cloud-download"
-                      text="Download"
+                      text="Télécharger"
                       (onClick)="downloadDocument(data)">
                     </dx-button>
                   </div>
@@ -613,12 +613,13 @@
                               style="padding-top: 2vh"
                               [noDataText]="'le contrat ne dispose pas d\'avenants'"
                               keyExpr="id">
-                  <dxi-column dataField="code" caption="réference">
+                  <dxi-column dataField="code" caption="Réference">
                   </dxi-column>
                   <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
                   </dxi-column>
                   <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
                   </dxi-column>
+
                   <div *dxTemplate="let data of 'statusTemplate'">
                         <span [ngClass]="getStatusColor(data.value)">
                           {{ data.value }}

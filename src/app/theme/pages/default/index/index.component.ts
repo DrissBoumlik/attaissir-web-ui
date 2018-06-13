@@ -27,7 +27,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       this.tilesList = [
         {
           title: 'Contrats confirmés',
-          subTitle: 'Nombre des contrats confirmés',
+          subTitle: 'Nombre de contrats confirmés',
           value: data['actif'] + data['inactif'],
           unit: '',
           icon: 'flaticon-interface-5',
@@ -37,7 +37,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         },
         {
           title: 'Contrats en cours',
-          subTitle: 'Nombre des contrats en cours',
+          subTitle: 'Nombre de contrats en cours',
           value: data['encours'],
           unit: '',
           icon: 'flaticon-interface-9',
@@ -69,7 +69,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     });
     this.shortcutsList = [
       {
-        title: 'Ajouter un nouveau agrégé',
+        title: 'Ajouter un nouvel agrégé',
         icon: 'flaticon-avatar',
         url: '/tiers/ajouter',
         color: ''
@@ -81,7 +81,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         color: ''
       },
       {
-        title: 'Liste des cartes agrégés',
+        title: 'Liste des cartes des agrégés',
         icon: 'flaticon-tabs',
         url: '/tiers/cartes',
         color: ''

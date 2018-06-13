@@ -14,7 +14,6 @@
     <div class="m-portlet__body m-portlet__body--no-padding">
       <dx-data-grid
         id="gridContainer"
-        (onEditStart)="onEditcontrat($event)"
         [dataSource]="contracts"
         showBorders="true"
         (onSelectionChanged)="selectionChanged($event)"
@@ -56,9 +55,7 @@
 
         <dxo-search-panel [visible]="true"></dxo-search-panel>
 
-        <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="" width="50px" allowColumnResizing="true">
-        </dxi-column>
-        <dxi-column dataField="id" caption="Id Contrat">
+        <dxi-column cellTemplate="cellTemplate" caption="" width="50px" allowColumnResizing="true">
         </dxi-column>
 
         <dxi-column dataField="code" caption="Code">
@@ -78,8 +75,6 @@
         <dxi-column dataField="third_name" cellTemplate="thirdNameTemplate" caption="Nom" datatype="Text"></dxi-column>
 
         <dxi-column dataField="structure_name" caption="Division" dataType="Text"></dxi-column>
-        <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="" allowColumnResizing="true">
-        </dxi-column>
         <div *dxTemplate="let contract of 'thirdNameTemplate'">
           <span>
                 {{ (contract.data['third_type'] === 'natural') ? contract.data['third_first_name'] + ' ' + contract.data['third_last_name'] : contract.data['third_company_name'] }}

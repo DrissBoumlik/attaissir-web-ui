@@ -29,16 +29,16 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/tiers/liste',
         description: 'Gestion des agrégés',
         subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouveaux agrégé'/*Nuveau agrégé*/, url: '/tiers/ajouter' },
+          { icon: 'flaticon-plus', name: 'Nouvel agrégé'/*Nuveau agrégé*/, url: '/tiers/ajouter' },
           { icon: 'flaticon-list-parcels', name: 'Liste des agrégés'/*Liste des  agrégés*/, url: '/tiers/liste' },
         ],
         disabled: 'false'
       },
       {
-        name: 'Contracts',
+        name: 'Contrats',
         icon: 'flaticon-file',
         url: '/contrats/liste',
-        description: 'Gestion des Contracts',
+        description: 'Gestion des Contrats',
         subMenu: [
           { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter' },
           { icon: 'flaticon-list-parcels', name: 'Liste des contrats', url: '/contrats/liste' },
@@ -50,7 +50,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         name: 'Cartes',
         icon: 'flaticon-tabs',
         url: '/tiers/cartes',
-        description: 'Generator des cards',
+        description: 'Generateur de cartes',
         disabled: 'false'
       }
     ];

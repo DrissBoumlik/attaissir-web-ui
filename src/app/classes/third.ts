@@ -14,7 +14,6 @@ export class Third {
   id?: number;
   code: string;
   code_as400: string;
-  code: string;
   type: string; // 'legal', 'natural'
   company_name: string;
   rc: string;

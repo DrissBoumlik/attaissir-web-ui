@@ -5,7 +5,6 @@
       <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
 
       <h2>Liste des parcelles</h2>
-      <a class="siam-header-btn-new" routerLink="/tiers/ajouter"><i class="fa fa-plus"></i></a>
     </div>
 
   </div>
@@ -70,30 +69,29 @@
         <dxo-group-panel [visible]="true"></dxo-group-panel>
         <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
-        <dxi-column dataField="third_party_id" caption="Agrégé" cellTemplate="userTemplate" width="150px"></dxi-column>
-        <dxi-column dataField="contract_id" caption="Contrat" cellTemplate="contractTemplate" width="150px"></dxi-column>
-        <dxi-column dataField="perimeter" caption="Perimeter"></dxi-column>
+        <dxi-column dataField="third_party_id" caption="Code Agrégé" cellTemplate="userTemplate" width="150px"></dxi-column>
+        <dxi-column dataField="cin" caption="CIN"></dxi-column>
+        <dxi-column dataField="full_name" caption="Nom complet" style="color: #6d7fcc; align-content: center; cursor: pointer" ></dxi-column>
+        <dxi-column dataField="contract_id" caption="Réf. Contrat" cellTemplate="contractTemplate" width="150px"></dxi-column>
         <dxi-column dataField="cda" caption="CDA"></dxi-column>
         <dxi-column dataField="zone" caption="Zone"></dxi-column>
-        <dxi-column dataField="block" caption="Bloc"></dxi-column>
+        <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
         <dxi-column dataField="code_ormva" caption="Code ORMVA"></dxi-column>
-        <dxi-column dataField="application_date" caption="Date d'application"></dxi-column>
-        <dxi-column dataField="cin" caption="CIN" [visible]="false"></dxi-column>
-        <dxi-column dataField="annuel_surface" caption="Superficie annuel" [visible]="false"></dxi-column>
+        <dxi-column dataField="application_date" caption="Date d'application" [visible]="false"></dxi-column>
+        <dxi-column dataField="perimeter" caption="Périmetre" [visible]="false"></dxi-column>
+        <dxi-column dataField="block" caption="Bloc" [visible]="false"></dxi-column>
+        <dxi-column dataField="annuel_surface" caption="Superficie annuelle" [visible]="false"></dxi-column>
         <dxi-column dataField="compaign_surface" caption="Superficie de la campagne"></dxi-column>
         <dxi-column dataField="company_name" caption="Raison social" [visible]="false"></dxi-column>
-        <dxi-column dataField="first_name" caption="Prénom"></dxi-column>
-        <dxi-column dataField="last_name" caption="Nom"></dxi-column>
         <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
         <dxi-column dataField="status" caption="Etat"></dxi-column>
         <dxi-column dataField="third_party_type" caption="Type d'agrégé"></dxi-column>
 
-
         <div *dxTemplate="let data of 'contractTemplate'">
-          <a style="font-size: 150%; align-content: center; cursor: pointer" (click)="gotoShow(data.data.contract_id, 'contrats')">{{ data.data.contract_code }}</a>
+          <a style="color: #6d7fcc; align-content: center; cursor: pointer" (click)="gotoShow(data.data.contract_id, 'contrats')">{{ data.data.contract_code }}</a>
         </div>
         <div *dxTemplate="let data of 'userTemplate'">
-          <a style="font-size: 150%; align-content: center; cursor: pointer" (click)="gotoShow(data.data.third_party_id, 'tiers')">{{ data.data.third_party_code }}</a>
+          <a style="color: #6d7fcc; align-content: center; cursor: pointer" (click)="gotoShow(data.data.third_party_id, 'tiers')">{{ data.data.third_party_code }}</a>
         </div>
       </dx-data-grid>
 

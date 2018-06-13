@@ -65,11 +65,16 @@
       </dxi-item>
 
       <dxi-item dataField="cin" [disabled]="isEdit" [editorOptions]="{
-                    mask: 'AAAAAAA',
+                    mask: 'AAAA',
                     useMaskedValue: true,
                     maskInvalidMessage: 'format CIN invalide.'
                 }">
         <dxi-validation-rule type="required" message="CIN est obligatoire" i18n-message></dxi-validation-rule>
+        <dxi-validation-rule
+                             type="pattern"
+                             [pattern]="cinPattern"
+                             message="CIN invalide" i18n-message>
+        </dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="sexe"
                 editorType="dxSelectBox" [editorOptions]="sexe">
@@ -180,7 +185,7 @@
         <dxo-label
           text="Niveau d`instruction" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="required" message="Situation familiale est obligatoire"
+        <dxi-validation-rule type="required" message="Niveau d`instruction est obligatoire"
                              i18n-message></dxi-validation-rule>
       </dxi-item>
 
@@ -228,53 +233,34 @@
         </dxo-label>
       </dxi-item>
 
-      <dxi-item dataField="bank_account_number" [editorOptions]="{
-                    mask: '0000000000000000',
-                    useMaskedValue: false,
-                    maskInvalidMessage: 'Numero compte banquaire est invalide'
-                }">
+      <dxi-item dataField="bank_account_number">
         <dxo-label
-          text="Numero compte banquaire" i18n-text>
+          text="Numero compte bancaire" i18n-text>
         </dxo-label>
-        <dxi-validation-rule *ngIf="tier.bank_account_number"
-                             type="pattern"
-                             [pattern]="accountBankPattern"
-                             message="Numero compte banquaire est invalide" i18n-message>
-        </dxi-validation-rule>
       </dxi-item>
 
-      <dxi-item dataField="bank_code" [editorOptions]="{
-                    mask: '000000',
-                    useMaskedValue: false,
-                    maskInvalidMessage: 'Numero compte banquaire est invalide'
-                }">
+      <dxi-item dataField="bank_code" editorType="dxNumberBox" [editorOptions]="">
         <dxo-label
-          text="Code banquaire" i18n-text>
+          text="Code bancaire" i18n-text>
         </dxo-label>
-        <dxi-validation-rule *ngIf="tier.bank_account_number"
-                             type="pattern"
-                             [pattern]="codeBankPattern"
-                             message="Numero compte banquaire est invalide" i18n-message>
-        </dxi-validation-rule>
       </dxi-item>
 
-      <dxi-item dataField="bank_rib_key" editorType="dxNumberBox" [editorOptions]="{
-                    mask: '00',
-                    useMaskedValue: false,
-                    maskInvalidMessage: 'Numero compte banquaire est invalide'
-                }">
+      <dxi-item dataField="bank_rib_key" editorType="dxNumberBox" [editorOptions]="">
         <dxo-label
-          text="Clé RIB banquaire" i18n-text>
+          text="Clé RIB bancaire" i18n-text>
         </dxo-label>
-        <dxi-validation-rule *ngIf="tier.bank_account_number"
+        <dxi-validation-rule *ngIf="tier.bank_rib_key"
                              type="pattern"
                              [pattern]="ribKeyPattern"
-                             message="Clé RIB banquaire est invalide" i18n-message>
+                             message="Clé RIB bancaire est invalide" i18n-message>
         </dxi-validation-rule>
       </dxi-item>
     </dxi-item>
 
-    <dxi-item dataField="morale" editorType="dxSwitch" (change)="onMoraleChanged($event)">
+    <dxi-item dataField="morale" editorType="dxSwitch" [editorOptions]="{
+      onText: 'Oui',
+      offText: 'Non'
+    }" (change)="onMoraleChanged($event)">
       <dxo-label
         text="Personne Morale?" i18n-text>
       </dxo-label>
@@ -303,7 +289,7 @@
 
       <dxi-item dataField="if">
         <dxo-label
-          text="Identification fiscale">
+          text="Identification fiscal">
         </dxo-label>
       </dxi-item>
 

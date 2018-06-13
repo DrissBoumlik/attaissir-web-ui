@@ -74,11 +74,20 @@ export class WizardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tierService.getThirdsDx().subscribe(tiers => {
+    this.tierService.getThirdsDx({
+      requireTotalCount: true,
+      searchOperation: 'contains',
+      searchValue: null,
+      skip: 0,
+      sort: null,
+      take: 10000,
+      userData: {}
+    }
+).subscribe(tiers => {
       this.tiers = this.tierService.dataFormatter(tiers, false);
       this.thirds = Third.getDataSource(this.tiers, 'cin');
     }, error1 => {
-      this.toastr.error(error1.error.message);
+      throw error1; // this.toastr.error(error1.error.message);
     });
 
     this.contractService.getContractsVars().subscribe((data) => {
@@ -91,7 +100,7 @@ export class WizardComponent implements OnInit {
       };
 
       this.worthEditorOptions = {
-        label: 'Mode valoire',
+        label: 'Mode faire-valoir',
         dataSource: Helper.dataSourceformatter(data['tenure']),
         displayExpr: 'Name',
         valueExpr: 'ID'
@@ -161,7 +170,6 @@ export class WizardComponent implements OnInit {
         items: this.cdas,
         displayExpr: 'name',
         valueExpr: 'code',
-        value: '',
         searchEnabled: true,
         onSelectionChanged: (e) => {
           // Zone
@@ -362,10 +370,10 @@ export class WizardComponent implements OnInit {
           tenure: soil.tenure,
           contract_id: contract['id'],
           annuel_surface: soil.annuel_surface
-        }
+        };
         this.parcelsService.addParcel( soilObject ).subscribe(d => {
           d = this.parcelsService.dataFormatter(d, false);
-          this.router.navigate([`/contrats/afficher/${contract['id']}`]);
+          this.router.navigate([`/contrats/afficher/${contract['parent_id']}`]);
         }, error1 => {
           this.toastr.error(error1.error.message);
         });

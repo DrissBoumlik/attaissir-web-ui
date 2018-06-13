@@ -17,10 +17,10 @@
           <div class="buttons">
             <dx-select-box id="select-prefix"
                            [dataSource]="[
-                      {name: 'Activate', action: 'activate'},
-                      {name: 'Deactivate', action: 'deactivate'}
+                      {name: 'Activation', action: 'activate'},
+                      {name: 'Déactivation', action: 'deactivate'}
                       ]"
-                           placeholder= "Select action"
+                           placeholder= "Selectionner une action"
                            displayExpr="name"
                            valueExpr="action"
                            (onValueChanged)="selectAction($event)">
@@ -82,17 +82,17 @@
   </dxi-column>
   <dxi-column dataField="cin" caption="CIN" i18n-caption>
   </dxi-column>
-  <dxi-column dataField="perimeter" caption="Perimeter" i18n-caption>
+  <dxi-column dataField="perimeter" caption="Périmetre" i18n-caption>
   </dxi-column>
   <dxi-column dataField="cda" caption="CDA" i18n-caption>
   </dxi-column>
-  <dxi-column dataField="status" caption="Status" i18n-caption>
+  <dxi-column dataField="status" caption="Statut" i18n-caption>
   </dxi-column>
   <dxi-column dataField="zone" caption="Zone" i18n-caption>
   </dxi-column>
-  <dxi-column dataField="sector" caption="Sector" i18n-caption>
+  <dxi-column dataField="sector" caption="Secteur" i18n-caption>
   </dxi-column>
-  <dxi-column dataField="block" caption="Block" i18n-caption>
+  <dxi-column dataField="block" caption="Bloc" i18n-caption>
   </dxi-column>
 </dx-data-grid>
     </div>

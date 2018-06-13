@@ -69,6 +69,14 @@ export class ShowComponent implements OnInit {
     );
   }
 
+  getContract = (id) => {
+    let contract;
+    contract = this.contracts.filter(c => {
+      return c.id === id;
+    });
+    return contract[0];
+  }
+
   onRemoveBA(e: any) {
     e.cancel = true;
     e.data['id'] = this.third.id;

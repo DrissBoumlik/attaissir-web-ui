@@ -32,6 +32,7 @@ export class TiersFormComponent implements OnInit {
   codeBankPattern: any;
   accountBankPattern: any;
   ribKeyPattern: any;
+  cinPattern: any;
   locale: string;
   tierData: string;
   cities: any;
@@ -70,7 +71,7 @@ export class TiersFormComponent implements OnInit {
       this.regions = {
         dataSource: Helper.dataSourceformatter(this.vars['regions']),
         displayExpr: 'Name',
-        valueExpr: 'ID',
+        valueExpr: 'Name',
         searchEnabled: true,
         // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
       };
@@ -87,6 +88,7 @@ export class TiersFormComponent implements OnInit {
         displayExpr: 'Name',
         valueExpr: 'ID'
       };
+
 
     }, error1 => {
       throw error1;
@@ -109,8 +111,9 @@ export class TiersFormComponent implements OnInit {
     };
     this.phonePattern = /^0[5|6|7]\s*\d{2}\s*\d{2}\s*\d{2}\s*\d{2}$/;
     this.accountBankPattern = /^\d{16}$/;
-    this.codeBankPattern = /^\d{6}$/;
-    this.ribKeyPattern = /^\d{2}$/;
+    this.codeBankPattern = /\d{6}$/;
+    this.ribKeyPattern = /\d{2}$/;
+    this.cinPattern = /[0-9A-F]*/;
   }
 
 
