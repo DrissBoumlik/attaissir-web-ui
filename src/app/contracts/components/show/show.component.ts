@@ -95,7 +95,7 @@ export class ShowComponent implements OnInit {
       res => {
         this.loadDocuments();
         d.resolve();
-        this.toaster.error('Le document a été téléchargé avec succès.');
+        this.toaster.success('Le document a été téléchargé avec succès.');
       }, error => {
         this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
       });
