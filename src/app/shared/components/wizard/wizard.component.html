@@ -242,7 +242,9 @@
            <dxo-label text="Mode faire-valoir"></dxo-label>
 
           </dxi-item>
-
+          <dxi-item dataField="code_ormva" i18n-caption>
+            <dxo-label text="Code ORMVA"></dxo-label>
+          </dxi-item>
           <dxi-item itemType="button"
                     alignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === '')" [buttonOptions]="addParcelOptions"></dxi-item>
         </dx-form>
@@ -279,6 +281,7 @@
 
           <dxi-column dataField="sector" caption="Secteur" i18n-caption></dxi-column>
           <dxi-column dataField="block" caption="Bloc" i18n-caption></dxi-column>
+          <dxi-column dataField="code_ormva" caption="Code ORMVA" i18n-caption></dxi-column>
           <dxi-column dataField="total_surface" caption="Superficie totale" i18n-caption></dxi-column>
           <dxi-column dataField="annuel_surface" caption="Superficie contractée" i18n-caption></dxi-column>
 

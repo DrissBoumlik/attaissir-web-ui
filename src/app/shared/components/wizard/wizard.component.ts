@@ -146,6 +146,7 @@ export class WizardComponent implements OnInit {
           ground = this.soilsService.dataFormatter(ground, false);
           ground['tenure'] = this.parcelForm.tenure;
           ground['annuel_surface'] = this.parcelForm.annuel_surface;
+          ground['code_ormva'] = this.parcelForm.code_ormva;
           this.parcelForm = {
             cda: null,
             zone: null,
@@ -365,15 +366,18 @@ export class WizardComponent implements OnInit {
       contract = this.contractService.dataFormatter(contract, false);
 
       this.groundsList.map((soil) => {
+        console.log(soil);
         const soilObject = {
           soil_id: soil.id,
           tenure: soil.tenure,
           contract_id: contract['id'],
-          annuel_surface: soil.annuel_surface
+          annuel_surface: soil.annuel_surface,
+          code_ormva: soil.code_ormva
         };
         this.parcelsService.addParcel( soilObject ).subscribe(d => {
           d = this.parcelsService.dataFormatter(d, false);
-          this.router.navigate([`/contrats/afficher/${contract['parent_id']}`]);
+          const id = (this.isEdit) ? this.contract.id : contract['id'];
+          this.router.navigate([`/contrats/afficher/${id}`]);
         }, error1 => {
           this.toastr.error(error1.error.message);
         });
