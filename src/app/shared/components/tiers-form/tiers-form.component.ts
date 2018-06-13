@@ -4,7 +4,6 @@ import 'devextreme-intl';
 import { Third } from '../../../classes/third';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { Helper } from '../../../classes/helper';
-import {VilletEtRegionService} from '../../../contracts/services/Ville_resgion.service';
 
 @Component({
   selector: 'app-tiers-form',
@@ -38,8 +37,7 @@ export class TiersFormComponent implements OnInit {
   cities: any;
   regions: any;
 
-  constructor(public thirdsServices: ThirdsService,
-              public VRService: VilletEtRegionService) {
+  constructor(public thirdsServices: ThirdsService) {
     locale('fr');
   }
 
@@ -70,7 +68,9 @@ export class TiersFormComponent implements OnInit {
       };
 
       this.regions = {
-        dataSource: this.VRService.getRegions(),
+        dataSource: Helper.dataSourceformatter(this.vars['regions']),
+        displayExpr: 'Name',
+        valueExpr: 'ID',
         searchEnabled: true,
         // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
       };
