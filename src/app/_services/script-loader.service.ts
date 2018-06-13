@@ -32,7 +32,7 @@ export class ScriptLoaderService {
   }
 
   /**
-   * Lazy load list of scripts
+   * Lazy load list-parcels of scripts
    * @param tag
    * @param scripts
    * @param loadOnce

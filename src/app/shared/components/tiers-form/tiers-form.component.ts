@@ -89,7 +89,7 @@ export class TiersFormComponent implements OnInit {
       },
       width: '100%'
     };
-    this.phonePattern = /^0[5|6|7]\s*\d{3}\s*\d{5}$/;
+    this.phonePattern = /^0[5|6|7]\s*\d{2}\s*\d{2}\s*\d{2}\s*\d{2}$/;
     this.accountBankPattern = /^\d{16}$/;
     this.codeBankPattern = /^\d{6}$/;
     this.ribKeyPattern = /^\d{2}$/;

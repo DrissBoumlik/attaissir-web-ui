@@ -5,6 +5,7 @@ import { ListComponent } from './components/list/list.component';
 import { ShowComponent } from './components/show/show.component';
 import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
+import { ListComponent as ListParcelsComponent } from './components/list-parcels/list.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
       { path: 'ajouter', component: AddComponent },
       { path: 'liste', component: ListComponent },
       { path: 'afficher/:id', component: ShowComponent },
-      { path: 'modifier/:id', component: EditComponent }
+      { path: 'modifier/:id', component: EditComponent },
+      { path: 'parcelles', component: ListParcelsComponent }
     ]
   }
 ];

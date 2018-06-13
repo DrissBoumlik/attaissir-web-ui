@@ -17,6 +17,7 @@ export class Contract {
   // culture_type: string; // ['cas', 'bas'])->nullable();
   type: string; // [''multiyear', 'annual''])->nullable();
   status: string; // 'draft','inprogress', 'actif', 'inactif', 'suspended', 'blocked', 'expired';
+  status_value: string;
   contracted_surface: any; // 'Ex: [{"compaign":"2018/2019","surface":"5"},{"compaign":"2019/2020","surface":"9"}]'
   compaign_surface: number;
   costum_fields: string;

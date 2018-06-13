@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { ContractsRoutingModule } from './contracts-routing.module';
 import { ThirdsModule } from '../thirds/thirds.module';
 import { ListComponent } from './components/list/list.component';
-import { ContractsService } from './services/contracts.service';
 import { ShowComponent } from './components/show/show.component';
 import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
+import { ListComponent as ListParcelsComponent } from './components/list-parcels/list.component';
 import { SharedModule } from '../shared/shared.module';
 import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devextreme-angular';
 
@@ -27,6 +27,7 @@ import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devex
     ShowComponent,
     AddComponent,
     EditComponent,
+    ListParcelsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

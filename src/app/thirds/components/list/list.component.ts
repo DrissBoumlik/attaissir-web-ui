@@ -83,7 +83,7 @@ export class ListComponent implements OnInit {
   }
 
   /**
-   * Delete a third and update the list
+   * Delete a third and update the list-parcels
    * @param {number} thirdId
    */
   onRemoveThird(thirdId: number): any {

@@ -55,6 +55,30 @@ export class ShowComponent implements OnInit {
             this.campagnes = res.data.contracted_surface;
             this.avenants = res.data.amendments;
             this.parcels = res.data.parcels;
+            this.parcels = this.parcels.map((data) => {
+              return {
+                perimeter: ((data.soil !== null) && (data.soil.perimeter !== null))
+                  ? data.soil.perimeter : 'Pas de données',
+                region: ((data.soil !== null) && (data.soil.region !== null))
+                  ? data.soil.region : 'Pas de données',
+                district: ((data.soil !== null) && (data.soil.district !== null))
+                  ? data.soil.district : 'Pas de données',
+                rural_commune: ((data.soil !== null) && (data.soil.rural_commune !== null))
+                  ? data.soil.rural_commune :  'Pas de données',
+                cda: ((data.soil !== null) && (data.soil.cda !== null))
+                  ? data.soil.cda : 'Pas de données',
+                zone: ((data.soil !== null) && (data.soil.zone !== null))
+                  ? data.soil.zone : 'Pas de données',
+                sector: ((data.soil !== null) && (data.soil.sector !== null))
+                  ? data.soil.sector : 'Pas de données',
+                block: ((data.soil !== null) && (data.soil.block !== null))
+                  ? data.soil.block : 'Pas de données',
+                registration_number: ((data.soil !== null) && (data.soil.registration_number !== null))
+                  ? data.soil.registration_number : 'Pas de données',
+                annuel_surface: data.annuel_surface,
+                tenure: data.tenure
+              };
+            });
             this.isContractEncours = this.contract.status === 'inprogress';
             /* this.hasRightAttatchment = this.documents.find(doc => {
                return doc.type.id === 5;

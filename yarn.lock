@@ -1952,7 +1952,7 @@ elliptic@^6.0.0:
 
 emojis-list@^2.0.0:
   version "2.1.0"
-  resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
+  resolved "https://registry.yarnpkg.com/emojis-list-parcels/-/emojis-list-parcels-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
 
 encodeurl@~1.0.1, encodeurl@~1.0.2:
   version "1.0.2"
@@ -3701,7 +3701,7 @@ loader-utils@^0.2.16:
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-0.2.17.tgz#f86e6374d43205a6e6c60e9196f17c0299bfb348"
   dependencies:
     big.js "^3.1.3"
-    emojis-list "^2.0.0"
+    emojis-list-parcels "^2.0.0"
     json5 "^0.5.0"
     object-assign "^4.0.1"
 
@@ -3710,7 +3710,7 @@ loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0:
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.1.0.tgz#c98aef488bcceda2ffb5e2de646d6a754429f5cd"
   dependencies:
     big.js "^3.1.3"
-    emojis-list "^2.0.0"
+    emojis-list-parcels "^2.0.0"
     json5 "^0.5.0"
 
 locate-path@^2.0.0:
@@ -5584,11 +5584,11 @@ sockjs@0.3.19:
 
 source-list-map@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.0.tgz#aaa47403f7b245a92fbc97ea08f250d6087ed085"
+  resolved "https://registry.yarnpkg.com/source-list-parcels-map/-/source-list-parcels-map-2.0.0.tgz#aaa47403f7b245a92fbc97ea08f250d6087ed085"
 
 source-list-map@~0.1.7:
   version "0.1.8"
-  resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-0.1.8.tgz#c550b2ab5427f6b3f21f5afead88c4f5587b2106"
+  resolved "https://registry.yarnpkg.com/source-list-parcels-map/-/source-list-parcels-map-0.1.8.tgz#c550b2ab5427f6b3f21f5afead88c4f5587b2106"
 
 source-map-resolve@^0.5.0:
   version "0.5.2"
@@ -6380,7 +6380,7 @@ webpack-core@^0.6.8:
   version "0.6.9"
   resolved "https://registry.yarnpkg.com/webpack-core/-/webpack-core-0.6.9.tgz#fc571588c8558da77be9efb6debdc5a3b172bdc2"
   dependencies:
-    source-list-map "~0.1.7"
+    source-list-parcels-map "~0.1.7"
     source-map "~0.4.1"
 
 webpack-dev-middleware@3.1.3, webpack-dev-middleware@^3.1.3:
@@ -6447,7 +6447,7 @@ webpack-sources@^1.0.1, webpack-sources@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-1.1.0.tgz#a101ebae59d6507354d71d8013950a3a8b7a5a54"
   dependencies:
-    source-list-map "^2.0.0"
+    source-list-parcels-map "^2.0.0"
     source-map "~0.6.1"
 
 webpack-subresource-integrity@^1.1.0-rc.4:

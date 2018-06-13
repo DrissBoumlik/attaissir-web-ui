@@ -30,7 +30,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des agrégés',
         subMenu: [
           { icon: 'flaticon-plus', name: 'Nouveaux agrégé'/*Nuveau agrégé*/, url: '/tiers/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des agrégés'/*Liste des  agrégés*/, url: '/tiers/liste' },
+          { icon: 'flaticon-list-parcels', name: 'Liste des agrégés'/*Liste des  agrégés*/, url: '/tiers/liste' },
         ],
         disabled: 'false'
       },
@@ -41,7 +41,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des Contracts',
         subMenu: [
           { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste' },
+          { icon: 'flaticon-list-parcels', name: 'Liste des contrats', url: '/contrats/liste' },
+          { icon: 'flaticon-list-parcels', name: 'Liste des parcelles', url: '/contrats/parcelles' },
         ],
         disabled: 'false'
       },
@@ -52,7 +53,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Generator des cards',
         disabled: 'false'
       }
-    ]
+    ];
 
   }
 

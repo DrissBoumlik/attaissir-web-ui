@@ -70,6 +70,8 @@
     <dxo-group-panel [visible]="true"></dxo-group-panel>
     <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
+    <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="" width="50px"  allowColumnResizing="true">
+    </dxi-column>
     <dxi-column dataField="code" caption="Code" i18n-caption>
     </dxi-column>
     <dxi-column dataField="first_name" allowHiding="true" hidden="hidden" caption="Prénom" >
@@ -116,8 +118,6 @@
     <dxi-column dataField="situation" caption="Situation" [visible]="false" i18n-caption>
     </dxi-column>
     <dxi-column dataField="children_number" caption="Nombre d'enfants" [visible]="false" i18n-caption>
-    </dxi-column>
-    <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="Détails" allowColumnResizing="true">
     </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate'">
       <a  (click)="gotoShow(data.data.id)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>

@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Parcel} from '../../classes/parcel';
+import {Contract} from '../../classes/contract';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,14 @@ export class ParcelsService {
     });
   }
 
+
+  getParcelsDx(params: any): Observable<Contract[]> {
+    return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
 
   /**
    * Edit a Parcel

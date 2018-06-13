@@ -12,7 +12,7 @@ import { Document } from './document';
 export class Third {
 
   id?: number;
-
+  code: string;
   code_as400: string;
   type: string; // 'legal', 'natural'
   company_name: string;

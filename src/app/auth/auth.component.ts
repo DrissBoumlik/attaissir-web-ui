@@ -47,10 +47,7 @@ export class AuthComponent implements OnInit {
       'assets/vendors/base/vendors.bundle.js',
       'assets/demo/demo12/base/scripts.bundle.js'], true).then(() => {
         Helpers.setLoading(false);
-        this.handleFormSwitch();
         this.handleSignInFormSubmit();
-        this.handleSignUpFormSubmit();
-        this.handleForgetPasswordFormSubmit();
       });
     // Set page height
     document.getElementById('m_login').style.height = (screen.height - 118) + 'px';
@@ -72,7 +69,8 @@ export class AuthComponent implements OnInit {
       error => {
         this.showAlert('alertSignin');
         if (error.error) {
-          this._alertService.error(error.error.error);
+          console.log(error.error.error);
+          this._alertService.error('Email ou mot de passe incorrect!');
         }
         this.loading = false;
       });
@@ -109,23 +107,6 @@ export class AuthComponent implements OnInit {
     mUtil.animateClass(login.getElementsByClassName('m-login__forget-password')[0], 'flipInX animated');
   }
 
-  handleFormSwitch() {
-    document.getElementById('m_login_forget_password').addEventListener('click', (e) => {
-      e.preventDefault();
-      this.displayForgetPasswordForm();
-    });
-
-    document.getElementById('m_login_forget_password_cancel').addEventListener('click', (e) => {
-      e.preventDefault();
-      this.displaySignInForm();
-    });
-
-
-    document.getElementById('m_login_signup_cancel').addEventListener('click', (e) => {
-      e.preventDefault();
-      this.displaySignInForm();
-    });
-  }
 
   signup() {
     this.loading = true;
@@ -183,56 +164,6 @@ export class AuthComponent implements OnInit {
           },
           password: {
             required: true,
-          },
-        },
-      });
-      if (!form.valid()) {
-        e.preventDefault();
-        return;
-      }
-    });
-  }
-
-  handleSignUpFormSubmit() {
-    document.getElementById('m_login_signup_submit').addEventListener('click', (e) => {
-      const btn = $(e.target);
-      const form = $(e.target).closest('form');
-      form.validate({
-        rules: {
-          fullname: {
-            required: true,
-          },
-          email: {
-            required: true,
-            email: true,
-          },
-          password: {
-            required: true,
-          },
-          rpassword: {
-            required: true,
-          },
-          agree: {
-            required: true,
-          },
-        },
-      });
-      if (!form.valid()) {
-        e.preventDefault();
-        return;
-      }
-    });
-  }
-
-  handleForgetPasswordFormSubmit() {
-    document.getElementById('m_login_forget_password_submit').addEventListener('click', (e) => {
-      const btn = $(e.target);
-      const form = $(e.target).closest('form');
-      form.validate({
-        rules: {
-          email: {
-            required: true,
-            email: true,
           },
         },
       });

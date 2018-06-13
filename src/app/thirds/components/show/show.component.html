@@ -3,13 +3,9 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de board</a>
       <h2>Fiche agriculteur ({{ third?.first_name | uppercase }} {{ third?.last_name | uppercase }})</h2>
-<<<<<<< HEAD
-      <a class="siam-header-btn-new" routerLink="/contrats/ajouter" title="Ajouter une contrat"><i
-        class="fa fa-plus"></i></a>
-=======
+
       <a class="siam-header-btn-new" routerLink="/tiers/modifier/{{ third?.id }}" title="Ajouter une contrat"><i
         class="fa fa-edit"></i></a>
->>>>>>> d67c711c35e47ef27ba5753f8cd4d21c5da84cfe
     </div>
 
   </div>
@@ -306,7 +302,7 @@
                   </dxi-column>
                   <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
                   </dxi-column>
-                  <dxi-column dataField="type" caption="type de contrat" dataType="Text">
+                  <dxi-column dataField="type" caption="Type de contrat" dataType="Text">
                   </dxi-column>
                   <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate">
                   </dxi-column>
@@ -493,10 +489,10 @@
                     </div>
                   </div>
                   <div *dxTemplate="let date of 'printed_atStatusTemplate'">
-                     <span ngClass="m-badge m-badge--success m-badge--wide" *ngIf="data">
+                     <span ngClass="m-badge m-badge--success m-badge--wide" *ngIf="date">
                        imprimé.
                     </span>
-                    <span ngClass="m-badge m-badge--warning m-badge--wide" *ngIf="!data">
+                    <span ngClass="m-badge m-badge--warning m-badge--wide" *ngIf="!date">
                       en cours d'impression.
                     </span>
                   </div>

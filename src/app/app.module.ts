@@ -25,6 +25,7 @@ import {
 } from 'devextreme-angular';
 import { SiamErrorHandler } from './classes/siam-error-handler';
 import { JasperoAlertsModule } from '@jaspero/ng-alerts';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -34,15 +35,11 @@ import { JasperoAlertsModule } from '@jaspero/ng-alerts';
   imports: [
     LayoutModule,
     BrowserModule,
-    FormsModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
     ThemeRoutingModule,
+    FormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
-    ThirdsModule,
-    AuthModule,
-    ContractsModule,
-    SharedModule,
     DxTemplateModule,
     DxDataGridModule,
     DxPopupModule,
@@ -51,7 +48,11 @@ import { JasperoAlertsModule } from '@jaspero/ng-alerts';
     DxSelectBoxModule,
     DxPopupModule,
     JasperoAlertsModule.forRoot(),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AuthModule,
+    ThirdsModule,
+    ContractsModule,
+    SharedModule
   ],
   exports: [
     DxTemplateModule,
