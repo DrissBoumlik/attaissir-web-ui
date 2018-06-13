@@ -479,11 +479,11 @@
                   </div>
                   <div *dxTemplate="let data of 'actionsTemplate'">
                     <div class="row" style="align-content: center">
-                      <div class="col-4">
+                      <!--<div class="col-4">
                         <dx-button [text]="getAdequateAction(data.value)"
                                    (click)="switchCarteStatus(data.value)" *ngIf="canHaveAction(data.value)"></dx-button>
-                      </div>
-                      <div class="col-8">
+                      </div>-->
+                      <div class="col-12">
                         <dx-button [text]="'Déclarer perdu'"
                                    (click)="DeclareStolen(data.value)" *ngIf="canHaveAction(data.value)"></dx-button>
                       </div>

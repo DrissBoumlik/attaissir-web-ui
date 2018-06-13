@@ -271,8 +271,10 @@ export class ShowComponent implements OnInit {
     carte.status = 'perdu';
     this.cardsService.editCard(carte).subscribe(
       (res) => {
+        console.log(res);
       },
       (err) => {
+        console.log(err);
       }
     );
   }
