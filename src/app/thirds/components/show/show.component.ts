@@ -43,9 +43,7 @@ export class ShowComponent implements OnInit {
       params => {
         this.thirdService.getThird(+params.id, false).subscribe(
           (res: any) => {
-            console.log(res);
             this.third = this.thirdService.dataFormatter(res, false);
-            console.log(this.third);
             this.bank_accounts = [{
               bank_name: this.third.bank_name,
               bank_account_number: this.third.bank_account_number,
@@ -54,13 +52,10 @@ export class ShowComponent implements OnInit {
             }];
             this.contracts = this.third['contracts'];
             this.cards = this.third.cards;
-            console.log(this.cards);
-            console.log(res);
           },
           (error) => {
             this.router.navigate(['/404']).catch(
               err => {
-                console.log(err);
               }
             );
           }
@@ -70,18 +65,12 @@ export class ShowComponent implements OnInit {
     this.thirdService.getDocTypes().subscribe(
       (res: any) => {
         this.docTypes = Helper.dataSourceformatter(res);
-        console.log(this.docTypes);
-        /* this.docTypes = this.docTypes.map((type: any) => {
-           type.id = Number.parseInt(type.id);
-           return type;
-         });*/
       }
     );
   }
 
   onRemoveBA(e: any) {
     e.cancel = true;
-    console.log(e.data);
     e.data['id'] = this.third.id;
     e.data['bank_code'] = '';
     e.data['bank_account_number'] = '';
@@ -92,12 +81,9 @@ export class ShowComponent implements OnInit {
       () => {
         this.toaster.success('Le compte bancaire a été supprimé avec succès.');
         e.cancel = false;
-        /*this.third.bank_accounts = this.third.bank_account_number.filter(ba => {
-          return ba.id !== e.data.id;
-        });*/
       },
       (err) => {
-        throw err; // this.toaster.error(err.message);
+        throw err;
       }
     );
   }
@@ -121,7 +107,6 @@ export class ShowComponent implements OnInit {
 
 
   onUpdateBA(e: any) {
-    console.log(e);
     const newBA = {
       bank: e.newData.bank ? e.newData.bank : e.oldData.bank,
       rib: e.newData.rib ? e.newData.rib : e.oldData.rib,
@@ -176,7 +161,6 @@ export class ShowComponent implements OnInit {
         this.loadDocuments();
         d.resolve();
       }, error => {
-        console.log(error);
       });
     e.cancel = d.promise();
   }
@@ -189,7 +173,7 @@ export class ShowComponent implements OnInit {
             downloadPath: doc.path,
             id: doc.id,
             path: doc.path,
-            name: doc.name
+            name: doc.name,
           };
         });
       }
@@ -252,7 +236,7 @@ export class ShowComponent implements OnInit {
   showDetails(idContract: number) {
     this.router.navigate(['/contrats/show/' + idContract]).catch(
       err => {
-        this.toaster.error(err);
+        this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
       }
     );
   }
@@ -264,12 +248,10 @@ export class ShowComponent implements OnInit {
     const action = carte.status = carte.status === 'actif' ? 'activate' : 'deactivate';
     this.cardsService.massCards([idCarte], action).subscribe(
       (res) => {
-        console.log(res);
         carte.status = carte.status === 'actif' ? 'inactif' : 'actif';
       },
       (err) => {
-        console.log(err);
-        this.toaster.error(err);
+        this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
       }
     );
   }
@@ -289,10 +271,8 @@ export class ShowComponent implements OnInit {
     carte.status = 'perdu';
     this.cardsService.editCard(carte).subscribe(
       (res) => {
-        console.log('res : ' + res);
       },
       (err) => {
-        console.log(err);
       }
     );
   }

@@ -136,13 +136,25 @@
                     <div class="col-4">
                       <div class="row">
                         <label class="col-12">
+                          Mode valoir
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="contract?.type">{{ contract?.type }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!contract?.type">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
                           Statut
                         </label>
                         <div class="col-12">
                           <div class="row">
                             <div class="col-6">
-                              <div [ngClass]="getStatusColor(contract?.status)"
-                                   class="m-badge m-badge--primary m-badge--wide" role="alert"
+                              <div [ngClass]="getStatusColor(contract?.status_value)"
+                                    role="alert"
                                    style="width: 100%; margin-top: 10%">
                                 {{ contract?.status_value  }}
                               </div>
@@ -150,7 +162,7 @@
                             <div class="col-6">
                               <div *ngIf="isContractEncours">
                                 <dx-button [text]="'Valider'" [type]="'success'"
-                                           (onClick)="activateContrat()" style="border-radius: 10%; margin-top: 5%"></dx-button>
+                                           (onClick)="activateContrat()" style=" margin-top: 5%"></dx-button>
                               </div>
                             </div>
                           </div>
@@ -158,7 +170,6 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-4"></div>
                   </div>
                 </div>
               </div>

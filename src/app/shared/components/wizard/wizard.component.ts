@@ -274,8 +274,6 @@ export class WizardComponent implements OnInit {
   goToContractInfo = () => {
     if (!this.currentThird.cin) {
       this.toastr.error('Sélectionnez ou créez un agrégé pour avancer!');
-    } else {
-      console.log(this.currentThird);
     }
   }
 
@@ -284,7 +282,6 @@ export class WizardComponent implements OnInit {
       this.toastr.error('Remplissez les champs du contrat pour avancer!');
     } else {
       this.maxYears = (this.contract.type === 'annual') ? 1 : 5;
-      console.log(this.contract);
     }
   }
 
@@ -294,9 +291,6 @@ export class WizardComponent implements OnInit {
       this.toastr.error('Sélectionnez ou créez un agrégé pour avancer!');
     } else if (this.campaigns.length <= 0 || this.campaigns[0].surface <= 0) {
       this.toastr.error('Sélectionnez au moins une campagne pour continuer et la superficie doit être supérieure à 0!');
-    } else {
-      console.log(this.currentThird);
-      console.log(this.campaigns);
     }
   }
 
@@ -347,10 +341,6 @@ export class WizardComponent implements OnInit {
   }
 
   finishFunction(e) {
-    console.log(this.campaigns);
-    console.log(this.currentThird);
-    console.log(this.contract);
-    console.log(this.groundsList);
     e.preventDefault();
     const tenantId = localStorage.getItem('tenantId');
     this.contract.third_party_id = this.currentThird.id;
@@ -367,15 +357,12 @@ export class WizardComponent implements OnInit {
       contract = this.contractService.dataFormatter(contract, false);
 
       this.groundsList.map((soil) => {
-        console.log(soil);
         const soilObject = {
           soil_id: soil.id,
           tenure: soil.tenure,
           contract_id: contract['id'],
           annuel_surface: soil.annuel_surface
         }
-        console.log(soilObject);
-
         this.parcelsService.addParcel( soilObject ).subscribe(d => {
           d = this.parcelsService.dataFormatter(d, false);
           this.router.navigate([`/contrats/afficher/${contract['id']}`]);

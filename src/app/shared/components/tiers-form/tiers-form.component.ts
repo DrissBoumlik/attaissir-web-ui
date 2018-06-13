@@ -4,6 +4,7 @@ import 'devextreme-intl';
 import { Third } from '../../../classes/third';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { Helper } from '../../../classes/helper';
+import {VilletEtRegionService} from '../../../contracts/services/Ville_resgion.service';
 
 @Component({
   selector: 'app-tiers-form',
@@ -34,8 +35,11 @@ export class TiersFormComponent implements OnInit {
   ribKeyPattern: any;
   locale: string;
   tierData: string;
+  cities: any;
+  regions: any;
 
-  constructor(public thirdsServices: ThirdsService) {
+  constructor(public thirdsServices: ThirdsService,
+              public VRService: VilletEtRegionService) {
     locale('fr');
   }
 
@@ -57,11 +61,25 @@ export class TiersFormComponent implements OnInit {
         // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
       };
 
+      this.cities = {
+        dataSource: Helper.dataSourceformatter(this.vars['cities']),
+        displayExpr: 'Name',
+        valueExpr: 'ID',
+        searchEnabled: true,
+        // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
+      };
+
+      this.regions = {
+        dataSource: this.VRService.getRegions(),
+        searchEnabled: true,
+        // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
+      };
+
       this.sexe = {
         dataSource: Helper.dataSourceformatter(this.vars['sexe']),
         displayExpr: 'Name',
         valueExpr: 'ID',
-        value: Helper.dataSourceformatter(this.vars['sexe'])[0].ID
+        value: Helper.dataSourceformatter(this.vars['sexe'])[0].ID,
       };
       this.payment_method = {
         dataSource: Helper.dataSourceformatter(this.vars['payment_method']),
