@@ -34,6 +34,8 @@ export class TiersFormComponent implements OnInit {
   ribKeyPattern: any;
   locale: string;
   tierData: string;
+  cities: any;
+  regions: any;
 
   constructor(public thirdsServices: ThirdsService) {
     locale('fr');
@@ -57,11 +59,27 @@ export class TiersFormComponent implements OnInit {
         // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
       };
 
+      this.cities = {
+        dataSource: Helper.dataSourceformatter(this.vars['cities']),
+        displayExpr: 'Name',
+        valueExpr: 'ID',
+        searchEnabled: true,
+        // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
+      };
+
+      this.regions = {
+        dataSource: Helper.dataSourceformatter(this.vars['regions']),
+        displayExpr: 'Name',
+        valueExpr: 'ID',
+        searchEnabled: true,
+        // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
+      };
+
       this.sexe = {
         dataSource: Helper.dataSourceformatter(this.vars['sexe']),
         displayExpr: 'Name',
         valueExpr: 'ID',
-        value: Helper.dataSourceformatter(this.vars['sexe'])[0].ID
+        value: Helper.dataSourceformatter(this.vars['sexe'])[0].ID,
       };
       this.payment_method = {
         dataSource: Helper.dataSourceformatter(this.vars['payment_method']),

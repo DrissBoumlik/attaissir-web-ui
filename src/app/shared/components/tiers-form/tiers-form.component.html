@@ -91,10 +91,12 @@
                              message="Vous ne pouvez pas avoir un code postal négatif."
                              i18n-message></dxi-validation-rule>
       </dxi-item>
-      <dxi-item dataField="city">
+      <dxi-item dataField="city" editorType="dxSelectBox" [editorOptions]="cities" >
         <dxo-label
           text="Ville" i18n-text>
         </dxo-label>
+        <dxi-validation-rule type="required" message="Le champ est obligatoire"
+                             i18n-message></dxi-validation-rule>
       </dxi-item>
 
       <dxi-item dataField="district">
@@ -109,10 +111,12 @@
         </dxo-label>
       </dxi-item>
 
-      <dxi-item dataField="region">
+      <dxi-item dataField="region" editorType="dxSelectBox" [editorOptions]="regions">
         <dxo-label
           text="Région" i18n-text>
         </dxo-label>
+        <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+                             i18n-message></dxi-validation-rule>
       </dxi-item>
 
 

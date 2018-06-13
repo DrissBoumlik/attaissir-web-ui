@@ -39,7 +39,6 @@ export class ListComponent implements OnInit {
         return this.tierService.getThirdsDx(loadOptions)
           .toPromise()
           .then(response => {
-            console.log(response);
             const json = response;
             return json;
           })

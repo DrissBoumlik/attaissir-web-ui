@@ -1,13 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Contract } from '../../../classes/contract';
-import { ContractsService } from '../../services/contracts.service';
-import { Third } from '../../../classes/third';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {Contract} from '../../../classes/contract';
+import {ContractsService} from '../../services/contracts.service';
+import {Third} from '../../../classes/third';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {ToastrService} from 'ngx-toastr';
+import {ActivatedRoute, Router} from '@angular/router';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import 'devextreme/integration/jquery';
+
+declare const require: any;
+const $ = require('jquery');
+
 
 @Component({
   selector: 'app-list-contract',
@@ -20,10 +24,10 @@ export class ListComponent implements OnInit {
   contract_status: string;
 
   constructor(private contractsService: ContractsService,
-    private thirdService: ThirdsService,
-    private toastr: ToastrService,
-    private router: Router,
-    private route: ActivatedRoute) {
+              private thirdService: ThirdsService,
+              private toastr: ToastrService,
+              private router: Router,
+              private route: ActivatedRoute) {
     this.contracts = {};
   }
 
@@ -38,29 +42,28 @@ export class ListComponent implements OnInit {
         return this.contractsService.getContractsDx(loadOptions)
           .toPromise()
           .then(response => {
-            console.log(response);
             const json = response;
-
             return json;
           })
           .catch(error => {
             throw error;
           });
-      }
+      },
+      remove: (event: any) => {
+        return this.contractsService.deleteContract(event.id)
+          .toPromise()
+          .then(response => {
+            this.toastr.success('Le contrat a été supprimé avec succès');
+          })
+          .catch(error => {
+            this.toastr.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
+          });
+      },
     });
   }
 
-  onEditcontrat(contrat: any) {
-    console.log(contrat);
-  }
 
-  getThirdDetails(IdTiers: any): any {
 
-  }
-
-  deleteRow = () => {
-    console.log('ok');
-  }
 
 
   selectionChanged(e) {
@@ -75,18 +78,6 @@ export class ListComponent implements OnInit {
   }
 
 
-  onDeleteContract(event: any) {
-    event.cancel = true;
-    this.contractsService.deleteContract(event.data.id).subscribe(
-      () => {
-        this.toastr.success('Le contrat a été supprimé avec succès');
-        event.cancel = false;
-      },
-      (err) => {
-        throw err; // this.toastr.error(err.error.message);
-      }
-    );
-  }
 
   showDetails(idContract: number) {
     this.router.navigate([`/contrats/afficher/${idContract}`]).catch(

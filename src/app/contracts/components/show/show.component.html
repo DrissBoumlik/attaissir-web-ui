@@ -30,11 +30,11 @@
                 Agrégé
               </a>
             </li>
-            <li class="nav-item m-tabs__item">
+            <!--<li class="nav-item m-tabs__item">
               <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_4" role="tab">
                 Site
               </a>
-            </li>
+            </li>-->
             <li class="nav-item m-tabs__item">
               <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
                 Campagnes
@@ -141,8 +141,8 @@
                         <div class="col-12">
                           <div class="row">
                             <div class="col-6">
-                              <div [ngClass]="getStatusColor(contract?.status)"
-                                   class="m-badge m-badge--primary m-badge--wide" role="alert"
+                              <div [ngClass]="getStatusColor(contract?.status_value)"
+                                    role="alert"
                                    style="width: 100%; margin-top: 10%">
                                 {{ contract?.status_value  }}
                               </div>
@@ -150,7 +150,7 @@
                             <div class="col-6">
                               <div *ngIf="isContractEncours">
                                 <dx-button [text]="'Valider'" [type]="'success'"
-                                           (onClick)="activateContrat()" style="border-radius: 10%; margin-top: 5%"></dx-button>
+                                           (onClick)="activateContrat()" style=" margin-top: 5%"></dx-button>
                               </div>
                             </div>
                           </div>
@@ -404,7 +404,7 @@
                 <dxi-column dataField="block" caption="Bloc"></dxi-column>
                 <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
                 <dxi-column dataField="annuel_surface" caption="Superficie annuel"></dxi-column>
-                <dxi-column dataField="tenure" caption="Mode faire-valoire"></dxi-column>
+                <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
                 <dxo-remote-operations
                   [sorting]="true"
                   [paging]="false">

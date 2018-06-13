@@ -3,7 +3,6 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de board</a>
       <h2>Fiche agriculteur ({{ third?.first_name | uppercase }} {{ third?.last_name | uppercase }})</h2>
-
       <a class="siam-header-btn-new" routerLink="/tiers/modifier/{{ third?.id }}" title="Ajouter une contrat"><i
         class="fa fa-edit"></i></a>
     </div>
@@ -478,11 +477,11 @@
                   </div>
                   <div *dxTemplate="let data of 'actionsTemplate'">
                     <div class="row" style="align-content: center">
-                      <div class="col-4">
+                      <!--<div class="col-4">
                         <dx-button [text]="getAdequateAction(data.value)"
                                    (click)="switchCarteStatus(data.value)" *ngIf="canHaveAction(data.value)"></dx-button>
-                      </div>
-                      <div class="col-8">
+                      </div>-->
+                      <div class="col-12">
                         <dx-button [text]="'Déclarer perdu'"
                                    (click)="DeclareStolen(data.value)" *ngIf="canHaveAction(data.value)"></dx-button>
                       </div>

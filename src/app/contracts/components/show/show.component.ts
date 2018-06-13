@@ -50,7 +50,6 @@ export class ShowComponent implements OnInit {
           (res: any) => {
             this.id = params.id;
             this.contract = res.data;
-            console.log(this.contract);
             this.third = res.data.third_party;
             this.campagnes = res.data.contracted_surface;
             this.avenants = res.data.amendments;
@@ -80,24 +79,10 @@ export class ShowComponent implements OnInit {
               };
             });
             this.isContractEncours = this.contract.status === 'inprogress';
-            /* this.hasRightAttatchment = this.documents.find(doc => {
-               return doc.type.id === 5;
-             });*/
-
-
-            /*this.contractService.getStrcutureById(res.data.structure.id).subscribe(
-              (struct: Structure) => {
-                this.structure = this.contractService.dataFormatter(struct, false);
-              },
-              (err) => {
-                console.log(err);
-              }Object
-            );*/
           },
           (error) => {
             this.router.navigate(['/404']).catch(
               err => {
-                console.log(err);
               }
             );
           }
@@ -107,7 +92,6 @@ export class ShowComponent implements OnInit {
     this.thirdsService.getDocTypes().subscribe(
       (res: any) => {
         this.docTypes = Helper.dataSourceformatter(res);
-        console.log(this.docTypes);
       }
     );
 
@@ -130,27 +114,14 @@ export class ShowComponent implements OnInit {
       type: e.data.name,
       file: this.filePath[0]
     };
-    console.log(e);
     e.cancel = true;
-    /*e.data.name = this.docTypes.find(dt => {
-      return dt.id === newDoc.type;
-    }).name;*/
     this.thirdsService.addDocument(newDoc.file, newDoc.type, this.contract.id.toString(), this.third.id.toString()).subscribe(
       res => {
         this.loadDocuments();
         d.resolve();
-
-        /*this.thirdsService.putDocumentInfo({
-          contract_id: this.contract.id,
-          type: newDoc.type
-        }, res.data.id).subscribe(
-          result => {
-            e.data.downloadPath = result.data.path;
-            d.resolve();
-          }
-        );*/
+        this.toaster.success('Le document a été téléchargé avec succès.');
       }, error => {
-        console.log(error);
+        this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
       });
     e.cancel = d.promise();
   }
@@ -163,7 +134,7 @@ export class ShowComponent implements OnInit {
             downloadPath: doc.path,
             id: doc.id,
             path: doc.path,
-            name: doc.type
+            name: this.docTypes.find(dt => dt.ID ===  doc.type).Name,
           };
         });
       }
@@ -175,40 +146,35 @@ export class ShowComponent implements OnInit {
   }
 
 
-  addAvenant(idContract: number) {
-    console.log(idContract);
-  }
-
   getStatusColor(value: string): string {
     switch (value) {
-      case 'inactif': {
-        return 'alert alert-warning';
+      case 'Inactif': {
+        return 'm-badge m-badge--warning m-badge--wide';
       }
       case 'inprogress': {
-        return 'alert alert-info';
+        return 'm-badge m-badge--info m-badge--wide';
       }
-      case 'actif': {
-        return 'alert alert-success';
+      case 'Actif': {
+        return 'm-badge m-badge--success m-badge--wide';
       }
-      case 'suspendu': {
-        return 'alert alert-danger';
+      case 'Suspendu': {
+        return 'm-badge m-badge--danger m-badge--wide';
       }
       default: {
-        return 'alert alert-primary';
+        return 'm-badge m-badge--primary m-badge--wide';
       }
     }
   }
 
   activateContrat() {
-    console.log(1);
     this.contractService.activateContract(this.contract.id).subscribe(
       (res) => {
-        this.contract.status = 'actif';
+        this.contract.status_value = 'Actif';
         this.isContractEncours = false;
         this.toaster.success('Le contrat a été activé avec succés');
       },
       (err) => {
-        this.toaster.error('Prière de joindre un contrat avant de valider');
+        this.toaster.error('Prière de joindre un contrat signé avant de valider');
       }
     );
   }
@@ -216,7 +182,6 @@ export class ShowComponent implements OnInit {
 
   downloadContract() {
     this.contractService.printContract(this.contract.id).subscribe(data => {
-      console.log(data['data']['file']);
       window.open(data['data']['file']);
     }, err => {
       throw err;
