@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Third} from '../../classes/third';
-import {environment} from '../../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Third } from '../../classes/third';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -70,7 +70,7 @@ export class ThirdsService {
    * @returns {Observable<Third[]>}
    */
   getThirdByCIN(cin: string): Observable<Third> {
-    return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/?cin=${cin}`);
+    return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/find?v=${cin}`);
   }
 
   /**

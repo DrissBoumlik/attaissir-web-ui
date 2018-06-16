@@ -64,16 +64,12 @@
         </dxi-item>
       </dxi-item>
 
-      <dxi-item dataField="cin" [disabled]="isEdit" [editorOptions]="{
-                    mask: 'AAAA',
-                    useMaskedValue: true,
-                    maskInvalidMessage: 'format CIN invalide.'
-                }">
+      <dxi-item dataField="cin" [disabled]="isEdit">
         <dxi-validation-rule type="required" message="CIN est obligatoire" i18n-message></dxi-validation-rule>
         <dxi-validation-rule
-                             type="pattern"
-                             [pattern]="cinPattern"
-                             message="CIN invalide" i18n-message>
+          type="pattern"
+          [pattern]="cinPattern"
+          message="CIN invalide" i18n-message>
         </dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="sexe"
@@ -88,7 +84,11 @@
           text="Adresse" i18n-text>
         </dxo-label>
       </dxi-item>
-      <dxi-item dataField="zip_code" editorType="dxNumberBox" [editorOptions]="{ min: 0 }">
+      <dxi-item dataField="zip_code" [editorOptions]="{
+                    mask: '00 000',
+                    useMaskedValue: true,
+                    maskInvalidMessage: 'Le code postale est incorrect.'
+                }">
         <dxo-label
           text="Code postal" i18n-text>
         </dxo-label>
@@ -96,12 +96,12 @@
                              message="Vous ne pouvez pas avoir un code postal négatif."
                              i18n-message></dxi-validation-rule>
       </dxi-item>
-      <dxi-item dataField="city" editorType="dxSelectBox" [editorOptions]="cities" >
+      <dxi-item dataField="city" editorType="dxSelectBox" [editorOptions]="cities" autocomplete="false">
         <dxo-label
           text="Ville" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="required" message="Le champ est obligatoire"
-                             i18n-message></dxi-validation-rule>
+        <dxi-validation-rule type="required" message="Le champ est obligatoire" i18n-message>
+        </dxi-validation-rule>
       </dxi-item>
 
       <dxi-item dataField="district">
@@ -124,20 +124,34 @@
                              i18n-message></dxi-validation-rule>
       </dxi-item>
 
-
       <dxi-item dataField="commune">
         <dxo-label
           text="Commune" i18n-text>
         </dxo-label>
       </dxi-item>
 
-      <dxi-item
-        dataField="birth_date"
-        editorType="dxDateBox"
-        [editorOptions]="dateOptions">
-        <dxo-label
-          text="Date de naissance" i18n-text>
-        </dxo-label>
+      <dxi-item itemType="group" caption="" [colCount]="2" style="padding-left: 0; padding-top: 0" i18n-caption>
+        <dxi-item [colSpan]="(isEdit) ? 1 : 2"
+          dataField="birth_date"
+          editorType="dxDateBox"
+          [editorOptions]="dateOptions">
+          <dxo-label
+            text="Date de naissance" i18n-text>
+          </dxo-label>
+        </dxi-item>
+        <dxi-item *ngIf="isEdit"
+                  dataField="death_date"
+                  editorType="dxDateBox"
+                  [editorOptions]="dateOptions">
+          <dxo-label
+            text="Date de décès" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule
+            type="compare"
+            *ngIf="tier.death_date"
+            message="Date de décès ne peux pas être infirieur à la date de naissance." i18n-message>
+          </dxi-validation-rule>
+        </dxi-item>
       </dxi-item>
 
       <dxi-item dataField="tel1" [editorOptions]="{
@@ -204,9 +218,7 @@
         </dxo-label>
         <dxi-validation-rule type="numeric" [min]="0" message="Vous ne pouvez pas avoir des enfants négatifs."
                              i18n-message></dxi-validation-rule>
-
       </dxi-item>
-
 
       <dxi-item editorType="dxCheckBox" dataField="is_insured">
         <dxo-label
@@ -227,7 +239,7 @@
 
 
     <dxi-item itemType="group" [colCount]="2" caption="Facturation" i18n-caption>
-      <dxi-item dataField="bank_name">
+      <dxi-item dataField="bank_name" editorType="dxSelectBox" [editorOptions]="bank_names">
         <dxo-label
           text="Nom de banque" i18n-text>
         </dxo-label>
@@ -237,15 +249,25 @@
         <dxo-label
           text="Numero compte bancaire" i18n-text>
         </dxo-label>
+        <dxi-validation-rule *ngIf="tier.bank_account_number"
+                             type="pattern"
+                             [pattern]="accountBankPattern"
+                             message="Numero compte bancaire est invalide" i18n-message>
+        </dxi-validation-rule>
       </dxi-item>
 
-      <dxi-item dataField="bank_code" editorType="dxNumberBox" [editorOptions]="">
+      <dxi-item dataField="bank_code" [editorOptions]="">
         <dxo-label
           text="Code bancaire" i18n-text>
         </dxo-label>
+        <dxi-validation-rule *ngIf="tier.bank_code"
+                             type="pattern"
+                             [pattern]="codeBankPattern"
+                             message="Code bancaire est invalide" i18n-message>
+        </dxi-validation-rule>
       </dxi-item>
 
-      <dxi-item dataField="bank_rib_key" editorType="dxNumberBox" [editorOptions]="">
+      <dxi-item dataField="bank_rib_key" [editorOptions]="">
         <dxo-label
           text="Clé RIB bancaire" i18n-text>
         </dxo-label>
@@ -275,32 +297,31 @@
         </dxo-label>
       </dxi-item>
 
-      <dxi-item dataField="rc">
+      <dxi-item dataField="rc" editorType="dxNumberBox">
         <dxo-label
           text="Registre de commerce" i18n-text="registre de commerce">
         </dxo-label>
       </dxi-item>
 
-      <dxi-item dataField="patent_number">
+      <dxi-item dataField="patent_number" editorType="dxNumberBox">
         <dxo-label
           text="Numéro de patente" i18n-text="">
         </dxo-label>
       </dxi-item>
 
-      <dxi-item dataField="if">
+      <dxi-item dataField="if" editorType="dxNumberBox">
         <dxo-label
           text="Identification fiscal">
         </dxo-label>
       </dxi-item>
 
-
-      <dxi-item dataField="ice">
+      <dxi-item dataField="ice" editorType="dxNumberBox">
         <dxo-label
           text="ICE" i18n-text="">
         </dxo-label>
       </dxi-item>
 
-      <dxi-item dataField="tva_code">
+      <dxi-item dataField="tva_code" editorType="dxNumberBox">
         <dxo-label
           text="Code TVA" i18n-text>
         </dxo-label>

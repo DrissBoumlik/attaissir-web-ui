@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ThirdsService} from '../../services/thirds.service';
-import {Third} from '../../../classes/third';
-import {ToastrService} from 'ngx-toastr';
-import {Contract} from '../../../classes/contract';
-import {Document} from '../../../classes/document';
-import {ContractsService} from '../../../contracts/services/contracts.service';
-import {CardsService} from '../../../contracts/services/cards.service';
-import {environment} from '../../../../environments/environment';
-import {Helper} from '../../../classes/helper';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ThirdsService } from '../../services/thirds.service';
+import { Third } from '../../../classes/third';
+import { ToastrService } from 'ngx-toastr';
+import { Contract } from '../../../classes/contract';
+import { Document } from '../../../classes/document';
+import { ContractsService } from '../../../contracts/services/contracts.service';
+import { CardsService } from '../../../contracts/services/cards.service';
+import { environment } from '../../../../environments/environment';
+import { Helper } from '../../../classes/helper';
 
 declare const require: any;
 const $ = require('jquery');
@@ -31,11 +31,11 @@ export class ShowComponent implements OnInit {
   bank_accounts: any;
 
   constructor(private thirdService: ThirdsService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private toaster: ToastrService,
-              private contractService: ContractsService,
-              private cardsService: CardsService) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private toaster: ToastrService,
+    private contractService: ContractsService,
+    private cardsService: CardsService) {
   }
 
   ngOnInit() {
@@ -72,7 +72,8 @@ export class ShowComponent implements OnInit {
   getContract = (id) => {
     let contract;
     contract = this.contracts.filter(c => {
-      return c.id === id;
+
+      return Number(c.id) === Number(id);
     });
     return contract[0];
   }

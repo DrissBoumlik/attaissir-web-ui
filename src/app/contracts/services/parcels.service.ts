@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Parcel} from '../../classes/parcel';
-import {Contract} from '../../classes/contract';
+import { Parcel } from '../../classes/parcel';
+import { Contract } from '../../classes/contract';
 
 @Injectable({
   providedIn: 'root'

@@ -30,6 +30,9 @@ export class ListComponent implements OnInit {
   }
 
   getGender = (data) => {
+    if (!data.gender) {
+      return '';
+    }
     return (data.gender === 'm') ? 'fa-male' : 'fa-female';
   }
 

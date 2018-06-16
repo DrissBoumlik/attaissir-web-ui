@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  DxButtonModule, DxDataGridModule, DxFileUploaderModule, DxRadioGroupModule, DxSelectBoxModule,
+  DxButtonModule, DxDataGridModule, DxPivotGridModule, DxFileUploaderModule, DxRadioGroupModule, DxSelectBoxModule,
   DxSwitchModule, DxTemplateModule
 } from 'devextreme-angular';
 import { FormsModule } from '@angular/forms';
@@ -27,6 +27,7 @@ import { SharedModule } from '../shared/shared.module';
     DxRadioGroupModule,
     NgbModule.forRoot(),
     DxSwitchModule,
+    DxPivotGridModule,
     DxTemplateModule,
     DxFileUploaderModule,
     DxSelectBoxModule,
@@ -34,6 +35,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   exports: [
     FormsModule,
+    DxPivotGridModule,
     DxTemplateModule,
     DxDataGridModule
   ],

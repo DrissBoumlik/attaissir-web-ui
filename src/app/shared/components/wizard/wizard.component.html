@@ -7,39 +7,27 @@
     <div class="">
 
       <div *ngIf="!addThird">
-        <div class="left">
-          <h5 class="mb-3">Liste des agrégé</h5>
-          <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-            <div class="m-portlet__body  m-portlet__body--no-padding">
 
-              <dx-list
-                class="list"
-                [dataSource]="thirds"
-                [grouped]="false"
-                [searchEnabled]="!isEdit"
-                selectionMode="single"
-                [readOnly]="isEdit"
-                height="100%"
-                [selectedItemKeys]="[currentThird?.id]"
-                (onSelectionChanged)=listSelectionChanged($event)
-              >
-                <div *dxTemplate="let item of 'item'">
-                  <div>
-                    <div class="third">
-                      <div class="first_name"><b>{{ item.cin }}</b> {{item.first_name}}</div>
-                    </div>
-                  </div>
-                </div>
-              </dx-list>
-            </div>
-          </div>
-        </div>
-        <div class="right">
+        <div class="">
           <div class="siam-empty-page" *ngIf="!currentThird.cin">
             <div class="siam-empty-page-content">
               <h2>Choisissez un agrégé</h2>
-              <p>Vous choisissez un agrégé dans la liste à gauche <br>ou en créer un nouveau</p>
-              <button class="btn btn-large" (click)="addThird = true"><span i18n>Ajouter un agrégé</span></button>
+              <p>Rechercher un agrégé par CIN <br>ou en créer un nouveau</p>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="dx-field">
+                    <div class="dx-field-value">
+                      <dx-text-box placeholder="Rechercher par CIN ou registre de commerce" (onEnterKey)="search()" [(ngModel)]="searchThird"></dx-text-box>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <button class="btn btn-large pull-left" (click)="addThird = true"><span i18n>Ajouter un agrégé</span></button>
+                </div>
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="nothirds">
+                L'argégé n'exist pas, <a style="cursor: pointer; color: #222;" (click)="addThird = true">ajouter un ici.</a>
+              </div>
             </div>
           </div>
           <div *ngIf="currentThird.cin">
@@ -90,7 +78,7 @@
 
       </div>
 
-     <app-tiers-form [isEdit]="isEdit" [readOnly]="isEdit" [validationGroup]="tierData" [tier]="tier" [isWizard]="true" *ngIf="addThird" (submit)="onFormSubmit($event)"></app-tiers-form>
+      <app-tiers-form [isEdit]="isEdit" [readOnly]="isEdit" [validationGroup]="tierData" [tier]="tier" [isWizard]="true" *ngIf="addThird" (submit)="onFormSubmit($event)"></app-tiers-form>
     </div>
     <!-- End Agreggated Informations -->
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5"  *ngIf="!addThird">

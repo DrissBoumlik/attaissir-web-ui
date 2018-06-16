@@ -1,10 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Contract} from '../../../classes/contract';
-import {ContractsService} from '../../services/contracts.service';
-import {Third} from '../../../classes/third';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {ToastrService} from 'ngx-toastr';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Contract } from '../../../classes/contract';
+import { ContractsService } from '../../services/contracts.service';
+import { Third } from '../../../classes/third';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import 'devextreme/integration/jquery';
@@ -24,10 +24,10 @@ export class ListComponent implements OnInit {
   contract_status: string;
 
   constructor(private contractsService: ContractsService,
-              private thirdService: ThirdsService,
-              private toastr: ToastrService,
-              private router: Router,
-              private route: ActivatedRoute) {
+    private thirdService: ThirdsService,
+    private toastr: ToastrService,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.contracts = {};
   }
 

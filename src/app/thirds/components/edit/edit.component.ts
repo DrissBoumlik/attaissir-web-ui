@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ThirdsService } from '../../services/thirds.service';
 import { Third } from '../../../classes/third';
@@ -17,6 +17,7 @@ export class EditComponent implements OnInit {
   constructor(public route: ActivatedRoute,
     private location: Location,
     public tier: Third,
+    private router: Router,
     public thirdsService: ThirdsService,
     private toastr: ToastrService) {
   }
@@ -55,6 +56,7 @@ export class EditComponent implements OnInit {
       this.toastr.success(
         `${this.tier.first_name.toUpperCase()} ${this.tier.last_name.toUpperCase()} informations modifiées avec succès`
       );
+      this.router.navigate([`/tiers/afficher/${this.tier.id}`]);
     }, err => {
       throw err;
       // this.toastr.error(err.error.message);

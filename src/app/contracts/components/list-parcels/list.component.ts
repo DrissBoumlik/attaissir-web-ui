@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ParcelsService} from '../../services/parcels.service';
+import { ParcelsService } from '../../services/parcels.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import 'devextreme/integration/jquery';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -15,7 +15,7 @@ export class ListComponent implements OnInit {
   selectedItems: any;
 
   constructor(public parcelsServices: ParcelsService,
-              private router: Router) {
+    private router: Router) {
     this.parcels = {};
   }
 
@@ -45,8 +45,8 @@ export class ListComponent implements OnInit {
     );
   }
 
-  onStartEdit = (e) => {};
-  onRemoveParcel = (e) => {};
-  deleteRecords = () => {};
+  onStartEdit = (e) => { };
+  onRemoveParcel = (e) => { };
+  deleteRecords = () => { };
 
 }

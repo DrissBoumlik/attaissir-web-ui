@@ -10,7 +10,7 @@ import { ContractsService } from '../../../contracts/services/contracts.service'
 import { Zone } from '../../../classes/zone';
 import { Router } from '@angular/router';
 import { Helper } from '../../../classes/helper';
-import {ParcelsService} from '../../../contracts/services/parcels.service';
+import { ParcelsService } from '../../../contracts/services/parcels.service';
 
 
 @Component({
@@ -27,6 +27,7 @@ export class WizardComponent implements OnInit {
   @Input() campaigns?: any[];
   @Input() readOnly: boolean;
 
+  searchThird: string;
   contracts: any;
   allMode: any;
   checkBoxesMode: any;
@@ -39,6 +40,7 @@ export class WizardComponent implements OnInit {
   sectors: any;
   blocs: any;
   mle: any;
+  nothirds: boolean;
   parcelForm: any;
 
   cdaEditorOptions: any;
@@ -74,6 +76,7 @@ export class WizardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.nothirds = false;
     this.tierService.getThirdsDx({
       requireTotalCount: true,
       searchOperation: 'contains',
@@ -83,7 +86,7 @@ export class WizardComponent implements OnInit {
       take: 10000,
       userData: {}
     }
-).subscribe(tiers => {
+    ).subscribe(tiers => {
       this.tiers = this.tierService.dataFormatter(tiers, false);
       this.thirds = Third.getDataSource(this.tiers, 'cin');
     }, error1 => {
@@ -280,6 +283,18 @@ export class WizardComponent implements OnInit {
     };
   }
 
+  search = () => {
+    this.thirdService.getThirdByCIN(this.searchThird).subscribe(data => {
+      this.currentThird = this.thirdService.dataFormatter(data, false);
+      this.nothirds = false;
+    }, error1 => {
+      this.nothirds = true;
+      setTimeout(() => {
+        this.nothirds = false;
+        }, 5000);
+    } );
+  }
+
   goToContractInfo = () => {
     if (!this.currentThird.cin) {
       this.toastr.error('Sélectionnez ou créez un agrégé pour avancer!');
@@ -374,7 +389,7 @@ export class WizardComponent implements OnInit {
           annuel_surface: soil.annuel_surface,
           code_ormva: soil.code_ormva
         };
-        this.parcelsService.addParcel( soilObject ).subscribe(d => {
+        this.parcelsService.addParcel(soilObject).subscribe(d => {
           d = this.parcelsService.dataFormatter(d, false);
           const id = (this.isEdit) ? this.contract.id : contract['id'];
           this.router.navigate([`/contrats/afficher/${id}`]);

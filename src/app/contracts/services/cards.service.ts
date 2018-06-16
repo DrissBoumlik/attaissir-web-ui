@@ -87,10 +87,10 @@ export class CardsService {
         ids: card
       }
     }), {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
   }
 
   /**

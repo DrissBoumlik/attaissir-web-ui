@@ -37,6 +37,7 @@ export class TiersFormComponent implements OnInit {
   tierData: string;
   cities: any;
   regions: any;
+  bank_names: any;
 
   constructor(public thirdsServices: ThirdsService) {
     locale('fr');
@@ -71,7 +72,7 @@ export class TiersFormComponent implements OnInit {
       this.regions = {
         dataSource: Helper.dataSourceformatter(this.vars['regions']),
         displayExpr: 'Name',
-        valueExpr: 'Name',
+        valueExpr: 'ID',
         searchEnabled: true,
         // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
       };
@@ -80,8 +81,15 @@ export class TiersFormComponent implements OnInit {
         dataSource: Helper.dataSourceformatter(this.vars['sexe']),
         displayExpr: 'Name',
         valueExpr: 'ID',
-        value: Helper.dataSourceformatter(this.vars['sexe'])[0].ID,
       };
+
+      this.bank_names = {
+        dataSource: Helper.dataSourceformatter(this.vars['banc_names']),
+        displayExpr: 'Name',
+        valueExpr: 'ID',
+        searchEnabled: true,
+      };
+
       this.payment_method = {
         dataSource: Helper.dataSourceformatter(this.vars['payment_method']),
         layout: 'horizontal',
@@ -113,7 +121,7 @@ export class TiersFormComponent implements OnInit {
     this.accountBankPattern = /^\d{16}$/;
     this.codeBankPattern = /\d{6}$/;
     this.ribKeyPattern = /\d{2}$/;
-    this.cinPattern = /[0-9A-F]*/;
+    this.cinPattern = /^[A-Za-z][A-Za-z0-9]{3,9}/;
   }
 
 

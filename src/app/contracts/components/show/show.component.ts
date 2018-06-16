@@ -9,7 +9,7 @@ import { Document } from '../../../classes/document';
 import { environment } from '../../../../environments/environment';
 import { CardsService } from '../../services/cards.service';
 import { ToastrService } from 'ngx-toastr';
-import {Helper} from '../../../classes/helper';
+import { Helper } from '../../../classes/helper';
 
 declare const require: any;
 const $ = require('jquery');
@@ -63,7 +63,7 @@ export class ShowComponent implements OnInit {
                 district: ((data.soil !== null) && (data.soil.district !== null))
                   ? data.soil.district : 'Pas de données',
                 rural_commune: ((data.soil !== null) && (data.soil.rural_commune !== null))
-                  ? data.soil.rural_commune :  'Pas de données',
+                  ? data.soil.rural_commune : 'Pas de données',
                 cda: ((data.soil !== null) && (data.soil.cda !== null))
                   ? data.soil.cda : 'Pas de données',
                 zone: ((data.soil !== null) && (data.soil.zone !== null))
@@ -134,7 +134,7 @@ export class ShowComponent implements OnInit {
             downloadPath: doc.path,
             id: doc.id,
             path: doc.path,
-            name: this.docTypes.find(dt => dt.ID ===  doc.type).Name,
+            name: this.docTypes.find(dt => dt.ID === doc.type).Name,
           };
         });
       }

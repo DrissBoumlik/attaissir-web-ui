@@ -25,7 +25,7 @@ import {
 } from 'devextreme-angular';
 import { SiamErrorHandler } from './classes/siam-error-handler';
 import { JasperoAlertsModule } from '@jaspero/ng-alerts';
-import {JwtHelperService} from '@auth0/angular-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [

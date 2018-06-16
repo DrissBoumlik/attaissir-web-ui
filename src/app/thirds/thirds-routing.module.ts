@@ -24,8 +24,7 @@ const routes: Routes = [
       },
       {
         path: 'modifier/:id',
-        component: EditComponent,
-        data: { title: 'Heroes List' }
+        component: EditComponent
       },
       {
         path: 'afficher/:id',

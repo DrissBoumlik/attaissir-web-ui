@@ -27,12 +27,12 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
   }
 
-/*
-  public isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    return !this.jwtHelper.isTokenExpired(token);
-  }
-*/
+  /*
+    public isAuthenticated(): boolean {
+      const token = localStorage.getItem('token');
+      return !this.jwtHelper.isTokenExpired(token);
+    }
+  */
   getToken = () => {
     return JSON.parse(localStorage.getItem('currentUser')).data.token;
   }

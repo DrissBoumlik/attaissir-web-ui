@@ -365,8 +365,11 @@
                 <dxi-column dataField="campaign" caption="Campagne"></dxi-column>
                 <!--<dxi-column dataField="campaign.start_date" caption="Date de début"></dxi-column>
                 <dxi-column dataField="campaign.end_date" caption="Date de fin"></dxi-column>-->
-                <dxi-column dataField="surface" caption="Surface contractée"></dxi-column>
+                <dxi-column dataField="surface" cellTemplate="cellTemplate1" caption="Surface contractée"></dxi-column>
                 <!--<dxi-column dataField="campaign.description" caption="Description"></dxi-column>-->
+                <div *dxTemplate="let data of 'cellTemplate1'">
+                  {{ data.data.surface }} (ha)
+                </div>
                 <dxo-remote-operations
                   [sorting]="true"
                   [paging]="false">
@@ -388,25 +391,29 @@
               <dx-data-grid id="ParcelsGridContainer"
                             [allowColumnReordering]="true"
                             [dataSource]="parcels"
-                            [showColumnLines]="true"
-                            [showRowLines]="true"
+                            [columnHidingEnabled]="true"
+                            [allowColumnResizing]="false"
                             [showBorders]="true"
                             [rowAlternationEnabled]="true"
                             style="padding-top: 2vh"
                             [noDataText]="'Le contrat ne dispose pas de parcels'">
 
-                <dxi-column dataField="code_ormva" caption="Code ORMVA"></dxi-column>
-                <dxi-column dataField="perimeter" caption="Périmetre"></dxi-column>
-                <dxi-column dataField="region" caption="Région"></dxi-column>
-                <dxi-column dataField="district" caption="Arrondissement"></dxi-column>
-                <dxi-column dataField="rural_commune" caption="Commune rurale"></dxi-column>
+                <dxi-column dataField="perimeter" caption="Périmetre" [hidingPriority]="4"></dxi-column>
+                <dxi-column dataField="region" caption="Région" [hidingPriority]="3"></dxi-column>
+                <dxi-column dataField="district" caption="Arrondissement" [hidingPriority]="2"></dxi-column>
+                <dxi-column dataField="rural_commune" caption="Commune rurale" [hidingPriority]="1"></dxi-column>
                 <dxi-column dataField="cda" caption="CDA"></dxi-column>
-                <dxi-column dataField="zone" caption="Zone"></dxi-column>
-                <dxi-column dataField="sector" caption="Secteur"></dxi-column>
-                <dxi-column dataField="block" caption="Bloc"></dxi-column>
+                <dxi-column dataField="zone" caption="Zone" [hidingPriority]="8"></dxi-column>
+                <dxi-column dataField="sector" caption="Secteur" [hidingPriority]="7"></dxi-column>
+                <dxi-column dataField="block" caption="Bloc"  [hidingPriority]="6"></dxi-column>
+                <dxi-column dataField="code_ormva" caption="Code ORMVA"  [hidingPriority]="5"></dxi-column>
                 <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
-                <dxi-column dataField="annuel_surface" caption="Superficie annuelle"></dxi-column>
-                <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
+                <dxi-column dataField="annuel_surface" cellTemplate="cellTemplate1" caption="Superficie annuelle"></dxi-column>
+                <dxi-column dataField="tenure" caption="Mode faire-valoir" [hidingPriority]="0"></dxi-column>
+                <div *dxTemplate="let data of 'cellTemplate1'">
+                  {{ data.data.annuel_surface }} (ha)
+                </div>
+
                 <dxo-remote-operations
                   [sorting]="true"
                   [paging]="false">
@@ -631,7 +638,7 @@
                     [sorting]="true"
                     [paging]="false">
                   </dxo-remote-operations>
-                  <dxo-selection mode="multiple"></dxo-selection>
+                  <dxo-selection mode="none"></dxo-selection>
                   <dxo-editing
                     [useIcons]="true"
                     mode="row"

@@ -58,11 +58,11 @@
         <dxi-column cellTemplate="cellTemplate" caption="" width="50px" allowColumnResizing="true">
         </dxi-column>
 
-        <dxi-column dataField="code" caption="Code">
+        <dxi-column dataField="code" [hidingPriority]="2" caption="Code">
         </dxi-column>
-        <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
+        <dxi-column dataField="application_date" [hidingPriority]="4" caption="Date d'application" dataType="date">
         </dxi-column>
-        <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
+        <dxi-column dataField="expiration_date" caption="Date d'expiration" [hidingPriority]="1" dataType="date">
         </dxi-column>
         <!--<dxi-column dataField="type" caption="type de contrat" dataType="Text">
         </dxi-column>
@@ -70,11 +70,11 @@
         </dxi-column>
         <dxi-column dataField="zone" caption="ZONE" i18n-caption>
         </dxi-column>-->
-        <dxi-column dataField="status" cellTemplate="contractListTemplate" caption="Statut">
+        <dxi-column dataField="status" [hidingPriority]="3" cellTemplate="contractListTemplate" caption="Statut">
         </dxi-column>
         <dxi-column dataField="third_name" cellTemplate="thirdNameTemplate" caption="Nom" datatype="Text"></dxi-column>
 
-        <dxi-column dataField="structure_name" caption="Division" dataType="Text"></dxi-column>
+        <dxi-column dataField="structure_name" caption="Division" [hidingPriority]="0" dataType="Text"></dxi-column>
         <div *dxTemplate="let contract of 'thirdNameTemplate'">
           <span>
                 {{ (contract.data['third_type'] === 'natural') ? contract.data['third_first_name'] + ' ' + contract.data['third_last_name'] : contract.data['third_company_name'] }}

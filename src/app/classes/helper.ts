@@ -26,12 +26,13 @@ export class Helper {
   /**
    * Map Array and return a Dx datasource
    * @param data
+   * @param {boolean} upper
    * @returns {{Name: any; ID: string}[]}
    */
-  public static dataSourceformatter = (data) => {
+  public static dataSourceformatter = (data: any, upper = true) => {
     return Object.keys(data).map((key) => {
       return {
-        Name: data[key],
+        Name: (upper) ? data[key].toUpperCase() : data[key],
         ID: key
       };
     });
