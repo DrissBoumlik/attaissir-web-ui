@@ -42,6 +42,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         subMenu: [
           { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter' },
           { icon: 'flaticon-list-parcels', name: 'Liste des contrats', url: '/contrats/liste' },
+          { icon: 'flaticon-list-parcels', name: 'Liste des contrats de cette compagne', url: '/contrats/liste/courant' },
           { icon: 'flaticon-list-parcels', name: 'Liste des parcelles', url: '/contrats/parcelles' },
         ],
         disabled: 'false'

@@ -15,10 +15,10 @@ const $ = require('jquery');
 
 @Component({
   selector: 'app-list-contract',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  templateUrl: './list-current.component.html',
+  styleUrls: ['./list-current.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListCurrentComponent implements OnInit {
   contracts: any;
   currentRowStatus: boolean;
   contract_status: string;
@@ -42,8 +42,17 @@ export class ListComponent implements OnInit {
         return this.contractsService.getContractsDx(loadOptions)
           .toPromise()
           .then(response => {
-            const json = response;
-            return json;
+            let json = this.contractsService.dataFormatter(response, false);
+            json = json.filter(data => {
+              return data.parent_id === null;
+            }).map(data => {
+              return this.getCurrentContract(data, json);
+            });
+            console.log(json);
+            return {
+              data: json,
+              totalCount: json.length
+            };
           })
           .catch(error => {
             throw error;
@@ -62,7 +71,12 @@ export class ListComponent implements OnInit {
     });
   }
 
-
+  getCurrentContract = (contract: any, contracts: any) => {
+    console.log(contracts);
+    const avenants = contracts.filter(c => Number(c.parent_id) === Number(contract.id));
+    console.log(avenants);
+    return (avenants.length > 0) ? avenants[0] : contract;
+  }
 
 
 
@@ -125,7 +139,7 @@ export class ListComponent implements OnInit {
       case 'inprogress': {
         return 'm-badge m-badge--info m-badge--wide';
       }
-      case 'suspendu': {
+      case 'suspended': {
         return 'm-badge m-badge--wide m-badge--dark';
       }
       default: {

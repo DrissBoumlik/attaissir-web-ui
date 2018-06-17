@@ -29,6 +29,7 @@ export class ShowComponent implements OnInit {
   filePath = [];
   id: number;
   avenants: any;
+  avenant: any;
   parcels: any;
   canValidateContract: boolean;
   hasRightAttatchment: boolean;
@@ -53,6 +54,7 @@ export class ShowComponent implements OnInit {
             this.third = res.data.third_party;
             this.campagnes = res.data.contracted_surface;
             this.avenants = res.data.amendments;
+            this.avenant = (this.avenants.length > 0) ? this.avenants[this.avenants.length - 1] : null;
             this.parcels = res.data.parcels;
             this.parcels = this.parcels.map((data) => {
               return {

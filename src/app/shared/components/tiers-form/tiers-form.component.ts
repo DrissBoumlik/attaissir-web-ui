@@ -120,8 +120,8 @@ export class TiersFormComponent implements OnInit {
     };
     this.phonePattern = /^0[5|6|7]\s*\d{2}\s*\d{2}\s*\d{2}\s*\d{2}$/;
     this.accountBankPattern = /^\d{16}$/;
-    this.codeBankPattern = /\d{6}$/;
-    this.ribKeyPattern = /\d{2}$/;
+    this.codeBankPattern = /^\d{6}$/;
+    this.ribKeyPattern = /^\d{2}$/;
     this.cinPattern = /^[A-Za-z][A-Za-z0-9]{3,9}/;
     this.arabicPattern = /[\u0600-\u06FF]/;
   }

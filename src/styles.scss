@@ -857,6 +857,7 @@ background: linear-gradient(to bottom, #567ba2, #435e7b);
     padding-top: 60px;
     padding-bottom: 160px;
     position: relative;
+    z-index: 1;
 }
 .siam-dashboard-intro:after {
     background-color: #4ebb5e;
@@ -963,6 +964,7 @@ margin-top: -40px;
     min-height: 160px;
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 .siam-dashboard-tiles .siam-dashboard-tiles-item .siam-dashboard-tiles-item-title {
     font-size: 18px;
@@ -1123,7 +1125,7 @@ font-size: 28px;
 @media (max-width: 1024px){
     .m-topbar {
         height: 60px!important;
-    } 
+    }
 }
 
 
@@ -1153,7 +1155,7 @@ font-size: 28px;
     border-bottom: 1px solid #1144a1;
 }
 .m-tabs-line.m-tabs-line--left {
-    float: none; 
+    float: none;
     margin-top: 15px;
 }
 .dx-layout-manager .dx-field-item.dx-field-button-item {

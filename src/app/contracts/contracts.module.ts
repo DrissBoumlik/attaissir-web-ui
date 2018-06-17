@@ -10,6 +10,7 @@ import { EditComponent } from './components/edit/edit.component';
 import { ListComponent as ListParcelsComponent } from './components/list-parcels/list.component';
 import { SharedModule } from '../shared/shared.module';
 import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devextreme-angular';
+import {ListCurrentComponent} from './components/list-current/list-current.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devex
   ],
   declarations: [
     ListComponent,
+    ListCurrentComponent,
     ShowComponent,
     AddComponent,
     EditComponent,

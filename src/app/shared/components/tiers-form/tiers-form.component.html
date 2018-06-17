@@ -96,15 +96,12 @@
       </dxi-item>
       <dxi-item dataField="zip_code" [editorOptions]="{
                     mask: '00 000',
-                    useMaskedValue: true,
+                    useMaskedValue: false,
                     maskInvalidMessage: 'Le code postale est incorrect.'
                 }">
         <dxo-label
           text="Code postal" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="numeric" *ngIf="tier.zip_code" [min]="0"
-                             message="Vous ne pouvez pas avoir un code postal négatif."
-                             i18n-message></dxi-validation-rule>
       </dxi-item>
       <dxi-item dataField="city" editorType="dxSelectBox" [editorOptions]="cities" autocomplete="false">
         <dxo-label
