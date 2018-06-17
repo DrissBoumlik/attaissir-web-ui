@@ -3,6 +3,34 @@
   margin-left: 2px;
 }
 
+::ng-deep .dx-field {
+}
+
+::ng-deep .dx-field-value:not(.dx-switch):not(.dx-checkbox):not(.dx-button), .dx-field-value-static {
+  width: 60%;
+}
+
+::ng-deep .siam-adjust {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+::ng-deep .dx-field input, .dx-field textarea {
+  height: 42px;
+  margin: 0;
+}
+
+::ng-deep .siam-caption {
+  font-size: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: block;
+  background-color: #f3f3f3;
+  margin: 0 0 15px;
+  padding-left: 29px;
+  padding-right: 29px;
+}
+
 ::ng-deep .btn-float{
   bottom: 90px;
   position: fixed;

@@ -40,8 +40,6 @@ export class WizardComponent implements OnInit {
   sectors: any;
   blocs: any;
   mle: any;
-  nothirds: boolean;
-  groundMsg: boolean;
   parcelForm: any;
 
   cdaEditorOptions: any;
@@ -77,23 +75,6 @@ export class WizardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.nothirds = false;
-    this.groundMsg = false;
-    this.tierService.getThirdsDx({
-      requireTotalCount: true,
-      searchOperation: 'contains',
-      searchValue: null,
-      skip: 0,
-      sort: null,
-      take: 10000,
-      userData: {}
-    }
-    ).subscribe(tiers => {
-      this.tiers = this.tierService.dataFormatter(tiers, false);
-      this.thirds = Third.getDataSource(this.tiers, 'cin');
-    }, error1 => {
-      throw error1; // this.toastr.warning(error1.error.message);
-    });
 
     this.contractService.getContractsVars().subscribe((data) => {
       this.contracteditorOptions = {
@@ -154,10 +135,7 @@ export class WizardComponent implements OnInit {
           ground['annuel_surface'] = this.parcelForm.annuel_surface;
           ground['code_ormva'] = this.parcelForm.code_ormva;
           if (Number(this.parcelForm.annuel_surface) > Number(this.parcelForm.total_surface)) {
-            this.groundMsg = true;
-            setTimeout(() => {
-              this.groundMsg = false;
-            }, 5000);
+            this.toastr.warning('La superficie contractée doit être inférieure ou égale à la superficie totale.');
           } else {
             this.parcelForm = {
               cda: null,
@@ -295,15 +273,39 @@ export class WizardComponent implements OnInit {
     };
   }
 
+  editParcels = (e) => {
+    e.cancel = true;
+    if (e.newData.hasOwnProperty('annuel_surface') && e.newData.hasOwnProperty('total_surface')) {
+      if (Number(e.newData.annuel_surface) > Number(e.newData.total_surface)) {
+        this.toastr.warning('La superficie contractée doit être inférieure ou égale à la superficie totale.');
+        return false;
+      }
+    } else if (e.newData.hasOwnProperty('annuel_surface')) {
+      if (Number(e.newData.annuel_surface) > Number(e.oldData.total_surface)) {
+        this.toastr.warning('La superficie contractée doit être inférieure ou égale à la superficie totale.');
+        return false;
+      }
+    } else if (e.newData.hasOwnProperty('total_surface')) {
+      if (Number(e.oldData.annuel_surface) > Number(e.newData.total_surface)) {
+        this.toastr.warning('La superficie contractée doit être inférieure ou égale à la superficie totale.');
+        return false;
+      }
+    }
+
+    e.newData['id'] = e.oldData.id;
+    this.soilsService.editGround(e.newData).subscribe(ground => {
+      this.toastr.success('Les modifications sont effectuées avec suces.');
+      e.cancel = false;
+    }, error1 => {
+      this.toastr.warning(error1.error.message);
+    });
+  }
+
   search = () => {
     this.thirdService.getThirdByCIN(this.searchThird).subscribe(data => {
       this.currentThird = this.thirdService.dataFormatter(data, false);
-      this.nothirds = false;
     }, error1 => {
-      this.nothirds = true;
-      setTimeout(() => {
-        this.nothirds = false;
-        }, 5000);
+      this.toastr.warning('L\'argégé n\'exist pas');
     } );
   }
 

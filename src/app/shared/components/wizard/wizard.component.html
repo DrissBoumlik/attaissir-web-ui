@@ -14,19 +14,23 @@
               <h2>Choisissez un agrégé</h2>
               <p>Rechercher un agrégé par CIN <br>ou en créer un nouveau</p>
               <div class="row">
-                <div class="col-md-6">
-                  <div class="dx-field">
-                    <div class="dx-field-value">
-                      <dx-text-box placeholder="Rechercher par CIN ou registre de commerce" (onEnterKey)="search()" [(ngModel)]="searchThird"></dx-text-box>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-sm-10 siam-adjust">
+                      <div class="dx-field">
+                        <div class="dx-field-value">
+                          <dx-text-box placeholder="Rechercher par CIN ou registre de commerce" style="border-bottom-right-radius: 0; border-top-right-radius: 0;" (onEnterKey)="search()" [(ngModel)]="searchThird"></dx-text-box>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-2 siam-adjust" style="flex: 0 0 13.66667%;">
+                      <button class="btn btn-success btn-large" style="border-bottom-left-radius: 0; border-top-left-radius: 0;" (click)="search()"><span i18n>Rechercher</span></button>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <button class="btn btn-large pull-left" (click)="addThird = true"><span i18n>Ajouter un agrégé</span></button>
                 </div>
-              </div>
-              <div class="alert alert-warning" role="alert" *ngIf="nothirds">
-                L'argégé n'exist pas, <a style="cursor: pointer; color: #222;" (click)="addThird = true">ajouter un ici.</a>
               </div>
             </div>
           </div>
@@ -237,22 +241,21 @@
                     alignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null)" [buttonOptions]="addParcelOptions"></dxi-item>
         </dx-form>
 
-        <div class="alert alert-warning" role="alert" *ngIf="groundMsg">
-          La superficie contractée doit être inférieure ou égale à la superficie totale.
-        </div>
       </div>
 
 
       <div class="siam-table-fullwidth-portlet mt-5">
-        <h2>Superficie de la campagne courant: {{ campaigns[0].surface }} (ha).</h2>
+        <h2 class="siam-caption">Superficie de la campagne courant: {{ campaigns[0].surface }} (ha).</h2>
         <dx-data-grid
           id="gridContainer"
           [dataSource]="groundsList"
+          (onRowUpdating)="editParcels($event)"
           keyExpr="id">
 
           <dxo-editing
             mode="row"
-            [allowUpdating]="false"
+            [useIcons]="true"
+            [allowUpdating]="true"
             [allowDeleting]="true"
             [allowAdding]="false">
           </dxo-editing>
@@ -268,15 +271,25 @@
           <dxo-paging [pageSize]="10"></dxo-paging>
 
           <dxi-column dataField="id" caption="ID" i18n-caption sortOrder="desc"></dxi-column>
-          <dxi-column dataField="registration_number" caption="Matricule" i18n-caption></dxi-column>
-          <dxi-column dataField="cda" caption="CDA" i18n-caption></dxi-column>
-          <dxi-column dataField="zone" caption="Zone" i18n-caption></dxi-column>
+          <dxi-column dataField="registration_number" caption="Matricule" i18n-caption>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-column>
+          <dxi-column dataField="cda" caption="CDA" i18n-caption>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-column>
+          <dxi-column dataField="zone" caption="Zone" i18n-caption>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-column>
 
           <dxi-column dataField="sector" caption="Secteur" i18n-caption></dxi-column>
           <dxi-column dataField="block" caption="Bloc" i18n-caption></dxi-column>
           <dxi-column dataField="code_ormva" caption="Code ORMVA" i18n-caption></dxi-column>
-          <dxi-column dataField="total_surface" caption="Superficie totale" i18n-caption></dxi-column>
-          <dxi-column dataField="annuel_surface" caption="Superficie contractée" i18n-caption></dxi-column>
+          <dxi-column dataField="total_surface" caption="Superficie totale" i18n-caption>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-column>
+          <dxi-column dataField="annuel_surface" caption="Superficie contractée" i18n-caption>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-column>
 
         </dx-data-grid>
       </div>
