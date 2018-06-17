@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {ListCurrentComponent} from './list-current.component';
+import { ListCurrentComponent } from './list-current.component';
 
 describe('ListCurrentComponent', () => {
   let component: ListCurrentComponent;

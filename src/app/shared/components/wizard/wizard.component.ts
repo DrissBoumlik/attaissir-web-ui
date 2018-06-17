@@ -308,7 +308,7 @@ export class WizardComponent implements OnInit {
       this.currentThird = this.thirdService.dataFormatter(data, false);
     }, error1 => {
       this.toastr.warning('L\'argégé n\'exist pas');
-    } );
+    });
   }
 
   goToContractInfo = () => {
