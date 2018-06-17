@@ -205,25 +205,25 @@
           <dxi-item dataField="sector" editorType="dxTextBox"
                     [editorOptions]="sectorEditorOptions">
             <dxo-label text="Secteur"></dxo-label>
-            <dxi-validation-rule type="required" message="Zone est obligatoire"></dxi-validation-rule>
           </dxi-item>
           <dxi-item dataField="block" Secteur i18n-caption editorType="dxTextBox"
                     [editorOptions]="blocEditorOptions">
             <dxo-label text="Bloc"></dxo-label>
-            <dxi-validation-rule type="required" message="Zone est obligatoire"></dxi-validation-rule>
           </dxi-item>
           <dxi-item dataField="registration_number" i18n-caption>
             <dxo-label text="Matricule"></dxo-label>
-            <dxi-validation-rule type="required" message="Zone est obligatoire"></dxi-validation-rule>
+            <dxi-validation-rule type="required" message="Matricule est obligatoire"></dxi-validation-rule>
           </dxi-item>
           >
           <dxi-item dataField="total_surface"  [editorOptions]="{ label: 'Superficie totale (ha)'}"
                     editorType="dxNumberBox">
             <dxo-label text="Superficie totale (ha)"></dxo-label>
+            <dxi-validation-rule type="required" message="Superficie totale est obligatoire"></dxi-validation-rule>
           </dxi-item>
          <dxi-item dataField="annuel_surface"
                     editorType="dxNumberBox">
             <dxo-label text="Superficie contractée (ha)"></dxo-label>
+           <dxi-validation-rule type="required" message="Superficie contractée est obligatoire"></dxi-validation-rule>
           </dxi-item>
           <dxi-item dataField="tenure" i18n-caption editorType="dxSelectBox"
                     [editorOptions]="worthEditorOptions">
@@ -234,12 +234,17 @@
             <dxo-label text="Code ORMVA"></dxo-label>
           </dxi-item>
           <dxi-item itemType="button"
-                    alignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === '')" [buttonOptions]="addParcelOptions"></dxi-item>
+                    alignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null)" [buttonOptions]="addParcelOptions"></dxi-item>
         </dx-form>
+
+        <div class="alert alert-warning" role="alert" *ngIf="groundMsg">
+          La superficie contractée doit être inférieure ou égale à la superficie totale.
+        </div>
       </div>
 
 
       <div class="siam-table-fullwidth-portlet mt-5">
+        <h2>Superficie de la campagne courant: {{ campaigns[0].surface }} (ha).</h2>
         <dx-data-grid
           id="gridContainer"
           [dataSource]="groundsList"
@@ -262,7 +267,7 @@
           </dxo-pager>
           <dxo-paging [pageSize]="10"></dxo-paging>
 
-          <dxi-column dataField="id" caption="ID" i18n-caption></dxi-column>
+          <dxi-column dataField="id" caption="ID" i18n-caption sortOrder="desc"></dxi-column>
           <dxi-column dataField="registration_number" caption="Matricule" i18n-caption></dxi-column>
           <dxi-column dataField="cda" caption="CDA" i18n-caption></dxi-column>
           <dxi-column dataField="zone" caption="Zone" i18n-caption></dxi-column>

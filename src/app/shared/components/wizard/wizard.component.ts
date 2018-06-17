@@ -41,6 +41,7 @@ export class WizardComponent implements OnInit {
   blocs: any;
   mle: any;
   nothirds: boolean;
+  groundMsg: boolean;
   parcelForm: any;
 
   cdaEditorOptions: any;
@@ -77,6 +78,7 @@ export class WizardComponent implements OnInit {
 
   ngOnInit() {
     this.nothirds = false;
+    this.groundMsg = false;
     this.tierService.getThirdsDx({
       requireTotalCount: true,
       searchOperation: 'contains',
@@ -90,7 +92,7 @@ export class WizardComponent implements OnInit {
       this.tiers = this.tierService.dataFormatter(tiers, false);
       this.thirds = Third.getDataSource(this.tiers, 'cin');
     }, error1 => {
-      throw error1; // this.toastr.error(error1.error.message);
+      throw error1; // this.toastr.warning(error1.error.message);
     });
 
     this.contractService.getContractsVars().subscribe((data) => {
@@ -132,6 +134,7 @@ export class WizardComponent implements OnInit {
       registration_number: null,
       total_surface: null,
       annuel_surface: null,
+      code_ormva: null,
       tenure: null
     };
     this.addParcelOptions = {
@@ -150,19 +153,28 @@ export class WizardComponent implements OnInit {
           ground['tenure'] = this.parcelForm.tenure;
           ground['annuel_surface'] = this.parcelForm.annuel_surface;
           ground['code_ormva'] = this.parcelForm.code_ormva;
-          this.parcelForm = {
-            cda: null,
-            zone: null,
-            sector: null,
-            block: null,
-            registration_number: null,
-            total_surface: null,
-            annuel_surface: null,
-            tenure: null
-          };
-          this.groundsList.push(ground);
+          if (Number(this.parcelForm.annuel_surface) > Number(this.parcelForm.total_surface)) {
+            this.groundMsg = true;
+            setTimeout(() => {
+              this.groundMsg = false;
+            }, 5000);
+          } else {
+            this.parcelForm = {
+              cda: null,
+              zone: null,
+              sector: null,
+              block: null,
+              registration_number: null,
+              total_surface: null,
+              annuel_surface: null,
+              code_ormva: null,
+              tenure: null
+            };
+            this.groundsList.push(ground);
+          }
+          console.log(this.groundsList);
         }, error1 => {
-          this.toastr.error(error1.error.message);
+          this.toastr.warning(error1.error.message);
         });
       }
     };
@@ -216,27 +228,27 @@ export class WizardComponent implements OnInit {
                                 }
                               };
                             }, error1 => {
-                              this.toastr.error(error1.error.message);
+                              this.toastr.warning(error1.error.message);
                             });
                           }
                         }
                       };
                     }, error1 => {
-                      this.toastr.error(error1.error.message);
+                      this.toastr.warning(error1.error.message);
                     });
                   }
 
                 }
               };
             }, error1 => {
-              this.toastr.error(error1.error.message);
+              this.toastr.warning(error1.error.message);
             });
           }
         }
       };
 
     }, error1 => {
-      this.toastr.error(error1.error.message);
+      this.toastr.warning(error1.error.message);
     });
 
     this.addThird = false;
@@ -297,13 +309,13 @@ export class WizardComponent implements OnInit {
 
   goToContractInfo = () => {
     if (!this.currentThird.cin) {
-      this.toastr.error('Sélectionnez ou créez un agrégé pour avancer!');
+      this.toastr.warning('Sélectionnez ou créez un agrégé pour avancer!');
     }
   }
 
   goToArea = () => {
     if (!this.contract.application_date) {
-      this.toastr.error('Remplissez les champs du contrat pour avancer!');
+      this.toastr.warning('Remplissez les champs du contrat pour avancer!');
     } else {
       this.maxYears = (this.contract.type === 'annual') ? 1 : 5;
     }
@@ -312,9 +324,9 @@ export class WizardComponent implements OnInit {
 
   goToParcels = () => {
     if (!this.currentThird.cin) {
-      this.toastr.error('Sélectionnez ou créez un agrégé pour avancer!');
+      this.toastr.warning('Sélectionnez ou créez un agrégé pour avancer!');
     } else if (this.campaigns.length <= 0 || this.campaigns[0].surface <= 0) {
-      this.toastr.error('Sélectionnez au moins une campagne pour continuer et la superficie doit être supérieure à 0!');
+      this.toastr.warning('Sélectionnez au moins une campagne pour continuer et la superficie doit être supérieure à 0!');
     }
   }
 
@@ -326,7 +338,7 @@ export class WizardComponent implements OnInit {
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
     }, err => {
-      this.toastr.error(err.error.message);
+      this.toastr.warning(err.error.message);
     });
     this.addThird = false;
   }
@@ -337,7 +349,7 @@ export class WizardComponent implements OnInit {
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
     }, err => {
-      this.toastr.error(err.error.message);
+      this.toastr.warning(err.error.message);
     });
     this.addThird = false;
   }
@@ -377,6 +389,17 @@ export class WizardComponent implements OnInit {
     this.contract.contracted_surface = this.campaigns;
     this.contract.compaign_surface = this.campaigns[0].surface;
 
+    let surfaces = 0;
+    this.groundsList.map(ground => {
+      surfaces += ground.annuel_surface;
+      return ground;
+    });
+
+    if (Number(this.contract.compaign_surface) !== Number(surfaces)) {
+      this.toastr.warning('Les superficies contractées doivent être égales à la superficie de la campagne courant.');
+      return false;
+    }
+
     this.contractService.addContract(this.contract).subscribe(contract => {
       contract = this.contractService.dataFormatter(contract, false);
 
@@ -394,7 +417,7 @@ export class WizardComponent implements OnInit {
           const id = (this.isEdit) ? this.contract.id : contract['id'];
           this.router.navigate([`/contrats/afficher/${id}`]);
         }, error1 => {
-          this.toastr.error(error1.error.message);
+          this.toastr.warning(error1.error.message);
         });
         return soil;
       });
@@ -417,14 +440,14 @@ export class WizardComponent implements OnInit {
           d = this.contractedArea.dataFormatter(d, false);
           this.router.navigate([`/contrats/afficher/${contract['id']}`]);
         }, error1 => {
-          this.toastr.error(error1.error.message);
+          this.toastr.warning(error1.error.message);
         });
 
       }, error1 => {
-        this.toastr.error(error1.error.message);
+        this.toastr.warning(error1.error.message);
       });*/
     /*}, error1 => {
-      this.toastr.error(error1.error.message);
+      this.toastr.warning(error1.error.message);
     });*/
   }
 }

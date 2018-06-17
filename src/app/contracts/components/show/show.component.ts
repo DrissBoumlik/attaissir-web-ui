@@ -75,7 +75,8 @@ export class ShowComponent implements OnInit {
                 registration_number: ((data.soil !== null) && (data.soil.registration_number !== null))
                   ? data.soil.registration_number : 'Pas de données',
                 annuel_surface: data.annuel_surface,
-                tenure: data.tenure
+                tenure: data.tenure,
+                code_ormva: data.code_ormva
               };
             });
             this.isContractEncours = this.contract.status === 'inprogress';
