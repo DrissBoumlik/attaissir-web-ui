@@ -24,6 +24,7 @@ export class ShowComponent implements OnInit {
   contracts: Contract[];
   documents: any;
   cards: any;
+  card_status: any;
   patternRIB: any = /^\d{24}$/i;
   documentsList = true;
   docTypes: any;
@@ -39,6 +40,14 @@ export class ShowComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.thirdService.getThirdsVars().subscribe(data => {
+      console.log(data);
+      this.card_status = data['card_status'];
+    }, error1 => {
+      throw error1;
+    });
+
     this.route.params.subscribe(
       params => {
         this.thirdService.getThird(+params.id, false).subscribe(
@@ -195,13 +204,13 @@ export class ShowComponent implements OnInit {
 
   getStatusColor(value: string): string {
     switch (value) {
-      case 'inactif': {
+      case 'inactive': {
         return 'm-badge m-badge--wide m-badge--warning';
       }
-      case 'actif': {
+      case 'active': {
         return 'm-badge m-badge--wide m-badge--success';
       }
-      case 'encours': {
+      case 'inproduction': {
         return 'm-badge m-badge--wide m-badge--info';
       }
       default: {
@@ -216,7 +225,7 @@ export class ShowComponent implements OnInit {
       return card.id === idCarte;
     }).status;
     switch (value) {
-      case 'inactif': {
+      case 'inactive': {
         return 'Activer';
       }
       default: {
@@ -254,10 +263,10 @@ export class ShowComponent implements OnInit {
     const carte = this.third.cards.find(card => {
       return card.id === idCarte;
     });
-    const action = carte.status = carte.status === 'actif' ? 'activate' : 'deactivate';
+    const action = carte.status = carte.status === 'active' ? 'activate' : 'deactivate';
     this.cardsService.massCards([idCarte], action).subscribe(
       (res) => {
-        carte.status = carte.status === 'actif' ? 'inactif' : 'actif';
+        carte.status = carte.status === 'active' ? 'inactive' : 'active';
       },
       (err) => {
         this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
@@ -269,7 +278,7 @@ export class ShowComponent implements OnInit {
     const carte = this.third.cards.find(card => {
       return card.id === id;
     });
-    return carte.status === 'actif' || carte.status === 'inactif';
+    return carte.status === 'active' || carte.status === 'inactive';
   }
 
 
@@ -277,8 +286,7 @@ export class ShowComponent implements OnInit {
     const carte = this.third.cards.find(card => {
       return card.id === idCarte;
     });
-    carte.status = 'perdu';
-    this.cardsService.editCard(carte).subscribe(
+    this.cardsService.editCard(carte.id, 'cancel').subscribe(
       (res) => {
         console.log(res);
       },

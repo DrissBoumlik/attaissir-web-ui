@@ -33,7 +33,7 @@ export class CardsComponent implements OnInit {
   }
 
   onStartEdit = (e) => {
-    this.cardsService.editCard(e.data).subscribe(
+    /*this.cardsService.editCard(e.data.id, ).subscribe(
       () => {
         this.toastr.success('Le compte bancaire a été modifié avec succès.');
       },
@@ -41,7 +41,7 @@ export class CardsComponent implements OnInit {
         throw err;
         // this.toastr.error(err.error.message);
       }
-    );
+    );*/
   }
 
 

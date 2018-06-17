@@ -66,11 +66,12 @@ export class CardsService {
 
   /**
    * Edit a Card
-   * @param Card
+   * @param number
+   * @param string
    * @returns {Observable<Card>}
    */
-  editCard(card: Card): Observable<Card> {
-    return this.http.put<Card>(`${environment.apiUrl}/${this.routeName}/${card.id}`, JSON.stringify(card), {
+  editCard(id: number, action: string): Observable<Card> {
+    return this.http.put<Card>(`${environment.apiUrl}/${this.routeName}/${id}/${action}`, JSON.stringify({}), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',

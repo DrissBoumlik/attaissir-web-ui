@@ -275,9 +275,19 @@
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
           <dxi-column dataField="cda" caption="CDA" i18n-caption>
+            <dxo-lookup
+              [dataSource]="cdas"
+              displayExpr="name"
+              valueExpr="code">
+            </dxo-lookup>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
           <dxi-column dataField="zone" caption="Zone" i18n-caption>
+            <dxo-lookup
+              [dataSource]="zones"
+              displayExpr="name"
+              valueExpr="code">
+            </dxo-lookup>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
 

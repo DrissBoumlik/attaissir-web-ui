@@ -482,7 +482,7 @@
                 style="padding-top: 2vh"
                 [noDataText]="'L\'agrégé ne dispose pas de carte agriculteur'"
                 keyExpr="id">
-                <dxi-column dataField="rfid" caption="Serie">
+                <dxi-column dataField="rfid" caption="Serie" [visible]="false">
                 </dxi-column>
                 <dxi-column width="100" dataField="status" caption="Statut" cellTemplate="statusTemplate">
                 </dxi-column>
@@ -493,7 +493,7 @@
                 </dxi-column>
                 <div *dxTemplate="let data of 'statusTemplate'">
                     <span [ngClass]="getStatusColor(data.value)">
-                      {{ data.value }}
+                      {{ card_status[data.value] }}
                     </span>
                 </div>
                 <div *dxTemplate="let data of 'actionsTemplate'">

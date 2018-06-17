@@ -274,19 +274,22 @@ export class WizardComponent implements OnInit {
   }
 
   editParcels = (e) => {
-    e.cancel = true;
+
     if (e.newData.hasOwnProperty('annuel_surface') && e.newData.hasOwnProperty('total_surface')) {
       if (Number(e.newData.annuel_surface) > Number(e.newData.total_surface)) {
+        e.cancel = true;
         this.toastr.warning('La superficie contractée doit être inférieure ou égale à la superficie totale.');
         return false;
       }
     } else if (e.newData.hasOwnProperty('annuel_surface')) {
       if (Number(e.newData.annuel_surface) > Number(e.oldData.total_surface)) {
+        e.cancel = true;
         this.toastr.warning('La superficie contractée doit être inférieure ou égale à la superficie totale.');
         return false;
       }
     } else if (e.newData.hasOwnProperty('total_surface')) {
       if (Number(e.oldData.annuel_surface) > Number(e.newData.total_surface)) {
+        e.cancel = true;
         this.toastr.warning('La superficie contractée doit être inférieure ou égale à la superficie totale.');
         return false;
       }
@@ -295,7 +298,6 @@ export class WizardComponent implements OnInit {
     e.newData['id'] = e.oldData.id;
     this.soilsService.editGround(e.newData).subscribe(ground => {
       this.toastr.success('Les modifications sont effectuées avec suces.');
-      e.cancel = false;
     }, error1 => {
       this.toastr.warning(error1.error.message);
     });
