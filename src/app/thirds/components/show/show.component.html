@@ -509,7 +509,7 @@
                   </div>
                 </div>
                 <div *dxTemplate="let date of 'printed_atStatusTemplate'">
-                     <span ngClass="m-badge m-badge--success m-badge--wide" *ngIf="date && data.value !== 'inproduction'">
+                     <span ngClass="m-badge m-badge--success m-badge--wide" *ngIf="date && date.data.status !== 'inproduction'">
                        imprimé.
                     </span>
                   <span ngClass="m-badge m-badge--warning m-badge--wide" *ngIf="!date">

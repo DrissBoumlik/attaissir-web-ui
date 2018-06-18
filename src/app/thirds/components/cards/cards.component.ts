@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CardsService } from '../../../contracts/services/cards.service';
 import { Card } from 'primeng/card';
-import {ThirdsService} from '../../services/thirds.service';
+import { ThirdsService } from '../../services/thirds.service';
 
 @Component({
   selector: 'app-cards',
@@ -19,20 +19,20 @@ export class CardsComponent implements OnInit {
 
   constructor(private toastr: ToastrService,
     private cardsService: CardsService,
-              public thirdService: ThirdsService) { }
+    public thirdService: ThirdsService) { }
 
   ngOnInit() {
     this.thirdService.getThirdsVars().subscribe(data => {
       console.log(data);
       this.card_status = data['card_status'];
       this.cardsService.getCards().subscribe(cards => {
-          this.cards = this.cardsService.dataFormatter(cards, false);
-          this.cards = this.cards.map(card => {
-            card.full_name = `${card.first_name} ${card.last_name}`;
-            card.status = this.card_status[card.status];
-            return card;
-          });
-        },
+        this.cards = this.cardsService.dataFormatter(cards, false);
+        this.cards = this.cards.map(card => {
+          card.full_name = `${card.first_name} ${card.last_name}`;
+          card.status = this.card_status[card.status];
+          return card;
+        });
+      },
         (err) => {
           throw err;
           // this.toastr.error(err.error.message);
