@@ -30,10 +30,11 @@ export class ListComponent implements OnInit {
   }
 
   getGender = (data) => {
-    if (!data.gender) {
+    if (!data.sexe) {
       return '';
     }
-    return (data.gender === 'm') ? 'fa-male' : 'fa-female';
+    console.log(data.sexe);
+    return (data.sexe === 'Masculin') ? 'fa-male' : 'fa-female';
   }
 
   ngOnInit() {

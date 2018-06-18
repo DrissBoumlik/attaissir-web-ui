@@ -87,12 +87,12 @@
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5"  *ngIf="!addThird">
 			<div class="m-form__actionss">
 				<button type="button" class="btn btn-success float-right"  awNextStep i18n>Étape suivante</button>
-				<button class="btn float-right mr-3" *ngIf="!!currentThird.cin" (click)="addThird = true"><span i18n>Ajouer un agrégé</span></button>
+				<button class="btn float-right mr-3" *ngIf="!!currentThird.cin" (click)="addThird = true"><span i18n>Ajouter un agrégé</span></button>
 			</div>
 		</div>
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5"  *ngIf="addThird">
 			<div class="m-form__actionss">
-				<button class="btn btn-success float-right" (click)="saveThird()"><span i18n>Sauvegarder</span></button>
+				<button class="btn btn-success float-right" (click)="saveThird()" *ngIf="false"><span i18n>Sauvegarder</span></button>
 				<button class="btn  float-right mr-3" (click)="cancelThird()"><span i18n>Anuller</span></button>
 			</div>
 		</div>
