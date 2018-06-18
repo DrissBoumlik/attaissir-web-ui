@@ -5,8 +5,8 @@
 
       <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Liste des
         contrats</a>
-      <h2>{{ (contract?.parent_id !== null) ? 'Contrat' : 'Avenant'}} Agrégat-Agrégé {{ contract?.code }}</h2>
-      <a class="siam-header-btn-new" href="#" (click)="downloadContract()" download=""><i
+      <h2>{{ (!contract?.parent_id) ? 'Contrat Agrégat-Agrégé' : 'Avenant'}} {{ contract?.code }}</h2>
+      <a class="siam-header-btn-new" href="javascript::void(0)" (click)="downloadContract()"><i
         class="fa fa-print"></i></a>
     </div>
   </div>
@@ -622,13 +622,16 @@
                               style="padding-top: 2vh"
                               [noDataText]="'le contrat ne dispose pas d\'avenants'"
                               keyExpr="id">
-                  <dxi-column dataField="code" caption="Réference">
+                  <dxi-column cellTemplate="linkTemplate" caption="Réference">
                   </dxi-column>
                   <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
                   </dxi-column>
                   <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
                   </dxi-column>
 
+                  <div *dxTemplate="let data of 'linkTemplate'">
+                    <a routerLink="/contrats/afficher/{{ data.data.id }}">{{ data.data.code }}</a>
+                  </div>
                   <div *dxTemplate="let data of 'statusTemplate'">
                         <span [ngClass]="getStatusColor(data.value)">
                           {{ data.value }}
