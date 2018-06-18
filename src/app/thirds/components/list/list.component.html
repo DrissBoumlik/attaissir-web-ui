@@ -95,7 +95,7 @@
       <i class="fa fa-id_card fa-5x" *ngIf=""></i>
     </div>-->
 
-    <dxi-column dataField="gender" [hidingPriority]="9"  cellTemplate="cellTemplate1" caption="Genre" allowColumnResizing="true">
+    <dxi-column dataField="sexe" [hidingPriority]="9"  cellTemplate="cellTemplate1" caption="Genre" allowColumnResizing="true">
     </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate1'">
       <i style="font-size: 150%; align-content: center; cursor: pointer" class="fa {{ getGender(data.data) }} fa-5x"></i>

@@ -206,8 +206,6 @@
         <dxo-label
           text="Niveau d`instruction" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="required" message="Niveau d`instruction est obligatoire"
-                             i18n-message></dxi-validation-rule>
       </dxi-item>
 
       <dxi-item dataField="civil_status"
@@ -252,37 +250,40 @@
         </dxo-label>
       </dxi-item>
 
-      <dxi-item dataField="bank_account_number">
-        <dxo-label
-          text="Numero compte bancaire" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule *ngIf="tier.bank_account_number"
-                             type="pattern"
-                             [pattern]="accountBankPattern"
-                             message="Numero compte bancaire est invalide" i18n-message>
-        </dxi-validation-rule>
-      </dxi-item>
+      <dxi-item itemType="group" [colCount]="12" i18n-caption>
 
-      <dxi-item dataField="bank_code" [editorOptions]="">
-        <dxo-label
-          text="Code bancaire" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule *ngIf="tier.bank_code"
-                             type="pattern"
-                             [pattern]="codeBankPattern"
-                             message="Code bancaire est invalide" i18n-message>
-        </dxi-validation-rule>
-      </dxi-item>
+        <dxi-item dataField="bank_account_number" [colSpan]="7">
+          <dxo-label
+            text="Numero compte bancaire" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule *ngIf="tier.bank_account_number"
+                               type="pattern"
+                               [pattern]="accountBankPattern"
+                               message="Numero compte bancaire est invalide" i18n-message>
+          </dxi-validation-rule>
+        </dxi-item>
 
-      <dxi-item dataField="bank_rib_key" [editorOptions]="">
-        <dxo-label
-          text="Clé RIB bancaire" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule *ngIf="tier.bank_rib_key"
-                             type="pattern"
-                             [pattern]="ribKeyPattern"
-                             message="Clé RIB bancaire est invalide" i18n-message>
-        </dxi-validation-rule>
+        <dxi-item dataField="bank_code" [editorOptions]="" [colSpan]="3">
+          <dxo-label
+            text="Code bancaire" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule *ngIf="tier.bank_code"
+                               type="pattern"
+                               [pattern]="codeBankPattern"
+                               message="Code bancaire est invalide" i18n-message>
+          </dxi-validation-rule>
+        </dxi-item>
+
+        <dxi-item dataField="bank_rib_key" [editorOptions]="" [colSpan]="2">
+          <dxo-label
+            text="Clé RIB bancaire" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule *ngIf="tier.bank_rib_key"
+                               type="pattern"
+                               [pattern]="ribKeyPattern"
+                               message="Clé RIB bancaire est invalide" i18n-message>
+          </dxi-validation-rule>
+        </dxi-item>
       </dxi-item>
     </dxi-item>
 

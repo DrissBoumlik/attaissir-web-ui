@@ -79,7 +79,7 @@ export class TiersFormComponent implements OnInit {
       };
 
       this.sexe = {
-        dataSource: Helper.dataSourceformatter(this.vars['sexe']),
+        dataSource: Helper.dataSourceformatter(this.vars['sexe']).reverse(),
         displayExpr: 'Name',
         valueExpr: 'ID',
       };
