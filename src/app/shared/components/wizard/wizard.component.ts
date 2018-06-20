@@ -1,16 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Third } from '../../../classes/third';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { ToastrService } from 'ngx-toastr';
-import { Contract } from '../../../classes/contract';
-import { Structure } from '../../../classes/structure';
-import { SoilsService } from '../../../contracts/services/soils.service';
-import { ZonesService } from '../../../contracts/services/zones.service';
-import { ContractsService } from '../../../contracts/services/contracts.service';
-import { Zone } from '../../../classes/zone';
 import { Router } from '@angular/router';
-import { Helper } from '../../../classes/helper';
-import { ParcelsService } from '../../../contracts/services/parcels.service';
+import { Contract } from '../../classes/contract';
+import { Third } from '../../classes/third';
+import { Structure } from '../../classes/structure';
+import { Zone } from '../../classes/zone';
+import { ThirdsService } from '../../../modules/thirds/services/thirds.service';
+import { ToastrService } from 'ngx-toastr';
+import { SoilsService } from '../../../modules/contracts/services/soils.service';
+import { ZonesService } from '../../../modules/contracts/services/zones.service';
+import { ParcelsService } from '../../../modules/contracts/services/parcels.service';
+import { ContractsService } from '../../../modules/contracts/services/contracts.service';
+import { Helper } from '../../classes/helper';
 
 
 @Component({

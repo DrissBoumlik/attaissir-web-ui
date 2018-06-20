@@ -15,11 +15,19 @@ const routes: Routes = [
       },
       {
         path: '',
-        loadChildren: '../contracts/contracts.module#ContractsModule'
+        loadChildren: '../modules/contracts/contracts.module#ContractsModule'
       },
       {
         path: '',
-        loadChildren: '../thirds/thirds.module#ThirdsModule'
+        loadChildren: '../modules/thirds/thirds.module#ThirdsModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/cards/cards.module#CardsModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/parcels/parcels.module#ParcelsModule'
       },
       {
         path: '404',

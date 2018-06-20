@@ -1,0 +1,663 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+
+      <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Liste des
+        contrats</a>
+      <h2>{{ (!contract?.parent_id) ? 'Contrat Agrégat-Agrégé' : 'Avenant'}} {{ contract?.code }}</h2>
+      <a class="siam-header-btn-new" href="javascript::void(0)" (click)="downloadContract()"><i
+        class="fa fa-print"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- END: Subheader -->
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12">
+          <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
+                <i class="flaticon-share m--hide"></i>
+                Contrat
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
+                Agrégé
+              </a>
+            </li>
+            <!--<li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_4" role="tab">
+                Site
+              </a>
+            </li>-->
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
+                Campagnes
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#parcelles" role="tab">
+                Parcelles
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_5"
+                 (click)="loadDocuments()" role="tab">
+                Documents
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item" *ngIf="contract?.parent_id !== null">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_6" role="tab">
+                Avenants
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="m_user_profile_tab_1">
+              <div class="m-form m-form--fit">
+                <div class="m-portlet__body">
+                  <div class="row">
+                    <div class="col-12">
+                      <h3 class="m-form__section">
+                        Informations générales
+                      </h3>
+                      <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Date d'application
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="contract?.application_date">{{
+                            contract?.application_date }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata"
+                             *ngIf="!contract?.application_date">Pas de données</p>
+                        </div>
+                      </div>
+                      <!--<div class="row">
+                        <label class="col-12">
+                          Type de culture
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="contract?.culture_type">{{ contract?.culture_type }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!contract?.culture_type">Pas de données</p>
+                        </div>
+                      </div>-->
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Date d'expiration
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="contract?.expiration_date">{{
+                            contract?.expiration_date }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata"
+                             *ngIf="!contract?.expiration_date">Pas de données</p>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Date de signature
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="contract?.signature_date">{{ contract?.signature_date
+                            }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata"
+                             *ngIf="!contract?.signature_date">Pas de données</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Type de contrat
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="contract?.type">{{ contract?.type }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!contract?.type">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Statut
+                        </label>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-6">
+                              <div [ngClass]="getStatusColor(contract?.status_value)"
+                                    role="alert"
+                                   style="width: 100%; margin-top: 10%">
+                                {{ contract?.status_value  }}
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div *ngIf="isContractEncours">
+                                <dx-button [text]="'Valider'" [type]="'success'"
+                                           (onClick)="activateContrat()" style=" margin-top: 5%"></dx-button>
+                              </div>
+                            </div>
+                          </div>
+                          <!--<input class="form-control m-input" type="text" [value]="" readonly>-->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane " id="m_user_profile_tab_2">
+              <div class="m-form m-form--fit">
+                <div class="m-portlet__body">
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                      <div class="row">
+                        <div class="col-12">
+                          <h3 class="m-form__section">
+                            Informations générales
+                          </h3>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="row">
+                            <label class="col-12">
+                              Nom complet
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value">{{ third?.first_name }} {{ third?.last_name }}</p>
+                            </div>
+                          </div>
+                          <div class="row" DIR="ltr">
+                            <label class="col-12">
+                              الاسم الكامل
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value">{{ third?.first_name_ar }} {{ third?.last_name_ar }}</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              CIN
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.cin">{{ third?.cin }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.cin">Pas de
+                                données</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="row">
+                            <label class="col-12">
+                              Date du décès
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.death_date">{{ third?.death_date |
+                                uppercase }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.death_date">
+                                Pas de données</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              Numéro de téléphone 1
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.tel1">{{ third?.tel1 | uppercase }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.tel1">Pas de
+                                données</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              Numéro de téléphone 2
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.tel2">{{ third?.tel2}}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.tel2">Pas de
+                                données</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="row">
+                            <label class="col-12">
+                              Email
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.email">{{ third?.email}}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.email">Pas de
+                                données</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              Assurance.
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.is_insured !== null">{{ third?.is_insured ?
+                                'Oui' : 'Non' }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata"
+                                 *ngIf="third?.is_insured == null">Pas de données</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              Retraite.
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.is_retired !== null">{{ third?.is_retired ?
+                                'Oui' : 'Non' }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata"
+                                 *ngIf="third?.is_retired == null">Pas de données</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                      <div *ngIf="third?.company_name">
+                        <div class="row">
+                          <div class="col-12">
+                            <h3 class="m-form__section">
+                              Société
+                            </h3>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4">
+                            <div class="row">
+                              <label class="col-12">
+                                Raison sociale
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.company_name">{{
+                                  third?.company_name}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata"
+                                   *ngIf="!third?.company_name">Pas de données</p>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <label class="col-12">
+                                Numéro de patente
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.patent_number">{{
+                                  third?.patent_number}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata"
+                                   *ngIf="!third?.patent_number">Pas de données</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="row">
+                              <label class="col-12">
+                                Code TVA
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.tva_code">{{ third?.tva_code}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.tva_code">
+                                  Pas de données</p>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <label class="col-12">
+                                Identification fiscale
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.if">{{ third?.if}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.if">Pas de
+                                  données</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="row">
+                              <label class="col-12">
+                                Identifiant commun de l’entreprise.
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.ice">{{ third?.ice}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.ice">Pas de
+                                  données</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="m_user_profile_tab_3">
+              <dx-data-grid id="CampaignGridContainer"
+                            [allowColumnReordering]="true"
+                            [dataSource]="campagnes"
+                            [showColumnLines]="true"
+                            [showRowLines]="true"
+                            [showBorders]="true"
+                            [rowAlternationEnabled]="true"
+                            style="padding-top: 2vh"
+                            [noDataText]="'Le contrat ne dispose pas de  campagne'">
+                <dxi-column dataField="campaign" caption="Campagne"></dxi-column>
+                <!--<dxi-column dataField="campaign.start_date" caption="Date de début"></dxi-column>
+                <dxi-column dataField="campaign.end_date" caption="Date de fin"></dxi-column>-->
+                <dxi-column dataField="surface" cellTemplate="cellTemplate1" caption="Surface contractée"></dxi-column>
+                <!--<dxi-column dataField="campaign.description" caption="Description"></dxi-column>-->
+                <div *dxTemplate="let data of 'cellTemplate1'">
+                  {{ data.data.surface }} (ha)
+                </div>
+                <dxo-remote-operations
+                  [sorting]="true"
+                  [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-editing
+                  [useIcons]="true"
+                  mode="row"
+                  [allowUpdating]="false"
+                  [allowDeleting]="false"
+                  [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                  [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </div>
+            <div class="tab-pane" id="parcelles">
+              <dx-data-grid id="ParcelsGridContainer"
+                            [allowColumnReordering]="true"
+                            [dataSource]="parcels"
+                            [columnHidingEnabled]="true"
+                            [allowColumnResizing]="false"
+                            [showBorders]="true"
+                            [rowAlternationEnabled]="true"
+                            style="padding-top: 2vh"
+                            [noDataText]="'Le contrat ne dispose pas de parcels'">
+
+                <dxi-column dataField="perimeter" caption="Périmetre" [hidingPriority]="4"></dxi-column>
+                <dxi-column dataField="region" caption="Région" [hidingPriority]="3"></dxi-column>
+                <dxi-column dataField="district" caption="Arrondissement" [hidingPriority]="2"></dxi-column>
+                <dxi-column dataField="rural_commune" caption="Commune rurale" [hidingPriority]="1"></dxi-column>
+                <dxi-column dataField="cda" caption="CDA" sortOrder="desc"></dxi-column>
+                <dxi-column dataField="zone" caption="Zone" [hidingPriority]="8"></dxi-column>
+                <dxi-column dataField="sector" caption="Secteur" [hidingPriority]="7"></dxi-column>
+                <dxi-column dataField="block" caption="Bloc"  [hidingPriority]="6"></dxi-column>
+                <dxi-column dataField="code_ormva" caption="Code ORMVA"  [hidingPriority]="5"></dxi-column>
+                <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
+                <dxi-column dataField="annuel_surface" cellTemplate="cellTemplate1" caption="Superficie annuelle"></dxi-column>
+                <dxi-column dataField="tenure" caption="Mode faire-valoir" [hidingPriority]="0"></dxi-column>
+                <div *dxTemplate="let data of 'cellTemplate1'">
+                  {{ data.data.annuel_surface }} (ha)
+                </div>
+
+                <dxo-remote-operations
+                  [sorting]="true"
+                  [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-editing
+                  [useIcons]="true"
+                  mode="row"
+                  [allowUpdating]="false"
+                  [allowDeleting]="false"
+                  [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                  [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </div>
+            <div class="tab-pane" id="m_user_profile_tab_4">
+              <div class="m-form m-form--fit">
+                <div class="m-portlet__body">
+                  <div class="row">
+                    <div class="col-12">
+                      <h3 class="m-form__section">
+                        Informations sur le site
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Libelle
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.name">{{ structure?.name }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.name">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Code
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.code">{{ structure?.code }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.code">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Ville
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.city">{{ structure?.city }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.city">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Adresse
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.address">{{ structure?.address }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.address">Pas
+                            de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Code postale
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.zip_code">{{ structure?.zip_code }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.zip_code">Pas
+                            de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Email
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.email">{{ structure?.email }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.email">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Numéro de téléphone 1:
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.tel1">{{ structure?.tel1 }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.tel1">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Numéro de téléphone 2:
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.tel2">{{ structure?.tel2 }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.tel2">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="m_user_profile_tab_5">
+              <form id="form">
+                <dx-data-grid
+                  id="gridCont"
+                  [allowColumnReordering]="true"
+                  [dataSource]="documents"
+                  [showColumnLines]="true"
+                  [showRowLines]="true"
+                  [showBorders]="true"
+                  (onRowInserting)="onAddDOC($event)"
+                  [rowAlternationEnabled]="true"
+                  style="padding-top: 2vh"
+                  [noDataText]="'Le contrat ne dispose pas de documents joints hors contrat'"
+                  keyExpr="id">
+
+                  <dxi-column dataField="name" caption="Type" [visible]="false">
+                    <dxo-lookup
+                      [dataSource]="docTypes"
+                      displayExpr="Name"
+                      valueExpr="ID">
+                    </dxo-lookup>
+                  </dxi-column>
+
+                  <dxi-column dataField="name" caption="Type"></dxi-column>
+
+                  <dxi-column dataField="path" caption="Charger" editCellTemplate="cellTemplate2"
+                              [visible]="false"></dxi-column>
+
+                  <dxi-column dataField="downloadPath" caption="Télécharger" cellTemplate="cellTemplate"></dxi-column>
+
+                  <div *dxTemplate="let data of 'cellTemplate'">
+                    <dx-button
+                      class="send"
+                      icon="fa fa-cloud-download"
+                      text="Télécharger"
+                      (onClick)="downloadDocument(data)">
+                    </dx-button>
+                  </div>
+                  <div *dxTemplate="let data of 'cellTemplate2'">
+                    <dx-file-uploader
+                      selectButtonText="Ajouter un document"
+                      labelText="document"
+                      accept="*"
+                      uploadMode="useForm"
+                      [(value)]="filePath">
+                    </dx-file-uploader>
+                  </div>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="false">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="none"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="popup"
+                    [form]="{items: ['name', 'path']}"
+                    [allowUpdating]="true"
+                    [allowDeleting]="true"
+                    [allowAdding]="true">
+                    <dxo-popup
+                      title="Ajouter ou modifier"
+                      [showTitle]="true"
+                      [width]="700"
+                      [height]="345"
+                      [position]="{ my: 'center', at: 'center'}">
+                    </dxo-popup>
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="false"
+                  ></dxo-pager>
+                </dx-data-grid>
+              </form>
+            </div>
+            <div class="tab-pane" id="m_user_profile_tab_6">
+              <div class="m-portlet__body">
+                <a class="btn btn-success" [routerLink]="['/contrats/modifier/' + contract?.id]"><i
+                  class="fa fa-plus"></i> Ajouter Avenants</a>
+                <dx-data-grid id="AvenantsgridContainer"
+                              [allowColumnReordering]="true"
+                              [dataSource]="avenants"
+                              [showColumnLines]="true"
+                              [showRowLines]="true"
+                              [showBorders]="true"
+                              [rowAlternationEnabled]="true"
+                              style="padding-top: 2vh"
+                              [noDataText]="'le contrat ne dispose pas d\'avenants'"
+                              keyExpr="id">
+                  <dxi-column cellTemplate="linkTemplate" caption="Réference">
+                  </dxi-column>
+                  <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
+                  </dxi-column>
+                  <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
+                  </dxi-column>
+
+                  <div *dxTemplate="let data of 'linkTemplate'">
+                    <a routerLink="/contrats/afficher/{{ data.data.id }}">{{ data.data.code }}</a>
+                  </div>
+                  <div *dxTemplate="let data of 'statusTemplate'">
+                        <span [ngClass]="getStatusColor(data.value)">
+                          {{ data.value }}
+                        </span>
+                  </div>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="false">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="none"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="row"
+                    [allowUpdating]="false"
+                    [allowDeleting]="false"
+                    [allowAdding]="false">
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="false"
+                  ></dxo-pager>
+                </dx-data-grid>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
