@@ -30,7 +30,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des agrégés',
         subMenu: [
           { icon: 'flaticon-plus', name: 'Nouvel agrégé'/*Nuveau agrégé*/, url: '/tiers/ajouter' },
-          { icon: 'flaticon-list-parcels', name: 'Liste des agrégés'/*Liste des  agrégés*/, url: '/tiers/liste' },
+          { icon: 'flaticon-list', name: 'Liste des agrégés'/*Liste des  agrégés*/, url: '/tiers/liste' },
         ],
         disabled: 'false'
       },
@@ -41,16 +41,16 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des Contrats',
         subMenu: [
           { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter' },
-          { icon: 'flaticon-list-parcels', name: 'Liste des contrats', url: '/contrats/liste' },
-          { icon: 'flaticon-list-parcels', name: 'Contrats de cette campagne', url: '/contrats/liste/courant' },
-          { icon: 'flaticon-list-parcels', name: 'Liste des parcelles', url: '/contrats/parcelles' },
+          { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste' },
+          { icon: 'flaticon-list', name: 'Contrats de cette campagne', url: '/contrats/liste/courant' },
+          { icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste' },
         ],
         disabled: 'false'
       },
       {
         name: 'Cartes',
         icon: 'flaticon-tabs',
-        url: '/tiers/cartes',
+        url: '/cartes/liste',
         description: 'Generateur de cartes',
         disabled: 'false'
       }

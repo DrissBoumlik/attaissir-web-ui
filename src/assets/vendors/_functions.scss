@@ -14,7 +14,7 @@
 }
 
 //== Map Get Deep
-// Given a map and a list-parcels of keys, find the value at the given key
+// Given a map and a list of keys, find the value at the given key
 @function array-get($map, $keys...) {
     @if length($keys) == 1 {
         $keys: nth($keys, 1);

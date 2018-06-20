@@ -8,24 +8,28 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ThemeRoutingModule } from './theme/theme-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { ScriptLoaderService } from './_services/script-loader.service';
-import { ThirdsModule } from './thirds/thirds.module';
 import { ToastrModule } from 'ngx-toastr';
-import { ContractsModule } from './contracts/contracts.module';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
-import { TokenInterceptor } from './auth/_services/token.interceptors';
+import { TokenInterceptor } from './shared/interceptors/token.interceptors';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
+  DxButtonModule, DxCheckBoxModule,
   DxDataGridModule,
   DxFileUploaderModule,
-  DxLookupModule,
-  DxPopupModule,
-  DxSelectBoxModule,
+  DxLookupModule, DxPivotGridModule,
+  DxPopupModule, DxRadioGroupModule,
+  DxSelectBoxModule, DxSwitchModule,
   DxTemplateModule
 } from 'devextreme-angular';
-import { SiamErrorHandler } from './classes/siam-error-handler';
+import { SiamErrorHandler } from './shared/classes/siam-error-handler';
 import { JasperoAlertsModule } from '@jaspero/ng-alerts';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ParcelsModule } from './modules/parcels/parcels.module';
+import { CardsModule } from './modules/cards/cards.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ContractsModule } from './modules/contracts/contracts.module';
+import { ThirdsModule } from './modules/thirds/thirds.module';
 
 @NgModule({
   declarations: [
@@ -35,8 +39,10 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   imports: [
     LayoutModule,
     BrowserModule,
+
     AppRoutingModule,
     ThemeRoutingModule,
+
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -46,20 +52,32 @@ import { JwtHelperService } from '@auth0/angular-jwt';
     DxLookupModule,
     DxFileUploaderModule,
     DxSelectBoxModule,
-    DxPopupModule,
     JasperoAlertsModule.forRoot(),
     ToastrModule.forRoot(),
+
+    DxButtonModule,
+    DxRadioGroupModule,
+    NgbModule.forRoot(),
+    DxSwitchModule,
+    DxPivotGridModule,
+
+
     AuthModule,
     ThirdsModule,
     ContractsModule,
+    ParcelsModule,
+    CardsModule,
     SharedModule
   ],
   exports: [
-    DxTemplateModule,
     DxDataGridModule,
     DxPopupModule,
     DxFileUploaderModule,
     DxSelectBoxModule,
+    FormsModule,
+    DxPivotGridModule,
+    DxTemplateModule,
+    DxCheckBoxModule
   ],
   providers: [{
     provide: LOCALE_ID,

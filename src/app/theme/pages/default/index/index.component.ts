@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
-import { Helpers } from '../../../../helpers';
 import { ScriptLoaderService } from '../../../../_services/script-loader.service';
-import { ThirdsService } from '../../../../thirds/services/thirds.service';
+import { ThirdsService } from '../../../../modules/thirds/services/thirds.service';
 
 
 @Component({
@@ -154,7 +153,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       console.log(res);
       updateLocation(res['name']);
       updateTemperature(Math.round(res['main'].temp));
-    })
+    });
 
     function updateLocation(location) {
       const place = document.getElementById('w-city');
