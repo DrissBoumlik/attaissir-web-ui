@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ThirdsService } from '../../services/thirds.service';
-import { Third } from '../../../classes/third';
-import { ToastrService } from 'ngx-toastr';
-import { Contract } from '../../../classes/contract';
-import { Document } from '../../../classes/document';
-import { ContractsService } from '../../../contracts/services/contracts.service';
-import { CardsService } from '../../../contracts/services/cards.service';
-import { environment } from '../../../../environments/environment';
-import { Helper } from '../../../classes/helper';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ThirdsService} from '../../services/thirds.service';
+import {Third} from '../../../classes/third';
+import {ToastrService} from 'ngx-toastr';
+import {Contract} from '../../../classes/contract';
+import {ContractsService} from '../../../contracts/services/contracts.service';
+import {CardsService} from '../../../contracts/services/cards.service';
+import {environment} from '../../../../environments/environment';
+import {Helper} from '../../../classes/helper';
+import {Card} from '../../../classes/card';
 
 declare const require: any;
 const $ = require('jquery');
@@ -32,11 +32,11 @@ export class ShowComponent implements OnInit {
   bank_accounts: any;
 
   constructor(private thirdService: ThirdsService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private toaster: ToastrService,
-    private contractService: ContractsService,
-    private cardsService: CardsService) {
+              private route: ActivatedRoute,
+              private router: Router,
+              private toaster: ToastrService,
+              private contractService: ContractsService,
+              private cardsService: CardsService) {
   }
 
   ngOnInit() {
@@ -61,6 +61,7 @@ export class ShowComponent implements OnInit {
             }];
             this.contracts = this.third['contracts'];
             this.cards = this.third.cards;
+            console.log(this.cards);
           },
           (error) => {
             this.router.navigate(['/404']).catch(
@@ -178,7 +179,9 @@ export class ShowComponent implements OnInit {
       res => {
         this.loadDocuments();
         d.resolve();
+        this.toaster.success('Le document a été téléchargé avec succès.');
       }, error => {
+        d.reject('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
       });
     e.cancel = d.promise();
   }
@@ -259,14 +262,13 @@ export class ShowComponent implements OnInit {
     );
   }
 
-  switchCarteStatus(idCarte: number) {
+  DeclareStolen(idCarte: number) {
     const carte = this.third.cards.find(card => {
       return card.id === idCarte;
     });
-    const action = carte.status = carte.status === 'active' ? 'activate' : 'deactivate';
-    this.cardsService.massCards([idCarte], action).subscribe(
+    this.cardsService.editCard(carte.id, 'cancel').subscribe(
       (res) => {
-        carte.status = carte.status === 'active' ? 'inactive' : 'active';
+        this.toaster.success('La carte  a été déclrée perdu');
       },
       (err) => {
         this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
@@ -274,27 +276,34 @@ export class ShowComponent implements OnInit {
     );
   }
 
-  canHaveAction(id: number) {
-    const carte = this.third.cards.find(card => {
-      return card.id === id;
-    });
-    return carte.status === 'active' || carte.status === 'inactive';
-  }
-
-
-  DeclareStolen(idCarte: number) {
+  activateCard(idCarte: number, bool?: string) {
+    const action = bool ? 'deactivate' : 'activate';
     const carte = this.third.cards.find(card => {
       return card.id === idCarte;
     });
-    this.cardsService.editCard(carte.id, 'cancel').subscribe(
+    this.cardsService.massCards([idCarte], action).subscribe(
       (res) => {
-        console.log(res);
+        carte.status = carte.status === 'active' ? 'inactive' : 'active';
+        this.toaster.success('Opération réussie');
       },
       (err) => {
-        console.log(err);
+        this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
       }
     );
   }
 
+  declareStolen(value: number): boolean {
+    const card = this.cards.find(c => c.id === value);
+    return (card.printed_at && card.status === 'active');
+  }
 
+  canActivateCard(id: number): boolean {
+    const card = this.cards.find(c => c.id === id);
+    return (card.printed_at && card.status === 'inactive');
+  }
+
+  canDeactivateCard(id: number): boolean {
+    const card = this.cards.find(c => c.id === id);
+    return (card.printed_at && card.status === 'active');
+  }
 }
