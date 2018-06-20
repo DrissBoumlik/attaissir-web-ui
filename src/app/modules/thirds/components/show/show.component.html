@@ -347,7 +347,7 @@
                 <dxi-column dataField="structure.label" caption="Structure" [hidingPriority]="0"
                             dataType="Text"></dxi-column>
                 <div *dxTemplate="let data of 'statusTemplate'">
-                        <span [ngClass]="getStatusColor(data.value)">
+                        <span [ngClass]="helper.getStatusColor(data.value)">
                               {{ contract_status[data.value] }}
                           </span>
                 </div>
@@ -494,7 +494,7 @@
                 <dxi-column dataField="id" caption="Action" cellTemplate="actionsTemplate">
                 </dxi-column>
                 <div *dxTemplate="let data of 'statusTemplate'" style="padding: 10px">
-                    <span [ngClass]="getStatusColor(data.value)">
+                    <span [ngClass]="helper.getStatusColor(data.value)">
                       {{ card_status[data.value] }}
                     </span>
                 </div>

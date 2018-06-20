@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { CardsService } from '../../../contracts/services/cards.service';
+import {Helper} from '../../../../shared/classes/helper';
 
 
 @Component({
@@ -16,10 +17,13 @@ export class ListComponent implements OnInit {
   action: string;
   selectedItems: any[];
   card_status: any;
+  helper: any;
 
   constructor(private toastr: ToastrService,
     private cardsService: CardsService,
-    public thirdService: ThirdsService) { }
+    public thirdService: ThirdsService) {
+    this.helper = Helper;
+  }
 
   ngOnInit() {
     this.thirdService.getThirdsVars().subscribe(data => {

@@ -32,6 +32,7 @@ export class ShowComponent implements OnInit {
   canValidateContract: boolean;
   hasRightAttatchment: boolean;
   isContractEncours: boolean;
+  helper: any;
 
   constructor(private contractService: ContractsService,
     private route: ActivatedRoute,
@@ -39,6 +40,7 @@ export class ShowComponent implements OnInit {
     private thirdsService: ThirdsService,
     public cardService: CardsService,
     private toaster: ToastrService) {
+    this.helper = Helper;
   }
 
   ngOnInit() {
@@ -145,27 +147,6 @@ export class ShowComponent implements OnInit {
 
   downloadDocument(data: any) {
     window.open(`${environment.apiUrl}/storage/${data.value}`);
-  }
-
-
-  getStatusColor(value: string): string {
-    switch (value) {
-      case 'inactif': {
-        return 'm-badge m-badge--warning m-badge--wide';
-      }
-      case 'inprogress': {
-        return 'm-badge m-badge--info m-badge--wide';
-      }
-      case 'actif': {
-        return 'm-badge m-badge--success m-badge--wide';
-      }
-      case 'suspended': {
-        return 'm-badge m-badge--danger m-badge--wide';
-      }
-      default: {
-        return 'm-badge m-badge--primary m-badge--wide';
-      }
-    }
   }
 
   activateContrat() {

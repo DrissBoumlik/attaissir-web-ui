@@ -30,6 +30,7 @@ export class ShowComponent implements OnInit {
   filePath = [];
   bank_accounts: any;
   contract_status: any;
+  helper: any;
 
   constructor(private thirdService: ThirdsService,
               private route: ActivatedRoute,
@@ -37,6 +38,7 @@ export class ShowComponent implements OnInit {
               private toaster: ToastrService,
               private contractService: ContractsService,
               private cardsService: CardsService) {
+    this.helper = Helper;
   }
 
   ngOnInit() {
@@ -209,22 +211,6 @@ export class ShowComponent implements OnInit {
     window.open(`${environment.apiUrl}/storage/${data.value}`);
   }
 
-  getStatusColor(value: string): string {
-    switch (value) {
-      case 'inactif': {
-        return 'm-badge m-badge--wide m-badge--warning';
-      }
-      case 'actif': {
-        return 'm-badge m-badge--wide m-badge--success';
-      }
-      case 'inprogress': {
-        return 'm-badge m-badge--wide m-badge--info';
-      }
-      default: {
-        return 'm-badge m-badge--wide m-badge--danger';
-      }
-    }
-  }
 
   getAdequateAction(idCarte: number): string {
     let value;

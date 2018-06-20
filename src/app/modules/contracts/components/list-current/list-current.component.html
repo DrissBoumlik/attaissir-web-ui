@@ -96,7 +96,7 @@
           </i>
         </div>
         <div *dxTemplate="let data of 'contractListTemplate'">
-          <span [ngClass]="getStatusClr(data.value)">
+          <span [ngClass]="helper.getStatusColor(data.value)">
               {{ getStatus(data.value) }}
           </span>
         </div>

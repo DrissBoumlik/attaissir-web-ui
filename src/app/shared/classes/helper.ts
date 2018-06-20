@@ -1,3 +1,5 @@
+import {isNull} from 'util';
+
 export class Helper {
 
   /**
@@ -36,5 +38,23 @@ export class Helper {
         ID: key
       };
     });
+  }
+
+
+  public static getStatusColor(value: string): string {
+    if (isNull(value)) {
+      return 'm-badge m-badge--primary m-badge--wide';
+    }
+    if (value.toLowerCase() === 'inactif'.toLowerCase() || value.toLowerCase() === 'Inactive'.toLowerCase()) {
+      return 'm-badge m-badge--warning m-badge--wide';
+    } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'Encours'.toLowerCase()) {
+      return 'm-badge m-badge--info m-badge--wide';
+    } else if (value.toLowerCase() === 'actif'.toLowerCase() || value.toLowerCase() === 'Active'.toLowerCase()) {
+      return 'm-badge m-badge--success m-badge--wide';
+    } else if (value.toLowerCase() === 'suspended'.toLowerCase() || value.toLowerCase() === 'Suspendu'.toLowerCase()) {
+      return 'm-badge m-badge--danger m-badge--wide';
+    } else {
+      return 'm-badge m-badge--primary m-badge--wide';
+    }
   }
 }

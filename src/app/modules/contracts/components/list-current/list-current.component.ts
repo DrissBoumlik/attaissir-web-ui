@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import 'devextreme/integration/jquery';
 import { ContractsService } from '../../services/contracts.service';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
+import {Helper} from '../../../../shared/classes/helper';
 
 declare const require: any;
 const $ = require('jquery');
@@ -20,6 +21,7 @@ export class ListCurrentComponent implements OnInit {
   contracts: any;
   currentRowStatus: boolean;
   contract_status: string;
+  helper: any;
 
   constructor(private contractsService: ContractsService,
     private thirdService: ThirdsService,
@@ -27,6 +29,7 @@ export class ListCurrentComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) {
     this.contracts = {};
+    this.helper = Helper;
   }
 
   ngOnInit() {
@@ -99,23 +102,6 @@ export class ListCurrentComponent implements OnInit {
     );
   }
 
-  getStatusColor = (value: string): string => {
-    this.currentRowStatus = (value === 'inprogress');
-    switch (value) {
-      case 'inactif': {
-        return 'm-badge m-badge--wide m-badge--warning';
-      }
-      case 'actif': {
-        return 'm-badge m-badge--wide m-badge--success';
-      }
-      case 'inprogress': {
-        return 'm-badge m-badge--wide m-badge--info';
-      }
-      default: {
-        return 'm-badge m-badge--wide m-badge--danger';
-      }
-    }
-  }
 
   onStartEdit = (e) => {
     this.router.navigate([`/contrats/modifier/${e.data.id}`]).catch(
@@ -125,26 +111,6 @@ export class ListCurrentComponent implements OnInit {
     );
   }
 
-
-  getStatusClr(value: string): string {
-    switch (value) {
-      case 'inactif': {
-        return 'm-badge m-badge--warning m-badge--wide';
-      }
-      case 'actif': {
-        return 'm-badge m-badge--success m-badge--wide';
-      }
-      case 'inprogress': {
-        return 'm-badge m-badge--info m-badge--wide';
-      }
-      case 'suspended': {
-        return 'm-badge m-badge--wide m-badge--dark';
-      }
-      default: {
-        return 'm-badge m-badge--wide m-badge--danger';
-      }
-    }
-  }
 
   onCellPrepared = (e) => {
     if (e.columnIndex === 10) {

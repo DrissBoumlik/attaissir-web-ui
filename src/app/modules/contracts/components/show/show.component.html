@@ -141,7 +141,7 @@
                         <div class="col-12">
                           <div class="row">
                             <div class="col-6">
-                              <div [ngClass]="getStatusColor(contract?.status_value)"
+                              <div [ngClass]="helper.getStatusColor(contract?.status_value)"
                                     role="alert"
                                    style="width: 100%; margin-top: 10%">
                                 {{ contract?.status_value  }}
@@ -633,7 +633,7 @@
                     <a routerLink="/contrats/afficher/{{ data.data.id }}">{{ data.data.code }}</a>
                   </div>
                   <div *dxTemplate="let data of 'statusTemplate'">
-                        <span [ngClass]="getStatusColor(data.value)">
+                        <span [ngClass]="helper.getStatusColor(data.value)">
                           {{ data.value }}
                         </span>
                   </div>

@@ -86,7 +86,7 @@
   </dxi-column>
   <dxi-column dataField="cda" [hidingPriority]="5" caption="CDA" i18n-caption>
   </dxi-column>
-  <dxi-column dataField="status" [hidingPriority]="4" caption="Statut" i18n-caption>
+  <dxi-column dataField="status" cellTemplate="statusTemplate" [hidingPriority]="4" caption="Statut" i18n-caption>
   </dxi-column>
   <dxi-column dataField="zone" [hidingPriority]="3" caption="Zone" i18n-caption>
   </dxi-column>
@@ -94,6 +94,12 @@
   </dxi-column>
   <dxi-column dataField="block" [hidingPriority]="0" caption="Bloc" i18n-caption>
   </dxi-column>
+
+  <div *dxTemplate="let data of 'statusTemplate'">
+      <span [ngClass]="helper.getStatusColor(data.value)">
+          {{ data.value }}
+      </span>
+  </div>
 </dx-data-grid>
     </div>
   </div>
