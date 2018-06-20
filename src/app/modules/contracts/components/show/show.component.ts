@@ -123,7 +123,7 @@ export class ShowComponent implements OnInit {
         e.cancel = true;
         this.toaster.success('Le document a été téléchargé avec succès.');
       }, error => {
-        this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
+        d.reject('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
       });
     e.cancel = d.promise();
   }
