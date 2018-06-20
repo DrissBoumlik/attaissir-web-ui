@@ -120,6 +120,7 @@ export class ShowComponent implements OnInit {
       res => {
         this.loadDocuments();
         d.resolve();
+        e.cancel = true;
         this.toaster.success('Le document a été téléchargé avec succès.');
       }, error => {
         this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
@@ -149,16 +150,16 @@ export class ShowComponent implements OnInit {
 
   getStatusColor(value: string): string {
     switch (value) {
-      case 'Inactif': {
+      case 'inactif': {
         return 'm-badge m-badge--warning m-badge--wide';
       }
       case 'inprogress': {
         return 'm-badge m-badge--info m-badge--wide';
       }
-      case 'Actif': {
+      case 'actif': {
         return 'm-badge m-badge--success m-badge--wide';
       }
-      case 'Suspendu': {
+      case 'suspended': {
         return 'm-badge m-badge--danger m-badge--wide';
       }
       default: {

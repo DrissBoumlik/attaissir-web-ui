@@ -7,12 +7,15 @@ import { ListComponent } from './components/list/list.component';
 import { ShowComponent } from './components/show/show.component';
 import { EditComponent } from './components/edit/edit.component';
 import { SharedModule } from '../../shared/shared.module';
+import { DxFileUploaderModule, DxSelectBoxModule } from 'devextreme-angular';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     ThirdsRoutingModule,
+    DxSelectBoxModule,
+    DxFileUploaderModule
   ],
   exports: [
   ],

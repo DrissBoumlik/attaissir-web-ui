@@ -49,7 +49,7 @@ export class Third {
   bank_account_number: string;
   bank_rib_key: string;
   bank_name: string;
-  costum_fields: string;
+  rib?: number;
 
   morale?: boolean;
   third_party_structure_types?: string;

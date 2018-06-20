@@ -70,7 +70,7 @@
     <dxo-group-panel [visible]="true"></dxo-group-panel>
     <dxo-grouping #expand [autoExpandAll]="false"></dxo-grouping>
 
-    <dxi-column dataField="dets" cellTemplate="cellTemplate" caption="" width="50px"  allowColumnResizing="true">
+    <dxi-column dataField="" [allowSorting]="false" cellTemplate="cellTemplate" caption="" width="50px"  allowColumnResizing="true">
     </dxi-column>
     <dxi-column dataField="code" [hidingPriority]="12" caption="Code" i18n-caption>
     </dxi-column>

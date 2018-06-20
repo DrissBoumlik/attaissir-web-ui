@@ -346,7 +346,7 @@
                             dataType="Text"></dxi-column>
                 <div *dxTemplate="let data of 'statusTemplate'">
                         <span [ngClass]="getStatusColor(data.value)">
-                              {{ data.value }}
+                              {{ contract_status[data.value] }}
                           </span>
                 </div>
                 <div *dxTemplate="let data of 'typeTemplate'">
@@ -441,7 +441,7 @@
                   <dx-file-uploader
                     selectButtonText="Ajouter un document"
                     labelText="document"
-                    accept="*"
+                    accept="image/png,image/gif,application/pdf"
                     uploadMode="useForm"
                     [(value)]="filePath" style="padding-bottom: 100px">
                   </dx-file-uploader>

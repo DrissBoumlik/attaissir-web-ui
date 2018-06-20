@@ -30,6 +30,7 @@ export class ShowComponent implements OnInit {
   docTypes: any;
   filePath = [];
   bank_accounts: any;
+  contract_status: any;
 
   constructor(private thirdService: ThirdsService,
     private route: ActivatedRoute,
@@ -40,7 +41,11 @@ export class ShowComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.contractService.getContractsVars().subscribe(data => {
+      this.contract_status = data['contract_status'];
+    }, error1 => {
+      throw error1;
+    });
     this.thirdService.getThirdsVars().subscribe(data => {
       console.log(data);
       this.card_status = data['card_status'];
@@ -204,13 +209,13 @@ export class ShowComponent implements OnInit {
 
   getStatusColor(value: string): string {
     switch (value) {
-      case 'inactive': {
+      case 'inactif': {
         return 'm-badge m-badge--wide m-badge--warning';
       }
-      case 'active': {
+      case 'actif': {
         return 'm-badge m-badge--wide m-badge--success';
       }
-      case 'inproduction': {
+      case 'inprogress': {
         return 'm-badge m-badge--wide m-badge--info';
       }
       default: {
@@ -280,7 +285,6 @@ export class ShowComponent implements OnInit {
     });
     return carte.status === 'active' || carte.status === 'inactive';
   }
-
 
   DeclareStolen(idCarte: number) {
     const carte = this.third.cards.find(card => {
