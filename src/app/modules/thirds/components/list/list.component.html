@@ -17,8 +17,8 @@
   <dx-data-grid
     id="gridContainer"
     [dataSource]="third_parties"
-    [columnHidingEnabled]="true"
-    [allowColumnResizing]="true"
+    [columnHidingEnabled]="false"
+    [allowColumnResizing]="false"
     [allowColumnReordering]="true"
     [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
     (onEditingStart)="onStartEdit($event.data.id)"
@@ -72,17 +72,17 @@
 
     <dxi-column dataField="" [allowSorting]="false" cellTemplate="cellTemplate" caption="" width="50px"  allowColumnResizing="true">
     </dxi-column>
-    <dxi-column dataField="code" [hidingPriority]="12" caption="Code" i18n-caption>
+    <dxi-column dataField="code" caption="Code" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="first_name" [hidingPriority]="14" allowHiding="true" hidden="hidden" caption="Prénom" >
+    <dxi-column dataField="first_name" allowHiding="true" hidden="hidden" caption="Prénom" >
     </dxi-column>
     <dxi-column dataField="last_name" caption="Nom" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="last_name_ar" [hidingPriority]="11" caption="Nom (Arabe)" i18n-caption>
+    <dxi-column dataField="last_name_ar" caption="Nom (Arabe)" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="first_name_ar" [hidingPriority]="10" caption="Prénom (Arabe)" i18n-caption>
+    <dxi-column dataField="first_name_ar" caption="Prénom (Arabe)" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="date_birth" [hidingPriority]="8" caption="Date de naissance" i18n-caption>
+    <dxi-column dataField="date_birth" caption="Date de naissance" i18n-caption>
     </dxi-column>
 
     <!--<dxi-column dataField="cda" caption="CDA" i18n-caption>
@@ -95,29 +95,29 @@
       <i class="fa fa-id_card fa-5x" *ngIf=""></i>
     </div>-->
 
-    <dxi-column dataField="sexe" [hidingPriority]="9"  cellTemplate="cellTemplate1" caption="Genre" allowColumnResizing="true">
+    <dxi-column dataField="sexe" cellTemplate="cellTemplate1" caption="Genre" allowColumnResizing="true">
     </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate1'">
       <i style="font-size: 150%; align-content: center; cursor: pointer" class="fa {{ getGender(data.data) }} fa-5x"></i>
     </div>
-    <dxi-column dataField="cin" [hidingPriority]="13" caption="CIN" i18n-caption>
+    <dxi-column dataField="cin" caption="CIN" i18n-caption>
     </dxi-column>
 
-    <dxi-column dataField="tel1" [hidingPriority]="7" caption="Téléphone 1" i18n-caption>
+    <dxi-column dataField="tel1" caption="Téléphone 1" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="tel2" [hidingPriority]="6" caption="Téléphone 2" i18n-caption>
+    <dxi-column dataField="tel2" caption="Téléphone 2" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="email" [hidingPriority]="5" caption="Email" i18n-caption>
+    <dxi-column dataField="email" caption="Email" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="address" [hidingPriority]="4" caption="Adress" i18n-caption>
+    <dxi-column dataField="address" caption="Adress" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="city" [hidingPriority]="3" caption="Ville" i18n-caption>
+    <dxi-column dataField="city" caption="Ville" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="commune" [hidingPriority]="2" caption="Commune" i18n-caption>
+    <dxi-column dataField="commune" caption="Commune" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="situation" [hidingPriority]="1" caption="Situation" i18n-caption>
+    <dxi-column dataField="situation" caption="Situation" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="children_number" [hidingPriority]="0" caption="Nombre d'enfants" i18n-caption>
+    <dxi-column dataField="children_number" caption="Nombre d'enfants" i18n-caption>
     </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate'">
       <a  (click)="gotoShow(data.data.id)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>

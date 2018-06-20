@@ -46,8 +46,8 @@ export class IndexComponent implements OnInit, AfterViewInit {
         },
         {
           title: 'Superficie contractée',
-          subTitle: 'Totale superficie contractée ',
-          value: data['sup_contracted'],
+          subTitle: 'Totale superficie contractée',
+          value: `${data['sup_contracted']} (ha)`,
           unit: '',
           icon: 'flaticon-background',
           url: '',

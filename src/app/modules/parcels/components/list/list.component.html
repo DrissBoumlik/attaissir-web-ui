@@ -17,7 +17,7 @@
         id="gridContainer"
         [dataSource]="parcels"
         [columnHidingEnabled]="true"
-        [allowColumnResizing]="true"
+        [allowColumnResizing]="false"
         [allowColumnReordering]="true"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         (onEditingStart)="onStartEdit($event.data.id)"
