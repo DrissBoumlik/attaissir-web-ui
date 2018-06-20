@@ -35,6 +35,7 @@ export class EditComponent implements OnInit {
               || this.tier.rc || this.tier.tva_code || this.tier.if) {
               this.tier.morale = true;
             }
+            this.tier.rib = `${this.tier.bank_account_number}${this.tier.bank_code}${this.tier.bank_rib_key}`;
             console.log(this.tier);
           }, error1 => {
             this.toastr.warning('Utilisateur non trouvé.');
