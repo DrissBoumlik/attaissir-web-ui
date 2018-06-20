@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { CardsRoutingModule } from './cards-routing.module';
 import { ListComponent } from './components/list/list.component';
 import { SharedModule } from '../../shared/shared.module';
+import { DxSelectBoxModule } from 'devextreme-angular';
 
 @NgModule({
   imports: [
     SharedModule,
     CommonModule,
-    CardsRoutingModule
+    CardsRoutingModule,
+    DxSelectBoxModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [

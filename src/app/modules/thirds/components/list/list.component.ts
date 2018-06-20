@@ -33,7 +33,6 @@ export class ListComponent implements OnInit {
     if (!data.sexe) {
       return '';
     }
-    console.log(data.sexe);
     return (data.sexe === 'Masculin') ? 'fa-male' : 'fa-female';
   }
 
