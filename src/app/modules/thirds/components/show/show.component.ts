@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ThirdsService} from '../../services/thirds.service';
-import {ToastrService} from 'ngx-toastr';
-import {ContractsService} from '../../../contracts/services/contracts.service';
-import {CardsService} from '../../../contracts/services/cards.service';
-import {Contract} from '../../../../shared/classes/contract';
-import {Third} from '../../../../shared/classes/third';
-import {Helper} from '../../../../shared/classes/helper';
-import {environment} from '../../../../../environments/environment';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ThirdsService } from '../../services/thirds.service';
+import { ToastrService } from 'ngx-toastr';
+import { ContractsService } from '../../../contracts/services/contracts.service';
+import { CardsService } from '../../../contracts/services/cards.service';
+import { Contract } from '../../../../shared/classes/contract';
+import { Third } from '../../../../shared/classes/third';
+import { Helper } from '../../../../shared/classes/helper';
+import { environment } from '../../../../../environments/environment';
 
 declare const require: any;
 const $ = require('jquery');
@@ -33,11 +33,11 @@ export class ShowComponent implements OnInit {
   helper: any;
 
   constructor(private thirdService: ThirdsService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private toaster: ToastrService,
-              private contractService: ContractsService,
-              private cardsService: CardsService) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private toaster: ToastrService,
+    private contractService: ContractsService,
+    private cardsService: CardsService) {
     this.helper = Helper;
   }
 

@@ -338,22 +338,20 @@ export class WizardComponent implements OnInit {
   onFormSubmit = (e) => {
     this.thirdService.addThird(this.currentThird).subscribe(data => {
       this.currentThird = this.thirdService.dataFormatter(data, false);
-      this.tier = new Third();
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
     }, err => {
-      this.toastr.warning(err.error.message);
+      throw err;
     });
     this.addThird = false;
   }
   saveThird = (e) => {
     this.thirdService.addThird(this.currentThird).subscribe(data => {
       this.currentThird = this.thirdService.dataFormatter(data, false);
-      this.tier = new Third();
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
     }, err => {
-      this.toastr.warning(err.error.message);
+      throw err;
     });
     this.addThird = false;
   }
