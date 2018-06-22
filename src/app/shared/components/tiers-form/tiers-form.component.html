@@ -139,12 +139,14 @@
 
       <dxi-item itemType="group" caption="" [colCount]="2" style="padding-left: 0; padding-top: 0" i18n-caption>
         <dxi-item [colSpan]="(isEdit) ? 1 : 2"
-          dataField="birth_date"
-          editorType="dxDateBox"
-          [editorOptions]="dateOptions">
+                  dataField="birth_date"
+                  editorType="dxDateBox"
+                  [editorOptions]="dateOptions">
           <dxo-label
             text="Date de naissance" i18n-text>
           </dxo-label>
+          <dxi-validation-rule type="required" message="Le champ date de naissance est obligatoire" i18n-message>
+          </dxi-validation-rule>
         </dxi-item>
         <dxi-item *ngIf="isEdit"
                   dataField="death_date"
@@ -259,11 +261,14 @@
         <dxo-label
           text="RIB" i18n-text>
         </dxo-label>
+        <dxi-validation-rule type="required" message="Le RIB est obligatoire" i18n-message>
+        </dxi-validation-rule>
         <dxi-validation-rule *ngIf="tier.rib"
                              type="pattern"
                              [pattern]="ribKeyPattern"
                              message="RIB est invalide" i18n-message>
         </dxi-validation-rule>
+
       </dxi-item>
     </dxi-item>
 
