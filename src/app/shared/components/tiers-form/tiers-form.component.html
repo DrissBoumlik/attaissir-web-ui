@@ -50,7 +50,7 @@
       <dxi-item itemType="group" caption="" [colCount]="2" i18n-caption>
         <dxi-item dataField="first_name_ar">
           <dxo-label
-            text="Prénom (Arabe)" i18n-text>
+            text="الاسم الشخصي " i18n-text>
           </dxo-label>
           <dxi-validation-rule *ngIf="tier.first_name_ar"
                                type="pattern"
@@ -62,7 +62,7 @@
         </dxi-item>
         <dxi-item dataField="last_name_ar" [editorOptions]="{ placeholder: '' }">
           <dxo-label
-            text="Nom (Arabe)" i18n-text>
+            text="الاسم العائلي" i18n-text>
           </dxo-label>
           <dxi-validation-rule *ngIf="tier.last_name_ar"
                                type="pattern"
@@ -89,11 +89,18 @@
         </dxo-label>
         <dxi-validation-rule type="required" message="Sexe est obligatoire" i18n-message></dxi-validation-rule>
       </dxi-item>
+
       <dxi-item dataField="address">
         <dxo-label
           text="Adresse" i18n-text>
         </dxo-label>
       </dxi-item>
+      <dxi-item dataField="address_ar">
+        <dxo-label
+          text="العنوان" i18n-text>
+        </dxo-label>
+      </dxi-item>
+
       <dxi-item dataField="zip_code" [editorOptions]="{
                     mask: '00 000',
                     useMaskedValue: false,
