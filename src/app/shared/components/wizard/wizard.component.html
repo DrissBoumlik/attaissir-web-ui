@@ -19,61 +19,76 @@
                     <div class="col-sm-10 siam-adjust">
                       <div class="dx-field">
                         <div class="dx-field-value">
-                          <dx-text-box placeholder="Rechercher par CIN ou registre de commerce" style="border-bottom-right-radius: 0; border-top-right-radius: 0;" (onEnterKey)="search()" [(ngModel)]="searchThird"></dx-text-box>
+                          <dx-text-box placeholder="Rechercher par CIN ou registre de commerce"
+                                       style="border-bottom-right-radius: 0; border-top-right-radius: 0;"
+                                       (onEnterKey)="search()" [(ngModel)]="searchThird"></dx-text-box>
                         </div>
                       </div>
                     </div>
                     <div class="col-sm-2 siam-adjust" style="flex: 0 0 13.66667%;">
-                      <button class="btn btn-success btn-large" style="border-bottom-left-radius: 0; border-top-left-radius: 0;" (click)="search()"><span i18n>Rechercher</span></button>
+                      <button class="btn btn-success btn-large"
+                              style="border-bottom-left-radius: 0; border-top-left-radius: 0;" (click)="search()"><span
+                        i18n>Rechercher</span></button>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <button class="btn btn-large pull-left" (click)="addThird = true"><span i18n>Ajouter un agrégé</span></button>
+                  <button class="btn btn-large pull-left" (click)="addThird = true"><span i18n>Ajouter un agrégé</span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
           <div *ngIf="currentThird.cin">
             <dx-form id="form"
-                   [formData]="currentThird"
-                   [readOnly]="isEdit"
-                   labelLocation="top">
+                     [formData]="currentThird"
+                     [readOnly]="isEdit"
+                     labelLocation="top">
 
-            <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+              <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
 
-              <dxi-item dataField="first_name" [disabled]="true">
-                <dxo-label text="Prénom"></dxo-label>
-              </dxi-item>
-              <dxi-item dataField="last_name" [disabled]="true">
-                <dxo-label text="Nom"></dxo-label></dxi-item>
-              <dxi-item dataField="first_name_ar" [disabled]="true">
-                <dxo-label text="Prénom (Arabe)"></dxo-label></dxi-item>
-              <dxi-item dataField="last_name_ar" [disabled]="true">
-                <dxo-label text="Nom (Arabe)"></dxo-label></dxi-item>
-              <dxi-item dataField="birth_date" [editorOptions]="{ width: '100%'}" [disabled]="true">
-                <dxo-label text="Date de naissance"></dxo-label></dxi-item>
+                <dxi-item dataField="first_name" [disabled]="true">
+                  <dxo-label text="Prénom"></dxo-label>
+                </dxi-item>
+                <dxi-item dataField="last_name" [disabled]="true">
+                  <dxo-label text="Nom"></dxo-label>
+                </dxi-item>
+                <dxi-item dataField="first_name_ar" [disabled]="true">
+                  <dxo-label text="Prénom (Arabe)"></dxo-label>
+                </dxi-item>
+                <dxi-item dataField="last_name_ar" [disabled]="true">
+                  <dxo-label text="Nom (Arabe)"></dxo-label>
+                </dxi-item>
+                <dxi-item dataField="birth_date" [editorOptions]="{ width: '100%'}" [disabled]="true">
+                  <dxo-label text="Date de naissance"></dxo-label>
+                </dxi-item>
 
-            </dxi-item>
-            <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
-              <dxi-item itemType="group">
-                <dxi-item dataField="address" [disabled]="true">
-                  <dxo-label text="Adresse"></dxo-label></dxi-item>
-                <dxi-item dataField="city" [disabled]="true">
-                  <dxo-label text="Ville"></dxo-label></dxi-item>
-                <dxi-item dataField="zip_code" [disabled]="true">
-                  <dxo-label text="Code postale"></dxo-label></dxi-item>
               </dxi-item>
-              <dxi-item itemType="group">
-                <dxi-item dataField="email" [label]="{text: 'Email'}" [disabled]="true">
-                  <dxo-label text="Email"></dxo-label></dxi-item>
-                <dxi-item dataField="tel1" [label]="{text: 'Telephone 1'}" [disabled]="true">
-                  <dxo-label text="Téléphone 1"></dxo-label></dxi-item>
-                <dxi-item dataField="tel2" [label]="{text: 'Telephone 2'}" [disabled]="true">
-                  <dxo-label text="Téléphone"></dxo-label></dxi-item>
+              <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+                <dxi-item itemType="group">
+                  <dxi-item dataField="address" [disabled]="true">
+                    <dxo-label text="Adresse"></dxo-label>
+                  </dxi-item>
+                  <dxi-item dataField="city" [disabled]="true">
+                    <dxo-label text="Ville"></dxo-label>
+                  </dxi-item>
+                  <dxi-item dataField="zip_code" [disabled]="true">
+                    <dxo-label text="Code postale"></dxo-label>
+                  </dxi-item>
+                </dxi-item>
+                <dxi-item itemType="group">
+                  <dxi-item dataField="email" [label]="{text: 'Email'}" [disabled]="true">
+                    <dxo-label text="Email"></dxo-label>
+                  </dxi-item>
+                  <dxi-item dataField="tel1" [label]="{text: 'Telephone 1'}" [disabled]="true">
+                    <dxo-label text="Téléphone 1"></dxo-label>
+                  </dxi-item>
+                  <dxi-item dataField="tel2" [label]="{text: 'Telephone 2'}" [disabled]="true">
+                    <dxo-label text="Téléphone"></dxo-label>
+                  </dxi-item>
+                </dxi-item>
               </dxi-item>
-            </dxi-item>
-          </dx-form>
+            </dx-form>
 
           </div>
 
@@ -81,21 +96,24 @@
 
       </div>
 
-      <app-tiers-form [isEdit]="isEdit" [readOnly]="isEdit" [validationGroup]="tierData" [tier]="tier" [isWizard]="true" *ngIf="addThird" (submit)="onFormSubmit($event)"></app-tiers-form>
+      <app-tiers-form [isEdit]="isEdit" [readOnly]="isEdit" [validationGroup]="tierData" [tier]="tier" [isWizard]="true"
+                      *ngIf="addThird" (submit)="onFormSubmit($event)"></app-tiers-form>
     </div>
     <!-- End Agreggated Informations -->
-    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5"  *ngIf="!addThird">
-			<div class="m-form__actionss">
-				<button type="button" class="btn btn-success float-right"  awNextStep i18n>Étape suivante</button>
-				<button class="btn float-right mr-3" *ngIf="!!currentThird.cin" (click)="addThird = true"><span i18n>Ajouter un agrégé</span></button>
-			</div>
-		</div>
-    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5"  *ngIf="addThird">
-			<div class="m-form__actionss">
-				<button class="btn btn-success float-right" (click)="saveThird()" *ngIf="false"><span i18n>Sauvegarder</span></button>
-				<button class="btn  float-right mr-3" (click)="cancelThird()"><span i18n>Anuller</span></button>
-			</div>
-		</div>
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5" *ngIf="!addThird">
+      <div class="m-form__actionss">
+        <button type="button" class="btn btn-success float-right" awNextStep i18n>Étape suivante</button>
+        <button class="btn float-right mr-3" *ngIf="!!currentThird.cin" (click)="addThird = true"><span i18n>Ajouter un agrégé</span>
+        </button>
+      </div>
+    </div>
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5" *ngIf="addThird">
+      <div class="m-form__actionss">
+        <button class="btn btn-success float-right" (click)="saveThird()" *ngIf="false"><span i18n>Sauvegarder</span>
+        </button>
+        <button class="btn  float-right mr-3" (click)="cancelThird()"><span i18n>Anuller</span></button>
+      </div>
+    </div>
 
   </aw-wizard-step>
 
@@ -119,18 +137,18 @@
           <dxi-item dataField="type" editorType="dxSelectBox" i18n-label
                     [editorOptions]="contracteditorOptions" *ngIf="!isEdit"
           ></dxi-item>
-        <!--  <dxi-item dataField="superficie_total" [editorOptions]="{ label: 'Total superficie'}" i18n-label
-                    editorType="dxNumberBox"></dxi-item>-->
+          <!--  <dxi-item dataField="superficie_total" [editorOptions]="{ label: 'Total superficie'}" i18n-label
+                      editorType="dxNumberBox"></dxi-item>-->
         </dxi-item>
 
       </dx-form>
     </div>
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5">
-			<div class="m-form__actionss">
+      <div class="m-form__actionss">
         <button type="button" class="btn default float-left" awPreviousStep i18n>Étape précédente</button>
         <button type="button" class="btn btn-success float-right" awNextStep i18n>Étape suivante</button>
-			</div>
-		</div>
+      </div>
+    </div>
   </aw-wizard-step>
   <aw-wizard-step stepTitle="3. Superficie contractée" [canEnter]="!!contract.application_date"
                   (stepExit)="goToParcels()"
@@ -177,13 +195,14 @@
       </form>
     </div>
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5">
-			<div class="m-form__actionss">
+      <div class="m-form__actionss">
         <button type="button" class="btn default float-left" awPreviousStep i18n>Étape précédente</button>
         <button type="button" class="btn btn-success float-right" awNextStep i18n>Étape suivante</button>
-			</div>
-		</div>
+      </div>
+    </div>
   </aw-wizard-step>
-  <aw-wizard-step stepTitle="4. Parcelle" [canEnter]="!!currentThird.cin && (campaigns.length > 0 && campaigns[0].surface > 0)"
+  <aw-wizard-step stepTitle="4. Parcelle"
+                  [canEnter]="!!currentThird.cin && (campaigns.length > 0 && campaigns[0].surface > 0)"
                   i18n-step-title
                   [navigationSymbol]="{ symbol: '&#xf1a0;', fontFamily: 'Flaticon'}">
 
@@ -200,7 +219,7 @@
             <dxo-label text="CDA"></dxo-label>
             <dxi-validation-rule type="required" message="CDA est obligatoire"></dxi-validation-rule>
           </dxi-item>
-          <dxi-item dataField="zone" caption="Zone" i18n-caption editorType="dxSelectBox"Étape précédente
+          <dxi-item dataField="zone" caption="Zone" i18n-caption editorType="dxSelectBox" Étape précédente
                     [editorOptions]="zoneEditorOptions">
             <dxo-label text="Zone"></dxo-label>
             <dxi-validation-rule type="required" message="Zone est obligatoire"></dxi-validation-rule>
@@ -218,26 +237,28 @@
             <dxi-validation-rule type="required" message="Matricule est obligatoire"></dxi-validation-rule>
           </dxi-item>
           >
-          <dxi-item dataField="total_surface"  [editorOptions]="{ label: 'Superficie totale (ha)'}"
+          <dxi-item dataField="total_surface" [editorOptions]="{ label: 'Superficie totale (ha)'}"
                     editorType="dxNumberBox">
             <dxo-label text="Superficie totale (ha)"></dxo-label>
             <dxi-validation-rule type="required" message="Superficie totale est obligatoire"></dxi-validation-rule>
           </dxi-item>
-         <dxi-item dataField="annuel_surface"
+          <dxi-item dataField="annuel_surface"
                     editorType="dxNumberBox">
             <dxo-label text="Superficie contractée (ha)"></dxo-label>
-           <dxi-validation-rule type="required" message="Superficie contractée est obligatoire"></dxi-validation-rule>
+            <dxi-validation-rule type="required" message="Superficie contractée est obligatoire"></dxi-validation-rule>
           </dxi-item>
           <dxi-item dataField="tenure" i18n-caption editorType="dxSelectBox"
                     [editorOptions]="worthEditorOptions">
-           <dxo-label text="Mode faire-valoir"></dxo-label>
-
+            <dxo-label text="Mode faire-valoir"></dxo-label>
+            <dxi-validation-rule type="required" message="Le champ mode faire-valoir est obligatoire" i18n-message>
+            </dxi-validation-rule>
           </dxi-item>
           <dxi-item dataField="code_ormva" i18n-caption>
             <dxo-label text="Code ORMVA"></dxo-label>
           </dxi-item>
           <dxi-item itemType="button"
-                    alignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null)" [buttonOptions]="addParcelOptions"></dxi-item>
+                    alignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null)"
+                    [buttonOptions]="addParcelOptions"></dxi-item>
         </dx-form>
       </div>
 
@@ -258,7 +279,7 @@
           </dxo-editing>
 
           <dxo-pager
-          [allowedPageSizes]="false"
+            [allowedPageSizes]="false"
             [allowedPageSizes]="[5, 8, 15, 30]"
             [showInfo]="true"
             [showNavigationButtons]="true"
@@ -302,10 +323,12 @@
       </div>
     </div>
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5">
-			<div class="m-form__actionss">
+      <div class="m-form__actionss">
         <button type="button" class="btn default float-left" awPreviousStep i18n>Étape précédente</button>
-        <button type="button" class="btn btn-success float-right" *ngIf="groundsList.length > 0" (click)="finishFunction($event)" i18n>Finir</button>
-			</div>
-		</div>
+        <button type="button" class="btn btn-success float-right" *ngIf="groundsList.length > 0"
+                (click)="finishFunction($event)" i18n>Finir
+        </button>
+      </div>
+    </div>
   </aw-wizard-step>
 </aw-wizard>
