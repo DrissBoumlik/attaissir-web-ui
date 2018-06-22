@@ -67,7 +67,6 @@ export class ShowComponent implements OnInit {
             }];
             this.contracts = this.third['contracts'];
             this.cards = this.third.cards;
-            console.log(this.cards);
           },
           (error) => {
             this.router.navigate(['/404']).catch(
@@ -252,12 +251,13 @@ export class ShowComponent implements OnInit {
     );
   }
 
-  DeclareStolen(idCarte: number) {
+  DeclareLost(idCarte: number) {
     const carte = this.third.cards.find(card => {
       return card.id === idCarte;
     });
     this.cardsService.editCard(carte.id, 'cancel').subscribe(
       (res) => {
+        carte.status = 'lost';
         this.toaster.success('La carte  a été déclrée perdu');
       },
       (err) => {
@@ -289,9 +289,9 @@ export class ShowComponent implements OnInit {
     );
   }
 
-  declareStolen(value: number): boolean {
+  declareLost(value: number): boolean {
     const card = this.cards.find(c => c.id === value);
-    return (card.printed_at && card.status === 'active');
+    return (card.printed_at && card.status !== 'lost');
   }
 
   canActivateCard(id: number): boolean {

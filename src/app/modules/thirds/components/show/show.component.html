@@ -486,14 +486,14 @@
                 keyExpr="id">
                 <dxi-column dataField="rfid" caption="Serie" [visible]="false">
                 </dxi-column>
-                <dxi-column width="100" dataField="status" caption="Statut" cellTemplate="statusTemplate">
+                <dxi-column width="200" dataField="status" caption="Statut" cellTemplate="statusTemplate">
                 </dxi-column>
                 <dxi-column width="200" dataField="printed_at" caption="Statut d'impression"
-                            cellTemplate="printed_atStatusTemplate">
+                            cellTemplate="PStatusTemplate">
                 </dxi-column>
                 <dxi-column dataField="id" caption="Action" cellTemplate="actionsTemplate">
                 </dxi-column>
-                <div *dxTemplate="let data of 'statusTemplate'" style="padding: 10px">
+                <div *dxTemplate="let data of 'statusTemplate'" style="padding: 10px; text-align: center" >
                     <span [ngClass]="helper.getStatusColor(data.value)">
                       {{ card_status[data.value] }}
                     </span>
@@ -504,30 +504,30 @@
                       <dx-button [text]="getAdequateAction(data.value)"
                                  (click)="switchCarteStatus(data.value)" *ngIf="canHaveAction(data.value)"></dx-button>
                     </div>-->
-                      <div class="col-12" style="text-align: center">
+                    <div class="col-12" style="text-align: center">
 
 
-                      <dx-button  [text]="'Déclarer perdu'"  style="margin-right: 3px"
+                      <dx-button [text]="'Déclarer perdu'" style="margin-right: 3px"
                                  type="danger"
-                                 (click)="DeclareStolen(data.value)"
-                                [disabled]="!declareStolen(data.value)"></dx-button>
-                        <dx-button [text]="'Activer'" style="margin-right: 3px"
-                                   type="success"
-                                   (click)="activateCard(data.value)"
-                                   [disabled]="!canActivateCard(data.value)"></dx-button>
-                        <dx-button [text]="'Désactiver'" style="margin-right: 3px"
-                                   type="default"
-                                   (click)="activateCard(data.value, true)"
-                                   [disabled]="!canDeactivateCard(data.value)"></dx-button>
+                                 (click)="DeclareLost(data.value)"
+                                 [disabled]="!declareLost(data.value)"></dx-button>
+                      <dx-button [text]="'Activer'" style="margin-right: 3px"
+                                 type="success"
+                                 (click)="activateCard(data.value)"
+                                 [disabled]="!canActivateCard(data.value)"></dx-button>
+                      <dx-button [text]="'Désactiver'" style="margin-right: 3px"
+                                 type="default"
+                                 (click)="activateCard(data.value, true)"
+                                 [disabled]="!canDeactivateCard(data.value)"></dx-button>
 
                     </div>
                   </div>
                 </div>
-                <div *dxTemplate="let date of 'printed_atStatusTemplate'" style="padding: 10px">
-                     <span ngClass="m-badge m-badge--success m-badge--wide" *ngIf="data">
+                <div *dxTemplate="let data of 'PStatusTemplate'" style="padding: 10px; text-align: center">
+                  <span ngClass="m-badge m-badge--success m-badge--wide" *ngIf="data.value">
                        imprimé.
-                    </span>
-                  <span ngClass="m-badge m-badge--danger m-badge--wide" *ngIf="!data">
+                     </span>
+                  <span ngClass="m-badge m-badge--danger m-badge--wide" *ngIf="!data.value">
                       en cours d'impression.
                     </span>
                 </div>
