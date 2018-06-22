@@ -21,6 +21,7 @@ export class SiamErrorHandler implements ErrorHandler {
       message = error.message;
       title = error.statusText || 'Une erreur est survenue';
     }
+
     if (title === 'Unprocessable Entity') {
       if (error.error.message === 'The given data was invalid.') {
         let errors = '<ul>';
@@ -28,17 +29,17 @@ export class SiamErrorHandler implements ErrorHandler {
           errors += `<li>${err}</li>`;
         }
         errors += '</ul>';
-        console.log(errors);
-        this.toastr.warning('Les données sont incorrect!', '', {
-          enableHtml: true,
-          closeButton: true
-        });
+        message = 'Les données sont incorrect!';
       }
-    } else if (message.search('third_parties_cin_type_unique') === -1) {
-      this.toastr.warning('CIN exist déjà!');
-    } else {
-      this.toastr.warning(message, title);
+    } else if (message.search('third_parties_cin_type_unique') !== -1) {
+      message = 'CIN exist déjà!';
+      title = '';
     }
+
+    this.toastr.warning(message, title, {
+      enableHtml: true,
+      closeButton: true
+    });
     /* this.alert2.create('error', message, title, {
       overlay: true,
       overlayClickToClose: true,

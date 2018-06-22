@@ -322,6 +322,9 @@ export class WizardComponent implements OnInit {
       this.toastr.warning('Remplissez les champs du contrat pour avancer!');
     } else {
       this.maxYears = (this.contract.type === 'annual') ? 1 : 5;
+      if (this.isEdit) {
+        this.maxYears = 1;
+      }
     }
   }
 
@@ -387,6 +390,7 @@ export class WizardComponent implements OnInit {
     if (this.isEdit) {
       this.contract.parent_id = this.contract.id;
       this.contract.type = 'annual';
+      this.contract.status = 'inprogress';
     }
     this.contract.contracted_surface = this.campaigns;
     this.contract.compaign_surface = this.campaigns[0].surface;
