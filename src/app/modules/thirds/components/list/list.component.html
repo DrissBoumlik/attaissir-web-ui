@@ -18,7 +18,8 @@
     id="gridContainer"
     [dataSource]="third_parties"
     [columnHidingEnabled]="false"
-    [allowColumnResizing]="false"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
     [allowColumnReordering]="true"
     [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
     (onEditingStart)="onStartEdit($event.data.id)"
@@ -46,6 +47,7 @@
       [allowDeleting]="false">
     </dxo-editing>
     <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
 
     <dxo-sorting mode="multiple"></dxo-sorting>
     <dxo-filter-row

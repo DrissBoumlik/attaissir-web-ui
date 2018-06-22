@@ -329,9 +329,12 @@
                 [allowColumnResizing]="false"
                 [columnHidingEnabled]="true"
                 [rowAlternationEnabled]="true"
+                [columnAutoWidth]="true"
                 style="padding-top: 2vh"
                 [noDataText]="'L\'agrégé ne dispose pas de contrat'"
                 keyExpr="id">
+
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                 <dxi-column dataField="id" caption="" cellTemplate="detsTemplate"></dxi-column>
                 <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
                 </dxi-column>
@@ -381,8 +384,11 @@
                 [showBorders]="true"
                 (onRowInserting)="onAddBA($event)"
                 [rowAlternationEnabled]="true"
+                [columnAutoWidth]="true"
                 style="padding-top: 2vh"
                 [noDataText]="'L\'agrégé ne dispose pas de compte bancaire'">
+
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                 <dxi-column dataField="bank_name" caption="Dénomination">
                   <dxi-validation-rule type="required"></dxi-validation-rule>
                 </dxi-column>
@@ -412,10 +418,12 @@
                 [showBorders]="true"
                 (onRowInserting)="onAddDOC($event)"
                 [rowAlternationEnabled]="true"
+                [columnAutoWidth]="true"
                 style="padding-top: 2vh"
                 [noDataText]="'L\'agrégé ne dispose pas de documents joints'"
                 keyExpr="id">
 
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                 <dxi-column dataField="name" caption="Type" [visible]="false">
                   <dxo-lookup
                     [dataSource]="docTypes"
@@ -482,8 +490,11 @@
                 [showBorders]="true"
                 [rowAlternationEnabled]="true"
                 style="padding-top: 2vh"
+                [columnAutoWidth]="true"
                 [noDataText]="'L\'agrégé ne dispose pas de carte agriculteur'"
                 keyExpr="id">
+
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                 <dxi-column dataField="rfid" caption="Serie" [visible]="false">
                 </dxi-column>
                 <dxi-column width="100" dataField="status" caption="Statut" cellTemplate="statusTemplate">

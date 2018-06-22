@@ -19,6 +19,7 @@
         [columnHidingEnabled]="true"
         [allowColumnResizing]="false"
         [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         (onEditingStart)="onStartEdit($event.data.id)"
         (onRowRemoving)="onRemoveParcel($event.data.id)"
@@ -38,6 +39,7 @@
           [paging]="true">
         </dxo-remote-operations>
 
+        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
         <dxo-editing
           mode="row"
           [useIcons]="true"

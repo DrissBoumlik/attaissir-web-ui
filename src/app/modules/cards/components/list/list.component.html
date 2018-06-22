@@ -41,6 +41,7 @@
   [columnHidingEnabled]="true"
   [allowColumnReordering]="true"
   [(selectedRowKeys)]="selectedItems"
+  [columnAutoWidth]="true"
   [remoteOperations]="{ groupPaging: true }"
   (onEditingStart)="onStartEdit($event.data.id)"
   (onRowRemoving)="onRemoveThird($event.data.id)"
@@ -54,6 +55,7 @@
   </dxo-remote-operations>
 
   <dxo-selection mode="multiple"></dxo-selection>
+  <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
 
   <dxo-sorting mode="multiple"></dxo-sorting>
   <dxo-filter-row

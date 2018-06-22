@@ -23,10 +23,12 @@
         [columnHidingEnabled]="true"
         [allowColumnResizing]="false"
         [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         [masterDetail]="{ enabled: false, template: 'detail' }"
         KeyExpr="id">
 
+        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
         <dxo-filter-row [visible]="true"></dxo-filter-row>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
         <dxo-group-panel [visible]="true"></dxo-group-panel>
