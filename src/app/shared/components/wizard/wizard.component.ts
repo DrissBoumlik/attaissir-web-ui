@@ -1,16 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Contract } from '../../classes/contract';
-import { Third } from '../../classes/third';
-import { Structure } from '../../classes/structure';
-import { Zone } from '../../classes/zone';
-import { ThirdsService } from '../../../modules/thirds/services/thirds.service';
-import { ToastrService } from 'ngx-toastr';
-import { SoilsService } from '../../../modules/contracts/services/soils.service';
-import { ZonesService } from '../../../modules/contracts/services/zones.service';
-import { ParcelsService } from '../../../modules/contracts/services/parcels.service';
-import { ContractsService } from '../../../modules/contracts/services/contracts.service';
-import { Helper } from '../../classes/helper';
+import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Contract} from '../../classes/contract';
+import {Third} from '../../classes/third';
+import {Structure} from '../../classes/structure';
+import {Zone} from '../../classes/zone';
+import {ThirdsService} from '../../../modules/thirds/services/thirds.service';
+import {ToastrService} from 'ngx-toastr';
+import {SoilsService} from '../../../modules/contracts/services/soils.service';
+import {ZonesService} from '../../../modules/contracts/services/zones.service';
+import {ParcelsService} from '../../../modules/contracts/services/parcels.service';
+import {ContractsService} from '../../../modules/contracts/services/contracts.service';
+import {Helper} from '../../classes/helper';
 
 
 @Component({
@@ -64,15 +64,15 @@ export class WizardComponent implements OnInit {
   step2: string;
 
   constructor(public tier: Third,
-    public tierService: ThirdsService,
-    private toastr: ToastrService,
-    private thirdService: ThirdsService,
-    private soilsService: SoilsService,
-    private zoneService: ZonesService,
-    private contractService: ContractsService,
-    private contractedArea: ParcelsService,
-    private parcelsService: ParcelsService,
-    private router: Router) {
+              public tierService: ThirdsService,
+              private toastr: ToastrService,
+              private thirdService: ThirdsService,
+              private soilsService: SoilsService,
+              private zoneService: ZonesService,
+              private contractService: ContractsService,
+              private contractedArea: ParcelsService,
+              private parcelsService: ParcelsService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -387,6 +387,7 @@ export class WizardComponent implements OnInit {
     const tenantId = localStorage.getItem('tenantId');
     this.contract.third_party_id = this.currentThird.id;
     this.contract.signature_date = new Date();
+    this.contract.expiration_date = new Date();
     this.contract.structure_id = Number(tenantId);
     if (this.isEdit) {
       this.contract.parent_id = this.contract.id;
@@ -395,6 +396,16 @@ export class WizardComponent implements OnInit {
     }
     this.contract.contracted_surface = this.campaigns;
     this.contract.compaign_surface = this.campaigns[0].surface;
+
+    this.contract.application_date = new Date(this.contract.application_date);
+
+    Object.assign(this.contract.expiration_date, this.contract.application_date);
+
+    this.contract.expiration_date.setFullYear(this.contract.application_date.getFullYear() + this.campaigns.length);
+
+    if (this.isEdit) {
+      this.contract.expiration_date.setFullYear(this.contract.application_date.getFullYear() + 1);
+    }
 
     let surfaces = 0;
     this.groundsList.map(ground => {
@@ -411,7 +422,6 @@ export class WizardComponent implements OnInit {
       contract = this.contractService.dataFormatter(contract, false);
 
       this.groundsList.map((soil) => {
-        console.log(soil);
         const soilObject = {
           soil_id: soil.id,
           tenure: soil.tenure,

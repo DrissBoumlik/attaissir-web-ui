@@ -136,4 +136,6 @@ export class TiersFormComponent implements OnInit {
     this.tier.type = (this.tier.morale) ? 'morale' : 'physique';
   }
 
+
+
 }

@@ -1,4 +1,4 @@
-<form>
+<div id="form-container">
   <dx-form id="form"
            [formData]="tier"
            [readOnly]="false"
@@ -270,7 +270,8 @@
         </dxo-label>
         <dxi-validation-rule type="required" message="Le RIB est obligatoire" i18n-message>
         </dxi-validation-rule>
-        <dxi-validation-rule *ngIf="tier.rib"
+
+          <dxi-validation-rule
                              type="pattern"
                              [pattern]="ribKeyPattern"
                              message="RIB est invalide" i18n-message>
@@ -344,4 +345,5 @@
       [buttonOptions]="buttonOptions">
     </dxi-item>
   </dx-form>
-</form>
+
+</div>
