@@ -23,8 +23,6 @@ import {
   DxTemplateModule
 } from 'devextreme-angular';
 import { SiamErrorHandler } from './shared/classes/siam-error-handler';
-import { JasperoAlertsModule } from '@jaspero/ng-alerts';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { ParcelsModule } from './modules/parcels/parcels.module';
 import { CardsModule } from './modules/cards/cards.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -52,7 +50,6 @@ import { ThirdsModule } from './modules/thirds/thirds.module';
     DxLookupModule,
     DxFileUploaderModule,
     DxSelectBoxModule,
-    JasperoAlertsModule.forRoot(),
     ToastrModule.forRoot(),
 
     DxButtonModule,

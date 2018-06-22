@@ -1,4 +1,4 @@
-import {isNull} from 'util';
+import { isNull } from 'util';
 
 export class Helper {
 

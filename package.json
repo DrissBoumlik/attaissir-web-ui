@@ -23,7 +23,6 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "@auth0/angular-jwt": "^2.0.0",
-    "@jaspero/ng-alerts": "^0.1.1",
     "@ng-bootstrap/ng-bootstrap": "^2.0.0",
     "@types/jquery": "^3.3.2",
     "angular-archwizard": "^3.0.0",

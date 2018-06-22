@@ -322,6 +322,9 @@ export class WizardComponent implements OnInit {
       this.toastr.warning('Remplissez les champs du contrat pour avancer!');
     } else {
       this.maxYears = (this.contract.type === 'annual') ? 1 : 5;
+      if (this.isEdit) {
+        this.maxYears = 1;
+      }
     }
   }
 
@@ -338,22 +341,20 @@ export class WizardComponent implements OnInit {
   onFormSubmit = (e) => {
     this.thirdService.addThird(this.currentThird).subscribe(data => {
       this.currentThird = this.thirdService.dataFormatter(data, false);
-      this.tier = new Third();
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
     }, err => {
-      this.toastr.warning(err.error.message);
+      throw err;
     });
     this.addThird = false;
   }
   saveThird = (e) => {
     this.thirdService.addThird(this.currentThird).subscribe(data => {
       this.currentThird = this.thirdService.dataFormatter(data, false);
-      this.tier = new Third();
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
     }, err => {
-      this.toastr.warning(err.error.message);
+      throw err;
     });
     this.addThird = false;
   }
@@ -390,6 +391,7 @@ export class WizardComponent implements OnInit {
     if (this.isEdit) {
       this.contract.parent_id = this.contract.id;
       this.contract.type = 'annual';
+      this.contract.status = 'inprogress';
     }
     this.contract.contracted_surface = this.campaigns;
     this.contract.compaign_surface = this.campaigns[0].surface;

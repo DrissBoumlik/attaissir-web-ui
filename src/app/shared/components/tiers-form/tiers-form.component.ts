@@ -45,6 +45,7 @@ export class TiersFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tier = (this.isEdit) ? this.tier : new Third();
     this.thirdsServices.getThirdsVars().subscribe(data => {
       this.vars = data;
 

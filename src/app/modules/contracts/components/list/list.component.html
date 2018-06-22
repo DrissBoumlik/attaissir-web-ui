@@ -100,7 +100,7 @@
         </div>
         <div *dxTemplate="let data of 'contractListTemplate'">
           <span [ngClass]="helper.getStatusColor(data.value)">
-              {{ getStatus(data.value) }}
+              {{ data.value }}
           </span>
         </div>
 
