@@ -396,8 +396,12 @@ export class WizardComponent implements OnInit {
     this.contract.contracted_surface = this.campaigns;
     this.contract.compaign_surface = this.campaigns[0].surface;
 
+    this.contract.application_date = new Date(this.contract.application_date);
+
     Object.assign(this.contract.expiration_date, this.contract.application_date);
+
     this.contract.expiration_date.setFullYear(this.contract.application_date.getFullYear() + this.campaigns.length);
+
     if (this.isEdit) {
       this.contract.expiration_date.setFullYear(this.contract.application_date.getFullYear() + 1);
     }
