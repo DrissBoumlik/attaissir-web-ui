@@ -28,10 +28,10 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         icon: 'flaticon-users',
         url: '/tiers/liste',
         description: 'Gestion des agrégés',
-        subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouvel agrégé'/*Nuveau agrégé*/, url: '/tiers/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des agrégés'/*Liste des  agrégés*/, url: '/tiers/liste' },
-        ],
+        /*subMenu: [
+          { icon: 'flaticon-plus', name: 'Nouvel agrégé', url: '/tiers/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des agrégés', url: '/tiers/liste' },
+        ],*/
         disabled: 'false'
       },
       {

@@ -361,6 +361,7 @@
                             [showBorders]="true"
                             [rowAlternationEnabled]="true"
                             style="padding-top: 2vh"
+                            [columnAutoWidth]="true"
                             [noDataText]="'Le contrat ne dispose pas de  campagne'">
                 <dxi-column dataField="campaign" caption="Campagne"></dxi-column>
                 <!--<dxi-column dataField="campaign.start_date" caption="Date de début"></dxi-column>
@@ -370,6 +371,7 @@
                 <div *dxTemplate="let data of 'cellTemplate1'">
                   {{ data.data.surface }} (ha)
                 </div>
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                 <dxo-remote-operations
                   [sorting]="true"
                   [paging]="false">
@@ -396,8 +398,10 @@
                             [showBorders]="true"
                             [rowAlternationEnabled]="true"
                             style="padding-top: 2vh"
+                            [columnAutoWidth]="true"
                             [noDataText]="'Le contrat ne dispose pas de parcels'">
 
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                 <dxi-column dataField="perimeter" caption="Périmetre"></dxi-column>
                 <dxi-column dataField="region" caption="Région"></dxi-column>
                 <dxi-column dataField="district" caption="Arrondissement"></dxi-column>
@@ -547,6 +551,7 @@
                   (onRowInserting)="onAddDOC($event)"
                   [rowAlternationEnabled]="true"
                   style="padding-top: 2vh"
+                  [columnAutoWidth]="true"
                   [noDataText]="'Le contrat ne dispose pas de documents joints hors contrat'"
                   keyExpr="id">
 
@@ -558,6 +563,7 @@
                     </dxo-lookup>
                   </dxi-column>
 
+                  <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                   <dxi-column dataField="name" caption="Type"></dxi-column>
 
                   <dxi-column dataField="path" caption="Charger" editCellTemplate="cellTemplate2"
@@ -620,8 +626,10 @@
                               [showBorders]="true"
                               [rowAlternationEnabled]="true"
                               style="padding-top: 2vh"
+                              [columnAutoWidth]="true"
                               [noDataText]="'le contrat ne dispose pas d\'avenants'"
                               keyExpr="id">
+                  <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                   <dxi-column cellTemplate="linkTemplate" caption="Réference">
                   </dxi-column>
                   <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
