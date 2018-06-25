@@ -61,6 +61,7 @@ export class WizardComponent implements OnInit {
   removeButtonOptions: any;
   aggregatedOptions: any;
   addParcelOptions: any;
+  step2: string;
 
   constructor(public tier: Third,
               public tierService: ThirdsService,
@@ -75,7 +76,7 @@ export class WizardComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.step2 = (!this.isEdit) ? '2. Informations contrat' : '2. Informations avenant';
     this.contractService.getContractsVars().subscribe((data) => {
       this.contracteditorOptions = {
         label: 'Type contrat',

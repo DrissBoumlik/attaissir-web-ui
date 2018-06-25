@@ -47,6 +47,20 @@ export class EditComponent implements OnInit {
           (res: any) => {
             this.id = params.id;
             this.contract = res.data;
+            const grounds = res.data.parcels.map(data => {
+              return {
+                id: data['id'],
+                registration_number: data['soil']['registration_number'],
+                cda: data['soil']['cda_id'],
+                zone: data['soil']['zone_id'],
+                sector: data['soil']['sector'],
+                block: data['soil']['block'],
+                code_ormva: data['code_ormva'],
+                total_surface: data['soil']['total_surface'],
+                annuel_surface: data['annuel_surface']
+              };
+            });
+            this.groundsList = grounds;
             this.currentThird = res.data.third_party;
             // this.campaigns = res.data.campaigns;
             this.contractService.getStrcutureById(res.data.structure.id).subscribe(
