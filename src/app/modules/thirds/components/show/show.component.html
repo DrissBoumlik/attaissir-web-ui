@@ -326,29 +326,28 @@
                 [showColumnLines]="true"
                 [showRowLines]="true"
                 [showBorders]="true"
-                [allowColumnResizing]="false"
-                [columnHidingEnabled]="true"
+                [allowColumnResizing]="true"
+                [columnHidingEnabled]="false"
                 [rowAlternationEnabled]="true"
                 [columnAutoWidth]="true"
                 style="padding-top: 2vh"
                 [noDataText]="'L\'agrégé ne dispose pas de contrat'"
                 keyExpr="id">
 
+
                 <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
-                <dxi-column dataField="id" caption="" cellTemplate="detsTemplate"></dxi-column>
+                <dxi-column dataField="id" caption="" width="50" cellTemplate="detsTemplate"></dxi-column>
                 <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
                 </dxi-column>
                 <dxi-column dataField="code" caption="Code" dataType="date">
                 </dxi-column>
-                <dxi-column dataField="expiration_date" caption="Date d'expiration" [hidingPriority]="1"
-                            dataType="date">
-                </dxi-column>
+                <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date"></dxi-column>
+                <dxi-column dataField="signature_date" caption="Date de signature" dataType="date"></dxi-column>
                 <dxi-column dataField="type" caption="Type de contrat" cellTemplate="typeTemplate" dataType="Text">
                 </dxi-column>
                 <dxi-column dataField="status" caption="Statut" cellTemplate="statusTemplate">
                 </dxi-column>
-                <dxi-column dataField="structure.label" caption="Structure" [hidingPriority]="0"
-                            dataType="Text"></dxi-column>
+
                 <div *dxTemplate="let data of 'statusTemplate'">
                         <span [ngClass]="helper.getStatusColor(data.value)">
                               {{ contract_status[data.value] }}

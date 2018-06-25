@@ -244,7 +244,7 @@ export class ShowComponent implements OnInit {
   }*/
 
   showDetails(idContract: number) {
-    this.router.navigate(['/contrats/show/' + idContract]).catch(
+    this.router.navigate(['/contrats/afficher/' + idContract]).catch(
       err => {
         this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
       }
