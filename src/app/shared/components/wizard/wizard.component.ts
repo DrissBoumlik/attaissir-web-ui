@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import {Router} from '@angular/router';
 import {Contract} from '../../classes/contract';
 import {Third} from '../../classes/third';
@@ -441,30 +441,5 @@ export class WizardComponent implements OnInit {
     }, error1 => {
       throw error1;
     });
-    /*
-      /*
-      this.contractedArea.addMultiAreas({ 'contracted_surfaces': this.campaigns }).subscribe(data => {
-        data = this.contractedArea.dataFormatter(data, false);
-        const groundsList = this.groundsList.map(ground => {
-          return {
-            ground_id: ground.id,
-            mode_worth: ground.mode_worth,
-            agreement_id: contract['id'],
-            annuel_surface: ground.annuel_surface
-          };
-        });
-        this.agreementGroundService.addAgreementGround({ 'agreement_grounds': groundsList }).subscribe(d => {
-          d = this.contractedArea.dataFormatter(d, false);
-          this.router.navigate([`/contrats/afficher/${contract['id']}`]);
-        }, error1 => {
-          this.toastr.warning(error1.error.message);
-        });
-
-      }, error1 => {
-        this.toastr.warning(error1.error.message);
-      });*/
-    /*}, error1 => {
-      this.toastr.warning(error1.error.message);
-    });*/
   }
 }

@@ -22,20 +22,19 @@ export class AuthenticationService {
     return this.http.post(`${environment.apiUrl}/login`, JSON.stringify({ email: email, password: password }), this.options);
   }
 
+  refresh = () => {
+    return this.http.get(`${environment.apiUrl}/refresh`);
+  }
+
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
   }
 
-  /*
-    public isAuthenticated(): boolean {
-      const token = localStorage.getItem('token');
-      return !this.jwtHelper.isTokenExpired(token);
-    }
-  */
   getToken = () => {
     return JSON.parse(localStorage.getItem('currentUser')).data.token;
   }
+
   getTanent = () => {
     return JSON.parse(localStorage.getItem('tenantId'));
   }

@@ -6,6 +6,7 @@ import { AlertService } from './_services/alert.service';
 import { UserService } from './_services/user.service';
 import { AlertComponent } from './_directives/alert.component';
 import { Helpers } from '../helpers';
+import {ToastrService} from 'ngx-toastr';
 declare let $: any;
 declare let mUtil: any;
 
@@ -34,7 +35,8 @@ export class AuthComponent implements OnInit {
     private _route: ActivatedRoute,
     private _authService: AuthenticationService,
     private _alertService: AlertService,
-    private cfr: ComponentFactoryResolver) {
+    private cfr: ComponentFactoryResolver,
+    private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -55,14 +57,14 @@ export class AuthComponent implements OnInit {
   }
 
   signin() {
-    console.log('ok');
     this.loading = true;
     this._authService.login(this.model.email, this.model.password).subscribe(
       data => {
         if (data) {
-          const currentUser = JSON.stringify(data);
+          const currentUser: any = JSON.stringify(data);
           localStorage.setItem('currentUser', currentUser);
           localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
+          this.toastr.success(`Bonjour ${JSON.parse(currentUser).data.name.toUpperCase()}`);
         }
         this._router.navigate([this.returnUrl]);
       },

@@ -44,20 +44,20 @@ import { ThirdsModule } from './modules/thirds/thirds.module';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
     DxTemplateModule,
     DxDataGridModule,
     DxPopupModule,
     DxLookupModule,
     DxFileUploaderModule,
     DxSelectBoxModule,
-    ToastrModule.forRoot(),
-
+    DxSwitchModule,
     DxButtonModule,
     DxRadioGroupModule,
-    NgbModule.forRoot(),
-    DxSwitchModule,
+    ToastrModule.forRoot(),
     DxPivotGridModule,
 
+    NgbModule.forRoot(),
 
     AuthModule,
     ThirdsModule,
