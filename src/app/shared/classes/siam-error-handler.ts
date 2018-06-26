@@ -31,7 +31,7 @@ export class SiamErrorHandler implements ErrorHandler {
         errors += '</ul>';
         message = 'Les données sont incorrect!';
       }
-    } else if (message.search('third_parties_cin_type_unique') !== -1) {
+    } else if (message && message.search('third_parties_cin_type_unique') !== -1) {
       message = 'CIN exist déjà!';
       title = '';
     }

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {IncidentService} from '../../services/incidents';
 import {Incident} from '../../classes/Incident';
 import {ToastrService} from 'ngx-toastr';
+import {IncidentService} from '../../services/incident.service';
+import CustomStore from 'devextreme/data/custom_store';
 
 declare const require: any;
 const $ = require('jquery');
@@ -13,18 +14,33 @@ const $ = require('jquery');
 })
 export class ListComponent implements OnInit {
 
-  incidents: Incident[];
+  incidents: any = {};
 
   constructor(private incidentService: IncidentService,
               private toaster: ToastrService) {
   }
 
   ngOnInit() {
-    this.incidentService.getAll().subscribe(
+    /*this.incidentService.getAll().subscribe(
       (res: Incident[]) => {
         this.incidents = res;
       }
-    );
+    );*/
+    this.incidents.store = new CustomStore({
+      load: (loadOptions: any) => {
+        return this.incidentService.getIncidentsDx(loadOptions)
+          .toPromise()
+          .then(response => {
+            console.log(response);
+            const json = response;
+            return json;
+          })
+          .catch(error => {
+            console.log(error);
+            throw error;
+          });
+      }
+    });
   }
 
   onEditIncident(e: any) {
@@ -79,4 +95,6 @@ export class ListComponent implements OnInit {
     );
     e.cancel = d.promise();
   }
+
+
 }

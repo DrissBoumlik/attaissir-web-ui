@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { IncidentsRoutingModule } from './incidents-routing.module';
 import { AddComponent } from './components/add/add.component';
 import { ListComponent } from './components/list/list.component';
-import {IncidentService} from './services/incidents';
 import {DxDataGridModule, DxTextAreaModule} from 'devextreme-angular';
 
 @NgModule({
@@ -15,6 +14,5 @@ import {DxDataGridModule, DxTextAreaModule} from 'devextreme-angular';
     DxTextAreaModule
   ],
   declarations: [AddComponent, ListComponent],
-  providers: [IncidentService]
 })
 export class IncidentsModule { }
