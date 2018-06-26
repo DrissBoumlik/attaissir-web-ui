@@ -30,6 +30,10 @@ const routes: Routes = [
         loadChildren: '../modules/parcels/parcels.module#ParcelsModule'
       },
       {
+        path: '',
+        loadChildren: '../modules/incidents/incidents.module#IncidentsModule'
+      },
+      {
         path: '404',
         loadChildren: './pages/default/not-found/not-found.module#NotFoundModule'
       },
