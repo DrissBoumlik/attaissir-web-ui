@@ -36,7 +36,6 @@ export class EditComponent implements OnInit {
               this.tier.morale = true;
             }
             this.tier.rib = `${this.tier.bank_account_number}${this.tier.bank_code}${this.tier.bank_rib_key}`;
-            console.log(this.tier);
           }, error1 => {
             this.toastr.warning('Utilisateur non trouvé.');
             this.location.back();
@@ -53,6 +52,7 @@ export class EditComponent implements OnInit {
    * @param e Event
    */
   onFormSubmit = function(e) {
+    console.log('why?');
     this.thirdsService.editThird(this.tier).subscribe(data => {
       this.toastr.success(
         `${this.tier.first_name.toUpperCase()} ${this.tier.last_name.toUpperCase()} informations modifiées avec succès`
