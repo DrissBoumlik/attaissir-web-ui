@@ -144,6 +144,37 @@
         </dxo-label>
       </dxi-item>
 
+
+      <dxi-item dataField="tel1" [editorOptions]="{
+                    mask: '00 00 00 00 00',
+                    useMaskedValue: true,
+                    maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
+                }">
+        <dxo-label
+          text="Telephone 1" i18n-text>
+        </dxo-label>
+        <dxi-validation-rule *ngIf="tier.tel2"
+          type="pattern"
+          [pattern]="phonePattern"
+          message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
+        </dxi-validation-rule>
+      </dxi-item>
+      <dxi-item dataField="tel2" [editorOptions]="{
+                    mask: '00 00 00 00 00',
+                    useMaskedValue: true,
+                    maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
+                }">
+        <dxo-label
+          text="Telephone 2" i18n-text>
+        </dxo-label>
+        <dxi-validation-rule *ngIf="tier.tel2"
+           type="pattern"
+           [pattern]="phonePattern"
+           message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
+        </dxi-validation-rule>
+      </dxi-item>
+
+
       <dxi-item itemType="group" caption="" [colCount]="2" style="padding-left: 0; padding-top: 0" i18n-caption>
         <dxi-item [colSpan]="(isEdit) ? 1 : 2"
                   dataField="birth_date"
@@ -163,36 +194,6 @@
             text="Date de décès" i18n-text>
           </dxo-label>
         </dxi-item>
-      </dxi-item>
-
-      <dxi-item dataField="tel1" [editorOptions]="{
-                    mask: '00 00 00 00 00',
-                    useMaskedValue: true,
-                    maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
-                }">
-        <dxo-label
-          text="Telephone 1" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule
-          type="pattern"
-          *ngIf="tier.tel1"
-          [pattern]="phonePattern"
-          message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
-        </dxi-validation-rule>
-      </dxi-item>
-      <dxi-item dataField="tel2" [editorOptions]="{
-                    mask: '00 00 00 00 00',
-                    useMaskedValue: true,
-                    maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
-                }">
-        <dxo-label
-          text="Telephone 2" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule *ngIf="tier.tel2"
-                             type="pattern"
-                             [pattern]="phonePattern"
-                             message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
-        </dxi-validation-rule>
       </dxi-item>
 
       <dxi-item dataField="email">

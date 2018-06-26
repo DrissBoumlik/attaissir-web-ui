@@ -50,6 +50,7 @@ export class EditComponent implements OnInit {
             const grounds = res.data.parcels.map(data => {
               return {
                 id: data['id'],
+                tenure: data['tenure_id'],
                 registration_number: data['soil']['registration_number'],
                 cda: data['soil']['cda_id'],
                 zone: data['soil']['zone_id'],
