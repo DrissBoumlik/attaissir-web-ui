@@ -22,7 +22,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // var _this = this;
     this.thirdsService.getStats().subscribe(data => {
-      console.log(data);
       this.tilesList = [
         {
           title: 'Contrats confirmés',
@@ -132,7 +131,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
     function getWeatherData() {
       return getGeoData(geoUrl)
         .then((response) => {
-          console.log(response);
           const lat = response['location'].lat,
             lng = response['location'].lng;
           return {
@@ -150,7 +148,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
     getWeatherData().then((res) => {
       const mainCond = res['weather'][0].main.toLowerCase();
-      console.log(res);
       updateLocation(res['name']);
       updateTemperature(Math.round(res['main'].temp));
     });

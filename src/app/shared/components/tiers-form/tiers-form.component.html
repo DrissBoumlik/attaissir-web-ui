@@ -52,7 +52,7 @@
           <dxo-label
             text="الاسم الشخصي " i18n-text>
           </dxo-label>
-          <dxi-validation-rule *ngIf="tier.first_name_ar"
+          <dxi-validation-rule
                                type="pattern"
                                [pattern]="arabicPattern"
                                message="Ce prénom n'est pas en arabe." i18n-message>
@@ -64,7 +64,7 @@
           <dxo-label
             text="الاسم العائلي" i18n-text>
           </dxo-label>
-          <dxi-validation-rule *ngIf="tier.last_name_ar"
+          <dxi-validation-rule
                                type="pattern"
                                [pattern]="arabicPattern"
                                message="Ce nom n'est pas en arabe." i18n-message>
@@ -162,11 +162,6 @@
           <dxo-label
             text="Date de décès" i18n-text>
           </dxo-label>
-          <dxi-validation-rule
-            type="compare"
-            *ngIf="tier.death_date"
-            message="Date de décès ne peux pas être infirieur à la date de naissance." i18n-message>
-          </dxi-validation-rule>
         </dxi-item>
       </dxi-item>
 
@@ -204,7 +199,7 @@
         <dxo-label
           text="Email" i18n-text>
         </dxo-label>
-        <dxi-validation-rule *ngIf="tier.tel1"
+        <dxi-validation-rule *ngIf="tier.email"
                              type="email"
                              message="Ce n'est pas une adresse email valide."
                              i18n-message
