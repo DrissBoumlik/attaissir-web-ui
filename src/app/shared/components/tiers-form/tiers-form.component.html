@@ -32,46 +32,24 @@
 
     <dxi-item itemType="group" caption="Informations Générales" [colCount]="2" i18n-caption>
 
-      <dxi-item itemType="group" caption="" [colCount]="2" i18n-caption>
-        <dxi-item dataField="first_name">
-          <dxo-label
-            text="Prénom" i18n-text>
-          </dxo-label>
-          <dxi-validation-rule type="required" message="Prénom est obligatoire" i18n-message></dxi-validation-rule>
-        </dxi-item>
-        <dxi-item dataField="last_name" [editorOptions]="{ placeholder: ''} ">
-          <dxo-label
-            text="Nom" i18n-text>
-          </dxo-label>
-          <dxi-validation-rule type="required" message="Nom est obligatoire" i18n-message></dxi-validation-rule>
-        </dxi-item>
+      <dxi-item dataField="full_name">
+        <dxo-label
+          text="Nom Complet" i18n-text>
+        </dxo-label>
+        <dxi-validation-rule type="required" message="Nom est obligatoire" i18n-message></dxi-validation-rule>
       </dxi-item>
 
-      <dxi-item itemType="group" caption="" [colCount]="2" i18n-caption>
-        <dxi-item dataField="first_name_ar">
-          <dxo-label
-            text="الاسم الشخصي " i18n-text>
-          </dxo-label>
-          <dxi-validation-rule
-                               type="pattern"
-                               [pattern]="arabicPattern"
-                               message="Ce prénom n'est pas en arabe." i18n-message>
-          </dxi-validation-rule>
-          <dxi-validation-rule type="required" message="Prénom (Arabe) est obligatoire"
-                               i18n-message></dxi-validation-rule>
-        </dxi-item>
-        <dxi-item dataField="last_name_ar" [editorOptions]="{ placeholder: '' }">
-          <dxo-label
-            text="الاسم العائلي" i18n-text>
-          </dxo-label>
-          <dxi-validation-rule
-                               type="pattern"
-                               [pattern]="arabicPattern"
-                               message="Ce nom n'est pas en arabe." i18n-message>
-          </dxi-validation-rule>
-          <dxi-validation-rule type="required" message="Nom (Arabe) est obligatoire"
-                               i18n-message></dxi-validation-rule>
-        </dxi-item>
+      <dxi-item dataField="full_name_ar">
+        <dxo-label
+          text="الاسم الكامل" i18n-text>
+        </dxo-label>
+        <dxi-validation-rule
+                             type="pattern"
+                             [pattern]="arabicPattern"
+                             message="Nom n'est pas en arabe." i18n-message>
+        </dxi-validation-rule>
+        <dxi-validation-rule type="required" message="Nom (Arabe) est obligatoire"
+                             i18n-message></dxi-validation-rule>
       </dxi-item>
 
       <dxi-item dataField="cin" [disabled]="isEdit">
