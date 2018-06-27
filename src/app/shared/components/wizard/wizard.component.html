@@ -47,17 +47,14 @@
 
               <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
 
-                <dxi-item dataField="first_name" [disabled]="true">
-                  <dxo-label text="Prénom"></dxo-label>
+                <dxi-item dataField="full_name" [disabled]="true">
+                  <dxo-label text="Nom complet"></dxo-label>
                 </dxi-item>
-                <dxi-item dataField="last_name" [disabled]="true">
-                  <dxo-label text="Nom"></dxo-label>
+                <dxi-item dataField="full_name_ar" [disabled]="true">
+                  <dxo-label text="الإسم الكامل"></dxo-label>
                 </dxi-item>
-                <dxi-item dataField="first_name_ar" [disabled]="true">
-                  <dxo-label text="Prénom (Arabe)"></dxo-label>
-                </dxi-item>
-                <dxi-item dataField="last_name_ar" [disabled]="true">
-                  <dxo-label text="Nom (Arabe)"></dxo-label>
+                <dxi-item dataField="cin" [disabled]="true">
+                  <dxo-label text="CIN"></dxo-label>
                 </dxi-item>
                 <dxi-item dataField="birth_date" [editorOptions]="{ width: '100%'}" [disabled]="true">
                   <dxo-label text="Date de naissance"></dxo-label>
@@ -128,8 +125,10 @@
                [formData]="contract">
 
         <dxi-item itemType="group" [colCount]="2">
-          <dxi-item dataField="application_date" [editorOptions]="{ label: 'Date d\'application'}" i18n-label
-                    editorType="dxDateBox"></dxi-item>
+          <dxi-item dataField="application_date" i18n-label
+                    editorType="dxDateBox">
+            <dxo-label text="Date d'application"></dxo-label>
+          </dxi-item>
           <!--<dxi-item dataField="expiration_date" [editorOptions]="expirationDateOptions" i18n-label
                     editorType="dxDateBox"></dxi-item>-->
           <dxi-item dataField="type" editorType="dxSelectBox" i18n-label
