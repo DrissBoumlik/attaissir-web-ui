@@ -28,6 +28,7 @@ import { CardsModule } from './modules/cards/cards.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsModule } from './modules/contracts/contracts.module';
 import { ThirdsModule } from './modules/thirds/thirds.module';
+import { ArticlesModule } from './modules/articles/articles.module';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ThirdsModule } from './modules/thirds/thirds.module';
     ContractsModule,
     ParcelsModule,
     CardsModule,
+    ArticlesModule,
     SharedModule
   ],
   exports: [

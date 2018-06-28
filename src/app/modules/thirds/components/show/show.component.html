@@ -362,7 +362,7 @@
                           </span>
                 </div>
                 <div *dxTemplate="let data of 'detsTemplate'">
-                  <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="showDetails(data.value)"
+                  <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.value, router, toastr)"
                      class="fa fa-info-circle fa-5x"></i>
                 </div>
                 <dxo-pager

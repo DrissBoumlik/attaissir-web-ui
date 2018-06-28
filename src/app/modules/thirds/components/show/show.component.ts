@@ -226,30 +226,6 @@ export class ShowComponent implements OnInit {
     }
   }
 
-  /*getThirdAgreements = (idThird: number) => {
-    this.contractService.getContractsByAgregre(idThird).subscribe(
-      (res: any) => {
-        this.contracts = [];
-        res.data.forEach(contract => {
-          if (contract.third_cin === this.third.cin) {
-            this.contractService.getContract(contract.id).subscribe(
-              (contr: any) => {
-                this.contracts.push(contr.data);
-              }
-            );
-          }
-        });
-      }
-    );
-  }*/
-
-  showDetails(idContract: number) {
-    this.router.navigate(['/contrats/afficher/' + idContract]).catch(
-      err => {
-        this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
-      }
-    );
-  }
 
   DeclareLost(idCarte: number) {
     const carte = this.third.cards.find(card => {

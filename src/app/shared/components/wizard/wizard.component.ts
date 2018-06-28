@@ -1,16 +1,16 @@
-import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
-import {Router} from '@angular/router';
-import {Contract} from '../../classes/contract';
-import {Third} from '../../classes/third';
-import {Structure} from '../../classes/structure';
-import {Zone} from '../../classes/zone';
-import {ThirdsService} from '../../../modules/thirds/services/thirds.service';
-import {ToastrService} from 'ngx-toastr';
-import {SoilsService} from '../../../modules/contracts/services/soils.service';
-import {ZonesService} from '../../../modules/contracts/services/zones.service';
-import {ParcelsService} from '../../../modules/contracts/services/parcels.service';
-import {ContractsService} from '../../../modules/contracts/services/contracts.service';
-import {Helper} from '../../classes/helper';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
+import { Contract } from '../../classes/contract';
+import { Third } from '../../classes/third';
+import { Structure } from '../../classes/structure';
+import { Zone } from '../../classes/zone';
+import { ThirdsService } from '../../../modules/thirds/services/thirds.service';
+import { ToastrService } from 'ngx-toastr';
+import { SoilsService } from '../../../modules/contracts/services/soils.service';
+import { ZonesService } from '../../../modules/contracts/services/zones.service';
+import { ParcelsService } from '../../../modules/contracts/services/parcels.service';
+import { ContractsService } from '../../../modules/contracts/services/contracts.service';
+import { Helper } from '../../classes/helper';
 
 
 @Component({
@@ -64,15 +64,15 @@ export class WizardComponent implements OnInit {
   step2: string;
 
   constructor(public tier: Third,
-              public tierService: ThirdsService,
-              private toastr: ToastrService,
-              private thirdService: ThirdsService,
-              private soilsService: SoilsService,
-              private zoneService: ZonesService,
-              private contractService: ContractsService,
-              private contractedArea: ParcelsService,
-              private parcelsService: ParcelsService,
-              private router: Router) {
+    public tierService: ThirdsService,
+    private toastr: ToastrService,
+    private thirdService: ThirdsService,
+    private soilsService: SoilsService,
+    private zoneService: ZonesService,
+    private contractService: ContractsService,
+    private contractedArea: ParcelsService,
+    private parcelsService: ParcelsService,
+    private router: Router) {
   }
 
   ngOnInit() {

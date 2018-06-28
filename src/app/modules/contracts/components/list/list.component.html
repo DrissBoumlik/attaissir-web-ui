@@ -94,7 +94,7 @@
         <dxi-column dataField="structure_name" caption="Division" [hidingPriority]="0" dataType="Text"></dxi-column>
 
         <div *dxTemplate="let data of 'cellTemplate'">
-          <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="showDetails(data.data.id)"
+          <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data.id, router, toastr)"
              class="fa fa-info-circle fa-5x">
           </i>
         </div>

@@ -53,7 +53,18 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/cartes/liste',
         description: 'Generateur de cartes',
         disabled: 'false'
-      }
+      },
+
+      {
+        name: 'Centre de distrubition',
+        icon: 'flaticon-open-box',
+        url: '/articles/liste',
+        description: 'Centre de distrubition',
+        subMenu: [
+          { icon: 'flaticon-list', name: 'Liste des articles', url: '/articles/liste' },
+        ],
+        disabled: 'false'
+      },
     ];
 
   }

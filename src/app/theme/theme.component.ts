@@ -3,8 +3,8 @@ import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { Helpers } from '../helpers';
 import { ScriptLoaderService } from '../_services/script-loader.service';
 
-import {ToastrService} from 'ngx-toastr';
-import {AuthenticationService} from '../auth/_services';
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../auth/_services';
 
 declare let mApp: any;
 declare let mUtil: any;
@@ -12,7 +12,7 @@ declare let mLayout: any;
 
 const MINUTES_UNITL_AUTO_LOGOUT = 30;
 const CHECK_INTERVAL = 1000;
-const STORE_KEY =  'lastAction';
+const STORE_KEY = 'lastAction';
 
 
 @Component({
@@ -25,9 +25,9 @@ export class ThemeComponent implements OnInit {
   canRefresh: boolean;
 
   constructor(private _script: ScriptLoaderService,
-              private auth: AuthenticationService,
-              private _router: Router,
-              private toastr: ToastrService) {
+    private auth: AuthenticationService,
+    private _router: Router,
+    private toastr: ToastrService) {
     this.canRefresh = false;
     this.reset();
     this.initListener();

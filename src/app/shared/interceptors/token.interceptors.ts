@@ -7,13 +7,13 @@ import {
 } from '@angular/common/http';
 import { AuthenticationService } from '../../auth/_services/authentication.service';
 import 'rxjs/add/operator/retry';
-import {Router} from '@angular/router';
-import {Observable} from 'rxjs/Rx';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(public auth: AuthenticationService,
-              public router: Router) {
+    public router: Router) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

@@ -118,7 +118,7 @@
     <dxi-column dataField="children_number" caption="Nombre d'enfants" i18n-caption>
     </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate'">
-      <a  (click)="gotoShow(data.data.id)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
+      <a  (click)="helper.gotoShow('tiers', data.data.id, router, toastr)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
     </div>
     </dx-data-grid>
 
