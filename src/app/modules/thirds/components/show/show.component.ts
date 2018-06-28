@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ThirdsService} from '../../services/thirds.service';
-import {ToastrService} from 'ngx-toastr';
-import {ContractsService} from '../../../contracts/services/contracts.service';
-import {CardsService} from '../../../contracts/services/cards.service';
-import {Contract} from '../../../../shared/classes/contract';
-import {Third} from '../../../../shared/classes/third';
-import {Helper} from '../../../../shared/classes/helper';
-import {environment} from '../../../../../environments/environment';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ThirdsService } from '../../services/thirds.service';
+import { ToastrService } from 'ngx-toastr';
+import { ContractsService } from '../../../contracts/services/contracts.service';
+import { CardsService } from '../../../contracts/services/cards.service';
+import { Contract } from '../../../../shared/classes/contract';
+import { Third } from '../../../../shared/classes/third';
+import { Helper } from '../../../../shared/classes/helper';
+import { environment } from '../../../../../environments/environment';
 
 declare const require: any;
 const $ = require('jquery');
@@ -33,11 +33,11 @@ export class ShowComponent implements OnInit {
   helper: any;
 
   constructor(private thirdService: ThirdsService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private toaster: ToastrService,
-              private contractService: ContractsService,
-              private cardsService: CardsService) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private toaster: ToastrService,
+    private contractService: ContractsService,
+    private cardsService: CardsService) {
     this.helper = Helper;
   }
 
@@ -67,7 +67,6 @@ export class ShowComponent implements OnInit {
             }];
             this.contracts = this.third['contracts'];
             this.cards = this.third.cards;
-            console.log(this.cards);
           },
           (error) => {
             this.router.navigate(['/404']).catch(
@@ -227,37 +226,14 @@ export class ShowComponent implements OnInit {
     }
   }
 
-  /*getThirdAgreements = (idThird: number) => {
-    this.contractService.getContractsByAgregre(idThird).subscribe(
-      (res: any) => {
-        this.contracts = [];
-        res.data.forEach(contract => {
-          if (contract.third_cin === this.third.cin) {
-            this.contractService.getContract(contract.id).subscribe(
-              (contr: any) => {
-                this.contracts.push(contr.data);
-              }
-            );
-          }
-        });
-      }
-    );
-  }*/
 
-  showDetails(idContract: number) {
-    this.router.navigate(['/contrats/show/' + idContract]).catch(
-      err => {
-        this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
-      }
-    );
-  }
-
-  DeclareStolen(idCarte: number) {
+  DeclareLost(idCarte: number) {
     const carte = this.third.cards.find(card => {
       return card.id === idCarte;
     });
     this.cardsService.editCard(carte.id, 'cancel').subscribe(
       (res) => {
+        carte.status = 'lost';
         this.toaster.success('La carte  a été déclrée perdu');
       },
       (err) => {
@@ -289,9 +265,9 @@ export class ShowComponent implements OnInit {
     );
   }
 
-  declareStolen(value: number): boolean {
+  declareLost(value: number): boolean {
     const card = this.cards.find(c => c.id === value);
-    return (card.printed_at && card.status === 'active');
+    return (card.printed_at && card.status !== 'lost');
   }
 
   canActivateCard(id: number): boolean {

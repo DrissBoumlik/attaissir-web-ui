@@ -1,7 +1,6 @@
-import {isNull} from 'util';
+import { isNull } from 'util';
 
 export class Helper {
-
   /**
    * Map to format and return request params used in DxGrid
    * @param loadOptions
@@ -41,6 +40,11 @@ export class Helper {
   }
 
 
+  /**
+   * Get color by status
+   * @param {string} value
+   * @returns {string}
+   */
   public static getStatusColor(value: string): string {
     if (isNull(value)) {
       return 'm-badge m-badge--primary m-badge--wide';
@@ -56,5 +60,20 @@ export class Helper {
     } else {
       return 'm-badge m-badge--primary m-badge--wide';
     }
+  }
+
+  /**
+   * Goto A Route
+   * @param {string} routeName
+   * @param {number} id
+   * @param router
+   * @param toastr
+   */
+  public static gotoShow = (routeName: string, id: number, router: any, toastr) => {
+    router.navigate([`/${routeName}/afficher/${id}`]).catch(
+      err => {
+        toastr.error(err.error.message);
+      }
+    );
   }
 }

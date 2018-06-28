@@ -3,20 +3,81 @@ import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { Helpers } from '../helpers';
 import { ScriptLoaderService } from '../_services/script-loader.service';
 
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../auth/_services';
+
 declare let mApp: any;
 declare let mUtil: any;
 declare let mLayout: any;
+
+const MINUTES_UNITL_AUTO_LOGOUT = 30;
+const CHECK_INTERVAL = 1000;
+const STORE_KEY = 'lastAction';
+
+
 @Component({
   selector: '.m-grid.m-grid--hor.m-grid--root.m-page',
   templateUrl: './theme.component.html',
   encapsulation: ViewEncapsulation.None,
 })
 export class ThemeComponent implements OnInit {
+  lastAction: string;
+  canRefresh: boolean;
 
-
-  constructor(private _script: ScriptLoaderService, private _router: Router) {
-
+  constructor(private _script: ScriptLoaderService,
+    private auth: AuthenticationService,
+    private _router: Router,
+    private toastr: ToastrService) {
+    this.canRefresh = false;
+    this.reset();
+    this.initListener();
+    this.initInterval();
   }
+
+  initListener() {
+    document.body.addEventListener('click', () => this.reset());
+  }
+
+  reset() {
+    localStorage.setItem(STORE_KEY, Date.now().toString());
+    this.lastAction = localStorage.getItem(STORE_KEY);
+    if (this.canRefresh) {
+      this.auth.refresh().subscribe(data => {
+      }, error1 => {
+        console.warn(error1);
+      });
+    }
+  }
+
+  initInterval() {
+    setInterval(() => {
+      this.check();
+    }, CHECK_INTERVAL);
+  }
+
+  check() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!!currentUser) {
+      const now = Date.now();
+      const timeleft: any = Number(this.lastAction) + MINUTES_UNITL_AUTO_LOGOUT * 60 * 1000;
+      const diff = Number(timeleft) - Number(now);
+      const isTimeout = diff < 0;
+      this.canRefresh = diff < 1200000;
+
+      if (diff < 300000 && diff > 298800) {
+        this.toastr.warning('Votre session va expirer dans 5 minute!', '', {
+          enableHtml: true,
+          tapToDismiss: true
+        });
+      }
+
+      if (isTimeout) {
+        this.auth.logout();
+        this._router.navigate(['/login']);
+      }
+    }
+  }
+
   ngOnInit() {
     this._script.loadScripts('body', ['assets/vendors/base/vendors.bundle.js', 'assets/demo/demo12/base/scripts.bundle.js'], true)
       .then(result => {

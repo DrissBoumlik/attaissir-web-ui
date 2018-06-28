@@ -4,6 +4,7 @@ import { ThirdsService } from '../../services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-list',
@@ -20,6 +21,7 @@ export class ListComponent implements OnInit {
   columns: Array<string>;
   entities: Array<object> = [];
   types: Array<object> = [];
+  helper: any;
 
   constructor(public tierService: ThirdsService,
     private router: Router,
@@ -27,6 +29,7 @@ export class ListComponent implements OnInit {
     private toastr: ToastrService) {
     this.third_parties = {};
     this.third_parties_count = 0;
+    this.helper = Helper;
   }
 
   getGender = (data) => {
@@ -64,14 +67,6 @@ export class ListComponent implements OnInit {
     delete ob[name];
     ob[newName] = tmp;
     return ob;
-  }
-
-  gotoShow(idContract: number) {
-    this.router.navigate([`/tiers/afficher/${idContract}`]).catch(
-      err => {
-        this.toastr.error(err.error.message);
-      }
-    );
   }
 
   selectionChanged(data: any) {

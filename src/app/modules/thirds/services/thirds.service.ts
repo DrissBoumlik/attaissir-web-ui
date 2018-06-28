@@ -92,6 +92,7 @@ export class ThirdsService {
    * @returns {Observable<Third>}
    */
   editThird(third: Third): Observable<Third> {
+    console.log('put');
     return this.http.put<Third>(`${environment.apiUrl}/${this.routeName}/${third.id}`, JSON.stringify(third), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

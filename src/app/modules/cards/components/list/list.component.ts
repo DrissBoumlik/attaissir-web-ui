@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { CardsService } from '../../../contracts/services/cards.service';
-import {Helper} from '../../../../shared/classes/helper';
+import { Helper } from '../../../../shared/classes/helper';
 
 
 @Component({
@@ -32,7 +32,6 @@ export class ListComponent implements OnInit {
       this.cardsService.getCards().subscribe(cards => {
         this.cards = this.cardsService.dataFormatter(cards, false);
         this.cards = this.cards.map(card => {
-          card.full_name = `${card.first_name} ${card.last_name}`;
           card.status = this.card_status[card.status];
           return card;
         });

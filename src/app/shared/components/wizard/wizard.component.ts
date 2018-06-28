@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Contract } from '../../classes/contract';
 import { Third } from '../../classes/third';
@@ -61,6 +61,7 @@ export class WizardComponent implements OnInit {
   removeButtonOptions: any;
   aggregatedOptions: any;
   addParcelOptions: any;
+  step2: string;
 
   constructor(public tier: Third,
     public tierService: ThirdsService,
@@ -75,7 +76,7 @@ export class WizardComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.step2 = (!this.isEdit) ? '2. Informations contrat' : '2. Informations avenant';
     this.contractService.getContractsVars().subscribe((data) => {
       this.contracteditorOptions = {
         label: 'Type contrat',
@@ -322,6 +323,9 @@ export class WizardComponent implements OnInit {
       this.toastr.warning('Remplissez les champs du contrat pour avancer!');
     } else {
       this.maxYears = (this.contract.type === 'annual') ? 1 : 5;
+      if (this.isEdit) {
+        this.maxYears = 1;
+      }
     }
   }
 
@@ -338,22 +342,20 @@ export class WizardComponent implements OnInit {
   onFormSubmit = (e) => {
     this.thirdService.addThird(this.currentThird).subscribe(data => {
       this.currentThird = this.thirdService.dataFormatter(data, false);
-      this.tier = new Third();
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
     }, err => {
-      this.toastr.warning(err.error.message);
+      throw err;
     });
     this.addThird = false;
   }
   saveThird = (e) => {
     this.thirdService.addThird(this.currentThird).subscribe(data => {
       this.currentThird = this.thirdService.dataFormatter(data, false);
-      this.tier = new Third();
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
     }, err => {
-      this.toastr.warning(err.error.message);
+      throw err;
     });
     this.addThird = false;
   }
@@ -385,13 +387,25 @@ export class WizardComponent implements OnInit {
     const tenantId = localStorage.getItem('tenantId');
     this.contract.third_party_id = this.currentThird.id;
     this.contract.signature_date = new Date();
+    this.contract.expiration_date = new Date();
     this.contract.structure_id = Number(tenantId);
     if (this.isEdit) {
       this.contract.parent_id = this.contract.id;
       this.contract.type = 'annual';
+      this.contract.status = 'inprogress';
     }
     this.contract.contracted_surface = this.campaigns;
     this.contract.compaign_surface = this.campaigns[0].surface;
+
+    this.contract.application_date = new Date(this.contract.application_date);
+
+    Object.assign(this.contract.expiration_date, this.contract.application_date);
+
+    this.contract.expiration_date.setFullYear(this.contract.application_date.getFullYear() + this.campaigns.length);
+
+    if (this.isEdit) {
+      this.contract.expiration_date.setFullYear(this.contract.application_date.getFullYear() + 1);
+    }
 
     let surfaces = 0;
     this.groundsList.map(ground => {
@@ -408,7 +422,6 @@ export class WizardComponent implements OnInit {
       contract = this.contractService.dataFormatter(contract, false);
 
       this.groundsList.map((soil) => {
-        console.log(soil);
         const soilObject = {
           soil_id: soil.id,
           tenure: soil.tenure,
@@ -428,30 +441,5 @@ export class WizardComponent implements OnInit {
     }, error1 => {
       throw error1;
     });
-    /*
-      /*
-      this.contractedArea.addMultiAreas({ 'contracted_surfaces': this.campaigns }).subscribe(data => {
-        data = this.contractedArea.dataFormatter(data, false);
-        const groundsList = this.groundsList.map(ground => {
-          return {
-            ground_id: ground.id,
-            mode_worth: ground.mode_worth,
-            agreement_id: contract['id'],
-            annuel_surface: ground.annuel_surface
-          };
-        });
-        this.agreementGroundService.addAgreementGround({ 'agreement_grounds': groundsList }).subscribe(d => {
-          d = this.contractedArea.dataFormatter(d, false);
-          this.router.navigate([`/contrats/afficher/${contract['id']}`]);
-        }, error1 => {
-          this.toastr.warning(error1.error.message);
-        });
-
-      }, error1 => {
-        this.toastr.warning(error1.error.message);
-      });*/
-    /*}, error1 => {
-      this.toastr.warning(error1.error.message);
-    });*/
   }
 }

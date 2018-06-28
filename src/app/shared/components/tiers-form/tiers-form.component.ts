@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { locale } from 'devextreme/localization';
 import 'devextreme-intl';
 import { Third } from '../../classes/third';
@@ -45,6 +45,7 @@ export class TiersFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tier = (this.isEdit) ? this.tier : new Third();
     this.thirdsServices.getThirdsVars().subscribe(data => {
       this.vars = data;
 
@@ -116,6 +117,11 @@ export class TiersFormComponent implements OnInit {
         displayFormat: 'yyyy-MM-dd',
         forceIsoDateParsing: true
       },
+      onValidated: (e) => {
+        if (!e.value) {
+          e.isValid = true;
+        }
+      },
       width: '100%'
     };
     this.phonePattern = /^0[5|6|7]\s*\d{2}\s*\d{2}\s*\d{2}\s*\d{2}$/;
@@ -127,6 +133,7 @@ export class TiersFormComponent implements OnInit {
   }
 
 
+
   /**
    * Update civility value
    * @param e
@@ -134,5 +141,7 @@ export class TiersFormComponent implements OnInit {
   onMoraleChanged = (e) => {
     this.tier.type = (this.tier.morale) ? 'morale' : 'physique';
   }
+
+
 
 }

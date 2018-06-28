@@ -1,4 +1,4 @@
-<form>
+<div id="form-container">
   <dx-form id="form"
            [formData]="tier"
            [readOnly]="false"
@@ -32,46 +32,24 @@
 
     <dxi-item itemType="group" caption="Informations Générales" [colCount]="2" i18n-caption>
 
-      <dxi-item itemType="group" caption="" [colCount]="2" i18n-caption>
-        <dxi-item dataField="first_name">
-          <dxo-label
-            text="Prénom" i18n-text>
-          </dxo-label>
-          <dxi-validation-rule type="required" message="Prénom est obligatoire" i18n-message></dxi-validation-rule>
-        </dxi-item>
-        <dxi-item dataField="last_name" [editorOptions]="{ placeholder: ''} ">
-          <dxo-label
-            text="Nom" i18n-text>
-          </dxo-label>
-          <dxi-validation-rule type="required" message="Nom est obligatoire" i18n-message></dxi-validation-rule>
-        </dxi-item>
+      <dxi-item dataField="full_name">
+        <dxo-label
+          text="Nom Complet" i18n-text>
+        </dxo-label>
+        <dxi-validation-rule type="required" message="Nom est obligatoire" i18n-message></dxi-validation-rule>
       </dxi-item>
 
-      <dxi-item itemType="group" caption="" [colCount]="2" i18n-caption>
-        <dxi-item dataField="first_name_ar">
-          <dxo-label
-            text="Prénom (Arabe)" i18n-text>
-          </dxo-label>
-          <dxi-validation-rule *ngIf="tier.first_name_ar"
-                               type="pattern"
-                               [pattern]="arabicPattern"
-                               message="Ce prénom n'est pas en arabe." i18n-message>
-          </dxi-validation-rule>
-          <dxi-validation-rule type="required" message="Prénom (Arabe) est obligatoire"
-                               i18n-message></dxi-validation-rule>
-        </dxi-item>
-        <dxi-item dataField="last_name_ar" [editorOptions]="{ placeholder: '' }">
-          <dxo-label
-            text="Nom (Arabe)" i18n-text>
-          </dxo-label>
-          <dxi-validation-rule *ngIf="tier.last_name_ar"
-                               type="pattern"
-                               [pattern]="arabicPattern"
-                               message="Ce nom n'est pas en arabe." i18n-message>
-          </dxi-validation-rule>
-          <dxi-validation-rule type="required" message="Nom (Arabe) est obligatoire"
-                               i18n-message></dxi-validation-rule>
-        </dxi-item>
+      <dxi-item dataField="full_name_ar">
+        <dxo-label
+          text="الاسم الكامل" i18n-text>
+        </dxo-label>
+        <dxi-validation-rule
+                             type="pattern"
+                             [pattern]="arabicPattern"
+                             message="Nom n'est pas en arabe." i18n-message>
+        </dxi-validation-rule>
+        <dxi-validation-rule type="required" message="Nom (Arabe) est obligatoire"
+                             i18n-message></dxi-validation-rule>
       </dxi-item>
 
       <dxi-item dataField="cin" [disabled]="isEdit">
@@ -89,11 +67,18 @@
         </dxo-label>
         <dxi-validation-rule type="required" message="Sexe est obligatoire" i18n-message></dxi-validation-rule>
       </dxi-item>
+
       <dxi-item dataField="address">
         <dxo-label
           text="Adresse" i18n-text>
         </dxo-label>
       </dxi-item>
+      <dxi-item dataField="address_ar">
+        <dxo-label
+          text="العنوان" i18n-text>
+        </dxo-label>
+      </dxi-item>
+
       <dxi-item dataField="zip_code" [editorOptions]="{
                     mask: '00 000',
                     useMaskedValue: false,
@@ -107,7 +92,7 @@
         <dxo-label
           text="Ville" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="required" message="Le champ est obligatoire" i18n-message>
+        <dxi-validation-rule type="required" message="Ville est obligatoire" i18n-message>
         </dxi-validation-rule>
       </dxi-item>
 
@@ -127,7 +112,7 @@
         <dxo-label
           text="Région" i18n-text>
         </dxo-label>
-        <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+        <dxi-validation-rule type="required" message="Région est obligatoire"
                              i18n-message></dxi-validation-rule>
       </dxi-item>
 
@@ -137,29 +122,6 @@
         </dxo-label>
       </dxi-item>
 
-      <dxi-item itemType="group" caption="" [colCount]="2" style="padding-left: 0; padding-top: 0" i18n-caption>
-        <dxi-item [colSpan]="(isEdit) ? 1 : 2"
-          dataField="birth_date"
-          editorType="dxDateBox"
-          [editorOptions]="dateOptions">
-          <dxo-label
-            text="Date de naissance" i18n-text>
-          </dxo-label>
-        </dxi-item>
-        <dxi-item *ngIf="isEdit"
-                  dataField="death_date"
-                  editorType="dxDateBox"
-                  [editorOptions]="dateOptions">
-          <dxo-label
-            text="Date de décès" i18n-text>
-          </dxo-label>
-          <dxi-validation-rule
-            type="compare"
-            *ngIf="tier.death_date"
-            message="Date de décès ne peux pas être infirieur à la date de naissance." i18n-message>
-          </dxi-validation-rule>
-        </dxi-item>
-      </dxi-item>
 
       <dxi-item dataField="tel1" [editorOptions]="{
                     mask: '00 00 00 00 00',
@@ -169,9 +131,8 @@
         <dxo-label
           text="Telephone 1" i18n-text>
         </dxo-label>
-        <dxi-validation-rule
+        <dxi-validation-rule *ngIf="tier.tel2"
           type="pattern"
-          *ngIf="tier.tel1"
           [pattern]="phonePattern"
           message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
         </dxi-validation-rule>
@@ -185,17 +146,39 @@
           text="Telephone 2" i18n-text>
         </dxo-label>
         <dxi-validation-rule *ngIf="tier.tel2"
-                             type="pattern"
-                             [pattern]="phonePattern"
-                             message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
+           type="pattern"
+           [pattern]="phonePattern"
+           message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
         </dxi-validation-rule>
+      </dxi-item>
+
+
+      <dxi-item itemType="group" caption="" [colCount]="2" style="padding-left: 0; padding-top: 0" i18n-caption>
+        <dxi-item [colSpan]="(isEdit) ? 1 : 2"
+                  dataField="birth_date"
+                  editorType="dxDateBox"
+                  [editorOptions]="dateOptions">
+          <dxo-label
+            text="Date de naissance" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Le champ date de naissance est obligatoire" i18n-message>
+          </dxi-validation-rule>
+        </dxi-item>
+        <dxi-item *ngIf="isEdit"
+                  dataField="death_date"
+                  editorType="dxDateBox"
+                  [editorOptions]="dateOptions">
+          <dxo-label
+            text="Date de décès" i18n-text>
+          </dxo-label>
+        </dxi-item>
       </dxi-item>
 
       <dxi-item dataField="email">
         <dxo-label
           text="Email" i18n-text>
         </dxo-label>
-        <dxi-validation-rule *ngIf="tier.tel1"
+        <dxi-validation-rule *ngIf="tier.email"
                              type="email"
                              message="Ce n'est pas une adresse email valide."
                              i18n-message
@@ -259,11 +242,15 @@
         <dxo-label
           text="RIB" i18n-text>
         </dxo-label>
-        <dxi-validation-rule *ngIf="tier.rib"
+        <dxi-validation-rule type="required" message="Le RIB est obligatoire" i18n-message>
+        </dxi-validation-rule>
+
+          <dxi-validation-rule
                              type="pattern"
                              [pattern]="ribKeyPattern"
                              message="RIB est invalide" i18n-message>
         </dxi-validation-rule>
+
       </dxi-item>
     </dxi-item>
 
@@ -332,4 +319,5 @@
       [buttonOptions]="buttonOptions">
     </dxi-item>
   </dx-form>
-</form>
+
+</div>

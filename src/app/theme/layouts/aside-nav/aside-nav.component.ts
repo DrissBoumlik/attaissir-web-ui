@@ -28,10 +28,10 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         icon: 'flaticon-users',
         url: '/tiers/liste',
         description: 'Gestion des agrégés',
-        subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouvel agrégé'/*Nuveau agrégé*/, url: '/tiers/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des agrégés'/*Liste des  agrégés*/, url: '/tiers/liste' },
-        ],
+        /*subMenu: [
+          { icon: 'flaticon-plus', name: 'Nouvel agrégé', url: '/tiers/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des agrégés', url: '/tiers/liste' },
+        ],*/
         disabled: 'false'
       },
       {
@@ -53,7 +53,18 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/cartes/liste',
         description: 'Generateur de cartes',
         disabled: 'false'
-      }
+      },
+
+      {
+        name: 'Centre de distrubition',
+        icon: 'flaticon-open-box',
+        url: '/articles/liste',
+        description: 'Centre de distrubition',
+        subMenu: [
+          { icon: 'flaticon-list', name: 'Liste des articles', url: '/articles/liste' },
+        ],
+        disabled: 'false'
+      },
     ];
 
   }

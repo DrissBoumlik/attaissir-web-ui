@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import 'devextreme/integration/jquery';
 import { ContractsService } from '../../services/contracts.service';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
-import {Helper} from '../../../../shared/classes/helper';
+import { Helper } from '../../../../shared/classes/helper';
 
 declare const require: any;
 const $ = require('jquery');
@@ -43,6 +43,11 @@ export class ListComponent implements OnInit {
         return this.contractsService.getContractsDx(loadOptions)
           .toPromise()
           .then(response => {
+            response['data'] = response['data'].map(data => {
+              data['status'] = this.getStatus(data.status);
+              return data;
+            });
+            console.log(response);
             const json = response;
             return json;
           })
@@ -76,16 +81,6 @@ export class ListComponent implements OnInit {
     /* if (!e.component.getSelectedRowKeys().length) {
        e.component.selectRowsByIndexes(0);
      }*/
-  }
-
-
-
-  showDetails(idContract: number) {
-    this.router.navigate([`/contrats/afficher/${idContract}`]).catch(
-      err => {
-        throw err; // this.toastr.error(err.error.message);
-      }
-    );
   }
 
   onStartEdit = (e) => {

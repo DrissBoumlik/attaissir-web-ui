@@ -1,14 +1,17 @@
-import { ErrorHandler, Injectable, Input } from '@angular/core';
+import { ErrorHandler, Inject, Injectable, Injector, Input } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AlertsService } from '@jaspero/ng-alerts';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class SiamErrorHandler implements ErrorHandler {
 
-  constructor(public alert2: AlertsService) { }
+  constructor(@Inject(Injector) private injector: Injector) { }
+
+  private get toastr(): ToastrService {
+    return this.injector.get(ToastrService);
+  }
 
   handleError = (error: any): void => {
-    console.log(error);
     let message: string;
     let title: string;
     if (error instanceof HttpErrorResponse) {
@@ -19,12 +22,30 @@ export class SiamErrorHandler implements ErrorHandler {
       title = error.statusText || 'Une erreur est survenue';
     }
 
-    this.alert2.create('error', message, title, {
+    if (title === 'Unprocessable Entity') {
+      if (error.error.message === 'The given data was invalid.') {
+        let errors = '<ul>';
+        for (const err of error.error.errors) {
+          errors += `<li>${err}</li>`;
+        }
+        errors += '</ul>';
+        message = 'Les données sont incorrect!';
+      }
+    } else if (message.search('third_parties_cin_type_unique') !== -1) {
+      message = 'CIN exist déjà!';
+      title = '';
+    }
+
+    this.toastr.warning(message, title, {
+      enableHtml: true,
+      closeButton: true
+    });
+    /* this.alert2.create('error', message, title, {
       overlay: true,
       overlayClickToClose: true,
       showCloseButton: false,
       duration: 100000
-    });
+    }); */
   }
 
   message = (msg) => {

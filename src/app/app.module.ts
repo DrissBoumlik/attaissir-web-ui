@@ -23,13 +23,12 @@ import {
   DxTemplateModule
 } from 'devextreme-angular';
 import { SiamErrorHandler } from './shared/classes/siam-error-handler';
-import { JasperoAlertsModule } from '@jaspero/ng-alerts';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { ParcelsModule } from './modules/parcels/parcels.module';
 import { CardsModule } from './modules/cards/cards.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsModule } from './modules/contracts/contracts.module';
 import { ThirdsModule } from './modules/thirds/thirds.module';
+import { ArticlesModule } from './modules/articles/articles.module';
 
 @NgModule({
   declarations: [
@@ -46,27 +45,27 @@ import { ThirdsModule } from './modules/thirds/thirds.module';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
     DxTemplateModule,
     DxDataGridModule,
     DxPopupModule,
     DxLookupModule,
     DxFileUploaderModule,
     DxSelectBoxModule,
-    JasperoAlertsModule.forRoot(),
-    ToastrModule.forRoot(),
-
+    DxSwitchModule,
     DxButtonModule,
     DxRadioGroupModule,
-    NgbModule.forRoot(),
-    DxSwitchModule,
+    ToastrModule.forRoot(),
     DxPivotGridModule,
 
+    NgbModule.forRoot(),
 
     AuthModule,
     ThirdsModule,
     ContractsModule,
     ParcelsModule,
     CardsModule,
+    ArticlesModule,
     SharedModule
   ],
   exports: [
