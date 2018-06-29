@@ -35,6 +35,39 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         disabled: 'false'
       },
       {
+        name: 'Conseille agricole',
+        icon: 'flaticon-user',
+        url: '/conseille-agricole/liste',
+        description: 'Conseille agricole',
+        subMenu: [
+          { icon: 'flaticon-plus', name: 'Nouveau Conseille', url: '/conseille-agricole/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des Conseille', url: '/conseille-agricole/liste' },
+        ],
+        disabled: 'false'
+      },
+       {
+        name: 'Magasin',
+        icon: 'fa fa-shopping-bag',
+        url: '/magasin/liste',
+        description: 'magasin',
+        subMenu: [
+          { icon: 'flaticon-plus', name: 'Nouveau magasin', url: '/magasin/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des magasins', url: '/magasin/liste' },
+        ],
+        disabled: 'false'
+      },
+      {
+        name: 'Commande',
+        icon: 'fa fa-cart-plus',
+        url: '/commande/liste',
+        description: 'commande',
+        subMenu: [
+          { icon: 'flaticon-plus', name: 'nouvelle commande', url: '/commande/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des commandes', url: '/commande/liste' },
+        ],
+        disabled: 'false'
+      },
+      {
         name: 'Contrats',
         icon: 'flaticon-file',
         url: '/contrats/liste',

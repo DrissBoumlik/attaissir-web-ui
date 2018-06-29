@@ -31,6 +31,10 @@ const routes: Routes = [
       },
       {
         path: '',
+        loadChildren: '../modules/warehouse/warehouse.module#WarehouseModule'
+      },
+      {
+        path: '',
         loadChildren: '../modules/articles/articles.module#ArticlesModule'
       },
       {

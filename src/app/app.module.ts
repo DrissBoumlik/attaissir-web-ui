@@ -36,7 +36,6 @@ import {WarehouseComponent} from './shared/components/warehouse/warehouse.compon
   declarations: [
     ThemeComponent,
     AppComponent,
-    WarehouseComponent
   ],
   imports: [
     LayoutModule,

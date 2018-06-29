@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
-import { Third } from '../../../shared/classes/third';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../../../environments/environment';
+import {Third} from '../../../shared/classes/third';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,18 @@ export class ThirdsService {
    */
   getThirdsDx(params?: any): Observable<Third[]> {
     return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  /**
+   * @param {string} type
+   * @returns {Observable<any>}
+   */
+  getThirdPartiesByType(type: string): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/grid/type`, JSON.stringify(type), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -111,7 +123,7 @@ export class ThirdsService {
         'Content-Type': 'application/json'
       })
     });
-  }
+  };
 
   /**
    * Format data depending of API
@@ -121,7 +133,7 @@ export class ThirdsService {
    */
   dataFormatter = (dat: any, test: boolean) => {
     return (!test) ? dat['data'] : dat;
-  }
+  };
 
   /**
    *

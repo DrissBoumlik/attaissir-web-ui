@@ -6,6 +6,8 @@ import { DxButtonModule, DxDataGridModule, DxFormModule, DxListModule, DxTextBox
 import { TiersFormComponent } from './components/tiers-form/tiers-form.component';
 import { FormsModule } from '@angular/forms';
 import {ConseilleComponent} from './components/conseille/conseille.component';
+import {CommandeComponent} from './components/commande/commande.component';
+import {WarehouseComponent} from './components/warehouse/warehouse.component';
 
 @NgModule({
   imports: [
@@ -21,18 +23,22 @@ import {ConseilleComponent} from './components/conseille/conseille.component';
   exports: [
     WizardComponent,
     TiersFormComponent,
+    CommandeComponent,
     ArchwizardModule,
     FormsModule,
     DxListModule,
     DxFormModule,
     DxDataGridModule,
     DxButtonModule,
-    ConseilleComponent
+    ConseilleComponent,
+    WarehouseComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     WizardComponent,
     TiersFormComponent,
-    ConseilleComponent]
+    CommandeComponent,
+    ConseilleComponent,
+    WarehouseComponent]
 })
 export class SharedModule { }

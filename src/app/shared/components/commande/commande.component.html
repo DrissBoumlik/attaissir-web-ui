@@ -1,0 +1,161 @@
+<form>
+  <dx-form id="form" [formData]="conseille">
+
+
+    <dxi-item itemType="group" caption="Informations Générales" [colCount]="2" i18n-caption>
+      <dxi-item itemType="group">
+        <dxi-item dataField="name">
+          <dxo-label text="Objet" i18n-text></dxo-label>
+
+          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
+
+
+        <dxi-item dataField="city">
+          <dxo-label text="Date" i18n-text></dxo-label>
+          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item itemType="group">
+
+        <dxi-item dataField="tiers" editorType="dxSelectBox" [editorOptions]="regions">
+          <dxo-label
+            text="Tier" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
+
+
+        <dxi-item dataField="magasins" editorType="dxSelectBox" [editorOptions]="regions">
+          <dxo-label
+            text="Magasin" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
+
+      </dxi-item>
+
+    </dxi-item>
+
+
+    <dxi-item itemType="group" [colCount]="5" i18n-caption>
+      <dxi-item itemType="group">
+
+        <dxi-item dataField="tiers" editorType="dxSelectBox" [editorOptions]="regions">
+          <dxo-label
+            text="Famille" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
+
+      </dxi-item>
+
+      <dxi-item itemType="group">
+
+        <dxi-item dataField="tiers" editorType="dxSelectBox" [editorOptions]="regions">
+          <dxo-label
+            text="Sous-Famille" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
+
+      </dxi-item>
+
+
+      <dxi-item itemType="group">
+
+        <dxi-item dataField="tiers" editorType="dxSelectBox" [editorOptions]="regions">
+          <dxo-label
+            text="Produits" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
+
+      </dxi-item>
+
+
+      <dxi-item itemType="group">
+
+        <dxi-item dataField="tiers" editorType="dxSelectBox" [editorOptions]="regions">
+          <dxo-label
+            text="Quantité" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
+
+      </dxi-item>
+
+
+      <dxi-item itemType="group">
+
+        <dxi-item
+          itemType="button"
+          alignment="left"
+          [buttonOptions]="buttonOptions">
+        </dxi-item>
+
+      </dxi-item>
+    </dxi-item>
+
+
+    <dxi-item itemType="group">
+
+
+      <dx-data-grid id="gridContainer" [dataSource]="orderDetails">
+
+        <dxi-column dataField="Famille" [width]="60" caption="Title"></dxi-column>
+        <dxi-column dataField="FirstName"></dxi-column>
+        <dxi-column dataField="LastName"></dxi-column>
+        <dxi-column dataField="City"></dxi-column>
+        <dxi-column dataField="State"></dxi-column>
+        <dxi-column dataField="Position" [width]="130"></dxi-column>
+        <dxi-column dataField="BirthDate" [width]="100" dataType="date"></dxi-column>
+        <dxi-column dataField="HireDate" [width]="100" dataType="date"></dxi-column>
+      </dx-data-grid>
+    </dxi-item>
+
+
+    <dxi-item itemType="group" [colCount]="2" i18n-caption>
+
+      <dxi-item itemType="group">
+        <dxi-item editorType="dxTextArea">
+          <dxo-label
+            text="Note" i18n-text>
+          </dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item itemType="group">
+        <dxi-item dataField="magasins" editorType="dxSelectBox" [editorOptions]="regions">
+          <dxo-label
+            text="Etat" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
+
+
+      </dxi-item>
+
+    </dxi-item>
+
+
+    <hr>
+
+    <dxi-item
+      itemType="button"
+      alignment="left"
+      [buttonOptions]="buttonOptions">
+    </dxi-item>
+
+  </dx-form>
+</form>

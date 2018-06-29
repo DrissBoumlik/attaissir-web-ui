@@ -2,12 +2,18 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Third} from '../../classes/third';
 
 @Component({
-  selector: 'app-conseille-form',
-  templateUrl: './conseille.component.html',
-  styleUrls: ['./conseille.component.scss']
+  selector: 'app-commande-form',
+  templateUrl: './commande.component.html',
+  styleUrls: ['./commande.component.scss']
 })
-export class ConseilleComponent implements OnInit {
+export class CommandeComponent implements OnInit {
 
+  structures: any[];
+  regions: any[];
+  zones: any[];
+  tiers: any[];
+  magasin: any[];
+  orderDetails: any;
 
   @Output() submit: EventEmitter<any> = new EventEmitter();
 
@@ -20,6 +26,7 @@ export class ConseilleComponent implements OnInit {
   @Input() readOnly?: boolean;
 
   buttonOptions: any;
+  constructor() { }
 
   ngOnInit() {
 
