@@ -13,6 +13,7 @@ export class WarehouseComponent implements OnInit {
   structures: any[];
   regions: any[];
   zones: any[];
+  cda: any[];
   tiers: any;
   magasin: any[];
 
