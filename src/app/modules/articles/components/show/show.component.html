@@ -51,6 +51,14 @@
                           <p class="siam-form-input-value">{{ article?.code || 'Pas de donnée' }}</p>
                         </div>
                       </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Groupe de marchandise
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value">{{ article?.article_group || 'Pas de donnée' }}</p>
+                        </div>
+                      </div>
                     </div>
                     <div class="col-4">
                       <div class="row">
@@ -58,7 +66,8 @@
                           Dose (unite)
                         </label>
                         <div class="col-12">
-                          <p class="siam-form-input-value">{{ article?.dose || 'Pas de donnée' }} ({{ article?.unit || 'Pas de donnée' }})</p>
+                          <p class="siam-form-input-value">{{ article?.dose || 'Pas de donnée' }} ({{ article?.unit
+                            }})</p>
                         </div>
                       </div>
                       <div class="row">
@@ -71,10 +80,10 @@
                       </div>
                       <div class="row">
                         <label class="col-12">
-                          Groupe de marchandise
+                          Famille
                         </label>
                         <div class="col-12">
-                          <p class="siam-form-input-value">{{ article?.article_group || 'Pas de donnée' }}</p>
+                          <p class="siam-form-input-value">{{ article?.parent_category['name'] || 'Pas de donnée' }}</p>
                         </div>
                       </div>
                     </div>
@@ -97,10 +106,10 @@
                       </div>
                       <div class="row">
                         <label class="col-12">
-                          Famille
+                          Sous-Famille
                         </label>
                         <div class="col-12">
-                          <p class="siam-form-input-value">{{ article?.article_category || 'Pas de donnée' }}</p>
+                          <p class="siam-form-input-value">{{ article?.category['name'] || 'Pas de donnée' }}</p>
                         </div>
                       </div>
                     </div>
