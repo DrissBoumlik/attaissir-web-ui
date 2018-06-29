@@ -1,3 +1,4 @@
+import { ZonesService } from '../../../modules/contracts/services/zones.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Third } from '../../classes/third';
 import { Helper } from '../../classes/helper';
