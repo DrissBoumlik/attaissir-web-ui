@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../../../environments/environment';
-import {Third} from '../../../shared/classes/third';
-import {ConseilleAgricole} from '../../../shared/classes/conseille-agricole';
-import {Contract} from '../../../shared/classes/contract';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
+import { Third } from '../../../shared/classes/third';
+import { ConseilleAgricole } from '../../../shared/classes/conseille-agricole';
+import { Contract } from '../../../shared/classes/contract';
 
 
 @Injectable({
@@ -54,13 +54,13 @@ export class ConseilleAgricoleService {
    */
   getThirds(): any {
     return this.customers;
-   // return this.http.get<ConseilleAgricole[]>(`${environment.apiUrl}/${this.routeName}`);
+    // return this.http.get<ConseilleAgricole[]>(`${environment.apiUrl}/${this.routeName}`);
   }
 
   getConseille(id: number): Observable<any> {
 
     return this.customers[id];
-     // return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/${id}${edit}`);
+    // return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/${id}${edit}`);
   }
 
 }

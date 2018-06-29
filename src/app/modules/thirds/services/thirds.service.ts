@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../../../environments/environment';
-import {Third} from '../../../shared/classes/third';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
+import { Third } from '../../../shared/classes/third';
 
 @Injectable({
   providedIn: 'root'
@@ -123,17 +123,7 @@ export class ThirdsService {
         'Content-Type': 'application/json'
       })
     });
-  };
-
-  /**
-   * Format data depending of API
-   * @param {any} dat
-   * @param {boolean} test
-   * @returns {Third[]}
-   */
-  dataFormatter = (dat: any, test: boolean) => {
-    return (!test) ? dat['data'] : dat;
-  };
+  }
 
   /**
    *

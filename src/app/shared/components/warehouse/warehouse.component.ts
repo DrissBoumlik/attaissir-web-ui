@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Third} from '../../classes/third';
-import {Helper} from '../../classes/helper';
-import {ThirdsService} from '../../../modules/thirds/services/thirds.service';
+import { ZonesService } from '../../../modules/contracts/services/zones.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Third } from '../../classes/third';
+import { Helper } from '../../classes/helper';
+import { ThirdsService } from '../../../modules/thirds/services/thirds.service';
 
 @Component({
   selector: 'app-warehouse-form',
@@ -13,7 +14,6 @@ export class WarehouseComponent implements OnInit {
   structures: any[];
   regions: any[];
   zones: any[];
-  cda: any[];
   tiers: any;
   magasin: any[];
 
@@ -46,8 +46,8 @@ export class WarehouseComponent implements OnInit {
           displayExpr: 'full_name',
           valueExpr: 'ID',
           searchEnabled: true,
-        // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
-      };
+          // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
+        };
       }
     );
 

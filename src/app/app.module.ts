@@ -29,8 +29,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsModule } from './modules/contracts/contracts.module';
 import { ThirdsModule } from './modules/thirds/thirds.module';
 import { ArticlesModule } from './modules/articles/articles.module';
-import {ConseilleAgricoleModule} from './modules/conseille-agricole/conseille-agricole.module';
-import {WarehouseComponent} from './shared/components/warehouse/warehouse.component';
+import { ConseilleAgricoleModule } from './modules/conseille-agricole/conseille-agricole.module';
+import { WarehouseComponent } from './shared/components/warehouse/warehouse.component';
 
 @NgModule({
   declarations: [

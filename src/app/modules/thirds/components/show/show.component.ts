@@ -58,7 +58,7 @@ export class ShowComponent implements OnInit {
       params => {
         this.thirdService.getThird(+params.id, false).subscribe(
           (res: any) => {
-            this.third = this.thirdService.dataFormatter(res, false);
+            this.third = this.helper.dataFormatter(res, false);
             this.bank_accounts = [{
               bank_name: this.third.bank_name,
               bank_account_number: this.third.bank_account_number,

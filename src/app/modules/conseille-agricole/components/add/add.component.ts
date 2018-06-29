@@ -19,7 +19,7 @@ export class AddComponent implements OnInit {
   ngOnInit() {
 
     this.buttonOptions = {
-      text:  'Ajouter',
+      text: 'Ajouter',
       type: 'success',
       useSubmitBehavior: true
     };
@@ -28,17 +28,17 @@ export class AddComponent implements OnInit {
 
 
   onFormSubmit = function(e) {
-   /*
-    this.thirdsService.addThird(this.tier).subscribe(data => {
-      data = this.thirdsService.dataFormatter(data, false);
-      this.toastr.success(
-        `Nouveau agrégé ajouté avec succès.`);
-      this.router.navigate(['/tiers/afficher/' + data.id]);
-    }, err => {
-      throw err;
-      // this.toastr.error(err.error.message);
-    });
-    e.preventDefault();*/
+    /*
+     this.thirdsService.addThird(this.tier).subscribe(data => {
+       data = this.thirdsService.dataFormatter(data, false);
+       this.toastr.success(
+         `Nouveau agrégé ajouté avec succès.`);
+       this.router.navigate(['/tiers/afficher/' + data.id]);
+     }, err => {
+       throw err;
+       // this.toastr.error(err.error.message);
+     });
+     e.preventDefault();*/
   };
 
 }

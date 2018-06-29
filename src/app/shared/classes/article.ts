@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 
 export class Article {
   id?: number;
+  name: string;
   unit: number;
   code: number;
   price: number;

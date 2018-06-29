@@ -30,7 +30,7 @@ export class ListComponent implements OnInit {
       console.log(data);
       this.card_status = data['card_status'];
       this.cardsService.getCards().subscribe(cards => {
-        this.cards = this.cardsService.dataFormatter(cards, false);
+        this.cards = this.helper.dataFormatter(cards, false);
         this.cards = this.cards.map(card => {
           card.status = this.card_status[card.status];
           return card;

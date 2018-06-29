@@ -43,7 +43,7 @@ export class ListCurrentComponent implements OnInit {
         return this.contractsService.getContractsDx(loadOptions)
           .toPromise()
           .then(response => {
-            let json = this.contractsService.dataFormatter(response, false);
+            let json = this.helper.dataFormatter(response, false);
             json = json.filter(data => {
               return data.parent_id === null;
             }).map(data => {

@@ -32,6 +32,7 @@ export class WizardComponent implements OnInit {
   allMode: any;
   checkBoxesMode: any;
   tierData: string;
+  helper: any;
 
   navBarLayout: string;
   block_id: number;
@@ -73,6 +74,7 @@ export class WizardComponent implements OnInit {
     private contractedArea: ParcelsService,
     private parcelsService: ParcelsService,
     private router: Router) {
+    this.helper = Helper;
   }
 
   ngOnInit() {
@@ -131,7 +133,7 @@ export class WizardComponent implements OnInit {
         z.code = e.mle;
 
         this.soilsService.addGround(this.parcelForm).subscribe(ground => {
-          ground = this.soilsService.dataFormatter(ground, false);
+          ground = this.helper.dataFormatter(ground, false);
           ground['tenure'] = this.parcelForm.tenure;
           ground['annuel_surface'] = this.parcelForm.annuel_surface;
           ground['code_ormva'] = this.parcelForm.code_ormva;
@@ -159,7 +161,7 @@ export class WizardComponent implements OnInit {
     };
     this.zoneService.getCDAs().subscribe(cda => {
       // CDA
-      this.cdas = this.zoneService.dataFormatter(cda, true);
+      this.cdas = this.helper.dataFormatter(cda, true);
       this.cdaEditorOptions = {
         label: 'CDA',
         items: this.cdas,
@@ -170,7 +172,7 @@ export class WizardComponent implements OnInit {
           // Zone
           if (e.selectedItem) {
             this.zoneService.getZonesByCDA(e.selectedItem.code).subscribe(zone => {
-              this.zones = this.zoneService.dataFormatter(zone, true);
+              this.zones = this.helper.dataFormatter(zone, true);
               this.zoneEditorOptions = {
                 label: 'Zone',
                 items: this.zones,
@@ -182,7 +184,7 @@ export class WizardComponent implements OnInit {
                   // Sector
                   if (event.selectedItem) {
                     this.zoneService.getSectors(event.selectedItem.code).subscribe(secteur => {
-                      this.sectors = this.zoneService.dataFormatter(secteur, true);
+                      this.sectors = this.helper.dataFormatter(secteur, true);
                       this.sectorEditorOptions = {
                         label: 'Secteur',
                         items: this.sectors,
@@ -195,7 +197,7 @@ export class WizardComponent implements OnInit {
                           if (event1.selectedItem) {
                             this.block_id = event1.selectedItem.id;
                             this.zoneService.getBlocs(event1.selectedItem.code).subscribe(block => {
-                              this.blocs = this.zoneService.dataFormatter(block, true);
+                              this.blocs = this.helper.dataFormatter(block, true);
                               this.blocEditorOptions = {
                                 label: 'Bloc',
                                 items: this.blocs,
@@ -306,7 +308,7 @@ export class WizardComponent implements OnInit {
 
   search = () => {
     this.thirdService.getThirdByCIN(this.searchThird).subscribe(data => {
-      this.currentThird = this.thirdService.dataFormatter(data, false);
+      this.currentThird = this.helper.dataFormatter(data, false);
     }, error1 => {
       this.toastr.warning('L\'argégé n\'exist pas');
     });
@@ -341,7 +343,7 @@ export class WizardComponent implements OnInit {
 
   onFormSubmit = (e) => {
     this.thirdService.addThird(this.currentThird).subscribe(data => {
-      this.currentThird = this.thirdService.dataFormatter(data, false);
+      this.currentThird = this.helper.dataFormatter(data, false);
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
     }, err => {
@@ -351,7 +353,7 @@ export class WizardComponent implements OnInit {
   }
   saveThird = (e) => {
     this.thirdService.addThird(this.currentThird).subscribe(data => {
-      this.currentThird = this.thirdService.dataFormatter(data, false);
+      this.currentThird = this.helper.dataFormatter(data, false);
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
     }, err => {
@@ -419,7 +421,7 @@ export class WizardComponent implements OnInit {
     }
 
     this.contractService.addContract(this.contract).subscribe(contract => {
-      contract = this.contractService.dataFormatter(contract, false);
+      contract = this.helper.dataFormatter(contract, false);
 
       this.groundsList.map((soil) => {
         const soilObject = {
@@ -430,7 +432,7 @@ export class WizardComponent implements OnInit {
           code_ormva: soil.code_ormva
         };
         this.parcelsService.addParcel(soilObject).subscribe(d => {
-          d = this.parcelsService.dataFormatter(d, false);
+          d = this.helper.dataFormatter(d, false);
           const id = (this.isEdit) ? this.contract.id : contract['id'];
           this.router.navigate([`/contrats/afficher/${id}`]);
         }, error1 => {

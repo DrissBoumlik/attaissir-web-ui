@@ -14,7 +14,7 @@ export class AddComponent implements OnInit {
   ngOnInit() {
 
     this.buttonOptionsAdd = {
-      text:  '+',
+      text: '+',
       type: 'success',
       useSubmitBehavior: true
     };

@@ -74,13 +74,4 @@ export class SoilsService {
     });
   }
 
-  /**
-   * Format data depending of API
-   * @param dat
-   * @param test
-   * @returns {any}
-   */
-  dataFormatter(dat, test) {
-    return (!test) ? dat['data'] : dat;
-  }
 }

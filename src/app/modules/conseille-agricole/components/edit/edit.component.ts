@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ConseilleAgricoleService} from '../../service/conseille-agricole.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConseilleAgricoleService } from '../../service/conseille-agricole.service';
 
 @Component({
   selector: 'app-edit',
@@ -12,8 +12,8 @@ export class EditComponent implements OnInit {
   conseille: any;
 
   constructor(private conseilleService: ConseilleAgricoleService,
-              private router: Router,
-              private route: ActivatedRoute) {
+    private router: Router,
+    private route: ActivatedRoute) {
 
   }
 

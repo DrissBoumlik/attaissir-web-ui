@@ -45,7 +45,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         ],
         disabled: 'false'
       },
-       {
+      {
         name: 'Magasin',
         icon: 'fa fa-shopping-bag',
         url: '/magasin/liste',

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../environments/environment';
-import {Third} from '../shared/classes/third';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { Third } from '../shared/classes/third';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class DynamicService {
 
   header1: any;
   constructor(private http: HttpClient) {
-    this.header1 =  new HttpHeaders({
+    this.header1 = new HttpHeaders({
       'Content-Type': 'application/json'
     });
   }

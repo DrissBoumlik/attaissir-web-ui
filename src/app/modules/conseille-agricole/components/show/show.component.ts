@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Helper} from '../../../../shared/classes/helper';
-import {ToastrService} from 'ngx-toastr';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ConseilleAgricoleService} from '../../service/conseille-agricole.service';
+import { Component, OnInit } from '@angular/core';
+import { Helper } from '../../../../shared/classes/helper';
+import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConseilleAgricoleService } from '../../service/conseille-agricole.service';
 
 @Component({
   selector: 'app-show',
@@ -16,8 +16,8 @@ export class ShowComponent implements OnInit {
   conseille: any = null;
 
   constructor(private conseilleService: ConseilleAgricoleService,
-              private router: Router,
-              private route: ActivatedRoute) {
+    private router: Router,
+    private route: ActivatedRoute) {
 
   }
 

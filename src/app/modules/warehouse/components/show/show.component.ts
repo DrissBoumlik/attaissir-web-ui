@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ConseilleAgricoleService} from '../../../conseille-agricole/service/conseille-agricole.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConseilleAgricoleService } from '../../../conseille-agricole/service/conseille-agricole.service';
 
 @Component({
   selector: 'app-show',
@@ -14,8 +14,8 @@ export class ShowComponent implements OnInit {
   magasin: any = null;
 
   constructor(private conseilleService: ConseilleAgricoleService,
-              private router: Router,
-              private route: ActivatedRoute) {
+    private router: Router,
+    private route: ActivatedRoute) {
 
   }
 

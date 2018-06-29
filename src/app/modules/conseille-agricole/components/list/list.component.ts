@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {ConseilleAgricoleService} from '../../service/conseille-agricole.service';
-import {ConseilleAgricole} from '../../../../shared/classes/conseille-agricole';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { ConseilleAgricoleService } from '../../service/conseille-agricole.service';
+import { ConseilleAgricole } from '../../../../shared/classes/conseille-agricole';
 
 @Component({
   selector: 'app-list',
@@ -31,9 +31,9 @@ export class ListComponent implements OnInit {
   conseille: ConseilleAgricole[];
 
   constructor(private conseilleService: ConseilleAgricoleService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private toastr: ToastrService) {
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastr: ToastrService) {
     this.third_parties = {};
     this.third_parties_count = 0;
 
@@ -62,6 +62,6 @@ export class ListComponent implements OnInit {
 
   gotoShow(id: any) {
     console.log(id);
-    this.router.navigate(['/conseille-agricole/afficher/' + id.data.id] );
+    this.router.navigate(['/conseille-agricole/afficher/' + id.data.id]);
   }
 }
