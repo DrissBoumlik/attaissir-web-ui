@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddComponent implements OnInit {
 
+  order_articles: any[];
+  buttonOptionsAdd: any;
   constructor() { }
 
   ngOnInit() {
+
+    this.buttonOptionsAdd = {
+      text: '+',
+      type: 'success',
+      useSubmitBehavior: true
+    };
   }
 
 }

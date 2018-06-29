@@ -5,6 +5,9 @@ import { WizardComponent } from './components/wizard/wizard.component';
 import { DxButtonModule, DxDataGridModule, DxFormModule, DxListModule, DxTextBoxModule } from 'devextreme-angular';
 import { TiersFormComponent } from './components/tiers-form/tiers-form.component';
 import { FormsModule } from '@angular/forms';
+import { ConseilleComponent } from './components/conseille/conseille.component';
+import { CommandeComponent } from './components/commande/commande.component';
+import { WarehouseComponent } from './components/warehouse/warehouse.component';
 
 @NgModule({
   imports: [
@@ -20,16 +23,22 @@ import { FormsModule } from '@angular/forms';
   exports: [
     WizardComponent,
     TiersFormComponent,
+    CommandeComponent,
     ArchwizardModule,
     FormsModule,
     DxListModule,
     DxFormModule,
     DxDataGridModule,
     DxButtonModule,
+    ConseilleComponent,
+    WarehouseComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     WizardComponent,
-    TiersFormComponent]
+    TiersFormComponent,
+    CommandeComponent,
+    ConseilleComponent,
+    WarehouseComponent]
 })
 export class SharedModule { }

@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Third} from '../../../../shared/classes/third';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Third } from '../../../../shared/classes/third';
 
 @Component({
   selector: 'app-add',

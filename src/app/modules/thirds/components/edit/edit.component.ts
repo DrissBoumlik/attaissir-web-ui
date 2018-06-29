@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { ThirdsService } from '../../services/thirds.service';
 import { Third } from '../../../../shared/classes/third';
 import { ToastrService } from 'ngx-toastr';
-import {Helper} from '../../../../shared/classes/helper';
+import { Helper } from '../../../../shared/classes/helper';
 
 
 @Component({

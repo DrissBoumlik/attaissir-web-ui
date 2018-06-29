@@ -6,7 +6,7 @@ import { Contract } from '../../../../shared/classes/contract';
 import { Third } from '../../../../shared/classes/third';
 import { Structure } from '../../../../shared/classes/structure';
 import { ContractsService } from '../../services/contracts.service';
-import {Helper} from '../../../../shared/classes/helper';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-edit',

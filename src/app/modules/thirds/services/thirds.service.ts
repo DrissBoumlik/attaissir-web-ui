@@ -45,6 +45,18 @@ export class ThirdsService {
   }
 
   /**
+   * @param {string} type
+   * @returns {Observable<any>}
+   */
+  getThirdPartiesByType(type: string): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/grid/type`, JSON.stringify(type), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  /**
    * Get a collection of any parties
    * @returns {Observable<any[]>}
    */
@@ -112,7 +124,6 @@ export class ThirdsService {
       })
     });
   }
-
 
   /**
    *

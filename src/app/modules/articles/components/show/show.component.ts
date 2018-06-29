@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Article} from '../../../../shared/classes/article';
-import {Helper} from '../../../../shared/classes/helper';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ArticlesService} from '../../services/articles.service';
+import { Article } from '../../../../shared/classes/article';
+import { Helper } from '../../../../shared/classes/helper';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ArticlesService } from '../../services/articles.service';
 
 @Component({
   selector: 'app-show',
@@ -14,8 +14,8 @@ export class ShowComponent implements OnInit {
   helper: any;
 
   constructor(public router: Router,
-              private route: ActivatedRoute,
-              private articleservice: ArticlesService) {
+    private route: ActivatedRoute,
+    private articleservice: ArticlesService) {
     this.helper = Helper;
   }
 

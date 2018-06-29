@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
-import {WarehoseService} from '../../service/warehose.service';
+import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { WarehoseService } from '../../service/warehose.service';
 import CustomStore from 'devextreme/data/custom_store';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {ZonesService} from '../../../contracts/services/zones.service';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { ZonesService } from '../../../contracts/services/zones.service';
 
 @Component({
   selector: 'app-list',
@@ -15,9 +15,9 @@ export class ListComponent implements OnInit {
   warehouses: any = {};
 
   constructor(private warehoseService: WarehoseService,
-              private thirdService: ThirdsService,
-              private zoneService: ZonesService,
-              private toastr: ToastrService) {
+    private thirdService: ThirdsService,
+    private zoneService: ZonesService,
+    private toastr: ToastrService) {
   }
 
 
@@ -28,7 +28,7 @@ export class ListComponent implements OnInit {
           .toPromise()
           .then(response => {
             let third = {};
-            response['data'] = response['data'].map( ress => {
+            response['data'] = response['data'].map(ress => {
               ress.third_party_id = 2;
               ress.zone_id = 14;
               this.zoneService.getCDAs().subscribe(
@@ -46,7 +46,7 @@ export class ListComponent implements OnInit {
                 }
               );
               return ress;
-              });
+            });
             const json = response;
             return json;
           })
@@ -64,11 +64,11 @@ export class ListComponent implements OnInit {
           .catch(err => {
             console.log(err);
             throw err;
-        });
+          });
       }
     });
   }
 
 
-  gotoShow(ev: any) {}
+  gotoShow(ev: any) { }
 }
