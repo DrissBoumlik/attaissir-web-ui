@@ -23,6 +23,14 @@ export class ArticlesService {
   }
 
   /**
+   * Get a Article
+   * @returns {Observable<Article>}
+   */
+  getArticle(id: number): Observable<Article> {
+    return this.http.get<Article>(`${environment.apiUrl}/${this.routeName}/${id}`);
+  }
+
+  /**
    * Get a collection of Article variables to be used in dropdowns in forms
    * @returns {Observable<Article[]>}
    */

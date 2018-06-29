@@ -113,15 +113,6 @@ export class ThirdsService {
     });
   }
 
-  /**
-   * Format data depending of API
-   * @param {any} dat
-   * @param {boolean} test
-   * @returns {Third[]}
-   */
-  dataFormatter = (dat: any, test: boolean) => {
-    return (!test) ? dat['data'] : dat;
-  }
 
   /**
    *

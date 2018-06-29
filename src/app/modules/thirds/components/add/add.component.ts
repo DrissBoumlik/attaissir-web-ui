@@ -27,7 +27,7 @@ export class AddComponent implements OnInit {
   onFormSubmit = function(e) {
     console.log(this.tier);
     this.thirdsService.addThird(this.tier).subscribe(data => {
-      data = this.thirdsService.dataFormatter(data, false);
+      data = this.helper.dataFormatter(data, false);
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
       this.router.navigate(['/tiers/afficher/' + data.id]);

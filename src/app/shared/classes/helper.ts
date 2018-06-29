@@ -76,4 +76,14 @@ export class Helper {
       }
     );
   }
+
+  /**
+   * Format data depending of API
+   * @param dat
+   * @param {boolean} test
+   * @returns {any}
+   */
+  public static dataFormatter = (dat: any, test: boolean) => {
+    return (!test) ? dat['data'] : dat;
+  }
 }

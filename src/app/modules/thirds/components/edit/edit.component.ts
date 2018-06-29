@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { ThirdsService } from '../../services/thirds.service';
 import { Third } from '../../../../shared/classes/third';
 import { ToastrService } from 'ngx-toastr';
+import {Helper} from '../../../../shared/classes/helper';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EditComponent implements OnInit {
   id: number;
+  helper: any;
 
   constructor(public route: ActivatedRoute,
     private location: Location,
@@ -20,6 +22,7 @@ export class EditComponent implements OnInit {
     private router: Router,
     public thirdsService: ThirdsService,
     private toastr: ToastrService) {
+    this.helper = Helper;
   }
 
   ngOnInit() {
@@ -30,7 +33,7 @@ export class EditComponent implements OnInit {
         this.thirdsService.getThird(this.id, true)
           .subscribe(data => {
             console.log(data);
-            this.tier = this.thirdsService.dataFormatter(data, false);
+            this.tier = this.helper.dataFormatter(data, false);
             if (this.tier.company_name || this.tier.patent_number || this.tier.ice
               || this.tier.rc || this.tier.tva_code || this.tier.if) {
               this.tier.morale = true;

@@ -6,6 +6,7 @@ import { Contract } from '../../../../shared/classes/contract';
 import { Third } from '../../../../shared/classes/third';
 import { Structure } from '../../../../shared/classes/structure';
 import { ContractsService } from '../../services/contracts.service';
+import {Helper} from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-edit',
@@ -16,6 +17,7 @@ export class EditComponent implements OnInit {
   groundsList?: any[];
   campaigns?: any[];
   id: number;
+  helper: any;
 
   constructor(
     public contract: Contract,
@@ -25,7 +27,9 @@ export class EditComponent implements OnInit {
     private router: Router,
     private location: Location,
     private toastr: ToastrService,
-    private contractService: ContractsService) { }
+    private contractService: ContractsService) {
+    this.helper = Helper;
+  }
 
   ngOnInit() {
     this.groundsList = [];
@@ -66,7 +70,7 @@ export class EditComponent implements OnInit {
             // this.campaigns = res.data.campaigns;
             this.contractService.getStrcutureById(res.data.structure.id).subscribe(
               (struct: Structure) => {
-                this.structure = this.contractService.dataFormatter(struct, false);
+                this.structure = this.helper.dataFormatter(struct, false);
               },
               (err) => {
                 console.log(err);
