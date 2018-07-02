@@ -9,7 +9,7 @@ export class AddComponent implements OnInit {
 
   order_articles: any[];
   buttonOptionsAdd: any;
-  constructor() { }
+  constructor( ) { }
 
   ngOnInit() {
 

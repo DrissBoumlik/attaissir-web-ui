@@ -7,6 +7,7 @@ import { ListComponent } from './components/list/list.component';
 import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { WarehouseRoutingModule } from './warehouse-routing.module';
+import { ReplenishmentComponent } from './components/replenishment/replenishment.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { WarehouseRoutingModule } from './warehouse-routing.module';
     DxDateBoxModule,
     DxDataGridModule
   ],
-  declarations: [AddComponent, EditComponent, ListComponent, ShowComponent]
+  declarations: [AddComponent, EditComponent, ListComponent, ShowComponent, ReplenishmentComponent]
 })
 
 export class WarehouseModule { }

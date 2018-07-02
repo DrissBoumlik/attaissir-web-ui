@@ -1,8 +1,8 @@
 <form>
-  <dx-form id="form" [formData]="conseille">
+  <dx-form id="form" [formData]="conseille" labelLocation="top">
 
 
-    <dxi-item itemType="group" caption="Informations Générales" [colCount]="2" i18n-caption>
+    <dxi-item itemType="group" caption="Informations Générales" [colCount]="3" i18n-caption>
       <dxi-item itemType="group">
         <dxi-item dataField="name">
           <dxo-label text="Objet" i18n-text></dxo-label>
@@ -12,33 +12,26 @@
         </dxi-item>
 
 
-        <dxi-item dataField="city">
-          <dxo-label text="Date" i18n-text></dxo-label>
-          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
-                               i18n-message></dxi-validation-rule>
-        </dxi-item>
       </dxi-item>
 
       <dxi-item itemType="group">
 
-        <dxi-item dataField="tiers" editorType="dxSelectBox" [editorOptions]="regions">
+        <dxi-item  editorType="dxSelectBox" [editorOptions]="fournisseurs">
           <dxo-label
-            text="Tier" i18n-text>
+            text="Fournisseur" i18n-text>
           </dxo-label>
-          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+          <dxi-validation-rule type="required" message="Le champ fournisseur est obligatoire"
                                i18n-message></dxi-validation-rule>
         </dxi-item>
 
+      </dxi-item>
 
-
-        <dxi-item dataField="magasins" editorType="dxSelectBox" [editorOptions]="regions">
-          <dxo-label
-            text="Magasin" i18n-text>
-          </dxo-label>
+      <dxi-item itemType="group" >
+        <dxi-item dataField="dateCommande" editorType="dxDateBox">
+          <dxo-label text="Date" i18n-text></dxo-label>
           <dxi-validation-rule type="required" message="Le champ région est obligatoire"
                                i18n-message></dxi-validation-rule>
         </dxi-item>
-
       </dxi-item>
 
     </dxi-item>
@@ -47,11 +40,11 @@
     <dxi-item itemType="group" [colCount]="5" i18n-caption>
       <dxi-item itemType="group">
 
-        <dxi-item dataField="tiers" editorType="dxSelectBox" [editorOptions]="regions">
+        <dxi-item  editorType="dxSelectBox"  [editorOptions]="families">
           <dxo-label
             text="Famille" i18n-text>
           </dxo-label>
-          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+          <dxi-validation-rule type="required" message="Le champ Famille est obligatoire"
                                i18n-message></dxi-validation-rule>
         </dxi-item>
 
@@ -59,11 +52,11 @@
 
       <dxi-item itemType="group">
 
-        <dxi-item dataField="tiers" editorType="dxSelectBox" [editorOptions]="regions">
+        <dxi-item  editorType="dxSelectBox" [editorOptions]="subFamilies">
           <dxo-label
             text="Sous-Famille" i18n-text>
           </dxo-label>
-          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+          <dxi-validation-rule type="required" message="Le champ Sous-Famille est obligatoire"
                                i18n-message></dxi-validation-rule>
         </dxi-item>
 
@@ -86,10 +79,10 @@
       <dxi-item itemType="group">
 
 
-        <dxi-item dataField="quantite">
+        <dxi-item dataField="quantite" editorType="dxNumberBox" >
           <dxo-label text="Quantité" i18n-text></dxo-label>
 
-          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+          <dxi-validation-rule type="required" message="Le champ quantite est obligatoire"
                                i18n-message></dxi-validation-rule>
         </dxi-item>
 

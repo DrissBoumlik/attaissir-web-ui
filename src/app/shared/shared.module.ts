@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ArchwizardModule } from 'angular-archwizard';
 import { WizardComponent } from './components/wizard/wizard.component';
-import { DxButtonModule, DxDataGridModule, DxFormModule, DxListModule, DxTextBoxModule } from 'devextreme-angular';
+import {DxButtonModule, DxDataGridModule, DxDateBoxModule, DxFormModule, DxListModule, DxTextBoxModule} from 'devextreme-angular';
 import { TiersFormComponent } from './components/tiers-form/tiers-form.component';
 import { FormsModule } from '@angular/forms';
 import { ConseilleComponent } from './components/conseille/conseille.component';
@@ -17,6 +17,7 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
     DxListModule,
     DxDataGridModule,
     DxTextBoxModule,
+    DxDateBoxModule,
     FormsModule
   ],
   exports: [
