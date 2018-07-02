@@ -77,11 +77,13 @@
         </dxi-column>
         <dxi-column dataField="type" caption="Type" allowColumnResizing="true">
         </dxi-column>
-        <dxi-column dataField="article_group" caption="Groupe marchandise" i18n-caption>
+        <dxi-column dataField="article_category_parent" caption="Famille" i18n-caption>
         </dxi-column>
-        <dxi-column dataField="article_category" caption="Famille" i18n-caption>
+        <dxi-column dataField="article_category" caption="Sous-Famille" i18n-caption>
         </dxi-column>
         <dxi-column dataField="technical_caracteristics" caption="Caractér technique" i18n-caption>
+        </dxi-column>
+        <dxi-column dataField="article_group" caption="Groupe marchandise" i18n-caption>
         </dxi-column>
         <!--<div *dxTemplate="let data of 'familyTemplate'">
           <a class="siam-link" (click)="helper.gotoShow('familles', data.data.article_category_id, router, toastr)">{{ data.value }}</a>

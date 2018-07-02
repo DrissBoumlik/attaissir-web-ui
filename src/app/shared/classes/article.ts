@@ -15,5 +15,7 @@ export class Article {
   technical_caracteristics?: string;
   type: string; // ['product', 'service']
   article_group: string;
+  category?: any;
+  parent_category?: any;
   article_category_id?: number;
 }

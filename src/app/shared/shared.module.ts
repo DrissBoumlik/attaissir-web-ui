@@ -15,7 +15,6 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
     ArchwizardModule,
     DxFormModule,
     DxListModule,
-    DxButtonModule,
     DxDataGridModule,
     DxTextBoxModule,
     FormsModule
@@ -29,7 +28,6 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
     DxListModule,
     DxFormModule,
     DxDataGridModule,
-    DxButtonModule,
     ConseilleComponent,
     WarehouseComponent
   ],
