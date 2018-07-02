@@ -10,6 +10,7 @@ export class Article {
   unit: number;
   code: number;
   price: number;
+  article_category: any;
   dose: string; // measure
   technical_caracteristics?: string;
   type: string; // ['product', 'service']

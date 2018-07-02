@@ -11,6 +11,7 @@ import { Helper } from '../../classes/helper';
   styleUrls: ['./tiers-form.component.scss']
 })
 export class TiersFormComponent implements OnInit {
+
   @Output() submit: EventEmitter<any> = new EventEmitter();
 
 

@@ -1,8 +1,9 @@
-import { ZonesService } from '../../../modules/contracts/services/zones.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Third } from '../../classes/third';
-import { Helper } from '../../classes/helper';
-import { ThirdsService } from '../../../modules/thirds/services/thirds.service';
+import {ZonesService} from '../../../modules/contracts/services/zones.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Third} from '../../classes/third';
+import {Helper} from '../../classes/helper';
+import {ThirdsService} from '../../../modules/thirds/services/thirds.service';
+import {Toast, ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-warehouse-form',
@@ -14,21 +15,27 @@ export class WarehouseComponent implements OnInit {
   structures: any[];
   regions: any[];
   zones: any[];
+  cda: any[];
   tiers: any;
-  magasin: any[];
+
+  helper: any;
+  cdasEditorOptions: any;
 
   @Output() submit: EventEmitter<any> = new EventEmitter();
 
 
   @Input() isEdit: boolean;
   @Input() id?: number;
-  @Input() conseille: Third;
-  @Input() isWizard?: boolean;
   @Input() validationGroup?: string;
   @Input() readOnly?: boolean;
+  @Input() magasin: any;
 
   buttonOptions: any;
-  constructor(private thirdService: ThirdsService) { }
+
+  constructor(private thirdService: ThirdsService, private  zonesService: ZonesService,
+              private toastr: ToastrService) {
+    this.helper = Helper;
+  }
 
   ngOnInit() {
 
@@ -37,6 +44,18 @@ export class WarehouseComponent implements OnInit {
       type: 'success',
       useSubmitBehavior: true
     };
+
+
+    this.zonesService.getCDAs().subscribe(res => {
+
+      this.cdasEditorOptions = {
+        dataSource: res,
+        displayExpr: 'name',
+        valueExpr: 'id'
+      };
+    }, error1 => {
+      this.toastr.warning(error1.error.message);
+    });
 
     this.thirdService.getThirdsDx().subscribe(
       (res: any) => {

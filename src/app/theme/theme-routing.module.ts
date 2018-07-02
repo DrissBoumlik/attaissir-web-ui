@@ -35,6 +35,10 @@ const routes: Routes = [
       },
       {
         path: '',
+        loadChildren: '../modules/commande/commande.module#CommandeModule'
+      },
+      {
+        path: '',
         loadChildren: '../modules/articles/articles.module#ArticlesModule'
       },
       {

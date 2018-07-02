@@ -31,6 +31,7 @@ import { ThirdsModule } from './modules/thirds/thirds.module';
 import { ArticlesModule } from './modules/articles/articles.module';
 import { ConseilleAgricoleModule } from './modules/conseille-agricole/conseille-agricole.module';
 import { WarehouseComponent } from './shared/components/warehouse/warehouse.component';
+import {CommandeModule} from './modules/commande/commande.module';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { WarehouseComponent } from './shared/components/warehouse/warehouse.comp
     AuthModule,
     ThirdsModule,
     ContractsModule,
+    CommandeModule,
     ParcelsModule,
     CardsModule,
     ArticlesModule,
@@ -79,7 +81,7 @@ import { WarehouseComponent } from './shared/components/warehouse/warehouse.comp
     FormsModule,
     DxPivotGridModule,
     DxTemplateModule,
-    DxCheckBoxModule
+    DxCheckBoxModule,
   ],
   providers: [{
     provide: LOCALE_ID,

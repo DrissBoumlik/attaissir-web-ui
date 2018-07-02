@@ -85,13 +85,14 @@
 
       <dxi-item itemType="group">
 
-        <dxi-item dataField="tiers" editorType="dxSelectBox" [editorOptions]="regions">
-          <dxo-label
-            text="Quantité" i18n-teTiers:xt>
-          </dxo-label>
+
+        <dxi-item dataField="quantite">
+          <dxo-label text="Quantité" i18n-text></dxo-label>
+
           <dxi-validation-rule type="required" message="Le champ région est obligatoire"
                                i18n-message></dxi-validation-rule>
         </dxi-item>
+
 
       </dxi-item>
 
@@ -113,14 +114,11 @@
 
       <dx-data-grid id="gridContainer" [dataSource]="orderDetails">
 
-        <dxi-column dataField="Famille" [width]="60" caption="Title"></dxi-column>
-        <dxi-column dataField="FirstName"></dxi-column>
-        <dxi-column dataField="LastName"></dxi-column>
-        <dxi-column dataField="City"></dxi-column>
-        <dxi-column dataField="State"></dxi-column>
-        <dxi-column dataField="Position" [width]="130"></dxi-column>
-        <dxi-column dataField="BirthDate" [width]="100" dataType="date"></dxi-column>
-        <dxi-column dataField="HireDate" [width]="100" dataType="date"></dxi-column>
+        <dxi-column dataField="Famille"></dxi-column>
+        <dxi-column dataField="Sous-Famille"></dxi-column>
+        <dxi-column dataField="article"></dxi-column>
+        <dxi-column dataField="quantite"></dxi-column>
+
       </dx-data-grid>
     </dxi-item>
 
