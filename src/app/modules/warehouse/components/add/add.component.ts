@@ -4,6 +4,7 @@ import {ThirdsService} from '../../../thirds/services/thirds.service';
 import {Router} from '@angular/router';
 import {Warehouse} from '../../../../shared/classes/warehouse';
 import {ToastrService} from 'ngx-toastr';
+import {Helper} from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-add',
@@ -11,22 +12,25 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./add.component.scss']
 })
 export class AddComponent implements OnInit {
+  helper: any
 
-
-  constructor(public warehouse: Warehouse,
+  constructor(
               private router: Router,
+              public warehouse: Warehouse,
               public warehouseService: WarehoseService,
               private toastr: ToastrService) {
+    this.helper = Helper;
   }
 
   ngOnInit() {
+    console.log('test');
+
   }
 
 
   onFormSubmit = function (e) {
-    console.log(e);
-    this.warehouseService.addWarehouse(this.magasin).subscribe(data => {
-      data = this.warehoseService.dataFormatter(data, false);
+    console.log('ok');
+    this.warehouseService.addWarehouse(this.warehouse).subscribe(data => {
       this.toastr.success(
         `Nouveau magasin ajouté avec succès.`);
       this.router.navigate(['/magasin']);

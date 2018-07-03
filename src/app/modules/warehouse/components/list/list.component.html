@@ -19,6 +19,7 @@
         [columnHidingEnabled]="true"
         [allowColumnResizing]="false"
         [allowColumnReordering]="true"
+        (onEditingStart)="onStartEdit($event.data.id)"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         KeyExpr="id">
 
@@ -52,11 +53,11 @@
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
         <dxi-column dataField="id" [width]="50" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="caTemplate"></dxi-column>
-        <dxi-column dataField="cda" caption="CDA"></dxi-column>
+        <dxi-column dataField="name" caption="CDA"></dxi-column>
         <dxi-column dataField="name" caption="Libelle"></dxi-column>
-        <dxi-column dataField="third.full_name" caption="Nom complet"></dxi-column>
-        <dxi-column dataField="email" caption="Adresse e-mail "></dxi-column>
-        <dxi-column dataField="tel" caption="N° Téléphone"></dxi-column>
+        <dxi-column dataField="full_name" caption="Nom complet"></dxi-column>
+        <dxi-column dataField="tp_email" caption="Adresse e-mail "></dxi-column>
+        <dxi-column dataField="tp_tel" caption="N° Téléphone"></dxi-column>
         <dxi-column dataField="third.company_name" caption="Raison sociale"></dxi-column>
 
         <div *dxTemplate="let data of 'caTemplate'">

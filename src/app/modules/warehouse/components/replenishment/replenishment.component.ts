@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReplenishmentComponent implements OnInit {
 
+  replenishment: any;
   constructor() { }
 
   ngOnInit() {
