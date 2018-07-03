@@ -51,7 +51,7 @@ export class ListComponent implements OnInit {
                   ress.cda = cda.name;
                 }
               );
-              this.thirdService.getThird(ress.third_party_id, false).subscribe(
+              this.thirdService.getThird(ress.third_party_id, 'aggregared', false).subscribe(
                 (res: any) => {
                   third = res.data;
                   ress.third = third;

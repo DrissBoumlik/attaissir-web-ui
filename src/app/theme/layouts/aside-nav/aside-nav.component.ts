@@ -35,6 +35,17 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         disabled: 'false'
       },
       {
+        name: 'Jeune promoteur',
+        icon: 'flaticon-users',
+        url: '/jeunepromoteurs/liste',
+        description: 'Gestion des Jeune promoteurs',
+        subMenu: [
+          { icon: 'flaticon-plus', name: 'Nouvel Jeune promoteur', url: '/jeunepromoteurs/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des Jeune promoteurs', url: '/jeunepromoteurs/liste' },
+        ],
+        disabled: 'false'
+      },
+      {
         name: 'Conseille agricole',
         icon: 'flaticon-user',
         url: '/conseille-agricole/liste',

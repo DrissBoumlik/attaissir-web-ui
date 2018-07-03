@@ -1,323 +1,324 @@
 <div id="form-container">
-  <dx-form id="form"
-           [formData]="tier"
-           [readOnly]="false"
-           [showColonAfterLabel]="true"
-           [showValidationSummary]="true"
-           labelLocation="top"
-           validationGroup="{{ tierData }}">
+  <form>
+    <dx-form id="form"
+             [formData]="tier"
+             [readOnly]="false"
+             [showColonAfterLabel]="true"
+             [showValidationSummary]="true"
+             labelLocation="top"
+             validationGroup="{{ tierData }}">
 
-    <!--<dxi-item itemType="group" [colCount]="3" caption="Type d'agrégé" i18n-caption>
+      <!--<dxi-item itemType="group" [colCount]="3" caption="Type d'agrégé" i18n-caption>
 
-      <dxi-item editorType="dxCheckBox" dataField="types[0].mechanization_provider"
-                *ngFor="let v of vars.third_party_structure_types">
-        <dxo-label
-          text="{{ v }}" i18n-text="Fournisseur de prestation">
-        </dxo-label>
-      </dxi-item>
+        <dxi-item editorType="dxCheckBox" dataField="types[0].mechanization_provider"
+                  *ngFor="let v of vars.third_party_structure_types">
+          <dxo-label
+            text="{{ v }}" i18n-text="Fournisseur de prestation">
+          </dxo-label>
+        </dxi-item>
 
-      <dxi-item editorType="dxCheckBox" dataField="types[0].cutting_supplier">
-        <dxo-label
-          text="Fournisseur de bouture" i18n-text="Fournisseur de bouture">
-        </dxo-label>
-      </dxi-item>
+        <dxi-item editorType="dxCheckBox" dataField="types[0].cutting_supplier">
+          <dxo-label
+            text="Fournisseur de bouture" i18n-text="Fournisseur de bouture">
+          </dxo-label>
+        </dxi-item>
 
-      <dxi-item editorType="dxCheckBox" dataField="types[0].aggregated" [checked]="true">
-        <dxo-label
-          text="Agrégé" i18n-text="Agrégé">
-        </dxo-label>
-      </dxi-item>
+        <dxi-item editorType="dxCheckBox" dataField="types[0].aggregated" [checked]="true">
+          <dxo-label
+            text="Agrégé" i18n-text="Agrégé">
+          </dxo-label>
+        </dxi-item>
 
-    </dxi-item>-->
+      </dxi-item>-->
 
-    <dxi-item itemType="group" caption="Informations Générales" [colCount]="2" i18n-caption>
+      <dxi-item itemType="group" caption="Informations Générales" [colCount]="2" i18n-caption>
 
-      <dxi-item dataField="full_name">
-        <dxo-label
-          text="Nom Complet" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule type="required" message="Nom est obligatoire" i18n-message></dxi-validation-rule>
-      </dxi-item>
+        <dxi-item dataField="full_name">
+          <dxo-label
+            text="Nom Complet" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Nom est obligatoire" i18n-message></dxi-validation-rule>
+        </dxi-item>
 
-      <dxi-item dataField="full_name_ar">
-        <dxo-label
-          text="الاسم الكامل" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule
-                             type="pattern"
-                             [pattern]="arabicPattern"
-                             message="Nom n'est pas en arabe." i18n-message>
-        </dxi-validation-rule>
-        <dxi-validation-rule type="required" message="Nom (Arabe) est obligatoire"
-                             i18n-message></dxi-validation-rule>
-      </dxi-item>
+        <dxi-item dataField="full_name_ar">
+          <dxo-label
+            text="الاسم الكامل" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule
+            type="pattern"
+            [pattern]="arabicPattern"
+            message="Nom n'est pas en arabe." i18n-message>
+          </dxi-validation-rule>
+          <dxi-validation-rule type="required" message="Nom (Arabe) est obligatoire"
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
 
-      <dxi-item dataField="cin" [disabled]="isEdit">
-        <dxi-validation-rule type="required" message="CIN est obligatoire" i18n-message></dxi-validation-rule>
-        <dxi-validation-rule
-          type="pattern"
-          [pattern]="cinPattern"
-          message="CIN invalide" i18n-message>
-        </dxi-validation-rule>
-      </dxi-item>
-      <dxi-item dataField="sexe"
-                editorType="dxSelectBox" [editorOptions]="sexe">
-        <dxo-label
-          text="Sexe" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule type="required" message="Sexe est obligatoire" i18n-message></dxi-validation-rule>
-      </dxi-item>
+        <dxi-item dataField="cin" [disabled]="isEdit">
+          <dxi-validation-rule type="required" message="CIN est obligatoire" i18n-message></dxi-validation-rule>
+          <dxi-validation-rule
+            type="pattern"
+            [pattern]="cinPattern"
+            message="CIN invalide" i18n-message>
+          </dxi-validation-rule>
+        </dxi-item>
+        <dxi-item dataField="sexe"
+                  editorType="dxSelectBox" [editorOptions]="sexe">
+          <dxo-label
+            text="Sexe" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Sexe est obligatoire" i18n-message></dxi-validation-rule>
+        </dxi-item>
 
-      <dxi-item dataField="address">
-        <dxo-label
-          text="Adresse" i18n-text>
-        </dxo-label>
-      </dxi-item>
-      <dxi-item dataField="address_ar">
-        <dxo-label
-          text="العنوان" i18n-text>
-        </dxo-label>
-      </dxi-item>
+        <dxi-item dataField="address">
+          <dxo-label
+            text="Adresse" i18n-text>
+          </dxo-label>
+        </dxi-item>
+        <dxi-item dataField="address_ar">
+          <dxo-label
+            text="العنوان" i18n-text>
+          </dxo-label>
+        </dxi-item>
 
-      <dxi-item dataField="zip_code" [editorOptions]="{
+        <dxi-item dataField="zip_code" [editorOptions]="{
                     mask: '00 000',
                     useMaskedValue: false,
                     maskInvalidMessage: 'Le code postale est incorrect.'
                 }">
-        <dxo-label
-          text="Code postal" i18n-text>
-        </dxo-label>
-      </dxi-item>
-      <dxi-item dataField="city" editorType="dxSelectBox" [editorOptions]="cities" autocomplete="false">
-        <dxo-label
-          text="Ville" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule type="required" message="Ville est obligatoire" i18n-message>
-        </dxi-validation-rule>
-      </dxi-item>
-
-      <dxi-item dataField="district">
-        <dxo-label
-          text="Arrondissement" i18n-text>
-        </dxo-label>
-      </dxi-item>
-
-      <dxi-item dataField="commandment">
-        <dxo-label
-          text="Commandement" i18n-text>
-        </dxo-label>
-      </dxi-item>
-
-      <dxi-item dataField="region" editorType="dxSelectBox" [editorOptions]="regions">
-        <dxo-label
-          text="Région" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule type="required" message="Région est obligatoire"
-                             i18n-message></dxi-validation-rule>
-      </dxi-item>
-
-      <dxi-item dataField="commune">
-        <dxo-label
-          text="Commune" i18n-text>
-        </dxo-label>
-      </dxi-item>
-
-
-      <dxi-item dataField="tel1" [editorOptions]="{
-                    mask: '00 00 00 00 00',
-                    useMaskedValue: true,
-                    maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
-                }">
-        <dxo-label
-          text="Telephone 1" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule *ngIf="tier.tel2"
-          type="pattern"
-          [pattern]="phonePattern"
-          message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
-        </dxi-validation-rule>
-      </dxi-item>
-      <dxi-item dataField="tel2" [editorOptions]="{
-                    mask: '00 00 00 00 00',
-                    useMaskedValue: true,
-                    maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
-                }">
-        <dxo-label
-          text="Telephone 2" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule *ngIf="tier.tel2"
-           type="pattern"
-           [pattern]="phonePattern"
-           message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
-        </dxi-validation-rule>
-      </dxi-item>
-
-
-      <dxi-item itemType="group" caption="" [colCount]="2" style="padding-left: 0; padding-top: 0" i18n-caption>
-        <dxi-item [colSpan]="(isEdit) ? 1 : 2"
-                  dataField="birth_date"
-                  editorType="dxDateBox"
-                  [editorOptions]="dateOptions">
           <dxo-label
-            text="Date de naissance" i18n-text>
+            text="Code postal" i18n-text>
           </dxo-label>
-          <dxi-validation-rule type="required" message="Le champ date de naissance est obligatoire" i18n-message>
+        </dxi-item>
+        <dxi-item dataField="city" editorType="dxSelectBox" [editorOptions]="cities" autocomplete="false">
+          <dxo-label
+            text="Ville" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Ville est obligatoire" i18n-message>
           </dxi-validation-rule>
         </dxi-item>
-        <dxi-item *ngIf="isEdit"
-                  dataField="death_date"
-                  editorType="dxDateBox"
-                  [editorOptions]="dateOptions">
+
+        <dxi-item dataField="district">
           <dxo-label
-            text="Date de décès" i18n-text>
+            text="Arrondissement" i18n-text>
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="commandment">
+          <dxo-label
+            text="Commandement" i18n-text>
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="region" editorType="dxSelectBox" [editorOptions]="regions">
+          <dxo-label
+            text="Région" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Région est obligatoire"
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
+
+        <dxi-item dataField="commune">
+          <dxo-label
+            text="Commune" i18n-text>
+          </dxo-label>
+        </dxi-item>
+
+
+        <dxi-item dataField="tel1" [editorOptions]="{
+                    mask: '00 00 00 00 00',
+                    useMaskedValue: true,
+                    maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
+                }">
+          <dxo-label
+            text="Telephone 1" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule *ngIf="tier.tel2"
+                               type="pattern"
+                               [pattern]="phonePattern"
+                               message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
+          </dxi-validation-rule>
+        </dxi-item>
+        <dxi-item dataField="tel2" [editorOptions]="{
+                    mask: '00 00 00 00 00',
+                    useMaskedValue: true,
+                    maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
+                }">
+          <dxo-label
+            text="Telephone 2" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule *ngIf="tier.tel2"
+                               type="pattern"
+                               [pattern]="phonePattern"
+                               message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
+          </dxi-validation-rule>
+        </dxi-item>
+
+
+        <dxi-item itemType="group" caption="" [colCount]="2" style="padding-left: 0; padding-top: 0" i18n-caption>
+          <dxi-item [colSpan]="(isEdit) ? 1 : 2"
+                    dataField="birth_date"
+                    editorType="dxDateBox"
+                    [editorOptions]="dateOptions">
+            <dxo-label
+              text="Date de naissance" i18n-text>
+            </dxo-label>
+            <dxi-validation-rule type="required" message="Le champ date de naissance est obligatoire" i18n-message>
+            </dxi-validation-rule>
+          </dxi-item>
+          <dxi-item *ngIf="isEdit"
+                    dataField="death_date"
+                    editorType="dxDateBox"
+                    [editorOptions]="dateOptions">
+            <dxo-label
+              text="Date de décès" i18n-text>
+            </dxo-label>
+          </dxi-item>
+        </dxi-item>
+
+        <dxi-item dataField="email">
+          <dxo-label
+            text="Email" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule *ngIf="tier.email"
+                               type="email"
+                               message="Ce n'est pas une adresse email valide."
+                               i18n-message
+          >
+          </dxi-validation-rule>
+        </dxi-item>
+        <dxi-item dataField="education_degree" editorType="dxSelectBox" [editorOptions]="education_degree">
+          <dxo-label
+            text="Niveau d`instruction" i18n-text>
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="civil_status"
+                  editorType="dxSelectBox" [editorOptions]="civil_status">
+          <dxo-label
+            text="Situation Familiale" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Situation familiale est obligatoire"
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
+        <dxi-item dataField="children_number" editorType="dxNumberBox"
+                  [editorOptions]="{ value: !isEdit ? 0 : tier?.children_number, min: 0 }">
+          <dxo-label
+            text="Nombre d'enfants" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="numeric" [min]="0" message="Vous ne pouvez pas avoir des enfants négatifs."
+                               i18n-message></dxi-validation-rule>
+        </dxi-item>
+
+        <dxi-item editorType="dxCheckBox" dataField="is_insured">
+          <dxo-label
+            text="Assurance" i18n-text>
+          </dxo-label>
+        </dxi-item>
+        <dxi-item editorType="dxCheckBox" dataField="is_retired">
+          <dxo-label
+            text="Retraite" i18n-text>
+          </dxo-label>
+        </dxi-item>
+        <dxi-item dataField="payment_method" editorType="dxRadioGroup" [editorOptions]="payment_method" [colSpan]="2">
+          <dxo-label
+            text="Mode de paiement" i18n-text>
           </dxo-label>
         </dxi-item>
       </dxi-item>
 
-      <dxi-item dataField="email">
-        <dxo-label
-          text="Email" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule *ngIf="tier.email"
-                             type="email"
-                             message="Ce n'est pas une adresse email valide."
-                             i18n-message
-        >
-        </dxi-validation-rule>
-      </dxi-item>
-      <dxi-item dataField="education_degree" editorType="dxSelectBox" [editorOptions]="education_degree">
-        <dxo-label
-          text="Niveau d`instruction" i18n-text>
-        </dxo-label>
-      </dxi-item>
 
-      <dxi-item dataField="civil_status"
-                editorType="dxSelectBox" [editorOptions]="civil_status">
-        <dxo-label
-          text="Situation Familiale" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule type="required" message="Situation familiale est obligatoire"
-                             i18n-message></dxi-validation-rule>
-      </dxi-item>
-      <dxi-item dataField="children_number" editorType="dxNumberBox"
-                [editorOptions]="{ value: !isEdit ? 0 : tier?.children_number, min: 0 }">
-        <dxo-label
-          text="Nombre d'enfants" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule type="numeric" [min]="0" message="Vous ne pouvez pas avoir des enfants négatifs."
-                             i18n-message></dxi-validation-rule>
-      </dxi-item>
-
-      <dxi-item editorType="dxCheckBox" dataField="is_insured">
-        <dxo-label
-          text="Assurance" i18n-text>
-        </dxo-label>
-      </dxi-item>
-      <dxi-item editorType="dxCheckBox" dataField="is_retired">
-        <dxo-label
-          text="Retraite" i18n-text>
-        </dxo-label>
-      </dxi-item>
-      <dxi-item dataField="payment_method" editorType="dxRadioGroup" [editorOptions]="payment_method" [colSpan]="2">
-        <dxo-label
-          text="Mode de paiement" i18n-text>
-        </dxo-label>
-      </dxi-item>
-    </dxi-item>
+      <dxi-item itemType="group" [colCount]="2" caption="Facturation" i18n-caption>
+        <dxi-item dataField="bank_name" editorType="dxSelectBox" [editorOptions]="bank_names">
+          <dxo-label
+            text="Nom de banque" i18n-text>
+          </dxo-label>
+        </dxi-item>
 
 
-    <dxi-item itemType="group" [colCount]="2" caption="Facturation" i18n-caption>
-      <dxi-item dataField="bank_name" editorType="dxSelectBox" [editorOptions]="bank_names">
-        <dxo-label
-          text="Nom de banque" i18n-text>
-        </dxo-label>
-      </dxi-item>
-
-
-      <dxi-item dataField="rib" [editorOptions]="{
+        <dxi-item dataField="rib" [editorOptions]="{
                                                   useMaskedValue: false,
                                                   mask: '000000 0000000000000000 00',
                                                   maskInvalidMessage: 'RIB est invalide'
                                                   }" [colSpan]="2">
-        <dxo-label
-          text="RIB" i18n-text>
-        </dxo-label>
-        <dxi-validation-rule type="required" message="Le RIB est obligatoire" i18n-message>
-        </dxi-validation-rule>
+          <dxo-label
+            text="RIB" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Le RIB est obligatoire" i18n-message>
+          </dxi-validation-rule>
 
           <dxi-validation-rule
-                             type="pattern"
-                             [pattern]="ribKeyPattern"
-                             message="RIB est invalide" i18n-message>
-        </dxi-validation-rule>
+            type="pattern"
+            [pattern]="ribKeyPattern"
+            message="RIB est invalide" i18n-message>
+          </dxi-validation-rule>
 
+        </dxi-item>
       </dxi-item>
-    </dxi-item>
 
-    <dxi-item dataField="morale" editorType="dxSwitch" [editorOptions]="{
+      <dxi-item dataField="morale" editorType="dxSwitch" *ngIf="!morale" [editorOptions]="{
       onText: 'Oui',
       offText: 'Non'
     }" (change)="onMoraleChanged($event)">
-      <dxo-label
-        text="Personne Morale?" i18n-text>
-      </dxo-label>
-    </dxi-item>
-
-    <dxi-item itemType="group" caption="Société"
-              [colCount]="2" i18n-caption="Personne morale" *ngIf="tier.morale">
-
-      <dxi-item dataField="company_name">
         <dxo-label
-          text="Raison sociale">
+          text="Personne Morale?" i18n-text>
         </dxo-label>
       </dxi-item>
 
-      <dxi-item dataField="rc" editorType="dxNumberBox">
+      <dxi-item itemType="group" caption="Société"
+                [colCount]="2" i18n-caption="Personne morale" *ngIf="tier.morale">
+
+        <dxi-item dataField="company_name">
+          <dxo-label
+            text="Raison sociale">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="rc" editorType="dxNumberBox">
+          <dxo-label
+            text="Registre de commerce" i18n-text="registre de commerce">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="patent_number" editorType="dxNumberBox">
+          <dxo-label
+            text="Numéro de patente" i18n-text="">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="if" editorType="dxNumberBox">
+          <dxo-label
+            text="Identification fiscal">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="ice" editorType="dxNumberBox">
+          <dxo-label
+            text="ICE" i18n-text="">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="tva_code" editorType="dxNumberBox">
+          <dxo-label
+            text="Code TVA" i18n-text>
+          </dxo-label>
+        </dxi-item>
+
+      </dxi-item>
+
+
+      <dxi-item dataField="etat" editorType="dxSwitch" *ngIf="false">
         <dxo-label
-          text="Registre de commerce" i18n-text="registre de commerce">
+          text="Est actif?" i18n-text>
         </dxo-label>
       </dxi-item>
 
-      <dxi-item dataField="patent_number" editorType="dxNumberBox">
-        <dxo-label
-          text="Numéro de patente" i18n-text="">
-        </dxo-label>
+      <hr>
+
+      <dxi-item
+        itemType="button"
+        alignment="left"
+        [buttonOptions]="buttonOptions">
       </dxi-item>
-
-      <dxi-item dataField="if" editorType="dxNumberBox">
-        <dxo-label
-          text="Identification fiscal">
-        </dxo-label>
-      </dxi-item>
-
-      <dxi-item dataField="ice" editorType="dxNumberBox">
-        <dxo-label
-          text="ICE" i18n-text="">
-        </dxo-label>
-      </dxi-item>
-
-      <dxi-item dataField="tva_code" editorType="dxNumberBox">
-        <dxo-label
-          text="Code TVA" i18n-text>
-        </dxo-label>
-      </dxi-item>
-
-    </dxi-item>
-
-
-    <dxi-item dataField="etat" editorType="dxSwitch" *ngIf="false">
-      <dxo-label
-        text="Est actif?" i18n-text>
-      </dxo-label>
-    </dxi-item>
-
-    <hr>
-
-    <dxi-item
-      itemType="button"
-      alignment="left"
-      [buttonOptions]="buttonOptions">
-    </dxi-item>
-  </dx-form>
-
+    </dx-form>
+  </form>
 </div>
