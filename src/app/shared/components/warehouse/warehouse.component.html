@@ -1,6 +1,7 @@
 
 <div id="form-container">
-  <dx-form id="form"  [formData]="magasin"  validationGroup="tierData">
+  <form>
+  <dx-form id="form"  [formData]="warehouse"  validationGroup="tierData" >
 
 
     <dxi-item itemType="group"  caption="Informations Générales" [colCount]="2" i18n-caption>
@@ -12,13 +13,14 @@
                                i18n-message></dxi-validation-rule>
         </dxi-item>
 
-        <dxi-item dataField="city">
-          <dxo-label text="Ville" i18n-text> </dxo-label>
-          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
-                               i18n-message></dxi-validation-rule>
+
+        <dxi-item  editorType="dxSelectBox"[editorOptions]="citys" >
+          <dxo-label
+            text="Ville" i18n-text>
+          </dxo-label>
         </dxi-item>
 
-        <dxi-item dataField="postal_code">
+       <dxi-item dataField="postal_code">
           <dxo-label text="Code postal" i18n-text> </dxo-label>
         </dxi-item>
 
@@ -80,4 +82,5 @@
     </dxi-item>
 
   </dx-form>
+  </form>
 </div>

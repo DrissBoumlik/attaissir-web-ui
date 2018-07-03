@@ -17,6 +17,7 @@ export class WarehouseComponent implements OnInit {
   zones: any[];
   cda: any[];
   tiers: any;
+  citys: any;
 
   helper: any;
   cdasEditorOptions: any;
@@ -28,12 +29,12 @@ export class WarehouseComponent implements OnInit {
   @Input() id?: number;
   @Input() validationGroup?: string;
   @Input() readOnly?: boolean;
-  @Input() magasin: any;
+  @Input() warehouse: any;
 
   buttonOptions: any;
 
   constructor(private thirdService: ThirdsService, private  zonesService: ZonesService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService ) {
     this.helper = Helper;
   }
 
@@ -60,7 +61,7 @@ export class WarehouseComponent implements OnInit {
 
     this.thirdService.getThirdsDx('aggregated').subscribe(
       (res: any) => {
-        console.log(res.data);
+        console.log(res);
         this.tiers = {
           dataSource: res.data,
           displayExpr: 'full_name',
@@ -70,6 +71,17 @@ export class WarehouseComponent implements OnInit {
         };
       }
     );
+
+    this.thirdService.getThirdsVars().subscribe(
+      (res: any) => {
+        this.citys = {
+          dataSource: Helper.dataSourceformatter(res['cities']),
+          displayExpr: 'Name',
+          valueExpr: 'ID',
+          searchEnabled: true,
+        };
+      });
+
 
   }
 
