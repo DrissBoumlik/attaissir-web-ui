@@ -63,6 +63,68 @@ export class Helper {
   }
 
   /**
+   * get Third party type
+   * @param link
+   * @returns {string}
+   */
+  public static getThirdType = (link) => {
+    console.log(link);
+    if (/jeunepromoteurs/g.test(link)) {
+      return 'young_promoter';
+    } else if (/tiers/g.test(link)) {
+      return 'aggregated';
+    } else if (/mecanisation/g.test(link)) {
+      return 'mechanization_provider';
+    } else if (/boutures/g.test(link)) {
+      return 'cuttings_supplier';
+    } else if (/produits/g.test(link)) {
+      return 'products_supplier';
+    }
+    return 'aggregated';
+  }
+
+  /**
+   * get Third party type link
+   * @param link
+   * @returns {string}
+   */
+  public static getThirdLink = (link) => {
+    if (/jeunepromoteurs/g.test(link)) {
+      return 'jeunepromoteurs';
+    } else if (/tiers/g.test(link)) {
+      return 'tiers';
+    } else if (/mecanisations/g.test(link)) {
+      return 'mecanisations';
+    } else if (/boutures/g.test(link)) {
+      return 'boutures';
+    } else if (/produits/g.test(link)) {
+      return 'produits';
+    }
+    return 'tiers';
+  }
+
+  /**
+   * get Third party type name
+   * @param link
+   * @returns {string}
+   */
+  public static getThirdTypeName = (link) => {
+
+    if (/jeunepromoteurs/g.test(link)) {
+      return 'Jeune promoteur';
+    } else if (/tiers/g.test(link)) {
+      return 'Agrégé';
+    } else if (/mecanisations/g.test(link)) {
+      return 'Prestataire de mécanisation';
+    } else if (/boutures/g.test(link)) {
+      return 'Fournisseur de boutures';
+    } else if (/produits/g.test(link)) {
+      return 'Fournisseur de produits';
+    }
+    return 'Agrégé';
+  }
+
+  /**
    * Goto A Route
    * @param {string} routeName
    * @param {number} id

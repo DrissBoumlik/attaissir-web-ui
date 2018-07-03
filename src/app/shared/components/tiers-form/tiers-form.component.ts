@@ -17,10 +17,12 @@ export class TiersFormComponent implements OnInit {
 
   @Input() isEdit: boolean;
   @Input() id?: number;
+  @Input() type?: string;
   @Input() tier: Third;
   @Input() isWizard?: boolean;
   @Input() validationGroup?: string;
   @Input() readOnly?: boolean;
+  @Input() morale?: boolean;
 
   buttonOptions: any;
   vars: any;
@@ -46,7 +48,7 @@ export class TiersFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tier = (this.isEdit) ? this.tier : new Third();
+    console.log(this.tier);
     this.thirdsServices.getThirdsVars().subscribe(data => {
       this.vars = data;
 
@@ -131,6 +133,10 @@ export class TiersFormComponent implements OnInit {
     this.ribKeyPattern = /^\d{6}\s*\d{16}\s*\d{2}$/;
     this.cinPattern = /^[A-Za-z][A-Za-z0-9]{3,9}/;
     this.arabicPattern = /[\u0600-\u06FF]/;
+  }
+
+  OnDestroy() {
+    delete this.tier;
   }
 
 

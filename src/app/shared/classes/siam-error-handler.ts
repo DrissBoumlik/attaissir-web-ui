@@ -14,7 +14,10 @@ export class SiamErrorHandler implements ErrorHandler {
   handleError = (error: any): void => {
     let message: string;
     let title: string;
-    if (error instanceof HttpErrorResponse) {
+    if (/TypeError: You provided /g.test(error)) {
+      message = 'Une erreur est survenue';
+      title = '';
+    } else if (error instanceof HttpErrorResponse) {
       message = error.message;
       title = error.statusText || 'Une erreur est survenue';
     } else {
@@ -40,12 +43,7 @@ export class SiamErrorHandler implements ErrorHandler {
       enableHtml: true,
       closeButton: true
     });
-    /* this.alert2.create('error', message, title, {
-      overlay: true,
-      overlayClickToClose: true,
-      showCloseButton: false,
-      duration: 100000
-    }); */
+
   }
 
   message = (msg) => {

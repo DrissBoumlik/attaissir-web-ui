@@ -32,6 +32,32 @@ const routes: Routes = [
         component: ListComponent
       }
     ]
+  },
+  {
+    path: 'jeunepromoteurs',
+    component: DefaultComponent,
+    children: [
+      {
+        path: '',
+        component: ListComponent
+      },
+      {
+        path: 'ajouter',
+        component: AddComponent
+      },
+      {
+        path: 'modifier/:id',
+        component: EditComponent
+      },
+      {
+        path: 'afficher/:id',
+        component: ShowComponent
+      },
+      {
+        path: 'liste',
+        component: ListComponent
+      }
+    ]
   }
 ];
 

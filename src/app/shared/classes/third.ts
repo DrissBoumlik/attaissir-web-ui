@@ -33,7 +33,7 @@ export class Third {
   commandment: string;
   commune: string;
   region: string;
-  zip_code: number;
+  zip_code: string;
   tel1: string;
   tel2: string;
   civil_status: string; // 'single', 'married', 'divorce'
@@ -61,19 +61,7 @@ export class Third {
 
 
   constructor() {
-    /*this.types = [
-      {
-        id: null,
-        libelle: ''
-      }
-    ];
-    this.bank_accounts = [
-        {
-          id: null,
-          bank: '',
-          rib: null
-      }
-    ];*/
+
     this.payment_method = 'transfer';
     this.morale = false;
     this.third_party_structure_types = 'aggregated';

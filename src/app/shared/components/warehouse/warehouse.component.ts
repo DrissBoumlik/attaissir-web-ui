@@ -57,7 +57,8 @@ export class WarehouseComponent implements OnInit {
       this.toastr.warning(error1.error.message);
     });
 
-    this.thirdService.getThirdsDx().subscribe(
+
+    this.thirdService.getThirdsDx('aggregated').subscribe(
       (res: any) => {
         console.log(res.data);
         this.tiers = {

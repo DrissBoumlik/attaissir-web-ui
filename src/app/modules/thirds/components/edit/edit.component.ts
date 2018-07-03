@@ -15,6 +15,8 @@ import { Helper } from '../../../../shared/classes/helper';
 export class EditComponent implements OnInit {
   id: number;
   helper: any;
+  thirdType: string;
+  goTo: string;
 
   constructor(public route: ActivatedRoute,
     private location: Location,
@@ -26,11 +28,13 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.goTo = this.helper.getThirdLink(this.location.path());
+    this.thirdType = this.helper.getThirdType(this.location.path());
     this.route.params.subscribe(params => {
       this.id = params['id'];
       if (this.id) {
         console.log(this.id);
-        this.thirdsService.getThird(this.id, true)
+        this.thirdsService.getThird(this.id, this.thirdType, true)
           .subscribe(data => {
             console.log(data);
             this.tier = this.helper.dataFormatter(data, false);
@@ -38,6 +42,7 @@ export class EditComponent implements OnInit {
               || this.tier.rc || this.tier.tva_code || this.tier.if) {
               this.tier.morale = true;
             }
+            this.tier.zip_code = String(this.tier.zip_code);
             this.tier.rib = `${this.tier.bank_account_number}${this.tier.bank_code}${this.tier.bank_rib_key}`;
           }, error1 => {
             this.toastr.warning('Utilisateur non trouvé.');
@@ -55,17 +60,15 @@ export class EditComponent implements OnInit {
    * @param e Event
    */
   onFormSubmit = function(e) {
-    console.log('why?');
     this.thirdsService.editThird(this.tier).subscribe(data => {
       this.toastr.success(
-        `${this.tier.first_name.toUpperCase()} ${this.tier.last_name.toUpperCase()} informations modifiées avec succès`
+        `${this.tier.full_name.toUpperCase()} informations modifiées avec succès`
       );
-      this.router.navigate([`/tiers/afficher/${this.tier.id}`]);
+      this.router.navigate([`/${this.goTo}/afficher/${this.tier.id}`]);
     }, err => {
       throw err;
       // this.toastr.error(err.error.message);
     });
-
 
     e.preventDefault();
   };
