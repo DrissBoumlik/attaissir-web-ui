@@ -14,18 +14,20 @@
         </dxi-item>
 
 
-        <dxi-item  editorType="dxSelectBox"[editorOptions]="citys" >
+        <dxi-item  editorType="dxSelectBox"[editorOptions]="citys"  dataField="city"  [(value)]="warehouse.city" >
           <dxo-label
             text="Ville" i18n-text>
           </dxo-label>
         </dxi-item>
 
-       <dxi-item dataField="postal_code">
+       <dxi-item dataField="zip_code">
           <dxo-label text="Code postal" i18n-text> </dxo-label>
         </dxi-item>
 
         <dxi-item dataField="convention_ref">
-          <dxo-label text="Convention ref" i18n-text> </dxo-label>
+          <dxo-label text="Référence de convention" i18n-text> </dxo-label>
+          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+                               i18n-message></dxi-validation-rule>
         </dxi-item>
 
       </dxi-item>
@@ -34,16 +36,16 @@
 
         <dxi-item dataField="email">
           <dxo-label text="Email" i18n-text> </dxo-label>
-          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+          <dxi-validation-rule type="email" message="Le champ région est obligatoire"
                                i18n-message></dxi-validation-rule>
         </dxi-item>
 
-        <dxi-item dataField="adress">
+        <dxi-item dataField="address">
           <dxo-label text="Adresse" i18n-text> </dxo-label>
         </dxi-item>
 
 
-        <dxi-item dataField="phone">
+        <dxi-item dataField="tel">
           <dxo-label text="Téléphone" i18n-text> </dxo-label>
           <dxi-validation-rule type="required" message="Le champ région est obligatoire"
                                i18n-message></dxi-validation-rule>
@@ -54,8 +56,10 @@
 
         <dxi-item dataField="third_party_id" editorType="dxSelectBox" [editorOptions]="tiers">
           <dxo-label
-            text="Tiers" i18n-text>
+            text="Jeune promoteurs" i18n-text>
           </dxo-label>
+          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
+                               i18n-message></dxi-validation-rule>
          </dxi-item>
 
 

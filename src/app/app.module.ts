@@ -31,6 +31,7 @@ import { ThirdsModule } from './modules/thirds/thirds.module';
 import { ArticlesModule } from './modules/articles/articles.module';
 import { ConseilleAgricoleModule } from './modules/conseille-agricole/conseille-agricole.module';
 import {CommandeModule} from './modules/commande/commande.module';
+import {MouvementsModule} from './modules/mouvements/mouvements.module';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {CommandeModule} from './modules/commande/commande.module';
     ParcelsModule,
     CardsModule,
     ArticlesModule,
-    SharedModule
+    SharedModule,
+    MouvementsModule
   ],
   exports: [
     DxDataGridModule,

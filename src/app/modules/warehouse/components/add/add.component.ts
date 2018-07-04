@@ -12,7 +12,7 @@ import {Helper} from '../../../../shared/classes/helper';
   styleUrls: ['./add.component.scss']
 })
 export class AddComponent implements OnInit {
-  helper: any
+  helper: any;
 
   constructor(
               private router: Router,

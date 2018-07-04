@@ -59,7 +59,7 @@ export class WarehouseComponent implements OnInit {
     });
 
 
-    this.thirdService.getThirdsDx('aggregated').subscribe(
+    this.thirdService.getThirdsDx('young_promoter').subscribe(
       (res: any) => {
         console.log(res);
         this.tiers = {

@@ -30,6 +30,12 @@ export class WarehoseService {
   }
 
 
+  getWarehouse(id: number, isEdit?: boolean): Observable<Third> {
+    const edit = (isEdit) ? '?edit' : '';
+    return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/${id}${edit}`);
+  }
+
+
   /**
    * Add a third party
    * @param third

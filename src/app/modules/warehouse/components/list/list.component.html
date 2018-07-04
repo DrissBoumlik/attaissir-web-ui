@@ -53,12 +53,11 @@
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
         <dxi-column dataField="id" [width]="50" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="caTemplate"></dxi-column>
-        <dxi-column dataField="name" caption="CDA"></dxi-column>
         <dxi-column dataField="name" caption="Libelle"></dxi-column>
-        <dxi-column dataField="full_name" caption="Nom complet"></dxi-column>
-        <dxi-column dataField="tp_email" caption="Adresse e-mail "></dxi-column>
-        <dxi-column dataField="tp_tel" caption="N° Téléphone"></dxi-column>
-        <dxi-column dataField="third.company_name" caption="Raison sociale"></dxi-column>
+        <dxi-column dataField="third_party_full_name" caption="Nom complet"></dxi-column>
+        <dxi-column dataField="email" caption="Adresse e-mail "></dxi-column>
+        <dxi-column dataField="tel" caption="N° Téléphone"></dxi-column>
+        <dxi-column dataField="third_party_company_name" caption="Raison sociale"></dxi-column>
 
         <div *dxTemplate="let data of 'caTemplate'">
           <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; cursor: pointer"

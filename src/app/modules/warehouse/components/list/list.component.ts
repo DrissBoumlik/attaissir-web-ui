@@ -35,7 +35,6 @@ export class ListComponent implements OnInit {
         return this.warehoseService.getAllDx(loadOptions)
           .toPromise()
           .then(response => {
-
             return response;
 
 /*
@@ -80,7 +79,9 @@ export class ListComponent implements OnInit {
   }
 
 
-  gotoShow(ev: any) { }
+  gotoShow(ev: any) {
+
+  }
 
 
 
@@ -109,7 +110,7 @@ export class ListComponent implements OnInit {
 
 
   onStartEdit(id: number) {
-    this.router.navigate([`/tiers/modifier/${id}`]).catch(
+    this.router.navigate([`/magasin/modifier/${id}`]).catch(
       err => {
         this.toastr.error(err.error.message);
       }

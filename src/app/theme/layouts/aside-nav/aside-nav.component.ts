@@ -101,6 +101,14 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
 
       {
+        name: 'Liste des mouvements',
+        icon: 'fa fa-exchange',
+        url: '/mouvements',
+        description: 'Liste des mouvements',
+        disabled: 'false'
+      },
+
+      {
         name: 'Centre de distrubition',
         icon: 'flaticon-open-box',
         url: '/articles/liste',
