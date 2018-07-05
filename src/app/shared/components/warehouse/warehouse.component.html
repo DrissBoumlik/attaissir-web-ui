@@ -36,7 +36,7 @@
 
         <dxi-item dataField="email">
           <dxo-label text="Email" i18n-text> </dxo-label>
-          <dxi-validation-rule type="email" message="Le champ région est obligatoire"
+          <dxi-validation-rule type="email" message="Ce n'est pas une adresse email valide."
                                i18n-message></dxi-validation-rule>
         </dxi-item>
 
@@ -45,10 +45,20 @@
         </dxi-item>
 
 
-        <dxi-item dataField="tel">
-          <dxo-label text="Téléphone" i18n-text> </dxo-label>
-          <dxi-validation-rule type="required" message="Le champ région est obligatoire"
-                               i18n-message></dxi-validation-rule>
+
+        <dxi-item dataField="tel" [editorOptions]="{
+                    mask: '00 00 00 00 00',
+                    useMaskedValue: true,
+                    maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
+                }">
+          <dxo-label
+            text="Telephone" i18n-text>
+          </dxo-label>
+          <dxi-validation-rule *ngIf="warehouse.tel"
+                               type="pattern"
+                               [pattern]="phonePattern"
+                               message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
+          </dxi-validation-rule>
         </dxi-item>
 
 

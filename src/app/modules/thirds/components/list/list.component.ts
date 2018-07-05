@@ -42,9 +42,13 @@ export class ListComponent implements OnInit {
       return '';
     }
     return (data.sexe === 'Masculin') ? 'fa-male' : 'fa-female';
-  }
+  };
+
 
   ngOnInit() {
+
+
+
     this.title = this.helper.getThirdTypeName(this.location.path());
     this.goTo = this.helper.getThirdLink(this.location.path());
     this.thirdType = this.helper.getThirdType(this.location.path());
