@@ -50,13 +50,12 @@
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
         <dxi-column dataField="id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
-        <dxi-column dataField="ref"  caption="Ref"  ></dxi-column>
         <dxi-column dataField="type" caption="Type"></dxi-column>
         <dxi-column dataField="bon_nbr" caption="N Bon" cellTemplate="bon_nbrTemplate"></dxi-column>
         <dxi-column dataField="emetter" caption="Emetteur" cellTemplate="emetterTemplate"></dxi-column>
         <dxi-column dataField="recepteur" caption="Récepteur" cellTemplate="recepteurTemplate"></dxi-column>
         <dxi-column dataField="nbr_articles" caption="Nombre d article"></dxi-column>
-        <dxi-column dataField="status" caption="Etat"  cellTemplate="statusTemplate"></dxi-column>
+        <dxi-column dataField="state" caption="Etat"  cellTemplate="statusTemplate"></dxi-column>
 
         <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="getStatusColor(data.value)">

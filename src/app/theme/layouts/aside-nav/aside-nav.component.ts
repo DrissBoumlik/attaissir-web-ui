@@ -69,17 +69,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         disabled: 'false'
       },
       {
-        name: 'Commande',
-        icon: 'fa fa-cart-plus',
-        url: '/commande/liste',
-        description: 'commande',
-        subMenu: [
-          { icon: 'flaticon-plus', name: 'nouvelle commande', url: '/commande/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des commandes', url: '/commande/liste' },
-        ],
-        disabled: 'false'
-      },
-      {
         name: 'Contrats',
         icon: 'flaticon-file',
         url: '/contrats/liste',
@@ -118,9 +107,19 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         ],
         disabled: 'false'
       },
+      {
+        name: 'Liste des demandes d\'achat\n',
+        icon: 'fa  fa-shopping-cart',
+        url: '/list_des_demandes',
+        description: 'Centre de distrubition',
+        disabled: 'false'
+      }
     ];
 
   }
+
+
+
 
   ngAfterViewInit() {
 

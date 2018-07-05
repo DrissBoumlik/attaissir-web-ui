@@ -2,14 +2,7 @@
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Liste des magasins</h2>
-
-
-     
-
-
-      <a class="siam-header-btn-new" routerLink="/magasin/ajouter" title="Ajouter conseille"><i
-        class="fa fa-plus"></i></a>
+      <h2>Liste des demandes</h2>
     </div>
   </div>
 </div>
@@ -19,12 +12,11 @@
     <div class="m-portlet__body m-portlet__body--no-padding">
       <dx-data-grid
         id="gridContainer"
-        [dataSource]="warehouses"
+        [dataSource]="list_des_demandes"
         showBorders="true"
         [columnHidingEnabled]="true"
         [allowColumnResizing]="false"
         [allowColumnReordering]="true"
-        (onEditingStart)="onStartEdit($event.data.id)"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         KeyExpr="id">
 
@@ -38,8 +30,8 @@
         <dxo-editing
           mode="popup"
           [useIcons]="true"
-          [allowDeleting]="true"
-          [allowUpdating]="true"
+          [allowDeleting]="false"
+          [allowUpdating]="false"
         >
         </dxo-editing>
         <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
@@ -57,17 +49,32 @@
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxi-column dataField="id" [width]="50" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="caTemplate"></dxi-column>
-        <dxi-column dataField="name" caption="Libelle"></dxi-column>
-        <dxi-column dataField="third_party_full_name" caption="Nom complet"></dxi-column>
-        <dxi-column dataField="email" caption="Adresse e-mail "></dxi-column>
-        <dxi-column dataField="tel" caption="N° Téléphone"></dxi-column>
-        <dxi-column dataField="third_party_company_name" caption="Raison sociale"></dxi-column>
+        <dxi-column dataField="id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [visible]="false"  [allowSorting]="false"></dxi-column>
+        <dxi-column dataField="object"  caption="Objet"  ></dxi-column>
+        <dxi-column dataField="date" caption="Date"></dxi-column>
+        <dxi-column dataField="note" caption="Note"></dxi-column>
+        <dxi-column dataField="third_party_full_name" caption="Jeune promoteur" cellTemplate="third_partyTemplate" ></dxi-column>
+        <dxi-column dataField="warehouse_name" caption="Magasin" ></dxi-column>
+        <dxi-column dataField="state" caption="Etat"  cellTemplate="statusTemplate"></dxi-column>
 
-        <div *dxTemplate="let data of 'caTemplate'">
-          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; cursor: pointer"
-                                         class="fa fa-info-circle fa-5x"></i></a>
+        <div *dxTemplate="let data of 'statusTemplate'">
+      <span [ngClass]="helper.getStatusColor(data.value)">
+          {{ data.value }}
+      </span>
         </div>
+
+        <div *dxTemplate="let data of 'third_partyTemplate'">
+      <span>
+         <i class="fa fa-user" aria-hidden="true"></i> {{ data.value }}
+      </span>
+        </div>
+
+
+
+
+
+
+
 
       </dx-data-grid>
     </div>

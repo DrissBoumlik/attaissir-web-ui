@@ -3,6 +3,7 @@ import { ThemeComponent } from './theme.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/_guards';
 import {MouvementsModule} from '../modules/mouvements/mouvements.module';
+import {ListeDesDemandesModule} from '../modules/liste_des_demandes/liste-des-demandes.module';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: '../modules/mouvements/mouvements.module#MouvementsModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/liste_des_demandes/liste-des-demandes.module#ListeDesDemandesModule'
       },
       {
         path: '404',

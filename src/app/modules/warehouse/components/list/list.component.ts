@@ -18,6 +18,8 @@ export class ListComponent implements OnInit {
   selectedItems: any[] = [];
   helper: any;
 
+  loadIndicatorVisible: any = false;
+
   constructor(private warehoseService: WarehoseService,
     private thirdService: ThirdsService,
     private zoneService: ZonesService,
@@ -116,4 +118,8 @@ export class ListComponent implements OnInit {
       }
     );
   }
-}
+
+
+
+
+ }

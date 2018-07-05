@@ -62,6 +62,23 @@ export class Helper {
     }
   }
 
+  getOrderStatusColor(value: string): string {
+    console.log(value);
+    if (isNull(value)) {
+      return 'm-badge m-badge--primary m-badge--wide';
+    }
+    if (value.toLowerCase() === 'recive'.toLowerCase() || value.toLowerCase() === 'Recive'.toLowerCase()) {
+      return 'm-badge m-badge--primary m-badge--wide';
+    } else if (value.toLowerCase() === 'delivery'.toLowerCase() || value.toLowerCase() === 'Delivery'.toLowerCase()) {
+      return 'm-badge m-badge--info m-badge--wide';
+    } else if (value.toLowerCase() === 'transfer'.toLowerCase() || value.toLowerCase() === 'Transfer'.toLowerCase()) {
+      return 'm-badge m-badge--success m-badge--wide';
+    }  else {
+      return 'm-badge m-badge--primary m-badge--wide';
+    }
+  }
+
+
   /**
    * get Third party type
    * @param link

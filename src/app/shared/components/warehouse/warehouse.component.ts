@@ -18,6 +18,8 @@ export class WarehouseComponent implements OnInit {
   cda: any[];
   tiers: any;
   citys: any;
+  phonePattern: any;
+
 
   helper: any;
   cdasEditorOptions: any;
@@ -39,6 +41,8 @@ export class WarehouseComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.phonePattern = /^0[5|6|7]\s*\d{2}\s*\d{2}\s*\d{2}\s*\d{2}$/;
 
     this.buttonOptions = {
       text: (!this.isEdit) ? 'Ajouter' : 'Modifier',
