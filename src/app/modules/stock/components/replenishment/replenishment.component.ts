@@ -58,10 +58,6 @@ export class ReplenishmentComponent implements OnInit {
               .catch(err => {
                 throw err;
               });
-          },
-          update: (key, values) => {
-            console.log('key', key);
-            console.log('values',values);
           }
         });
       },
