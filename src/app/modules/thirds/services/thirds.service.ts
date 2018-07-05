@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
-import { Third } from '../../../shared/classes/third';
+   import { HttpClient, HttpHeaders } from '@angular/common/http';
+   import { Observable } from 'rxjs';
+   import { environment } from '../../../../environments/environment';
+   import { Third } from '../../../shared/classes/third';
 
-@Injectable({
+   @Injectable({
   providedIn: 'root'
 })
-export class ThirdsService {
+   export class ThirdsService {
 
   routeName: string;
 
