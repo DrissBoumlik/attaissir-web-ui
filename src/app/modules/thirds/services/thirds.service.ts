@@ -34,10 +34,25 @@ import { Injectable } from '@angular/core';
 
   /**
    * Get a collection of Third parties
+   * @param {string} thirdType
+   * @param params
    * @returns {Observable<Third[]>}
    */
-  getThirdsDx(params?: any): Observable<Third[]> {
-    return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
+  getThirdsDx(thirdType: string, params?: any): Observable<Third[]> {
+    const type = (thirdType) ? `?third_type=${thirdType}` : '';
+    return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}/grid${type}`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  /**
+   * @param {string} type
+   * @returns {Observable<any>}
+   */
+  getThirdPartiesByType(type: string): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/grid/type`, JSON.stringify(type), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -52,16 +67,16 @@ import { Injectable } from '@angular/core';
     return this.http.get<any[]>(`${environment.apiUrl}/contracts/kpi`);
   }
 
-
   /**
    * Get a Third parties
    * @param id
    * @param isEdit
    * @returns {Observable<Third[]>}
    */
-  getThird(id: number, isEdit?: boolean): Observable<Third> {
+  getThird(id: number, thirdType: string, isEdit?: boolean): Observable<Third> {
     const edit = (isEdit) ? '?edit' : '';
-    return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/${id}${edit}`);
+    const type = (isEdit) ? `&third_type=${thirdType}` : `?third_type=${thirdType}`;
+    return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/${id}${edit}${type}`);
   }
 
   /**
@@ -111,16 +126,6 @@ import { Injectable } from '@angular/core';
         'Content-Type': 'application/json'
       })
     });
-  }
-
-  /**
-   * Format data depending of API
-   * @param {any} dat
-   * @param {boolean} test
-   * @returns {Third[]}
-   */
-  dataFormatter = (dat: any, test: boolean) => {
-    return (!test) ? dat['data'] : dat;
   }
 
   /**

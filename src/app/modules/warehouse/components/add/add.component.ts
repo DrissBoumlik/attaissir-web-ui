@@ -1,5 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Third} from '../../../../shared/classes/third';
+import {Component, OnInit} from '@angular/core';
+import {WarehoseService} from '../../service/warehose.service';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {Router} from '@angular/router';
+import {Warehouse} from '../../../../shared/classes/warehouse';
+import {ToastrService} from 'ngx-toastr';
+import {Helper} from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-add',
@@ -7,43 +12,33 @@ import {Third} from '../../../../shared/classes/third';
   styleUrls: ['./add.component.scss']
 })
 export class AddComponent implements OnInit {
+  helper: any;
 
-
-  @Output() submit: EventEmitter<any> = new EventEmitter();
-
-
-  @Input() isEdit: boolean;
-  @Input() id?: number;
-  @Input() magasin: Third;
-  @Input() isWizard?: boolean;
-  @Input() validationGroup?: string;
-  @Input() readOnly?: boolean;
-
-  buttonOptions: any;
-  constructor() { }
+  constructor(
+              private router: Router,
+              public warehouse: Warehouse,
+              public warehouseService: WarehoseService,
+              private toastr: ToastrService) {
+    this.helper = Helper;
+  }
 
   ngOnInit() {
+    console.log('test');
 
-    this.buttonOptions = {
-      text: (!this.isEdit) ? 'Ajouter' : 'Modifier',
-      type: 'success',
-      useSubmitBehavior: true
-    };
   }
 
 
-  onFormSubmit = function(e) {
-    /*
-     this.thirdsService.addThird(this.tier).subscribe(data => {
-       data = this.thirdsService.dataFormatter(data, false);
-       this.toastr.success(
-         `Nouveau agrégé ajouté avec succès.`);
-       this.router.navigate(['/tiers/afficher/' + data.id]);
-     }, err => {
-       throw err;
-       // this.toastr.error(err.error.message);
-     });
-     e.preventDefault();*/
+  onFormSubmit = function (e) {
+    console.log('ok');
+    this.warehouseService.addWarehouse(this.warehouse).subscribe(data => {
+      this.toastr.success(
+        `Nouveau magasin ajouté avec succès.`);
+      this.router.navigate(['/magasin']);
+    }, err => {
+      throw err;
+      // this.toastr.error(err.error.message);
+    });
+    e.preventDefault();
   };
 
 }

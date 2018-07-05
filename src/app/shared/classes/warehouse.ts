@@ -1,13 +1,21 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+
 export class Warehouse {
-  id: number;
+  id?: number;
   name: string;
-  address: string;
+  adress: string;
   city: string;
-  zip_code: string;
-  tel: string;
-  email: string;
-  convention_ref: string;
-  structure_id: number;
-  third_party_id: number;
-  zone_id: number;
+  postal_code: any;
+  phone: any;
+  email: any;
+  convention_ref: any;
+  structur_id: any;
+  third_party_id: any;
+  zone_id: any;
+  created_at?: Date;
+  updated_at?: Date;
 }

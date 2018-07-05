@@ -38,6 +38,17 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ```
 
+
+# GIT
+Steps to fellow
+
+```
+git add .
+git commit -m "votre message"
+git pull origin developpement
+git push origin developpement
+```
+
 # Documantation
 
 ```bash
@@ -59,20 +70,3 @@ snyk test
 
 # Workarounds
 
-
- Copy the file in
- 
- `ng-alerts.metadata.json`
- 
- To
- 
- `node_modules/@jaspero/ng-alerts`
-
-```
-
-
-# IMPORTANT
-```javascript
-// Clean  'src/assets' directory, and specialy
-assets/demo/demo12/base/style.bundle.css
-```

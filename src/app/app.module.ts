@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { TokenInterceptor } from './shared/interceptors/token.interceptors';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
-  DxButtonModule, DxCheckBoxModule,
+  DxCheckBoxModule,
   DxDataGridModule,
   DxFileUploaderModule,
   DxLookupModule, DxPivotGridModule,
@@ -29,11 +29,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsModule } from './modules/contracts/contracts.module';
 import { ThirdsModule } from './modules/thirds/thirds.module';
 import { ArticlesModule } from './modules/articles/articles.module';
+import { ConseilleAgricoleModule } from './modules/conseille-agricole/conseille-agricole.module';
+import {CommandeModule} from './modules/commande/commande.module';
+import {MouvementsModule} from './modules/mouvements/mouvements.module';
+import {ListeDesDemandesModule} from './modules/liste_des_demandes/liste-des-demandes.module';
 
 @NgModule({
   declarations: [
     ThemeComponent,
-    AppComponent
+    AppComponent,
   ],
   imports: [
     LayoutModule,
@@ -53,20 +57,23 @@ import { ArticlesModule } from './modules/articles/articles.module';
     DxFileUploaderModule,
     DxSelectBoxModule,
     DxSwitchModule,
-    DxButtonModule,
     DxRadioGroupModule,
     ToastrModule.forRoot(),
     DxPivotGridModule,
 
     NgbModule.forRoot(),
 
+    ConseilleAgricoleModule,
     AuthModule,
     ThirdsModule,
     ContractsModule,
+    CommandeModule,
     ParcelsModule,
     CardsModule,
+    ListeDesDemandesModule,
     ArticlesModule,
-    SharedModule
+    SharedModule,
+    MouvementsModule
   ],
   exports: [
     DxDataGridModule,
@@ -76,7 +83,7 @@ import { ArticlesModule } from './modules/articles/articles.module';
     FormsModule,
     DxPivotGridModule,
     DxTemplateModule,
-    DxCheckBoxModule
+    DxCheckBoxModule,
   ],
   providers: [{
     provide: LOCALE_ID,

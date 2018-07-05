@@ -1,0 +1,125 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" routerLink="/"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+      <h2>Fiche article ({{ article?.name | uppercase }})</h2>
+      <!--<a class="siam-header-btn-new" routerLink="/tiers/modifier/{{ article?.id }}" title="Modifier l'article"><i
+        class="fa fa-edit"></i></a>-->
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12">
+          <!--<ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
+                <i class="flaticon-share m--hide"></i>
+                Fiche
+              </a>
+            </li>
+          </ul>-->
+          <div class="tab-content">
+            <div class="tab-pane active" id="m_user_profile_tab_1">
+              <div class="m-form m-form--fit">
+                <div class="m-portlet__body">
+                  <div class="row">
+                    <div class="col-12">
+                      <h3 class="m-form__section">
+                        Informations générales
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Nom
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value">{{ article?.name || 'Pas de donnée' }}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Code
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value">{{ article?.code || 'Pas de donnée' }}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Groupe de marchandise
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value">{{ article?.article_group || 'Pas de donnée' }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Dose (unite)
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value">{{ article?.dose || 'Pas de donnée' }} ({{ article?.unit
+                            }})</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Prix
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value">{{ article?.price || 'Pas de donnée' }} DH</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Famille
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value">{{ article?.parent_category['name'] || 'Pas de donnée' }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Caractér technique
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value">{{ article?.technical_caracteristics || 'Pas de donnée' }}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Type
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value">{{ article?.type || 'Pas de donnée' }}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Sous-Famille
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value">{{ article?.category['name'] || 'Pas de donnée' }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

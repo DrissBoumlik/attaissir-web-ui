@@ -1,0 +1,181 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+      <h2>Fiche conseille</h2>
+    </div>
+  </div>
+</div>
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="m_user_profile_tab_1">
+          <div class="m-form m-form--fit">
+            <div class="m-portlet__body">
+              <div class="row">
+                <div class="col-12">
+                  <h3 class="m-form__section">
+                    Informations générales
+                  </h3>
+                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Nom
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                        <span  *ngIf="conseille.first_name == null"> Pas de données </span>
+                        <span  *ngIf="conseille.first_name != null"> {{conseille.first_name}} </span>
+                      </p>
+
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Prénom
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                      <span  *ngIf="conseille.last_name == null"> Pas de données </span>
+                      <span  *ngIf="conseille.last_name != null"> {{conseille.last_name}} </span>
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Cin
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        <span  *ngIf="conseille.cin == null"> Pas de données </span>
+                        <span  *ngIf="conseille.cin != null"> {{conseille.cin}} </span>
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Téléphone
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        <span  *ngIf="conseille.phone == null"> Pas de données </span>
+                        <span  *ngIf="conseille.phone != null"> {{conseille.phone}} </span>
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Adresse
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        <span  *ngIf="conseille.adress == null"> Pas de données </span>
+                        <span  *ngIf="conseille.adress != null"> {{conseille.adress}} </span>
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Ville
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        <span  *ngIf="conseille.city == null"> Pas de données </span>
+                        <span  *ngIf="conseille.city != null"> {{conseille.city}} </span>
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Code postal
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        <span  *ngIf="conseille.postal_code == null"> Pas de données </span>
+                        <span  *ngIf="conseille.postal_code != null"> {{conseille.postal_code}} </span>
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Matricule
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        <span  *ngIf="conseille.code == null"> Pas de données </span>
+                        <span  *ngIf="conseille.code != null"> {{conseille.code}} </span>
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Email
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        <span  *ngIf="conseille.email == null"> Pas de données </span>
+                        <span  *ngIf="conseille.email != null"> {{conseille.email}} </span>
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

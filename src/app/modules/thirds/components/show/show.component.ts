@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ThirdsService } from '../../services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 import { ContractsService } from '../../../contracts/services/contracts.service';
 import { CardsService } from '../../../contracts/services/cards.service';
 import { Contract } from '../../../../shared/classes/contract';
@@ -23,6 +24,7 @@ export class ShowComponent implements OnInit {
   contracts: Contract[];
   documents: any;
   cards: any;
+  title: string;
   card_status: any;
   patternRIB: any = /^\d{24}$/i;
   documentsList = true;
@@ -31,10 +33,12 @@ export class ShowComponent implements OnInit {
   bank_accounts: any;
   contract_status: any;
   helper: any;
+  thirdType: string;
 
   constructor(private thirdService: ThirdsService,
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private toaster: ToastrService,
     private contractService: ContractsService,
     private cardsService: CardsService) {
@@ -42,6 +46,8 @@ export class ShowComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title = this.helper.getThirdTypeName(this.location.path());
+    this.thirdType = this.helper.getThirdType(this.location.path());
     this.contractService.getContractsVars().subscribe(data => {
       this.contract_status = data['contract_status'];
     }, error1 => {
@@ -56,9 +62,9 @@ export class ShowComponent implements OnInit {
 
     this.route.params.subscribe(
       params => {
-        this.thirdService.getThird(+params.id, false).subscribe(
+        this.thirdService.getThird(+params.id, this.thirdType, false).subscribe(
           (res: any) => {
-            this.third = this.thirdService.dataFormatter(res, false);
+            this.third = this.helper.dataFormatter(res, false);
             this.bank_accounts = [{
               bank_name: this.third.bank_name,
               bank_account_number: this.third.bank_account_number,
@@ -192,7 +198,7 @@ export class ShowComponent implements OnInit {
   }
 
   loadDocuments() {
-    this.thirdService.getThird(this.third.id, false).subscribe(
+    this.thirdService.getThird(this.third.id, this.thirdType, false).subscribe(
       (res: any) => {
         this.documents = res.data.documents.map(doc => {
           return doc = {

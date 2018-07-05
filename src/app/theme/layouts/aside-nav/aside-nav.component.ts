@@ -35,6 +35,40 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         disabled: 'false'
       },
       {
+        name: 'Jeune promoteur',
+        icon: 'flaticon-users',
+        url: '/jeunepromoteurs/liste',
+        description: 'Gestion des Jeune promoteurs',
+        subMenu: [
+          { icon: 'flaticon-plus', name: 'Nouvel Jeune promoteur', url: '/jeunepromoteurs/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des Jeune promoteurs', url: '/jeunepromoteurs/liste' },
+        ],
+        disabled: 'false'
+      },
+      {
+        name: 'Conseille agricole',
+        icon: 'flaticon-user',
+        url: '/conseille-agricole/liste',
+        description: 'Conseille agricole',
+        subMenu: [
+          { icon: 'flaticon-plus', name: 'Nouveau Conseille', url: '/conseille-agricole/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des Conseille', url: '/conseille-agricole/liste' },
+        ],
+        disabled: 'false'
+      },
+      {
+        name: 'Magasin',
+        icon: 'fa fa-shopping-bag',
+        url: '/magasin/liste',
+        description: 'magasin',
+        subMenu: [
+          { icon: 'flaticon-plus', name: 'Nouveau magasin', url: '/magasin/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des magasins', url: '/magasin/liste' },
+          { icon: 'flaticon-list', name: 'réapprovisionnement de stock', url: '/magasin/reapprovisionnement' },
+        ],
+        disabled: 'false'
+      },
+      {
         name: 'Contrats',
         icon: 'flaticon-file',
         url: '/contrats/liste',
@@ -56,6 +90,14 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
 
       {
+        name: 'Liste des mouvements',
+        icon: 'fa fa-exchange',
+        url: '/mouvements',
+        description: 'Liste des mouvements',
+        disabled: 'false'
+      },
+
+      {
         name: 'Centre de distrubition',
         icon: 'flaticon-open-box',
         url: '/articles/liste',
@@ -65,9 +107,19 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         ],
         disabled: 'false'
       },
+      {
+        name: 'Liste des demandes d\'achat\n',
+        icon: 'fa  fa-shopping-cart',
+        url: '/list_des_demandes',
+        description: 'Centre de distrubition',
+        disabled: 'false'
+      }
     ];
 
   }
+
+
+
 
   ngAfterViewInit() {
 

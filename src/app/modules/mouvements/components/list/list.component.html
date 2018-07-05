@@ -1,0 +1,90 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+      <h2>Liste des mouvements</h2>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body m-portlet__body--no-padding">
+      <dx-data-grid
+        id="gridContainer"
+        [dataSource]="mouvements"
+        showBorders="true"
+        [columnHidingEnabled]="true"
+        [allowColumnResizing]="false"
+        [allowColumnReordering]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        KeyExpr="id">
+
+        <dxo-export [enabled]="true" fileName="magasin" [allowExportSelectedData]="true"></dxo-export>
+
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxo-group-panel [visible]="true"></dxo-group-panel>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+        <dxo-editing
+          mode="popup"
+          [useIcons]="true"
+          [allowDeleting]="false"
+          [allowUpdating]="false"
+        >
+        </dxo-editing>
+        <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+        <dxo-selection mode="multiple"></dxo-selection>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+
+        <dxo-pager
+          [allowedPageSizes]="[5, 8, 15, 30]"
+          [showInfo]="true"
+          [showNavigationButtons]="true"
+          [showPageSizeSelector]="true"
+          [visible]="true">
+        </dxo-pager>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+        <dxi-column dataField="id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
+        <dxi-column dataField="type" caption="Type"></dxi-column>
+        <dxi-column dataField="bon_nbr" caption="N Bon" cellTemplate="bon_nbrTemplate"></dxi-column>
+        <dxi-column dataField="emetter" caption="Emetteur" cellTemplate="emetterTemplate"></dxi-column>
+        <dxi-column dataField="recepteur" caption="Récepteur" cellTemplate="recepteurTemplate"></dxi-column>
+        <dxi-column dataField="nbr_articles" caption="Nombre d article"></dxi-column>
+        <dxi-column dataField="state" caption="Etat"  cellTemplate="statusTemplate"></dxi-column>
+
+        <div *dxTemplate="let data of 'statusTemplate'">
+      <span [ngClass]="getStatusColor(data.value)">
+          {{ data.value }}
+      </span>
+        </div>
+
+        <div *dxTemplate="let data of 'bon_nbrTemplate'" class="pull-left">
+          # {{data.value}}
+        </div>
+
+        <div *dxTemplate="let data of 'consulterTemplate'">
+          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; cursor: pointer"
+                                         class="fa fa-info fa-5x"></i> &nbsp; Consulter</a>
+        </div>
+
+        <div *dxTemplate="let data of 'emetterTemplate'">
+          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; cursor: pointer; color: #ac2925;"
+                                         class="fa fa-chevron-up fa-5x"></i> &nbsp; {{data.value}}</a>
+        </div>
+
+
+        <div *dxTemplate="let data of 'recepteurTemplate'">
+          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; cursor: pointer; color:  #0b9c8f;"
+                                         class="fa fa-chevron-down fa-5x"></i> &nbsp;  {{data.value}}</a>
+        </div>
+
+
+     </dx-data-grid>
+    </div>
+  </div>
+</div>

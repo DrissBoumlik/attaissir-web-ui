@@ -23,6 +23,14 @@ export class ArticlesService {
   }
 
   /**
+   * Get a Article
+   * @returns {Observable<Article>}
+   */
+  getArticle(id: number): Observable<Article> {
+    return this.http.get<Article>(`${environment.apiUrl}/${this.routeName}/${id}`);
+  }
+
+  /**
    * Get a collection of Article variables to be used in dropdowns in forms
    * @returns {Observable<Article[]>}
    */
@@ -36,6 +44,18 @@ export class ArticlesService {
    */
   getArticlesDx(params?: any): Observable<Article[]> {
     return this.http.post<Article[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  /**
+   * @param {number} id
+   * @returns {Observable<any>}
+   */
+  getArticlesByFamily(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/${this.routeName}/family/${id}`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

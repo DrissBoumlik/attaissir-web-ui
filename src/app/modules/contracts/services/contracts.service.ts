@@ -88,15 +88,6 @@ export class ContractsService {
     });
   }
 
-  /**
-   * Format data depending of API
-   * @param data
-   * @param test
-   * @returns {any}
-   */
-  dataFormatter(data, test) {
-    return (!test) ? data['data'] : data;
-  }
 
   /**
    *

@@ -62,6 +62,85 @@ export class Helper {
     }
   }
 
+  getOrderStatusColor(value: string): string {
+    console.log(value);
+    if (isNull(value)) {
+      return 'm-badge m-badge--primary m-badge--wide';
+    }
+    if (value.toLowerCase() === 'recive'.toLowerCase() || value.toLowerCase() === 'Recive'.toLowerCase()) {
+      return 'm-badge m-badge--primary m-badge--wide';
+    } else if (value.toLowerCase() === 'delivery'.toLowerCase() || value.toLowerCase() === 'Delivery'.toLowerCase()) {
+      return 'm-badge m-badge--info m-badge--wide';
+    } else if (value.toLowerCase() === 'transfer'.toLowerCase() || value.toLowerCase() === 'Transfer'.toLowerCase()) {
+      return 'm-badge m-badge--success m-badge--wide';
+    }  else {
+      return 'm-badge m-badge--primary m-badge--wide';
+    }
+  }
+
+
+  /**
+   * get Third party type
+   * @param link
+   * @returns {string}
+   */
+  public static getThirdType = (link) => {
+    console.log(link);
+    if (/jeunepromoteurs/g.test(link)) {
+      return 'young_promoter';
+    } else if (/tiers/g.test(link)) {
+      return 'aggregated';
+    } else if (/mecanisation/g.test(link)) {
+      return 'mechanization_provider';
+    } else if (/boutures/g.test(link)) {
+      return 'cuttings_supplier';
+    } else if (/produits/g.test(link)) {
+      return 'products_supplier';
+    }
+    return 'aggregated';
+  }
+
+  /**
+   * get Third party type link
+   * @param link
+   * @returns {string}
+   */
+  public static getThirdLink = (link) => {
+    if (/jeunepromoteurs/g.test(link)) {
+      return 'jeunepromoteurs';
+    } else if (/tiers/g.test(link)) {
+      return 'tiers';
+    } else if (/mecanisations/g.test(link)) {
+      return 'mecanisations';
+    } else if (/boutures/g.test(link)) {
+      return 'boutures';
+    } else if (/produits/g.test(link)) {
+      return 'produits';
+    }
+    return 'tiers';
+  }
+
+  /**
+   * get Third party type name
+   * @param link
+   * @returns {string}
+   */
+  public static getThirdTypeName = (link) => {
+
+    if (/jeunepromoteurs/g.test(link)) {
+      return 'Jeune promoteur';
+    } else if (/tiers/g.test(link)) {
+      return 'Agrégé';
+    } else if (/mecanisations/g.test(link)) {
+      return 'Prestataire de mécanisation';
+    } else if (/boutures/g.test(link)) {
+      return 'Fournisseur de boutures';
+    } else if (/produits/g.test(link)) {
+      return 'Fournisseur de produits';
+    }
+    return 'Agrégé';
+  }
+
   /**
    * Goto A Route
    * @param {string} routeName
@@ -75,5 +154,15 @@ export class Helper {
         toastr.error(err.error.message);
       }
     );
+  }
+
+  /**
+   * Format data depending of API
+   * @param dat
+   * @param {boolean} test
+   * @returns {any}
+   */
+  public static dataFormatter = (dat: any, test: boolean) => {
+    return (!test) ? dat['data'] : dat;
   }
 }
