@@ -62,7 +62,7 @@ export class Helper {
     }
   }
 
-  getOrderStatusColor(value: string): string {
+  public static getOrderStatusColor(value: string): string {
     console.log(value);
     if (isNull(value)) {
       return 'm-badge m-badge--primary m-badge--wide';
@@ -147,9 +147,10 @@ export class Helper {
    * @param {number} id
    * @param router
    * @param toastr
+   * @param action
    */
-  public static gotoShow = (routeName: string, id: number, router: any, toastr) => {
-    router.navigate([`/${routeName}/afficher/${id}`]).catch(
+  public static gotoShow = (routeName: string, id: number, router: any, toastr, action = 'afficher') => {
+    router.navigate([`/${routeName}/${action}/${id}`]).catch(
       err => {
         toastr.error(err.error.message);
       }
