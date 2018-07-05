@@ -90,10 +90,10 @@
         <dxi-column dataField="third_party_type" caption="Type d'agrégé"></dxi-column>
 
         <div *dxTemplate="let data of 'contractTemplate'">
-          <a style="color: #6d7fcc; align-content: center; cursor: pointer" (click)="gotoShow(data.data.contract_id, 'contrats')">{{ data.data.contract_code }}</a>
+          <a style="color: #6d7fcc; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data.contract_id, router, toastr)">{{ data.data.contract_code }}</a>
         </div>
         <div *dxTemplate="let data of 'userTemplate'">
-          <a style="color: #6d7fcc; align-content: center; cursor: pointer" (click)="gotoShow(data.data.third_party_id, 'tiers')">{{ data.data.third_party_code }}</a>
+          <a class="siam-link" (click)="helper.gotoShow('tiers', data.data.third_party_id, router, toastr)">{{ data.data.third_party_code }}</a>
         </div>
       </dx-data-grid>
 

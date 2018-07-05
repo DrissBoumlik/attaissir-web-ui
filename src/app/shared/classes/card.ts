@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Structure } from './structure';
-import { Third } from './third';
 
 @Injectable({
   providedIn: 'root',

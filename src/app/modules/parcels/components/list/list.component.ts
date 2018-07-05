@@ -4,6 +4,7 @@ import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import 'devextreme/integration/jquery';
 import { Router } from '@angular/router';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-list',
@@ -13,10 +14,12 @@ import { Router } from '@angular/router';
 export class ListComponent implements OnInit {
   parcels: any;
   selectedItems: any;
+  helper: any;
 
   constructor(public parcelsServices: ParcelsService,
     private router: Router) {
     this.parcels = {};
+    this.helper = Helper;
   }
 
   ngOnInit() {
@@ -35,14 +38,6 @@ export class ListComponent implements OnInit {
           });
       }
     });
-  }
-
-  gotoShow = (id, link) => {
-    this.router.navigate([`/${link}/afficher/${id}`]).catch(
-      err => {
-        throw err; // this.toastr.error(err.error.message);
-      }
-    );
   }
 
   onStartEdit = (e) => { };

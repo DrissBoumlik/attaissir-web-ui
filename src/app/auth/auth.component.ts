@@ -6,7 +6,7 @@ import { AlertService } from './_services/alert.service';
 import { UserService } from './_services/user.service';
 import { AlertComponent } from './_directives/alert.component';
 import { Helpers } from '../helpers';
-import {ToastrService} from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 declare let $: any;
 declare let mUtil: any;
 

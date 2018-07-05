@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://s2.hbelouali.code.go' // 'http://api.siam618.graviton.ma',
+  apiUrl: 'http://s5.kouladchalha.code.go' // 'http://api.siam618.graviton.ma',
 };
 
 /*

@@ -4,7 +4,6 @@
       <a class="siam-header-back-btn" routerLink="/"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Liste des incidents</h2>
     </div>
-
   </div>
 </div>
 
@@ -19,9 +18,6 @@
         [allowColumnReordering]="true"
         [columnAutoWidth]="true"
         [remoteOperations]="{ groupPaging: true }"
-        (onRowRemoving)="onRemoveIncident($event)"
-        (onRowUpdating)="onEditIncident($event)"
-        (onRowInserting)="onAddIncident($event)"
         noDataText="Aucun incident n'a été rapporté"
         KeyExpr="id">
 

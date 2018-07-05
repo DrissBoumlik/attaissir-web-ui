@@ -76,13 +76,9 @@
     </dxi-column>
     <dxi-column dataField="code" caption="Code" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="first_name" allowHiding="true" hidden="hidden" caption="Prénom" >
+    <dxi-column dataField="full_name" allowHiding="true" hidden="hidden" caption="Nom complet" >
     </dxi-column>
-    <dxi-column dataField="last_name" caption="Nom" i18n-caption>
-    </dxi-column>
-    <dxi-column dataField="last_name_ar" caption="الاسم العائلي" i18n-caption>
-    </dxi-column>
-    <dxi-column dataField="first_name_ar" caption="الاسم الشخصي" i18n-caption>
+    <dxi-column dataField="full_name_ar" caption="الاسم الكامل" i18n-caption>
     </dxi-column>
     <dxi-column dataField="date_birth" caption="Date de naissance" i18n-caption>
     </dxi-column>
@@ -122,7 +118,7 @@
     <dxi-column dataField="children_number" caption="Nombre d'enfants" i18n-caption>
     </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate'">
-      <a  (click)="gotoShow(data.data.id)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
+      <a  (click)="helper.gotoShow('tiers', data.data.id, router, toastr)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
     </div>
     </dx-data-grid>
 

@@ -79,7 +79,7 @@
 
         <dxi-column dataField="status" [hidingPriority]="3" cellTemplate="contractListTemplate" caption="Statut">
         </dxi-column>
-        <dxi-column dataField="third_name" cellTemplate="thirdNameTemplate" caption="Nom" datatype="Text"></dxi-column>
+        <dxi-column dataField="third_full_name" cellTemplate="thirdNameTemplate" caption="Nom" datatype="Text"></dxi-column>
         <dxi-column dataField="structure_name" caption="Division" [hidingPriority]="0" dataType="Text"></dxi-column>
         <div *dxTemplate="let contract of 'typeTemplate'">
           <span>
@@ -88,13 +88,13 @@
         </div>
         <div *dxTemplate="let contract of 'thirdNameTemplate'">
           <span>
-                {{ (contract.data['third_type'] === 'natural') ? contract.data['third_first_name'] + ' ' + contract.data['third_last_name'] : contract.data['third_company_name'] }}
+                {{ (contract.data['third_type'] === 'natural') ? contract.data['third_full_name'] : contract.data['third_company_name'] }}
           </span>
         </div>
         <dxi-column dataField="structure_name" caption="Division" [hidingPriority]="0" dataType="Text"></dxi-column>
 
         <div *dxTemplate="let data of 'cellTemplate'">
-          <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="showDetails(data.data.id)"
+          <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data.id, router, toastr)"
              class="fa fa-info-circle fa-5x">
           </i>
         </div>

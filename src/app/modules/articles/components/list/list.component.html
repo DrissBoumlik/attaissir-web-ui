@@ -1,0 +1,93 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+
+      <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+
+      <h2>Liste des articles</h2>
+      <!--<a class="siam-header-btn-new" routerLink="/tiers/ajouter"><i class="fa fa-plus"></i></a>-->
+    </div>
+
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body m-portlet__body--no-padding">
+      <dx-data-grid
+        id="gridContainer"
+        [dataSource]="articles"
+        [columnHidingEnabled]="false"
+        [allowColumnResizing]="true"
+        [columnAutoWidth]="true"
+        [allowColumnReordering]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+      >
+
+        <!--<dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>-->
+        <dxo-remote-operations
+          [sorting]="true"
+          [paging]="true">
+        </dxo-remote-operations>
+
+        <dxo-editing
+          mode="row"
+          [useIcons]="true"
+          [allowUpdating]="false"
+          [allowDeleting]="false">
+        </dxo-editing>
+        <dxo-selection mode="multiple"></dxo-selection>
+        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+
+        <dxo-sorting mode="multiple"></dxo-sorting>
+        <dxo-filter-row
+          [visible]="true" [applyFilter]="true"></dxo-filter-row>
+
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-export [enabled]="true" fileName="Tiers" [allowExportSelectedData]="true"></dxo-export>
+
+        <dxo-pager
+          [allowedPageSizes]="[5, 8, 15, 30]"
+          [showInfo]="true"
+          [showNavigationButtons]="true"
+          [showPageSizeSelector]="true"
+          [visible]="true">
+        </dxo-pager>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+
+        <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+        <dxo-search-panel [visible]="false"></dxo-search-panel>
+
+        <dxo-group-panel [visible]="true"></dxo-group-panel>
+        <dxo-grouping #expand [autoExpandAll]="false"></dxo-grouping>
+
+        <dxi-column dataField="" [allowSorting]="false" cellTemplate="cellTemplate" caption="" width="50px"  allowColumnResizing="true">
+        </dxi-column>
+        <div *dxTemplate="let data of 'cellTemplate'">
+          <a  (click)="helper.gotoShow('articles', data.data.id, router, toastr)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
+        </div>
+        <dxi-column dataField="code" caption="Code" i18n-caption>
+        </dxi-column>
+        <dxi-column dataField="unit" allowHiding="true" hidden="hidden" caption="Unite" >
+        </dxi-column>
+        <dxi-column dataField="dose" caption="Dose" i18n-caption>
+        </dxi-column>
+        <dxi-column dataField="price" caption="Prix"  i18n-caption>
+        </dxi-column>
+        <dxi-column dataField="type" caption="Type" allowColumnResizing="true">
+        </dxi-column>
+        <dxi-column dataField="article_group" caption="Groupe marchandise" i18n-caption>
+        </dxi-column>
+        <dxi-column dataField="article_category" cellTemplate="familyTemplate" caption="Famille" i18n-caption>
+        </dxi-column>
+        <dxi-column dataField="technical_caracteristics" caption="Caractér technique" i18n-caption>
+        </dxi-column>
+        <div *dxTemplate="let data of 'familyTemplate'">
+          <a class="siam-link" (click)="helper.gotoShow('familles', data.data.article_category_id, router, toastr)">{{ data.value }}</a>
+        </div>
+      </dx-data-grid>
+
+    </div>
+  </div>
+</div>

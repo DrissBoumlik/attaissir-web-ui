@@ -21,10 +21,8 @@ export class Third {
   if: string;
   ice: string;
   cin: string;
-  last_name: string;
-  first_name: string;
-  last_name_ar: string;
-  first_name_ar: string;
+  full_name: string;
+  full_name_ar: string;
   email: string;
   birth_date: Date;
   death_date: Date;

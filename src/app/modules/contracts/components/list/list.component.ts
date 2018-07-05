@@ -83,16 +83,6 @@ export class ListComponent implements OnInit {
      }*/
   }
 
-
-
-  showDetails(idContract: number) {
-    this.router.navigate([`/contrats/afficher/${idContract}`]).catch(
-      err => {
-        throw err; // this.toastr.error(err.error.message);
-      }
-    );
-  }
-
   onStartEdit = (e) => {
     this.router.navigate([`/contrats/modifier/${e.data.id}`]).catch(
       err => {

@@ -39,11 +39,35 @@ export class ListComponent implements OnInit {
             console.log(error);
             throw error;
           });
+      },
+      remove: (event: any) => {
+        return this.incidentService.deleteIncident(event.id)
+          .toPromise()
+          .then(response => {
+            console.log(response);
+            this.toaster.success('L\'incident a été supprimé avec succès');
+          })
+          .catch(error => {
+            this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
+          });
+      },
+      insert: (event: any) => {
+        const incident = new Incident();
+        incident.name = event.name;
+        incident.description = event.description;
+        return this.incidentService.addIncident(incident)
+          .toPromise()
+          .then(res => {
+            this.toaster.success('L\'incident a été ajouté avec succès');
+          })
+          .catch(err => {
+            this.toaster.error('Une erreur s\'est produite, veuillez réessayer plus tard.');
+          });
       }
     });
   }
 
-  onEditIncident(e: any) {
+  /*onEditIncident(e: any) {
     const d = new $.Deferred();
     const name = e.newData.name ? e.newData.name : e.oldData.name;
     const description = e.newData.description ? e.newData.description : e.oldData.description;
@@ -61,9 +85,9 @@ export class ListComponent implements OnInit {
       }
     );
     e.cancel = d.promise();
-  }
+  }*/
 
-  onRemoveIncident(e: any) {
+  /*onRemoveIncident(e: any) {
     const d = new $.Deferred();
     e.cancel = true;
     this.incidentService.deleteIncident(e.data.id).subscribe(
@@ -76,25 +100,27 @@ export class ListComponent implements OnInit {
       }
     );
     e.cancel = d.promise();
-  }
+  }*/
 
-  onAddIncident(e: any) {
-    const d = new $.Deferred();
-    e.cancel = true;
-    const incident = new Incident();
-    incident.name = e.data.name;
-    incident.description = e.data.description;
-    this.incidentService.addIncident(incident).subscribe(
-      (res: Incident) => {
-        d.resolve();
-        this.toaster.success('Opération réussie.');
-      },
-      (err: any) => {
-        d.reject('Opération échouée.');
-      }
-    );
-    e.cancel = d.promise();
-  }
+  /*
+    onAddIncident(e: any) {
+      const d = new $.Deferred();
+      e.cancel = true;
+      const incident = new Incident();
+      incident.name = e.data.name;
+      incident.description = e.data.description;
+      this.incidentService.addIncident(incident).subscribe(
+        (res: Incident) => {
+          d.resolve();
+          this.toaster.success('Opération réussie.');
+        },
+        (err: any) => {
+          d.reject('Opération échouée.');
+        }
+      );
+      e.cancel = d.promise();
+    }
+  */
 
 
 }

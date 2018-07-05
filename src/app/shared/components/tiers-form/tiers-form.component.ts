@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { locale } from 'devextreme/localization';
 import 'devextreme-intl';
 import { Third } from '../../classes/third';

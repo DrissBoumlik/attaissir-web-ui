@@ -31,7 +31,15 @@ const routes: Routes = [
       },
       {
         path: '',
+        loadChildren: '../modules/articles/articles.module#ArticlesModule'
+      },
+      {
+        path: '',
         loadChildren: '../modules/incidents/incidents.module#IncidentsModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/stock/stock.module#StockModule'
       },
       {
         path: '404',
