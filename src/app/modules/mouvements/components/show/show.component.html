@@ -17,7 +17,7 @@
               <div class="row">
                 <div class="col-12">
                   <h3 class="m-form__section">
-                    Mouvement N° 111    <span class="siam-form-input-value _status">
+                    Fiche Mouvement N° 111    <span class="siam-form-input-value _status">
                     <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
                   </span>
                   </h3>
@@ -208,12 +208,103 @@
 
 
 
+
+
+
+
+
+
+
+
+  <dx-popup
+    class="popup"
+    [width]="320"
+    [height]="150"
+    [showTitle]="true"
+    title="Confirmation "
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="true"
+    [(visible)]="popupDeliverVisible"
+  >
+    <div *dxTemplate="let data of 'content'">
+      <p>
+        Voulez-vous vraiment livrer cet élement ?
+       </p>
+
+      <div  class="pull-right">
+      <dx-button class="pull-left"
+        type="success"
+        text="Oui"
+        width="80"
+        (onClick)="delete()">
+      </dx-button>
+        &nbsp;
+        &nbsp;
+
+      <dx-button class="pull-right"
+        class="button-info"
+        text="No"
+        width="80"
+        (onClick)="cancelPopup()">
+      </dx-button>
+      </div>
+
+    </div>
+  </dx-popup>
+
+
+
+
+
+<dx-popup
+  class="popup"
+  [width]="350"
+  [height]="150"
+  [showTitle]="true"
+  title="Confirmation "
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="popupDeleteVisible"
+>
+  <div *dxTemplate="let data of 'content'">
+    <p>
+      Voulez-vous vraiment annuler cet élement ?
+    </p>
+
+    <div  class="pull-right">
+
+    <dx-button class="pull-left"
+               width="80"
+               type="danger"
+               text="Oui"
+               (onClick)="deliver()">
+    </dx-button>
+    &nbsp;
+    &nbsp;
+
+    <dx-button class="pull-right"
+               class="button-info"
+               width="80"
+               text="No"
+               (onClick)="cancelPopup()">
+    </dx-button>
+  </div>
+
+  </div>
+</dx-popup>
+
+
+
+
+
+
+
 <div class="dx-fieldset">
     <div class="dx-field">
     <div class="dx-field-value">
-      <dx-button width="180"  icon="fa fa-paper-plane"  text="LIVRER" type="default"  style="margin-left: 20px; margin-right: 20px;"></dx-button>
+      <dx-button width="180"  icon="fa fa-paper-plane"  text="LIVRER" type="success"  style="margin-left: 20px; margin-right: 20px;" (onClick)="showDeliverPopup()"></dx-button>
 
-      <dx-button width="130" icon="fa fa-trash"  text="ANNULER" type="danger"></dx-button> &nbsp; &nbsp;
+      <dx-button width="130" icon="fa fa-trash"  text="ANNULER" type="danger"  (onClick)="showDeletePopup()"></dx-button> &nbsp; &nbsp;
     </div>
   </div>
 </div>

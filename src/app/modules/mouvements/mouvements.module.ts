@@ -4,8 +4,8 @@ import {
   DxButtonModule,
   DxDataGridModule,
   DxDateBoxModule,
-  DxFileUploaderModule,
-  DxSelectBoxModule,
+  DxFileUploaderModule, DxPopupModule,
+  DxSelectBoxModule, DxTemplateModule,
   DxTextAreaModule
 } from 'devextreme-angular';
 import {ListComponent} from './components/list/list.component';
@@ -22,7 +22,12 @@ import { ShowComponent } from './components/show/show.component';
     DxTextAreaModule,
     DxDateBoxModule,
     DxDataGridModule,
-    DxButtonModule
+    DxButtonModule,
+
+
+    DxPopupModule,
+    DxButtonModule,
+    DxTemplateModule
   ],
   declarations: [ListComponent, ShowComponent]
 })

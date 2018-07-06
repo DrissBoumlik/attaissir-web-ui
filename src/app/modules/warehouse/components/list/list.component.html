@@ -5,7 +5,7 @@
       <h2>Liste des magasins</h2>
 
 
-     
+
 
 
       <a class="siam-header-btn-new" routerLink="/magasin/ajouter" title="Ajouter conseille"><i
@@ -65,7 +65,7 @@
         <dxi-column dataField="third_party_company_name" caption="Raison sociale"></dxi-column>
 
         <div *dxTemplate="let data of 'caTemplate'">
-          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; cursor: pointer"
+          <a  routerLink="/magasin/afficher/{{data.value}}" routerLinkActive="active"><i style="font-size: 150%; align-content: center; cursor: pointer"
                                          class="fa fa-info-circle fa-5x"></i></a>
         </div>
 

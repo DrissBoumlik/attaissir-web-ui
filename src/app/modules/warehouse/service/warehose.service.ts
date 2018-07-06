@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
-import {Third} from '../../../shared/classes/third';
 import {Warehouse} from '../../../shared/classes/warehouse';
 
 @Injectable({
@@ -18,8 +17,8 @@ export class WarehoseService {
 
 
   /**
-   * Get a collection of Third parties
-   * @returns {Observable<Third[]>}
+   * Get a collection of Warehouse
+   * * @returns {Observable<Warehouse[]>}
    */
   getAllDx(params?: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
@@ -30,19 +29,19 @@ export class WarehoseService {
   }
 
 
-  getWarehouse(id: number, isEdit?: boolean): Observable<Third> {
+  getWarehouse(id: number, isEdit?: boolean): Observable<any> {
     const edit = (isEdit) ? '?edit' : '';
-    return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/${id}${edit}`);
+    return this.http.get<any>(`${environment.apiUrl}/${this.routeName}/${id}${edit}`);
   }
 
 
   /**
-   * Add a third party
-   * @param third
-   * @returns {Observable<Third[]>}
+   * Add a warehouse
+   * * @param warehouse
+   * @returns {Observable<Warehouse[]>}
    */
-  addWarehouse(third: Third): Observable<Warehouse[]> {
-    return this.http.post<Warehouse[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(third), {
+  addWarehouse(item: any): Observable<Warehouse[]> {
+    return this.http.post<Warehouse[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(item), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -55,6 +54,21 @@ export class WarehoseService {
    */
   deleteWarehouse(id: any): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+
+  /**
+   * Edit a warehouse
+   * @param warehouse
+   * @returns {Observable<Warehouse>}
+   */
+  editWarehouse(item: any): Observable<any> {
+    console.log('put');
+    return this.http.put<any>(`${environment.apiUrl}/${this.routeName}/${item.id}`, JSON.stringify(item), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

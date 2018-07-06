@@ -51,10 +51,10 @@
 
         <dxi-column dataField="id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
         <dxi-column dataField="type" caption="Type"></dxi-column>
-        <dxi-column dataField="bon_nbr" caption="N Bon" cellTemplate="bon_nbrTemplate"></dxi-column>
+        <dxi-column dataField="order_id" caption="N Bon" cellTemplate="bon_nbrTemplate"></dxi-column>
         <dxi-column dataField="emetter" caption="Emetteur" cellTemplate="emetterTemplate"></dxi-column>
         <dxi-column dataField="recepteur" caption="Récepteur" cellTemplate="recepteurTemplate"></dxi-column>
-        <dxi-column dataField="nbr_articles" caption="Nombre d article"></dxi-column>
+        <dxi-column dataField="article_count" caption="Nombre d'article"></dxi-column>
         <dxi-column dataField="state" caption="Etat"  cellTemplate="statusTemplate"></dxi-column>
 
         <div *dxTemplate="let data of 'statusTemplate'">
@@ -79,7 +79,7 @@
 
 
         <div *dxTemplate="let data of 'recepteurTemplate'">
-          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; color:  #0b9c8f;"
+          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center;   color:  #0b9c8f;"
                                          class="fa fa-chevron-down fa-5x"></i> &nbsp;  {{data.value}}</a>
         </div>
 

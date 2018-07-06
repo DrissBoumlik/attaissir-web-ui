@@ -39,7 +39,7 @@ export class EditComponent implements OnInit {
             this.warehouse = this.helper.dataFormatter(data, false);
 
           }, error1 => {
-            this.toastr.warning('Utilisateur non trouvé.');
+            this.toastr.warning('Magasin non trouvé.');
             this.location.back();
           });
       } else {
@@ -48,5 +48,25 @@ export class EditComponent implements OnInit {
       }
     });
   }
+
+
+
+  /**
+   * Submiting form data
+   * @param e Event
+   */
+  onFormSubmit = function(e) {
+    console.log('tttt1');
+    this.warehouseService.editWarehouse(this.warehouse).subscribe(data => {
+      this.toastr.success(
+        `${this.warehouse.name.toUpperCase()} informations modifiées avec succès`
+      );
+    }, err => {
+      throw err;
+       // this.toastr.error(err.error.message);
+    });
+
+    e.preventDefault();
+  };
 
 }

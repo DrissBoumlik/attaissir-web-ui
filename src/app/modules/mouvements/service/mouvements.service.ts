@@ -34,4 +34,32 @@ export class MouvementsService {
     return this.http.get<any>(`${environment.apiUrl}/${this.routeName}/${id}`);
   }
 
+
+  /**
+   * Delete a third party
+   * @param id  the id of the mouvement intended to delete
+   * @returns {Observable<any>}
+   */
+  deleteMouvement = (id: number): Observable<any> => {
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  /**
+   * Delete a third party
+   * @param id  the id of the mouvement intended to delete
+   * @returns {Observable<any>}
+   */
+  deliverMouvement = (id: number): Observable<any> => {
+    return this.http.get(`${environment.apiUrl}/${this.routeName}/'deliver'/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+
 }

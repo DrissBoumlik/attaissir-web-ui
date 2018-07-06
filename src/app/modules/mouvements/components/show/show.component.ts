@@ -11,6 +11,8 @@ export class ShowComponent implements OnInit {
 
   mouvement: any;
   produits: any ;
+  popupDeliverVisible = false;
+  popupDeleteVisible = false;
 
 
   constructor( private router: Router, private route: ActivatedRoute , private mouvementsService: MouvementsService) {
@@ -24,5 +26,26 @@ export class ShowComponent implements OnInit {
 
   }
 
+  delete() {
+    this.mouvementsService.deleteMouvement(this.mouvement.id);
+
+  }
+
+  deliver() {
+    this.mouvementsService.deliverMouvement(this.mouvement.id);
+  }
+
+  showDeliverPopup() {
+    this.popupDeliverVisible = true;
+  }
+
+  showDeletePopup() {
+    this.popupDeleteVisible = true;
+  }
+
+  cancelPopup() {
+    this.popupDeleteVisible = false;
+    this.popupDeliverVisible = false;
+  }
 
 }

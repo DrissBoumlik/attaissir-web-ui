@@ -23,7 +23,6 @@ export class AddComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('test');
 
   }
 

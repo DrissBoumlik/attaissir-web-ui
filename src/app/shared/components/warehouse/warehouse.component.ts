@@ -69,7 +69,7 @@ export class WarehouseComponent implements OnInit {
         this.tiers = {
           dataSource: res.data,
           displayExpr: 'full_name',
-          valueExpr: 'ID',
+          valueExpr: 'id',
           searchEnabled: true,
           // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
         };

@@ -45,7 +45,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         ],
         disabled: 'false'
       },
-      {
+    /*  {
         name: 'Conseille agricole',
         icon: 'flaticon-user',
         url: '/conseille-agricole/liste',
@@ -55,7 +55,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           { icon: 'flaticon-list', name: 'Liste des Conseille', url: '/conseille-agricole/liste' },
         ],
         disabled: 'false'
-      },
+      },*/
       {
         name: 'Magasin',
         icon: 'fa fa-shopping-bag',
