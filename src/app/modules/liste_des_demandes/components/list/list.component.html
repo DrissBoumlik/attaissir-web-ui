@@ -51,7 +51,7 @@
 
         <dxi-column dataField="id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [visible]="false"  [allowSorting]="false"></dxi-column>
         <dxi-column dataField="object"  caption="Objet"  ></dxi-column>
-        <dxi-column dataField="date" caption="Date"></dxi-column>
+        <dxi-column dataField="date" caption="Date" cellTemplate="dateTemplate"></dxi-column>
         <dxi-column dataField="note" caption="Note"></dxi-column>
         <dxi-column dataField="third_party_full_name" caption="Jeune promoteur" cellTemplate="third_partyTemplate" ></dxi-column>
         <dxi-column dataField="warehouse_name" caption="Magasin" ></dxi-column>
@@ -60,6 +60,16 @@
         <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="helper.getStatusColor(data.value)">
           {{ data.value }}
+      </span>
+        </div>
+
+
+
+
+
+        <div *dxTemplate="let data of 'dateTemplate'">
+      <span>
+          <i class="fa fa-clock-o" aria-hidden="true"></i> {{ data.value }}
       </span>
         </div>
 
