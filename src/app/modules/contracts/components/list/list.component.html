@@ -58,7 +58,7 @@
 
         <dxo-search-panel [visible]="false"></dxo-search-panel>
 
-        <dxi-column cellTemplate="cellTemplate" [allowSorting]="false" caption="" width="50px" allowColumnResizing="true">
+        <dxi-column cellTemplate="cellTemplate" [allowSorting]="false" caption="" width="70px" allowColumnResizing="true">
         </dxi-column>
 
         <dxi-column dataField="code" [hidingPriority]="2" caption="Code">
@@ -91,11 +91,13 @@
                 {{ (contract.data['third_type'] === 'natural') ? contract.data['third_full_name'] : contract.data['third_company_name'] }}
           </span>
         </div>
-        <dxi-column dataField="structure_name" caption="Division" [hidingPriority]="0" dataType="Text"></dxi-column>
 
         <div *dxTemplate="let data of 'cellTemplate'">
           <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data.id, router, toastr)"
              class="fa fa-info-circle fa-5x">
+          </i>
+          <i style="font-size: 150%; align-content: center; cursor: pointer;padding-left: 10px;" (click)="helper.gotoShow('contrats', data.data.id, router, toastr, 'modifier')"
+             class="fa fa-edit fa-5x">
           </i>
         </div>
         <div *dxTemplate="let data of 'contractListTemplate'">

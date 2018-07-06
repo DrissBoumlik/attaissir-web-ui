@@ -54,6 +54,7 @@ export class ListComponent implements OnInit {
     this.thirdType = this.helper.getThirdType(this.location.path());
     this.third_parties.store = new CustomStore({
       load: (loadOptions: any) => {
+        loadOptions['filter'] = ['ts_type', '=', this.thirdType];
         return this.tierService.getThirdsDx(this.thirdType, loadOptions)
           .toPromise()
           .then(response => {
