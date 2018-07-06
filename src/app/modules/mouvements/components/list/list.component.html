@@ -54,7 +54,7 @@
         <dxi-column dataField="bon_nbr" caption="N Bon" cellTemplate="bon_nbrTemplate"></dxi-column>
         <dxi-column dataField="emetter" caption="Emetteur" cellTemplate="emetterTemplate"></dxi-column>
         <dxi-column dataField="recepteur" caption="Récepteur" cellTemplate="recepteurTemplate"></dxi-column>
-        <dxi-column dataField="nbr_articles" caption="Nombre d article"></dxi-column>
+        <dxi-column dataField="article_count" caption="Nombre d article"></dxi-column>
         <dxi-column dataField="state" caption="Etat"  cellTemplate="statusTemplate"></dxi-column>
 
         <div *dxTemplate="let data of 'statusTemplate'">
@@ -68,18 +68,18 @@
         </div>
 
         <div *dxTemplate="let data of 'consulterTemplate'">
-          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; cursor: pointer"
-                                         class="fa fa-info fa-5x"></i> &nbsp; Consulter</a>
+          <a  routerLink="/mouvements/afficher/{{data.value}}" routerLinkActive="active"><i style="font-size: 150%; align-content: center; cursor: pointer"
+                                         class="fa fa-info-circle fa-5x"></i></a>
         </div>
 
         <div *dxTemplate="let data of 'emetterTemplate'">
-          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; cursor: pointer; color: #ac2925;"
+          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; color: #ac2925;"
                                          class="fa fa-chevron-up fa-5x"></i> &nbsp; {{data.value}}</a>
         </div>
 
 
         <div *dxTemplate="let data of 'recepteurTemplate'">
-          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; cursor: pointer; color:  #0b9c8f;"
+          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; color:  #0b9c8f;"
                                          class="fa fa-chevron-down fa-5x"></i> &nbsp;  {{data.value}}</a>
         </div>
 

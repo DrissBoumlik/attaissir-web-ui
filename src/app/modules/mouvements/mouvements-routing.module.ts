@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { ListComponent } from './components/list/list.component';
 import {AddComponent} from './components/add/add.component';
+import {ShowComponent} from './components/show/show.component';
 
 
 
@@ -20,6 +21,10 @@ const routes: Routes = [
         component: ListComponent
       },
       { path: 'ajouter', component: AddComponent },
+      {
+        path: 'afficher/:id',
+        component: ShowComponent
+      }
     ]
   }
 ];

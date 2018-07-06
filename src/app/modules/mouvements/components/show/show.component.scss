@@ -1,0 +1,42 @@
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-fieldset {
+  width: 420px;
+  margin: 30px auto;
+}
+
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-fieldset:first-child {
+  margin-top: 120px;
+}
+
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-fieldset-header {
+  font-size: 16px;
+}
+
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-field {
+  display: inline-block;
+  width: 24%;
+}
+
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-field-value:not(.dx-widget) > .dx-button {
+  float: none;
+}
+
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-field-value:not(.dx-switch):not(.dx-checkbox):not(.dx-button),
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-field-label {
+  float: none;
+  width: 100%;
+}
+
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-field-label {
+  padding-left: 0;
+}
+
+
+.siam-form-input-value {
+  background-color: #fdfdfd !important;
+  color: #7b7b7b !important;
+}
+
+._status {
+  color : #fff !important;
+  background-color: #f9d49a  !important; ;
+}
