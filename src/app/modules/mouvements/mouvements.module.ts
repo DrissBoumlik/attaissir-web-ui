@@ -4,6 +4,7 @@ import {DxDataGridModule, DxDateBoxModule, DxFileUploaderModule, DxSelectBoxModu
 import {ListComponent} from './components/list/list.component';
 import {MouvementsRoutingModule} from './mouvements-routing.module';
 import {SharedModule} from '../../shared/shared.module';
+import {AddComponent} from './components/add/add.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import {SharedModule} from '../../shared/shared.module';
     DxDateBoxModule,
     DxDataGridModule
   ],
-  declarations: [ListComponent]
+  declarations: [ListComponent, AddComponent]
 })
 export class MouvementsModule { }
