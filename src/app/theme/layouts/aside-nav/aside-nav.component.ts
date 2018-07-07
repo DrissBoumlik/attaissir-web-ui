@@ -47,7 +47,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Stock',
-        icon: 'flaticon-truck',
+        icon: 'flaticon-open-box',
         url: '/stock',
         description: 'Gestion de stock',
         subMenu: [
