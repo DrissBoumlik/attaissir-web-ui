@@ -8,9 +8,9 @@ describe('ReplenishmentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReplenishmentComponent ]
+      declarations: [ReplenishmentComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Third } from '../../../../shared/classes/third';
 import { Structure } from '../../../../shared/classes/structure';
 import { Contract } from '../../../../shared/classes/contract';
-import {Helper} from '../../../../shared/classes/helper';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-add',

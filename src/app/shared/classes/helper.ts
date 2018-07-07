@@ -83,7 +83,7 @@ export class Helper {
       return 'm-badge m-badge--info m-badge--wide';
     } else if (value.toLowerCase() === 'transfer'.toLowerCase() || value.toLowerCase() === 'Transfer'.toLowerCase()) {
       return 'm-badge m-badge--success m-badge--wide';
-    }  else {
+    } else {
       return 'm-badge m-badge--primary m-badge--wide';
     }
   }
@@ -175,5 +175,29 @@ export class Helper {
    */
   public static dataFormatter = (dat: any, test: boolean) => {
     return (!test) ? dat['data'] : dat;
+  }
+
+
+  public static getStatut = (value: string): string => {
+    if (value === 'inprogress') {
+      return 'ENCOURS';
+    } else if (value === 'done') {
+      return 'VALIDÉ';
+    } else if (value === 'cancled') {
+      return 'ANNULÉ';
+    }
+    return 'ENCOURS';
+  }
+
+
+  public static orderType = (value: string): string => {
+    if (value === 'transfer') {
+      return 'TRANSFERT';
+    } else if (value === 'delivery') {
+      return 'LIVRAISON';
+    } else if (value === 'return') {
+      return 'RETOUR';
+    }
+    return value;
   }
 }

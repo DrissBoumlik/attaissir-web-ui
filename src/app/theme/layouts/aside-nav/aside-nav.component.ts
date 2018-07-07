@@ -45,17 +45,30 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         ],
         disabled: 'false'
       },
-      {
-        name: 'Conseille agricole',
-        icon: 'flaticon-user',
-        url: '/conseille-agricole/liste',
-        description: 'Conseille agricole',
-        subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouveau Conseille', url: '/conseille-agricole/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des Conseille', url: '/conseille-agricole/liste' },
-        ],
-        disabled: 'false'
-      },
+      /*  {
+        {
+          name: 'Stock',
+          icon: 'flaticon-open-box',
+          url: '/stock',
+          description: 'Gestion de stock',
+          subMenu: [
+            { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },
+            { icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation' },
+            { icon: 'flaticon-plus', name: 'Réapprovisionnement de stock', url: '/stock/reappro' },
+          ],
+          disabled: 'false'
+        },
+        {
+          name: 'Conseille agricole',
+          icon: 'flaticon-user',
+          url: '/conseille-agricole/liste',
+          description: 'Conseille agricole',
+          subMenu: [
+            { icon: 'flaticon-plus', name: 'Nouveau Conseille', url: '/conseille-agricole/ajouter' },
+            { icon: 'flaticon-list', name: 'Liste des Conseille', url: '/conseille-agricole/liste' },
+          ],
+          disabled: 'false'
+        },*/
       {
         name: 'Magasin',
         icon: 'fa fa-shopping-bag',
@@ -66,6 +79,13 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           { icon: 'flaticon-list', name: 'Liste des magasins', url: '/magasin/liste' },
           { icon: 'flaticon-list', name: 'réapprovisionnement de stock', url: '/magasin/reapprovisionnement' },
         ],
+        disabled: 'false'
+      },
+      {
+        name: 'Mon stock',
+        icon: 'fa fa-archive',
+        url: '/mouvements/mon_stock',
+        description: 'mon stock',
         disabled: 'false'
       },
       {
@@ -110,7 +130,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'Liste des demandes d\'achat\n',
         icon: 'fa  fa-shopping-cart',
-        url: '/list_des_demandes',
+        url: '/demandes',
         description: 'Centre de distrubition',
         disabled: 'false'
       }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MouvementsService} from '../../service/mouvements.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MouvementsService } from '../../service/mouvements.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-show',
@@ -10,23 +11,54 @@ import {MouvementsService} from '../../service/mouvements.service';
 export class ShowComponent implements OnInit {
 
   mouvement: any;
-  produits: any ;
+  produits: any;
+  popupDeliverVisible = false;
+  popupDeleteVisible = false;
 
 
-  constructor( private router: Router, private route: ActivatedRoute , private mouvementsService: MouvementsService) {
+
+
+  constructor(private router: Router, private route: ActivatedRoute, private mouvementsService: MouvementsService, private toastr: ToastrService) {
   }
 
   ngOnInit() {
     this.route.params.subscribe(
       params => {
-        this.mouvement = this.mouvementsService.getMouvement(params.id).subscribe(data => {
-          console.log(data);
-        }, err => {
-          throw err;
-        }).unsubscribe();
+        this.mouvement = this.mouvementsService.getMouvement(params.id).subscribe((response) => {
+          this.mouvement = response.data;
+          this.produits = response.data.order;
+          console.log(response.data.order.articles);
+        });
       });
 
   }
 
+  delete() {
+    this.mouvementsService.deleteMouvement(this.mouvement.id).subscribe((response) => {
+      this.router.navigate(['/mouvements'])
+      this.toastr.success('L \'élément a été supprimé.');
+    });
+
+  }
+
+  deliver() {
+    this.mouvementsService.deliverMouvement(this.mouvement.id).subscribe((response) => {
+      this.router.navigate(['/mouvements'])
+      this.toastr.success('L \'élément a été livré.');
+    });
+  }
+
+  showDeliverPopup() {
+    this.popupDeliverVisible = true;
+  }
+
+  showDeletePopup() {
+    this.popupDeleteVisible = true;
+  }
+
+  cancelPopup() {
+    this.popupDeleteVisible = false;
+    this.popupDeliverVisible = false;
+  }
 
 }

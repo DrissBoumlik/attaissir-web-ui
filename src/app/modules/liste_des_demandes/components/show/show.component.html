@@ -1,0 +1,182 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+      <h2> Fiche demande N°  {{order.id}} </h2>
+    </div>
+
+
+  </div>
+</div>
+<div class="m-content" style="padding-bottom: 10px;">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+
+
+
+
+      <div class="tab-content" >
+        <div class="tab-pane active" id="m_user_profile_tab_1">
+          <div class="m-form m-form--fit">
+            <div class="m-portlet__body">
+              <div class="row">
+                <div class="col-12">
+                  <h3 class="m-form__section">
+                    Informations générales <!--<span class="siam-form-input-value _status">
+                    <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
+                  </span> !-->
+                  </h3>
+                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Objet
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        {{order.object}}
+                      </p>
+
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Date
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        {{order.date}}
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Note
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        {{order.note}}
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Jeune promoteur
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                          {{order.third_party_full_name}}
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="m-content" style="padding-bottom: 10px;">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="m_user_profile_tab_2">
+          <div class="m-form m-form--fit">
+            <div class="m-portlet__body">
+              <div class="row">
+                <div class="col-12">
+                  <h3 class="m-form__section">
+                    Liste des produits
+                  </h3>
+                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                </div>
+              </div>
+
+
+              <dx-data-grid
+                id="gridContainer"
+                [dataSource]="produits"
+                showBorders="true"
+                [columnHidingEnabled]="true"
+                [allowColumnResizing]="false"
+                [allowColumnReordering]="true"
+                [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+                KeyExpr="id">
+
+                <dxo-export [enabled]="true" fileName="magasin" [allowExportSelectedData]="true"></dxo-export>
+
+                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+                <dxo-group-panel [visible]="true"></dxo-group-panel>
+                <dxo-scrolling mode="virtual"></dxo-scrolling>
+                <dxo-editing
+                  mode="popup"
+                  [useIcons]="true"
+                  [allowDeleting]="false"
+                  [allowUpdating]="false"
+                >
+                </dxo-editing>
+                <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+                <dxo-selection mode="multiple"></dxo-selection>
+                <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+
+                <dxo-pager
+                  [allowedPageSizes]="[5, 8, 15, 30]"
+                  [showInfo]="true"
+                  [showNavigationButtons]="true"
+                  [showPageSizeSelector]="true"
+                  [visible]="true">
+                </dxo-pager>
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+                <dxi-column dataField="id" [visible]="false" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"  ></dxi-column>
+                <dxi-column dataField="name" caption="Libelle"></dxi-column>
+                <dxi-column dataField="price" caption="Prix" ></dxi-column>
+                <dxi-column dataField="quantity" caption="Quantité" ></dxi-column>
+                <dxi-column dataField="category" caption="Catégorie" ></dxi-column>
+                <dxi-column dataField="sub_category" caption="sous catégorie"></dxi-column>
+
+              </dx-data-grid>
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+

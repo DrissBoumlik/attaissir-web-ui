@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Third } from '../../../../shared/classes/third';
 import { ToastrService } from 'ngx-toastr';
 import { ThirdsService } from '../../services/thirds.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import {Helper} from '../../../../shared/classes/helper';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-add',

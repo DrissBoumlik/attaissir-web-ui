@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Stock} from '../../../../shared/classes/stock';
-import {StockService} from '../../services/stock.service';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Stock } from '../../../../shared/classes/stock';
+import { StockService } from '../../services/stock.service';
+import { ActivatedRoute } from '@angular/router';
 import CustomStore from 'devextreme/data/custom_store';
-import {WarehouseService} from '../../../distribution-center/services/warehouse.service';
+import { WarehouseService } from '../../../distribution-center/services/warehouse.service';
 
 
 @Component({
@@ -18,15 +18,17 @@ export class ListComponent implements OnInit {
   queryParams = '';
 
   constructor(private stockService: StockService,
-              private route: ActivatedRoute,
-              private warhouseService: WarehouseService) {
+    private route: ActivatedRoute,
+    private warhouseService: WarehouseService) {
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(
       (params: any) => {
-        if (params.magasin || params.article) {
-          this.queryParams = params.toString().includes('magasin') ? '?magasin=' + params.magasin : '?article=' + params.article;
+        if (params.magasin) {
+          this.queryParams = '?magasin=' + params.magasin;
+        } else if (params.article) {
+          this.queryParams = '?article=' + params.article;
         }
         this.stock.store = new CustomStore({
           load: (loadOptions: any) => {

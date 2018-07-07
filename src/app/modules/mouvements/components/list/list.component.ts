@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import {WarehoseService} from '../../../warehouse/service/warehose.service';
-import {Helper} from '../../../../shared/classes/helper';
-import {isNull} from "util";
-import {MouvementsService} from '../../service/mouvements.service';
-import {forEach} from '@angular/router/src/utils/collection';
+import { WarehoseService } from '../../../warehouse/service/warehose.service';
+import { Helper } from '../../../../shared/classes/helper';
+import { isNull } from "util";
+import { MouvementsService } from '../../service/mouvements.service';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-list',
@@ -31,10 +31,10 @@ export class ListComponent implements OnInit {
           .then(response => {
 
             response.data.forEach((it) => {
-               if (it.to_warehouse_name != null) {
-                 it.emetter = it.to_warehouse_name;
-               } else if (it.to_third_name != null) {
-                 it.emetter = it.to_third_name;
+              if (it.to_warehouse_name != null) {
+                it.emetter = it.to_warehouse_name;
+              } else if (it.to_third_name != null) {
+                it.emetter = it.to_third_name;
               }
 
               if (it.from_third_name != null) {
@@ -57,17 +57,17 @@ export class ListComponent implements OnInit {
   }
 
 
-    getStatusColor(value: string): string {
-      if (isNull(value)) {
+  getStatusColor(value: string): string {
+    if (isNull(value)) {
       return 'm-badge m-badge--primary m-badge--wide';
     }
-    if (value.toLowerCase() === 'recive'.toLowerCase() || value.toLowerCase() === 'Recive'.toLowerCase()) {
-      return 'm-badge m-badge--primary m-badge--wide';
-    } else if (value.toLowerCase() === 'delivery'.toLowerCase() || value.toLowerCase() === 'Delivery'.toLowerCase()) {
-      return 'm-badge m-badge--info m-badge--wide';
-    } else if (value.toLowerCase() === 'transfer'.toLowerCase() || value.toLowerCase() === 'Transfer'.toLowerCase()) {
+    if (value.toLowerCase() === 'done'.toLowerCase() || value.toLowerCase() === 'Done'.toLowerCase()) {
       return 'm-badge m-badge--success m-badge--wide';
-    }  else {
+    } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'Inprogress'.toLowerCase()) {
+      return 'm-badge m-badge--info m-badge--wide';
+    } else if (value.toLowerCase() === 'canceled'.toLowerCase() || value.toLowerCase() === 'Canceled'.toLowerCase()) {
+      return 'm-badge m-badge--danger m-badge--wide';
+    } else {
       return 'm-badge m-badge--primary m-badge--wide';
     }
   }

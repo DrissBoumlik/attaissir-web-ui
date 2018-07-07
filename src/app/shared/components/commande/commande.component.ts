@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Third} from '../../classes/third';
-import {Helper} from '../../classes/helper';
-import {ThirdsService} from '../../../modules/thirds/services/thirds.service';
-import {FamilyService} from '../../services/family-service.service';
-import {ArticlesService} from '../../../modules/articles/services/articles.service';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Third } from '../../classes/third';
+import { Helper } from '../../classes/helper';
+import { ThirdsService } from '../../../modules/thirds/services/thirds.service';
+import { FamilyService } from '../../services/family-service.service';
+import { ArticlesService } from '../../../modules/articles/services/articles.service';
 
 @Component({
   selector: 'app-commande-form',
@@ -39,8 +39,8 @@ export class CommandeComponent implements OnInit {
   buttonOptions: any;
 
   constructor(private thirdService: ThirdsService,
-              private familyService: FamilyService,
-              private articleService: ArticlesService) {
+    private familyService: FamilyService,
+    private articleService: ArticlesService) {
   }
 
   ngOnInit() {

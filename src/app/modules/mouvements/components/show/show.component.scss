@@ -36,7 +36,18 @@
   color: #7b7b7b !important;
 }
 
-._status {
+._status_inprogress {
   color : #fff !important;
   background-color: #f9d49a  !important; ;
+}
+
+._status_cancled {
+  color : #fff !important;
+  background-color: #c33c37 !important; ;
+}
+
+
+._status_done {
+  color : #fff !important;
+  background-color: #2bb81d  !important; ;
 }

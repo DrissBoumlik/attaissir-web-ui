@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Third} from '../../../../shared/classes/third';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {Helper} from '../../../../shared/classes/helper';
-import {Location} from '@angular/common';
-import {ToastrService} from 'ngx-toastr';
-import {WarehoseService} from '../../service/warehose.service';
-import {Warehouse} from '../../../../shared/classes/warehouse';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Third } from '../../../../shared/classes/third';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { Helper } from '../../../../shared/classes/helper';
+import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { WarehoseService } from '../../service/warehose.service';
+import { Warehouse } from '../../../../shared/classes/warehouse';
 
 @Component({
   selector: 'app-edit',
@@ -15,16 +15,15 @@ import {Warehouse} from '../../../../shared/classes/warehouse';
 })
 export class EditComponent implements OnInit {
 
-
   id: number;
   helper: any;
 
   constructor(public route: ActivatedRoute,
-              private location: Location,
-              public warehouse: Warehouse,
-              private router: Router,
-              public warehouseService: WarehoseService,
-              private toastr: ToastrService) {
+    private location: Location,
+    public warehouse: Warehouse,
+    private router: Router,
+    public warehouseService: WarehoseService,
+    private toastr: ToastrService) {
     this.helper = Helper;
   }
 
@@ -39,7 +38,7 @@ export class EditComponent implements OnInit {
             this.warehouse = this.helper.dataFormatter(data, false);
 
           }, error1 => {
-            this.toastr.warning('Utilisateur non trouvé.');
+            this.toastr.warning('Magasin non trouvé.');
             this.location.back();
           });
       } else {
@@ -48,5 +47,25 @@ export class EditComponent implements OnInit {
       }
     });
   }
+
+
+
+  /**
+   * Submiting form data
+   * @param e Event
+   */
+  onFormSubmit = function(e) {
+    console.log('tttt1');
+    this.warehouseService.editWarehouse(this.warehouse).subscribe(data => {
+      this.toastr.success(
+        `${this.warehouse.name.toUpperCase()} informations modifiées avec succès`
+      );
+    }, err => {
+      throw err;
+      // this.toastr.error(err.error.message);
+    });
+
+    e.preventDefault();
+  };
 
 }

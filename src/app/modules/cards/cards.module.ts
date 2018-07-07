@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CardsRoutingModule } from './cards-routing.module';
 import { ListComponent } from './components/list/list.component';
 import { SharedModule } from '../../shared/shared.module';
-import {DxButtonModule, DxSelectBoxModule} from 'devextreme-angular';
+import { DxButtonModule, DxSelectBoxModule } from 'devextreme-angular';
 
 @NgModule({
   imports: [

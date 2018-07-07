@@ -6,7 +6,7 @@ import { ShowComponent } from './components/show/show.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AddComponent } from './components/add/add.component';
 import { ListComponent } from './components/list/list.component';
-import {CommandeRoutingModule} from './commande-routing.module';
+import { CommandeRoutingModule } from './commande-routing.module';
 
 @NgModule({
   imports: [

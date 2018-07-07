@@ -49,20 +49,19 @@
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxi-column dataField="id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [visible]="false"  [allowSorting]="false"></dxi-column>
+        <dxi-column dataField="id" [width]="40" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
         <dxi-column dataField="object"  caption="Objet"  ></dxi-column>
-        <dxi-column dataField="date" caption="Date" cellTemplate="dateTemplate"></dxi-column>
+        <dxi-column dataField="date" format="dd-MM-yyyy" [width]="150"  dataType="date" caption="Date" ></dxi-column>
         <dxi-column dataField="note" caption="Note"></dxi-column>
         <dxi-column dataField="third_party_full_name" caption="Jeune promoteur" cellTemplate="third_partyTemplate" ></dxi-column>
         <dxi-column dataField="warehouse_name" caption="Magasin" ></dxi-column>
-        <dxi-column dataField="state" caption="Etat"  cellTemplate="statusTemplate"></dxi-column>
+        <dxi-column dataField="state" caption="Etat" [allowFiltering]="false"  cellTemplate="statusTemplate"></dxi-column>
 
         <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="helper.getStatusColor(data.value)">
-          {{ data.value }}
+          {{ helper.getStatut(data.value) }}
       </span>
         </div>
-
 
 
 
@@ -73,17 +72,19 @@
       </span>
         </div>
 
-        <div *dxTemplate="let data of 'third_partyTemplate'">
+           <div *dxTemplate="let data of 'third_partyTemplate'">
       <span>
-         <i class="fa fa-user" aria-hidden="true"></i> {{ data.value }}
+      <a  routerLink="/tiers/afficher/{{data.data.third_party_id}}" routerLinkActive="active" style="color: #000">
+          <i class="fa fa-user" aria-hidden="true"></i> {{ data.data.third_party_full_name }}
+        </a>
       </span>
         </div>
 
 
-
-
-
-
+        <div *dxTemplate="let data of 'consulterTemplate'">
+          <a  routerLink="/demandes/afficher/{{data.value}}" routerLinkActive="active"><i style="font-size: 150%; align-content: center; cursor: pointer; color: #000;"
+                                                                                            class="fa fa-info-circle fa-5x"></i></a>
+        </div>
 
 
       </dx-data-grid>

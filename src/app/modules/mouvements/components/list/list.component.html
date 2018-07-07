@@ -51,17 +51,18 @@
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxi-column dataField="id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
-        <dxi-column dataField="type" caption="Type"></dxi-column>
-        <dxi-column dataField="bon_nbr" caption="N Bon" cellTemplate="bon_nbrTemplate"></dxi-column>
-        <dxi-column dataField="emetter" caption="Emetteur" cellTemplate="emetterTemplate"></dxi-column>
-        <dxi-column dataField="recepteur" caption="Récepteur" cellTemplate="recepteurTemplate"></dxi-column>
-        <dxi-column dataField="article_count" caption="Nombre d article"></dxi-column>
-        <dxi-column dataField="state" caption="Etat"  cellTemplate="statusTemplate"></dxi-column>
+        <dxi-column dataField="id" [width]="40" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
+        <dxi-column dataField="type" caption="Type" [allowFiltering]="false"  cellTemplate="typeTemplate">></dxi-column>
+        <dxi-column dataField="order_id" caption="N° Bon" cellTemplate="bon_nbrTemplate"></dxi-column>
+        <dxi-column dataField="emetter" caption="Emetteur" [allowFiltering]="false"  cellTemplate="emetterTemplate"></dxi-column>
+        <dxi-column dataField="recepteur" caption="Récepteur" [allowFiltering]="false"  cellTemplate="recepteurTemplate"></dxi-column>
+        <dxi-column dataField="article_count"  [allowFiltering]="false" caption="Nombre d'article"></dxi-column>
+
+        <dxi-column dataField="state" caption="Etat"  [allowFiltering]="false" cellTemplate="statusTemplate"></dxi-column>
 
         <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="getStatusColor(data.value)">
-          {{ data.value }}
+                  {{ helper.getStatut(data.value) }}
       </span>
         </div>
 
@@ -70,8 +71,13 @@
         </div>
 
         <div *dxTemplate="let data of 'consulterTemplate'">
-          <a  routerLink="/mouvements/afficher/{{data.value}}" routerLinkActive="active"><i style="font-size: 150%; align-content: center; cursor: pointer"
+          <a  routerLink="/mouvements/afficher/{{data.value}}" routerLinkActive="active"><i style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
                                          class="fa fa-info-circle fa-5x"></i></a>
+        </div>
+
+
+        <div *dxTemplate="let data of 'typeTemplate'">
+           {{helper.orderType(data.value)}}
         </div>
 
         <div *dxTemplate="let data of 'emetterTemplate'">
@@ -81,7 +87,7 @@
 
 
         <div *dxTemplate="let data of 'recepteurTemplate'">
-          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; color:  #0b9c8f;"
+          <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center;   color:  #0b9c8f;"
                                          class="fa fa-chevron-down fa-5x"></i> &nbsp;  {{data.value}}</a>
         </div>
 

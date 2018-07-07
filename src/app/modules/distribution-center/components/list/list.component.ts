@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import {WarehouseService} from '../../services/warehouse.service';
-import {Warehouse} from '../../../../shared/classes/warehouse';
-import {ToastrService} from 'ngx-toastr';
+import { WarehouseService } from '../../services/warehouse.service';
+import { Warehouse } from '../../../../shared/classes/warehouse';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -16,10 +16,10 @@ export class ListComponent implements OnInit {
   warehouses: any = {};
 
   constructor(private whService: WarehouseService,
-              private toaster: ToastrService) { }
+    private toaster: ToastrService) { }
 
   ngOnInit() {
-  this.warehouses.store = new CustomStore({
+    this.warehouses.store = new CustomStore({
       load: (loadOptions: any) => {
         return this.whService.getWarehousesDx(loadOptions)
           .toPromise()

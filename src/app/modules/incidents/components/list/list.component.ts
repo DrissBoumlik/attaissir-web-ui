@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Incident} from '../../classes/Incident';
-import {ToastrService} from 'ngx-toastr';
-import {IncidentService} from '../../services/incident.service';
+import { Component, OnInit } from '@angular/core';
+import { Incident } from '../../classes/Incident';
+import { ToastrService } from 'ngx-toastr';
+import { IncidentService } from '../../services/incident.service';
 import CustomStore from 'devextreme/data/custom_store';
 
 declare const require: any;
@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
   incidents: any = {};
 
   constructor(private incidentService: IncidentService,
-              private toaster: ToastrService) {
+    private toaster: ToastrService) {
   }
 
   ngOnInit() {

@@ -1,9 +1,8 @@
-import {ZonesService} from '../../../modules/contracts/services/zones.service';
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Third} from '../../classes/third';
-import {Helper} from '../../classes/helper';
-import {ThirdsService} from '../../../modules/thirds/services/thirds.service';
-import {Toast, ToastrService} from 'ngx-toastr';
+import { ZonesService } from '../../../modules/contracts/services/zones.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Helper } from '../../classes/helper';
+import { ThirdsService } from '../../../modules/thirds/services/thirds.service';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-warehouse-form',
@@ -35,8 +34,8 @@ export class WarehouseComponent implements OnInit {
 
   buttonOptions: any;
 
-  constructor(private thirdService: ThirdsService, private  zonesService: ZonesService,
-              private toastr: ToastrService ) {
+  constructor(private thirdService: ThirdsService, private zonesService: ZonesService,
+    private toastr: ToastrService) {
     this.helper = Helper;
   }
 
@@ -69,7 +68,7 @@ export class WarehouseComponent implements OnInit {
         this.tiers = {
           dataSource: res.data,
           displayExpr: 'full_name',
-          valueExpr: 'ID',
+          valueExpr: 'id',
           searchEnabled: true,
           // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
         };

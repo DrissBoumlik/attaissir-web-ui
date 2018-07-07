@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { ThemeComponent } from './theme.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/_guards';
-import {MouvementsModule} from '../modules/mouvements/mouvements.module';
-import {ListeDesDemandesModule} from '../modules/liste_des_demandes/liste-des-demandes.module';
+import { MouvementsModule } from '../modules/mouvements/mouvements.module';
+import { ListeDesDemandesModule } from '../modules/liste_des_demandes/liste-des-demandes.module';
 
 const routes: Routes = [
   {
@@ -42,6 +42,10 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: '../modules/articles/articles.module#ArticlesModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/stocks/stock.module#StockModule'
       },
       {
         path: '',

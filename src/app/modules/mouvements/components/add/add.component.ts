@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {Helper} from '../../../../shared/classes/helper';
-import {MouvementsService} from '../../service/mouvements.service';
-import {CommandeService} from '../../../commande/service/commande.service';
+import { Helper } from '../../../../shared/classes/helper';
+import { MouvementsService } from '../../service/mouvements.service';
+import { CommandeService } from '../../../commande/service/commande.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {WarehoseService} from '../../../warehouse/service/warehose.service';
-import {ArticleCategiesService} from '../../../articles/services/article-categies.service';
-import {ArticlesService} from '../../../articles/services/articles.service';
-import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { WarehoseService } from '../../../warehouse/service/warehose.service';
+import { ArticleCategiesService } from '../../../articles/services/article-categies.service';
+import { ArticlesService } from '../../../articles/services/articles.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -36,13 +36,13 @@ export class AddComponent implements OnInit {
   helper: any;
 
   constructor(public mouvementService: MouvementsService,
-              public commandeService: CommandeService,
-              public thirdService: ThirdsService,
-              public warehouseService: WarehoseService,
-              public familleService: ArticleCategiesService,
-              public articleService: ArticlesService,
-              private router: Router,
-              public toastr: ToastrService) {
+    public commandeService: CommandeService,
+    public thirdService: ThirdsService,
+    public warehouseService: WarehoseService,
+    public familleService: ArticleCategiesService,
+    public articleService: ArticlesService,
+    private router: Router,
+    public toastr: ToastrService) {
     this.stock_operation = {};
     this.helper = Helper;
     this.commandes = {};
@@ -61,7 +61,7 @@ export class AddComponent implements OnInit {
           'sub_famille_id': this.stock_operation.sub_famille,
           'article_id': this.stock_operation.article,
           'quantity1': this.stock_operation.quantity
-      });
+        });
       }
     };
     this.buttonOptions = {

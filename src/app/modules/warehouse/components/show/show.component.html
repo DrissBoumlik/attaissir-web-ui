@@ -49,8 +49,8 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                        <span  *ngIf="magasin.adress == null"> Pas de données </span>
-                        <span  *ngIf="magasin.adress != null"> {{magasin.adress}} </span>
+                        <span  *ngIf="magasin.address == null"> Pas de données </span>
+                        <span  *ngIf="magasin.address != null"> {{magasin.address}} </span>
                       </p>
                     </div>
                   </div>
@@ -119,13 +119,47 @@
                 <div class="col-4">
                   <div class="row">
                     <label class="col-12">
-                      Convention Ref
+                      Référence de convention
                     </label>
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
                         <span  *ngIf="magasin.convention_ref == null"> Pas de données </span>
                         <span  *ngIf="magasin.convention_ref != null"> {{magasin.convention_ref}} </span>
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Jeune promoteurs
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        <span  *ngIf="magasin.third_party == null"> Pas de données </span>
+                        <span  *ngIf="magasin.third_party != null"> {{magasin.third_party}} </span>
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      CDA
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        <span  *ngIf="magasin.cda == null"> Pas de données </span>
+                        <span  *ngIf="magasin.cda != null"> {{magasin.cda}} </span>
                       </p>
 
                     </div>
