@@ -45,7 +45,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        loadChildren: '../modules/stock/stock.module#StockModule'
+        loadChildren: '../modules/stocks/stock.module#StockModule'
       },
       {
         path: '',
