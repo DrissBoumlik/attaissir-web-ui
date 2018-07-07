@@ -178,17 +178,6 @@ export class Helper {
   }
 
 
-  public static getStatut = (value: string): string => {
-    if (value === 'inprogress') {
-      return 'ENCOURS';
-    } else if (value === 'done') {
-      return 'VALIDÉ';
-    } else if (value === 'cancled') {
-      return 'ANNULÉ';
-    }
-    return 'ENCOURS';
-  }
-
 
   public static orderType = (value: string): string => {
     if (value === 'transfer') {
