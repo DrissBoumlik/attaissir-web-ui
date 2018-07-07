@@ -71,7 +71,7 @@
         </div>
 
         <div *dxTemplate="let data of 'stockTemplate'">
-          <a  routerLink="/stock/situation?magasin={{data.value}}" routerLinkActive="active" style=" color : #000;"><i style="font-size: 100%; align-content: center; cursor: pointer; color : #000;"
+          <a (click)="warehouse_nav(data.value)"  style=" color : #000;"><i style="font-size: 100%; align-content: center; cursor: pointer; color : #000;"
                                                                                          class="fa fa fa-archive fa-5x"></i> Consulter Stock</a>
         </div>
 

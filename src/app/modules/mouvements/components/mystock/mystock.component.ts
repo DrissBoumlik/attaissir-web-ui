@@ -14,8 +14,8 @@ export class MystockComponent implements OnInit {
   ngOnInit() {
 
     this.warehouseService.getWarehouseByStruct(parseInt(localStorage.getItem('tenantId'))).subscribe((response) => {
-      console.log('/stock/situation?magasin=' + response.data.id);
-      this.router.navigate(['/stock/situation?magasin=' + response.id]);
+      this.router.navigate(['/stock/situation'], { queryParams: { magasin: response.data.id } });
+
     });
 
     // console.log(localStorage.getItem('tenantId'));
