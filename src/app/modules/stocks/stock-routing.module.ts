@@ -4,14 +4,16 @@ import {ListComponent} from './components/list/list.component';
 import {DefaultComponent} from '../../theme/pages/default/default.component';
 import {ReplenishmentComponent} from './components/replenishment/replenishment.component';
 import {AddComponent} from '../mouvements/components/add/add.component';
+import {BoardComponent} from './components/board/board.component';
 
 const routes: Routes = [{
   path: 'stock',
   component: DefaultComponent,
   children: [
-    { path: '', component: ListComponent },
+    { path: '', component: BoardComponent },
     { path: 'situation', component: ListComponent },
     { path: 'reappro', component: ReplenishmentComponent },
+    { path: 'board', component: BoardComponent },
   ]
 }];
 

@@ -46,6 +46,19 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         disabled: 'false'
       },
     /*  {
+      {
+        name: 'Stock',
+        icon: 'flaticon-open-box',
+        url: '/stock',
+        description: 'Gestion de stock',
+        subMenu: [
+          { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },
+          { icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation' },
+          { icon: 'flaticon-plus', name: 'Réapprovisionnement de stock', url: '/stock/reappro' },
+        ],
+        disabled: 'false'
+      },
+      {
         name: 'Conseille agricole',
         icon: 'flaticon-user',
         url: '/conseille-agricole/liste',
