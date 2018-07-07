@@ -1,6 +1,5 @@
 import {ZonesService} from '../../../modules/contracts/services/zones.service';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Third} from '../../classes/third';
 import {Helper} from '../../classes/helper';
 import {ThirdsService} from '../../../modules/thirds/services/thirds.service';
 import {Toast, ToastrService} from 'ngx-toastr';

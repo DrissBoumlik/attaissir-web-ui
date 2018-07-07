@@ -69,6 +69,13 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         disabled: 'false'
       },
       {
+        name: 'Mon stock',
+        icon: 'fa fa-archive',
+        url: '/mouvements/mon_stock',
+        description: 'mon stock',
+        disabled: 'false'
+      },
+      {
         name: 'Contrats',
         icon: 'flaticon-file',
         url: '/contrats/liste',
@@ -110,7 +117,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'Liste des demandes d\'achat\n',
         icon: 'fa  fa-shopping-cart',
-        url: '/list_des_demandes',
+        url: '/demandes',
         description: 'Centre de distrubition',
         disabled: 'false'
       }

@@ -94,7 +94,7 @@
           <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data.id, router, toastr)"
              class="fa fa-info-circle fa-5x">
           </i>
-          <i style="font-size: 150%; align-content: center; cursor: pointer;padding-left: 10px;" (click)="helper.gotoShow('contrats', data.data.id, router, toastr, 'modifier')"
+          <i *ngIf="data.data.status === 'inprogress'"  style="font-size: 150%; align-content: center; cursor: pointer;padding-left: 10px;" (click)="helper.gotoShow('contrats', data.data.id, router, toastr, 'modifier')"
              class="fa fa-edit fa-5x">
           </i>
         </div>

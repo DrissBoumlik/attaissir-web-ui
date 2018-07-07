@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Third} from '../../../../shared/classes/third';
 import {ThirdsService} from '../../../thirds/services/thirds.service';
@@ -14,7 +14,6 @@ import {Warehouse} from '../../../../shared/classes/warehouse';
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
-
 
   id: number;
   helper: any;

@@ -4,6 +4,7 @@ import { ListComponent } from './components/list/list.component';
 import {DxDataGridModule, DxDateBoxModule, DxSelectBoxModule, DxTextAreaModule} from 'devextreme-angular';
 import {SharedModule} from '../../shared/shared.module';
 import {List_des_demandesRoutingModule} from './list_des_demandes-routing.module';
+import {ShowComponent} from './components/show/show.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,6 @@ import {List_des_demandesRoutingModule} from './list_des_demandes-routing.module
     DxDateBoxModule,
     DxDataGridModule
   ],
-  declarations: [ListComponent]
+  declarations: [ListComponent, ShowComponent]
 })
 export class ListeDesDemandesModule { }

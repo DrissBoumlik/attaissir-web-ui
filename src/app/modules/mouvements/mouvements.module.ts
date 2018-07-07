@@ -11,7 +11,9 @@ import {
 import {ListComponent} from './components/list/list.component';
 import {MouvementsRoutingModule} from './mouvements-routing.module';
 import {SharedModule} from '../../shared/shared.module';
+import {AddComponent} from './components/add/add.component';
 import { ShowComponent } from './components/show/show.component';
+import { MystockComponent } from './components/mystock/mystock.component';
 
 @NgModule({
   imports: [
@@ -29,6 +31,7 @@ import { ShowComponent } from './components/show/show.component';
     DxButtonModule,
     DxTemplateModule
   ],
-  declarations: [ListComponent, ShowComponent]
+
+  declarations: [ListComponent, AddComponent, ShowComponent, MystockComponent]
 })
 export class MouvementsModule { }

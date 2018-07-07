@@ -12,7 +12,7 @@ export class MouvementsService {
   routeName: string;
 
   constructor(private http: HttpClient) {
-    this.routeName = 'stock';
+    this.routeName = 'stocks';
   }
 
 

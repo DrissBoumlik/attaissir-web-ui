@@ -3,8 +3,8 @@
 
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2> Fiche Mouvement N° 111 </h2>
-          </div>
+      <h2> Fiche demande N°  {{order.id}} </h2>
+    </div>
 
 
   </div>
@@ -23,22 +23,9 @@
               <div class="row">
                 <div class="col-12">
                   <h3 class="m-form__section">
-                    Informations générales
-
-                    <span class="siam-form-input-value _status_inprogress" *ngIf="mouvement.state == 'inprogress'">
+                    Informations générales <!--<span class="siam-form-input-value _status">
                     <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
-                  </span>
-
-
-                    <span class="siam-form-input-value _status_done" *ngIf="mouvement.state == 'done'">
-                    <i class="fa  fa-spinner" aria-hidden="true"></i> VALIDÉ
-                  </span>
-
-                    <span class="siam-form-input-value _status_cancled" *ngIf="mouvement.state == 'cancled'">
-                    <i class="fa  fa-spinner" aria-hidden="true"></i> ANNULÉ
-                  </span>
-
-
+                  </span> !-->
                   </h3>
                   <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
                 </div>
@@ -47,28 +34,14 @@
                 <div class="col-4">
                   <div class="row">
                     <label class="col-12">
-                      Type
+                      Objet
                     </label>
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                          {{mouvement.type}}
+                        {{order.object}}
                       </p>
 
-                    </div>
-                  </div>
-
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      N° Bon
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-                        6456
-                      </p>
                     </div>
                   </div>
 
@@ -82,7 +55,21 @@
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
-                        {{mouvement.date}}
+                        {{order.date}}
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Note
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        {{order.note}}
                       </p>
 
                     </div>
@@ -91,42 +78,14 @@
                 <div class="col-4">
                   <div class="row">
                     <label class="col-12">
-                      Commande
+                      Jeune promoteur
                     </label>
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> {{mouvement.order_id}}
+                          {{order.third_party_full_name}}
                       </p>
 
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Emetteur
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-
-                        <i style="font-size: 150%; align-content: center; color: #ac2925;" class="fa fa-chevron-up fa-5x"></i> Med med
-                      </p>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Récepteur
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-                        <i style="font-size: 150%; align-content: center; color: #0b9c8f;" class="fa fa-chevron-down fa-5x"></i> Med med
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -201,11 +160,12 @@
                 <dxo-paging [pageSize]="10"></dxo-paging>
                 <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-                <dxi-column dataField="id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
-                <dxi-column dataField="type" caption="Famille"></dxi-column>
-                <dxi-column dataField="bon_nbr" caption="Sous Famille" cellTemplate="bon_nbrTemplate"></dxi-column>
-                <dxi-column dataField="emetter" caption="Article" cellTemplate="emetterTemplate"></dxi-column>
-                <dxi-column dataField="recepteur" caption="Quantité globale" cellTemplate="recepteurTemplate"></dxi-column>
+                <dxi-column dataField="id" [visible]="false" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"  ></dxi-column>
+                <dxi-column dataField="name" caption="Libelle"></dxi-column>
+                <dxi-column dataField="price" caption="Prix" ></dxi-column>
+                <dxi-column dataField="quantity" caption="Quantité" ></dxi-column>
+                <dxi-column dataField="category" caption="Catégorie" ></dxi-column>
+                <dxi-column dataField="sub_category" caption="sous catégorie"></dxi-column>
 
               </dx-data-grid>
 
@@ -219,113 +179,4 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <dx-popup
-    class="popup"
-    [width]="320"
-    [height]="150"
-    [showTitle]="true"
-    title="Confirmation "
-    [dragEnabled]="false"
-    [closeOnOutsideClick]="true"
-    [(visible)]="popupDeliverVisible"
-  >
-    <div *dxTemplate="let data of 'content'">
-      <p>
-        Voulez-vous vraiment livrer cet élement ?
-       </p>
-
-      <div  class="pull-right">
-      <dx-button class="pull-left"
-        type="success"
-        text="Oui"
-        width="80"
-        (onClick)="deliver()">
-      </dx-button>
-        &nbsp;
-        &nbsp;
-
-      <dx-button class="pull-right"
-        class="button-info"
-        text="No"
-        width="80"
-        (onClick)="cancelPopup()">
-      </dx-button>
-      </div>
-
-    </div>
-  </dx-popup>
-
-
-
-
-
-<dx-popup
-  class="popup"
-  [width]="350"
-  [height]="150"
-  [showTitle]="true"
-  title="Confirmation "
-  [dragEnabled]="false"
-  [closeOnOutsideClick]="true"
-  [(visible)]="popupDeleteVisible"
->
-  <div *dxTemplate="let data of 'content'">
-    <p>
-      Voulez-vous vraiment annuler cet élement ?
-    </p>
-
-    <div  class="pull-right">
-
-    <dx-button class="pull-left"
-               width="80"
-               type="danger"
-               text="Oui"
-               (onClick)="delete()">
-    </dx-button>
-    &nbsp;
-    &nbsp;
-
-    <dx-button class="pull-right"
-               class="button-info"
-               width="80"
-               text="No"
-               (onClick)="cancelPopup()">
-    </dx-button>
-  </div>
-
-  </div>
-</dx-popup>
-
-
-
-
-
-
-
-<div class="dx-fieldset">
-    <div class="dx-field">
-    <div class="dx-field-value">
-      <dx-button width="180"  icon="fa fa-paper-plane"  text="LIVRER" type="success"  style="margin-left: 20px; margin-right: 20px;" (onClick)="showDeliverPopup()"></dx-button>
-
-      <dx-button width="130" icon="fa fa-trash"  text="ANNULER" type="danger"  (onClick)="showDeletePopup()"></dx-button> &nbsp; &nbsp;
-    </div>
-  </div>
-</div>
-
 

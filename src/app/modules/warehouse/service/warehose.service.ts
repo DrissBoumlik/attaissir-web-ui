@@ -35,6 +35,11 @@ export class WarehoseService {
   }
 
 
+
+  getWarehouseByStruct(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/${this.routeName}/structure/${id}`);
+  }
+
   /**
    * Add a warehouse
    * * @param warehouse

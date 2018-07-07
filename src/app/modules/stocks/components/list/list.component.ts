@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Stock} from '../../classes/Stock';
+import {Stock} from '../../../../shared/classes/stock';
 import {StockService} from '../../services/stock.service';
 import {ActivatedRoute} from '@angular/router';
 import CustomStore from 'devextreme/data/custom_store';

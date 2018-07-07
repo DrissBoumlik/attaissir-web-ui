@@ -166,4 +166,28 @@ export class Helper {
   public static dataFormatter = (dat: any, test: boolean) => {
     return (!test) ? dat['data'] : dat;
   }
+
+
+  public static getStatut = (value: string): string => {
+    if (value === 'inprogress') {
+      return 'ENCOURS';
+    } else if (value === 'done') {
+      return 'VALIDÉ';
+    } else if (value === 'cancled') {
+      return 'ANNULÉ';
+    }
+    return 'ENCOURS';
+  }
+
+
+  public static orderType = (value: string): string => {
+    if (value === 'transfer') {
+      return 'TRANSFERT';
+    } else if (value === 'delivery') {
+      return 'LIVRAISON';
+    } else if (value === 'return') {
+      return 'RETOUR';
+    }
+    return value;
+  }
 }

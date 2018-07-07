@@ -61,12 +61,12 @@ export class ListComponent implements OnInit {
       if (isNull(value)) {
       return 'm-badge m-badge--primary m-badge--wide';
     }
-    if (value.toLowerCase() === 'recive'.toLowerCase() || value.toLowerCase() === 'Recive'.toLowerCase()) {
-      return 'm-badge m-badge--primary m-badge--wide';
-    } else if (value.toLowerCase() === 'delivery'.toLowerCase() || value.toLowerCase() === 'Delivery'.toLowerCase()) {
-      return 'm-badge m-badge--info m-badge--wide';
-    } else if (value.toLowerCase() === 'transfer'.toLowerCase() || value.toLowerCase() === 'Transfer'.toLowerCase()) {
+    if (value.toLowerCase() === 'done'.toLowerCase() || value.toLowerCase() === 'Done'.toLowerCase()) {
       return 'm-badge m-badge--success m-badge--wide';
+    } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'Inprogress'.toLowerCase()) {
+      return 'm-badge m-badge--info m-badge--wide';
+    } else if (value.toLowerCase() === 'canceled'.toLowerCase() || value.toLowerCase() === 'Canceled'.toLowerCase()) {
+      return 'm-badge m-badge--danger m-badge--wide';
     }  else {
       return 'm-badge m-badge--primary m-badge--wide';
     }

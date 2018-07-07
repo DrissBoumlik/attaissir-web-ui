@@ -28,7 +28,6 @@ export class AddComponent implements OnInit {
 
 
   onFormSubmit = function (e) {
-    console.log('ok');
     this.warehouseService.addWarehouse(this.warehouse).subscribe(data => {
       this.toastr.success(
         `Nouveau magasin ajouté avec succès.`);

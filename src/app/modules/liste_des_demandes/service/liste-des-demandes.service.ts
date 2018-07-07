@@ -43,4 +43,13 @@ export class ListeDesDemandesService {
     }
   }
 
+
+  /**
+   * Get a Mouvement
+   * @returns {Observable<Article>}
+   */
+  getOrder(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/${this.routeName}/${id}`);
+  }
+
 }

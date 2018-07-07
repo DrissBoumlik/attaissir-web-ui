@@ -57,16 +57,22 @@
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxi-column dataField="id" [width]="50" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="caTemplate"></dxi-column>
+        <dxi-column dataField="id"  caption="" [width]="75" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="caTemplate"></dxi-column>
+        <dxi-column dataField="id"  caption="" [width]="133" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="stockTemplate"></dxi-column>
         <dxi-column dataField="name" caption="Libelle"></dxi-column>
-        <dxi-column dataField="third_party_full_name" caption="Nom complet"></dxi-column>
-        <dxi-column dataField="email" caption="Adresse e-mail "></dxi-column>
-        <dxi-column dataField="tel" caption="N° Téléphone"></dxi-column>
+        <dxi-column dataField="third_party_full_name" caption="Jeune promoteur"></dxi-column>
         <dxi-column dataField="third_party_company_name" caption="Raison sociale"></dxi-column>
+        <dxi-column dataField="warehouse_email" caption="Adresse e-mail "></dxi-column>
+        <dxi-column dataField="tel" caption="N° Téléphone"></dxi-column>
 
         <div *dxTemplate="let data of 'caTemplate'">
-          <a  routerLink="/magasin/afficher/{{data.value}}" routerLinkActive="active"><i style="font-size: 150%; align-content: center; cursor: pointer"
-                                         class="fa fa-info-circle fa-5x"></i></a>
+          <a  routerLink="/magasin/afficher/{{data.value}}" routerLinkActive="active" style="color : #000;"><i style="font-size: 100%; align-content: center; cursor: pointer; color : #000;"
+                                         class="fa fa-info-circle fa-5x"></i> Fiche</a>
+        </div>
+
+        <div *dxTemplate="let data of 'stockTemplate'">
+          <a  routerLink="/stock/situation?magasin={{data.value}}" routerLinkActive="active" style=" color : #000;"><i style="font-size: 100%; align-content: center; cursor: pointer; color : #000;"
+                                                                                         class="fa fa fa-archive fa-5x"></i> Consulter Stock</a>
         </div>
 
       </dx-data-grid>
