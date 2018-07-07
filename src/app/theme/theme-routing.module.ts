@@ -45,6 +45,10 @@ const routes: Routes = [
       },
       {
         path: '',
+        loadChildren: '../modules/stock/stock.module#StockModule'
+      },
+      {
+        path: '',
         loadChildren: '../modules/mouvements/mouvements.module#MouvementsModule'
       },
       {

@@ -17,7 +17,6 @@
               style="font-weight: bold"
               [type]="'success'"
               text="Créer une commande  et envoyer un mail de  réapprovisionnement"
-              [disabled]="!selectedItems?.length"
               (onClick)="replenishStock()">
             </dx-button>
           </div>
@@ -45,7 +44,7 @@
         <dxi-column dataField="article" caption="Article" alignment="center"></dxi-column>
         <dxi-column dataField="qr" caption="Quantité en stock" alignment="center"></dxi-column>
         <dxi-column dataField="threshold" caption="Seuil" alignment="center"></dxi-column>
-        <dxi-column dataField="toOrder" cellTemplate="ToOrder" caption="Quantité à commander"
+        <dxi-column dataField="dt" cellTemplate="ToOrder" caption="Quantité à commander"
                     alignment="center"></dxi-column>
 
         <div *dxTemplate="let data of 'ToOrder'">

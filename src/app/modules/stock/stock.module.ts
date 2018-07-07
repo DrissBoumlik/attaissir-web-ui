@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { StockRoutingModule } from './stock-routing.module';
 import { ListComponent } from './components/list/list.component';
-import {DxButtonModule, DxDataGridModule, DxNumberBoxModule, DxTextAreaModule} from 'devextreme-angular';
+import {DxButtonModule, DxChartModule, DxDataGridModule, DxNumberBoxModule, DxTextAreaModule} from 'devextreme-angular';
 import { ReplenishmentComponent } from './components/replenishment/replenishment.component';
 import {FormsModule} from '@angular/forms';
+import { BoardComponent } from './components/board/board.component';
 
 @NgModule({
   imports: [
@@ -15,8 +16,9 @@ import {FormsModule} from '@angular/forms';
     DxTextAreaModule,
     DxNumberBoxModule,
     DxButtonModule,
-    FormsModule
+    FormsModule,
+    DxChartModule
   ],
-  declarations: [ListComponent, ReplenishmentComponent]
+  declarations: [ListComponent, ReplenishmentComponent, BoardComponent]
 })
 export class StockModule { }

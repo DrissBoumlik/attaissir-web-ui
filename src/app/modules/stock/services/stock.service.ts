@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
-import {Stock} from '../classes/Stock';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +25,30 @@ export class StockService {
   }
 
   getStockSituationDx(params: any, param = ''): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/${this.routeName}/situation/grid${param}`, JSON.stringify(params) , {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/situation/grid${param}`, JSON.stringify(params), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     });
   }
 
+  placeOrder(orders: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/orders`, JSON.stringify(orders), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getStatsVar() {
+    return [
+      {name: 'Quantité Livrée', value: 220},
+      {name: 'Quantité Transfer Sortie', value: 110},
+      {name: 'Quantité Transfer Entrée', value: 135},
+      {name: 'Quantité Retour Agriculteur', value: 1400},
+      {name: 'Quantité Retour Fournisseur', value: 430},
+      {name: 'Quantité servie', value: 570},
+      {name: 'Quantité en stock', value: 380}
+    ];
+  }
 }
