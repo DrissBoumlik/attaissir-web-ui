@@ -14,21 +14,11 @@ import {forEach} from '@angular/router/src/utils/collection';
 export class ListComponent implements OnInit {
 
   mouvements: any = {};
-
-  mouvements_test = [];
   helper: any;
 
 
   constructor(private warehoseService: WarehoseService, private mouvementsService: MouvementsService) {
-
     this.helper = Helper;
-
-    this.mouvements_test =
-      [ {id : 1, ref: 5146, type: 'typel', bon_nbr: 65465, emetter: 'med med', recepteur: 'med2 med 2', nbr_articles: 9 , status: 'recive'},
- {id : 1, ref: 5146, type: 'type2', bon_nbr: 65465, emetter: 'med med', recepteur: 'med2 med 2', nbr_articles: 9 , status: 'delivery'},
- {id : 1, ref: 5146, type: 'type2', bon_nbr: 65465, emetter: 'med med', recepteur: 'med2 med 2', nbr_articles: 9 , status: 'transfer'}
-      ];
-
   }
 
 
@@ -39,7 +29,6 @@ export class ListComponent implements OnInit {
         return this.mouvementsService.getListeDemandesDx(loadOptions)
           .toPromise()
           .then(response => {
-            console.log(response);
 
             response.data.forEach((it) => {
                if (it.to_warehouse_name != null) {

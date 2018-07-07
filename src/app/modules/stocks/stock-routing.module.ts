@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {ListComponent} from './components/list/list.component';
 import {DefaultComponent} from '../../theme/pages/default/default.component';
 import {ReplenishmentComponent} from './components/replenishment/replenishment.component';
+import {AddComponent} from '../mouvements/components/add/add.component';
 import {BoardComponent} from './components/board/board.component';
 
 const routes: Routes = [{

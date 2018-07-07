@@ -104,6 +104,8 @@ export class ListCurrentComponent implements OnInit {
 
 
   onStartEdit = (e) => {
+    e.preventDefault();
+    console.log(e);
     this.router.navigate([`/contrats/modifier/${e.data.id}`]).catch(
       err => {
         throw err; // this.toastr.error(err.error.message);
@@ -115,7 +117,7 @@ export class ListCurrentComponent implements OnInit {
   onCellPrepared = (e) => {
     if (e.columnIndex === 10) {
       if (typeof e.key !== 'undefined') {
-        if (e.key.status !== 'inprogress') {
+        if (e.key.status !== 'ENCOURS') {
           e.cellElement.find('.dx-link-delete').remove();
         }
       }

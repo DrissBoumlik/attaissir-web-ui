@@ -1,9 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {DxDataGridModule, DxDateBoxModule, DxFileUploaderModule, DxSelectBoxModule, DxTextAreaModule} from 'devextreme-angular';
+import {
+  DxButtonModule,
+  DxDataGridModule,
+  DxDateBoxModule,
+  DxFileUploaderModule,
+  DxSelectBoxModule,
+  DxTextAreaModule
+} from 'devextreme-angular';
 import {ListComponent} from './components/list/list.component';
 import {MouvementsRoutingModule} from './mouvements-routing.module';
 import {SharedModule} from '../../shared/shared.module';
+import {AddComponent} from './components/add/add.component';
+import { ShowComponent } from './components/show/show.component';
 
 @NgModule({
   imports: [
@@ -13,8 +22,10 @@ import {SharedModule} from '../../shared/shared.module';
     DxSelectBoxModule,
     DxTextAreaModule,
     DxDateBoxModule,
-    DxDataGridModule
+    DxDataGridModule,
+    DxButtonModule
   ],
-  declarations: [ListComponent]
+
+  declarations: [ListComponent, AddComponent, ShowComponent]
 })
 export class MouvementsModule { }

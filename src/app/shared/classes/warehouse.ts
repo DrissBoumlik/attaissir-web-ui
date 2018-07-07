@@ -7,13 +7,13 @@ import { Injectable } from '@angular/core';
 export class Warehouse {
   id?: number;
   name: string;
-  adress: string;
+  address: string;
   city: string;
-  postal_code: any;
-  phone: any;
+  zip_code: any;
+  tel: any;
   email: any;
   convention_ref: any;
-  structur_id: any;
+  structure_id: any;
   third_party_id: any;
   zone_id: any;
   created_at?: Date;

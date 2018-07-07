@@ -7,6 +7,7 @@ import {DxButtonModule, DxChartModule, DxDataGridModule, DxNumberBoxModule, DxTe
 import { ReplenishmentComponent } from './components/replenishment/replenishment.component';
 import {FormsModule} from '@angular/forms';
 import { BoardComponent } from './components/board/board.component';
+import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
   imports: [

@@ -1,3 +1,9 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+
 export class Stock {
   warehouse: any;
   cda: string;
@@ -11,5 +17,7 @@ export class Stock {
   qrf = 0;
   qs = 0;
   qr = 0;
+  dt: any;
+  toOrder: 0;
   threshold = 10;
 }
