@@ -38,12 +38,10 @@
                                    i18n-message></dxi-validation-rule>
             </dxi-item>
 
-            <dxi-item dataField="intervention_request_id" editorType="dxSelectBox" [editorOptions]="interventionRequestOptions">
+            <dxi-item dataField="commande" editorType="dxSelectBox" [editorOptions]="commandeOptions">
               <dxo-label
                 text="Commande" i18n-text>
               </dxo-label>
-              <dxi-validation-rule type="required" message="Commande est obligatoire"
-                                   i18n-message></dxi-validation-rule>
             </dxi-item>
 
             <dxi-item dataField="recepteur" editorType="dxSelectBox" [editorOptions]="recepteurOptions">
@@ -54,11 +52,11 @@
                                    i18n-message></dxi-validation-rule>
             </dxi-item>
 
-            <dxi-item dataField="company_name">
+            <dxi-item dataField="bon">
               <dxo-label
                 text="N° Bon">
               </dxo-label>
-              <dxi-validation-rule type="required" message="N° Bon est obligatoire"
+              <dxi-validation-rule type="required" message="N° Bon est obligatoire" disabled=""
                                    i18n-message></dxi-validation-rule>
             </dxi-item>
           </dxi-item>
@@ -89,7 +87,7 @@
             </dxi-item>
             <dxi-item dataField="quantity" editorType="dxNumberBox">
               <dxo-label
-                text="Registre de commerce" i18n-text="registre de commerce">
+                text="Quantity">
               </dxo-label>
             </dxi-item>
 
@@ -112,10 +110,10 @@
                           style="padding-top: 2vh"
                           [columnAutoWidth]="true"
                           [noDataText]="'Aucan article n\'est ajouter!'">
-              <dxi-column dataField="famille" caption="Famille"></dxi-column>
-              <dxi-column dataField="sub_famille" caption="Sous famille"></dxi-column>
-              <dxi-column dataField="article" caption="Article"></dxi-column>
-              <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
+              <dxi-column dataField="famille_id" caption="Famille"></dxi-column>
+              <dxi-column dataField="sub_famille_id" caption="Sous famille"></dxi-column>
+              <dxi-column dataField="article_id" caption="Article"></dxi-column>
+              <dxi-column dataField="quantity1" caption="Quantité globale"></dxi-column>
               <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
               <dxo-remote-operations
                 [sorting]="true"

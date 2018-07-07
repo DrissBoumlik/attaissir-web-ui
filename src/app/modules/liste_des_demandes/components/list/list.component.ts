@@ -25,8 +25,6 @@ export class ListComponent implements OnInit {
           return this.listeDesDemandesService.getListeDemandesDx(loadOptions)
             .toPromise()
             .then(response => {
-              console.log('ok');
-
               console.log(response);
               const json = response;
               return json;

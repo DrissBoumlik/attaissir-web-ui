@@ -19,7 +19,11 @@ export class ShowComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       params => {
-        this.mouvement = this.mouvementsService.getMouvement(params.id);
+        this.mouvement = this.mouvementsService.getMouvement(params.id).subscribe(data => {
+          console.log(data);
+        }, err => {
+          throw err;
+        }).unsubscribe();
       });
 
   }
