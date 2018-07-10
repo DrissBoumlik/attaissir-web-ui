@@ -50,6 +50,7 @@ export class Helper {
     return 'ENCOURS';
   }
 
+
   /**
    * Get color by status
    * @param {string} value
@@ -181,11 +182,13 @@ export class Helper {
 
   public static orderType = (value: string): string => {
     if (value === 'transfer') {
-      return 'TRANSFERT';
+      return 'transfère entrée/sortie';
     } else if (value === 'delivery') {
       return 'LIVRAISON';
     } else if (value === 'return') {
-      return 'RETOUR';
+      return 'Retour Fournisseur';
+    } else if (value === 'receive') {
+      return 'Réception des intrants';
     }
     return value;
   }

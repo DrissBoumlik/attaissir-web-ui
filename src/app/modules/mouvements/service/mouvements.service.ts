@@ -17,7 +17,6 @@ export class MouvementsService {
     this.routeName = 'stocks';
   }
 
-
   getListeDemandesDx(params?: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
       headers: new HttpHeaders({
@@ -25,8 +24,6 @@ export class MouvementsService {
       })
     });
   }
-
-
 
   /**
    * Get a Mouvement

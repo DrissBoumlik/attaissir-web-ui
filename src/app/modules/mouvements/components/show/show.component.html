@@ -3,7 +3,7 @@
 
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2> Fiche Mouvement N° 111 </h2>
+      <h2> Fiche Mouvement N° {{ mouvement.id }} </h2>
           </div>
 
 
@@ -52,7 +52,7 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                          {{mouvement.type}}
+                          {{ helper.orderType(mouvement.type) }}
                       </p>
 
                     </div>
@@ -96,7 +96,7 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> {{mouvement.order_id}}
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ order.object }}
                       </p>
 
                     </div>
@@ -111,7 +111,7 @@
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
 
-                        <i style="font-size: 150%; align-content: center; color: #ac2925;" class="fa fa-chevron-up fa-5x"></i>  {{mouvement.third_party_name}}
+                        <i style="font-size: 150%; align-content: center; color: #ac2925;" class="fa fa-chevron-up fa-5x"></i> {{ from.name }}
                       </p>
 
                     </div>
@@ -125,7 +125,7 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                        <i style="font-size: 150%; align-content: center; color: #0b9c8f;" class="fa fa-chevron-down fa-5x"></i>  {{mouvement.third_party_name}}
+                        <i style="font-size: 150%; align-content: center; color: #0b9c8f;" class="fa fa-chevron-down fa-5x"></i> {{ to.name }}
                       </p>
                     </div>
                   </div>
@@ -164,7 +164,7 @@
 
               <dx-data-grid
                 id="gridContainer"
-                [dataSource]="produits"
+                [dataSource]="articles"
                 showBorders="true"
                 [columnHidingEnabled]="true"
                 [allowColumnResizing]="false"
@@ -201,11 +201,11 @@
                 <dxo-paging [pageSize]="10"></dxo-paging>
                 <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-                <dxi-column dataField="id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
-                <dxi-column dataField="type" caption="Famille"></dxi-column>
-                <dxi-column dataField="bon_nbr" caption="Sous Famille" cellTemplate="bon_nbrTemplate"></dxi-column>
-                <dxi-column dataField="emetter" caption="Article" cellTemplate="emetterTemplate"></dxi-column>
-                <dxi-column dataField="recepteur" caption="Quantité globale" cellTemplate="recepteurTemplate"></dxi-column>
+                <dxi-column dataField="article.id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
+                <dxi-column dataField="article.article_category_id" caption="Famille"></dxi-column>
+                <dxi-column dataField="article." caption="Sous Famille"></dxi-column>
+                <dxi-column dataField="article.name" caption="Article"></dxi-column>
+                <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
 
               </dx-data-grid>
 
@@ -219,21 +219,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   <dx-popup
     class="popup"
