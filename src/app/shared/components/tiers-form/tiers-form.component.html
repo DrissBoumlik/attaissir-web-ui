@@ -31,7 +31,49 @@
 
       </dxi-item>-->
 
-      <dxi-item itemType="group" caption="Informations Générales" [colCount]="2" i18n-caption>
+      <dxi-item itemType="group" caption="Centre de distribution"
+                [colCount]="2" i18n-caption="Personne morale" *ngIf="tier.morale">
+
+        <dxi-item dataField="company_name">
+          <dxo-label
+            text="Raison sociale">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="rc" editorType="dxNumberBox">
+          <dxo-label
+            text="Registre de commerce" i18n-text="registre de commerce">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="patent_number" editorType="dxNumberBox">
+          <dxo-label
+            text="Numéro de patente" i18n-text="">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="if" editorType="dxNumberBox">
+          <dxo-label
+            text="Identification fiscal">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="ice" editorType="dxNumberBox">
+          <dxo-label
+            text="ICE" i18n-text="">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="tva_code" editorType="dxNumberBox">
+          <dxo-label
+            text="Code TVA" i18n-text>
+          </dxo-label>
+        </dxi-item>
+
+      </dxi-item>
+
+
+      <dxi-item itemType="group" caption="Informations Jeune promoteur" [colCount]="2" i18n-caption>
 
         <dxi-item dataField="full_name">
           <dxo-label
@@ -49,7 +91,7 @@
             [pattern]="arabicPattern"
             message="Nom n'est pas en arabe." i18n-message>
           </dxi-validation-rule>
-          <dxi-validation-rule type="required" message="Nom (Arabe) est obligatoire"
+          <dxi-validation-rule *ngIf="!tier.morale" type="required" message="Nom (Arabe) est obligatoire"
                                i18n-message></dxi-validation-rule>
         </dxi-item>
 
@@ -262,47 +304,6 @@
         <dxo-label
           text="Personne Morale?" i18n-text>
         </dxo-label>
-      </dxi-item>
-
-      <dxi-item itemType="group" caption="Société"
-                [colCount]="2" i18n-caption="Personne morale" *ngIf="tier.morale">
-
-        <dxi-item dataField="company_name">
-          <dxo-label
-            text="Raison sociale">
-          </dxo-label>
-        </dxi-item>
-
-        <dxi-item dataField="rc" editorType="dxNumberBox">
-          <dxo-label
-            text="Registre de commerce" i18n-text="registre de commerce">
-          </dxo-label>
-        </dxi-item>
-
-        <dxi-item dataField="patent_number" editorType="dxNumberBox">
-          <dxo-label
-            text="Numéro de patente" i18n-text="">
-          </dxo-label>
-        </dxi-item>
-
-        <dxi-item dataField="if" editorType="dxNumberBox">
-          <dxo-label
-            text="Identification fiscal">
-          </dxo-label>
-        </dxi-item>
-
-        <dxi-item dataField="ice" editorType="dxNumberBox">
-          <dxo-label
-            text="ICE" i18n-text="">
-          </dxo-label>
-        </dxi-item>
-
-        <dxi-item dataField="tva_code" editorType="dxNumberBox">
-          <dxo-label
-            text="Code TVA" i18n-text>
-          </dxo-label>
-        </dxi-item>
-
       </dxi-item>
 
 
