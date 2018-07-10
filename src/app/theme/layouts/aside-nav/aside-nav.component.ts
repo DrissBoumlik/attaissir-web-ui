@@ -35,25 +35,30 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         disabled: 'false'
       },
       {
-        name: 'Jeune promoteur',
-        icon: 'flaticon-users',
+        name: 'Centre de distribution',
+        icon: 'flaticon-user',
         url: '/jeunepromoteurs/liste',
-        description: 'Gestion des Jeune promoteurs',
+        description: 'Gestion des Centre de distribution',
         subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouvel Jeune promoteur', url: '/jeunepromoteurs/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des Jeune promoteurs', url: '/jeunepromoteurs/liste' },
+          { icon: 'flaticon-plus', name: 'Nouvel Centre de distribution', url: '/jeunepromoteurs/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des Centre de distribution', url: '/jeunepromoteurs/liste' },
         ],
         disabled: 'false'
       },
       {
         name: 'Stock',
         icon: 'flaticon-open-box',
-        url: '/stock',
+        url: '/stock/situation',
         description: 'Gestion de stock',
         subMenu: [
-          { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },
+          /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
           { icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation' },
-          { icon: 'flaticon-plus', name: 'Réapprovisionnement de stock', url: '/stock/reappro' },
+          { icon: 'flaticon-plus', name: 'Approvisionnement de stock', url: '/stock/reappro' },
+          { name: 'Liste des mouvements', icon: 'fa fa-exchange', url: '/mouvements',
+            description: 'Liste des mouvements', disabled: 'false' },
+          { name: 'Liste des demandes d\'achat', icon: 'fa  fa-shopping-cart', url: '/demandes',
+            description: 'Centre de distrubition', disabled: 'false' },
+          { icon: 'flaticon-list', name: 'Liste des articles', url: '/articles/liste' },
         ],
         disabled: 'false'
       },
@@ -94,32 +99,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         icon: 'flaticon-tabs',
         url: '/cartes/liste',
         description: 'Generateur de cartes',
-        disabled: 'false'
-      },
-
-      {
-        name: 'Liste des mouvements',
-        icon: 'fa fa-exchange',
-        url: '/mouvements',
-        description: 'Liste des mouvements',
-        disabled: 'false'
-      },
-
-      {
-        name: 'Centre de distrubition',
-        icon: 'flaticon-open-box',
-        url: '/articles/liste',
-        description: 'Centre de distrubition',
-        subMenu: [
-          { icon: 'flaticon-list', name: 'Liste des articles', url: '/articles/liste' },
-        ],
-        disabled: 'false'
-      },
-      {
-        name: 'Liste des demandes d\'achat\n',
-        icon: 'fa  fa-shopping-cart',
-        url: '/demandes',
-        description: 'Centre de distrubition',
         disabled: 'false'
       }
     ];

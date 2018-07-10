@@ -9,7 +9,7 @@ import { Stock } from '../../../shared/classes/stock';
 })
 export class StockService {
 
-  routeName = 'stock';
+  routeName = 'stocks';
 
   stock: any = {};
 

@@ -41,12 +41,11 @@ export class ShowComponent implements OnInit {
           throw error1;
         });
       });
-
   }
 
   delete() {
     this.mouvementsService.deleteMouvement(this.mouvement.id).subscribe((response) => {
-      this.router.navigate(['/mouvements'])
+      this.router.navigate(['/mouvements']),
       this.toastr.success('L \'élément a été supprimé.');
     });
 
@@ -54,7 +53,7 @@ export class ShowComponent implements OnInit {
 
   deliver() {
     this.mouvementsService.deliverMouvement(this.mouvement.id).subscribe((response) => {
-      this.router.navigate(['/mouvements'])
+      this.router.navigate(['/mouvements']);
       this.toastr.success('L \'élément a été livré.');
     });
   }
