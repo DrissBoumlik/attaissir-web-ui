@@ -55,7 +55,7 @@ export class ShowComponent implements OnInit {
       state: 'canceled'
     }).subscribe((response) => {
       this.toastr.success('Mouvement annulé.');
-      this.mouvement.state = 'cancled';
+      this.mouvement.state = 'canceled';
       this.popupDeleteVisible = false;
     }, err => {
       throw err;
