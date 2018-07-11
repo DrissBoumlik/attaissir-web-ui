@@ -11,7 +11,7 @@ export class Warehouse {
   city: string;
   zip_code: any;
   tel: any;
-  email: any;
+  email: string;
   convention_ref: any;
   structure_id: any;
   third_party_id: any;

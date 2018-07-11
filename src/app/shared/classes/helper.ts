@@ -167,6 +167,15 @@ export class Helper {
       }
     );
   }
+  /**
+   * Change value to null if undefined or empty string
+   * @param val
+   */
+  public static makeNullable = (val: any) => {
+    if (val === '' || val === {} || val === []) {
+      return null;
+    }
+  }
 
   /**
    * Format data depending of API

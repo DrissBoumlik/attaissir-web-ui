@@ -23,6 +23,7 @@ export class TiersFormComponent implements OnInit {
   @Input() validationGroup?: string;
   @Input() readOnly?: boolean;
   @Input() morale?: boolean;
+  @Input() thirdTypeName = 'agrégé';
 
   buttonOptions: any;
   vars: any;

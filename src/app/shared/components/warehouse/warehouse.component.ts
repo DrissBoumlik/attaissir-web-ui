@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Helper } from '../../classes/helper';
 import { ThirdsService } from '../../../modules/thirds/services/thirds.service';
 import { Toast, ToastrService } from 'ngx-toastr';
+import {Warehouse} from '../../classes/warehouse';
 
 @Component({
   selector: 'app-warehouse-form',
@@ -12,11 +13,10 @@ import { Toast, ToastrService } from 'ngx-toastr';
 export class WarehouseComponent implements OnInit {
 
   structures: any[];
-  regions: any[];
   zones: any[];
   cda: any[];
   tiers: any;
-  citys: any;
+  cities: any;
   phonePattern: any;
 
 
@@ -33,6 +33,7 @@ export class WarehouseComponent implements OnInit {
   @Input() warehouse: any;
 
   buttonOptions: any;
+  resetOptions: any;
 
   constructor(private thirdService: ThirdsService, private zonesService: ZonesService,
     private toastr: ToastrService) {
@@ -44,9 +45,18 @@ export class WarehouseComponent implements OnInit {
     this.phonePattern = /^0[5|6|7]\s*\d{2}\s*\d{2}\s*\d{2}\s*\d{2}$/;
 
     this.buttonOptions = {
-      text: (!this.isEdit) ? 'Ajouter' : 'Modifier',
+      text: 'Soumettre',
       type: 'success',
       useSubmitBehavior: true
+    };
+
+    this.resetOptions = {
+      text: 'Vider',
+      type: 'defalut',
+      useSubmitBehavior: false,
+      onClick: () => {
+        this.warehouse = new Warehouse();
+      }
     };
 
 
@@ -62,22 +72,9 @@ export class WarehouseComponent implements OnInit {
     });
 
 
-    this.thirdService.getThirdsDx('young_promoter').subscribe(
-      (res: any) => {
-        console.log(res);
-        this.tiers = {
-          dataSource: res.data,
-          displayExpr: 'full_name',
-          valueExpr: 'id',
-          searchEnabled: true,
-          // value: Helper.dataSourceformatter(this.vars['civil_status'])[0].ID
-        };
-      }
-    );
-
     this.thirdService.getThirdsVars().subscribe(
       (res: any) => {
-        this.citys = {
+        this.cities = {
           dataSource: Helper.dataSourceformatter(res['cities']),
           displayExpr: 'Name',
           valueExpr: 'ID',

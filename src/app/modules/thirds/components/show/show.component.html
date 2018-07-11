@@ -3,7 +3,7 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Fiche {{ title }} ({{ third?.full_name | uppercase }})</h2>
-      <a class="siam-header-btn-new" routerLink="/tiers/modifier/{{ third?.id }}" title="Modifier l'agrégé"><i
+      <a class="siam-header-btn-new" routerLink="/{{ goTo }}/modifier/{{ third?.id }}" title="Modifier l'agrégé"><i
         class="fa fa-edit"></i></a>
     </div>
 
