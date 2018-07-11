@@ -16,7 +16,7 @@
 
 
 
-      <div class="tab-content" >
+      <div class="tab-content" *ngIf="mouvement">
         <div class="tab-pane active" id="m_user_profile_tab_1">
           <div class="m-form m-form--fit">
             <div class="m-portlet__body">
@@ -37,7 +37,6 @@
                     <span class="siam-form-input-value _status_cancled" *ngIf="mouvement.state == 'cancled'">
                     <i class="fa  fa-spinner" aria-hidden="true"></i> ANNULÉ
                   </span>
-
 
                   </h3>
                   <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
@@ -95,7 +94,7 @@
                     </label>
                     <div class="col-12">
 
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                      <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="order">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ order.object }}
                       </p>
 
@@ -109,7 +108,7 @@
                     </label>
                     <div class="col-12">
 
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                      <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="from">
 
                         <i style="font-size: 150%; align-content: center; color: #ac2925;" class="fa fa-chevron-up fa-5x"></i> {{ from.name }}
                       </p>
@@ -124,7 +123,7 @@
                     </label>
                     <div class="col-12">
 
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                      <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="to">
                         <i style="font-size: 150%; align-content: center; color: #0b9c8f;" class="fa fa-chevron-down fa-5x"></i> {{ to.name }}
                       </p>
                     </div>
@@ -303,7 +302,7 @@
 
 
 
-<div class="dx-fieldset">
+<div class="dx-fieldset" *ngIf="mouvement.state === 'inprogress'">
     <div class="dx-field">
     <div class="dx-field-value">
       <dx-button width="180"  icon="fa fa-paper-plane"  text="LIVRER" type="success"  style="margin-left: 20px; margin-right: 20px;" (onClick)="showDeliverPopup()"></dx-button>
