@@ -5,8 +5,8 @@ import { ThirdsService } from '../../services/thirds.service';
 import { Third } from '../../../../shared/classes/third';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from '../../../../shared/classes/helper';
-import {Warehouse} from '../../../../shared/classes/warehouse';
-import {WarehoseService} from '../../../warehouse/service/warehose.service';
+import { Warehouse } from '../../../../shared/classes/warehouse';
+import { WarehoseService } from '../../../warehouse/service/warehose.service';
 
 
 @Component({
@@ -55,7 +55,7 @@ export class EditComponent implements OnInit {
             this.tier.zip_code = String(this.tier.zip_code);
 
             this.tier.patent_number = this.helper.makeNullable(this.tier.patent_number);
-            this.tier.if            = this.helper.makeNullable(this.tier.if);
+            this.tier.if = this.helper.makeNullable(this.tier.if);
 
             this.tier.rib = `${this.tier.bank_account_number}${this.tier.bank_code}${this.tier.bank_rib_key}`;
             this.warehouses = this.tier.warehouses;

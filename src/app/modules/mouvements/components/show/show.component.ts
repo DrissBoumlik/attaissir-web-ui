@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MouvementsService } from '../../service/mouvements.service';
 import { ToastrService } from 'ngx-toastr';
-import {Helper} from '../../../../shared/classes/helper';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-show',
@@ -21,9 +21,9 @@ export class ShowComponent implements OnInit {
   from: any;
 
   constructor(private router: Router,
-              private route: ActivatedRoute,
-              private mouvementsService: MouvementsService,
-              private toastr: ToastrService) {
+    private route: ActivatedRoute,
+    private mouvementsService: MouvementsService,
+    private toastr: ToastrService) {
     this.helper = Helper;
   }
 
@@ -38,7 +38,7 @@ export class ShowComponent implements OnInit {
     this.route.params.subscribe(
       params => {
         this.mouvementsService.getMouvement(params.id).subscribe((response) => {
-          this.mouvement =  this.helper.dataFormatter(response, false);
+          this.mouvement = this.helper.dataFormatter(response, false);
           this.order = this.mouvement.order;
           this.from = this.mouvement.from;
           this.to = this.mouvement.to;

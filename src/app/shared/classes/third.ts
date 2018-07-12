@@ -3,7 +3,7 @@ import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
 import { Card } from './card';
 import { Document } from './document';
-import {Warehouse} from './warehouse';
+import { Warehouse } from './warehouse';
 
 
 @Injectable({

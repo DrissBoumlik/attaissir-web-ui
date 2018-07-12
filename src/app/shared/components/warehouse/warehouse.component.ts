@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Helper } from '../../classes/helper';
 import { ThirdsService } from '../../../modules/thirds/services/thirds.service';
 import { Toast, ToastrService } from 'ngx-toastr';
-import {Warehouse} from '../../classes/warehouse';
+import { Warehouse } from '../../classes/warehouse';
 
 @Component({
   selector: 'app-warehouse-form',
