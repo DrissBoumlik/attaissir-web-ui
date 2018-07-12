@@ -81,7 +81,7 @@ export class ReplenishmentComponent implements OnInit {
       const cmd = _.orderBy(aCommander, ['provider_id', 'warehouse_id'], ['asc', 'asc']);
       this.stockService.placeOrder(cmd).subscribe(
         (res => {
-          this.toaser.warning('Votre commande a été passée avec succès.');
+          this.toaser.success('Votre commande a été passée avec succès.');
           this.dataGrid.instance.refresh();
         }),
         (err => {

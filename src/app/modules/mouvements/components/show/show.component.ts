@@ -42,7 +42,7 @@ export class ShowComponent implements OnInit {
           this.order = this.mouvement.order;
           this.from = this.mouvement.from;
           this.to = this.mouvement.to;
-          this.articles = this.mouvement.order.articles;
+          this.articles = this.mouvement.articles;
         }, error1 => {
           throw error1;
         });
