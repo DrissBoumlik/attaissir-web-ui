@@ -175,6 +175,7 @@ export class Helper {
     if (val === '' || val === {} || val === []) {
       return null;
     }
+    return val;
   }
 
   /**

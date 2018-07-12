@@ -90,12 +90,13 @@ export class EditComponent implements OnInit {
   }
 
   onFormSubmitWarehouse = (e) => {
+    this.warehouse.third_party_id = this.tier.id;
     if (!this.warehouse.id) {
       this.warehouseService.addWarehouse(this.warehouse).subscribe(data => {
         this.toastr.success(
           `Nouveau magasin ajouté avec succès.`);
-        this.warehouse = new Warehouse();
         this.warehouses.push(this.warehouse);
+        this.warehouse = new Warehouse();
         // this.router.navigate(['/magasin']);
       }, err => {
         throw err;
@@ -105,13 +106,13 @@ export class EditComponent implements OnInit {
       this.warehouseService.editWarehouse(this.warehouse).subscribe(data => {
         this.toastr.success(
           `Magasin modifier avec succès.`);
-        this.warehouse = new Warehouse();
         this.warehouses = this.warehouses.map((warehouse) => {
           if (warehouse.id === this.warehouse.id) {
             return this.warehouse;
           }
           return warehouse;
         });
+        this.warehouse = new Warehouse();
         // this.router.navigate(['/magasin']);
       }, err => {
         throw err;
