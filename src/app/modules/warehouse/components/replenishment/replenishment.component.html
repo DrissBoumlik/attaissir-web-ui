@@ -3,8 +3,6 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Réapprovisionnement de stock</h2>
-      <a class="siam-header-btn-new" routerLink="/magasin/ajouter" title="Ajouter conseille"><i
-        class="fa fa-plus"></i></a>
     </div>
   </div>
 </div>
@@ -53,13 +51,13 @@
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
         <dxi-column dataField="id" [width]="50" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="caTemplate"></dxi-column>
-        <dxi-column dataField="cda" caption="Ref"></dxi-column>
+        <dxi-column dataField="id" caption="Ref"></dxi-column>
         <dxi-column dataField="name" caption="Libelle"></dxi-column>
         <dxi-column dataField="third.full_name" caption="Stock optimal"></dxi-column>
         <dxi-column dataField="email" caption="Stock alert"></dxi-column>
         <dxi-column dataField="tel" caption="Stock physique"></dxi-column>
-        <dxi-column dataField="third.company_name" caption="Commander"></dxi-column>
-        <dxi-column dataField="third.company_name" caption="Fournisseur"></dxi-column>
+        <dxi-column dataField="warehouse_name" caption="Commander"></dxi-column>
+        <dxi-column dataField="third_party_full_name" caption="Fournisseur"></dxi-column>
 
         <div *dxTemplate="let data of 'caTemplate'">
           <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; cursor: pointer"
