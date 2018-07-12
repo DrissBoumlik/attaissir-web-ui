@@ -30,7 +30,7 @@
         [columnHidingEnabled]="false"
         [allowColumnReordering]="true"
         [columnAutoWidth]="true"
-        [remoteOperations]="{ groupPaging: false }"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         noDataText="Aucun article n'est disponible"
         KeyExpr="id"
         [rowAlternationEnabled]="true"
@@ -60,6 +60,8 @@
           [sorting]="true"
           [paging]="true">
         </dxo-remote-operations>
+        <dxo-filter-row
+          [visible]="true" [applyFilter]="true"></dxo-filter-row>
         <dxo-editing
           mode="popup"
           [useIcons]="true"
@@ -82,7 +84,7 @@
         </dxo-pager>
         <dxo-paging [pageSize]="15"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
-        <dxo-search-panel [visible]="true"></dxo-search-panel>
+        <dxo-search-panel [visible]="false"></dxo-search-panel>
         <dxo-group-panel [visible]="true"
                          emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
         <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>

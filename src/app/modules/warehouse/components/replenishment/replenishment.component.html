@@ -24,9 +24,10 @@
 
         <dxo-export [enabled]="true" fileName="magasin" [allowExportSelectedData]="true"></dxo-export>
 
-        <dxo-filter-row [visible]="true"></dxo-filter-row>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
 
+        <dxo-filter-row
+          [visible]="true" [applyFilter]="true"></dxo-filter-row>
         <dxo-group-panel [visible]="true"></dxo-group-panel>
         <dxo-scrolling mode="virtual"></dxo-scrolling>
         <dxo-editing

@@ -93,7 +93,6 @@ export class ReplenishmentComponent implements OnInit {
   }
 
   valuechange(e: any, data: any, value: any): void {
-
     const check = this.toOrder.find(tr => {
       return tr.warehouse_id === data.value.warehouse_id
         && tr.article_id === data.value.article_id
