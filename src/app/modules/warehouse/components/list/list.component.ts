@@ -34,6 +34,7 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this.warehouses.store = new CustomStore({
       load: (loadOptions: any) => {
+        loadOptions['requireTotalCount'] = true;
         return this.warehoseService.getAllDx(loadOptions)
           .toPromise()
           .then(response => {
