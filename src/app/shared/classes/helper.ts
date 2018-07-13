@@ -44,10 +44,17 @@ export class Helper {
       return 'ENCOURS';
     } else if (value === 'done') {
       return 'VALIDÉ';
-    } else if (value === 'cancled') {
+    } else if (value === 'canceled') {
       return 'ANNULÉ';
     }
     return 'ENCOURS';
+  }
+
+  public static articleType = (type) => {
+    if (type === 'service') {
+      return 'Service';
+    }
+    return 'Produit';
   }
 
 
@@ -111,7 +118,7 @@ export class Helper {
     return 'aggregated';
   }
 
-  /**
+  /** 
    * get Third party type link
    * @param link
    * @returns {string}

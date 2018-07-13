@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
 import { WarehoseService } from '../../../warehouse/service/warehose.service';
 import { Helper } from '../../../../shared/classes/helper';
-import { isNull } from "util";
+import { isNull } from 'util';
 import { MouvementsService } from '../../service/mouvements.service';
 import { forEach } from '@angular/router/src/utils/collection';
 
@@ -61,11 +61,11 @@ export class ListComponent implements OnInit {
     if (isNull(value)) {
       return 'm-badge m-badge--primary m-badge--wide';
     }
-    if (value.toLowerCase() === 'done'.toLowerCase() || value.toLowerCase() === 'Done'.toLowerCase()) {
+    if (value.toLowerCase() === 'done') {
       return 'm-badge m-badge--success m-badge--wide';
-    } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'Inprogress'.toLowerCase()) {
+    } else if (value.toLowerCase() === 'inprogress') {
       return 'm-badge m-badge--info m-badge--wide';
-    } else if (value.toLowerCase() === 'canceled'.toLowerCase() || value.toLowerCase() === 'Canceled'.toLowerCase()) {
+    } else if (value.toLowerCase() === 'canceled') {
       return 'm-badge m-badge--danger m-badge--wide';
     } else {
       return 'm-badge m-badge--primary m-badge--wide';
