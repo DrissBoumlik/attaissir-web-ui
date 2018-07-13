@@ -5,9 +5,11 @@ import { InterventionsRoutingModule } from './interventions-routing.module';
 import { NewComponent } from './components/new/new.component';
 import {
   DxButtonModule,
-  DxDateBoxModule, DxFormModule, DxSelectBoxModule, DxTemplateModule, DxTextBoxModule,
+  DxDateBoxModule, DxFormModule, DxLoadPanelModule, DxSelectBoxModule, DxTemplateModule, DxTextBoxModule,
   NestedOptionHost
 } from 'devextreme-angular';
+import {SharedModule} from '../../shared/shared.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
@@ -18,7 +20,10 @@ import {
     DxTemplateModule,
     DxFormModule,
     DxDateBoxModule,
-    DxButtonModule
+    DxButtonModule,
+    SharedModule,
+    DxLoadPanelModule,
+    RouterModule,
   ],
   declarations: [NewComponent]
 })

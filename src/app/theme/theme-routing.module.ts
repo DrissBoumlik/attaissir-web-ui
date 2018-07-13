@@ -56,6 +56,10 @@ const routes: Routes = [
         loadChildren: '../modules/liste_des_demandes/liste-des-demandes.module#ListeDesDemandesModule'
       },
       {
+        path: '',
+        loadChildren: '../modules/interventions/interventions.module#InterventionsModule'
+      },
+      {
         path: '404',
         loadChildren: './pages/default/not-found/not-found.module#NotFoundModule'
       },

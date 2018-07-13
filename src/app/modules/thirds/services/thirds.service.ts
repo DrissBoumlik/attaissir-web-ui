@@ -84,7 +84,7 @@ export class ThirdsService {
    * @param cin
    * @returns {Observable<Third[]>}
    */
-  getThirdByCIN(cin: string): Observable<Third> {
+   getThirdByCIN(cin: string): Observable<Third> {
     return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/find?v=${cin}`);
   }
 
