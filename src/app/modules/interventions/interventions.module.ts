@@ -1,25 +1,36 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { InterventionsRoutingModule } from './interventions-routing.module';
 import { NewComponent } from './components/new/new.component';
 import {
-  DxButtonModule,
-  DxDateBoxModule, DxFormModule, DxSelectBoxModule, DxTemplateModule, DxTextBoxModule,
-  NestedOptionHost
+  DxButtonModule, DxCheckBoxModule, DxDataGridModule,
+  DxDateBoxModule,
+  DxFormModule, DxPopupModule,
+  DxSelectBoxModule,
+  DxTemplateModule,
+  DxTextAreaModule,
+  DxTextBoxModule
 } from 'devextreme-angular';
+import {AddComponent} from './components/add/add.component';
+import {SharedModule} from '../../shared/shared.module';
+import {MouvementsRoutingModule} from '../mouvements/mouvements-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     InterventionsRoutingModule,
     DxSelectBoxModule,
-    DxTextBoxModule,
-    DxTemplateModule,
-    DxFormModule,
+    DxTextAreaModule,
     DxDateBoxModule,
-    DxButtonModule
+    DxDataGridModule,
+    DxButtonModule,
+    DxPopupModule,
+    DxButtonModule,
+    DxTemplateModule,
+
+    DxCheckBoxModule
   ],
-  declarations: [NewComponent]
+  declarations: [NewComponent, AddComponent]
 })
 export class InterventionsModule { }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Helper} from '../../../../shared/classes/helper';
 import {isNull} from "util";
+import {ActivatedRoute, Router} from '@angular/router';
+import {PreconisationsIntrantsService} from '../../service/preconisations-intrants.service';
+import CustomStore from 'devextreme/data/custom_store';
 
 @Component({
   selector: 'app-list',
@@ -9,26 +12,44 @@ import {isNull} from "util";
 })
 export class ListComponent implements OnInit {
 
-  preconisations_intrants: any;
+   preconisations_intrants: any = {};
+
   helper: any;
 
-  constructor( ) {
+  constructor( private  route: ActivatedRoute, private  preconisationsIntrantsService: PreconisationsIntrantsService) {
     this.helper = Helper;
   }
 
+
+
   ngOnInit() {
 
-    this.preconisations_intrants = [
-      {
-    id : 5 , ref : 56, cda : 'CDA 231' , zone : 3, parcelle : 3831, nom_agriculteur : 'MAYOU MANSOUR' , cin : 'GB84622',
-    nbr_article : 7, date_de_commande : '21/06/2018 16:24:22', etat : 'ENCOURS'
-    },
-      {
-        id : 7 , ref : 14 , cda : 'CDA 954' , zone : 7, parcelle : 232, nom_agriculteur : 'ILYAS HASSAN' , cin : 'D89452',
-        nbr_article : 7, date_de_commande : '04/01/2018 01:04:22', etat : 'ANNULÉ'
-      }
 
-    ];
+    this.preconisations_intrants.store = new CustomStore({
+      load: (loadOptions: any) => {
+        return this.preconisationsIntrantsService.getListeDemandesDx(loadOptions)
+          .toPromise()
+          .then(response => {
+            return {
+              data: response.data,
+              totalCount: response.data.length
+            };
+          })
+          .catch(error => {
+            throw error;
+          });
+      }
+    });
+
+    this.route.params.subscribe(
+      params => {
+        if (params.cin == null) {
+          console.log('all');
+        } else {
+          console.log('by_search');
+        }
+      });
+
 
   }
 

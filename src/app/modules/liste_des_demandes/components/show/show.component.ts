@@ -18,7 +18,7 @@ export class ShowComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       params => {
-        this.order = this.listeDesDemandesService.getOrder(params.id).subscribe((response) => {
+        this.listeDesDemandesService.getOrder(params.id).subscribe((response) => {
           this.order = response.data;
 
 

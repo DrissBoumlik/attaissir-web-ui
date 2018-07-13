@@ -50,15 +50,15 @@
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
         <dxi-column dataField="id" [width]="40" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
-        <dxi-column dataField="ref" caption="Réf"></dxi-column>
+        <dxi-column dataField="id" caption="Réf"></dxi-column>
         <dxi-column dataField="cda" caption="CDA" ></dxi-column>
         <dxi-column dataField="zone" caption="Zone"></dxi-column>
         <dxi-column dataField="parcelle" caption="Parcelle"></dxi-column>
-        <dxi-column dataField="nom_agriculteur" caption="Nom d'agriculteur"></dxi-column>
+        <dxi-column dataField="full_name" caption="Nom d'agriculteur"></dxi-column>
         <dxi-column dataField="cin" caption="C.I.N d'agriculter"></dxi-column>
-        <dxi-column dataField="nbr_article"  caption="Nombre d'article"></dxi-column>
-        <dxi-column dataField="date_de_commande" caption="Date de commande"></dxi-column>
-        <dxi-column dataField="etat" caption="Etat" cellTemplate="statusTemplate"></dxi-column>
+        <dxi-column dataField="article_count"  caption="Nombre d'article"></dxi-column>
+        <dxi-column dataField="date" caption="Date de commande"></dxi-column>
+        <dxi-column dataField="state" caption="Etat" cellTemplate="statusTemplate"></dxi-column>
 
         <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="getStatusColor(data.value)">
@@ -71,13 +71,9 @@
         </div>
 
         <div *dxTemplate="let data of 'consulterTemplate'">
-          <a  routerLink="/mouvements/afficher/{{data.value}}" routerLinkActive="active"><i style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+          <a  routerLink="/preconisations-intrants/afficher/{{data.value}}" routerLinkActive="active"><i style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
                                                                                             class="fa fa-info-circle fa-5x"></i></a>
         </div>
-
-
-
-
 
       </dx-data-grid>
     </div>
