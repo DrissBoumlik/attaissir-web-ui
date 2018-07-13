@@ -106,4 +106,12 @@ export class CardsService {
       })
     });
   }
+
+  getCardByRFID(rfid: string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/${this.routeName}/find?rfid=${rfid}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
 }

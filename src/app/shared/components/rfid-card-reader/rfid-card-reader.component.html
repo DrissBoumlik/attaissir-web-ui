@@ -1,0 +1,43 @@
+<div class="m-portlet__head" style="padding: 2%;">
+  <button type="button" (click)="onGoback()" class="btn btn-primary float-right" style="margin-right: 5%;">Etape presedente </button>
+  <div class="m-portlet__head-title">
+    <h3 class="m-portlet__head-text">
+      Rechercher un agrégé
+    </h3>
+    <p>Taper le C.I.N de l'agrégé, ou bien scanner la carte d'agriculteur</p>
+    <hr>
+  </div>
+  <dx-form id="form2">
+    <dxi-item itemType="group" [colCount]="2">
+      <dxi-item>
+        <dx-text-box placeholder="Tape le C.I.N." (onInput)="onCinInput($event)">
+        </dx-text-box>
+      </dxi-item>
+      <dxi-item>
+        <dx-button style="background-color: rgba(41,167,39,0.74); border: none" icon="fa fa-id-card" text="Scanner la carte agriculteur" (onClick)="Scan()" type="default"></dx-button>
+      </dxi-item>
+    </dxi-item>
+  </dx-form>
+  <dx-popup
+    #popup
+    class="popup"
+    [width]="600"
+    [height]="400"
+    [showTitle]="true"
+    shadingColor="rgba(0,0,0,0.6)"
+    title="Glisser la carte"
+    [dragEnabled]="false"
+    (onShown)="test()"
+    [closeOnOutsideClick]="true"
+    [(visible)]="popupVisible">
+    <div *dxTemplate="let data of 'content'">
+      <div class="glisser">
+        <h1>GLISSER LA CARTE</h1>
+        <p>Faire glisser la carte sur le lecteur de carte pour lancer la recherche</p>
+        <img src="assets/images/credit-card.png" alt="carte agriculteur" width="50%">
+      </div>
+    </div>
+  </dx-popup>
+  <input class="rfid-input" type="text" name="rfid"  #rfid>
+  <input class="rfid-input" type="text" name="focusout"  #focusout>
+</div>

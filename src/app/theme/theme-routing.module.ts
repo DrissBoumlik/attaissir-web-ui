@@ -58,6 +58,10 @@ const routes: Routes = [
       },
       {
         path: '',
+        loadChildren: '../modules/interventions/interventions.module#InterventionsModule'
+      },
+      {
+        path: '',
         loadChildren: '../modules/preconisations-intrants/preconisations-intrants.module#PreconisationsIntrantsModule'
       },
       {

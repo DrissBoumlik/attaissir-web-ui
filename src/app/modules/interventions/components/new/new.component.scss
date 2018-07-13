@@ -7,6 +7,12 @@
   padding: 0;
   margin-left: -80px;
 }
+.m-portlet__head {
+  margin-left: -2%;
+}
+.m-portlet .m-portlet__body {
+  margin-right: 4%;
+}
 
 @-webkit-keyframes slide-right {
   0% {
