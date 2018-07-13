@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/_guards';
 import { MouvementsModule } from '../modules/mouvements/mouvements.module';
 import { ListeDesDemandesModule } from '../modules/liste_des_demandes/liste-des-demandes.module';
+import {PreconisationsIntrantsModule} from '../modules/preconisations-intrants/preconisations-intrants.module';
 
 const routes: Routes = [
   {
@@ -58,6 +59,10 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: '../modules/interventions/interventions.module#InterventionsModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/preconisations-intrants/preconisations-intrants.module#PreconisationsIntrantsModule'
       },
       {
         path: '404',
