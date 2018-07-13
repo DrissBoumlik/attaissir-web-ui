@@ -3,7 +3,7 @@ import { ThemeComponent } from './theme.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/_guards';
 import { MouvementsModule } from '../modules/mouvements/mouvements.module';
-import { ListeDesDemandesModule } from '../modules/liste_des_demandes/liste-des-demandes.module';
+import { DemandesModule } from '../modules/demandes/demandes.module';
 
 const routes: Routes = [
   {
@@ -53,7 +53,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        loadChildren: '../modules/liste_des_demandes/liste-des-demandes.module#ListeDesDemandesModule'
+        loadChildren: '../modules/demandes/demandes.module#DemandesModule'
       },
       {
         path: '404',

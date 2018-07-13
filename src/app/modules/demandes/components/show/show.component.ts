@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ListeDesDemandesService } from '../../service/liste-des-demandes.service';
+import { DemandesService } from '../../service/demandes.service';
+import {Helper} from '../../../../shared/classes/helper';
+import {Article} from '../../../../shared/classes/article';
 
 @Component({
   selector: 'app-show',
@@ -11,18 +13,24 @@ export class ShowComponent implements OnInit {
 
   order: any;
   produits: Article[];
-  constructor(private route: ActivatedRoute, private listeDesDemandesService: ListeDesDemandesService) {
+  helper: any;
+
+  constructor(private route: ActivatedRoute,
+              private demandesService: DemandesService) {
     this.produits = [];
+    this.helper = Helper;
+    this.order = {
+      id: 0
+    };
   }
 
   ngOnInit() {
     this.route.params.subscribe(
       params => {
-        this.order = this.listeDesDemandesService.getOrder(params.id).subscribe((response) => {
+        this.demandesService.getOrder(params.id).subscribe((response) => {
           this.order = response.data;
 
-
-          response.data.orderarticles.forEach((it) => {
+          /*this.order.articles.forEach((it) => {
             const article = new Article();
             article.id = it.id;
             article.quantity = it.quantity;
@@ -30,17 +38,10 @@ export class ShowComponent implements OnInit {
             article.name = it.article.name;
             article.category = it.article.category.name;
             article.sub_category = it.article.category.article_category.name;
-
-            console.log(article);
-
             this.produits.push(article);
             //  console.log(article);
-
-
-          });
-
+          });*/
           //  console.log(this.produits);
-
         });
       });
 
@@ -48,11 +49,3 @@ export class ShowComponent implements OnInit {
 
 }
 
-export class Article {
-  id?: number;
-  name: string;
-  price: number;
-  quantity: number;
-  category: any;
-  sub_category: string;
-}

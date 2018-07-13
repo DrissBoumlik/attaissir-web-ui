@@ -32,7 +32,7 @@ import { ArticlesModule } from './modules/articles/articles.module';
 import { ConseilleAgricoleModule } from './modules/conseille-agricole/conseille-agricole.module';
 import { CommandeModule } from './modules/commande/commande.module';
 import { MouvementsModule } from './modules/mouvements/mouvements.module';
-import { ListeDesDemandesModule } from './modules/liste_des_demandes/liste-des-demandes.module';
+import { DemandesModule } from './modules/demandes/demandes.module';
 
 @NgModule({
   declarations: [
@@ -70,7 +70,7 @@ import { ListeDesDemandesModule } from './modules/liste_des_demandes/liste-des-d
     CommandeModule,
     ParcelsModule,
     CardsModule,
-    ListeDesDemandesModule,
+    DemandesModule,
     ArticlesModule,
     SharedModule,
     MouvementsModule
