@@ -78,7 +78,7 @@ export class WizardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.step2 = (!this.isEdit) ? '2. Informations contrat' : '2. Informations avenant';
+    this.step2 = (!this.isEdit) ? '2. Contrat' : '2. Avenant';
     this.contractService.getContractsVars().subscribe((data) => {
       this.contracteditorOptions = {
         label: 'Type contrat',

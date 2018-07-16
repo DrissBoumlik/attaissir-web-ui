@@ -12,21 +12,19 @@ export class SiamErrorHandler implements ErrorHandler {
   }
 
   handleError = (error: any): void => {
-    let message: string;
-    let title: string;
     if (error instanceof HttpErrorResponse) {
       // Server or connection error happened
       if (!navigator.onLine) {
         // Handle offline error
         this.toastr.warning('Pas de connexion Internet');
       } else {
+        console.log(error.error);
+        // this.toastr.warning(error);
+
         // Handle Http Error (error.status === 403, 404...)
         // this.toastr.warning(`${error.status} - ${error.message}`);
       }
     } else {
-      /*this.toastr.warning(error, '', {
-        enableHtml: true
-      });*/
     }
     // Log the error anyway
     console.error('It happens: ', error);
