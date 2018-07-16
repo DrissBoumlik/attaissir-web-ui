@@ -21,6 +21,10 @@
         [allowColumnReordering]="true"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         KeyExpr="id">
+        <dxo-remote-operations
+          [sorting]="true"
+          [paging]="true">
+        </dxo-remote-operations>
 
         <dxo-export [enabled]="true" fileName="magasin" [allowExportSelectedData]="true"></dxo-export>
 
@@ -28,7 +32,7 @@
         <dxo-header-filter [visible]="true"></dxo-header-filter>
 
         <dxo-group-panel [visible]="true"></dxo-group-panel>
-        <dxo-scrolling mode="virtual"></dxo-scrolling>
+        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
         <dxo-editing
           mode="popup"
           [useIcons]="true"

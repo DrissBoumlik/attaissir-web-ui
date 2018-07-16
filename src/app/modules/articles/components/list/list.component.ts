@@ -26,6 +26,7 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this.articles.store = new CustomStore({
       load: (loadOptions: any) => {
+        loadOptions['requireTotalCount'] = true;
         return this.articleServices.getArticlesDx(loadOptions)
           .toPromise()
           .then(response => {

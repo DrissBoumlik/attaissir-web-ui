@@ -30,7 +30,7 @@
         [columnHidingEnabled]="false"
         [allowColumnReordering]="true"
         [columnAutoWidth]="true"
-        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true, grouping: true}"
         noDataText="Aucun article n'est disponible"
         KeyExpr="id"
         [rowAlternationEnabled]="true"
@@ -58,7 +58,8 @@
 
         <dxo-remote-operations
           [sorting]="true"
-          [paging]="true">
+          [paging]="true"
+          [grouping]="true">
         </dxo-remote-operations>
         <dxo-filter-row
           [visible]="true" [applyFilter]="true"></dxo-filter-row>
