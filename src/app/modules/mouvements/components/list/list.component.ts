@@ -26,7 +26,6 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this.mouvements.store = new CustomStore({
       load: (loadOptions: any) => {
-        loadOptions['requireTotalCount'] = true;
         return this.mouvementsService.getListeDemandesDx(loadOptions)
           .toPromise()
           .then(response => {
