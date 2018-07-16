@@ -67,12 +67,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
     });
     this.shortcutsList = [
       {
-        title: 'Ajouter un nouvel agrégé',
-        icon: 'flaticon-avatar',
-        url: '/tiers/ajouter',
-        color: ''
-      },
-      {
         title: 'Ajouter un nouveau contrat d\'agrégation',
         icon: 'flaticon-interface-6',
         url: '/contrats/ajouter',
