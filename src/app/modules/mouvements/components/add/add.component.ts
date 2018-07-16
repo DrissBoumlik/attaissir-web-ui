@@ -55,7 +55,9 @@ export class AddComponent implements OnInit {
       text: 'AJOUTER',
       type: 'success',
       useSubmitBehavior: false,
-      onClick: () => {
+      onClick: (e) => {
+        console.log(e);
+        
         this.products.push({
           'famille_id': this.stock_operation.famille,
           'sub_famille_id': this.stock_operation.sub_famille,
