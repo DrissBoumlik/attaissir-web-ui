@@ -13,7 +13,6 @@ import notify from 'devextreme/ui/notify';
 export class NewComponent implements OnInit {
   loadingVisible = false;
   step = 0;
-  loadingVisible = false;
   family: any;
   sub_family: any;
   farmerData: any;
@@ -40,7 +39,7 @@ export class NewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.interventionService.getFamiliesAndSubFamilies(null).subscribe(
+    this.interventionService.getFamiliesAndSubFamilies().subscribe(
       (res: any) => {
         console.log(res);
         res.data.forEach((activity_family: any) => {
