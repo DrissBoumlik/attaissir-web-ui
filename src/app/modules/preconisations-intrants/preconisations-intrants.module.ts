@@ -9,8 +9,12 @@ import {
   DxPopupModule,
   DxSelectBoxModule,
   DxTemplateModule,
-  DxTextAreaModule
+  DxTextAreaModule,
+  DxTextBoxModule
 } from 'devextreme-angular';
+import { ShowComponent } from './components/show/show.component';
+
+
 
 @NgModule({
   imports: [
@@ -23,12 +27,12 @@ import {
     DxButtonModule,
     DxPopupModule,
     DxButtonModule,
-    DxTemplateModule,
-
+    DxTemplateModule, DxTextBoxModule,
     PreconisationsIntrantsRoutingModule
   ],
   declarations: [
-    ListComponent
+    ListComponent,
+    ShowComponent
   ]
 })
 export class PreconisationsIntrantsModule { }

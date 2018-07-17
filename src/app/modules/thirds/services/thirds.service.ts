@@ -74,7 +74,7 @@ export class ThirdsService {
    * @param isEdit
    * @returns {Observable<Third[]>}
    */
-  getThird(id: number, thirdType: string, isEdit?: boolean): Observable<Third> {
+  getThird(id: number, thirdType: string, isEdit?: boolean): Observable<any> {
     const edit = (isEdit) ? '?edit' : '';
     const type = (isEdit) ? `&third_type=${thirdType}` : `?third_type=${thirdType}`;
     return this.http.get<Third>(`${environment.apiUrl}/${this.routeName}/${id}${edit}${type}`);

@@ -115,6 +115,13 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/cartes/liste',
         description: 'Generateur de cartes',
         disabled: 'false'
+      },
+      {
+        name: 'Préconisations intrants',
+        icon: 'flaticon-tabs',
+        url: '/preconisations-intrants/liste',
+        description: 'Preconisations intrants',
+        disabled: 'false'
       }
     ];
 

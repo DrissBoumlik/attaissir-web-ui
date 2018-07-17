@@ -33,6 +33,7 @@ import { ConseilleAgricoleModule } from './modules/conseille-agricole/conseille-
 import { CommandeModule } from './modules/commande/commande.module';
 import { MouvementsModule } from './modules/mouvements/mouvements.module';
 import { ListeDesDemandesModule } from './modules/liste_des_demandes/liste-des-demandes.module';
+import {InterventionsModule} from './modules/interventions/interventions.module';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { ListeDesDemandesModule } from './modules/liste_des_demandes/liste-des-d
     DxPivotGridModule,
 
     NgbModule.forRoot(),
-
+    InterventionsModule,
     ConseilleAgricoleModule,
     AuthModule,
     ThirdsModule,
