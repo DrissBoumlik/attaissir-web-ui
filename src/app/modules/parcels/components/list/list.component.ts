@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ParcelsService } from '../../../contracts/services/parcels.service';
+import { ParcelsService } from '../../services/parcels.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import 'devextreme/integration/jquery';

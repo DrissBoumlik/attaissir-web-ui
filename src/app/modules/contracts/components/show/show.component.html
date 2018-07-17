@@ -390,12 +390,16 @@
               </dx-data-grid>
             </div>
             <div class="tab-pane" id="parcelles">
+              <button class="btn btn-success" (click)="createLogicalParcel($event)" [disabled]="!selectedItems"><i class="fa fa-plus"></i> Crée une parcelle logique</button>
+              <hr>
               <dx-data-grid id="ParcelsGridContainer"
                             [allowColumnReordering]="true"
                             [dataSource]="parcels"
                             [columnHidingEnabled]="false"
                             [allowColumnResizing]="false"
                             [showBorders]="true"
+                            [(selectedRowKeys)]="selectedItems"
+                            (onEditingStart)="createLogicalParcel($event.data.id)"
                             [rowAlternationEnabled]="true"
                             style="padding-top: 2vh"
                             [columnAutoWidth]="true"
@@ -418,12 +422,13 @@
                 <div *dxTemplate="let data of 'cellTemplate1'">
                   {{ data.data.annuel_surface }} (ha)
                 </div>
+                <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
                 <dxo-remote-operations
                   [sorting]="true"
                   [paging]="false">
                 </dxo-remote-operations>
-                <dxo-selection mode="none"></dxo-selection>
+                <dxo-selection mode="multiple"></dxo-selection>
                 <dxo-editing
                   [useIcons]="true"
                   mode="row"

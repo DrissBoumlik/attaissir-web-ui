@@ -12,6 +12,7 @@ import { ConseilleComponent } from './components/conseille/conseille.component';
 import { CommandeComponent } from './components/commande/commande.component';
 import { WarehouseComponent } from './components/warehouse/warehouse.component';
 import { RfidCardReaderComponent } from './components/rfid-card-reader/rfid-card-reader.component';
+import { ParcelsListComponent } from './components/parcels-list/parcels-list.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { RfidCardReaderComponent } from './components/rfid-card-reader/rfid-card
     DxDataGridModule,
     ConseilleComponent,
     WarehouseComponent,
-    RfidCardReaderComponent
+    RfidCardReaderComponent,
+    ParcelsListComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -48,6 +50,7 @@ import { RfidCardReaderComponent } from './components/rfid-card-reader/rfid-card
     CommandeComponent,
     ConseilleComponent,
     WarehouseComponent,
-    RfidCardReaderComponent]
+    RfidCardReaderComponent,
+    ParcelsListComponent]
 })
 export class SharedModule { }
