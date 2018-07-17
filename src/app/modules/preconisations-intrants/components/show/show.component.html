@@ -3,7 +3,7 @@
 
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2> Fiche  Préconisation d'intrans N°  </h2>
+      <h2> Fiche  Préconisation d'intrans N°  {{preconisation.id}}</h2>
     </div>
 
 
@@ -55,7 +55,8 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                      </p>
+                        {{preconisation.id}}
+                       </p>
 
                     </div>
                   </div>
@@ -376,9 +377,9 @@
     <dx-data-grid
       id="gridContainer2"
       [dataSource]="ayants_droits">
-      <dxi-column dataField="ref" caption="CIN"></dxi-column>
-      <dxi-column dataField="cda" caption="NOM COMPLET" ></dxi-column>
-      <dxi-column dataField="zone" caption="DESCRIPTION"></dxi-column>
+      <dxi-column dataField="cin" caption="CIN"></dxi-column>
+      <dxi-column dataField="full_name" caption="NOM COMPLET" ></dxi-column>
+      <dxi-column dataField="description" caption="DESCRIPTION"></dxi-column>
     </dx-data-grid>
 
     <div  class="pull-right">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PreconisationsIntrantsService} from '../../service/preconisations-intrants.service';
 import {ActivatedRoute} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-show',
@@ -18,8 +19,10 @@ export class ShowComponent implements OnInit {
   pin_code: any;
   evnt1 = true;
 
+  ayants_droit: any;
 
-  constructor(private preconisationsIntrantsService: PreconisationsIntrantsService,
+
+  constructor(private preconisationsIntrantsService: PreconisationsIntrantsService, private toastr: ToastrService,
   private route: ActivatedRoute
   ) { }
 
@@ -40,6 +43,21 @@ export class ShowComponent implements OnInit {
       });
 
   this.evnt1 = false;
+
+
+    this.ayants_droits = [{cin : 'D8585858' , full_name : 'MED MED', description : 'description....'},
+      {cin : 'D8585858' , full_name : 'MED MED', description : 'description....'},
+      {cin : 'D8585858' , full_name : 'MED MED', description : 'description....'}
+    ];
+
+  this.preconisationsIntrantsService.getListeAyants_droits().subscribe((response) => {
+    console.log('ttg');
+    //  this.ayants_droits = response.data;
+
+   }, error1 => {
+    throw error1;
+  });
+
   }
 
   showDeliverPopup() {
@@ -59,7 +77,8 @@ export class ShowComponent implements OnInit {
   }
 
   cancelPopup() {
-    this.popupAyantDroitVisible = false;
+
+     this.popupAyantDroitVisible = false;
     this.popupDeliverVisible = false;
     this.cancelPopVisible = false;
   }
@@ -91,8 +110,15 @@ export class ShowComponent implements OnInit {
     this.evnt1 = true;
   }
 
-
   delete() {
+
+    this.preconisationsIntrantsService.cancelPreconisation(this.preconisation.id).subscribe((response) => {
+
+      this.toastr.success(` la préconisation d'intrans est supprimé avec succès.`);
+
+    }, error1 => {
+      throw error1;
+    });
    this.cancelPopVisible = false;
   }
 
