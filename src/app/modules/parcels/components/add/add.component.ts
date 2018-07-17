@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
 
 @Component({
   selector: 'app-add',
@@ -17,7 +17,7 @@ export class AddComponent implements OnInit {
   parcels_left: any;
 
 
-  constructor( private thirdsService: ThirdsService) {
+  constructor(private thirdsService: ThirdsService) {
     this.parcels_right = [];
     this.parcels_left = [];
   }
@@ -31,11 +31,11 @@ export class AddComponent implements OnInit {
     };
 
 
-    this.parcels_right.push({id : 1 , name : 'name1' , value : true , checked : false },
-      {id : 1 , name : 'name2' , value : true , checked : false },
-      {id : 1 , name : 'name3' , value : true , checked : false },
-      {id : 1 , name : 'name4' , value : true , checked : false }
-      );
+    this.parcels_right.push({ id: 1, name: 'name1', value: true, checked: false },
+      { id: 1, name: 'name2', value: true, checked: false },
+      { id: 1, name: 'name3', value: true, checked: false },
+      { id: 1, name: 'name4', value: true, checked: false }
+    );
 
 
 
@@ -44,7 +44,7 @@ export class AddComponent implements OnInit {
 
 
   test(event, option) {
-    if ( !event.value) {
+    if (!event.value) {
       const i = this.parcels_right.indexOf(option);
       this.parcels_right.splice(i, 1);
       this.parcels_left.push(option);
@@ -52,7 +52,7 @@ export class AddComponent implements OnInit {
   }
 
   test2(event, option) {
-    if ( !event.value) {
+    if (!event.value) {
       const i = this.parcels_left.indexOf(option);
       this.parcels_left.splice(i, 1);
       this.parcels_right.push(option);

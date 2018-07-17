@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { PreconisationsIntrantsService} from './preconisations-intrants.service';
+import { PreconisationsIntrantsService } from './preconisations-intrants.service';
 
 describe('PreconisationsServiceService', () => {
   beforeEach(() => {

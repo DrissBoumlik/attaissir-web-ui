@@ -11,9 +11,9 @@ import {
   DxTextAreaModule,
   DxTextBoxModule
 } from 'devextreme-angular';
-import {AddComponent} from './components/add/add.component';
-import {SharedModule} from '../../shared/shared.module';
-import {MouvementsRoutingModule} from '../mouvements/mouvements-routing.module';
+import { AddComponent } from './components/add/add.component';
+import { SharedModule } from '../../shared/shared.module';
+import { MouvementsRoutingModule } from '../mouvements/mouvements-routing.module';
 
 @NgModule({
   imports: [
