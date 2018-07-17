@@ -3,6 +3,7 @@ import { ThemeComponent } from './theme.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/_guards';
 import { MouvementsModule } from '../modules/mouvements/mouvements.module';
+import {PreconisationsIntrantsModule} from '../modules/preconisations-intrants/preconisations-intrants.module';
 import { DemandesModule } from '../modules/demandes/demandes.module';
 
 const routes: Routes = [
@@ -55,6 +56,23 @@ const routes: Routes = [
         path: '',
         loadChildren: '../modules/demandes/demandes.module#DemandesModule'
       },
+      {
+        path: '',
+        loadChildren: '../modules/preconisations-intrants/preconisations-intrants.module#PreconisationsIntrantsModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/interventions/interventions.module#InterventionsModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/preconisations-intrants/preconisations-intrants.module#PreconisationsIntrantsModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/interventions/interventions.module#InterventionsModule'
+      }
+      ,
       {
         path: '404',
         loadChildren: './pages/default/not-found/not-found.module#NotFoundModule'

@@ -67,6 +67,17 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         disabled: 'false'
       },
       {
+        name: 'interventions',
+        icon: 'flaticon-add',
+        url: '/interventions/selectionner',
+        description: 'Gestion des interventions',
+        subMenu: [
+          /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
+          { icon: 'flaticon-plus', name: 'nouvelle  demande d\'intervention', url: '/interventions/selectionner' }
+        ],
+        disabled: 'false'
+      },
+      {
         name: 'Magasin',
         icon: 'fa fa-shopping-bag',
         url: '/magasin/liste',
@@ -103,6 +114,13 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         icon: 'flaticon-tabs',
         url: '/cartes/liste',
         description: 'Generateur de cartes',
+        disabled: 'false'
+      },
+      {
+        name: 'Préconisations intrants',
+        icon: 'flaticon-tabs',
+        url: '/preconisations-intrants/liste',
+        description: 'Preconisations intrants',
         disabled: 'false'
       }
     ];

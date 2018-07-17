@@ -1,0 +1,83 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+      <h2>Nouvelle demande d'intervention</h2>
+    </div>
+  </div>
+</div>
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+
+      <div *ngIf="step == 0" class="slide-right">
+        <div class="m-portlet__head" *ngFor="let type of types" style="padding: 2%;">
+          <div class="m-portlet__head-title">
+            <h3 class="m-portlet__head-text">
+              {{ type.type_name }}
+            </h3>
+            <p>Familles d'activités</p>
+            <hr>
+          </div>
+          <form>
+            <dx-form id="form">
+              <dxi-item itemType="group" [colCount]="4">
+                <dxi-item *ngFor="let family of type.families">
+                  <button type="button" (click)="selectFamily(type.type_id, family.family_id)" style="width: 18vw"
+                          class="btn btn-success float-right">{{ family.family_name }}
+                  </button>
+                </dxi-item>
+              </dxi-item>
+            </dx-form>
+          </form>
+        </div>
+      </div>
+
+      <div *ngIf="step == 1" class="slide-right">
+        <div class="m-portlet__head" style="padding: 2%;">
+          <button type="button" (click)="goBack()" class="btn btn-primary float-right" style="margin-right: 5%;">Etape
+            presedente
+          </button>
+          <div class="m-portlet__head-title">
+            <h3 class="m-portlet__head-text">
+              {{ family.family_name }}
+            </h3>
+            <p>Sous-familles d'activités</p>
+            <hr>
+          </div>
+          <dx-form id="form2">
+            <dxi-item itemType="group" [colCount]="4">
+              <dxi-item *ngFor="let sub_family of family.sub_families">
+                <button type="button" (click)="selectSubFamily(sub_family.sub_family_id)" style="width: 18vw"
+                        class="btn btn-success float-right">{{ sub_family.sub_family_name }}
+                </button>
+              </dxi-item>
+            </dxi-item>
+          </dx-form>
+        </div>
+      </div>
+
+      <div *ngIf="step == 2" class="slide-right">
+        <app-rfid-card-reader (outData)="readRFID($event)" (goBack)="goBack()"></app-rfid-card-reader>
+
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-tools">
+            <dx-button icon="fa fa-check" (onClick)="validate()" [text]="'Valider'" type="success"></dx-button>
+          </div>
+        </div>
+      </div>
+
+      <dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [position]="{my: 'center'}"
+        [(visible)]="loadingVisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
+      </dx-load-panel>
+
+    </div>
+  </div>
+</div>

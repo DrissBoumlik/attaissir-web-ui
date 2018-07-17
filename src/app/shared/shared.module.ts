@@ -2,12 +2,16 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ArchwizardModule } from 'angular-archwizard';
 import { WizardComponent } from './components/wizard/wizard.component';
-import { DxButtonModule, DxDataGridModule, DxDateBoxModule, DxFormModule, DxListModule, DxTextBoxModule } from 'devextreme-angular';
+import {
+  DxButtonModule, DxDataGridModule, DxDateBoxModule, DxFormModule, DxListModule, DxPopupModule, DxTemplateModule,
+  DxTextBoxModule
+} from 'devextreme-angular';
 import { TiersFormComponent } from './components/tiers-form/tiers-form.component';
 import { FormsModule } from '@angular/forms';
 import { ConseilleComponent } from './components/conseille/conseille.component';
 import { CommandeComponent } from './components/commande/commande.component';
 import { WarehouseComponent } from './components/warehouse/warehouse.component';
+import { RfidCardReaderComponent } from './components/rfid-card-reader/rfid-card-reader.component';
 
 @NgModule({
   imports: [
@@ -19,7 +23,9 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
     DxDataGridModule,
     DxTextBoxModule,
     DxDateBoxModule,
-    FormsModule
+    FormsModule,
+    DxPopupModule,
+    DxTemplateModule
   ],
   exports: [
     WizardComponent,
@@ -32,7 +38,8 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
     DxButtonModule,
     DxDataGridModule,
     ConseilleComponent,
-    WarehouseComponent
+    WarehouseComponent,
+    RfidCardReaderComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -40,6 +47,7 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
     TiersFormComponent,
     CommandeComponent,
     ConseilleComponent,
-    WarehouseComponent]
+    WarehouseComponent,
+    RfidCardReaderComponent]
 })
 export class SharedModule { }

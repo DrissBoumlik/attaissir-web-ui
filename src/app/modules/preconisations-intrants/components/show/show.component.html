@@ -3,8 +3,8 @@
 
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2> Fiche Mouvement N° {{ mouvement.id }} </h2>
-          </div>
+      <h2> Fiche  Préconisation d'intrans N°  </h2>
+    </div>
 
 
   </div>
@@ -16,7 +16,7 @@
 
 
 
-      <div class="tab-content" *ngIf="mouvement">
+      <div class="tab-content" >
         <div class="tab-pane active" id="m_user_profile_tab_1">
           <div class="m-form m-form--fit">
             <div class="m-portlet__body">
@@ -25,7 +25,7 @@
                   <h3 class="m-form__section">
                     Informations générales
 
-                    <span class="siam-form-input-value _status_inprogress" *ngIf="mouvement.state == 'inprogress'">
+                <!--    <span class="siam-form-input-value _status_inprogress" *ngIf="mouvement.state == 'inprogress'">
                     <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
                   </span>
 
@@ -34,24 +34,27 @@
                     <i class="fa  fa-spinner" aria-hidden="true"></i> VALIDÉ
                   </span>
 
-                    <span class="siam-form-input-value _status_cancled" *ngIf="mouvement.state == 'canceled'">
+                    <span class="siam-form-input-value _status_cancled" *ngIf="mouvement.state == 'cancled'">
                     <i class="fa  fa-spinner" aria-hidden="true"></i> ANNULÉ
                   </span>
+                  !-->
+
 
                   </h3>
                   <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
                 </div>
               </div>
+
+
               <div class="row">
                 <div class="col-4">
                   <div class="row">
                     <label class="col-12">
-                      Type
+                      Référence
                     </label>
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                          {{ helper.orderType(mouvement.type) }}
                       </p>
 
                     </div>
@@ -61,12 +64,13 @@
                 <div class="col-4">
                   <div class="row">
                     <label class="col-12">
-                      N° Bon
+                      CDA
                     </label>
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                        -
+                        {{preconisation.cda}}
+
                       </p>
                     </div>
                   </div>
@@ -75,13 +79,13 @@
                 <div class="col-4">
                   <div class="row">
                     <label class="col-12">
-                      Date
+                      Zone
                     </label>
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                        {{mouvement.date}}
+                        {{preconisation.zone}}
+
                       </p>
 
                     </div>
@@ -90,12 +94,13 @@
                 <div class="col-4">
                   <div class="row">
                     <label class="col-12">
-                      Commande
+                      Parcelle
                     </label>
                     <div class="col-12">
 
-                      <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="order">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ order.object }}
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        {{preconisation.parcel}}
+
                       </p>
 
                     </div>
@@ -104,13 +109,14 @@
                 <div class="col-4">
                   <div class="row">
                     <label class="col-12">
-                      Emetteur
+                      Nom d'agriculteur
                     </label>
                     <div class="col-12">
 
-                      <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="from">
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
 
-                        <i style="font-size: 150%; align-content: center; color: #ac2925;" class="fa fa-chevron-up fa-5x"></i> {{ from.name || from.full_name }}
+                        {{preconisation.third_party_name}}
+
                       </p>
 
                     </div>
@@ -119,17 +125,44 @@
                 <div class="col-4">
                   <div class="row">
                     <label class="col-12">
-                      Récepteur
+                      C.I.N d'agriculter
                     </label>
                     <div class="col-12">
 
-                      <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="to">
-                        <i style="font-size: 150%; align-content: center; color: #0b9c8f;" class="fa fa-chevron-down fa-5x"></i> {{ to.name || to.full_name }}
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                        {{preconisation.third_party_cin}}
+
                       </p>
                     </div>
                   </div>
                 </div>
+
+                <div class="col-4">
+                  <div class="row">
+                    <label class="col-12">
+                      Date de commande
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                        {{preconisation.date}}
+
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+
               </div>
+
+              <div class="row">
+                <dx-button width="330" icon="fa fa-lock" (onClick)="showAyantsDroitPopup()"  text="LA LISTE DES AYANTS DROIT" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp; &nbsp;
+
+              </div>
+
+
             </div>
           </div>
         </div>
@@ -182,8 +215,7 @@
                   mode="popup"
                   [useIcons]="true"
                   [allowDeleting]="false"
-                  [allowUpdating]="false"
-                >
+                  [allowUpdating]="false">
                 </dxo-editing>
                 <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
                 <dxo-selection mode="multiple"></dxo-selection>
@@ -200,7 +232,7 @@
                 <dxo-paging [pageSize]="10"></dxo-paging>
                 <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-                <dxi-column dataField="article.id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
+                <dxi-column dataField="article.id" [width]="100" [visible]="false" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
                 <dxi-column dataField="article.category.article_category.name" caption="Famille"></dxi-column>
                 <dxi-column dataField="article.category.name" caption="Sous Famille"></dxi-column>
                 <dxi-column dataField="article.name" caption="Article"></dxi-column>
@@ -219,44 +251,73 @@
   </div>
 </div>
 
-  <dx-popup
-    class="popup"
-    [width]="320"
-    [height]="150"
-    [showTitle]="true"
-    title="Confirmation "
-    [dragEnabled]="false"
-    [closeOnOutsideClick]="true"
-    [(visible)]="popupDeliverVisible"
-  >
-    <div *dxTemplate="let data of 'content'">
+
+
+<dx-popup
+  class="popup"
+  [width]="580"
+  [height]="290"
+  [showTitle]="true"
+  title="Confirmation "
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="popupDeliverVisible"
+  (window:keypress)="doSomething($event)"
+
+>
+  <div *dxTemplate="let data of 'content'">
+
+    <div  *ngIf="evnt1" style="text-align: center;">
+    <p>
+      Glisser la carte agriculteur.
+    </p>
+
+    <p style="text-align: center; margin: 20px">
+    <i class="fa fa-id-card-o fa-rotate-45" aria-hidden="true"></i>
+    </p>
+    </div>
+
+    <div *ngIf="!evnt1">
       <p>
-        Voulez-vous vraiment livrer cet élement ?
-       </p>
+        Tapez le code PIN.
+      </p>
+      <br/>
 
-      <div  class="pull-right">
-      <dx-button class="pull-left"
-        type="success"
-        text="Oui"
-        width="80"
-        (onClick)="deliver()">
-      </dx-button>
-        &nbsp;
-        &nbsp;
+    <dxi-item itemType="group" [colCount]="2">
+      <dxi-item>
+        <div class="dx-field-value">
+          <dx-text-box placeholder="****" valueChangeEvent="keyup" (onValueChanged)="pinTextBox($event)" (onFocusIn)="func1()" (onFocusOut)="func2()"></dx-text-box>
+        </div>
+      </dxi-item>
 
-      <dx-button class="pull-right"
-        class="button-info"
-        text="No"
-        width="80"
-        (onClick)="cancelPopup()">
+      <dxi-item>
+        <dx-button class="button-info" text="Glisser la carte"   icon="fa fa-id-card-o" (onClick)="changeLivrerPopup()"> </dx-button>
+      </dxi-item>
+
+    </dxi-item>
+    </div>
+
+       <br/>
+
+    <div  class="pull-right">
+
+
+
+      <dx-button
+                 class="button-info"
+                 text="Fermer"
+                 width="100"
+                 (onClick)="cancelPopup()">
       </dx-button>
-      </div>
+
+      <dx-button *ngIf="!evnt1" width="120"  icon="fa fa-paper-plane"  text="LIVRER" type="success" (onClick)="showDeliverPopup()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
+
 
     </div>
-  </dx-popup>
 
 
-
+  </div>
+</dx-popup>
 
 
 <dx-popup
@@ -264,10 +325,10 @@
   [width]="350"
   [height]="150"
   [showTitle]="true"
-  title="Confirmation"
+  title="Confirmation "
   [dragEnabled]="false"
   [closeOnOutsideClick]="true"
-  [(visible)]="popupDeleteVisible"
+  [(visible)]="cancelPopVisible"
 >
   <div *dxTemplate="let data of 'content'">
     <p>
@@ -276,21 +337,22 @@
 
     <div  class="pull-right">
 
-    <dx-button class="pull-left"
-               width="80"
-               type="danger"
-               text="Oui"
-               (onClick)="delete()">
-    </dx-button>
+      <dx-button class="pull-left"
+                 width="80"
+                 type="danger"
+                 text="Oui"
+                 (onClick)="delete()">
+      </dx-button>
+      &nbsp;
+      &nbsp;
 
-
-    <dx-button class="pull-right"
-               class="button-info"
-               width="80"
-               text="No"
-               (onClick)="cancelPopup()">
-    </dx-button>
-  </div>
+      <dx-button class="pull-right"
+                 class="button-info"
+                 width="80"
+                 text="No"
+                 (onClick)="cancelPopup()">
+      </dx-button>
+    </div>
 
   </div>
 </dx-popup>
@@ -299,14 +361,47 @@
 
 
 
+<dx-popup
+  class="popup"
+  [width]="750"
+  [height]="550"
+  [showTitle]="true"
+  title="Liste des ayants droit"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="popupAyantDroitVisible"
+>
+  <div *dxTemplate="let data of 'content'">
+
+    <dx-data-grid
+      id="gridContainer2"
+      [dataSource]="ayants_droits">
+      <dxi-column dataField="ref" caption="CIN"></dxi-column>
+      <dxi-column dataField="cda" caption="NOM COMPLET" ></dxi-column>
+      <dxi-column dataField="zone" caption="DESCRIPTION"></dxi-column>
+    </dx-data-grid>
+
+    <div  class="pull-right">
+
+      <dx-button class="pull-right"
+                 class="button-info"
+                 width="120"
+                 text="Fermer"
+                 (onClick)="cancelAyantDroitPopup()">
+      </dx-button>
+    </div>
+
+  </div>
+</dx-popup>
 
 
-<div class="dx-fieldset" *ngIf="mouvement.state === 'inprogress'">
-    <div class="dx-field">
+<div class="dx-fieldset">
+  <div class="dx-field">
     <div class="dx-field-value">
-      <dx-button width="180"  icon="fa fa-paper-plane"  text="LIVRER" type="success"  style="margin-left: 20px; margin-right: 20px;" (onClick)="showDeliverPopup()"></dx-button>
+      <dx-button width="180"  icon="fa fa-paper-plane"  text="LIVRER" type="success" (onClick)="showDeliverPopup()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
 
-      <dx-button width="130" icon="fa fa-trash"  text="ANNULER" type="danger"  (onClick)="showDeletePopup()"></dx-button> &nbsp; &nbsp;
+      <dx-button width="130" icon="fa fa-print"  (onClick)="print()" text="IMPRIMER" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp; &nbsp;
+      <dx-button width="130" icon="fa fa-trash"  text="ANNULER" type="danger" (onClick)="showDeletePopup()"  ></dx-button> &nbsp; &nbsp;
     </div>
   </div>
 </div>
