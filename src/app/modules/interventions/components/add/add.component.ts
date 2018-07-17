@@ -3,7 +3,6 @@ import { ArticlesService } from '../../../articles/services/articles.service';
 import { ArticleCategiesService } from '../../../articles/services/article-categies.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
-import { Article } from '../../../liste_des_demandes/components/show/show.component';
 import { InterventionService } from '../../services/intervention.service';
 import { ActivatedRoute } from '@angular/router';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
