@@ -33,7 +33,6 @@
         <dxo-header-filter [visible]="true"></dxo-header-filter>
 
         <dxo-group-panel [visible]="true"></dxo-group-panel>
-        <dxo-scrolling mode="virtual"></dxo-scrolling>
         <dxo-editing
           mode="row"
           [useIcons]="true"
@@ -46,6 +45,10 @@
         <dxo-header-filter [visible]="true"></dxo-header-filter>
         <dxo-export [enabled]="true" fileName="Tiers" [allowExportSelectedData]="true"></dxo-export>
 
+        <dxo-remote-operations
+          [sorting]="true"
+          [paging]="true">
+        </dxo-remote-operations>
         <dxo-pager
           [allowedPageSizes]="[5, 8, 15, 30]"
           [showInfo]="true"

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListeDesDemandesService } from '../../service/liste-des-demandes.service';
+import { DemandesService } from '../../service/demandes.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import { Helper } from '../../../../shared/classes/helper';
@@ -13,7 +13,7 @@ export class ListComponent implements OnInit {
 
   list_des_demandes: any;
   helper: any;
-  constructor(public listeDesDemandesService: ListeDesDemandesService) {
+  constructor(public DemandesService: DemandesService) {
     this.helper = Helper;
     this.list_des_demandes = {};
   }
@@ -21,8 +21,8 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this.list_des_demandes.store = new CustomStore({
       load: (loadOptions: any) => {
-        console.log('loqd');
-        return this.listeDesDemandesService.getListeDemandesDx(loadOptions)
+        loadOptions['requireTotalCount'] = true;
+        return this.DemandesService.getListeDemandesDx(loadOptions)
           .toPromise()
           .then(response => {
             console.log(response);

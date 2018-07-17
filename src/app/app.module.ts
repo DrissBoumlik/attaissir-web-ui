@@ -34,6 +34,7 @@ import { CommandeModule } from './modules/commande/commande.module';
 import { MouvementsModule } from './modules/mouvements/mouvements.module';
 import { ListeDesDemandesModule } from './modules/liste_des_demandes/liste-des-demandes.module';
 import {InterventionsModule} from './modules/interventions/interventions.module';
+import { DemandesModule } from './modules/demandes/demandes.module';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,7 @@ import {InterventionsModule} from './modules/interventions/interventions.module'
     CommandeModule,
     ParcelsModule,
     CardsModule,
-    ListeDesDemandesModule,
+    DemandesModule,
     ArticlesModule,
     SharedModule,
     MouvementsModule

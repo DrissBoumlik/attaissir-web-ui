@@ -201,8 +201,8 @@
                 <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
                 <dxi-column dataField="article.id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
-                <dxi-column dataField="article.article_category_id" caption="Famille"></dxi-column>
-                <dxi-column dataField="article." caption="Sous Famille"></dxi-column>
+                <dxi-column dataField="article.category.article_category.name" caption="Famille"></dxi-column>
+                <dxi-column dataField="article.category.name" caption="Sous Famille"></dxi-column>
                 <dxi-column dataField="article.name" caption="Article"></dxi-column>
                 <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
 

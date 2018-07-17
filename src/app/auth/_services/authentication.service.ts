@@ -19,7 +19,7 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    return this.http.post(`${environment.apiUrl}/login`, JSON.stringify({ email: email, password: password }), this.options);
+    return this.http.post(`${environment.apiUrl}/login`, JSON.stringify({ email: email.toLowerCase(), password: password }), this.options);
   }
 
   refresh = () => {

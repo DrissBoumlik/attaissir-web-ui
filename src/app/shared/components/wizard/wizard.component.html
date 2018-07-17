@@ -1,5 +1,5 @@
 <aw-wizard [navBarLayout]="navBarLayout">
-  <aw-wizard-step stepTitle="1. Informations agrégé"
+  <aw-wizard-step stepTitle="1. Agrégé"
                   [navigationSymbol]="{ symbol: '&#xf10e;', fontFamily: 'Flaticon'}" (stepExit)="goToContractInfo()"
                   i18n-step-title>
 
@@ -11,8 +11,7 @@
         <div class="">
           <div class="siam-empty-page" *ngIf="!currentThird.cin">
             <div class="siam-empty-page-content">
-              <h2>Choisissez un agrégé</h2>
-              <p>Rechercher un agrégé par CIN <br>ou en créer un nouveau</p>
+              <h2>Choisir un agrégé</h2>
               <div class="row">
                 <div class="col-md-8">
                   <div class="row">
@@ -100,8 +99,6 @@
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5" *ngIf="!addThird">
       <div class="m-form__actionss">
         <button type="button" class="btn btn-success float-right" awNextStep i18n>Étape suivante</button>
-        <button class="btn float-right mr-3" *ngIf="!!currentThird.cin" (click)="addThird = true"><span i18n>Ajouter un agrégé</span>
-        </button>
       </div>
     </div>
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5" *ngIf="addThird">
