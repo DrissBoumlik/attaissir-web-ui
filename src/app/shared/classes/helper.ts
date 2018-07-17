@@ -44,10 +44,17 @@ export class Helper {
       return 'ENCOURS';
     } else if (value === 'done') {
       return 'VALIDÉ';
-    } else if (value === 'cancled') {
+    } else if (value === 'canceled') {
       return 'ANNULÉ';
     }
     return 'ENCOURS';
+  }
+
+  public static articleType = (type) => {
+    if (type === 'service') {
+      return 'Service';
+    }
+    return 'Produit';
   }
 
 
@@ -111,7 +118,7 @@ export class Helper {
     return 'aggregated';
   }
 
-  /**
+  /** 
    * get Third party type link
    * @param link
    * @returns {string}
@@ -166,6 +173,16 @@ export class Helper {
         toastr.error(err.error.message);
       }
     );
+  }
+  /**
+   * Change value to null if undefined or empty string
+   * @param val
+   */
+  public static makeNullable = (val: any) => {
+    if (val === '' || val === {} || val === []) {
+      return null;
+    }
+    return val;
   }
 
   /**

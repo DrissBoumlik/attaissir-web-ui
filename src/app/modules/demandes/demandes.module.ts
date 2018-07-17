@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ListComponent } from './components/list/list.component';
 import { DxDataGridModule, DxDateBoxModule, DxSelectBoxModule, DxTextAreaModule } from 'devextreme-angular';
 import { SharedModule } from '../../shared/shared.module';
-import { List_des_demandesRoutingModule } from './list_des_demandes-routing.module';
+import { DemandesRoutingModule } from './demandes-routing.module';
 import { ShowComponent } from './components/show/show.component';
 
 @NgModule({
   imports: [
     SharedModule,
     CommonModule,
-    List_des_demandesRoutingModule,
+    DemandesRoutingModule,
     DxSelectBoxModule,
     DxTextAreaModule,
     DxDateBoxModule,
@@ -26,4 +26,4 @@ import { ShowComponent } from './components/show/show.component';
   ],
   declarations: [ListComponent, ShowComponent]
 })
-export class ListeDesDemandesModule { }
+export class DemandesModule { }

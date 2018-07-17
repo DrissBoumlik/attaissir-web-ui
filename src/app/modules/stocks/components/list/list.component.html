@@ -17,31 +17,32 @@
         [columnHidingEnabled]="false"
         [allowColumnReordering]="true"
         [columnAutoWidth]="true"
-        [remoteOperations]="{ groupPaging:  false}"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         noDataText="Aucun article n'est disponible"
         KeyExpr="id"
         [rowAlternationEnabled]="true"
       >
 
-        <dxi-column dataField="warehouse" caption="Magasin" alignment="center"></dxi-column>
-        <dxi-column dataField="cda" caption="CDA" alignment="center"></dxi-column>
-        <dxi-column dataField="category" caption="Famille" alignment="center"></dxi-column>
-        <dxi-column dataField="sub_category" caption="Sous-famille" alignment="center"></dxi-column>
-        <dxi-column dataField="article" caption="Article" alignment="center"></dxi-column>
-      <dxi-column dataField="ql" caption="Quantité Livrée" alignment="center"></dxi-column>
-      <dxi-column dataField="qts" caption="Quantité Transfer Sortie" alignment="center"></dxi-column>
-      <dxi-column dataField="qte" caption="Quantité Transfer Entrée" alignment="center"></dxi-column>
-      <dxi-column dataField="qra" caption="Quantité Retour Agriculteur" alignment="center"></dxi-column>
-      <dxi-column dataField="qrf" caption="Quantité Retour Fournisseur" alignment="center"></dxi-column>
-      <dxi-column dataField="qs" caption="Quantité servie" alignment="center"></dxi-column>
-      <dxi-column dataField="qr" caption="Quantité en stock" alignment="center"></dxi-column>
+        <dxi-column dataField="warehouse_name" caption="Magasin" alignment="center"></dxi-column>
+        <dxi-column dataField="warehouse_zone_name" caption="CDA" alignment="center"></dxi-column>
+        <dxi-column dataField="category_name" caption="Famille" alignment="center"></dxi-column>
+        <dxi-column dataField="sub_category_name" caption="Sous-famille" alignment="center"></dxi-column>
+        <dxi-column dataField="article_name" caption="Article" alignment="center"></dxi-column>
+        <dxi-column dataField="ql" caption="Quantité Reçu" alignment="center"></dxi-column>
+        <dxi-column dataField="qts" caption="Quantité Transfert Sortie" alignment="center"></dxi-column>
+        <dxi-column dataField="qte" caption="Quantité Transfert Entrée" alignment="center"></dxi-column>
+        <dxi-column dataField="qra" caption="Quantité Retour Agriculteur" alignment="center"></dxi-column>
+        <dxi-column dataField="qrf" caption="Quantité Retour Fournisseur" alignment="center"></dxi-column>
+        <dxi-column dataField="qs" caption="Quantité servie" alignment="center"></dxi-column>
+        <dxi-column dataField="qr" caption="Quantité en stock" alignment="center"></dxi-column>
         <dxi-column dataField="threshold" caption="Seuil" alignment="center"></dxi-column>
 
         <dxo-remote-operations
           [sorting]="true"
-          [paging]="true"
-          [grouping]="false">
+          [paging]="true">
         </dxo-remote-operations>
+        <dxo-filter-row
+          [visible]="true" [applyFilter]="true"></dxo-filter-row>
         <dxo-editing
           mode="popup"
           [useIcons]="true"
@@ -64,7 +65,7 @@
         </dxo-pager>
         <dxo-paging [pageSize]="15"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
-        <dxo-search-panel [visible]="true"></dxo-search-panel>
+        <dxo-search-panel [visible]="false"></dxo-search-panel>
         <dxo-group-panel [visible]="true"
                          emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
         <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>

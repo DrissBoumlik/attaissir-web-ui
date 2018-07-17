@@ -34,6 +34,7 @@ export class ShowComponent implements OnInit {
   contract_status: any;
   helper: any;
   thirdType: string;
+  goTo: string;
 
   constructor(private thirdService: ThirdsService,
     private route: ActivatedRoute,
@@ -48,6 +49,7 @@ export class ShowComponent implements OnInit {
   ngOnInit() {
     this.title = this.helper.getThirdTypeName(this.location.path());
     this.thirdType = this.helper.getThirdType(this.location.path());
+    this.goTo = this.helper.getThirdLink(this.location.path());
     this.contractService.getContractsVars().subscribe(data => {
       this.contract_status = data['contract_status'];
     }, error1 => {

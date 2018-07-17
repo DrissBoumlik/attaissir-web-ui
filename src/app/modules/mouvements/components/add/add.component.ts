@@ -55,7 +55,9 @@ export class AddComponent implements OnInit {
       text: 'AJOUTER',
       type: 'success',
       useSubmitBehavior: false,
-      onClick: () => {
+      onClick: (e) => {
+        console.log(e);
+        
         this.products.push({
           'famille_id': this.stock_operation.famille,
           'sub_famille_id': this.stock_operation.sub_famille,
@@ -98,7 +100,7 @@ export class AddComponent implements OnInit {
         valueExpr: 'ID',
         onSelectionChanged: (event) => {
           console.log(event);
-          if (event.selectedItem.ID === 'receive') {
+          if (event.selectedItem.ID === 'receive' || event.selectedItem.ID === 'delivery') {
             this.emetteurOptions = {
               label: 'Émetteur',
               displayExpr: 'full_name',

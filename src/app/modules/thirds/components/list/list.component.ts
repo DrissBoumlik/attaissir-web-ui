@@ -42,7 +42,7 @@ export class ListComponent implements OnInit {
       return '';
     }
     return (data.sexe === 'Masculin') ? 'fa-male' : 'fa-female';
-  };
+  }
 
 
   ngOnInit() {
@@ -99,10 +99,10 @@ export class ListComponent implements OnInit {
   onRemoveThird(thirdId: number): any {
     this.tierService.deleteThird(thirdId).subscribe(
       (res) => {
-        this.toastr.success(`Nouveau ${this.title} ajouté avec succès.`);
+        this.toastr.success(`${this.title} est supprimé avec succès.`);
       },
       (err) => {
-        this.toastr.error(err.error.message);
+        throw err;
       }
     );
   }

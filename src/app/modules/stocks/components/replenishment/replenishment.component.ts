@@ -44,13 +44,12 @@ export class ReplenishmentComponent implements OnInit {
               .then((stk: any) => {
                 return {
                   data: stk.data.map((war: any) => {
-                    console.log(war);
                     const row = new Stock();
-                    row.warehouse = war.warehouse_name;
-                    row.category = war.category_name;
-                    row.sub_category = war.sub_category_name;
-                    row.cda = war.warehouse_zone_name;
-                    row.article = war.article_name;
+                    row.warehouse_name = war.warehouse_name;
+                    row.category_name = war.category_name;
+                    row.sub_category_name = war.sub_category_name;
+                    row.warehouse_zone_name = war.warehouse_zone_name;
+                    row.article_name = war.article_name;
                     row.threshold = war.threshold;
                     row.qr = war.qr;
                     row.dt = { warehouse_id: war.warehouse_id, article_id: war.article_id, provider_id: war.article_third_party_id };
@@ -81,7 +80,7 @@ export class ReplenishmentComponent implements OnInit {
       const cmd = _.orderBy(aCommander, ['provider_id', 'warehouse_id'], ['asc', 'asc']);
       this.stockService.placeOrder(cmd).subscribe(
         (res => {
-          this.toaser.warning('Votre commande a été passée avec succès.');
+          this.toaser.success('Votre commande a été passée avec succès.');
           this.dataGrid.instance.refresh();
         }),
         (err => {
@@ -93,7 +92,6 @@ export class ReplenishmentComponent implements OnInit {
   }
 
   valuechange(e: any, data: any, value: any): void {
-
     const check = this.toOrder.find(tr => {
       return tr.warehouse_id === data.value.warehouse_id
         && tr.article_id === data.value.article_id

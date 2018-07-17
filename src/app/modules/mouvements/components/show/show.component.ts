@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MouvementsService } from '../../service/mouvements.service';
 import { ToastrService } from 'ngx-toastr';
-import {Helper} from '../../../../shared/classes/helper';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-show',
@@ -21,22 +21,28 @@ export class ShowComponent implements OnInit {
   from: any;
 
   constructor(private router: Router,
-              private route: ActivatedRoute,
-              private mouvementsService: MouvementsService,
-              private toastr: ToastrService) {
+    private route: ActivatedRoute,
+    private mouvementsService: MouvementsService,
+    private toastr: ToastrService) {
     this.helper = Helper;
   }
 
   ngOnInit() {
+    this.mouvement = {
+      state: 'inprogress'
+    };
+    this.order = null;
+    this.to = null;
+    this.from = null;
+    this.articles = null;
     this.route.params.subscribe(
       params => {
-        this.mouvement = this.mouvementsService.getMouvement(params.id).subscribe((response) => {
-          this.mouvement = response.data;
-          this.order = response.data.order;
-          this.from = response.data.from;
-          this.to = response.data.to;
-          this.articles = this.mouvement.order.articles;
-          console.log(response.data.order);
+        this.mouvementsService.getMouvement(params.id).subscribe((response) => {
+          this.mouvement = this.helper.dataFormatter(response, false);
+          this.order = this.mouvement.order;
+          this.from = this.mouvement.from;
+          this.to = this.mouvement.to;
+          this.articles = this.mouvement.articles;
         }, error1 => {
           throw error1;
         });
@@ -44,17 +50,29 @@ export class ShowComponent implements OnInit {
   }
 
   delete() {
-    this.mouvementsService.deleteMouvement(this.mouvement.id).subscribe((response) => {
-      this.router.navigate(['/mouvements']),
-      this.toastr.success('L \'élément a été supprimé.');
+    this.mouvementsService.editMouvement({
+      id: this.mouvement.id,
+      state: 'canceled'
+    }).subscribe((response) => {
+      this.toastr.success('Mouvement annulé.');
+      this.mouvement.state = 'canceled';
+      this.popupDeleteVisible = false;
+    }, err => {
+      throw err;
     });
 
   }
 
   deliver() {
-    this.mouvementsService.deliverMouvement(this.mouvement.id).subscribe((response) => {
-      this.router.navigate(['/mouvements']);
-      this.toastr.success('L \'élément a été livré.');
+    this.mouvementsService.editMouvement({
+      id: this.mouvement.id,
+      state: 'done'
+    }).subscribe((response) => {
+      this.toastr.success('Mouvement validé.');
+      this.mouvement.state = 'done';
+      this.popupDeliverVisible = false;
+    }, err => {
+      throw err;
     });
   }
 

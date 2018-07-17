@@ -54,10 +54,14 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
           { icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation' },
           { icon: 'flaticon-plus', name: 'Approvisionnement de stock', url: '/stock/reappro' },
-          { name: 'Liste des mouvements', icon: 'fa fa-exchange', url: '/mouvements',
-            description: 'Liste des mouvements', disabled: 'false' },
-          { name: 'Liste des demandes d\'achat', icon: 'fa  fa-shopping-cart', url: '/demandes',
-            description: 'Centre de distrubition', disabled: 'false' },
+          {
+            name: 'Liste des mouvements', icon: 'fa fa-exchange', url: '/mouvements',
+            description: 'Liste des mouvements', disabled: 'false'
+          },
+          {
+            name: 'Liste des demandes d\'achat', icon: 'fa  fa-shopping-cart', url: '/demandes',
+            description: 'Centre de distrubition', disabled: 'false'
+          },
           { icon: 'flaticon-list', name: 'Liste des articles', url: '/articles/liste' },
         ],
         disabled: 'false'
@@ -81,7 +85,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         subMenu: [
           { icon: 'flaticon-plus', name: 'Nouveau magasin', url: '/magasin/ajouter' },
           { icon: 'flaticon-list', name: 'Liste des magasins', url: '/magasin/liste' },
-          { icon: 'flaticon-list', name: 'réapprovisionnement de stock', url: '/magasin/reapprovisionnement' },
+          /*{ icon: 'flaticon-list', name: 'réapprovisionnement de stock', url: '/magasin/reapprovisionnement' },*/
         ],
         disabled: 'false'
       },
@@ -100,7 +104,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         subMenu: [
           { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter' },
           { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste' },
-          { icon: 'flaticon-list', name: 'Contrats de cette campagne', url: '/contrats/liste/courant' },
+          { icon: 'flaticon-list', name: 'Contrats actifs', url: '/contrats/liste/courant' },
           { icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste' },
         ],
         disabled: 'false'

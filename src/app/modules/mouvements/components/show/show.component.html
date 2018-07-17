@@ -16,7 +16,7 @@
 
 
 
-      <div class="tab-content" >
+      <div class="tab-content" *ngIf="mouvement">
         <div class="tab-pane active" id="m_user_profile_tab_1">
           <div class="m-form m-form--fit">
             <div class="m-portlet__body">
@@ -34,10 +34,9 @@
                     <i class="fa  fa-spinner" aria-hidden="true"></i> VALIDÉ
                   </span>
 
-                    <span class="siam-form-input-value _status_cancled" *ngIf="mouvement.state == 'cancled'">
+                    <span class="siam-form-input-value _status_cancled" *ngIf="mouvement.state == 'canceled'">
                     <i class="fa  fa-spinner" aria-hidden="true"></i> ANNULÉ
                   </span>
-
 
                   </h3>
                   <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
@@ -67,7 +66,7 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                        6456
+                        -
                       </p>
                     </div>
                   </div>
@@ -95,7 +94,7 @@
                     </label>
                     <div class="col-12">
 
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                      <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="order">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ order.object }}
                       </p>
 
@@ -109,9 +108,9 @@
                     </label>
                     <div class="col-12">
 
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                      <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="from">
 
-                        <i style="font-size: 150%; align-content: center; color: #ac2925;" class="fa fa-chevron-up fa-5x"></i> {{ from.name }}
+                        <i style="font-size: 150%; align-content: center; color: #ac2925;" class="fa fa-chevron-up fa-5x"></i> {{ from.name || from.full_name }}
                       </p>
 
                     </div>
@@ -124,8 +123,8 @@
                     </label>
                     <div class="col-12">
 
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-                        <i style="font-size: 150%; align-content: center; color: #0b9c8f;" class="fa fa-chevron-down fa-5x"></i> {{ to.name }}
+                      <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="to">
+                        <i style="font-size: 150%; align-content: center; color: #0b9c8f;" class="fa fa-chevron-down fa-5x"></i> {{ to.name || to.full_name }}
                       </p>
                     </div>
                   </div>
@@ -202,8 +201,8 @@
                 <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
                 <dxi-column dataField="article.id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
-                <dxi-column dataField="article.article_category_id" caption="Famille"></dxi-column>
-                <dxi-column dataField="article." caption="Sous Famille"></dxi-column>
+                <dxi-column dataField="article.category.article_category.name" caption="Famille"></dxi-column>
+                <dxi-column dataField="article.category.name" caption="Sous Famille"></dxi-column>
                 <dxi-column dataField="article.name" caption="Article"></dxi-column>
                 <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
 
@@ -302,7 +301,7 @@
 
 
 
-<div class="dx-fieldset">
+<div class="dx-fieldset" *ngIf="mouvement.state === 'inprogress'">
     <div class="dx-field">
     <div class="dx-field-value">
       <dx-button width="180"  icon="fa fa-paper-plane"  text="LIVRER" type="success"  style="margin-left: 20px; margin-right: 20px;" (onClick)="showDeliverPopup()"></dx-button>

@@ -30,11 +30,10 @@
 
         <dxo-export [enabled]="true" fileName="magasin" [allowExportSelectedData]="true"></dxo-export>
 
-        <dxo-filter-row [visible]="true"></dxo-filter-row>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
-
+        <dxo-filter-row
+          [visible]="true" [applyFilter]="true"></dxo-filter-row>
         <dxo-group-panel [visible]="true"></dxo-group-panel>
-        <dxo-scrolling mode="virtual"></dxo-scrolling>
         <dxo-editing
           mode="popup"
           [useIcons]="true"
@@ -44,8 +43,11 @@
         </dxo-editing>
         <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
         <dxo-selection mode="multiple"></dxo-selection>
-        <dxo-header-filter [visible]="true"></dxo-header-filter>
-
+        <dxo-remote-operations
+          [sorting]="true"
+          [paging]="true">
+        </dxo-remote-operations>
+        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
 
         <dxo-pager
           [allowedPageSizes]="[5, 8, 15, 30]"

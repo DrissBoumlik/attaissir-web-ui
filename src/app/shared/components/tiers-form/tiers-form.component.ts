@@ -23,6 +23,7 @@ export class TiersFormComponent implements OnInit {
   @Input() validationGroup?: string;
   @Input() readOnly?: boolean;
   @Input() morale?: boolean;
+  @Input() thirdTypeName = 'agrégé';
 
   buttonOptions: any;
   vars: any;
@@ -42,6 +43,7 @@ export class TiersFormComponent implements OnInit {
   cities: any;
   regions: any;
   bank_names: any;
+  societe: string;
 
   constructor(public thirdsServices: ThirdsService) {
     locale('fr');
@@ -49,6 +51,7 @@ export class TiersFormComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.tier);
+    this.societe = (this.isWizard) ? 'Société' : 'Centre de distribution';
     this.thirdsServices.getThirdsVars().subscribe(data => {
       this.vars = data;
 

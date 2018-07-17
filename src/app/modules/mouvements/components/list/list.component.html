@@ -21,6 +21,10 @@
         [allowColumnReordering]="true"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         KeyExpr="id">
+        <dxo-remote-operations
+          [sorting]="true"
+          [paging]="true">
+        </dxo-remote-operations>
 
         <dxo-export [enabled]="true" fileName="magasin" [allowExportSelectedData]="true"></dxo-export>
 
@@ -28,7 +32,7 @@
         <dxo-header-filter [visible]="true"></dxo-header-filter>
 
         <dxo-group-panel [visible]="true"></dxo-group-panel>
-        <dxo-scrolling mode="virtual"></dxo-scrolling>
+        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
         <dxo-editing
           mode="popup"
           [useIcons]="true"
@@ -39,7 +43,6 @@
         <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
         <dxo-selection mode="multiple"></dxo-selection>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
-
 
         <dxo-pager
           [allowedPageSizes]="[5, 8, 15, 30]"
@@ -53,7 +56,7 @@
 
         <dxi-column dataField="id" [width]="40" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
         <dxi-column dataField="type" caption="Type" [allowFiltering]="false"  cellTemplate="typeTemplate">></dxi-column>
-        <dxi-column dataField="order_id" caption="N° Bon" cellTemplate="bon_nbrTemplate"></dxi-column>
+        <dxi-column dataField="order_id" caption="N° Bon de livraison fournisseur" cellTemplate="bon_nbrTemplate"></dxi-column>
         <dxi-column dataField="emetter" caption="Emetteur" [allowFiltering]="false"  cellTemplate="emetterTemplate"></dxi-column>
         <dxi-column dataField="recepteur" caption="Récepteur" [allowFiltering]="false"  cellTemplate="recepteurTemplate"></dxi-column>
         <dxi-column dataField="article_count"  [allowFiltering]="false" caption="Nombre d'article"></dxi-column>
@@ -75,7 +78,6 @@
                                          class="fa fa-info-circle fa-5x"></i></a>
         </div>
 
-
         <div *dxTemplate="let data of 'typeTemplate'">
            {{helper.orderType(data.value)}}
         </div>
@@ -85,12 +87,10 @@
                                          class="fa fa-chevron-up fa-5x"></i> &nbsp; {{data.value}}</a>
         </div>
 
-
         <div *dxTemplate="let data of 'recepteurTemplate'">
           <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center;   color:  #0b9c8f;"
                                          class="fa fa-chevron-down fa-5x"></i> &nbsp;  {{data.value}}</a>
         </div>
-
 
      </dx-data-grid>
     </div>

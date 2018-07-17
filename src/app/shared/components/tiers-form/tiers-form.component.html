@@ -30,9 +30,18 @@
         </dxi-item>
 
       </dxi-item>-->
+      <dxi-item dataField="morale" editorType="dxSwitch" *ngIf="!morale" [editorOptions]="{
+      onText: 'Oui',
+      offText: 'Non'
+    }" (change)="onMoraleChanged($event)">
+        <dxo-label
+          text="Personne Morale?" i18n-text>
+        </dxo-label>
+      </dxi-item>
 
-      <dxi-item itemType="group" caption="Centre de distribution"
-                [colCount]="2" i18n-caption="Personne morale" *ngIf="tier.morale">
+
+      <dxi-item itemType="group" caption="{{ societe }}"
+                [colCount]="2" *ngIf="tier.morale">
 
         <dxi-item dataField="company_name">
           <dxo-label
@@ -70,10 +79,11 @@
           </dxo-label>
         </dxi-item>
 
+
       </dxi-item>
 
 
-      <dxi-item itemType="group" caption="Informations Jeune promoteur" [colCount]="2" i18n-caption>
+      <dxi-item itemType="group" caption="Informations {{ thirdTypeName }}" [colCount]="2" i18n-caption>
 
         <dxi-item dataField="full_name">
           <dxo-label
@@ -96,6 +106,9 @@
         </dxi-item>
 
         <dxi-item dataField="cin" [disabled]="isEdit">
+          <dxo-label
+            text="CIN" i18n-text>
+          </dxo-label>
           <dxi-validation-rule type="required" message="CIN est obligatoire" i18n-message></dxi-validation-rule>
           <dxi-validation-rule
             type="pattern"
@@ -172,7 +185,7 @@
                     maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
                 }">
           <dxo-label
-            text="Telephone 1" i18n-text>
+            text="Téléphone 1" i18n-text>
           </dxo-label>
           <dxi-validation-rule *ngIf="tier.tel2"
                                type="pattern"
@@ -186,7 +199,7 @@
                     maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
                 }">
           <dxo-label
-            text="Telephone 2" i18n-text>
+            text="Téléphone 2" i18n-text>
           </dxo-label>
           <dxi-validation-rule *ngIf="tier.tel2"
                                type="pattern"
@@ -253,12 +266,12 @@
 
         <dxi-item editorType="dxCheckBox" dataField="is_insured">
           <dxo-label
-            text="Assurance" i18n-text>
+            text="Adhérant assurance" i18n-text>
           </dxo-label>
         </dxi-item>
         <dxi-item editorType="dxCheckBox" dataField="is_retired">
           <dxo-label
-            text="Retraite" i18n-text>
+            text="Adhérant retraite" i18n-text>
           </dxo-label>
         </dxi-item>
         <dxi-item dataField="payment_method" editorType="dxRadioGroup" [editorOptions]="payment_method" [colSpan]="2">
@@ -269,10 +282,10 @@
       </dxi-item>
 
 
-      <dxi-item itemType="group" [colCount]="2" caption="Facturation" i18n-caption>
+      <dxi-item itemType="group" [colCount]="2" caption="Données bancaires" i18n-caption>
         <dxi-item dataField="bank_name" editorType="dxSelectBox" [editorOptions]="bank_names">
           <dxo-label
-            text="Nom de banque" i18n-text>
+            text="Banque" i18n-text>
           </dxo-label>
         </dxi-item>
 
@@ -296,16 +309,6 @@
 
         </dxi-item>
       </dxi-item>
-
-      <dxi-item dataField="morale" editorType="dxSwitch" *ngIf="!morale" [editorOptions]="{
-      onText: 'Oui',
-      offText: 'Non'
-    }" (change)="onMoraleChanged($event)">
-        <dxo-label
-          text="Personne Morale?" i18n-text>
-        </dxo-label>
-      </dxi-item>
-
 
       <dxi-item dataField="etat" editorType="dxSwitch" *ngIf="false">
         <dxo-label

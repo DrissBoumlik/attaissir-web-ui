@@ -46,11 +46,11 @@ export class ListComponent implements OnInit {
                     row.qrf = war.qrf;
                     row.qs = war.qs;
                     row.qr = war.qr;
-                    row.warehouse = war.warehouse_name;
-                    row.category = war.category_name;
-                    row.sub_category = war.sub_category_name;
-                    row.cda = war.warehouse_zone_name;
-                    row.article = war.article_name;
+                    row.warehouse_name = war.warehouse_name;
+                    row.category_name = war.category_name;
+                    row.sub_category_name = war.sub_category_name;
+                    row.warehouse_zone_name = war.warehouse_zone_name;
+                    row.article_name = war.article_name;
                     row.threshold = war.threshold ? war.threshold : 'pas de données';
                     return row;
                   }),

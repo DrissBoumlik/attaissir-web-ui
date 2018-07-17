@@ -1,103 +1,97 @@
-
 <div id="form-container">
   <form>
-  <dx-form id="form"  [formData]="warehouse"  validationGroup="tierData" >
+    <dx-form id="form" [formData]="warehouse"
+             validationGroup="warehouseData"
+             labelLocation="top">
 
 
-    <dxi-item itemType="group"  caption="Informations Générales" [colCount]="2" i18n-caption>
-      <dxi-item itemType="group">
-        <dxi-item dataField="name">
-          <dxo-label text="Nom" i18n-text> </dxo-label>
+      <dxi-item itemType="group" caption="Informations Magasin" [colCount]="2" i18n-caption>
+        <dxi-item itemType="group">
+          <dxi-item dataField="name">
+            <dxo-label text="Nom" i18n-text></dxo-label>
 
-          <dxi-validation-rule type="required" message="Le champ nom est obligatoire"
-                               i18n-message></dxi-validation-rule>
+            <dxi-validation-rule type="required" message="Le champ nom est obligatoire"
+                                 i18n-message></dxi-validation-rule>
+          </dxi-item>
+
+
+          <dxi-item editorType="dxSelectBox" [editorOptions]="cities" dataField="city" [(value)]="warehouse.city">
+            <dxo-label
+              text="Ville" i18n-text>
+            </dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="zip_code">
+            <dxo-label text="Code postal" i18n-text></dxo-label>
+
+            <dxi-validation-rule type="numeric" message="le format du code postal est invalide."
+                                 i18n-message></dxi-validation-rule>
+          </dxi-item>
+
+          <dxi-item dataField="convention_ref">
+            <dxo-label text="Référence de convention" i18n-text></dxo-label>
+            <dxi-validation-rule type="required" message="Le champ référence de convention est obligatoire"
+                                 i18n-message></dxi-validation-rule>
+          </dxi-item>
+
         </dxi-item>
+        <dxi-item itemType="group">
 
 
-        <dxi-item  editorType="dxSelectBox"[editorOptions]="citys"  dataField="city"  [(value)]="warehouse.city" >
-          <dxo-label
-            text="Ville" i18n-text>
-          </dxo-label>
-        </dxi-item>
+          <dxi-item dataField="email">
+            <dxo-label text="Email" i18n-text></dxo-label>
+            <dxi-validation-rule type="email" message="Ce n'est pas une adresse email valide."
+                                 i18n-message></dxi-validation-rule>
+          </dxi-item>
 
-       <dxi-item dataField="zip_code">
-          <dxo-label text="Code postal" i18n-text> </dxo-label>
+          <dxi-item dataField="address">
+            <dxo-label text="Adresse" i18n-text></dxo-label>
+          </dxi-item>
 
-         <dxi-validation-rule type="numeric" message="le format du code postal est invalide."
-                              i18n-message></dxi-validation-rule>
-        </dxi-item>
-
-        <dxi-item dataField="convention_ref">
-          <dxo-label text="Référence de convention" i18n-text> </dxo-label>
-          <dxi-validation-rule type="required" message="Le champ référence de convention est obligatoire"
-                               i18n-message></dxi-validation-rule>
-        </dxi-item>
-
-      </dxi-item>
-      <dxi-item itemType="group">
-
-
-        <dxi-item dataField="email">
-          <dxo-label text="Email" i18n-text> </dxo-label>
-          <dxi-validation-rule type="email" message="Ce n'est pas une adresse email valide."
-                               i18n-message></dxi-validation-rule>
-        </dxi-item>
-
-        <dxi-item dataField="address">
-          <dxo-label text="Adresse" i18n-text> </dxo-label>
-        </dxi-item>
-
-
-
-        <dxi-item dataField="tel" [editorOptions]="{
+          <dxi-item dataField="tel" [editorOptions]="{
                     mask: '00 00 00 00 00',
                     useMaskedValue: true,
                     maskInvalidMessage: 'Le téléphone doit avoir un format de téléphone marocain correct.'
                 }">
-          <dxo-label
-            text="Telephone" i18n-text>
-          </dxo-label>
-          <dxi-validation-rule *ngIf="warehouse.tel"
-                               type="pattern"
-                               [pattern]="phonePattern"
-                               message="Le téléphone doit avoir un format de téléphone marocain correct." i18n-message>
-          </dxi-validation-rule>
+            <dxo-label
+              text="Telephone" i18n-text>
+            </dxo-label>
+            <dxi-validation-rule *ngIf="warehouse.tel"
+                                 type="pattern"
+                                 [pattern]="phonePattern"
+                                 message="Le téléphone doit avoir un format de téléphone marocain correct."
+                                 i18n-message>
+            </dxi-validation-rule>
+          </dxi-item>
+
+
+          <dxi-item dataField="zone_id" editorType="dxSelectBox" [editorOptions]="cdasEditorOptions">
+            <dxo-label
+              text="Cda" i18n-text>
+            </dxo-label>
+            <dxi-validation-rule type="required" message="Le champ cda est obligatoire"
+                                 i18n-message></dxi-validation-rule>
+          </dxi-item>
+
         </dxi-item>
-
-
-
-
-        <dxi-item dataField="third_party_id" editorType="dxSelectBox" [editorOptions]="tiers">
-          <dxo-label
-            text="Jeune promoteurs" i18n-text>
-          </dxo-label>
-          <dxi-validation-rule type="required" message="Le champ jeune promoteurs est obligatoire"
-                               i18n-message></dxi-validation-rule>
-         </dxi-item>
-
-
-        <dxi-item dataField="zone_id" editorType="dxSelectBox" [editorOptions]="cdasEditorOptions">
-          <dxo-label
-            text="Cda" i18n-text>
-          </dxo-label>
-          <dxi-validation-rule type="required" message="Le champ cda est obligatoire"
-                               i18n-message></dxi-validation-rule>
-        </dxi-item>
-
 
       </dxi-item>
 
-    </dxi-item>
+      <hr>
 
-    <hr>
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item
+          itemType="button"
+          alignment="left"
+          [buttonOptions]="buttonOptions">
+        </dxi-item>
+        <dxi-item
+          itemType="button"
+          alignment="right"
+          [buttonOptions]="resetOptions">
+        </dxi-item>
+      </dxi-item>
 
-
-    <dxi-item
-      itemType="button"
-      alignment="left"
-      [buttonOptions]="buttonOptions">
-    </dxi-item>
-
-  </dx-form>
+    </dx-form>
   </form>
 </div>

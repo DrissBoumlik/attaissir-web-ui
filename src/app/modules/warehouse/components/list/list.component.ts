@@ -4,8 +4,8 @@ import { WarehoseService } from '../../service/warehose.service';
 import CustomStore from 'devextreme/data/custom_store';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { ZonesService } from '../../../contracts/services/zones.service';
-import {Helper} from '../../../../shared/classes/helper';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Helper } from '../../../../shared/classes/helper';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -34,6 +34,7 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this.warehouses.store = new CustomStore({
       load: (loadOptions: any) => {
+        loadOptions['requireTotalCount'] = true;
         return this.warehoseService.getAllDx(loadOptions)
           .toPromise()
           .then(response => {
@@ -104,4 +105,4 @@ export class ListComponent implements OnInit {
 
 
 
- }
+}
