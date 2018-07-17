@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {PreconisationsIntrantsService} from '../../service/preconisations-intrants.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-show',
@@ -8,15 +10,35 @@ import { Component, OnInit } from '@angular/core';
 export class ShowComponent implements OnInit {
 
   articles: any;
+  preconisation: any ;
   popupDeliverVisible: any;
   popupAyantDroitVisible: any;
   cancelPopVisible: any;
   ayants_droits: any = [];
   pin_code: any;
+  evnt1 = true;
 
-  constructor() { }
+
+  constructor(private preconisationsIntrantsService: PreconisationsIntrantsService,
+  private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+
+    this.articles = {};
+    this.preconisation = {};
+
+    this.route.params.subscribe(
+      params => {
+       this.preconisationsIntrantsService.getPreconisation(params.id).subscribe((response) => {
+         this.preconisation = response.data;
+         this.articles = response.data.articles;
+
+       }, error1 => {
+          throw error1;
+        });
+      });
+
   this.evnt1 = false;
   }
 
@@ -60,7 +82,6 @@ export class ShowComponent implements OnInit {
     }
   }
 
-  evnt1 = true;
 
   func1() {
     this.evnt1 = false;
@@ -68,7 +89,6 @@ export class ShowComponent implements OnInit {
 
   func2() {
     this.evnt1 = true;
-    console.log('RF CODE');
   }
 
 
@@ -90,19 +110,24 @@ export class ShowComponent implements OnInit {
 
     print.document.write('<body>');
 
+
+
     print.document.write('<p><b>BON DE LIVRAISON</b></p>' +
         '<p>-------------------------</p>' +
         '<p>05/09/2018 &nbsp; &nbsp; n 0555</p>' +
-        '<p>COMPAGNE &nbsp; &nbsp; 2017/2018</p>' +
-        '<p>C/Z/P &nbsp; &nbsp; Q53829</p>' +
-        '<p>NOM COMPLET  &nbsp; &nbsp; OUADI ABDELLAAH</p>' +
+        '<p>COMPAGNE &nbsp;' + this.preconisation.campaign + '&nbsp; </p>' +
+        '<p>C/Z/P &nbsp;</p>' + this.preconisation.parcel + '/' + this.preconisation.cda + '/' + this.preconisation.zone +
+        '<p>NOM COMPLET  &nbsp;' + this.preconisation.third_party_name + '  &nbsp; </p>' +
         '<br/>' +
-        '<p>ENGRAIS</p>' +
-        '<p>*****</p>' +
-        '<p>- DAP 18-45 (50 KG) 45 QTE </p>' +
-        '<p>- SULFARE (50 KG) 45 QTE </p>' +
-        '<p>- KEMARAN (50 KG) 45 QTE </p>' +
-        '<p>- DAP 18-45 (50 KG) 45 QTE </p>' +
+       // '<p>' + this.articles.category.article_category.name + '</p>' +
+        '<p>*****</p>');
+
+    this.articles.forEach(function(element) {
+      print.document.write( '<p>' + element.article.name + ' ' + element.quantity  + ' ' + 'QTE' + '</p>' );
+
+    });
+
+      print.document.write(
         '<p>-------------------------</p>' +
         '<p>** MERCI **</p>' +
         '<p>*****</p>');
