@@ -3,6 +3,7 @@ import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
 import { Card } from './card';
 import { Document } from './document';
+import { Warehouse } from './warehouse';
 
 
 @Injectable({
@@ -55,6 +56,7 @@ export class Third {
   documents: Document[];
   cards?: Card[];
   types?: any;
+  warehouses?: Warehouse[];
   created_at?: Date;
   updated_at?: Date;
 

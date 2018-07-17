@@ -54,6 +54,16 @@ export class MouvementsService {
     });
   }
 
+
+  editMouvement(mouvement: any): Observable<any> {
+    console.log('put');
+    return this.http.put<any>(`${environment.apiUrl}/${this.routeName}/${mouvement.id}`, JSON.stringify(mouvement), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   getMouvementVars(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/${this.routeName}/vars`);
   }

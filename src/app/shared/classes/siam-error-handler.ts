@@ -14,35 +14,23 @@ export class SiamErrorHandler implements ErrorHandler {
   handleError = (error: any): void => {
     let message: string;
     let title: string;
-    if (/TypeError: You provided /g.test(error)) {
-      message = 'Une erreur est survenue';
-      title = '';
-    } else if (error instanceof HttpErrorResponse) {
-      message = error.message;
-      title = error.statusText || 'Une erreur est survenue';
-    } else {
-      message = error.message;
-      title = error.statusText || 'Une erreur est survenue';
-    }
-
-    if (title === 'Unprocessable Entity') {
-      if (error.error.message === 'The given data was invalid.') {
-        let errors = '<ul>';
-        for (const err of error.error.errors) {
-          errors += `<li>${err}</li>`;
-        }
-        errors += '</ul>';
-        message = 'Les données sont incorrect!';
+    if (error instanceof HttpErrorResponse) {
+      // Server or connection error happened
+      if (!navigator.onLine) {
+        // Handle offline error
+        this.toastr.warning('Pas de connexion Internet');
+      } else {
+        // Handle Http Error (error.status === 403, 404...)
+        // this.toastr.warning(`${error.status} - ${error.message}`);
       }
-    } else if (message && message.search('third_parties_cin_type_unique') !== -1) {
-      message = 'CIN exist déjà!';
-      title = '';
+    } else {
+      /*this.toastr.warning(error, '', {
+        enableHtml: true
+      });*/
     }
+    // Log the error anyway
+    console.error('It happens: ', error);
 
-    this.toastr.warning(message, title, {
-      enableHtml: true,
-      closeButton: true
-    });
 
   }
 

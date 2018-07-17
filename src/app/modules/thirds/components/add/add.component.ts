@@ -52,7 +52,7 @@ export class AddComponent implements OnInit {
       data = this.helper.dataFormatter(data, false);
       this.toastr.success(
         `Nouveau ${this.title} ajouté avec succès.`);
-      this.router.navigate([`/${this.goTo}/afficher/${data.id}`]);
+      this.router.navigate([`/${this.goTo}/modifier/${data.id}`]);
     }, err => {
       console.log(err);
       this.toastr.error(err.error.message);

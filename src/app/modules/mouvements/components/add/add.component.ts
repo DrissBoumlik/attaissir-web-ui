@@ -98,7 +98,7 @@ export class AddComponent implements OnInit {
         valueExpr: 'ID',
         onSelectionChanged: (event) => {
           console.log(event);
-          if (event.selectedItem.ID === 'receive') {
+          if (event.selectedItem.ID === 'receive' || event.selectedItem.ID === 'delivery') {
             this.emetteurOptions = {
               label: 'Émetteur',
               displayExpr: 'full_name',

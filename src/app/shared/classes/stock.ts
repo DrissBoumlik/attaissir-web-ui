@@ -20,4 +20,10 @@ export class Stock {
   dt: any;
   toOrder: 0;
   threshold = 10;
+
+  warehouse_name?: string;
+  category_name?: string;
+  sub_category_name?: string;
+  warehouse_zone_name?: string;
+  article_name?: string;
 }
