@@ -3,7 +3,7 @@ import { Third } from '../../../shared/classes/third';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import {isNull} from 'util';
+import { isNull } from 'util';
 
 
 @Injectable({

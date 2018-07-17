@@ -69,7 +69,7 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                        {{order.note}}
+                        {{order.note || 'Pas de donée'}}
                       </p>
 
                     </div>
@@ -83,7 +83,7 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                          {{order.third_party_full_name}}
+                          {{order.third_party.full_name}}
                       </p>
 
                     </div>
@@ -161,11 +161,11 @@
                 <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
                 <dxi-column dataField="id" [visible]="false" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"  ></dxi-column>
-                <dxi-column dataField="name" caption="Libelle"></dxi-column>
+                <dxi-column dataField="article.name" caption="Libelle"></dxi-column>
                 <dxi-column dataField="price" caption="Prix" ></dxi-column>
                 <dxi-column dataField="quantity" caption="Quantité" ></dxi-column>
-                <dxi-column dataField="category" caption="Catégorie" ></dxi-column>
-                <dxi-column dataField="sub_category" caption="sous catégorie"></dxi-column>
+                <dxi-column dataField="article.parent_category.name" caption="Catégorie" ></dxi-column>
+                <dxi-column dataField="article.category.name" caption="Sous catégorie"></dxi-column>
 
               </dx-data-grid>
 
