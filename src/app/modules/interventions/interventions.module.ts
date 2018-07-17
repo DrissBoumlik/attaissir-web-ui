@@ -5,7 +5,7 @@ import { NewComponent } from './components/new/new.component';
 import {
   DxButtonModule, DxCheckBoxModule, DxDataGridModule,
   DxDateBoxModule,
-  DxFormModule, DxPopupModule,
+  DxFormModule, DxLoadPanelModule, DxPopupModule,
   DxSelectBoxModule,
   DxTemplateModule,
   DxTextAreaModule,
@@ -28,7 +28,7 @@ import {MouvementsRoutingModule} from '../mouvements/mouvements-routing.module';
     DxPopupModule,
     DxButtonModule,
     DxTemplateModule,
-
+    DxLoadPanelModule,
     DxCheckBoxModule
   ],
   declarations: [NewComponent, AddComponent]

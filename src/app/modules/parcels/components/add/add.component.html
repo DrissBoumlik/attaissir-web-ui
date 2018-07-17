@@ -1,0 +1,236 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+      <h2>Nouvelle parcelle logique</h2>
+    </div>
+  </div>
+</div>
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+
+
+      <form>
+        <dx-form id="form"
+                 [formData]="parcel"
+                 [readOnly]="false"
+                 [showColonAfterLabel]="true"
+                 [showValidationSummary]="true"
+                 labelLocation="top">
+
+
+        <dxi-item itemType="group" caption="Informations Générales" [colCount]="2" >
+
+
+          <dxi-item dataField="semance_famille" editorType="dxSelectBox" [editorOptions]="thirdOptions">
+            <dxo-label
+              text="Agrégé" i18n-text>
+            </dxo-label>
+            <dxi-validation-rule type="required" message="Famille est obligatoire"
+                                 i18n-message></dxi-validation-rule>
+          </dxi-item>
+
+
+
+          <dxi-item dataField="semance_famille" editorType="dxSelectBox" [editorOptions]="contractOptions">
+            <dxo-label
+              text="Contrat" i18n-text>
+            </dxo-label>
+            <dxi-validation-rule type="required" message="Famille est obligatoire"
+                                 i18n-message></dxi-validation-rule>
+          </dxi-item>
+
+
+
+
+      </dxi-item>
+
+
+          <dxi-item itemType="group"  [colCount]="2" >
+
+
+          <dxi-item itemType="group" caption="Informations Générales" [colCount]="1" >
+
+          <div class="options">
+            <div class="caption">Options</div>
+
+
+
+            <div *ngFor="let option of parcels_right">
+
+              <div class="option">
+                <dx-check-box
+                  [value]="option.value"
+                  [width]="200"
+                  (onOptionChanged)="test($event,option)"
+                  [text]="option.name"
+                ></dx-check-box>
+              </div>
+
+
+
+            </div>
+
+            <br/>
+
+          <p (click)="addAll()" *ngIf="parcels_right.length != 0">Ajouter tout dans la liste </p>
+
+          </div>
+
+
+          </dxi-item>
+
+
+
+          <dxi-item itemType="group" caption="Informations Générales" [colCount]="1" >
+
+            <div class="options">
+              <div class="caption">Options</div>
+
+              <div *ngFor="let option of parcels_left">
+
+                <div class="option">
+                  <dx-check-box
+                    [value]="option.value"
+                    [width]="200"
+                    (onOptionChanged)="test2($event,option)"
+                    [text]="option.name"
+                  ></dx-check-box>
+                </div>
+
+            </div>
+            </div>
+
+
+          </dxi-item>
+
+
+          </dxi-item>
+
+
+
+          <hr>
+
+          <dxi-item
+            itemType="button"
+            alignment="right"
+            [buttonOptions]="buttonOptions">
+          </dxi-item>
+
+
+
+
+
+        </dx-form>
+      </form>
+      <!--  <form>
+        <dx-form id="form"
+                 [formData]="interventions"
+                 [readOnly]="false"
+                 [showColonAfterLabel]="true"
+                 [showValidationSummary]="true"
+                 labelLocation="top">
+
+          <dxi-item itemType="group" caption="Informations Générales" [colCount]="2" i18n-caption>
+
+
+            <dxi-item dataField="cin" editorType="dxTextBox" [disabled]="true">
+              <dxo-label
+                text="CIN" >
+              </dxo-label>
+            </dxi-item>
+
+
+            <dxi-item dataField="full_name" editorType="dxTextBox" [disabled]="true">
+              <dxo-label
+                text="Nom complet">
+              </dxo-label>
+            </dxi-item>
+
+
+            <dxi-item dataField="tel1" editorType="dxTextBox" [disabled]="true">
+              <dxo-label
+                text="N Téléphone">
+              </dxo-label>
+            </dxi-item>
+
+
+
+
+            <dxi-item dataField="cin" editorType="dxNumberBox">
+              <dxo-label
+                text="Superficie contractée">
+              </dxo-label>
+            </dxi-item>
+
+
+            <dxi-item dataField="cin" editorType="dxNumberBox">
+              <dxo-label
+                text="Superficie réelle">
+              </dxo-label>
+            </dxi-item>
+
+
+            <dxi-item dataField="cin" editorType="dxNumberBox">
+              <dxo-label
+                text="Superficie restante">
+              </dxo-label>
+            </dxi-item>
+
+
+            <dxi-item>
+              <dxo-label
+                text="Date prévue" >
+              </dxo-label>
+              <dx-date-box style="width: 100%"
+                           type="date">
+              </dx-date-box>
+            </dxi-item>
+
+
+
+            <dxi-item dataField="cin" editorType="dxNumberBox">
+              <dxo-label
+                text="Superficie a travailler">
+              </dxo-label>
+            </dxi-item>
+
+
+
+            <dxi-item dataField="description" editorType="dxTextArea">
+              <dxo-label
+                text="Description">
+              </dxo-label>
+            </dxi-item>
+
+          </dxi-item>
+
+
+
+
+
+
+
+
+
+
+
+          <dxi-item itemType="group" caption="Choix des préstations de service">
+
+
+
+
+
+
+          </dxi-item>
+
+
+
+
+
+        </dx-form>
+      </form> !-->
+    </div>
+  </div>
+</div>

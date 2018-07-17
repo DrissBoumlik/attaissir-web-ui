@@ -8,8 +8,8 @@ const routes: Routes = [{
   path: 'interventions',
   component: DefaultComponent,
   children: [
+    { path: 'selectionner', component: NewComponent },
     { path: 'ajouter', component: AddComponent },
-    { path: 'rechercher', component: NewComponent }
   ]
 }];
 

@@ -3,6 +3,10 @@ import {ArticlesService} from '../../../articles/services/articles.service';
 import {ArticleCategiesService} from '../../../articles/services/article-categies.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
+import {Article} from '../../../liste_des_demandes/components/show/show.component';
+import {InterventionService} from '../../services/intervention.service';
+import {ActivatedRoute} from '@angular/router';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
 
 @Component({
   selector: 'app-add',
@@ -14,6 +18,10 @@ export class AddComponent implements OnInit {
 
   checkBoxValue: boolean;
   indeterminateValue: boolean;
+
+  third_id: any;
+  family_id: any;
+  sub_family_id: any;
 
   buttonsave: any;
   buttonValider: any;
@@ -36,7 +44,12 @@ export class AddComponent implements OnInit {
 
   prestations_service: any;
 
-  constructor( public familleService: ArticleCategiesService, public articleService: ArticlesService ) {
+
+
+  constructor( public familleService: ArticleCategiesService, public articleService: ArticlesService  , public interventionService: InterventionService,
+  private route: ActivatedRoute, private thirdsService: ThirdsService
+  ) {
+
     this.products = [];
     this.interventions = [];
     this.semances = [];
@@ -50,6 +63,8 @@ export class AddComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log(this.third_id);
 
     this.addSemance = {
       text: 'AJOUTER',
@@ -121,6 +136,7 @@ export class AddComponent implements OnInit {
           return this.familleService.getArticleCategoriesDx(loadOptions)
             .toPromise()
             .then(response => {
+              console.log(response);
               const json = response;
               return json;
             })
@@ -135,7 +151,6 @@ export class AddComponent implements OnInit {
         }
       }),
       onSelectionChanged: (event) => {
-        console.log(event);
         this.subFamilleOptions = {
           label: 'Sous Famille',
           displayExpr: 'name',
@@ -191,6 +206,25 @@ export class AddComponent implements OnInit {
       .catch(error => {
         throw error;
       });
+
+    this.interventions.semance_famille = this.route.snapshot.queryParams['family_id'];
+    this.interventions.prod_famille = this.route.snapshot.queryParams['family_id'];
+
+    this.third_id  = this.route.snapshot.queryParams['third_party_id'];
+    this.family_id  = this.route.snapshot.queryParams['family_id'];
+    this.sub_family_id  = this.route.snapshot.queryParams['sub_family_id'];
+
+    this.thirdsService.getThird(this.third_id,"aggregated", true)
+      .subscribe(response => {
+        this.interventions = response.data;
+        // console.log(response.data);
+        // this.interventions = this.helper.dataFormatter(response, false);
+
+      }, error1 => {
+        // this.toastr.warning('Utilisateur non trouvé.');
+
+      });
+
 
 
 
