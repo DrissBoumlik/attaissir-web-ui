@@ -9,7 +9,7 @@ import { AuthenticationService } from '../../auth/_services/authentication.servi
 import 'rxjs/add/operator/retry';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
-import {ToastrService} from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

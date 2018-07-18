@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ScriptLoaderService } from '../_services/script-loader.service';
 import { Helpers } from '../helpers';
 import { ToastrService } from 'ngx-toastr';
-import {AlertComponent} from './_directives';
-import {AlertService, AuthenticationService, UserService} from './_services';
+import { AlertComponent } from './_directives';
+import { AlertService, AuthenticationService, UserService } from './_services';
 declare let $: any;
 declare let mUtil: any;
 

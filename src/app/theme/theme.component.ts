@@ -24,9 +24,9 @@ export class ThemeComponent implements OnInit {
   canRefresh: boolean;
 
   constructor(private _script: ScriptLoaderService,
-              private auth: AuthenticationService,
-              private _router: Router,
-              private toastr: ToastrService) {
+    private auth: AuthenticationService,
+    private _router: Router,
+    private toastr: ToastrService) {
     this.canRefresh = false;
     this.reset();
     this.initListener();

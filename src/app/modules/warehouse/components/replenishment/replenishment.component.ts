@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import {Stock} from '../../../../shared/classes/stock';
-import {CommandeService} from '../../../commande/service/commande.service';
+import { Stock } from '../../../../shared/classes/stock';
+import { CommandeService } from '../../../commande/service/commande.service';
 
 @Component({
   selector: 'app-replenishment',

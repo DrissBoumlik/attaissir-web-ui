@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DemandesService } from '../../service/demandes.service';
-import {Helper} from '../../../../shared/classes/helper';
-import {Article} from '../../../../shared/classes/article';
+import { Helper } from '../../../../shared/classes/helper';
+import { Article } from '../../../../shared/classes/article';
 
 @Component({
   selector: 'app-show',
@@ -16,7 +16,7 @@ export class ShowComponent implements OnInit {
   helper: any;
 
   constructor(private route: ActivatedRoute,
-              private demandesService: DemandesService) {
+    private demandesService: DemandesService) {
     this.produits = [];
     this.helper = Helper;
     this.order = {
