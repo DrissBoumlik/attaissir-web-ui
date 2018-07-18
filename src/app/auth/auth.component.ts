@@ -1,12 +1,10 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScriptLoaderService } from '../_services/script-loader.service';
-import { AuthenticationService } from './_services/authentication.service';
-import { AlertService } from './_services/alert.service';
-import { UserService } from './_services/user.service';
-import { AlertComponent } from './_directives/alert.component';
 import { Helpers } from '../helpers';
 import { ToastrService } from 'ngx-toastr';
+import {AlertComponent} from './_directives';
+import {AlertService, AuthenticationService, UserService} from './_services';
 declare let $: any;
 declare let mUtil: any;
 
@@ -56,6 +54,7 @@ export class AuthComponent implements OnInit {
     // m-login--signin
   }
 
+
   signin() {
     this.loading = true;
     this._authService.login(this.model.email, this.model.password).subscribe(
@@ -63,6 +62,7 @@ export class AuthComponent implements OnInit {
         if (data) {
           const currentUser: any = JSON.stringify(data);
           localStorage.setItem('currentUser', currentUser);
+          localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
           localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
           this.toastr.success(`Bonjour ${JSON.parse(currentUser).data.name.toUpperCase()}`);
         }

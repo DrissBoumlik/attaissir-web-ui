@@ -9,10 +9,12 @@ import { AuthenticationService } from '../../auth/_services/authentication.servi
 import 'rxjs/add/operator/retry';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(public auth: AuthenticationService,
+    private toastr: ToastrService,
     public router: Router) {
   }
 
@@ -32,8 +34,10 @@ export class TokenInterceptor implements HttpInterceptor {
         // logout users, redirect to login page
         this.auth.logout();
         // redirect to the signin page or show login modal here
+        // Observable.throwError(error);
         this.router.navigate(['/login']); // remember to import router class and declare it in the class
-        return Observable.throwError('Token est expiré!');
+        this.toastr.warning('Token est expiré!');
+
       } else {
         return Observable.throwError(error);
       }

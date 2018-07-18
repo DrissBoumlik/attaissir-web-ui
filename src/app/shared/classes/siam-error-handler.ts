@@ -27,27 +27,9 @@ export class SiamErrorHandler implements ErrorHandler {
     } else {
     }
     // Log the error anyway
-    console.error('It happens: ', error);
+    console.error('It happens: ');
+    console.error(error);
 
 
-  }
-
-  message = (msg) => {
-    if (!msg.hasOwnProperty('message')) {
-      if (msg.search('The server response does not provide the totalCount value.') !== -1) {
-        return 'The server response does not provide the totalCount value.';
-      }
-      return msg;
-    }
-    return msg.message;
-  }
-
-  getMessage = (code: number): any => {
-    if (code === 400) {
-      return {
-        title: 'Syntaxe invalide',
-        message: 'Le serveur n\'a pas pu comprendre la requête à cause d\'une syntaxe invalide.'
-      };
-    }
   }
 }

@@ -58,9 +58,9 @@ import { DemandesModule } from './modules/demandes/demandes.module';
     DxSelectBoxModule,
     DxSwitchModule,
     DxRadioGroupModule,
-    ToastrModule.forRoot(),
     DxPivotGridModule,
 
+    ToastrModule.forRoot(),
     NgbModule.forRoot(),
 
     ConseilleAgricoleModule,
@@ -86,19 +86,19 @@ import { DemandesModule } from './modules/demandes/demandes.module';
     DxCheckBoxModule,
   ],
   providers: [{
-    provide: LOCALE_ID,
-    useValue: 'fr'
-  },
-    ScriptLoaderService,
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  },
-  {
-    provide: ErrorHandler,
-    useClass: SiamErrorHandler
-  }
+      provide: LOCALE_ID,
+      useValue: 'fr'
+    },
+      ScriptLoaderService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: SiamErrorHandler
+    }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

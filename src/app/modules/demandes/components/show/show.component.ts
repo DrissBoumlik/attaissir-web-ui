@@ -29,6 +29,7 @@ export class ShowComponent implements OnInit {
       params => {
         this.demandesService.getOrder(params.id).subscribe((response) => {
           this.order = response.data;
+          this.produits = this.order.articles;
 
           /*this.order.articles.forEach((it) => {
             const article = new Article();

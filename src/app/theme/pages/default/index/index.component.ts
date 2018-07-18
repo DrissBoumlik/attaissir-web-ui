@@ -75,7 +75,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       {
         title: 'Liste des cartes des agrégés',
         icon: 'flaticon-tabs',
-        url: '/tiers/cartes',
+        url: '/cartes/liste',
         color: ''
       }
     ];
