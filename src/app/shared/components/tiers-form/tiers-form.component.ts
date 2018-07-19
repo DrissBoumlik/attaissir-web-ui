@@ -19,6 +19,7 @@ export class TiersFormComponent implements OnInit {
   @Input() id?: number;
   @Input() type?: string;
   @Input() tier: Third;
+  @Input() isAggregated: boolean;
   @Input() isWizard?: boolean;
   @Input() validationGroup?: string;
   @Input() readOnly?: boolean;
@@ -51,7 +52,7 @@ export class TiersFormComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.tier);
-    this.societe = (this.isWizard) ? 'Société' : 'Centre de distribution';
+    this.societe = (this.isAggregated) ? 'Société' : 'Centre de distribution';
     this.thirdsServices.getThirdsVars().subscribe(data => {
       this.vars = data;
 

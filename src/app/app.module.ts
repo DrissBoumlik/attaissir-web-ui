@@ -58,9 +58,9 @@ import { DemandesModule } from './modules/demandes/demandes.module';
     DxSelectBoxModule,
     DxSwitchModule,
     DxRadioGroupModule,
-    ToastrModule.forRoot(),
     DxPivotGridModule,
 
+    ToastrModule.forRoot(),
     NgbModule.forRoot(),
     InterventionsModule,
     AuthModule,

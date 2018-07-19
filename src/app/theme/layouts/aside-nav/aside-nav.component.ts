@@ -24,6 +24,19 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
     this.mainMenu = [
       {
+        name: 'Contrats',
+        icon: 'flaticon-file',
+        url: '/contrats/liste',
+        description: 'Gestion des Contrats',
+        subMenu: [
+          { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste' },
+          { icon: 'flaticon-list', name: 'Contrats actifs', url: '/contrats/liste/courant' },
+          { icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste' },
+        ],
+        disabled: 'false'
+      },
+      {
         name: 'Agrégés',
         icon: 'flaticon-users',
         url: '/tiers/liste',
@@ -94,19 +107,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         icon: 'fa fa-archive',
         url: '/mouvements/mon_stock',
         description: 'mon stock',
-        disabled: 'false'
-      },
-      {
-        name: 'Contrats',
-        icon: 'flaticon-file',
-        url: '/contrats/liste',
-        description: 'Gestion des Contrats',
-        subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste' },
-          { icon: 'flaticon-list', name: 'Contrats actifs', url: '/contrats/liste/courant' },
-          { icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste' },
-        ],
         disabled: 'false'
       },
       {
