@@ -20,6 +20,7 @@
     [columnHidingEnabled]="false"
     [allowColumnResizing]="true"
     [columnAutoWidth]="true"
+    [filterValue]="[]"
     [allowColumnReordering]="true"
     [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
     (onEditingStart)="onStartEdit($event.data.id)"
@@ -37,7 +38,8 @@
     </dx-button>
     <dxo-remote-operations
       [sorting]="true"
-      [paging]="true">
+      [paging]="true"
+      [filtering]="true">
     </dxo-remote-operations>
 
     <dxo-editing
@@ -50,8 +52,11 @@
     <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
 
     <dxo-sorting mode="multiple"></dxo-sorting>
+
     <dxo-filter-row
       [visible]="true" [applyFilter]="applyFilter"></dxo-filter-row>
+    <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+
 
     <dxo-header-filter [visible]="true"></dxo-header-filter>
     <dxo-export [enabled]="true" fileName="Tiers" [allowExportSelectedData]="true"></dxo-export>
@@ -80,7 +85,7 @@
     </dxi-column>
     <dxi-column dataField="full_name_ar" caption="الاسم الكامل" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="date_birth" caption="Date de naissance" i18n-caption>
+    <dxi-column dataField="birth_date" caption="Date de naissance" i18n-caption>
     </dxi-column>
 
     <!--<dxi-column dataField="cda" caption="CDA" i18n-caption>
