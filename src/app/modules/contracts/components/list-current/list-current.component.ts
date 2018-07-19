@@ -73,10 +73,10 @@ export class ListCurrentComponent implements OnInit {
   }
 
   getCurrentContract = (contract: any, contracts: any) => {
-    console.log(contracts);
     const avenants = contracts.filter(c => Number(c.parent_id) === Number(contract.id));
-    console.log(avenants);
-    return (avenants.length > 0) ? avenants[0] : contract;
+    const agreement = (avenants.length > 0) ? avenants[0] : contract;
+    agreement['status'] = this.getStatus(agreement.status);
+    return agreement;
   }
 
 

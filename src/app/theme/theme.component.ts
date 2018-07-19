@@ -69,8 +69,7 @@ export class ThemeComponent implements OnInit {
       const timeleft: any = Number(this.lastAction) + MINUTES_UNITL_AUTO_LOGOUT * 60 * 1000;
       const diff = Number(timeleft) - Number(now);
       const isTimeout = diff < 0;
-      console.log(`DIFF ${(diff / 60000) > 29}`);
-      this.canRefresh = diff < 1200000;
+      this.canRefresh = diff < 600000;
 
       if (diff < 1500000 && diff > 148800) {
         this.toastr.warning('Votre session va expirer dans 5 minute!', '', {

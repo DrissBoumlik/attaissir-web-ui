@@ -23,6 +23,7 @@ export class EditComponent implements OnInit {
   displayWarehouse: boolean;
   warehouses: any;
   isEditWarehouse: boolean;
+  isAggregated: boolean;
 
   constructor(public route: ActivatedRoute,
     private location: Location,
@@ -41,6 +42,7 @@ export class EditComponent implements OnInit {
     this.thirdTypeName = this.helper.getThirdTypeName(this.location.path());
     this.goTo = this.helper.getThirdLink(this.location.path());
     this.thirdType = this.helper.getThirdType(this.location.path());
+    this.isAggregated = (this.thirdType === 'aggregated');
     this.route.params.subscribe(params => {
       this.id = params['id'];
       if (this.id) {

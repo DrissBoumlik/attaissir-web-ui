@@ -6,6 +6,7 @@ import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import { Location } from '@angular/common';
 import { Helper } from '../../../../shared/classes/helper';
+import {isArray} from 'util';
 
 @Component({
   selector: 'app-list',
@@ -57,7 +58,7 @@ export class ListComponent implements OnInit {
         if (!loadOptions.hasOwnProperty('filter')) {
           loadOptions['filter'] = [['ts_type', '=', this.thirdType]];
         } else {
-          if (loadOptions['filter'].length === 3 && loadOptions['filter'][1] !== 'and') {
+          if (loadOptions['filter'].length === 3 && loadOptions['filter'][1] !== 'and' && !isArray(loadOptions['filter'][1])) {
             const tmp = loadOptions['filter'].splice(0, 3);
             loadOptions['filter'].push(tmp);
 
