@@ -99,19 +99,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         disabled: 'false'
       },
       {
-        name: 'Contrats',
-        icon: 'flaticon-file',
-        url: '/contrats/liste',
-        description: 'Gestion des Contrats',
-        subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste' },
-          { icon: 'flaticon-list', name: 'Contrats actifs', url: '/contrats/liste/courant' },
-          { icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste' },
-        ],
-        disabled: 'false'
-      },
-      {
         name: 'Cartes',
         icon: 'flaticon-tabs',
         url: '/cartes/liste',
