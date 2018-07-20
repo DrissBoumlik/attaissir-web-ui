@@ -182,13 +182,15 @@ export class EditComponent implements OnInit {
         };
       }
     };
-    // this.interventionService.getInterventionById(15).subscribe(
-    //   response => {
-    //     console.log(response.data);
-    //   },
-    //   err => {
-    //     console.log(err);
-    //   });
+    this.interventionService.getInterventionById(15).subscribe(
+      response => {
+        console.log(response.data);
+        this.interventions = response.data;
+        // this.third_id = response.data.third_party_id;
+      },
+      err => {
+        console.log(err);
+      });
 
     this.articleService.getArticlesByFamily(15)
       .toPromise()
