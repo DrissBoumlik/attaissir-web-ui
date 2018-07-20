@@ -5,8 +5,8 @@ import { NewComponent } from './components/new/new.component';
 import {
   DxButtonModule, DxCheckBoxModule, DxDataGridModule,
   DxDateBoxModule,
-  DxFormModule, DxLoadPanelModule, DxPopupModule,
-  DxSelectBoxModule,
+  DxFormModule, DxListModule, DxLoadPanelModule, DxPopupModule,
+  DxSelectBoxModule, DxSwitchModule, DxTagBoxModule,
   DxTemplateModule,
   DxTextAreaModule,
   DxTextBoxModule
@@ -14,6 +14,8 @@ import {
 import {AddComponent} from './components/add/add.component';
 import {SharedModule} from '../../shared/shared.module';
 import {MouvementsRoutingModule} from '../mouvements/mouvements-routing.module';
+import {DxiItemModule} from 'devextreme-angular/ui/nested/item-dxi';
+import {DxiGroupItemModule} from 'devextreme-angular/ui/nested/group-item-dxi';
 
 @NgModule({
   imports: [
@@ -29,7 +31,14 @@ import {MouvementsRoutingModule} from '../mouvements/mouvements-routing.module';
     DxButtonModule,
     DxTemplateModule,
     DxLoadPanelModule,
-    DxCheckBoxModule
+    DxCheckBoxModule,
+    DxSwitchModule,
+    DxTagBoxModule,
+    DxListModule,
+    DxiItemModule,
+    DxiGroupItemModule,
+    DxFormModule,
+    DxTextBoxModule,
   ],
   declarations: [NewComponent, AddComponent]
 })

@@ -25,13 +25,13 @@ export class ShowComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(
+    /*this.route.params.subscribe(
       params => {
         this.listeDesDemandesService.getOrder(params.id).subscribe((response) => {
           this.demandesService.getOrder(params.id).subscribe((response) => {
             this.order = response.data;
 
-            /*this.order.articles.forEach((it) => {
+            /!*this.order.articles.forEach((it) => {
               const article = new Article();
               article.id = it.id;
               article.quantity = it.quantity;
@@ -41,12 +41,12 @@ export class ShowComponent implements OnInit {
               article.sub_category = it.article.category.article_category.name;
               this.produits.push(article);
               //  console.log(article);
-            });*/
+            });*!/
             //  console.log(this.produits);
           });
         });
 
-      };
+      });*/
   }
 
 }
