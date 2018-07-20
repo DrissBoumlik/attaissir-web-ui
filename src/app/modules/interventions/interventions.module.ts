@@ -13,12 +13,8 @@ import {
 } from 'devextreme-angular';
 import {AddComponent} from './components/add/add.component';
 import {SharedModule} from '../../shared/shared.module';
-import {MouvementsRoutingModule} from '../mouvements/mouvements-routing.module';
 import {DxiItemModule} from 'devextreme-angular/ui/nested/item-dxi';
 import {DxiGroupItemModule} from 'devextreme-angular/ui/nested/group-item-dxi';
-import { AddComponent } from './components/add/add.component';
-import { SharedModule } from '../../shared/shared.module';
-import { MouvementsRoutingModule } from '../mouvements/mouvements-routing.module';
 
 @NgModule({
   imports: [

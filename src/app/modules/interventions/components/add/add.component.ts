@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ArticlesService} from '../../../articles/services/articles.service';
 import 'rxjs/add/operator/toPromise';
 import {InterventionService} from '../../services/intervention.service';
@@ -7,13 +7,14 @@ import {ThirdsService} from '../../../thirds/services/thirds.service';
 import {WarehouseService} from '../../../distribution-center/services/warehouse.service';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {NewComponent} from '../new/new.component';
+import {DxiItemComponent} from 'devextreme-angular/ui/nested/item-dxi';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss']
 })
-export class AddComponent implements OnInit {
+export class AddComponent implements OnInit, AfterViewInit {
 
   /*-------------------------------------------*/
   buttonsave: any;
@@ -56,6 +57,10 @@ export class AddComponent implements OnInit {
   @ViewChild('semenceGrid') semenceGrid: DxDataGridComponent;
   @ViewChild('productsGrid') productsGrid: DxDataGridComponent;
   /*-------------------------------------------*/
+  @ViewChild('choixSemence') choixSemence: DxiItemComponent;
+  @ViewChild('choixProducts') choixProducts: DxiItemComponent;
+  @ViewChild('choixServices') choixServices: DxiItemComponent;
+  /*-------------------------------------------*/
   data = {
     semence: [],
     products: [],
@@ -85,6 +90,8 @@ export class AddComponent implements OnInit {
   SEMENCE_TYPE = 'SEME';
   PRODUCT_TYPE = 'product';
   SERVICE_TYPE = 'service';
+  ttt = false;
+
   /*-------------------------------------------*/
 
   constructor(public articleService: ArticlesService,
@@ -98,7 +105,6 @@ export class AddComponent implements OnInit {
   }
 
   /*-------------------------------------------*/
-
   ngOnInit() {
     this.route.queryParams.subscribe(
       (qps: any) => {
@@ -148,6 +154,9 @@ export class AddComponent implements OnInit {
                         });
                     });
                   });
+
+                  this.ttt = true;
+
                 }
               );
             }
@@ -221,12 +230,12 @@ export class AddComponent implements OnInit {
                 };
                 switch (cf.type) {
                   case (this.DB_NUMBER_BOX) : {
-                    dxCustomField.editorType = this.DX_NUMBER_BOX ;
+                    dxCustomField.editorType = this.DX_NUMBER_BOX;
                     dxCustomField.colspan = 2;
                     break;
                   }
                   case (this.DB_CHECK_BOX) : {
-                    dxCustomField.editorType = this.DX_CHECK_BOX ;
+                    dxCustomField.editorType = this.DX_CHECK_BOX;
                     dxCustomField.colspan = 1;
                     break;
                   }
@@ -483,5 +492,27 @@ export class AddComponent implements OnInit {
       }
     };
 
+  }
+
+  /*-------------------------------------------*/
+
+  ngAfterViewInit() {
+
+ /*   console.log(this.data.services);
+    console.log(this.data.products);
+    console.log(this.data.semence);
+
+    if (this.ttt) {
+      this.ttt = false;
+      if (this.data.services.length === 0) {
+        this.choixServices.visible = false;
+      }
+      if (this.data.products.length === 0) {
+        this.choixProducts.visible = false;
+      }
+      if (this.data.semence.length === 0) {
+        this.choixSemence.visible = false;
+      }
+    }*/
   }
 }

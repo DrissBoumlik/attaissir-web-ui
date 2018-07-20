@@ -118,9 +118,9 @@
 
           </dxi-item>
           <!--*********************************************************************************-->
-          <dxi-item itemType="group"   [colCount]="5" caption="Choix de la semence">
+          <dxi-item itemType="group"   [colCount]="5" caption="Choix de la semence" #choixSemence>
 
-            <dxi-item dataField="semance_famille" editorType="dxSelectBox" [editorOptions]="semenceCategoryOptions">
+            <dxi-item dataField="semance_famille" editorType="dxSelectBox" [editorOptions]="semenceCategoryOptions" >
               <dxo-label
                 text="Famille">
               </dxo-label>
@@ -191,8 +191,7 @@
 
           </dxi-item>
           <!--*********************************************************************************-->
-          <dxi-item itemType="group"   [colCount]="5" caption="Choix des produits">
-
+          <dxi-item itemType="group" [colCount]="5" caption="Choix des produits" #choixProducts>
 
             <dxi-item dataField="prod_famille" editorType="dxSelectBox" [editorOptions]="productsCategoryOptions">
               <dxo-label
@@ -267,7 +266,7 @@
 
           </dxi-item>
           <!--*********************************************************************************-->
-          <dxi-item itemType="group"  [colCount]="5" caption="Choix des préstations de service">
+          <dxi-item itemType="group"  [colCount]="5" caption="Choix des préstations de service" #choixServices>
             <dx-list
               [items]="prestations"
               [showSelectionControls]="true"

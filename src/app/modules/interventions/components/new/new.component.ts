@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {CardsService} from '../../../contracts/services/cards.service';
 import {InterventionService} from '../../services/intervention.service';
 import notify from 'devextreme/ui/notify';
+import {CardsService} from '../../../cards/services/cards.service';
 
 @Component({
   selector: 'app-new',
