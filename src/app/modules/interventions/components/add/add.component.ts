@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ArticlesService} from '../../../articles/services/articles.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ArticlesService } from '../../../articles/services/articles.service';
 import 'rxjs/add/operator/toPromise';
-import {InterventionService} from '../../services/intervention.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {WarehouseService} from '../../../distribution-center/services/warehouse.service';
-import {DxDataGridComponent} from 'devextreme-angular';
-import {NewComponent} from '../new/new.component';
+import { InterventionService } from '../../services/intervention.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { WarehouseService } from '../../../distribution-center/services/warehouse.service';
+import { DxDataGridComponent } from 'devextreme-angular';
+import { NewComponent } from '../new/new.component';
 
 @Component({
   selector: 'app-add',
@@ -67,11 +67,11 @@ export class AddComponent implements OnInit {
   loadingVisible = false;
   request_type_id: number;
   custom_fields = [
-    {ID: 1, type: 'text', label: 'custom label1', name: 'custom_field_1', required: false},
-    {ID: 2, type: 'number', label: 'custom label2', name: 'custom_field_2', required: true},
-    {ID: 3, type: 'checkbox', label: 'custom label3', name: 'custom_field_3', required: true},
-    {ID: 4, type: 'text', label: 'custom label4', name: 'custom_field_4', required: false},
-    {ID: 5, type: 'checkbox', label: 'custom label5', name: 'custom_field_5', required: true}
+    { ID: 1, type: 'text', label: 'custom label1', name: 'custom_field_1', required: false },
+    { ID: 2, type: 'number', label: 'custom label2', name: 'custom_field_2', required: true },
+    { ID: 3, type: 'checkbox', label: 'custom label3', name: 'custom_field_3', required: true },
+    { ID: 4, type: 'text', label: 'custom label4', name: 'custom_field_4', required: false },
+    { ID: 5, type: 'checkbox', label: 'custom label5', name: 'custom_field_5', required: true }
   ];
   DX_custom_fields = [];
   /*-----------------CONSTANTS--------------------------*/
@@ -88,11 +88,11 @@ export class AddComponent implements OnInit {
   /*-------------------------------------------*/
 
   constructor(public articleService: ArticlesService,
-              public interventionService: InterventionService,
-              private wareHouseService: WarehouseService,
-              private route: ActivatedRoute,
-              private thirdsService: ThirdsService,
-              private router: Router) {
+    public interventionService: InterventionService,
+    private wareHouseService: WarehouseService,
+    private route: ActivatedRoute,
+    private thirdsService: ThirdsService,
+    private router: Router) {
 
 
   }
@@ -220,13 +220,13 @@ export class AddComponent implements OnInit {
                   colspan: 3,
                 };
                 switch (cf.type) {
-                  case (this.DB_NUMBER_BOX) : {
-                    dxCustomField.editorType = this.DX_NUMBER_BOX ;
+                  case (this.DB_NUMBER_BOX): {
+                    dxCustomField.editorType = this.DX_NUMBER_BOX;
                     dxCustomField.colspan = 2;
                     break;
                   }
-                  case (this.DB_CHECK_BOX) : {
-                    dxCustomField.editorType = this.DX_CHECK_BOX ;
+                  case (this.DB_CHECK_BOX): {
+                    dxCustomField.editorType = this.DX_CHECK_BOX;
                     dxCustomField.colspan = 1;
                     break;
                   }
@@ -409,7 +409,7 @@ export class AddComponent implements OnInit {
         });
         this.selectedItems.forEach(
           st => {
-            data.service_articles.push({article_id: st.id, quantity: 1});
+            data.service_articles.push({ article_id: st.id, quantity: 1 });
           }
         );
         if (this.interventions.isSaveAsModel

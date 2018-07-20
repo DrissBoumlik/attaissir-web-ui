@@ -8,8 +8,8 @@ import { Contract } from '../../../../shared/classes/contract';
 import { ContractsService } from '../../services/contracts.service';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { Helper } from '../../../../shared/classes/helper';
-import {ParcelsService} from '../../../parcels/services/parcels.service';
-import {LogicalParcel} from '../../../../shared/classes/logical-parcel';
+import { ParcelsService } from '../../../parcels/services/parcels.service';
+import { LogicalParcel } from '../../../../shared/classes/logical-parcel';
 declare const require: any;
 const $ = require('jquery');
 
