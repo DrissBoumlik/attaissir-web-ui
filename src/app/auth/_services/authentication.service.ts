@@ -3,7 +3,6 @@ import { Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthenticationService {
@@ -14,8 +13,7 @@ export class AuthenticationService {
   };
 
 
-  constructor(private http: HttpClient/*,
-              public jwtHelper: JwtHelperService*/) {
+  constructor(private http: HttpClient) {
   }
 
   login(email: string, password: string) {
@@ -29,13 +27,14 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
   }
 
   getToken = () => {
-    return JSON.parse(localStorage.getItem('currentUser')).data.token;
+    return localStorage.getItem('token');
   }
 
   getTanent = () => {
-    return JSON.parse(localStorage.getItem('tenantId'));
+    return localStorage.getItem('tenantId');
   }
 }

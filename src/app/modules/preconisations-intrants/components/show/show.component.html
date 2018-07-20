@@ -69,6 +69,8 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
+                        {{preconisation.cda}}
+
                       </p>
                     </div>
                   </div>
@@ -82,6 +84,7 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
+                        {{preconisation.zone}}
 
                       </p>
 
@@ -96,6 +99,8 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
+                        {{preconisation.parcel}}
+
                       </p>
 
                     </div>
@@ -110,6 +115,8 @@
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
 
+                        {{preconisation.third_party_name}}
+
                       </p>
 
                     </div>
@@ -123,6 +130,9 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                        {{preconisation.third_party_cin}}
+
                       </p>
                     </div>
                   </div>
@@ -136,6 +146,9 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                        {{preconisation.date}}
+
                       </p>
                     </div>
                   </div>
@@ -219,9 +232,9 @@
                 <dxo-paging [pageSize]="10"></dxo-paging>
                 <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-                <dxi-column dataField="article.id" [width]="100" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
-                <dxi-column dataField="article.article_category_id" caption="Famille"></dxi-column>
-                <dxi-column dataField="article." caption="Sous Famille"></dxi-column>
+                <dxi-column dataField="article.id" [width]="100" [visible]="false" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
+                <dxi-column dataField="article.category.article_category.name" caption="Famille"></dxi-column>
+                <dxi-column dataField="article.category.name" caption="Sous Famille"></dxi-column>
                 <dxi-column dataField="article.name" caption="Article"></dxi-column>
                 <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
 

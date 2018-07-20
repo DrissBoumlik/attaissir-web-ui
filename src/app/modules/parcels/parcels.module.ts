@@ -5,7 +5,7 @@ import { ParcelsRoutingModule } from './parcels-routing.module';
 import { ListComponent } from './components/list/list.component';
 import { SharedModule } from '../../shared/shared.module';
 import { AddComponent } from './components/add/add.component';
-import {InterventionsRoutingModule} from '../interventions/interventions-routing.module';
+import { InterventionsRoutingModule } from '../interventions/interventions-routing.module';
 import {
   DxButtonModule,
   DxCheckBoxModule,

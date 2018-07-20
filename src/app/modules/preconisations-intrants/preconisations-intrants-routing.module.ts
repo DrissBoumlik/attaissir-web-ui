@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './components/list/list.component';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
-import {ShowComponent} from './components/show/show.component';
+import { ShowComponent } from './components/show/show.component';
 
 const routes: Routes = [
   {

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ListComponent} from './components/list/list.component';
-import {PreconisationsIntrantsRoutingModule} from './preconisations-intrants-routing.module';
+import { ListComponent } from './components/list/list.component';
+import { PreconisationsIntrantsRoutingModule } from './preconisations-intrants-routing.module';
 import {
   DxButtonModule,
   DxDataGridModule,

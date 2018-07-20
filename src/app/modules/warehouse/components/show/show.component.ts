@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConseilleAgricoleService } from '../../../conseille-agricole/service/conseille-agricole.service';
 import { WarehoseService } from '../../service/warehose.service';
 
 @Component({

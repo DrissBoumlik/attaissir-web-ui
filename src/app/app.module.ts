@@ -29,10 +29,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsModule } from './modules/contracts/contracts.module';
 import { ThirdsModule } from './modules/thirds/thirds.module';
 import { ArticlesModule } from './modules/articles/articles.module';
-import { ConseilleAgricoleModule } from './modules/conseille-agricole/conseille-agricole.module';
 import { CommandeModule } from './modules/commande/commande.module';
 import { MouvementsModule } from './modules/mouvements/mouvements.module';
 import {InterventionsModule} from './modules/interventions/interventions.module';
+import { InterventionsModule } from './modules/interventions/interventions.module';
 import { DemandesModule } from './modules/demandes/demandes.module';
 
 @NgModule({
@@ -59,12 +59,11 @@ import { DemandesModule } from './modules/demandes/demandes.module';
     DxSelectBoxModule,
     DxSwitchModule,
     DxRadioGroupModule,
-    ToastrModule.forRoot(),
     DxPivotGridModule,
 
+    ToastrModule.forRoot(),
     NgbModule.forRoot(),
     InterventionsModule,
-    ConseilleAgricoleModule,
     AuthModule,
     ThirdsModule,
     ContractsModule,

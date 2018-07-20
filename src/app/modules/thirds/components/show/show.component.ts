@@ -4,7 +4,7 @@ import { ThirdsService } from '../../services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
 import { ContractsService } from '../../../contracts/services/contracts.service';
-import { CardsService } from '../../../contracts/services/cards.service';
+import { CardsService } from '../../../cards/services/cards.service';
 import { Contract } from '../../../../shared/classes/contract';
 import { Third } from '../../../../shared/classes/third';
 import { Helper } from '../../../../shared/classes/helper';

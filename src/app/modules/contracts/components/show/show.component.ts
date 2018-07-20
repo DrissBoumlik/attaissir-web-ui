@@ -7,7 +7,7 @@ import { Third } from '../../../../shared/classes/third';
 import { Contract } from '../../../../shared/classes/contract';
 import { ContractsService } from '../../services/contracts.service';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { CardsService } from '../../services/cards.service';
+import { CardsService } from '../../../cards/services/cards.service';
 import { Helper } from '../../../../shared/classes/helper';
 declare const require: any;
 const $ = require('jquery');
@@ -29,8 +29,7 @@ export class ShowComponent implements OnInit {
   avenants: any;
   avenant: any;
   parcels: any;
-  canValidateContract: boolean;
-  hasRightAttatchment: boolean;
+  selectedItems: any[];
   isContractEncours: boolean;
   helper: any;
 
@@ -58,6 +57,7 @@ export class ShowComponent implements OnInit {
             this.parcels = res.data.parcels;
             this.parcels = this.parcels.map((data) => {
               return {
+                id: data.soil.id,
                 perimeter: ((data.soil !== null) && (data.soil.perimeter !== null))
                   ? data.soil.perimeter : 'Pas de données',
                 region: ((data.soil !== null) && (data.soil.region !== null))
@@ -162,6 +162,9 @@ export class ShowComponent implements OnInit {
     );
   }
 
+  createLogicalParcel = (e) => {
+    console.log(this.selectedItems);
+  }
 
   downloadContract() {
     this.contractService.printContract(this.contract.id).subscribe(data => {
