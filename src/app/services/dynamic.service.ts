@@ -42,9 +42,6 @@ export class DynamicService {
   }
 
 
-
-
-
   /**
    * Get a Third parties
    * @param cin

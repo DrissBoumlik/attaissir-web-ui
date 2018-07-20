@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../../environments/environment';
-import { Warehouse } from '../../../shared/classes/warehouse';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {environment} from '../../../../environments/environment';
+import {Warehouse} from '../../../shared/classes/warehouse';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +45,14 @@ export class WarehouseService {
 
   addIncident(warehouse: Warehouse): Observable<any> {
     return this.http.post(`${environment.apiUrl}/${this.routeName}`, warehouse, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getWarehousesByZone(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/${this.routeName}/zone/${id}`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

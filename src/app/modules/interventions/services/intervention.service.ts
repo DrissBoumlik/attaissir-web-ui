@@ -15,7 +15,11 @@ export class InterventionService {
   }
 
   getInterventionById(id: number) {
-    return this.http.get(`${environment.apiUrl}/interventionrequests/${id}`);
+    return this.http.get(`${environment.apiUrl}/interventionrequests/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   getFamiliesAndSubFamilies(): Observable<any> {
@@ -27,5 +31,38 @@ export class InterventionService {
     });
   }
 
+  getDataBySubFamily(sub_family_id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/interventiontypesubcategories/${sub_family_id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getLogicalParcelsByUserId(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/logicalparcels/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  addInterventionRequest(data: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/interventionrequests/`, JSON.stringify(data), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getInterventionCustomFields(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/interventionrequesttypes/customfields/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
 
 }
+

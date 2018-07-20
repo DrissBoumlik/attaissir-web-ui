@@ -1,148 +1,150 @@
-<!--header-->
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
-      <a class="siam-header-back-btn" href="/index">
-        <i class="fa fa-angle-left"></i> Tableau de bord
-      </a>
+      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Modifier intervention</h2>
     </div>
   </div>
 </div>
-<!--end-header-->
-
-<!--content-->
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
-      <form>
+      <form style="height: auto">
         <dx-form id="form"
                  [formData]="interventions"
                  [readOnly]="false"
                  [showColonAfterLabel]="true"
                  [showValidationSummary]="true"
-                 labelLocation="top">
+                 labelLocation="top"
+                 #Form>
+          <!--*********************************************************************************-->
+          <dxi-item itemType="group" caption="Informations Générales" [colCount]="2">
 
-          <dxi-item itemType="group"
-                    caption="Informations Générales"
-                    [colCount]="2" i18n-caption>
+            <dxi-item itemType="group" [colCount]="1">
 
+              <dxi-item dataField="third_party_cin" [disabled]="true" editorType="dxTextBox">
+                <dxo-label
+                  text="CIN">
+                </dxo-label>
+              </dxi-item>
 
-            <dxi-item dataField="cin" editorType="dxTextBox" >
-              <dxo-label
-                text="CIN">
-              </dxo-label>
+              <dxi-item dataField="third_party_name" [disabled]="true" editorType="dxTextBox">
+                <dxo-label
+                  text="Nom complet">
+                </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="third.tel1" editorType="dxTextBox">
+                <dxo-label
+                  text="N Téléphone">
+                </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="parcel" editorType="dxSelectBox" [editorOptions]="parcelOptions">
+                <dxo-label
+                  text="Parcelle">
+                </dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  message="sélectionnez une parcelle logique avant de continuer.">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="contracted_surface" editorType="dxNumberBox">
+                <dxo-label
+                  text="Superficie contractée">
+                </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="actual_surface" editorType="dxNumberBox">
+                <dxo-label
+                  text="Superficie réelle">
+                </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="remaining_surface" editorType="dxNumberBox">
+                <dxo-label
+                  text="Superficie restante">
+                </dxo-label>
+              </dxi-item>
+
             </dxi-item>
 
 
-            <dxi-item dataField="full_name" editorType="dxTextBox" >
-              <dxo-label
-                text="Nom complet">
-              </dxo-label>
-            </dxi-item>
+            <dxi-item itemType="group" [colCount]="1">
 
+              <dxi-item dataField="date" [visible]="true" editorType="dxDateBox"
+                        [editorOptions]="{value: today, min: today}">
+                <dxo-label
+                  text="Date prévue">
+                </dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  message="sélectionnez la date d'intervention prévue avant de continuer.">
+                </dxi-validation-rule>
+              </dxi-item>
+              <dxi-item dataField="surface_to_work" editorType="dxNumberBox" [editorOptions]="stwOptions">
+                <dxo-label
+                  text="Superficie a travailler">
+                </dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  message="Entrez un numéro valide avant de continuer.">
+                </dxi-validation-rule>
+              </dxi-item>
 
-            <dxi-item dataField="tel1" editorType="dxTextBox" >
-              <dxo-label
-                text="N Téléphone">
-              </dxo-label>
-            </dxi-item>
+              <dxi-item dataField="proposition" editorType="dxSelectBox">
+                <dxo-label
+                  text="Proposition">
+                </dxo-label>
+              </dxi-item>
 
+              <dxi-item dataField="warehouse" editorType="dxSelectBox" [editorOptions]="cdOptions">
+                <dxo-label
+                  text="Centre distribution">
+                </dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  message="sélectionnez un centre de distribution avant de continuer.">
+                </dxi-validation-rule>
+              </dxi-item>
 
-            <dxi-item dataField="commande" editorType="dxSelectBox" [editorOptions]="commandeOptions">
-              <dxo-label
-                text="Parcelle" i18n-text>
-              </dxo-label>
-            </dxi-item>
+              <dxi-item dataField="description" editorType="dxTextArea">
+                <dxo-label
+                  text="Description">
+                </dxo-label>
 
-            <dxi-item dataField="cin" editorType="dxNumberBox">
-              <dxo-label
-                text="Superficie contractée">
-              </dxo-label>
-            </dxi-item>
+              </dxi-item>
 
-
-            <dxi-item dataField="cin" editorType="dxNumberBox">
-              <dxo-label
-                text="Superficie réelle">
-              </dxo-label>
-            </dxi-item>
-
-
-            <dxi-item dataField="cin" editorType="dxNumberBox">
-              <dxo-label
-                text="Superficie restante">
-              </dxo-label>
-            </dxi-item>
-
-
-            <dxi-item>
-              <dxo-label
-                text="Date prévue">
-              </dxo-label>
-              <dx-date-box style="width: 100%"
-                           type="date">
-              </dx-date-box>
-            </dxi-item>
-
-
-            <dxi-item dataField="cin" editorType="dxNumberBox">
-              <dxo-label
-                text="Superficie a travailler">
-              </dxo-label>
-            </dxi-item>
-
-
-            <dxi-item dataField="commande" editorType="dxSelectBox" [editorOptions]="commandeOptions">
-              <dxo-label
-                text="Proposition" i18n-text>
-              </dxo-label>
-            </dxi-item>
-
-
-            <dxi-item dataField="commande" editorType="dxSelectBox" [editorOptions]="commandeOptions">
-              <dxo-label
-                text="Centre distribution" i18n-text>
-              </dxo-label>
-            </dxi-item>
-
-
-            <dxi-item dataField="description" editorType="dxTextArea">
-              <dxo-label
-                text="Description">
-              </dxo-label>
             </dxi-item>
 
           </dxi-item>
+          <!--*********************************************************************************-->
+          <dxi-item itemType="group" [colCount]="5" caption="Choix de la semence">
 
-
-          <dxi-item itemType="group" [colCount]="5" caption="Choix de la semance" i18n-caption>
-
-
-            <dxi-item dataField="semance_famille" editorType="dxSelectBox" [editorOptions]="familleOptions">
+            <dxi-item dataField="semance_famille" editorType="dxSelectBox" [editorOptions]="semenceCategoryOptions">
               <dxo-label
-                text="Famille" i18n-text>
+                text="Famille">
               </dxo-label>
-              <dxi-validation-rule type="required" message="Famille est obligatoire"
-                                   i18n-message></dxi-validation-rule>
+
             </dxi-item>
 
-            <dxi-item dataField="semance_sub_famille" editorType="dxSelectBox" [editorOptions]="subFamilleOptions">
+            <dxi-item dataField="semance_sub_famille" editorType="dxSelectBox"
+                      [editorOptions]="semenceSubCategoryOptions">
               <dxo-label
-                text="Sous Famille" i18n-text>
+                text="Sous Famille">
               </dxo-label>
-              <dxi-validation-rule type="required" message="Sous Famille est obligatoire"
-                                   i18n-message></dxi-validation-rule>
+
             </dxi-item>
 
-            <dxi-item dataField="semance_article" editorType="dxSelectBox" [editorOptions]="articleOptions">
+            <dxi-item dataField="semance_article" editorType="dxSelectBox" [editorOptions]="semenceArticleOptions">
               <dxo-label
-                text="Article" i18n-text>
+                text="Article">
               </dxo-label>
-              <dxi-validation-rule type="required" message="Article est obligatoire"
-                                   i18n-message></dxi-validation-rule>
+
             </dxi-item>
-            <dxi-item dataField="semance_quantity" editorType="dxNumberBox">
+
+            <dxi-item dataField="semance_quantity" editorType="dxNumberBox" [editorOptions]="semenceQuantityOptions">
               <dxo-label
                 text="Quantity">
               </dxo-label>
@@ -155,20 +157,21 @@
             </dxi-item>
 
             <dxi-item [colSpan]="5">
-              <dx-data-grid id="CampaignGridContainer1"
-                            [allowColumnReordering]="true"
-                            [dataSource]="semances"
-                            [showColumnLines]="true"
-                            [showRowLines]="true"
-                            [showBorders]="true"
-                            [rowAlternationEnabled]="true"
-                            style="padding-top: 2vh"
-                            [columnAutoWidth]="true"
-                            [noDataText]="'Aucan article n\'est ajouter!'">
-                <dxi-column dataField="famille_id" caption="Famille"></dxi-column>
-                <dxi-column dataField="sub_famille_id" caption="Sous famille"></dxi-column>
-                <dxi-column dataField="article_id" caption="Article"></dxi-column>
-                <dxi-column dataField="quantity1" caption="Quantité globale"></dxi-column>
+              <dx-data-grid
+                #semenceGrid
+                id="semenceGrid"
+                [allowColumnReordering]="true"
+                [dataSource]="semences"
+                [showColumnLines]="true"
+                [showRowLines]="true"
+                [showBorders]="true"
+                [rowAlternationEnabled]="true"
+                [columnAutoWidth]="true"
+                [noDataText]="'Aucan article n\'est ajoute!'">
+                <dxi-column dataField="category.category_name" caption="Famille"></dxi-column>
+                <dxi-column dataField="sub_category.sub_category_name" caption="Sous famille"></dxi-column>
+                <dxi-column dataField="article.name" caption="Article"></dxi-column>
+                <dxi-column dataField="quantity" caption="Quantité"></dxi-column>
                 <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                 <dxo-remote-operations
                   [sorting]="true"
@@ -189,34 +192,31 @@
             </dxi-item>
 
           </dxi-item>
+          <!--*********************************************************************************-->
+          <dxi-item itemType="group" [colCount]="5" caption="Choix des produits">
 
 
-          <dxi-item itemType="group" [colCount]="5" caption="Choix des produits" i18n-caption>
-
-
-            <dxi-item dataField="prod_famille" editorType="dxSelectBox" [editorOptions]="familleOptions">
+            <dxi-item dataField="prod_famille" editorType="dxSelectBox" [editorOptions]="productsCategoryOptions">
               <dxo-label
-                text="Famille" i18n-text>
+                text="Famille">
               </dxo-label>
-              <dxi-validation-rule type="required" message="Famille est obligatoire"
-                                   i18n-message></dxi-validation-rule>
+
             </dxi-item>
-            <dxi-item dataField="prod_sub_famille" editorType="dxSelectBox" [editorOptions]="subFamilleOptions">
+            <dxi-item dataField="prod_sub_famille" editorType="dxSelectBox"
+                      [editorOptions]="productsSubCategoryOptions">
               <dxo-label
-                text="Sous Famille" i18n-text>
+                text="Sous Famille">
               </dxo-label>
-              <dxi-validation-rule type="required" message="Sous Famille est obligatoire"
-                                   i18n-message></dxi-validation-rule>
+
             </dxi-item>
 
-            <dxi-item dataField="prod_article" editorType="dxSelectBox" [editorOptions]="articleOptions">
+            <dxi-item dataField="prod_article" editorType="dxSelectBox" [editorOptions]="productsArticleOptions">
               <dxo-label
-                text="Article" i18n-text>
+                text="Article">
               </dxo-label>
-              <dxi-validation-rule type="required" message="Article est obligatoire"
-                                   i18n-message></dxi-validation-rule>
+
             </dxi-item>
-            <dxi-item dataField="prod_quantity" editorType="dxNumberBox">
+            <dxi-item dataField="prod_quantity" editorType="dxNumberBox" [editorOptions]="productsQuantityOptions">
               <dxo-label
                 text="Quantity">
               </dxo-label>
@@ -231,20 +231,22 @@
 
             <dxi-item [colSpan]="5">
 
-              <dx-data-grid id="CampaignGridContainer"
-                            [allowColumnReordering]="true"
-                            [dataSource]="products"
-                            [showColumnLines]="true"
-                            [showRowLines]="true"
-                            [showBorders]="true"
-                            [rowAlternationEnabled]="true"
-                            style="padding-top: 2vh"
-                            [columnAutoWidth]="true"
-                            [noDataText]="'Aucan article n\'est ajouter!'">
-                <dxi-column dataField="famille_id" caption="Famille"></dxi-column>
-                <dxi-column dataField="sub_famille_id" caption="Sous famille"></dxi-column>
-                <dxi-column dataField="article_id" caption="Article"></dxi-column>
-                <dxi-column dataField="quantity1" caption="Quantité globale"></dxi-column>
+              <dx-data-grid
+                #productsGrid
+                id="productsGrid"
+                [allowColumnReordering]="true"
+                [dataSource]="products"
+                [showColumnLines]="true"
+                [showRowLines]="true"
+                [showBorders]="true"
+                [rowAlternationEnabled]="true"
+                style="padding-top: 2vh"
+                [columnAutoWidth]="true"
+                [noDataText]="'Aucan article n\'est ajoute'">
+                <dxi-column dataField="category.category_name" caption="Famille"></dxi-column>
+                <dxi-column dataField="sub_category.sub_category_name" caption="Sous famille"></dxi-column>
+                <dxi-column dataField="article.name" caption="Article"></dxi-column>
+                <dxi-column dataField="quantity" caption="Quantité"></dxi-column>
                 <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                 <dxo-remote-operations
                   [sorting]="true"
@@ -266,38 +268,95 @@
 
 
           </dxi-item>
+          <!--*********************************************************************************-->
+          <dxi-item itemType="group" [colCount]="5" caption="Choix des préstations de service">
+            <dx-list
+              [items]="prestations"
+              [showSelectionControls]="true"
+              selectionMode="multiple"
+              noDataText="Ce type d'intervention ne possède pas de préstations de service"
+              [(selectedItems)]="selectedItems">
+            </dx-list>
+          </dxi-item>
+          <!--*********************************************************************************-->
+          <dxi-item *ngIf="custom_fields.length" itemType="group" caption="Champs personnalisés" [colCount]="6">
 
-
-          <dxi-item itemType="group" caption="Choix des préstations de service">
-
-
-            <div *ngFor="let option of prestations_service">
-
-              <dx-check-box
-                [value]="option.value"
-                [width]="200"
-                [text]="option.name"
-              ></dx-check-box>
-
-            </div>
+            <dx-form id="form2"
+                     [formData]="custom_fields_form_data"
+                     [readOnly]="false"
+                     [showColonAfterLabel]="true"
+                     [showValidationSummary]="true"
+                     labelLocation="top"
+                     #Form2>
+              <dxi-item itemType="group" [colCount]="6">
+                <dxi-item *ngFor="let field of DX_custom_fields"
+                          [editorType]="field.editorType"
+                          [dataField]="field.dataField"
+                          itemType="simple"
+                          [colSpan]="field.colspan">
+                  <dxo-label text="{{ field.label }}"></dxo-label>
+                  <dxi-validation-rule
+                    message="Ce champs est obligatoire"
+                    type="required" *ngIf="field.required"
+                  >
+                  </dxi-validation-rule>
+                </dxi-item>
+              </dxi-item>
+            </dx-form>
 
           </dxi-item>
+          <!--*********************************************************************************-->
+          <dxi-item itemType="group" caption="Enregistrer comme modèle" [colCount]="6">
+            <dxi-item itemType="group" [colSpan]="4" [colCount]="4">
+              <dxi-item [colSpan]="1" dataField="isSaveAsModel" editorType="dxSwitch"
+                        [editorOptions]="saveAsModelOptions">
 
+                <dxo-label
+                  text="Enregistrer comme modèle">
+                </dxo-label>
+              </dxi-item>
+              <dxi-item>
+                <div *dxTemplate>
+                  <span *ngIf="saveAsModel" class="label-t18">Nom de modèle:</span>
+                  <dx-text-box *ngIf="saveAsModel" placeholder="Entrer un nom de modèle"
+                               [(value)]="interventions.model_name"></dx-text-box>
+                </div>
+              </dxi-item>
 
-          <div class="dx-fieldset">
-            <div class="dx-field">
-              <div class="dx-field-value">
-                <dxi-item itemType="button" [buttonOptions]="buttonsave"></dxi-item>
-                <dxi-item itemType="button" [buttonOptions]="buttonValider"></dxi-item>
-                <dxi-item itemType="button" [buttonOptions]="buttoncancel"></dxi-item>&nbsp;
-              </div>
-            </div>
-          </div>
+              <dxi-item>
+                <div *dxTemplate>
+                  <span *ngIf="saveAsModel" class="label-t18">Visible à tous:</span><br>
+                  <dx-switch *ngIf="saveAsModel" onText="Oui" offText="Non"
+                             [(value)]="interventions.model_visibility"></dx-switch>
+                </div>
+              </dxi-item>
 
+            </dxi-item>
 
+          </dxi-item>
+          <!--*********************************************************************************-->
+          <dxi-item itemType="group" [colCount]="5">
+            <dxi-item itemType="group" [colSpan]="3">
+              <dxi-item dataField="model_name" [visible]="false" editorType="dxTextBox">
+              </dxi-item>
+            </dxi-item>
+            <dxi-item itemType="button" [buttonOptions]="buttoncancel"></dxi-item>&nbsp;
+            <dxi-item itemType="button" [buttonOptions]="buttonsave"></dxi-item>
+          </dxi-item>
+          <!--*********************************************************************************-->
         </dx-form>
       </form>
     </div>
   </div>
 </div>
-<!--end content-->
+<!--*********************************************************************************-->
+<dx-load-panel
+  #loadPanel
+  shadingColor="rgba(0,0,0,0.4)"
+  [position]="{my: 'center'}"
+  [(visible)]="loadingVisible"
+  [showIndicator]="true"
+  [showPane]="true"
+  [shading]="true"
+  [closeOnOutsideClick]="false">
+</dx-load-panel>

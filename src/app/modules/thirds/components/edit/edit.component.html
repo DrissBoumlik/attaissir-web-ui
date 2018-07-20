@@ -12,11 +12,11 @@
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
-      <app-tiers-form  [isEdit]="true" [id]="id" [readOnly]="false" [tier]="tier" [thirdTypeName]="thirdTypeName" (submit)="onFormSubmit($event)"></app-tiers-form>
-      <app-warehouse-form [isEdit]="isEditWarehouse" [readOnly]="false" [warehouse]="warehouse"  (submit)="onFormSubmitWarehouse($event)" *ngIf="tier.morale"></app-warehouse-form>
+      <app-tiers-form  [isEdit]="true" [isAggregated]="isAggregated" [id]="id" [readOnly]="false" [tier]="tier" [thirdTypeName]="thirdTypeName" (submit)="onFormSubmit($event)"></app-tiers-form>
+      <app-warehouse-form [isEdit]="isEditWarehouse" [readOnly]="false" [warehouse]="warehouse"  (submit)="onFormSubmitWarehouse($event)" *ngIf="!isAggregated"></app-warehouse-form>
 
       <hr>
-      <dx-data-grid
+      <dx-data-grid *ngIf="!isAggregated"
         id="gridContainer"
         [dataSource]="warehouses"
         showBorders="true"
