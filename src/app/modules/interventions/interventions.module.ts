@@ -14,6 +14,7 @@ import {
 import { AddComponent } from './components/add/add.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MouvementsRoutingModule } from '../mouvements/mouvements-routing.module';
+import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,6 @@ import { MouvementsRoutingModule } from '../mouvements/mouvements-routing.module
     DxLoadPanelModule,
     DxCheckBoxModule
   ],
-  declarations: [NewComponent, AddComponent]
+  declarations: [NewComponent, AddComponent, EditComponent]
 })
 export class InterventionsModule { }

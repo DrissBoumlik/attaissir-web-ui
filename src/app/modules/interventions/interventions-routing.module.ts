@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NewComponent } from './components/new/new.component';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { AddComponent } from './components/add/add.component';
+import { EditComponent } from './components/edit/edit.component';
 
 const routes: Routes = [{
   path: 'interventions',
@@ -10,6 +11,7 @@ const routes: Routes = [{
   children: [
     { path: 'selectionner', component: NewComponent },
     { path: 'ajouter', component: AddComponent },
+    { path: 'modifier/:id', component: EditComponent },
   ]
 }];
 

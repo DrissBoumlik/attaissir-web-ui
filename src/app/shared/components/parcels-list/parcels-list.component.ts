@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Helper} from '../../classes/helper';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Helper } from '../../classes/helper';
 
 @Component({
   selector: 'app-parcels-list',
