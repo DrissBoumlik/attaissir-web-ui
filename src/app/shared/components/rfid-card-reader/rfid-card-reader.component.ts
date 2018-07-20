@@ -1,5 +1,5 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import notify from 'devextreme/ui/notify';
 
 @Component({

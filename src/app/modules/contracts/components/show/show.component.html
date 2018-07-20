@@ -399,18 +399,15 @@
                             [allowColumnResizing]="false"
                             [showBorders]="true"
                             [(selectedRowKeys)]="selectedItems"
+                            (onRowPrepared)="initSelectionRows($event)"
                             (onEditingStart)="createLogicalParcel($event.data.id)"
                             [rowAlternationEnabled]="true"
                             style="padding-top: 2vh"
                             [columnAutoWidth]="true"
+                            [masterDetail]="{ enabled: true, template: 'detail' }"
                             [noDataText]="'Le contrat ne dispose pas de parcels'">
 
-                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
-                <dxi-column dataField="id" caption="Sélectionner"></dxi-column>
-                <dxi-column dataField="perimeter" caption="Périmetre"></dxi-column>
-                <dxi-column dataField="region" caption="Région"></dxi-column>
-                <dxi-column dataField="district" caption="Arrondissement"></dxi-column>
-                <dxi-column dataField="rural_commune" caption="Commune rurale"></dxi-column>
+                <dxi-column dataField="name" caption="Nom"></dxi-column>
                 <dxi-column dataField="cda" caption="CDA" sortOrder="desc"></dxi-column>
                 <dxi-column dataField="zone" caption="Zone"></dxi-column>
                 <dxi-column dataField="sector" caption="Secteur"></dxi-column>
@@ -422,8 +419,29 @@
                 <div *dxTemplate="let data of 'cellTemplate1'">
                   {{ data.data.annuel_surface }} (ha)
                 </div>
+                <div *dxTemplate="let data of 'detail'">
+                  <dx-data-grid
+                    *ngIf="data.data.parcels"
+                    [dataSource]="data.data.parcels"
+                    [showBorders]="true"
+                    [columnAutoWidth]="true">
+                    <dxi-column dataField="cda" caption="CDA" sortOrder="desc"></dxi-column>
+                    <dxi-column dataField="zone" caption="Zone"></dxi-column>
+                    <dxi-column dataField="sector" caption="Secteur"></dxi-column>
+                    <dxi-column dataField="block" caption="Bloc"></dxi-column>
+                    <dxi-column dataField="code_ormva" caption="Code ORMVA"></dxi-column>
+                    <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
+                    <dxi-column dataField="annuel_surface" cellTemplate="cellTemplate2" caption="Superficie annuelle"></dxi-column>
+                    <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
+                    <div *dxTemplate="let data of 'cellTemplate2'">
+                      {{ data.value }} (ha)
+                    </div>
+                  </dx-data-grid>
+                </div>
+
                 <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                 <dxo-remote-operations
                   [sorting]="true"
                   [paging]="false">

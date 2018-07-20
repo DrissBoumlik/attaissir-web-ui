@@ -71,7 +71,7 @@ export class ThemeComponent implements OnInit {
       const isTimeout = diff < 0;
       this.canRefresh = diff < 600000;
 
-      if (diff < 1500000 && diff > 148800) {
+      if (diff < 1500000 && diff > 1499800) {
         this.toastr.warning('Votre session va expirer dans 5 minute!', '', {
           enableHtml: true,
           tapToDismiss: true
