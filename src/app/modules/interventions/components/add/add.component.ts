@@ -14,7 +14,7 @@ import {DxiItemComponent} from 'devextreme-angular/ui/nested/item-dxi';
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss']
 })
-export class AddComponent implements OnInit, AfterViewInit {
+export class AddComponent implements OnInit {
 
   /*-------------------------------------------*/
   buttonsave: any;
@@ -71,13 +71,7 @@ export class AddComponent implements OnInit, AfterViewInit {
   selectedItems: any[] = [];
   loadingVisible = false;
   request_type_id: number;
-  custom_fields = [
-    {ID: 1, type: 'text', label: 'custom label1', name: 'custom_field_1', required: false},
-    {ID: 2, type: 'number', label: 'custom label2', name: 'custom_field_2', required: true},
-    {ID: 3, type: 'checkbox', label: 'custom label3', name: 'custom_field_3', required: true},
-    {ID: 4, type: 'text', label: 'custom label4', name: 'custom_field_4', required: false},
-    {ID: 5, type: 'checkbox', label: 'custom label5', name: 'custom_field_5', required: true}
-  ];
+  custom_fields = [];
   DX_custom_fields = [];
   /*-----------------CONSTANTS--------------------------*/
   DB_NUMBER_BOX = 'number';
@@ -90,7 +84,6 @@ export class AddComponent implements OnInit, AfterViewInit {
   SEMENCE_TYPE = 'SEME';
   PRODUCT_TYPE = 'product';
   SERVICE_TYPE = 'service';
-  ttt = false;
 
   /*-------------------------------------------*/
 
@@ -114,6 +107,7 @@ export class AddComponent implements OnInit, AfterViewInit {
         this.interventionService.getDataBySubFamily(qps.sub_family_id)
           .subscribe(
             (res: any) => {
+              console.log(res);
               res.data.forEach(
                 (type: any) => {
                   type.categories.forEach(cat => {
@@ -153,9 +147,6 @@ export class AddComponent implements OnInit, AfterViewInit {
                         });
                     });
                   });
-
-                  this.ttt = true;
-
                 }
               );
             }
@@ -370,10 +361,12 @@ export class AddComponent implements OnInit, AfterViewInit {
       useSubmitBehavior: true,
       icon: 'fa fa-save',
       onClick: ($event) => {
-        console.log(this.interventions);
+        console.log(this.data);
         /*--------------------------------------------------------*/
-        if (((!this.productsGrid && !this.data.services.length && this.semenceGrid) && this.semenceGrid.instance.getVisibleRows().length === 0)
-          || ((!this.semenceGrid && !this.data.services.length && this.productsGrid) && this.productsGrid.instance.getVisibleRows().length === 0)
+        if (((!this.productsGrid && !this.data.services.length && this.semenceGrid) &&
+            this.semenceGrid.instance.getVisibleRows().length === 0)
+          || ((!this.semenceGrid && !this.data.services.length && this.productsGrid) &&
+            this.productsGrid.instance.getVisibleRows().length === 0)
           || ((!this.semenceGrid && !this.productsGrid && this.selectedItems) && this.selectedItems.length === 0)) {
           NewComponent.notifyMe('Aucun produit ou service n\'a été choisi.');
           return -1;
@@ -503,22 +496,4 @@ export class AddComponent implements OnInit, AfterViewInit {
 
   /*-------------------------------------------*/
 
-  ngAfterViewInit() {
- /*   console.log(this.data.services);
-    console.log(this.data.products);
-    console.log(this.data.semence);
-
-    if (this.ttt) {
-      this.ttt = false;
-      if (this.data.services.length === 0) {
-        this.choixServices.visible = false;
-      }
-      if (this.data.products.length === 0) {
-        this.choixProducts.visible = false;
-      }
-      if (this.data.semence.length === 0) {
-        this.choixSemence.visible = false;
-      }
-    }*/
-  }
 }
