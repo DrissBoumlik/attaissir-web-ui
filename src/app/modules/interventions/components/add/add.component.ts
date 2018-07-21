@@ -110,7 +110,6 @@ export class AddComponent implements OnInit, AfterViewInit {
       (qps: any) => {
         /*-------------------------------------------------------------------------*/
         this.request_type_id = qps.sub_family_id;
-        this.interventions.model_visibility = false;
         /*-------------------------------------------------------------------------*/
         this.interventionService.getDataBySubFamily(qps.sub_family_id)
           .subscribe(
@@ -192,7 +191,7 @@ export class AddComponent implements OnInit, AfterViewInit {
                       this.interventions.actual_surface = event.selectedItem.actual_surface;
                       this.interventions.remaining_surface = event.selectedItem.remaining_surface;
                       this.stwOptions = {
-                        max: this.interventions.remaining_surface,
+                        max: this.interventions.contracted_surface,
                         min: 0,
                         value: 0,
                       };
@@ -219,7 +218,8 @@ export class AddComponent implements OnInit, AfterViewInit {
         this.interventionService.getInterventionCustomFields(qps.sub_family_id)
           .subscribe(
             (res: any) => {
-              // this.custom_fields = res.data ? res.data : [];
+              console.log(res);
+              this.custom_fields = res.data ? res.data : [];
               this.custom_fields.forEach((cf: any) => {
                 const dxCustomField = {
                   dataField: cf.name,
@@ -372,9 +372,9 @@ export class AddComponent implements OnInit, AfterViewInit {
       onClick: ($event) => {
         console.log(this.interventions);
         /*--------------------------------------------------------*/
-        if (this.semenceGrid.instance.getVisibleRows().length === 0
-          && this.productsGrid.instance.getVisibleRows().length === 0
-          && this.selectedItems.length === 0) {
+        if (((!this.productsGrid && !this.data.services.length && this.semenceGrid) && this.semenceGrid.instance.getVisibleRows().length === 0)
+          || ((!this.semenceGrid && !this.data.services.length && this.productsGrid) && this.productsGrid.instance.getVisibleRows().length === 0)
+          || ((!this.semenceGrid && !this.productsGrid && this.selectedItems) && this.selectedItems.length === 0)) {
           NewComponent.notifyMe('Aucun produit ou service n\'a été choisi.');
           return -1;
         }
@@ -404,18 +404,24 @@ export class AddComponent implements OnInit, AfterViewInit {
           }
         );
 
-        this.semenceGrid.instance.getVisibleRows().forEach(row => {
-          data.semence_articles.push({
-            article_id: row.data.article.id,
-            quantity: row.data.quantity,
+        if (this.semenceGrid) {
+          this.semenceGrid.instance.getVisibleRows().forEach(row => {
+            data.semence_articles.push({
+              article_id: row.data.article.id,
+              quantity: row.data.quantity,
+            });
           });
-        });
-        this.productsGrid.instance.getVisibleRows().forEach(row => {
-          data.product_articles.push({
-            article_id: row.data.article.id,
-            quantity: row.data.quantity,
-          });
-        });
+        }
+
+       if (this.productsGrid) {
+         this.productsGrid.instance.getVisibleRows().forEach(row => {
+           data.product_articles.push({
+             article_id: row.data.article.id,
+             quantity: row.data.quantity,
+           });
+         });
+       }
+
         this.selectedItems.forEach(
           st => {
             data.service_articles.push({article_id: st.id, quantity: 1});
@@ -423,7 +429,7 @@ export class AddComponent implements OnInit, AfterViewInit {
         );
         if (this.interventions.isSaveAsModel
           && !this.interventions.model_name) {
-          NewComponent.notifyMe('veuillez entrer un nom de modèle ou bien désactiver l\'option \'Enregistrer comme modèle\'');
+          NewComponent.notifyMe('Veuillez entrer un nom de modèle ou bien désactiver l\'option \'Enregistrer comme modèle\'');
           return -1;
         }
         /*--------------------------------------------------------*/
@@ -450,11 +456,12 @@ export class AddComponent implements OnInit, AfterViewInit {
         /*--------------------------------------------------------*/
 
         this.loadingVisible = true;
+        console.log(data);
         this.interventionService.addInterventionRequest(data).subscribe(
           (value: any) => {
             this.loadingVisible = false;
             NewComponent.notifyMe('La demande d\'intervention a été traitée avec succès, Redirection.........', 'success');
-            this.router.navigate([`/mouvements/afficher/${value.data.stock_operation_id}`])
+            this.router.navigate([`/mouvements`])
               .catch(err => {
                 throw err;
               });
@@ -497,7 +504,6 @@ export class AddComponent implements OnInit, AfterViewInit {
   /*-------------------------------------------*/
 
   ngAfterViewInit() {
-
  /*   console.log(this.data.services);
     console.log(this.data.products);
     console.log(this.data.semence);
