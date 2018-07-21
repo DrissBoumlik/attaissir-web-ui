@@ -454,7 +454,7 @@ export class AddComponent implements OnInit {
           (value: any) => {
             this.loadingVisible = false;
             NewComponent.notifyMe('La demande d\'intervention a été traitée avec succès, Redirection.........', 'success');
-            this.router.navigate([`/mouvements`])
+            this.router.navigate([`/preconisations-intrants/liste`])
               .catch(err => {
                 throw err;
               });
