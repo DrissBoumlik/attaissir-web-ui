@@ -1,0 +1,124 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+      <h2></h2>
+    </div>
+  </div>
+</div>
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+
+
+      <form>
+        <dx-form id="form"
+                 [formData]="template"
+
+                 [readOnly]="false"
+                 [showColonAfterLabel]="true"
+                 [showValidationSummary]="true"
+                 labelLocation="top">
+
+          <dxi-item itemType="group" caption="Template" [colCount]="2" i18n-caption>
+
+
+            <dxi-item dataField="template" editorType="dxSelectBox" [editorOptions]="templateOptions">
+              <dxo-label
+                text="Templates" i18n-text>
+              </dxo-label>
+              <dxi-validation-rule type="required" message="Template est obligatoire"
+                                   i18n-message></dxi-validation-rule>
+            </dxi-item>
+
+
+          </dxi-item>
+
+
+          <dxi-item>
+
+          <dx-tree-list
+            id="tasks"
+            [dataSource]="_parcels"
+            keyExpr="id"
+            parentIdExpr="parent_id"
+            [expandedRowKeys]="[1, 2]"
+            [selectedRowKeys]="[1, 29, 42]"
+            [columnAutoWidth]="true"
+            [wordWrapEnabled]="true"
+          #ref1>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+            <dxi-column dataField="parent_id" caption=" "  [width]="100"  cellTemplate="employeeTemplate"></dxi-column>
+
+            <dxi-column dataField="name" [width]="300" caption="Parcelle"   cellTemplate="employeeTemplate1"></dxi-column>
+            <dxi-column dataField="id" caption="Id"  [visible]="false"></dxi-column>
+
+             <dxi-column dataField="cda" caption="CDA" ></dxi-column>
+             <dxi-column dataField="zone" caption="Zone" ></dxi-column>
+
+             <dxi-column dataField="third_party_id" caption="Code Agrégé" ></dxi-column>
+             <dxi-column dataField="cin" caption="CIN"></dxi-column>
+             <dxi-column dataField="full_name" caption="Nom complet" style="color: #6d7fcc; align-content: center; cursor: pointer" ></dxi-column>
+             <dxi-column dataField="contract_id" caption="Réf. Contrat"  width="150px"></dxi-column>
+             <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
+             <dxi-column dataField="code_ormva" caption="Code ORMVA"></dxi-column>
+             <dxi-column dataField="application_date" caption="Date d'application" [visible]="false"></dxi-column>
+             <dxi-column dataField="perimeter" caption="Périmetre" [visible]="false"></dxi-column>
+             <dxi-column dataField="block" caption="Bloc" [visible]="false"></dxi-column>
+             <dxi-column dataField="annuel_surface" caption="Superficie annuelle" [visible]="false"></dxi-column>
+             <dxi-column dataField="compaign_surface" caption="Superficie de la campagne"></dxi-column>
+             <dxi-column dataField="company_name" caption="Raison social" [visible]="false"></dxi-column>
+             <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
+             <dxi-column dataField="status" caption="Etat"  cellTemplate="statusTemplate"></dxi-column>
+             <dxi-column dataField="third_party_type" caption="Type d'agrégé"></dxi-column>
+
+
+            <div *dxTemplate="let data of 'employeeTemplate'">
+              <div *ngIf="data.value ==0">
+                <dx-check-box [value]="data.data.is_selected"  (valueChange)="selectedEventItem($event,data.data.id)"></dx-check-box> &nbsp; &nbsp; &nbsp;
+              </div>
+            </div>
+
+
+            <div *dxTemplate="let data of 'employeeTemplate1'">
+              <div >
+                <span *ngIf="data.data.parent_id !=0" > &nbsp; &nbsp; ----  {{data.data.name}} </span>
+                <span *ngIf="data.data.parent_id ==0" > {{data.data.name}} </span>
+              </div>
+            </div>
+
+            <div *dxTemplate="let data of 'statusTemplate'">
+              <p>{{helper.getStatut(data.value)}}</p>
+            </div>
+
+
+          </dx-tree-list>
+
+
+            <br/>
+            <dx-check-box
+               (valueChange)="selectedEvent($event)"
+              [value]="false"
+              [width]="200"
+              [text]="'Sélectionner tout'"
+            ></dx-check-box>
+
+            </dxi-item>
+
+
+
+          <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-value">
+                <dxi-item  itemType="button"  [buttonOptions]="buttonsave"></dxi-item>
+              </div>
+            </div>
+          </div>
+
+
+        </dx-form>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ArticlesService} from '../../../articles/services/articles.service';
-import {ArticleCategiesService} from '../../../articles/services/article-categies.service';
+import { ArticlesService } from '../../../articles/services/articles.service';
+import { ArticleCategiesService } from '../../../articles/services/article-categies.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
-import {InterventionService} from '../../services/intervention.service';
-import {ActivatedRoute} from '@angular/router';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
+import { InterventionService } from '../../services/intervention.service';
+import { ActivatedRoute } from '@angular/router';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
 
 @Component({
   selector: 'app-add',
@@ -45,18 +45,19 @@ export class AddComponent implements OnInit {
 
 
 
-  constructor( public familleService: ArticleCategiesService, public articleService: ArticlesService  , public interventionService: InterventionService,
-  private route: ActivatedRoute, private thirdsService: ThirdsService
+  constructor(public familleService: ArticleCategiesService, public articleService: ArticlesService,
+              public interventionService: InterventionService,
+    private route: ActivatedRoute, private thirdsService: ThirdsService
   ) {
 
     this.products = [];
     this.interventions = [];
     this.semances = [];
 
-    this.prestations_service =  [
-      {name: 'OptionA', value: '1', checked: true },
-      {name: 'OptionB', value: '2', checked: false },
-      {name: 'OptionC', value: '3', checked: true }
+    this.prestations_service = [
+      { name: 'OptionA', value: '1', checked: true },
+      { name: 'OptionB', value: '2', checked: false },
+      { name: 'OptionC', value: '3', checked: true }
     ];
 
   }
@@ -198,9 +199,9 @@ export class AddComponent implements OnInit {
       .toPromise()
       .then(response => {
         response.data.forEach((it) => {
-             this.prestations_service.push({id : it.id , name : it.name , value : it.id , checked : false });
+          this.prestations_service.push({ id: it.id, name: it.name, value: it.id, checked: false });
 
-           });
+        });
       })
       .catch(error => {
         throw error;
@@ -209,11 +210,11 @@ export class AddComponent implements OnInit {
     this.interventions.semance_famille = this.route.snapshot.queryParams['family_id'];
     this.interventions.prod_famille = this.route.snapshot.queryParams['family_id'];
 
-    this.third_id  = this.route.snapshot.queryParams['third_party_id'];
-    this.family_id  = this.route.snapshot.queryParams['family_id'];
-    this.sub_family_id  = this.route.snapshot.queryParams['sub_family_id'];
+    this.third_id = this.route.snapshot.queryParams['third_party_id'];
+    this.family_id = this.route.snapshot.queryParams['family_id'];
+    this.sub_family_id = this.route.snapshot.queryParams['sub_family_id'];
 
-    this.thirdsService.getThird(this.third_id ,'aggregated'  , true)
+    this.thirdsService.getThird(this.third_id, 'aggregated', true)
       .subscribe(response => {
         this.interventions = response.data;
         // console.log(response.data);

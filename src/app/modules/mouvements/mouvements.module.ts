@@ -4,7 +4,7 @@ import {
   DxButtonModule,
   DxDataGridModule,
   DxDateBoxModule,
-  DxFileUploaderModule, DxPopupModule,
+  DxFileUploaderModule, DxNumberBoxModule, DxPopupModule,
   DxSelectBoxModule, DxTemplateModule,
   DxTextAreaModule
 } from 'devextreme-angular';
@@ -14,6 +14,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AddComponent } from './components/add/add.component';
 import { ShowComponent } from './components/show/show.component';
 import { MystockComponent } from './components/mystock/mystock.component';
+import { ShowRetourComponent } from './components/show-retour/show-retour.component';
 
 @NgModule({
   imports: [
@@ -25,13 +26,13 @@ import { MystockComponent } from './components/mystock/mystock.component';
     DxDateBoxModule,
     DxDataGridModule,
     DxButtonModule,
-
+    DxNumberBoxModule,
 
     DxPopupModule,
     DxButtonModule,
     DxTemplateModule
   ],
 
-  declarations: [ListComponent, AddComponent, ShowComponent, MystockComponent]
+  declarations: [ListComponent, AddComponent, ShowComponent, MystockComponent, ShowRetourComponent]
 })
 export class MouvementsModule { }

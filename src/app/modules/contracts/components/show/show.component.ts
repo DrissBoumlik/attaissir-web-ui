@@ -9,6 +9,7 @@ import { ContractsService } from '../../services/contracts.service';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { CardsService } from '../../services/cards.service';
 import { Helper } from '../../../../shared/classes/helper';
+import {RightHolderService} from '../../services/right-holder.service';
 declare const require: any;
 const $ = require('jquery');
 
@@ -33,10 +34,13 @@ export class ShowComponent implements OnInit {
   hasRightAttatchment: boolean;
   isContractEncours: boolean;
   helper: any;
+  rightsholders: any;
+
 
   constructor(private contractService: ContractsService,
     private route: ActivatedRoute,
     private router: Router,
+    private rightHolderService: RightHolderService,
     private thirdsService: ThirdsService,
     public cardService: CardsService,
     private toaster: ToastrService) {
@@ -45,7 +49,7 @@ export class ShowComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.params.subscribe(
+      this.route.params.subscribe(
       params => {
         this.contractService.getContract(+params.id).subscribe(
           (res: any) => {
@@ -82,6 +86,13 @@ export class ShowComponent implements OnInit {
               };
             });
             this.isContractEncours = this.contract.status === 'inprogress';
+
+
+            this.rightHolderService.getAllDx(this.id).subscribe((_res: any) => {
+                this.rightsholders = _res;
+              }
+            );
+
           },
           (error) => {
             this.router.navigate(['/404']).catch(
@@ -97,6 +108,8 @@ export class ShowComponent implements OnInit {
         this.docTypes = Helper.dataSourceformatter(res);
       }
     );
+
+
 
   }
 
@@ -129,6 +142,31 @@ export class ShowComponent implements OnInit {
       });
     e.cancel = d.promise();
   }
+
+
+  onAddRightHolder(e: any) {
+    const d = new $.Deferred();
+    const newRightHolder = {
+      contract_id : this.id,
+      full_name: e.data.full_name,
+      cin: e.data.cin,
+      description: e.data.description
+    };
+    e.cancel = false;
+    this.rightHolderService.addRightHolder( newRightHolder).subscribe(
+      res => {
+        this.loadDocuments();
+        d.resolve();
+        e.cancel = true;
+        this.toaster.success('L element a été ajouté avec succès.');
+      }, error => {
+      //  d.resolve();
+        e.cancel = true;
+      d.reject('erreur');
+      });
+    e.cancel = d.promise();
+  }
+
 
   loadDocuments() {
     this.contractService.getContract(this.contract.id).subscribe(
@@ -169,8 +207,45 @@ export class ShowComponent implements OnInit {
     }, err => {
       throw err;
     });
+ }
 
+
+  onUpdateRightHolder(e: any) {
+    console.log(e);
+    const d = new $.Deferred();
+    const updateRightHolder = {
+      contract_id: this.id,
+      full_name: e.newData.full_name,
+      cin: e.newData.cin,
+      description: e.newData.description
+    };
+    e.cancel = true;
+    console.log(e);
+    this.rightHolderService.editRightHolder(e.oldData.id, updateRightHolder).subscribe(
+      res => {
+        this.loadDocuments();
+        d.resolve();
+        e.cancel = true;
+        this.toaster.success('L element a été modifié avec succès.');
+      }, error => {
+        // d.reject('erreur');
+      });
+    e.cancel = d.promise();
   }
+
+
+  onRemoveRightHolder(event): any {
+
+    this.rightHolderService.deleteRightHolder(event.data.id).subscribe(
+      (res) => {
+        this.toaster.success('l \' element est supprimé avec succès.');
+      },
+      (err) => {
+        throw err;
+      }
+    );
+  }
+
 
 }
 

@@ -8,9 +8,9 @@ describe('RfidCardReaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RfidCardReaderComponent ]
+      declarations: [RfidCardReaderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
