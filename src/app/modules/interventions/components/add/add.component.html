@@ -97,7 +97,7 @@
                 </dxo-label>
               </dxi-item>
 
-              <dxi-item dataField="warehouse" editorType="dxSelectBox" [editorOptions]="cdOptions">
+              <dxi-item dataField="warehouse" *ngIf="this.data.semence.length || this.data.products.length" editorType="dxSelectBox" [editorOptions]="cdOptions">
                 <dxo-label
                   text="Centre distribution">
                 </dxo-label>
