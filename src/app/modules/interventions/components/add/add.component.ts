@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ArticlesService } from '../../../articles/services/articles.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ArticlesService} from '../../../articles/services/articles.service';
 import 'rxjs/add/operator/toPromise';
-import { InterventionService } from '../../services/intervention.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { WarehouseService } from '../../../distribution-center/services/warehouse.service';
-import { DxDataGridComponent } from 'devextreme-angular';
-import { NewComponent } from '../new/new.component';
-import { DxiItemComponent } from 'devextreme-angular/ui/nested/item-dxi';
+import {InterventionService} from '../../services/intervention.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {WarehouseService} from '../../../distribution-center/services/warehouse.service';
+import {DxDataGridComponent} from 'devextreme-angular';
+import {NewComponent} from '../new/new.component';
+import {DxiItemComponent} from 'devextreme-angular/ui/nested/item-dxi';
 
 @Component({
   selector: 'app-add',
@@ -88,11 +88,11 @@ export class AddComponent implements OnInit {
   /*--------------------Constructor-----------------------*/
 
   constructor(public articleService: ArticlesService,
-    public interventionService: InterventionService,
-    private wareHouseService: WarehouseService,
-    private route: ActivatedRoute,
-    private thirdsService: ThirdsService,
-    private router: Router) { }
+              public interventionService: InterventionService,
+              private wareHouseService: WarehouseService,
+              private route: ActivatedRoute,
+              private thirdsService: ThirdsService,
+              private router: Router) {}
 
   /*--------------------Initialize content-----------------------*/
   ngOnInit() {
@@ -215,12 +215,12 @@ export class AddComponent implements OnInit {
                   colspan: 3,
                 };
                 switch (cf.type) {
-                  case (this.DB_NUMBER_BOX): {
+                  case (this.DB_NUMBER_BOX) : {
                     dxCustomField.editorType = this.DX_NUMBER_BOX;
                     dxCustomField.colspan = 2;
                     break;
                   }
-                  case (this.DB_CHECK_BOX): {
+                  case (this.DB_CHECK_BOX) : {
                     dxCustomField.editorType = this.DX_CHECK_BOX;
                     dxCustomField.colspan = 1;
                     break;
@@ -269,6 +269,12 @@ export class AddComponent implements OnInit {
                     searchEnabled: true,
                     onSelectionChanged: (ev) => {
                       this.SelectedSemenceArticle = ev.selectedItem;
+                      this.semenceQuantityOptions = {
+                        value:  this.interventions.surface_to_work * (+this.SelectedSemenceArticle.dose),
+                        onValueChanged: (cc) => {
+                          this.SemenceQuantity = cc.value;
+                        }
+                      };
                     }
                   };
                 }
@@ -277,20 +283,16 @@ export class AddComponent implements OnInit {
         };
       },
     };
-    this.semenceQuantityOptions = {
-      onValueChanged: (e) => {
-        this.SemenceQuantity = e.value;
-      }
-    };
+
     this.addSemance = {
       text: 'AJOUTER',
       type: 'default',
       useSubmitBehavior: false,
       onClick: () => {
-        if (!this.SelectedSemenceCategory
-          || !this.SelectedSemenceSubCategory
-          || !this.SelectedSemenceArticle
-          || !this.SemenceQuantity) {
+        if ( !this.SelectedSemenceCategory
+            || !this.SelectedSemenceSubCategory
+           || !this.SelectedSemenceArticle
+           || !this.SemenceQuantity) {
           NewComponent.notifyMe('Veuillez remplir tous les champs');
           return -1;
         }
@@ -301,7 +303,7 @@ export class AddComponent implements OnInit {
             if (row.data.article.name === this.SelectedProductsArticle.name
               && row.data.category.category_name === this.SelectedProductsCategory.category_name
               && row.data.sub_category.sub_category_name === this.SelectedProductsSubCategory.sub_category_name
-              && row.data.quantity === this.productsQuantity) {
+              && row.data.quantity === this.productsQuantity ) {
               const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
               NewComponent.notifyMe(msg);
               throw new Error(msg);
@@ -345,6 +347,12 @@ export class AddComponent implements OnInit {
                     searchEnabled: true,
                     onSelectionChanged: (ev) => {
                       this.SelectedProductsArticle = ev.selectedItem;
+                      this.productsQuantityOptions = {
+                        value:  this.interventions.surface_to_work * (+this.SelectedProductsArticle.dose),
+                        onValueChanged: (vv) => {
+                          this.productsQuantity = vv.value;
+                        }
+                      };
                     }
                   };
                 }
@@ -353,17 +361,13 @@ export class AddComponent implements OnInit {
         };
       },
     };
-    this.productsQuantityOptions = {
-      onValueChanged: (e) => {
-        this.productsQuantity = e.value;
-      }
-    };
+
     this.addProduct = {
       text: 'AJOUTER',
       type: 'default',
       useSubmitBehavior: false,
       onClick: () => {
-        if (!this.SelectedProductsCategory
+        if ( !this.SelectedProductsCategory
           || !this.SelectedProductsSubCategory
           || !this.SelectedProductsArticle
           || !this.productsQuantity) {
@@ -377,7 +381,7 @@ export class AddComponent implements OnInit {
             if (row.data.article.name === this.SelectedProductsArticle.name
               && row.data.category.category_name === this.SelectedProductsCategory.category_name
               && row.data.sub_category.sub_category_name === this.SelectedProductsSubCategory.sub_category_name
-              && row.data.quantity === this.productsQuantity) {
+              && row.data.quantity === this.productsQuantity ) {
               const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
               NewComponent.notifyMe(msg);
               throw new Error(msg);
@@ -406,7 +410,7 @@ export class AddComponent implements OnInit {
         console.log(this.data);
         /*--------------------------------------------------------*/
         if (((!this.productsGrid && !this.data.services.length && this.semenceGrid) &&
-          this.semenceGrid.instance.getVisibleRows().length === 0)
+            this.semenceGrid.instance.getVisibleRows().length === 0)
           || ((!this.semenceGrid && !this.data.services.length && this.productsGrid) &&
             this.productsGrid.instance.getVisibleRows().length === 0)
           || ((!this.semenceGrid && !this.productsGrid && this.selectedItems) && this.selectedItems.length === 0)) {
@@ -448,18 +452,18 @@ export class AddComponent implements OnInit {
           });
         }
 
-        if (this.productsGrid) {
-          this.productsGrid.instance.getVisibleRows().forEach(row => {
-            data.product_articles.push({
-              article_id: row.data.article.id,
-              quantity: row.data.quantity,
-            });
-          });
-        }
+       if (this.productsGrid) {
+         this.productsGrid.instance.getVisibleRows().forEach(row => {
+           data.product_articles.push({
+             article_id: row.data.article.id,
+             quantity: row.data.quantity,
+           });
+         });
+       }
 
         this.selectedItems.forEach(
           st => {
-            data.service_articles.push({ article_id: st.id, quantity: 1 });
+            data.service_articles.push({article_id: st.id, quantity: 1});
           }
         );
         if (this.interventions.isSaveAsModel

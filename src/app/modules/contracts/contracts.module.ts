@@ -8,7 +8,7 @@ import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ListCurrentComponent } from './components/list-current/list-current.component';
-import { DxFileUploaderModule, DxSelectBoxModule } from 'devextreme-angular';
+import {DxFileUploaderModule, DxSelectBoxModule, DxTemplateModule, DxTextAreaModule} from 'devextreme-angular';
 
 
 @NgModule({
@@ -17,14 +17,16 @@ import { DxFileUploaderModule, DxSelectBoxModule } from 'devextreme-angular';
     CommonModule,
     ContractsRoutingModule,
     DxSelectBoxModule,
-    DxFileUploaderModule
+    DxFileUploaderModule,
+    DxTextAreaModule,
+    DxTemplateModule
   ],
   declarations: [
     ListComponent,
     ListCurrentComponent,
     ShowComponent,
     AddComponent,
-    EditComponent
+    EditComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

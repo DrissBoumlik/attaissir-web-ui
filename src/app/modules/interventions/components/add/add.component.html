@@ -97,7 +97,7 @@
                 </dxo-label>
               </dxi-item>
 
-              <dxi-item dataField="warehouse" editorType="dxSelectBox" [editorOptions]="cdOptions">
+              <dxi-item dataField="warehouse" *ngIf="this.data.semence.length || this.data.products.length" editorType="dxSelectBox" [editorOptions]="cdOptions">
                 <dxo-label
                   text="Centre distribution">
                 </dxo-label>
@@ -152,7 +152,7 @@
 
                   </dxi-item>
 
-                  <dxi-item dataField="semance_quantity" editorType="dxNumberBox" [editorOptions]="semenceQuantityOptions">
+                  <dxi-item dataField="semance_quantity" editorType="dxNumberBox"  [editorOptions]="semenceQuantityOptions" >
                     <dxo-label
                       text="Quantity">
                     </dxo-label>
@@ -326,6 +326,7 @@
                 <dxi-item *ngFor="let field of DX_custom_fields"
                           [editorType]="field.editorType"
                           [dataField]="field.dataField"
+                          [editorOptions]="{placeholder: field.label}"
                           itemType="simple"
                           [colSpan]="field.colspan">
                   <dxo-label text="{{ field.label }}"></dxo-label>

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NewComponent } from './components/new/new.component';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { AddComponent } from './components/add/add.component';
+import {AddTempleteComponent} from './components/add-templete/add-templete.component';
 import { ListComponent } from './components/list/list.component';
 
 const routes: Routes = [{
@@ -11,6 +12,7 @@ const routes: Routes = [{
   children: [
     { path: 'selectionner', component: NewComponent },
     { path: 'ajouter', component: AddComponent },
+    { path: 'template/ajouter', component: AddTempleteComponent },
     { path: 'list', component: ListComponent }
   ]
 }];

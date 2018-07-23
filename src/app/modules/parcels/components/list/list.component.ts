@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
   helper: any;
 
   constructor(public parcelsServices: ParcelsService,
-    private router: Router) {
+              private router: Router) {
     this.parcels = {};
     this.helper = Helper;
   }
@@ -28,10 +28,9 @@ export class ListComponent implements OnInit {
         return this.parcelsServices.getParcelsDx(loadOptions)
           .toPromise()
           .then(response => {
-            console.log(response);
-            const json = response;
+            const data = response;
 
-            return json;
+            return data;
           })
           .catch(error => {
             throw error;

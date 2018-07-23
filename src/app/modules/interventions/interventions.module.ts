@@ -9,12 +9,15 @@ import {
   DxSelectBoxModule, DxSwitchModule, DxTagBoxModule,
   DxTemplateModule,
   DxTextAreaModule,
-  DxTextBoxModule
+  DxTextBoxModule,
+  DxTreeListModule
 } from 'devextreme-angular';
-import { AddComponent } from './components/add/add.component';
-import { SharedModule } from '../../shared/shared.module';
-import { DxiItemModule } from 'devextreme-angular/ui/nested/item-dxi';
-import { DxiGroupItemModule } from 'devextreme-angular/ui/nested/group-item-dxi';
+import {AddComponent} from './components/add/add.component';
+import {SharedModule} from '../../shared/shared.module';
+import {DxiItemModule} from 'devextreme-angular/ui/nested/item-dxi';
+import {DxiGroupItemModule} from 'devextreme-angular/ui/nested/group-item-dxi';
+import { MouvementsRoutingModule } from '../mouvements/mouvements-routing.module';
+import { AddTempleteComponent } from './components/add-templete/add-templete.component';
 import { ListComponent } from './components/list/list.component';
 import { EtatDirective } from './components/list/directives/etat.directive';
 
@@ -40,7 +43,9 @@ import { EtatDirective } from './components/list/directives/etat.directive';
     DxiGroupItemModule,
     DxFormModule,
     DxTextBoxModule,
+    DxCheckBoxModule,
+    DxTreeListModule
   ],
-  declarations: [NewComponent, AddComponent, ListComponent, EtatDirective]
+  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective]
 })
 export class InterventionsModule { }
