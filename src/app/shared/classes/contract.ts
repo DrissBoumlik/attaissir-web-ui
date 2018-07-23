@@ -23,6 +23,7 @@ export class Contract {
   costum_fields: string;
   third_party_id?: number;
   campaign_id: number;
+  campaign: any;
   structure_id?: number;
   parent_id?: number;
   documents?: any;

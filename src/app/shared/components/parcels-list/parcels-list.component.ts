@@ -21,3 +21,4 @@ export class ParcelsListComponent implements OnInit {
   }
 
 }
+

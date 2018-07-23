@@ -28,7 +28,7 @@
 }
 
 
-.swipe-animation{
+.glisser-carte-agriculteur{
   position:relative;
   width: 500px;
   height: 200px;
@@ -39,7 +39,7 @@
 .credit-card{
   width: 250px;
   height: 140px;
-  background-image:  url('http://api.siam618.graviton.ma/cards/17/generate?face=recto&id=17&rfid=54554&type=agri&full_name=ESSATRAJI%20MOHAMED&cin=B532815');
+  background-image:  url('../../../../assets/images/generate.png');
   background-size:     cover;
   background-repeat:   no-repeat;
   background-position: center center;
@@ -80,6 +80,7 @@
   }
 }
 
+
 @keyframes swipe-card{
   0%{
     margin-left: -150px;
@@ -93,6 +94,7 @@
     transform:rotate(-25deg);
   }
 }
+
 @keyframes reader-light{
   0%{
     background:#dadada;
@@ -101,6 +103,9 @@
     background:#B8FD99;
   }
   80%{
+
     background: #11fd19;
   }
 }
+
+

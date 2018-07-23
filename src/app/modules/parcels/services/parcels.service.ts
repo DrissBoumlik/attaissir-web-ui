@@ -50,6 +50,14 @@ export class ParcelsService {
     });
   }
 
+  addParcelLogical(parcel: any): Observable<Parcel[]> {
+    return this.http.post<Parcel[]>(`${environment.apiUrl}/${this.routeName}/logical`, JSON.stringify(parcel), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
 
   getParcelsDx(params: any): Observable<Contract[]> {
     return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {

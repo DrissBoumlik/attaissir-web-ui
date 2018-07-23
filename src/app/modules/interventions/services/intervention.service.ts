@@ -72,5 +72,35 @@ export class InterventionService {
   }
 
 
+
+  getParcelsDx(params?: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/allparcels`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+
+
+  /**
+   * Get a Template
+   * @returns {Observable<Template>}
+   */
+  getTemplates(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/interventionrequests/templates`);
+  }
+
+
+
+
+  addIng(item: any): Observable<any[]> {
+    return this.http.post<any[]>(`${environment.apiUrl}/interventionrequests/templates`, JSON.stringify(item), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
 }
 

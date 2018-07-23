@@ -7,6 +7,7 @@ import {ThirdsService} from '../../../thirds/services/thirds.service';
 import {WarehouseService} from '../../../distribution-center/services/warehouse.service';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {NewComponent} from '../new/new.component';
+import {DxiItemComponent} from 'devextreme-angular/ui/nested/item-dxi';
 
 @Component({
   selector: 'app-add',
@@ -56,6 +57,10 @@ export class AddComponent implements OnInit {
   @ViewChild('semenceGrid') semenceGrid: DxDataGridComponent;
   @ViewChild('productsGrid') productsGrid: DxDataGridComponent;
   /*-------------------------------------------*/
+  @ViewChild('choixSemence') choixSemence: DxiItemComponent;
+  @ViewChild('choixProducts') choixProducts: DxiItemComponent;
+  @ViewChild('choixServices') choixServices: DxiItemComponent;
+  /*-------------------------------------------*/
   data = {
     semence: [],
     products: [],
@@ -66,13 +71,7 @@ export class AddComponent implements OnInit {
   selectedItems: any[] = [];
   loadingVisible = false;
   request_type_id: number;
-  custom_fields = [
-    {ID: 1, type: 'text', label: 'custom label1', name: 'custom_field_1', required: false},
-    {ID: 2, type: 'number', label: 'custom label2', name: 'custom_field_2', required: true},
-    {ID: 3, type: 'checkbox', label: 'custom label3', name: 'custom_field_3', required: true},
-    {ID: 4, type: 'text', label: 'custom label4', name: 'custom_field_4', required: false},
-    {ID: 5, type: 'checkbox', label: 'custom label5', name: 'custom_field_5', required: true}
-  ];
+  custom_fields = [];
   DX_custom_fields = [];
   /*-----------------CONSTANTS--------------------------*/
   DB_NUMBER_BOX = 'number';
@@ -85,26 +84,22 @@ export class AddComponent implements OnInit {
   SEMENCE_TYPE = 'SEME';
   PRODUCT_TYPE = 'product';
   SERVICE_TYPE = 'service';
-  /*-------------------------------------------*/
+
+  /*--------------------Constructor-----------------------*/
 
   constructor(public articleService: ArticlesService,
               public interventionService: InterventionService,
               private wareHouseService: WarehouseService,
               private route: ActivatedRoute,
               private thirdsService: ThirdsService,
-              private router: Router) {
+              private router: Router) {}
 
-
-  }
-
-  /*-------------------------------------------*/
-
+  /*--------------------Initialize content-----------------------*/
   ngOnInit() {
     this.route.queryParams.subscribe(
       (qps: any) => {
         /*-------------------------------------------------------------------------*/
         this.request_type_id = qps.sub_family_id;
-        this.interventions.model_visibility = false;
         /*-------------------------------------------------------------------------*/
         this.interventionService.getDataBySubFamily(qps.sub_family_id)
           .subscribe(
@@ -183,7 +178,7 @@ export class AddComponent implements OnInit {
                       this.interventions.actual_surface = event.selectedItem.actual_surface;
                       this.interventions.remaining_surface = event.selectedItem.remaining_surface;
                       this.stwOptions = {
-                        max: this.interventions.remaining_surface,
+                        max: this.interventions.contracted_surface,
                         min: 0,
                         value: 0,
                       };
@@ -210,7 +205,7 @@ export class AddComponent implements OnInit {
         this.interventionService.getInterventionCustomFields(qps.sub_family_id)
           .subscribe(
             (res: any) => {
-              // this.custom_fields = res.data ? res.data : [];
+              this.custom_fields = res.data ? res.data : [];
               this.custom_fields.forEach((cf: any) => {
                 const dxCustomField = {
                   dataField: cf.name,
@@ -221,12 +216,12 @@ export class AddComponent implements OnInit {
                 };
                 switch (cf.type) {
                   case (this.DB_NUMBER_BOX) : {
-                    dxCustomField.editorType = this.DX_NUMBER_BOX ;
+                    dxCustomField.editorType = this.DX_NUMBER_BOX;
                     dxCustomField.colspan = 2;
                     break;
                   }
                   case (this.DB_CHECK_BOX) : {
-                    dxCustomField.editorType = this.DX_CHECK_BOX ;
+                    dxCustomField.editorType = this.DX_CHECK_BOX;
                     dxCustomField.colspan = 1;
                     break;
                   }
@@ -274,6 +269,12 @@ export class AddComponent implements OnInit {
                     searchEnabled: true,
                     onSelectionChanged: (ev) => {
                       this.SelectedSemenceArticle = ev.selectedItem;
+                      this.semenceQuantityOptions = {
+                        value:  this.interventions.surface_to_work * (+this.SelectedSemenceArticle.dose),
+                        onValueChanged: (cc) => {
+                          this.SemenceQuantity = cc.value;
+                        }
+                      };
                     }
                   };
                 }
@@ -282,16 +283,35 @@ export class AddComponent implements OnInit {
         };
       },
     };
-    this.semenceQuantityOptions = {
-      onValueChanged: (e) => {
-        this.SemenceQuantity = e.value;
-      }
-    };
+
     this.addSemance = {
       text: 'AJOUTER',
       type: 'default',
       useSubmitBehavior: false,
       onClick: () => {
+        if ( !this.SelectedSemenceCategory
+            || !this.SelectedSemenceSubCategory
+           || !this.SelectedSemenceArticle
+           || !this.SemenceQuantity) {
+          NewComponent.notifyMe('Veuillez remplir tous les champs');
+          return -1;
+        }
+        try {
+          this.semenceGrid.instance.getVisibleRows().forEach((row: any) => {
+            console.log(row);
+            console.log(this.SelectedProductsArticle);
+            if (row.data.article.name === this.SelectedProductsArticle.name
+              && row.data.category.category_name === this.SelectedProductsCategory.category_name
+              && row.data.sub_category.sub_category_name === this.SelectedProductsSubCategory.sub_category_name
+              && row.data.quantity === this.productsQuantity ) {
+              const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
+              NewComponent.notifyMe(msg);
+              throw new Error(msg);
+            }
+          });
+        } catch (e) {
+          throw e;
+        }
         this.semences.push({
           'category': this.SelectedSemenceCategory,
           'sub_category': this.SelectedSemenceSubCategory,
@@ -327,6 +347,12 @@ export class AddComponent implements OnInit {
                     searchEnabled: true,
                     onSelectionChanged: (ev) => {
                       this.SelectedProductsArticle = ev.selectedItem;
+                      this.productsQuantityOptions = {
+                        value:  this.interventions.surface_to_work * (+this.SelectedProductsArticle.dose),
+                        onValueChanged: (vv) => {
+                          this.productsQuantity = vv.value;
+                        }
+                      };
                     }
                   };
                 }
@@ -335,16 +361,36 @@ export class AddComponent implements OnInit {
         };
       },
     };
-    this.productsQuantityOptions = {
-      onValueChanged: (e) => {
-        this.productsQuantity = e.value;
-      }
-    };
+
     this.addProduct = {
       text: 'AJOUTER',
       type: 'default',
       useSubmitBehavior: false,
       onClick: () => {
+        if ( !this.SelectedProductsCategory
+          || !this.SelectedProductsSubCategory
+          || !this.SelectedProductsArticle
+          || !this.productsQuantity) {
+          NewComponent.notifyMe('Veuillez remplir tous les champs');
+          return -1;
+        }
+        try {
+          this.productsGrid.instance.getVisibleRows().forEach((row: any) => {
+            console.log(row);
+            console.log(this.SelectedProductsArticle);
+            if (row.data.article.name === this.SelectedProductsArticle.name
+              && row.data.category.category_name === this.SelectedProductsCategory.category_name
+              && row.data.sub_category.sub_category_name === this.SelectedProductsSubCategory.sub_category_name
+              && row.data.quantity === this.productsQuantity ) {
+              const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
+              NewComponent.notifyMe(msg);
+              throw new Error(msg);
+            }
+          });
+        } catch (e) {
+          throw e;
+        }
+
         this.products.push({
           'category': this.SelectedProductsCategory,
           'sub_category': this.SelectedProductsSubCategory,
@@ -361,11 +407,13 @@ export class AddComponent implements OnInit {
       useSubmitBehavior: true,
       icon: 'fa fa-save',
       onClick: ($event) => {
-        console.log(this.interventions);
+        console.log(this.data);
         /*--------------------------------------------------------*/
-        if (this.semenceGrid.instance.getVisibleRows().length === 0
-          && this.productsGrid.instance.getVisibleRows().length === 0
-          && this.selectedItems.length === 0) {
+        if (((!this.productsGrid && !this.data.services.length && this.semenceGrid) &&
+            this.semenceGrid.instance.getVisibleRows().length === 0)
+          || ((!this.semenceGrid && !this.data.services.length && this.productsGrid) &&
+            this.productsGrid.instance.getVisibleRows().length === 0)
+          || ((!this.semenceGrid && !this.productsGrid && this.selectedItems) && this.selectedItems.length === 0)) {
           NewComponent.notifyMe('Aucun produit ou service n\'a été choisi.');
           return -1;
         }
@@ -395,18 +443,24 @@ export class AddComponent implements OnInit {
           }
         );
 
-        this.semenceGrid.instance.getVisibleRows().forEach(row => {
-          data.semence_articles.push({
-            article_id: row.data.article.id,
-            quantity: row.data.quantity,
+        if (this.semenceGrid) {
+          this.semenceGrid.instance.getVisibleRows().forEach(row => {
+            data.semence_articles.push({
+              article_id: row.data.article.id,
+              quantity: row.data.quantity,
+            });
           });
-        });
-        this.productsGrid.instance.getVisibleRows().forEach(row => {
-          data.product_articles.push({
-            article_id: row.data.article.id,
-            quantity: row.data.quantity,
-          });
-        });
+        }
+
+       if (this.productsGrid) {
+         this.productsGrid.instance.getVisibleRows().forEach(row => {
+           data.product_articles.push({
+             article_id: row.data.article.id,
+             quantity: row.data.quantity,
+           });
+         });
+       }
+
         this.selectedItems.forEach(
           st => {
             data.service_articles.push({article_id: st.id, quantity: 1});
@@ -414,7 +468,7 @@ export class AddComponent implements OnInit {
         );
         if (this.interventions.isSaveAsModel
           && !this.interventions.model_name) {
-          NewComponent.notifyMe('veuillez entrer un nom de modèle ou bien désactiver l\'option \'Enregistrer comme modèle\'');
+          NewComponent.notifyMe('Veuillez entrer un nom de modèle ou bien désactiver l\'option \'Enregistrer comme modèle\'');
           return -1;
         }
         /*--------------------------------------------------------*/
@@ -429,8 +483,9 @@ export class AddComponent implements OnInit {
         try {
           this.DX_custom_fields.forEach(cf => {
             if (!this.custom_fields_form_data[cf.dataField] && cf.required) {
-              NewComponent.notifyMe('Veuillez remplir tous les champs obligatoires.');
-              throw new Error('Veuillez remplir tous les champs obligatoires.');
+              const msg = 'Veuillez remplir tous les champs obligatoires.';
+              NewComponent.notifyMe(msg);
+              throw new Error(msg);
             }
           });
         } catch (e) {
@@ -441,11 +496,12 @@ export class AddComponent implements OnInit {
         /*--------------------------------------------------------*/
 
         this.loadingVisible = true;
+        console.log(data);
         this.interventionService.addInterventionRequest(data).subscribe(
           (value: any) => {
             this.loadingVisible = false;
             NewComponent.notifyMe('La demande d\'intervention a été traitée avec succès, Redirection.........', 'success');
-            this.router.navigate([`/mouvements/afficher/${value.data.stock_operation_id}`])
+            this.router.navigate([`/preconisations-intrants/liste`])
               .catch(err => {
                 throw err;
               });
@@ -484,4 +540,7 @@ export class AddComponent implements OnInit {
     };
 
   }
+
+  /*-------------------------------------------*/
+
 }

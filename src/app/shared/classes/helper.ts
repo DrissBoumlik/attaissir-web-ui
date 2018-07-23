@@ -39,6 +39,15 @@ export class Helper {
     });
   }
 
+  public static realObject = (spy) => {
+    Object.keys(spy).forEach(function(key) {
+      if (spy[key] === '') {
+        spy[key] = null;
+      }
+    });
+    return spy;
+  }
+
   public static getStatut = (value: string): string => {
     if (value === 'inprogress') {
       return 'ENCOURS';

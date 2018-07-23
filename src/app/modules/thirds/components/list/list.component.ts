@@ -6,7 +6,7 @@ import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import { Location } from '@angular/common';
 import { Helper } from '../../../../shared/classes/helper';
-import {isArray} from 'util';
+import { isArray } from 'util';
 
 @Component({
   selector: 'app-list',

@@ -21,6 +21,7 @@ export class Parcel {
   coordinate: string;
   costum_fields: string;
   soil_id?: number;
+  logical_parcel_id?: number;
   contract_id?: number;
   created_at?: Date;
   updated_at?: Date;
