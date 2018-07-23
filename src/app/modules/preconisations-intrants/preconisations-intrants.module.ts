@@ -8,6 +8,7 @@ import {
   DxDateBoxModule,
   DxPopupModule,
   DxSelectBoxModule,
+  DxNumberBoxModule,
   DxTemplateModule,
   DxTextAreaModule,
   DxTextBoxModule
@@ -24,6 +25,7 @@ import { ShowComponent } from './components/show/show.component';
     DxTextAreaModule,
     DxDateBoxModule,
     DxDataGridModule,
+    DxNumberBoxModule,
     DxButtonModule,
     DxPopupModule,
     DxButtonModule,

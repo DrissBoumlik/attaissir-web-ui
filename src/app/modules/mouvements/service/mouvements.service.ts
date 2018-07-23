@@ -46,6 +46,20 @@ export class MouvementsService {
     });
   }
 
+
+  /**
+   * Add a Mouvement
+   * @param third
+   * @returns {Observable<Third[]>}
+   */
+  addReturn(mouvement: any): Observable<any[]> {
+    return this.http.post<any[]>(`${environment.apiUrl}/stocks/return`, JSON.stringify(mouvement), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   deleteMouvement = (id: number): Observable<any> => {
     return this.http.delete(`${environment.apiUrl}/${this.routeName}/${id}`, {
       headers: new HttpHeaders({

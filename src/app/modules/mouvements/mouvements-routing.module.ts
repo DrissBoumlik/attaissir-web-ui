@@ -5,6 +5,7 @@ import { ListComponent } from './components/list/list.component';
 import { AddComponent } from './components/add/add.component';
 import { ShowComponent } from './components/show/show.component';
 import { MystockComponent } from './components/mystock/mystock.component';
+import {ShowRetourComponent} from './components/show-retour/show-retour.component';
 
 
 
@@ -25,10 +26,16 @@ const routes: Routes = [
         path: 'mon_stock',
         component: MystockComponent
       },
-      { path: 'ajouter', component: AddComponent },
+      { path: 'ajouter',
+        component: AddComponent
+      },
       {
         path: 'afficher/:id',
         component: ShowComponent
+      },
+      {
+        path: 'retour/:id',
+        component: ShowRetourComponent
       }
     ]
   }

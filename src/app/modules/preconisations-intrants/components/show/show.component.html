@@ -3,7 +3,7 @@
 
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2> Fiche  Préconisation d'intrans N°  </h2>
+      <h2> Fiche  Préconisation d'intrans N°  {{preconisation.id}}</h2>
     </div>
 
 
@@ -55,7 +55,8 @@
                     <div class="col-12">
 
                       <p class="siam-form-input-value siam-form-input-value-nodata">
-                      </p>
+                        {{preconisation.id}}
+                       </p>
 
                     </div>
                   </div>
@@ -195,12 +196,14 @@
 
 
               <dx-data-grid
+                #dataGrid
                 id="gridContainer"
                 [dataSource]="articles"
                 showBorders="true"
                 [columnHidingEnabled]="true"
                 [allowColumnResizing]="false"
                 [allowColumnReordering]="true"
+                [(selectedRowKeys)]="selectedItems"
                 [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
                 KeyExpr="id">
 
@@ -232,10 +235,10 @@
                 <dxo-paging [pageSize]="10"></dxo-paging>
                 <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-                <dxi-column dataField="article.id" [width]="100" [visible]="false" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
-                <dxi-column dataField="article.category.article_category.name" caption="Famille"></dxi-column>
-                <dxi-column dataField="article.category.name" caption="Sous Famille"></dxi-column>
-                <dxi-column dataField="article.name" caption="Article"></dxi-column>
+                <dxi-column dataField="id" [width]="100" [visible]="false" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
+                <dxi-column dataField="category" caption="Famille"></dxi-column>
+                <dxi-column dataField="sub_category" caption="Sous Famille"></dxi-column>
+                <dxi-column dataField="article_name" caption="Article"></dxi-column>
                 <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
 
               </dx-data-grid>
@@ -256,7 +259,7 @@
 <dx-popup
   class="popup"
   [width]="580"
-  [height]="290"
+  [height]="400"
   [showTitle]="true"
   title="Confirmation "
   [dragEnabled]="false"
@@ -268,13 +271,17 @@
   <div *dxTemplate="let data of 'content'">
 
     <div  *ngIf="evnt1" style="text-align: center;">
-    <p>
-      Glisser la carte agriculteur.
-    </p>
-
-    <p style="text-align: center; margin: 20px">
-    <i class="fa fa-id-card-o fa-rotate-45" aria-hidden="true"></i>
-    </p>
+      <h1>GLISSER LA CARTE</h1>
+      <p>Faire glisser la carte sur le lecteur de carte pour lancer la recherche</p>
+      <div class="glisser-carte-agriculteur">
+        <div class="credit-card">
+          <div class="rfid-tripe"></div>
+        </div>
+        <div class="swiper-top"></div>
+        <div class="swiper-bottom">
+          <div class="light-indicator"></div>
+        </div>
+      </div>
     </div>
 
     <div *ngIf="!evnt1">
@@ -286,7 +293,7 @@
     <dxi-item itemType="group" [colCount]="2">
       <dxi-item>
         <div class="dx-field-value">
-          <dx-text-box placeholder="****" valueChangeEvent="keyup" (onValueChanged)="pinTextBox($event)" (onFocusIn)="func1()" (onFocusOut)="func2()"></dx-text-box>
+          <dx-text-box placeholder="****" valueChangeEvent="keyup" (onValueChanged)="pinTextBox($event)" ></dx-text-box>
         </div>
       </dxi-item>
 
@@ -301,8 +308,6 @@
 
     <div  class="pull-right">
 
-
-
       <dx-button
                  class="button-info"
                  text="Fermer"
@@ -310,7 +315,7 @@
                  (onClick)="cancelPopup()">
       </dx-button>
 
-      <dx-button *ngIf="!evnt1" width="120"  icon="fa fa-paper-plane"  text="LIVRER" type="success" (onClick)="showDeliverPopup()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
+      <dx-button *ngIf="!evnt1" width="120"  icon="fa fa-paper-plane"  text="LIVRER" type="success" (onClick)="Deliver()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
 
 
     </div>
@@ -358,9 +363,6 @@
 </dx-popup>
 
 
-
-
-
 <dx-popup
   class="popup"
   [width]="750"
@@ -371,17 +373,19 @@
   [closeOnOutsideClick]="true"
   [(visible)]="popupAyantDroitVisible"
 >
+
   <div *dxTemplate="let data of 'content'">
 
     <dx-data-grid
       id="gridContainer2"
       [dataSource]="ayants_droits">
-      <dxi-column dataField="ref" caption="CIN"></dxi-column>
-      <dxi-column dataField="cda" caption="NOM COMPLET" ></dxi-column>
-      <dxi-column dataField="zone" caption="DESCRIPTION"></dxi-column>
+      <dxi-column dataField="cin" caption="CIN"></dxi-column>
+      <dxi-column dataField="full_name" caption="NOM COMPLET" ></dxi-column>
+      <dxi-column dataField="description" caption="DESCRIPTION"></dxi-column>
     </dx-data-grid>
 
-    <div  class="pull-right">
+    <div style="position: absolute; bottom: 0;right: 0; margin-bottom: 15px; margin-right: 15px;">
+
 
       <dx-button class="pull-right"
                  class="button-info"
@@ -394,14 +398,80 @@
   </div>
 </dx-popup>
 
+<!--
+<dx-popup
+  class="popup"
+  [width]="950"
+  [height]="550"
+  [showTitle]="true"
+  title="Retour"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="retourPopVisible"
+>
+  <div *dxTemplate="let data of 'content'">
 
+    <dx-data-grid
+      id="gridContainer3"
+      [selectionFilter]="false"
+      [dataSource]="articles"
+    >
+      <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+      <dxi-column dataField="id" [width]="100"  caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
+      <dxi-column dataField="category" caption="Famille"></dxi-column>
+     <dxi-column dataField="sub_category" caption="Sous Famille"></dxi-column>
+      <dxi-column dataField="name" caption="Article"></dxi-column>
+      <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
+      <dxi-column dataField="quantity_retour1" caption="Quantité retour"  cellTemplate="ToOrder"></dxi-column>
+
+      <div *dxTemplate="let data of 'ToOrder'">
+        <dx-number-box #dxNb
+                       dataField="data.value"
+                       [min]="0"
+                       [value]="0"
+                       [showSpinButtons]="true"
+                       [showClearButton]="true"
+                       (onValueChanged)="valuechange($event, data, dxNb.value)" ></dx-number-box>
+      </div>
+
+
+
+      <div *dxTemplate="let data of 'removeTemplate'">
+        <a  (click)="removeRetourItem(data.value)" ><i style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;" class="fa fa-times fa-5x"></i></a>
+      </div>
+    </dx-data-grid>
+
+    <div   style="position: absolute; bottom: 0;right: 0; margin-bottom: 15px; margin-right: 15px;">
+
+      <dx-button class="pull-right" style="margin-right: 10px;"
+                 class="button-info"
+                 width="120"
+                 text="Fermer"
+                 (onClick)="cancelRetourPopup()">
+      </dx-button>
+
+      <dx-button
+                 [disabled]="!retour_valider_enabled"
+                 class="button-info"
+                 width="120"
+                 text="VALIDER"
+                 (onClick)="RetourValiderPopup()">
+      </dx-button>
+
+    </div>
+
+  </div>
+</dx-popup>
+
+!-->
 <div class="dx-fieldset">
   <div class="dx-field">
     <div class="dx-field-value">
-      <dx-button width="180"  icon="fa fa-paper-plane"  text="LIVRER" type="success" (onClick)="showDeliverPopup()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
+      <dx-button width="180"  icon="fa fa-paper-plane"  text="LIVRER" [disabled]="preconisation.state == 'done'"  type="success" (onClick)="showDeliverPopup()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
 
       <dx-button width="130" icon="fa fa-print"  (onClick)="print()" text="IMPRIMER" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp; &nbsp;
-      <dx-button width="130" icon="fa fa-trash"  text="ANNULER" type="danger" (onClick)="showDeletePopup()"  ></dx-button> &nbsp; &nbsp;
+      <dx-button width="130" icon="fa fa-exchange"  text="RETOUR" type="default" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active" [disabled]="preconisation.state == 'delivered'" style="margin-left: 20px; margin-right: 20px;"  ></dx-button> &nbsp; &nbsp;
+      <dx-button width="130" icon="fa fa-trash"  text="ANNULER" [disabled]="preconisation.state == 'done'" type="danger" (onClick)="showDeletePopup()"  ></dx-button> &nbsp; &nbsp;
     </div>
   </div>
 </div>

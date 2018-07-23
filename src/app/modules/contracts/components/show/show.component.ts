@@ -8,8 +8,10 @@ import { Contract } from '../../../../shared/classes/contract';
 import { ContractsService } from '../../services/contracts.service';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { Helper } from '../../../../shared/classes/helper';
-import { ParcelsService } from '../../../parcels/services/parcels.service';
+import {RightHolderService} from '../../services/right-holder.service';
 import { LogicalParcel } from '../../../../shared/classes/logical-parcel';
+import {ParcelsService} from '../../../parcels/services/parcels.service';
+import {CardsService} from '../../../cards/services/cards.service';
 declare const require: any;
 const $ = require('jquery');
 
@@ -30,22 +32,29 @@ export class ShowComponent implements OnInit {
   avenants: any;
   avenant: any;
   parcels: any;
-  selectedItems: any[];
+  canValidateContract: boolean;
+  hasRightAttatchment: boolean;
   isContractEncours: boolean;
   helper: any;
+  rightsholders: any;
+  selectedItems: any[];
+
+
 
   constructor(private contractService: ContractsService,
     private route: ActivatedRoute,
     private router: Router,
+    private rightHolderService: RightHolderService,
     private thirdsService: ThirdsService,
     public parcelService: ParcelsService,
+    public cardService: CardsService,
     private toaster: ToastrService) {
     this.helper = Helper;
   }
 
   ngOnInit() {
 
-    this.route.params.subscribe(
+      this.route.params.subscribe(
       params => {
         this.contractService.getContract(+params.id).subscribe(
           (res: any) => {
@@ -55,11 +64,40 @@ export class ShowComponent implements OnInit {
             this.campagnes = res.data.contracted_surface;
             this.avenants = res.data.amendments;
             this.avenant = (this.avenants.length > 0) ? this.avenants[this.avenants.length - 1] : null;
-            this.parcels = res.data.logical_parcels.concat(res.data.parcels);
+            this.parcels = res.data.parcels;
             this.parcels = this.parcels.map((data) => {
-              return this.makeParcel(data);
+              return {
+                perimeter: ((data.soil !== null) && (data.soil.perimeter !== null))
+                  ? data.soil.perimeter : 'Pas de données',
+                region: ((data.soil !== null) && (data.soil.region !== null))
+                  ? data.soil.region : 'Pas de données',
+                district: ((data.soil !== null) && (data.soil.district !== null))
+                  ? data.soil.district : 'Pas de données',
+                rural_commune: ((data.soil !== null) && (data.soil.rural_commune !== null))
+                  ? data.soil.rural_commune : 'Pas de données',
+                cda: ((data.soil !== null) && (data.soil.cda !== null))
+                  ? data.soil.cda : 'Pas de données',
+                zone: ((data.soil !== null) && (data.soil.zone !== null))
+                  ? data.soil.zone : 'Pas de données',
+                sector: ((data.soil !== null) && (data.soil.sector !== null))
+                  ? data.soil.sector : 'Pas de données',
+                block: ((data.soil !== null) && (data.soil.block !== null))
+                  ? data.soil.block : 'Pas de données',
+                registration_number: ((data.soil !== null) && (data.soil.registration_number !== null))
+                  ? data.soil.registration_number : 'Pas de données',
+                annuel_surface: data.annuel_surface,
+                tenure: data.tenure,
+                code_ormva: data.code_ormva
+              };
             });
             this.isContractEncours = this.contract.status === 'inprogress';
+
+
+            this.rightHolderService.getAllDx(this.id).subscribe((_res: any) => {
+                this.rightsholders = _res;
+              }
+            );
+
           },
           (error) => {
             this.router.navigate(['/404']).catch(
@@ -77,6 +115,7 @@ export class ShowComponent implements OnInit {
     );
 
   }
+
 
   makeParcel = (data) => {
     if (data.hasOwnProperty('name')) {
@@ -148,10 +187,35 @@ export class ShowComponent implements OnInit {
         e.cancel = true;
         this.toaster.success('Le document a été téléchargé avec succès.');
       }, error => {
-        d.reject('Le document que vous essayez d\'importer est  trop volumine$eventux, ou bien corrompu.');
+        d.reject('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
       });
     e.cancel = d.promise();
   }
+
+
+  onAddRightHolder(e: any) {
+    const d = new $.Deferred();
+    const newRightHolder = {
+      contract_id : this.id,
+      full_name: e.data.full_name,
+      cin: e.data.cin,
+      description: e.data.description
+    };
+    e.cancel = false;
+    this.rightHolderService.addRightHolder( newRightHolder).subscribe(
+      res => {
+        this.loadDocuments();
+        d.resolve();
+        e.cancel = true;
+        this.toaster.success('L element a été ajouté avec succès.');
+      }, error => {
+      //  d.resolve();
+        e.cancel = true;
+      d.reject('erreur');
+      });
+    e.cancel = d.promise();
+  }
+
 
   loadDocuments() {
     this.contractService.getContract(this.contract.id).subscribe(
@@ -184,6 +248,8 @@ export class ShowComponent implements OnInit {
       }
     );
   }
+
+
 
   createLogicalParcel = (e) => {
     console.log(this.selectedItems);
@@ -237,14 +303,51 @@ export class ShowComponent implements OnInit {
     console.log(e);
   }
 
+
   downloadContract() {
     this.contractService.printContract(this.contract.id).subscribe(data => {
       window.open(data['data']['file']);
     }, err => {
       throw err;
     });
+ }
 
+
+  onUpdateRightHolder(e: any) {
+    console.log(e);
+    const d = new $.Deferred();
+    const updateRightHolder = {
+      contract_id: this.id,
+      full_name: e.newData.full_name,
+      cin: e.newData.cin,
+      description: e.newData.description
+    };
+    e.cancel = true;
+    console.log(e);
+    this.rightHolderService.editRightHolder(e.oldData.id, updateRightHolder).subscribe(
+      res => {
+        this.loadDocuments();
+        d.resolve();
+        e.cancel = true;
+        this.toaster.success('L element a été modifié avec succès.');
+      }, error => {
+        // d.reject('erreur');
+      });
+    e.cancel = d.promise();
   }
 
-}
 
+  onRemoveRightHolder(event): any {
+
+    this.rightHolderService.deleteRightHolder(event.data.id).subscribe(
+      (res) => {
+        this.toaster.success('l \' element est supprimé avec succès.');
+      },
+      (err) => {
+        throw err;
+      }
+    );
+  }
+
+
+}
