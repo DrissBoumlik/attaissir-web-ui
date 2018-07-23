@@ -9,9 +9,9 @@ import { ContractsService } from '../../services/contracts.service';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { Helper } from '../../../../shared/classes/helper';
 import {RightHolderService} from '../../services/right-holder.service';
-import { LogicalParcel } from '../../../../shared/classes/logical-parcel';
 import {ParcelsService} from '../../../parcels/services/parcels.service';
 import {CardsService} from '../../../cards/services/cards.service';
+import {Parcel} from '../../../../shared/classes/parcel';
 declare const require: any;
 const $ = require('jquery');
 
@@ -66,28 +66,32 @@ export class ShowComponent implements OnInit {
             this.avenant = (this.avenants.length > 0) ? this.avenants[this.avenants.length - 1] : null;
             this.parcels = res.data.parcels;
             this.parcels = this.parcels.map((data) => {
+              const parcels = data;
               return {
+                id: data.id,
+                soil_id: data.soil.id,
                 perimeter: ((data.soil !== null) && (data.soil.perimeter !== null))
-                  ? data.soil.perimeter : 'Pas de données',
+                  ? data.soil.perimeter : '',
                 region: ((data.soil !== null) && (data.soil.region !== null))
-                  ? data.soil.region : 'Pas de données',
+                  ? data.soil.region : '',
                 district: ((data.soil !== null) && (data.soil.district !== null))
-                  ? data.soil.district : 'Pas de données',
+                  ? data.soil.district : '',
                 rural_commune: ((data.soil !== null) && (data.soil.rural_commune !== null))
-                  ? data.soil.rural_commune : 'Pas de données',
+                  ? data.soil.rural_commune : '',
                 cda: ((data.soil !== null) && (data.soil.cda !== null))
-                  ? data.soil.cda : 'Pas de données',
+                  ? data.soil.cda : '',
                 zone: ((data.soil !== null) && (data.soil.zone !== null))
-                  ? data.soil.zone : 'Pas de données',
+                  ? data.soil.zone : '',
                 sector: ((data.soil !== null) && (data.soil.sector !== null))
-                  ? data.soil.sector : 'Pas de données',
+                  ? data.soil.sector : '',
                 block: ((data.soil !== null) && (data.soil.block !== null))
-                  ? data.soil.block : 'Pas de données',
+                  ? data.soil.block : '',
                 registration_number: ((data.soil !== null) && (data.soil.registration_number !== null))
-                  ? data.soil.registration_number : 'Pas de données',
+                  ? data.soil.registration_number : '',
                 annuel_surface: data.annuel_surface,
                 tenure: data.tenure,
-                code_ormva: data.code_ormva
+                code_ormva: data.code_ormva,
+                parcels: parcels
               };
             });
             this.isContractEncours = this.contract.status === 'inprogress';
@@ -256,15 +260,17 @@ export class ShowComponent implements OnInit {
     let annuel_surfaces = 0;
     let name = '';
     let zone: number;
+    let soil_id: number;
     const parcels = this.selectedItems.map(p => {
       annuel_surfaces += p.annuel_surface;
       name = `${p.cda}${p.zone}`;
       zone = p.zone_id;
+      soil_id = p.soil_id;
       return {
         id: p.id
       };
     });
-    const parcel = new LogicalParcel();
+    const parcel = new Parcel();
     parcel.name = name;
     parcel.annuel_surface = annuel_surfaces;
     parcel.exploited_surface = null;
@@ -277,7 +283,9 @@ export class ShowComponent implements OnInit {
     parcel.zone_id = zone;
     parcel.third_party_id = this.third.id;
     parcel.campaign_id = this.contract.campaign.id;
+    parcel.soil_id = soil_id;
     parcel.contract_id = this.contract.id;
+    parcel.is_logical = true;
     const data = {
       parcels: parcels,
       parcel: parcel
