@@ -348,9 +348,9 @@ export class AddComponent implements OnInit {
                     onSelectionChanged: (ev) => {
                       this.SelectedProductsArticle = ev.selectedItem;
                       this.productsQuantityOptions = {
-                        value:  this.interventions.surface_to_work * (+this.SelectedSemenceArticle.dose),
-                        onValueChanged: (e) => {
-                          this.productsQuantity = e.value;
+                        value:  this.interventions.surface_to_work * (+this.SelectedProductsArticle.dose),
+                        onValueChanged: (vv) => {
+                          this.productsQuantity = vv.value;
                         }
                       };
                     }
