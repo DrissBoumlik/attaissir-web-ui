@@ -269,6 +269,12 @@ export class AddComponent implements OnInit {
                     searchEnabled: true,
                     onSelectionChanged: (ev) => {
                       this.SelectedSemenceArticle = ev.selectedItem;
+                      this.semenceQuantityOptions = {
+                        value:  this.interventions.surface_to_work * (+this.SelectedSemenceArticle.dose),
+                        onValueChanged: (cc) => {
+                          this.SemenceQuantity = cc.value;
+                        }
+                      };
                     }
                   };
                 }
@@ -277,11 +283,7 @@ export class AddComponent implements OnInit {
         };
       },
     };
-    this.semenceQuantityOptions = {
-      onValueChanged: (e) => {
-        this.SemenceQuantity = e.value;
-      }
-    };
+
     this.addSemance = {
       text: 'AJOUTER',
       type: 'default',
@@ -345,6 +347,12 @@ export class AddComponent implements OnInit {
                     searchEnabled: true,
                     onSelectionChanged: (ev) => {
                       this.SelectedProductsArticle = ev.selectedItem;
+                      this.productsQuantityOptions = {
+                        value:  this.interventions.surface_to_work * (+this.SelectedSemenceArticle.dose),
+                        onValueChanged: (e) => {
+                          this.productsQuantity = e.value;
+                        }
+                      };
                     }
                   };
                 }
@@ -353,11 +361,7 @@ export class AddComponent implements OnInit {
         };
       },
     };
-    this.productsQuantityOptions = {
-      onValueChanged: (e) => {
-        this.productsQuantity = e.value;
-      }
-    };
+
     this.addProduct = {
       text: 'AJOUTER',
       type: 'default',
