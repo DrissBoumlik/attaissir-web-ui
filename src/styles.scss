@@ -1207,3 +1207,14 @@ font-size: 28px;
 .dx-datagrid-drag-action {
   font-weight: bolder;
 }
+
+
+.dx-switch-on-value .dx-switch-handle:before {
+  background-color: #49eb90;
+}
+.dx-switch-on-value .dx-switch-handle:hover {
+  background-color: #49eb90;
+}
+.dx-switch-on-value.dx-state-focused .dx-switch-handle:before {
+  background-color: #49eb90;
+}

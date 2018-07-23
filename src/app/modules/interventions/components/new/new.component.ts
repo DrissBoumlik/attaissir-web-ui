@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { InterventionService } from '../../services/intervention.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {InterventionService} from '../../services/intervention.service';
 import notify from 'devextreme/ui/notify';
-import { CardsService } from '../../../cards/services/cards.service';
+import {CardsService} from '../../../cards/services/cards.service';
 
 @Component({
   selector: 'app-new',
@@ -20,9 +20,9 @@ export class NewComponent implements OnInit {
   public types = [];
 
   constructor(private router: Router,
-    private cardService: CardsService,
-    private thirdService: ThirdsService,
-    private interventionService: InterventionService) { }
+              private cardService: CardsService,
+              private thirdService: ThirdsService,
+              private interventionService: InterventionService) {}
 
   static notifyMe(message: string, type = 'warning') {
     return notify(
@@ -41,6 +41,7 @@ export class NewComponent implements OnInit {
   ngOnInit() {
     this.interventionService.getFamiliesAndSubFamilies().subscribe(
       (res: any) => {
+        console.log(res);
         res.data.forEach((activity_family: any, index) => {
           const acfa = {
             type_name: activity_family.activity_family,
