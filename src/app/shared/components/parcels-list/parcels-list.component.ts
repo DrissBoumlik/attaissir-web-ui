@@ -17,7 +17,5 @@ export class ParcelsListComponent implements OnInit {
     this.helper = Helper;
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
