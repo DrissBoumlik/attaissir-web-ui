@@ -41,6 +41,7 @@ export class NewComponent implements OnInit {
   ngOnInit() {
     this.interventionService.getFamiliesAndSubFamilies().subscribe(
       (res: any) => {
+        console.log(res);
         res.data.forEach((activity_family: any, index) => {
           const acfa = {
             type_name: activity_family.activity_family,

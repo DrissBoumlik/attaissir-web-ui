@@ -80,6 +80,7 @@
   }
 }
 
+
 @keyframes swipe-card{
   0%{
     margin-left: -150px;
@@ -93,6 +94,7 @@
     transform:rotate(-25deg);
   }
 }
+
 @keyframes reader-light{
   0%{
     background:#dadada;
@@ -101,6 +103,8 @@
     background:#B8FD99;
   }
   80%{
+
     background: #11fd19;
   }
 }
+
