@@ -4,7 +4,6 @@ import { DemandesService } from '../../service/demandes.service';
 import { Helper } from '../../../../shared/classes/helper';
 import { Article } from '../../../../shared/classes/article';
 
-
 @Component({
   selector: 'app-show',
   templateUrl: './show.component.html',
@@ -32,6 +31,7 @@ export class ShowComponent implements OnInit {
         this.demandesService.getOrder(params.id).subscribe((response) => {
           this.order = response.data;
           this.produits = this.order.articles;
+
         });
 
       });

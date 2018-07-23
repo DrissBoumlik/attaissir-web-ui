@@ -25,18 +25,24 @@ export class RfidCardReaderComponent implements OnInit {
 
   @ViewChild('focusout') focusout: ElementRef;
 
+  @ViewChild('popup') popup: ElementRef;
 
-  constructor(private toast: ToastrService, ) {
+
+  constructor(private toast: ToastrService) {
   }
 
   ngOnInit() {
+
   }
 
   Scan() {
     this.popupVisible = true;
   }
 
-  test() {
+  ReadCard() {
+    this.popup.nativeElement.addEventListener('click', () => {
+      this.rfid.nativeElement.focus();
+    });
     this.rfid.nativeElement.focus();
     this.rfid.nativeElement.addEventListener('keyup', (vv) => {
       this.rfid_input_value = vv.target.value;
@@ -46,19 +52,9 @@ export class RfidCardReaderComponent implements OnInit {
           rfid: this.rfid_input_value,
           cin: this.cin
         });
-        notify(
-          {
-            position: { my: 'center', at: 'center', of: window },
-            shading: true,
-            shadingColor: 'rgba(0,0,0,0.4)',
-            width: '30%',
-            message: 'La carte  agriculteur a été lue avec succès'
-          },
-          'success',
-          1200
-        );
         this.focusout.nativeElement.focus();
       }
+      this.rfid.nativeElement.value = '';
       this.rfid_input_value = '';
     });
   }

@@ -7,9 +7,11 @@ import { Third } from '../../../../shared/classes/third';
 import { Contract } from '../../../../shared/classes/contract';
 import { ContractsService } from '../../services/contracts.service';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { CardsService } from '../../services/cards.service';
 import { Helper } from '../../../../shared/classes/helper';
 import {RightHolderService} from '../../services/right-holder.service';
+import { LogicalParcel } from '../../../../shared/classes/logical-parcel';
+import {ParcelsService} from '../../../parcels/services/parcels.service';
+import {CardsService} from '../../../cards/services/cards.service';
 declare const require: any;
 const $ = require('jquery');
 
@@ -35,6 +37,8 @@ export class ShowComponent implements OnInit {
   isContractEncours: boolean;
   helper: any;
   rightsholders: any;
+  selectedItems: any[];
+
 
 
   constructor(private contractService: ContractsService,
@@ -42,6 +46,7 @@ export class ShowComponent implements OnInit {
     private router: Router,
     private rightHolderService: RightHolderService,
     private thirdsService: ThirdsService,
+    public parcelService: ParcelsService,
     public cardService: CardsService,
     private toaster: ToastrService) {
     this.helper = Helper;
@@ -109,8 +114,52 @@ export class ShowComponent implements OnInit {
       }
     );
 
+  }
 
 
+  makeParcel = (data) => {
+    if (data.hasOwnProperty('name')) {
+      return {
+        id: data.parcels[0].id,
+        name: data.name,
+        cda: ((data.parcels[0].soil !== null) && (data.parcels[0].soil.cda !== null))
+          ? data.parcels[0].soil.cda : '',
+        zone_id: ((data.parcels[0].soil !== null) && (data.parcels[0].soil.zone_id !== null))
+          ? data.parcels[0].soil.zone_id : '',
+        zone: ((data.parcels[0].soil !== null) && (data.parcels[0].soil.zone !== null))
+          ? data.parcels[0].soil.zone : '',
+        sector: ((data.parcels[0].soil !== null) && (data.parcels[0].soil.sector !== null))
+          ? data.parcels[0].soil.sector : '',
+        block: ((data.parcels[0].soil !== null) && (data.parcels[0].soil.block !== null))
+          ? data.parcels[0].soil.block : '',
+        registration_number: ((data.parcels[0].soil !== null) && (data.parcels[0].soil.registration_number !== null))
+          ? data.parcels[0].soil.registration_number : '',
+        annuel_surface: data.annuel_surface,
+        tenure: '-',
+        code_ormva: data.code_ormva,
+        parcels: data.parcels.map(p => this.makeParcel(p))
+      };
+    }
+    return {
+      id: data.id,
+      name: null,
+      cda: ((data.soil !== null) && (data.soil.cda !== null))
+        ? data.soil.cda : '',
+      zone_id: ((data.soil !== null) && (data.soil.zone_id !== null))
+        ? data.soil.zone_id : '',
+      zone: ((data.soil !== null) && (data.soil.zone !== null))
+        ? data.soil.zone : '',
+      sector: ((data.soil !== null) && (data.soil.sector !== null))
+        ? data.soil.sector : '',
+      block: ((data.soil !== null) && (data.soil.block !== null))
+        ? data.soil.block : '',
+      registration_number: ((data.soil !== null) && (data.soil.registration_number !== null))
+        ? data.soil.registration_number : '',
+      annuel_surface: data.annuel_surface,
+      tenure: data.tenure,
+      tenure_id: data.tenure_id,
+      code_ormva: data.code_ormva,
+    };
   }
 
   onRemoveDOC(e: any) {
@@ -201,6 +250,60 @@ export class ShowComponent implements OnInit {
   }
 
 
+
+  createLogicalParcel = (e) => {
+    console.log(this.selectedItems);
+    let annuel_surfaces = 0;
+    let name = '';
+    let zone: number;
+    const parcels = this.selectedItems.map(p => {
+      annuel_surfaces += p.annuel_surface;
+      name = `${p.cda}${p.zone}`;
+      zone = p.zone_id;
+      return {
+        id: p.id
+      };
+    });
+    const parcel = new LogicalParcel();
+    parcel.name = name;
+    parcel.annuel_surface = annuel_surfaces;
+    parcel.exploited_surface = null;
+    parcel.manuel_surface = null;
+    parcel.gps_surface = null;
+    parcel.harvested_surface = null;
+    parcel.abandoned_surface = null;
+    parcel.cleared_surface = null;
+    parcel.stricken_surface = null;
+    parcel.zone_id = zone;
+    parcel.third_party_id = this.third.id;
+    parcel.campaign_id = this.contract.campaign.id;
+    parcel.contract_id = this.contract.id;
+    const data = {
+      parcels: parcels,
+      parcel: parcel
+    };
+    this.parcelService.addParcelLogical(this.helper.realObject(data)).subscribe(d => {
+      d = this.helper.dataFormatter(d, false);
+      console.log(d);
+      this.parcels = [];
+      this.parcels.push(d);
+      this.parcels = this.parcels.concat(d['parcels']).map(dat => {
+        return this.makeParcel(dat);
+      });
+      this.toaster.success('Le parcelle logique est crée avec succés');
+    }, error1 => {
+      throw error1;
+    });
+  }
+
+  initSelectionRows = (e) => {
+    /*if (!e.values[1]) {
+      console.log(e.rowElement[0].cells[0].remove());
+    }*/
+    console.log(e);
+  }
+
+
   downloadContract() {
     this.contractService.printContract(this.contract.id).subscribe(data => {
       window.open(data['data']['file']);
@@ -248,4 +351,3 @@ export class ShowComponent implements OnInit {
 
 
 }
-

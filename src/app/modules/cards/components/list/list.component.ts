@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { CardsService } from '../../../contracts/services/cards.service';
+import { CardsService } from '../../services/cards.service';
 import { Helper } from '../../../../shared/classes/helper';
 
 

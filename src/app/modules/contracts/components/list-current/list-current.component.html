@@ -61,13 +61,13 @@
 
         <dxi-column dataField="code" caption="Code">
         </dxi-column>
+        <dxi-column dataField="third_cin" caption="CIN" i18n-caption>
+        </dxi-column>
         <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
         </dxi-column>
         <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
         </dxi-column>
         <!--<dxi-column dataField="type" caption="type de contrat" dataType="Text">
-        </dxi-column>
-        <dxi-column dataField="cda" caption="CDA" i18n-caption>
         </dxi-column>
         <dxi-column dataField="zone" caption="ZONE" i18n-caption>
         </dxi-column>-->
@@ -94,13 +94,13 @@
           <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data.id, router, toastr)"
              class="fa fa-info-circle fa-5x">
           </i>
-          <i *ngIf="data.data.status === 'inprogress'"  style="font-size: 150%; align-content: center; cursor: pointer;padding-left: 10px;" (click)="helper.gotoShow('contrats', data.data.id, router, toastr, 'modifier')"
+          <i *ngIf="data.data.status === 'ENCOURS'"  style="font-size: 150%; align-content: center; cursor: pointer;padding-left: 10px;" (click)="helper.gotoShow('contrats', data.data.id, router, toastr, 'modifier')"
              class="fa fa-edit fa-5x">
           </i>
         </div>
         <div *dxTemplate="let data of 'contractListTemplate'">
           <span [ngClass]="helper.getStatusColor(data.value)">
-              {{ getStatus(data.value) }}
+              {{ data.value }}
           </span>
         </div>
 

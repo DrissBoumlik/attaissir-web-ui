@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { CardsService } from '../../../contracts/services/cards.service';
-import { InterventionService } from '../../services/intervention.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {InterventionService} from '../../services/intervention.service';
 import notify from 'devextreme/ui/notify';
+import {CardsService} from '../../../cards/services/cards.service';
 
 @Component({
   selector: 'app-new',
@@ -20,11 +20,11 @@ export class NewComponent implements OnInit {
   public types = [];
 
   constructor(private router: Router,
-    private cardService: CardsService,
-    private thirdService: ThirdsService,
-    private interventionService: InterventionService) { }
+              private cardService: CardsService,
+              private thirdService: ThirdsService,
+              private interventionService: InterventionService) {}
 
-  static notifyMe(message: string) {
+  static notifyMe(message: string, type = 'warning') {
     return notify(
       {
         position: { my: 'center', at: 'center', of: window },
@@ -33,7 +33,7 @@ export class NewComponent implements OnInit {
         width: '30%',
         message: message,
       },
-      'warning',
+      type,
       1200
     );
   }
@@ -41,10 +41,10 @@ export class NewComponent implements OnInit {
   ngOnInit() {
     this.interventionService.getFamiliesAndSubFamilies().subscribe(
       (res: any) => {
-        console.log(res);
-        res.data.forEach((activity_family: any) => {
+        res.data.forEach((activity_family: any, index) => {
           const acfa = {
             type_name: activity_family.activity_family,
+            type_id: index,
             families: []
           };
           activity_family.interventions.forEach((intervention: any) => {
@@ -94,6 +94,9 @@ export class NewComponent implements OnInit {
 
   readRFID(e: any) {
     this.farmerData = e;
+    if (this.farmerData.rfid) {
+      this.validate();
+    }
   }
 
   validate() {
@@ -134,6 +137,11 @@ export class NewComponent implements OnInit {
                 }
               });
           }
+        },
+        (err) => {
+          this.loadingVisible = false;
+          NewComponent.notifyMe('Le CIN que vous avez saisi est incorrect ou n\'appartient pas à un agriculteur.');
+          return;
         });
     }
 

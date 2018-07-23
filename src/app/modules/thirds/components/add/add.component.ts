@@ -17,6 +17,7 @@ export class AddComponent implements OnInit {
   helper: any;
   title: string;
   morale: boolean;
+  isAggregated: boolean;
 
   constructor(
     private location: Location,
@@ -32,6 +33,7 @@ export class AddComponent implements OnInit {
     this.thirdType = this.helper.getThirdType(this.location.path());
     this.goTo = this.helper.getThirdLink(this.location.path());
     this.title = this.helper.getThirdTypeName(this.location.path());
+    this.isAggregated = (this.thirdType === 'aggregated');
     this.morale = false;
     if (this.thirdType === 'young_promoter') {
       this.tier.type = 'legal';

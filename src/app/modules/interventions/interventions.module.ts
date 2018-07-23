@@ -5,15 +5,17 @@ import { NewComponent } from './components/new/new.component';
 import {
   DxButtonModule, DxCheckBoxModule, DxDataGridModule,
   DxDateBoxModule,
-  DxFormModule, DxLoadPanelModule, DxPopupModule,
-  DxSelectBoxModule,
+  DxFormModule, DxListModule, DxLoadPanelModule, DxPopupModule,
+  DxSelectBoxModule, DxSwitchModule, DxTagBoxModule,
   DxTemplateModule,
   DxTextAreaModule,
   DxTextBoxModule,
   DxTreeListModule
 } from 'devextreme-angular';
-import { AddComponent } from './components/add/add.component';
-import { SharedModule } from '../../shared/shared.module';
+import {AddComponent} from './components/add/add.component';
+import {SharedModule} from '../../shared/shared.module';
+import {DxiItemModule} from 'devextreme-angular/ui/nested/item-dxi';
+import {DxiGroupItemModule} from 'devextreme-angular/ui/nested/group-item-dxi';
 import { MouvementsRoutingModule } from '../mouvements/mouvements-routing.module';
 import { AddTempleteComponent } from './components/add-templete/add-templete.component';
 
@@ -31,6 +33,14 @@ import { AddTempleteComponent } from './components/add-templete/add-templete.com
     DxButtonModule,
     DxTemplateModule,
     DxLoadPanelModule,
+    DxCheckBoxModule,
+    DxSwitchModule,
+    DxTagBoxModule,
+    DxListModule,
+    DxiItemModule,
+    DxiGroupItemModule,
+    DxFormModule,
+    DxTextBoxModule,
     DxCheckBoxModule,
     DxTreeListModule
   ],

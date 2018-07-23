@@ -53,7 +53,7 @@ export class ListComponent implements OnInit {
         warehouse.zip_code = event.zip_code;
         warehouse.tel = event.tel;
         warehouse.convention_ref = event.convention_ref;
-        warehouse.structure_id = +localStorage.getItem('structure_id');
+        warehouse.structure_id = +localStorage.getItem('tenantId');
         console.log(warehouse);
         return this.whService.addIncident(warehouse)
           .toPromise()

@@ -42,6 +42,20 @@ export class ShowRetourComponent implements OnInit {
           this.mouvement = response.data;
           this.articles = response.data.articles;
 
+          let dd: any; let mm: any; let today: any; let yyyy: any;
+           today = new Date();
+           dd = today.getDate();
+           mm = today.getMonth() + 1;
+           yyyy = today.getFullYear();
+          if ( dd < 10 ) {
+            dd = '0' + dd;
+          }
+          if ( mm < 10) {
+            mm = '0' + mm;
+          }
+           today = dd + '/' + mm + '/' + yyyy;
+          this.mouvement.date = today;
+
       this.stock_operation = {
           commande: this.mouvement.order_id,
           emetteur: this.mouvement.third_party_id,

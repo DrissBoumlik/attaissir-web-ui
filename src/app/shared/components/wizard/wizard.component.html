@@ -92,7 +92,7 @@
 
       </div>
 
-      <app-tiers-form [isEdit]="isEdit" [readOnly]="isEdit" [validationGroup]="tierData" [tier]="tier" [isWizard]="true"
+      <app-tiers-form [isEdit]="isEdit" [readOnly]="isEdit" [validationGroup]="tierData" [tier]="tier" [isAggregated]="true" [isWizard]="true"
                       *ngIf="addThird" (submit)="onFormSubmit($event)"></app-tiers-form>
     </div>
     <!-- End Agreggated Informations -->

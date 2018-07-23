@@ -261,10 +261,10 @@ export class ShowComponent implements OnInit {
         '<p> <span style="float: left">' + this.preconisation.date +
       '</span> &nbsp; &nbsp;  <span style="float: right"> n ' + this.preconisation.id + ' </span></p>' +
       '<br/><p>-------------------------</p><br/>' +
-      '<p> <span style="float: left;font-weight: bolder;">COMPAGNE </span>  <span style="float: right">' + this.preconisation.campaign + ' </span></p>' +
-      '<p> <span style="float: left;font-weight: bolder;">C/Z/P  </span>   <span style="float: right">' +  this.preconisation.parcel + '/' + this.preconisation.cda + '/' + this.preconisation.zone + ' </span></p>' +
-      '<p> <span style="float: left;font-weight: bolder;">NOM COMPLET  </span>   <span style="float: right">' + this.preconisation.third_party_name + ' </span></p>' +
-        '<p>*****</p>');
+      '<p> <span style="float: left;font-weight: bolder;">COMPAGNE </span>  <span style="float: right">' + this.preconisation.campaign + ' </span></p> <br/>' +
+      '<p> <span style="font-weight: bolder;float: left;"> C/Z/P  </span>   <span style="float: right">' +  this.preconisation.parcel + '/' + this.preconisation.cda + '/' + this.preconisation.zone + ' </span></p>  <br/>' +
+      '<p> <span style="float: left;font-weight: bolder;">NOM COMPLET  </span>   <span style="float: right">' + this.preconisation.third_party_name + ' </span></p>  <br/>' +
+        '<p><span style="float: bottom">***** </span></p>');
 
     this.articles.forEach(function(element) {
       print.document.write( '<p style="font-weight: bolder;">' + element.category + '</p>' );

@@ -259,7 +259,7 @@
 <dx-popup
   class="popup"
   [width]="580"
-  [height]="290"
+  [height]="400"
   [showTitle]="true"
   title="Confirmation "
   [dragEnabled]="false"
@@ -271,13 +271,17 @@
   <div *dxTemplate="let data of 'content'">
 
     <div  *ngIf="evnt1" style="text-align: center;">
-    <p>
-      Glisser la carte agriculteur.
-    </p>
-
-    <p style="text-align: center; margin: 20px">
-    <i class="fa fa-id-card-o fa-rotate-45" aria-hidden="true"></i>
-    </p>
+      <h1>GLISSER LA CARTE</h1>
+      <p>Faire glisser la carte sur le lecteur de carte pour lancer la recherche</p>
+      <div class="glisser-carte-agriculteur">
+        <div class="credit-card">
+          <div class="rfid-tripe"></div>
+        </div>
+        <div class="swiper-top"></div>
+        <div class="swiper-bottom">
+          <div class="light-indicator"></div>
+        </div>
+      </div>
     </div>
 
     <div *ngIf="!evnt1">
@@ -467,7 +471,7 @@
 
       <dx-button width="130" icon="fa fa-print"  (onClick)="print()" text="IMPRIMER" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp; &nbsp;
       <dx-button width="130" icon="fa fa-exchange"  text="RETOUR" type="default" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active" [disabled]="preconisation.state == 'delivered'" style="margin-left: 20px; margin-right: 20px;"  ></dx-button> &nbsp; &nbsp;
-      <dx-button width="130" icon="fa fa-trash"  text="ANNULER" type="danger" (onClick)="showDeletePopup()"  ></dx-button> &nbsp; &nbsp;
+      <dx-button width="130" icon="fa fa-trash"  text="ANNULER" [disabled]="preconisation.state == 'done'" type="danger" (onClick)="showDeletePopup()"  ></dx-button> &nbsp; &nbsp;
     </div>
   </div>
 </div>

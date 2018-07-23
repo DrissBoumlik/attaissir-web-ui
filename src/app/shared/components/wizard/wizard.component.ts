@@ -8,7 +8,7 @@ import { ThirdsService } from '../../../modules/thirds/services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
 import { SoilsService } from '../../../modules/contracts/services/soils.service';
 import { ZonesService } from '../../../modules/contracts/services/zones.service';
-import { ParcelsService } from '../../../modules/contracts/services/parcels.service';
+import { ParcelsService } from '../../../modules/parcels/services/parcels.service';
 import { ContractsService } from '../../../modules/contracts/services/contracts.service';
 import { Helper } from '../../classes/helper';
 

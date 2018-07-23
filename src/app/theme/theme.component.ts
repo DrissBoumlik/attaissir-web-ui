@@ -9,7 +9,6 @@ import { AuthenticationService } from '../auth/_services';
 declare let mApp: any;
 declare let mUtil: any;
 declare let mLayout: any;
-
 const MINUTES_UNITL_AUTO_LOGOUT = 30;
 const CHECK_INTERVAL = 1000;
 const STORE_KEY = 'lastAction';
@@ -35,7 +34,11 @@ export class ThemeComponent implements OnInit {
   }
 
   initListener() {
-    document.body.addEventListener('click', () => this.reset());
+    document.body.addEventListener('click', () => {
+      if (this.auth.getToken()) {
+        this.reset();
+      }
+    });
   }
 
   reset() {
@@ -43,8 +46,12 @@ export class ThemeComponent implements OnInit {
     this.lastAction = localStorage.getItem(STORE_KEY);
     if (this.canRefresh) {
       this.auth.refresh().subscribe(data => {
+        const currentUser: any = JSON.stringify(data);
+        localStorage.setItem('currentUser', currentUser);
+        localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
+        localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
       }, error1 => {
-        console.warn(error1);
+        this.toastr.warning(`La session n'est pas actualisée.`);
       });
     }
   }
@@ -62,9 +69,9 @@ export class ThemeComponent implements OnInit {
       const timeleft: any = Number(this.lastAction) + MINUTES_UNITL_AUTO_LOGOUT * 60 * 1000;
       const diff = Number(timeleft) - Number(now);
       const isTimeout = diff < 0;
-      this.canRefresh = diff < 1200000;
+      this.canRefresh = diff < 600000;
 
-      if (diff < 300000 && diff > 298800) {
+      if (diff < 1500000 && diff > 1499800) {
         this.toastr.warning('Votre session va expirer dans 5 minute!', '', {
           enableHtml: true,
           tapToDismiss: true
