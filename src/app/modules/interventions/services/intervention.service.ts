@@ -14,8 +14,16 @@ export class InterventionService {
   constructor(private http: HttpClient) {
   }
 
+  updateIntervention(id: number, data: any) {
+    return this.http.put(`${environment.apiUrl}/interventionrequests/${id}`, JSON.stringify(data), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   getInterventionById(id: number) {
-    return this.http.get(`${environment.apiUrl}/interventionrequests/${id}`, {
+    return this.http.get(`${environment.apiUrl}/interventionrequests/edit/${id}`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

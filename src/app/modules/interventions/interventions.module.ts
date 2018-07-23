@@ -9,7 +9,7 @@ import {
   DxSelectBoxModule, DxSwitchModule,
   DxTemplateModule,
   DxTextAreaModule,
-  DxTextBoxModule
+  DxTextBoxModule, DxValidationSummaryModule, DxValidatorModule
 } from 'devextreme-angular';
 import {AddComponent} from './components/add/add.component';
 import {SharedModule} from '../../shared/shared.module';
@@ -32,7 +32,9 @@ import {EditComponent} from './components/edit/edit.component';
     DxLoadPanelModule,
     DxCheckBoxModule,
     DxTextBoxModule,
-    DxSwitchModule
+    DxSwitchModule,
+    DxValidatorModule,
+    DxValidationSummaryModule
   ],
   declarations: [NewComponent, AddComponent, EditComponent]
 })
