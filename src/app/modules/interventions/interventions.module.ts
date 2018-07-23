@@ -11,10 +11,12 @@ import {
   DxTextAreaModule,
   DxTextBoxModule
 } from 'devextreme-angular';
-import {AddComponent} from './components/add/add.component';
-import {SharedModule} from '../../shared/shared.module';
-import {DxiItemModule} from 'devextreme-angular/ui/nested/item-dxi';
-import {DxiGroupItemModule} from 'devextreme-angular/ui/nested/group-item-dxi';
+import { AddComponent } from './components/add/add.component';
+import { SharedModule } from '../../shared/shared.module';
+import { DxiItemModule } from 'devextreme-angular/ui/nested/item-dxi';
+import { DxiGroupItemModule } from 'devextreme-angular/ui/nested/group-item-dxi';
+import { ListComponent } from './components/list/list.component';
+import { EtatDirective } from './components/list/directives/etat.directive';
 
 @NgModule({
   imports: [
@@ -39,6 +41,6 @@ import {DxiGroupItemModule} from 'devextreme-angular/ui/nested/group-item-dxi';
     DxFormModule,
     DxTextBoxModule,
   ],
-  declarations: [NewComponent, AddComponent]
+  declarations: [NewComponent, AddComponent, ListComponent, EtatDirective]
 })
 export class InterventionsModule { }

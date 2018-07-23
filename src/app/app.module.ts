@@ -31,7 +31,7 @@ import { ThirdsModule } from './modules/thirds/thirds.module';
 import { ArticlesModule } from './modules/articles/articles.module';
 import { CommandeModule } from './modules/commande/commande.module';
 import { MouvementsModule } from './modules/mouvements/mouvements.module';
-import {InterventionsModule} from './modules/interventions/interventions.module';
+import { InterventionsModule } from './modules/interventions/interventions.module';
 import { DemandesModule } from './modules/demandes/demandes.module';
 
 @NgModule({
