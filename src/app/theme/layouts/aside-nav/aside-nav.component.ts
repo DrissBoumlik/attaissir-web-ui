@@ -86,7 +86,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des interventions',
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
-          { icon: 'flaticon-plus', name: 'nouvelle  demande d\'intervention', url: '/interventions/selectionner' }
+          { icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner' }
         ],
         disabled: 'false'
       },

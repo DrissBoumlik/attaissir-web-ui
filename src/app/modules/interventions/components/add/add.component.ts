@@ -1,4 +1,4 @@
-import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ArticlesService} from '../../../articles/services/articles.service';
 import 'rxjs/add/operator/toPromise';
 import {InterventionService} from '../../services/intervention.service';
@@ -85,19 +85,16 @@ export class AddComponent implements OnInit {
   PRODUCT_TYPE = 'product';
   SERVICE_TYPE = 'service';
 
-  /*-------------------------------------------*/
+  /*--------------------Constructor-----------------------*/
 
   constructor(public articleService: ArticlesService,
               public interventionService: InterventionService,
               private wareHouseService: WarehouseService,
               private route: ActivatedRoute,
               private thirdsService: ThirdsService,
-              private router: Router) {
+              private router: Router) {}
 
-
-  }
-
-  /*-------------------------------------------*/
+  /*--------------------Initialize content-----------------------*/
   ngOnInit() {
     this.route.queryParams.subscribe(
       (qps: any) => {
@@ -107,7 +104,6 @@ export class AddComponent implements OnInit {
         this.interventionService.getDataBySubFamily(qps.sub_family_id)
           .subscribe(
             (res: any) => {
-              console.log(res);
               res.data.forEach(
                 (type: any) => {
                   type.categories.forEach(cat => {
@@ -209,7 +205,6 @@ export class AddComponent implements OnInit {
         this.interventionService.getInterventionCustomFields(qps.sub_family_id)
           .subscribe(
             (res: any) => {
-              console.log(res);
               this.custom_fields = res.data ? res.data : [];
               this.custom_fields.forEach((cf: any) => {
                 const dxCustomField = {
@@ -292,6 +287,29 @@ export class AddComponent implements OnInit {
       type: 'default',
       useSubmitBehavior: false,
       onClick: () => {
+        if ( !this.SelectedSemenceCategory
+            || !this.SelectedSemenceSubCategory
+           || !this.SelectedSemenceArticle
+           || !this.SemenceQuantity) {
+          NewComponent.notifyMe('Veuillez remplir tous les champs');
+          return -1;
+        }
+        try {
+          this.semenceGrid.instance.getVisibleRows().forEach((row: any) => {
+            console.log(row);
+            console.log(this.SelectedProductsArticle);
+            if (row.data.article.name === this.SelectedProductsArticle.name
+              && row.data.category.category_name === this.SelectedProductsCategory.category_name
+              && row.data.sub_category.sub_category_name === this.SelectedProductsSubCategory.sub_category_name
+              && row.data.quantity === this.productsQuantity ) {
+              const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
+              NewComponent.notifyMe(msg);
+              throw new Error(msg);
+            }
+          });
+        } catch (e) {
+          throw e;
+        }
         this.semences.push({
           'category': this.SelectedSemenceCategory,
           'sub_category': this.SelectedSemenceSubCategory,
@@ -345,6 +363,30 @@ export class AddComponent implements OnInit {
       type: 'default',
       useSubmitBehavior: false,
       onClick: () => {
+        if ( !this.SelectedProductsCategory
+          || !this.SelectedProductsSubCategory
+          || !this.SelectedProductsArticle
+          || !this.productsQuantity) {
+          NewComponent.notifyMe('Veuillez remplir tous les champs');
+          return -1;
+        }
+        try {
+          this.productsGrid.instance.getVisibleRows().forEach((row: any) => {
+            console.log(row);
+            console.log(this.SelectedProductsArticle);
+            if (row.data.article.name === this.SelectedProductsArticle.name
+              && row.data.category.category_name === this.SelectedProductsCategory.category_name
+              && row.data.sub_category.sub_category_name === this.SelectedProductsSubCategory.sub_category_name
+              && row.data.quantity === this.productsQuantity ) {
+              const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
+              NewComponent.notifyMe(msg);
+              throw new Error(msg);
+            }
+          });
+        } catch (e) {
+          throw e;
+        }
+
         this.products.push({
           'category': this.SelectedProductsCategory,
           'sub_category': this.SelectedProductsSubCategory,
@@ -437,8 +479,9 @@ export class AddComponent implements OnInit {
         try {
           this.DX_custom_fields.forEach(cf => {
             if (!this.custom_fields_form_data[cf.dataField] && cf.required) {
-              NewComponent.notifyMe('Veuillez remplir tous les champs obligatoires.');
-              throw new Error('Veuillez remplir tous les champs obligatoires.');
+              const msg = 'Veuillez remplir tous les champs obligatoires.';
+              NewComponent.notifyMe(msg);
+              throw new Error(msg);
             }
           });
         } catch (e) {
