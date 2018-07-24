@@ -19,7 +19,7 @@ import {DxiGroupItemModule} from 'devextreme-angular/ui/nested/group-item-dxi';
 import { MouvementsRoutingModule } from '../mouvements/mouvements-routing.module';
 import { AddTempleteComponent } from './components/add-templete/add-templete.component';
 import { ListComponent } from './components/list/list.component';
-import { EtatDirective } from './components/list/directives/etat.directive';
+import { EtatDirective } from '../../shared/directives/etat.directive';
 
 @NgModule({
   imports: [

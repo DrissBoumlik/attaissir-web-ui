@@ -17,7 +17,7 @@ export class EtatDirective implements OnInit {
   // @Input('appBetterHighlight') highlightColor: string = 'blue';
   @HostBinding('style.backgroundColor') backgroundColor: string;
   @HostBinding('style.color') color: string;
-  constructor(private elRef: ElementRef, private renderer: Renderer2) { }
+  constructor() { }
 
   ngOnInit() {
     if (this.etat == "etat1") {
