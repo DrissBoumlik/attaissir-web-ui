@@ -22,6 +22,7 @@ export class Parcel {
   costum_fields: string;
   soil_id?: number;
   logical_parcel_id?: number;
+  parcel_id?: number;
   is_logical?: boolean;
   contract_id?: number;
   name: string;

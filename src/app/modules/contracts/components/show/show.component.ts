@@ -64,38 +64,13 @@ export class ShowComponent implements OnInit {
             this.campagnes = res.data.contracted_surface;
             this.avenants = res.data.amendments;
             this.avenant = (this.avenants.length > 0) ? this.avenants[this.avenants.length - 1] : null;
-            this.parcels = res.data.parcels;
-            this.parcels = this.parcels.map((data) => {
-              const parcels = data;
-              return {
-                id: data.id,
-                soil_id: data.soil.id,
-                perimeter: ((data.soil !== null) && (data.soil.perimeter !== null))
-                  ? data.soil.perimeter : '',
-                region: ((data.soil !== null) && (data.soil.region !== null))
-                  ? data.soil.region : '',
-                district: ((data.soil !== null) && (data.soil.district !== null))
-                  ? data.soil.district : '',
-                rural_commune: ((data.soil !== null) && (data.soil.rural_commune !== null))
-                  ? data.soil.rural_commune : '',
-                cda: ((data.soil !== null) && (data.soil.cda !== null))
-                  ? data.soil.cda : '',
-                zone: ((data.soil !== null) && (data.soil.zone !== null))
-                  ? data.soil.zone : '',
-                sector: ((data.soil !== null) && (data.soil.sector !== null))
-                  ? data.soil.sector : '',
-                block: ((data.soil !== null) && (data.soil.block !== null))
-                  ? data.soil.block : '',
-                registration_number: ((data.soil !== null) && (data.soil.registration_number !== null))
-                  ? data.soil.registration_number : '',
-                annuel_surface: data.annuel_surface,
-                tenure: data.tenure,
-                code_ormva: data.code_ormva,
-                parcels: parcels
-              };
+            this.parcels = res.data.parcels.map((data) => {
+              return this.helper.makeParcel(data);
+            }).filter((a) => {
+              return !a.parcel_id;
             });
+            console.log(this.parcels);
             this.isContractEncours = this.contract.status === 'inprogress';
-
 
             this.rightHolderService.getAllDx(this.id).subscribe((_res: any) => {
                 this.rightsholders = _res;
@@ -118,52 +93,6 @@ export class ShowComponent implements OnInit {
       }
     );
 
-  }
-
-
-  makeParcel = (data) => {
-    if (data.hasOwnProperty('name')) {
-      return {
-        id: data.parcels[0].id,
-        name: data.name,
-        cda: ((data.parcels[0].soil !== null) && (data.parcels[0].soil.cda !== null))
-          ? data.parcels[0].soil.cda : '',
-        zone_id: ((data.parcels[0].soil !== null) && (data.parcels[0].soil.zone_id !== null))
-          ? data.parcels[0].soil.zone_id : '',
-        zone: ((data.parcels[0].soil !== null) && (data.parcels[0].soil.zone !== null))
-          ? data.parcels[0].soil.zone : '',
-        sector: ((data.parcels[0].soil !== null) && (data.parcels[0].soil.sector !== null))
-          ? data.parcels[0].soil.sector : '',
-        block: ((data.parcels[0].soil !== null) && (data.parcels[0].soil.block !== null))
-          ? data.parcels[0].soil.block : '',
-        registration_number: ((data.parcels[0].soil !== null) && (data.parcels[0].soil.registration_number !== null))
-          ? data.parcels[0].soil.registration_number : '',
-        annuel_surface: data.annuel_surface,
-        tenure: '-',
-        code_ormva: data.code_ormva,
-        parcels: data.parcels.map(p => this.makeParcel(p))
-      };
-    }
-    return {
-      id: data.id,
-      name: null,
-      cda: ((data.soil !== null) && (data.soil.cda !== null))
-        ? data.soil.cda : '',
-      zone_id: ((data.soil !== null) && (data.soil.zone_id !== null))
-        ? data.soil.zone_id : '',
-      zone: ((data.soil !== null) && (data.soil.zone !== null))
-        ? data.soil.zone : '',
-      sector: ((data.soil !== null) && (data.soil.sector !== null))
-        ? data.soil.sector : '',
-      block: ((data.soil !== null) && (data.soil.block !== null))
-        ? data.soil.block : '',
-      registration_number: ((data.soil !== null) && (data.soil.registration_number !== null))
-        ? data.soil.registration_number : '',
-      annuel_surface: data.annuel_surface,
-      tenure: data.tenure,
-      tenure_id: data.tenure_id,
-      code_ormva: data.code_ormva,
-    };
   }
 
   onRemoveDOC(e: any) {
@@ -296,7 +225,7 @@ export class ShowComponent implements OnInit {
       this.parcels = [];
       this.parcels.push(d);
       this.parcels = this.parcels.concat(d['parcels']).map(dat => {
-        return this.makeParcel(dat);
+        return this.helper.makeParcel(dat);
       });
       this.toaster.success('Le parcelle logique est crée avec succés');
     }, error1 => {
