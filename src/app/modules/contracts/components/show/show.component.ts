@@ -8,17 +8,11 @@ import { Contract } from '../../../../shared/classes/contract';
 import { ContractsService } from '../../services/contracts.service';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { Helper } from '../../../../shared/classes/helper';
-<<<<<<< HEAD
-import {RightHolderService} from '../../services/right-holder.service';
-import {ParcelsService} from '../../../parcels/services/parcels.service';
-import {CardsService} from '../../../cards/services/cards.service';
-import {Parcel} from '../../../../shared/classes/parcel';
-=======
 import { RightHolderService } from '../../services/right-holder.service';
-import { LogicalParcel } from '../../../../shared/classes/logical-parcel';
 import { ParcelsService } from '../../../parcels/services/parcels.service';
 import { CardsService } from '../../../cards/services/cards.service';
->>>>>>> 31b0ea9b34eea680db83b0bfcff5f225f9eabc34
+import { Parcel } from '../../../../shared/classes/parcel';
+
 declare const require: any;
 const $ = require('jquery');
 
