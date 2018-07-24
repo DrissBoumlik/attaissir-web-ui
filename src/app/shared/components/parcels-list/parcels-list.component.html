@@ -55,6 +55,7 @@
   <dxo-group-panel [visible]="true"></dxo-group-panel>
   <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
+
   <dxi-column dataField="name" caption="Nom de la parcelle"></dxi-column>
   <dxi-column dataField="third_party_code" caption="Code Agrégé" cellTemplate="userTemplate" width="150px"></dxi-column>
   <dxi-column dataField="cin" caption="CIN"></dxi-column>
@@ -66,8 +67,24 @@
   <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
   <dxi-column dataField="status" caption="Etat" cellTemplate="contractStatusTemplate"></dxi-column>
   <dxi-column dataField="type" caption="Type d'agrégé" cellTemplate="typeTemplate"></dxi-column>
-
-
+  <div *dxTemplate="let data of 'detail'">
+    <dx-data-grid
+      [dataSource]="data.data.parcels"
+      [showBorders]="true"
+      [columnAutoWidth]="true">
+      <dxi-column dataField="cda" caption="CDA" sortOrder="desc"></dxi-column>
+      <dxi-column dataField="zone" caption="Zone"></dxi-column>
+      <dxi-column dataField="sector" caption="Secteur"></dxi-column>
+      <dxi-column dataField="block" caption="Bloc"></dxi-column>
+      <dxi-column dataField="code_ormva" caption="Code ORMVA"></dxi-column>
+      <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
+      <dxi-column dataField="annuel_surface" cellTemplate="cellTemplate2" caption="Superficie annuelle"></dxi-column>
+      <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
+      <div *dxTemplate="let data of 'cellTemplate2'">
+        {{ data.value }} (ha)
+      </div>
+    </dx-data-grid>
+  </div>
   <div *dxTemplate="let data of 'contractStatusTemplate'">
           <span [ngClass]="helper.getStatusColor(data.value)">
               {{ helper.getStatut(data.value) }}

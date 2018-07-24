@@ -5,19 +5,24 @@ import { NewComponent } from './components/new/new.component';
 import {
   DxButtonModule, DxCheckBoxModule, DxDataGridModule,
   DxDateBoxModule,
-  DxFormModule, DxListModule, DxLoadPanelModule, DxPopupModule,
-  DxSelectBoxModule, DxSwitchModule, DxTagBoxModule,
+  DxFormModule, DxLoadPanelModule, DxPopupModule,
+  DxSelectBoxModule, DxSwitchModule,
   DxTemplateModule,
   DxTextAreaModule,
+
   DxTextBoxModule,
-  DxTreeListModule
+  DxTreeListModule, DxValidationSummaryModule, DxValidatorModule
 } from 'devextreme-angular';
-import {AddComponent} from './components/add/add.component';
-import {SharedModule} from '../../shared/shared.module';
-import {DxiItemModule} from 'devextreme-angular/ui/nested/item-dxi';
-import {DxiGroupItemModule} from 'devextreme-angular/ui/nested/group-item-dxi';
+import { AddComponent } from './components/add/add.component';
+import { SharedModule } from '../../shared/shared.module';
+import { DxiItemModule } from 'devextreme-angular/ui/nested/item-dxi';
+import { DxiGroupItemModule } from 'devextreme-angular/ui/nested/group-item-dxi';
 import { MouvementsRoutingModule } from '../mouvements/mouvements-routing.module';
 import { AddTempleteComponent } from './components/add-templete/add-templete.component';
+import { ListComponent } from './components/list/list.component';
+import { EtatDirective } from './components/list/directives/etat.directive';
+import { EditComponent } from './components/edit/edit.component';
+
 
 @NgModule({
   imports: [
@@ -34,16 +39,17 @@ import { AddTempleteComponent } from './components/add-templete/add-templete.com
     DxTemplateModule,
     DxLoadPanelModule,
     DxCheckBoxModule,
-    DxSwitchModule,
-    DxTagBoxModule,
-    DxListModule,
-    DxiItemModule,
-    DxiGroupItemModule,
-    DxFormModule,
     DxTextBoxModule,
+
+    DxSwitchModule,
+    DxValidatorModule,
+    DxValidationSummaryModule,
     DxCheckBoxModule,
     DxTreeListModule
   ],
-  declarations: [NewComponent, AddComponent, AddTempleteComponent]
+  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent]
+
 })
-export class InterventionsModule { }
+export class InterventionsModule {
+}
+

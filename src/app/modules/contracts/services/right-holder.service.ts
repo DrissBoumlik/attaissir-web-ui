@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +20,9 @@ export class RightHolderService {
    */
   getAllDx(contract_id: any): Observable<any[]> {
 
-    console.log({contract_id : contract_id});
+    console.log({ contract_id: contract_id });
 
-    return this.http.post<any[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify({contract_id : contract_id}), {
+    return this.http.post<any[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify({ contract_id: contract_id }), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -39,7 +39,7 @@ export class RightHolderService {
    * @param rightHolder
    * @returns {Observable<rightHolder[]>}
    */
-  addRightHolder( rightHolder: any): Observable<any[]> {
+  addRightHolder(rightHolder: any): Observable<any[]> {
     return this.http.post<any[]>(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(rightHolder), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ export class RightHolderService {
    * @param rightHolder , contract id
    * @returns {Observable<rightHolder>}
    */
-  editRightHolder(id: any , rightHolder: any): Observable<any> {
+  editRightHolder(id: any, rightHolder: any): Observable<any> {
     return this.http.put<any>(`${environment.apiUrl}/${this.routeName}/${id}`, JSON.stringify(rightHolder), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

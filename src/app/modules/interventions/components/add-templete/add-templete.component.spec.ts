@@ -8,9 +8,9 @@ describe('AddTempleteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddTempleteComponent ]
+      declarations: [AddTempleteComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
