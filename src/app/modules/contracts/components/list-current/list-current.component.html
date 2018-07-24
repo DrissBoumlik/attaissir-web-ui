@@ -42,7 +42,7 @@
         <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
         <dxo-selection mode="multiple"></dxo-selection>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
-        <dxo-export [enabled]="true" fileName="Tiers" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-export [enabled]="true" fileName="contrats-actifs" [allowExportSelectedData]="true"></dxo-export>
 
         <dxo-pager
           [allowedPageSizes]="[5, 8, 15, 30]"
@@ -59,7 +59,7 @@
         <dxi-column cellTemplate="cellTemplate" [allowSorting]="false" caption="" width="70px" allowColumnResizing="true">
         </dxi-column>
 
-        <dxi-column dataField="code" caption="Code">
+        <dxi-column dataField="code" [hidingPriority]="2" [allowFiltering]="false" [allowSorting]="false" [allowGrouping]="false"  caption="Code">
         </dxi-column>
         <dxi-column dataField="third_cin" caption="CIN" i18n-caption>
         </dxi-column>
@@ -72,18 +72,14 @@
         <dxi-column dataField="zone" caption="ZONE" i18n-caption>
         </dxi-column>-->
 
-        <dxi-column cellTemplate="typeTemplate" caption="Type">
+        <dxi-column dataField="contract_type" caption="Type"  [allowFiltering]="false" [allowSorting]="false" [allowGrouping]="false"  >
         </dxi-column>
 
         <dxi-column dataField="status" cellTemplate="contractListTemplate" caption="Statut">
         </dxi-column>
         <dxi-column dataField="third_full_name" cellTemplate="thirdNameTemplate" caption="Nom" datatype="Text"></dxi-column>
         <dxi-column dataField="structure_name" caption="Division" dataType="Text"></dxi-column>
-        <div *dxTemplate="let contract of 'typeTemplate'">
-          <span>
-                {{ (contract.data['parent_id']) ? 'Avenant' : 'Contrat' }}
-          </span>
-        </div>
+
         <div *dxTemplate="let contract of 'thirdNameTemplate'">
           <span>
                 {{ (contract.data['third_type'] === 'natural') ? contract.data['third_full_name'] : contract.data['third_company_name'] }}
