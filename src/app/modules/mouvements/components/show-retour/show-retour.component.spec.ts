@@ -8,9 +8,9 @@ describe('ShowRetourComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShowRetourComponent ]
+      declarations: [ShowRetourComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

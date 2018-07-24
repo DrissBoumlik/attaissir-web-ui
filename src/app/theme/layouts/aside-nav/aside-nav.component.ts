@@ -122,7 +122,14 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/preconisations-intrants/liste',
         description: 'Preconisations intrants',
         disabled: 'false'
-      }
+      },
+      {
+        name: 'Préconisations intrants',
+        icon: 'flaticon-tabs',
+        url: '/interventions/appliquer-template-parcelle',
+        description: 'Preconisations intrants',
+        disabled: 'false'
+      },
     ];
 
   }

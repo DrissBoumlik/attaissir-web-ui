@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {PreconisationsIntrantsService} from '../../../preconisations-intrants/service/preconisations-intrants.service';
-import {ActivatedRoute} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {MouvementsService} from '../../service/mouvements.service';
+import { PreconisationsIntrantsService } from '../../../preconisations-intrants/service/preconisations-intrants.service';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { MouvementsService } from '../../service/mouvements.service';
 import { Helper } from '../../../../shared/classes/helper';
 import { Router } from '@angular/router';
 
@@ -25,7 +25,7 @@ export class ShowRetourComponent implements OnInit {
 
 
   constructor(private preconisationsIntrantsService: PreconisationsIntrantsService, private route: ActivatedRoute, private toastr: ToastrService,
-  private mouvementService: MouvementsService , private router: Router) {
+    private mouvementService: MouvementsService, private router: Router) {
 
     this.helper = Helper;
     this.articles = [];
@@ -43,25 +43,25 @@ export class ShowRetourComponent implements OnInit {
           this.articles = response.data.articles;
 
           let dd: any; let mm: any; let today: any; let yyyy: any;
-           today = new Date();
-           dd = today.getDate();
-           mm = today.getMonth() + 1;
-           yyyy = today.getFullYear();
-          if ( dd < 10 ) {
+          today = new Date();
+          dd = today.getDate();
+          mm = today.getMonth() + 1;
+          yyyy = today.getFullYear();
+          if (dd < 10) {
             dd = '0' + dd;
           }
-          if ( mm < 10) {
+          if (mm < 10) {
             mm = '0' + mm;
           }
-           today = dd + '/' + mm + '/' + yyyy;
+          today = dd + '/' + mm + '/' + yyyy;
           this.mouvement.date = today;
 
-      this.stock_operation = {
-          commande: this.mouvement.order_id,
-          emetteur: this.mouvement.third_party_id,
-          recepteur: this.mouvement.source,
-          type: 'return'
-       };
+          this.stock_operation = {
+            commande: this.mouvement.order_id,
+            emetteur: this.mouvement.third_party_id,
+            recepteur: this.mouvement.source,
+            type: 'return'
+          };
 
 
 
@@ -78,8 +78,8 @@ export class ShowRetourComponent implements OnInit {
     this.articles.forEach((it) => {
 
       if (it.id === id) {
-       const index = this.articles.indexOf(it, 0);
-        this.articles.splice(index, 1 );
+        const index = this.articles.indexOf(it, 0);
+        this.articles.splice(index, 1);
       }
     });
   }
@@ -118,10 +118,10 @@ export class ShowRetourComponent implements OnInit {
 
       if (typeof it.quantity_retour1 !== 'undefined') {
         this.products.push({
-         // 'famille_id': it.article.category.article_category.id,
-         // 'sub_famille_id': it.article.category.id ,
+          // 'famille_id': it.article.category.article_category.id,
+          // 'sub_famille_id': it.article.category.id ,
           'article_id': it.id,
-          'quantity_retour1':  it.quantity_retour1
+          'quantity_retour1': it.quantity_retour1
         });
       }
     });

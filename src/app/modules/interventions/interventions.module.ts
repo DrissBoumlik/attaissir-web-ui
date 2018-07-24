@@ -9,16 +9,19 @@ import {
   DxSelectBoxModule, DxSwitchModule, DxTagBoxModule,
   DxTemplateModule,
   DxTextAreaModule,
+
   DxTextBoxModule,
-  DxTreeListModule
+  DxTreeListModule, DxValidationSummaryModule, DxValidatorModule
 } from 'devextreme-angular';
-import {AddComponent} from './components/add/add.component';
-import {SharedModule} from '../../shared/shared.module';
-import {DxiItemModule} from 'devextreme-angular/ui/nested/item-dxi';
-import {DxiGroupItemModule} from 'devextreme-angular/ui/nested/group-item-dxi';
+import { AddComponent } from './components/add/add.component';
+import { SharedModule } from '../../shared/shared.module';
+import { DxiItemModule } from 'devextreme-angular/ui/nested/item-dxi';
+import { DxiGroupItemModule } from 'devextreme-angular/ui/nested/group-item-dxi';
 import { MouvementsRoutingModule } from '../mouvements/mouvements-routing.module';
 import { AddTempleteComponent } from './components/add-templete/add-templete.component';
 import { ListComponent } from './components/list/list.component';
+
+import { EditComponent } from './components/edit/edit.component';
 import { EtatDirective } from '../../shared/directives/etat.directive';
 
 @NgModule({
@@ -36,6 +39,7 @@ import { EtatDirective } from '../../shared/directives/etat.directive';
     DxTemplateModule,
     DxLoadPanelModule,
     DxCheckBoxModule,
+
     DxSwitchModule,
     DxTagBoxModule,
     DxListModule,
@@ -43,9 +47,12 @@ import { EtatDirective } from '../../shared/directives/etat.directive';
     DxiGroupItemModule,
     DxFormModule,
     DxTextBoxModule,
+    DxValidatorModule,
     DxCheckBoxModule,
-    DxTreeListModule
+    DxTreeListModule,
+    DxTextBoxModule,
+    DxValidationSummaryModule
   ],
-  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective]
+  declarations: [NewComponent, AddComponent, AddTempleteComponent, EditComponent, ListComponent, EtatDirective  ]
 })
 export class InterventionsModule { }

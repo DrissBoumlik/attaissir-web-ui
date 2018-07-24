@@ -4,6 +4,7 @@ import { isNull } from "util";
 import { ActivatedRoute, Router } from '@angular/router';
 import { PreconisationsIntrantsService } from '../../service/preconisations-intrants.service';
 import CustomStore from 'devextreme/data/custom_store';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-list',
@@ -15,6 +16,7 @@ export class ListComponent implements OnInit {
   preconisations_intrants: any = {};
 
   helper: any;
+  applyFilter: any = 'auto';
 
   constructor(private route: ActivatedRoute, private preconisationsIntrantsService: PreconisationsIntrantsService) {
     this.helper = Helper;
@@ -30,10 +32,7 @@ export class ListComponent implements OnInit {
         return this.preconisationsIntrantsService.getListeDemandesDx(loadOptions)
           .toPromise()
           .then(response => {
-            return {
-              data: response.data,
-              totalCount: response.data.length
-            };
+            return response;
           })
           .catch(error => {
             throw error;

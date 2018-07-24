@@ -8,6 +8,7 @@ import {WarehouseService} from '../../../distribution-center/services/warehouse.
 import {DxDataGridComponent} from 'devextreme-angular';
 import {NewComponent} from '../new/new.component';
 import {DxiItemComponent} from 'devextreme-angular/ui/nested/item-dxi';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-add',
@@ -43,7 +44,7 @@ export class AddComponent implements OnInit {
   semenceArticleOptions: any;
   SelectedSemenceCategory: any;
   SelectedSemenceSubCategory: any;
-  SelectedSemenceArticle: any;
+  SelectedSemenceArticle: any = {};
   SemenceQuantity: any;
   /*-------------------------------------------*/
   productsCategoryOptions: any;
@@ -51,7 +52,7 @@ export class AddComponent implements OnInit {
   productsArticleOptions: any;
   SelectedProductsCategory: any;
   SelectedProductsSubCategory: any;
-  SelectedProductsArticle: any;
+  SelectedProductsArticle: any = {};
   productsQuantity: any;
   /*-------------------------------------------*/
   @ViewChild('semenceGrid') semenceGrid: DxDataGridComponent;
@@ -92,7 +93,9 @@ export class AddComponent implements OnInit {
               private wareHouseService: WarehouseService,
               private route: ActivatedRoute,
               private thirdsService: ThirdsService,
-              private router: Router) {}
+              private toastr: ToastrService,
+              private router: Router) {
+  }
 
   /*--------------------Initialize content-----------------------*/
   ngOnInit() {
@@ -130,7 +133,7 @@ export class AddComponent implements OnInit {
                   });
                   this.data.services.forEach(cat => {
                     cat.sub_categories.forEach(subcat => {
-                      this.articleService.getArticlesByFamily(subcat.sub_category_id)
+                      this.interventionService.getServiceArticlesBySubCatID(this.request_type_id)
                         .subscribe((ars: any) => {
                           ars.data.forEach(
                             (ar: any) => {
@@ -163,7 +166,7 @@ export class AddComponent implements OnInit {
                       contracted_surface: parcel.exploited_surface,
                       actual_surface: parcel.manuel_surface,
                       remaining_surface: parcel.abandoned_surface,
-                      id_zone: parcel.zone_id ? parcel.zone_id : 21
+                      id_zone: parcel.zone_id ? parcel.zone_id : 2
                     },
                   );
                 });
@@ -180,7 +183,17 @@ export class AddComponent implements OnInit {
                       this.stwOptions = {
                         max: this.interventions.contracted_surface,
                         min: 0,
-                        value: 0,
+                        value: this.interventions.contracted_surface,
+                        /*onValueChanged: (stwEvent) => {
+                          if (this.interventions.contracted_surface && (stwEvent.value > this.interventions.contracted_surface )) {
+                            this.stwOptions.value = {
+                              min: 0,
+                              value: this.interventions.contracted_surface,
+                            };
+                            console.log(stwEvent);
+                            this.toastr.warning('La valeur que vous avez saisie dépasse la valeur de la superficie contractée.');
+                          }
+                        }*/
                       };
                       this.wareHouseService.getWarehousesByZone(event.selectedItem.id_zone).subscribe(
                         (cds: any) => {
@@ -270,7 +283,7 @@ export class AddComponent implements OnInit {
                     onSelectionChanged: (ev) => {
                       this.SelectedSemenceArticle = ev.selectedItem;
                       this.semenceQuantityOptions = {
-                        value:  this.interventions.surface_to_work * (+this.SelectedSemenceArticle.dose),
+                        value: this.interventions.surface_to_work * (+this.SelectedSemenceArticle.dose),
                         onValueChanged: (cc) => {
                           this.SemenceQuantity = cc.value;
                         }
@@ -289,21 +302,19 @@ export class AddComponent implements OnInit {
       type: 'default',
       useSubmitBehavior: false,
       onClick: () => {
-        if ( !this.SelectedSemenceCategory
-            || !this.SelectedSemenceSubCategory
-           || !this.SelectedSemenceArticle
-           || !this.SemenceQuantity) {
+        if (!this.SelectedSemenceCategory
+          || !this.SelectedSemenceSubCategory
+          || !this.SelectedSemenceArticle
+          || !this.SemenceQuantity) {
           NewComponent.notifyMe('Veuillez remplir tous les champs');
           return -1;
         }
         try {
           this.semenceGrid.instance.getVisibleRows().forEach((row: any) => {
-            console.log(row);
-            console.log(this.SelectedProductsArticle);
             if (row.data.article.name === this.SelectedProductsArticle.name
               && row.data.category.category_name === this.SelectedProductsCategory.category_name
               && row.data.sub_category.sub_category_name === this.SelectedProductsSubCategory.sub_category_name
-              && row.data.quantity === this.productsQuantity ) {
+              && row.data.quantity === this.productsQuantity) {
               const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
               NewComponent.notifyMe(msg);
               throw new Error(msg);
@@ -348,7 +359,7 @@ export class AddComponent implements OnInit {
                     onSelectionChanged: (ev) => {
                       this.SelectedProductsArticle = ev.selectedItem;
                       this.productsQuantityOptions = {
-                        value:  this.interventions.surface_to_work * (+this.SelectedProductsArticle.dose),
+                        value: this.interventions.surface_to_work * (+this.SelectedProductsArticle.dose),
                         onValueChanged: (vv) => {
                           this.productsQuantity = vv.value;
                         }
@@ -367,7 +378,7 @@ export class AddComponent implements OnInit {
       type: 'default',
       useSubmitBehavior: false,
       onClick: () => {
-        if ( !this.SelectedProductsCategory
+        if (!this.SelectedProductsCategory
           || !this.SelectedProductsSubCategory
           || !this.SelectedProductsArticle
           || !this.productsQuantity) {
@@ -376,12 +387,10 @@ export class AddComponent implements OnInit {
         }
         try {
           this.productsGrid.instance.getVisibleRows().forEach((row: any) => {
-            console.log(row);
-            console.log(this.SelectedProductsArticle);
             if (row.data.article.name === this.SelectedProductsArticle.name
               && row.data.category.category_name === this.SelectedProductsCategory.category_name
               && row.data.sub_category.sub_category_name === this.SelectedProductsSubCategory.sub_category_name
-              && row.data.quantity === this.productsQuantity ) {
+              && row.data.quantity === this.productsQuantity) {
               const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
               NewComponent.notifyMe(msg);
               throw new Error(msg);
@@ -407,7 +416,6 @@ export class AddComponent implements OnInit {
       useSubmitBehavior: true,
       icon: 'fa fa-save',
       onClick: ($event) => {
-        console.log(this.data);
         /*--------------------------------------------------------*/
         if (((!this.productsGrid && !this.data.services.length && this.semenceGrid) &&
             this.semenceGrid.instance.getVisibleRows().length === 0)
@@ -452,14 +460,14 @@ export class AddComponent implements OnInit {
           });
         }
 
-       if (this.productsGrid) {
-         this.productsGrid.instance.getVisibleRows().forEach(row => {
-           data.product_articles.push({
-             article_id: row.data.article.id,
-             quantity: row.data.quantity,
-           });
-         });
-       }
+        if (this.productsGrid) {
+          this.productsGrid.instance.getVisibleRows().forEach(row => {
+            data.product_articles.push({
+              article_id: row.data.article.id,
+              quantity: row.data.quantity,
+            });
+          });
+        }
 
         this.selectedItems.forEach(
           st => {
@@ -475,7 +483,7 @@ export class AddComponent implements OnInit {
         if (!data.logical_parcel_id
           || !data.date
           || data.surface_to_work === null
-          || !data.warehouse_id) {
+          || (!data.warehouse_id && (this.data.products.length || this.data.products.length))) {
           NewComponent.notifyMe('Veuillez remplir tous les champs obligatoires.');
           return -1;
         }
@@ -496,7 +504,6 @@ export class AddComponent implements OnInit {
         /*--------------------------------------------------------*/
 
         this.loadingVisible = true;
-        console.log(data);
         this.interventionService.addInterventionRequest(data).subscribe(
           (value: any) => {
             this.loadingVisible = false;

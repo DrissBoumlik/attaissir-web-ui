@@ -56,7 +56,7 @@ export class Helper {
     } else if (value === 'canceled') {
       return 'ANNULÉ';
     }
-    return 'ENCOURS';
+    return '';
   }
 
   public static articleType = (type) => {
@@ -77,17 +77,29 @@ export class Helper {
       return 'm-badge m-badge--primary m-badge--wide';
     }
     if (value.toLowerCase() === 'inactif'.toLowerCase() || value.toLowerCase() === 'Inactive'.toLowerCase()) {
-      return 'm-badge m-badge--warning m-badge--wide';
-    } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'Encours'.toLowerCase()) {
-      return 'm-badge m-badge--info m-badge--wide';
-    } else if (value.toLowerCase() === 'actif'.toLowerCase() || value.toLowerCase() === 'Active'.toLowerCase()) {
-      return 'm-badge m-badge--success m-badge--wide';
-    } else if (value.toLowerCase() === 'suspended'.toLowerCase() || value.toLowerCase() === 'Suspendu'.toLowerCase()) {
-      return 'm-badge m-badge--danger m-badge--wide';
-    } else {
-      return 'm-badge m-badge--primary m-badge--wide';
-    }
+       return 'm-badge m-badge--warning m-badge--wide';
+     } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'Encours'.toLowerCase()) {
+       return 'm-badge m-badge--info m-badge--wide';
+     } else if (value.toLowerCase() === 'actif'.toLowerCase() || value.toLowerCase() === 'Active'.toLowerCase()) {
+       return 'm-badge m-badge--success m-badge--wide';
+     } else if (value.toLowerCase() === 'suspended'.toLowerCase() || value.toLowerCase() === 'Suspendu'.toLowerCase()) {
+       return 'm-badge m-badge--danger m-badge--wide';
+     } else {
+       return 'm-badge m-badge--primary m-badge--wide';
+     }
   }
+
+
+/*  public static getStatusColor = (value: string): string => {
+    if (value === 'inprogress') {
+      return 'ENCOURS';
+    } else if (value === 'done') {
+      return 'VALIDÉ';
+    } else if (value === 'canceled') {
+      return 'ANNULÉ';
+    }
+    return 'ENCOURS';
+  }*/
 
   public static getOrderStatusColor(value: string): string {
     console.log(value);
@@ -218,4 +230,77 @@ export class Helper {
     }
     return value;
   }
+
+  public static makeParcel = (data) => {
+    if (data.hasOwnProperty('name')) {
+      return {
+        id: data.id,
+        name: data.name,
+        soil_id: data.soil.id,
+        parcel_id: data.parcel_id,
+        perimeter: ((data.soil !== null) && (data.soil.perimeter !== null))
+          ? data.soil.perimeter : '',
+        region: ((data.soil !== null) && (data.soil.region !== null))
+          ? data.soil.region : '',
+        district: ((data.soil !== null) && (data.soil.district !== null))
+          ? data.soil.district : '',
+        rural_commune: ((data.soil !== null) && (data.soil.rural_commune !== null))
+          ? data.soil.rural_commune : '',
+        cda: ((data.soil !== null) && (data.soil.cda !== null))
+          ? data.soil.cda : '',
+        zone: ((data.soil !== null) && (data.soil.zone !== null))
+          ? data.soil.zone : '',
+        sector: ((data.soil !== null) && (data.soil.sector !== null))
+          ? data.soil.sector : '',
+        block: ((data.soil !== null) && (data.soil.block !== null))
+          ? data.soil.block : '',
+        registration_number: ((data.soil !== null) && (data.soil.registration_number !== null))
+          ? data.soil.registration_number : '',
+        annuel_surface: data.annuel_surface,
+        tenure: data.tenure,
+        code_ormva: data.code_ormva,
+        parcels: data.parcels.map(p => Helper.makeParcel(p))
+      };
+    }
+    return {
+      id: data.id,
+      name: data.name,
+      soil_id: data.soil.id,
+      parcel_id: data.parcel_id,
+      perimeter: ((data.soil !== null) && (data.soil.perimeter !== null))
+        ? data.soil.perimeter : '',
+      region: ((data.soil !== null) && (data.soil.region !== null))
+        ? data.soil.region : '',
+      district: ((data.soil !== null) && (data.soil.district !== null))
+        ? data.soil.district : '',
+      rural_commune: ((data.soil !== null) && (data.soil.rural_commune !== null))
+        ? data.soil.rural_commune : '',
+      cda: ((data.soil !== null) && (data.soil.cda !== null))
+        ? data.soil.cda : '',
+      zone: ((data.soil !== null) && (data.soil.zone !== null))
+        ? data.soil.zone : '',
+      sector: ((data.soil !== null) && (data.soil.sector !== null))
+        ? data.soil.sector : '',
+      block: ((data.soil !== null) && (data.soil.block !== null))
+        ? data.soil.block : '',
+      registration_number: ((data.soil !== null) && (data.soil.registration_number !== null))
+        ? data.soil.registration_number : '',
+      annuel_surface: data.annuel_surface,
+      tenure: data.tenure,
+      code_ormva: data.code_ormva,
+      parcels: []
+    };
+  }
+
+  public static tenureType = (value: string): string => {
+    if (value === 'property') {
+      return 'propriété';
+    } else if (value === 'lease') {
+      return 'bail';
+    } else if (value === 'procuration') {
+      return 'procuration';
+    }
+    return value;
+  }
+
 }

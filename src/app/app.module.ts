@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,11 +18,15 @@ import {
   DxCheckBoxModule,
   DxDataGridModule,
   DxFileUploaderModule,
-  DxLookupModule, DxPivotGridModule,
-  DxPopupModule, DxRadioGroupModule,
-  DxSelectBoxModule, DxSwitchModule,
+  DxLookupModule,
+  DxPivotGridModule,
+  DxPopupModule,
+  DxRadioGroupModule,
+  DxSelectBoxModule,
+  DxSwitchModule,
   DxTemplateModule
 } from 'devextreme-angular';
+
 import { SiamErrorHandler } from './shared/classes/siam-error-handler';
 import { ParcelsModule } from './modules/parcels/parcels.module';
 import { CardsModule } from './modules/cards/cards.module';
@@ -33,10 +38,13 @@ import { MouvementsModule } from './modules/mouvements/mouvements.module';
 import { InterventionsModule } from './modules/interventions/interventions.module';
 import { DemandesModule } from './modules/demandes/demandes.module';
 
+import {PermissionDirective} from './_directives/permission.directive';
+
 @NgModule({
   declarations: [
     ThemeComponent,
     AppComponent,
+    PermissionDirective
   ],
   imports: [
     LayoutModule,
@@ -87,17 +95,18 @@ import { DemandesModule } from './modules/demandes/demandes.module';
     useValue: 'fr'
   },
     ScriptLoaderService,
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  },
-  {
-    provide: ErrorHandler,
-    useClass: SiamErrorHandler
-  }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: SiamErrorHandler
+    }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

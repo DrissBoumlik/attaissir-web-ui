@@ -59,8 +59,8 @@ export class ParcelsService {
   }
 
 
-  getParcelsDx(params: any): Observable<Contract[]> {
-    return this.http.post<Contract[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
+  getParcelsDx(params: any): Observable<Parcel[]> {
+    return this.http.post<Parcel[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

@@ -12,8 +12,8 @@ const routes: Routes = [{
   children: [
     { path: 'selectionner', component: NewComponent },
     { path: 'ajouter', component: AddComponent },
-    { path: 'template/ajouter', component: AddTempleteComponent },
-    { path: 'list', component: ListComponent }
+    { path: 'appliquer-template-parcelle', component: AddTempleteComponent },
+    { path: 'list', component: ListComponent },
   ]
 }];
 

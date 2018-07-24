@@ -63,7 +63,9 @@ export class AuthComponent implements OnInit {
           const currentUser: any = JSON.stringify(data);
           localStorage.setItem('currentUser', currentUser);
           localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
-          localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
+          if (!localStorage.getItem('tenantId')) {
+            localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
+          }
           this.toastr.success(`Bonjour ${JSON.parse(currentUser).data.name.toUpperCase()}`);
         }
         this._router.navigate([this.returnUrl]);

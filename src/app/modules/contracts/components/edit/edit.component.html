@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Créer un avenant pour {{ contract.code }}</h2>
+      <h2>{{ (contract['status'] === 'inprogress') ? 'Modifier le contrat' : 'Créer un avenant pour' }} {{ contract.code }}</h2>
     </div>
 
   </div>

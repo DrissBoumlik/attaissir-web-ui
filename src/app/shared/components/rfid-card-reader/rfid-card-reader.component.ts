@@ -44,19 +44,21 @@ export class RfidCardReaderComponent implements OnInit {
       this.rfid.nativeElement.focus();
     });
     this.rfid.nativeElement.focus();
-    setTimeout(() => {
-      this.rfid_input_value = this.rfid.nativeElement.value;
-      if (this.rfid_input_value.length > 0) {
-        this.popupVisible = false;
-        this.outData.emit({
-          rfid: this.rfid_input_value,
-          cin: this.cin
-        });
-        this.focusout.nativeElement.focus();
-      }
-      this.rfid.nativeElement.value = '';
-      this.rfid_input_value = '';
-    }, 2000);
+    this.rfid.nativeElement.addEventListener('input', () => {
+      setTimeout(() => {
+        this.rfid_input_value = this.rfid.nativeElement.value;
+        if (this.rfid_input_value.length > 0) {
+          this.popupVisible = false;
+          this.outData.emit({
+            rfid: this.rfid_input_value,
+            cin: this.cin
+          });
+          this.focusout.nativeElement.focus();
+        }
+        this.rfid.nativeElement.value = '';
+        this.rfid_input_value = '';
+      }, 1000);
+    });
   }
 
   onCinInput(e: any) {
