@@ -1,0 +1,281 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+      <h2>Modifier intervention</h2>
+    </div>
+  </div>
+</div>
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+      <form style="height: auto" (submit)="onFormSubmit($event)">
+        <dx-form
+          [formData]="interventions"
+          [readOnly]="false"
+          [showColonAfterLabel]="true"
+          [showValidationSummary]="true"
+          labelLocation="top">
+
+          <!--Informations Générales-->
+          <dxi-item itemType="group" caption="Informations Générales" [colCount]="2">
+            <!--col 1-->
+            <dxi-item itemType="group" [colCount]="1">
+
+              <dxi-item dataField="generaleInformations.cin" [disabled]="true">
+                <dxo-label
+                  text="CIN">
+                </dxo-label>
+              </dxi-item>
+              <dxi-item dataField="generaleInformations.fullName" [disabled]="true">
+                <dxo-label
+                  text="Nom complet">
+                </dxo-label>
+              </dxi-item>
+              <dxi-item dataField="generaleInformations.phone" [disabled]="true">
+                <dxo-label
+                  text="N Téléphone">
+                </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="generaleInformations.parcelle" [disabled]="true">
+                <dxo-label
+                  text="Parcelle">
+                </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="generaleInformations.areaContracted" [disabled]="true">
+                <dxo-label
+                  text="Superficie contractée">
+                </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="generaleInformations.areaReal" [disabled]="true">
+                <dxo-label
+                  text="Superficie réelle">
+                </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="generaleInformations.areaLeft" [disabled]="true">
+                <dxo-label
+                  text="Superficie restante">
+                </dxo-label>
+              </dxi-item>
+
+            </dxi-item>
+            <!--end col 1-->
+            <!--col 2-->
+            <dxi-item itemType="group" [colCount]="1">
+
+              <dxi-item dataField="generaleInformations.predictedDate" [disabled]="true">
+                <dxo-label
+                  text="Date prévue">
+                </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="generaleInformations.areaToWork" [disabled]="true">
+                <dxo-label
+                  text="Superficie a travailler">
+                </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="generaleInformations.centreDisribution" [disabled]="true">
+                <dxo-label
+                  text="Centre distribution">
+                </dxo-label>
+              </dxi-item>
+
+            </dxi-item>
+            <!--end col2-->
+          </dxi-item>
+          <!--end Informations Générales-->
+
+          <!--choix de la semence-->
+          <dxi-item itemType="group" caption="Choix de la semence">
+            <dxi-item [colSpan]="5">
+              <dx-data-grid
+                #semenceGrid
+                id="prestationGrid"
+                [allowColumnReordering]="true"
+                [dataSource]="interventions.prestations"
+                [showColumnLines]="true"
+                [showRowLines]="true"
+                [showBorders]="true"
+                [rowAlternationEnabled]="true"
+                [columnAutoWidth]="true"
+                [noDataText]="'Aucan article n\'est ajoute!'">
+                <dxi-column dataField="category" caption="Famille"></dxi-column>
+                <dxi-column dataField="sub_category" caption="Sous famille"></dxi-column>
+                <dxi-column dataField="article_name" caption="Article"></dxi-column>
+                <dxi-column dataField="quantity" caption="Quantité"></dxi-column>
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxo-remote-operations
+                  [sorting]="true"
+                  [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-pager
+                  [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </dxi-item>
+          </dxi-item>
+          <!--end choix de la semence-->
+
+          <!--Choix des produits-->
+          <dxi-item itemType="group" caption="Choix des produits">
+            <dxi-item [colSpan]="5">
+              <dx-data-grid
+                #semenceGrid
+                id="ProductsGrid"
+                [allowColumnReordering]="true"
+                [dataSource]="interventions.products"
+                [showColumnLines]="true"
+                [showRowLines]="true"
+                [showBorders]="true"
+                [rowAlternationEnabled]="true"
+                [columnAutoWidth]="true"
+                [noDataText]="'Aucan article n\'est ajoute!'">
+                <dxi-column dataField="category" caption="Famille"></dxi-column>
+                <dxi-column dataField="sub_category" caption="Sous famille"></dxi-column>
+                <dxi-column dataField="article_name" caption="Article"></dxi-column>
+                <dxi-column dataField="quantity" caption="Quantité"></dxi-column>
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxo-remote-operations
+                  [sorting]="true"
+                  [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-pager
+                  [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </dxi-item>
+          </dxi-item>
+          <!--end Choix des produits-->
+
+          <!--choix des prestations de service-->
+          <dxi-item itemType="group" caption="Choix des préstations de service">
+            <dxi-item [colSpan]="5">
+              <dx-data-grid
+                #semenceGrid
+                id="ServicesGrid"
+                [allowColumnReordering]="true"
+                [dataSource]="interventions.prestations"
+                [showColumnLines]="true"
+                [showRowLines]="true"
+                [showBorders]="true"
+                [rowAlternationEnabled]="true"
+                [columnAutoWidth]="true"
+                [noDataText]="'Aucan article n\'est ajoute!'">
+                <dxi-column dataField="category" caption="Famille"></dxi-column>
+                <dxi-column dataField="sub_category" caption="Sous famille"></dxi-column>
+                <dxi-column dataField="article_name" caption="Article"></dxi-column>
+                <dxi-column dataField="quantity" caption="Quantité"></dxi-column>
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxo-remote-operations
+                  [sorting]="true"
+                  [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-pager
+                  [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </dxi-item>
+          </dxi-item>
+
+          <!--end choix des prestations de service-->
+
+          <!--Enregistrer comme modèle-->
+          <dxi-item itemType="group" caption="Enregistrer comme modèle" [colCount]="6">
+            <dxi-item itemType="group" [colSpan]="6" [colCount]="4">
+
+
+              <dxi-item [colSpan]="1"
+                        dataField="interventions.savedModel.saved"
+                        editorType="dxSwitch"
+                        [editorOptions]="saveAsModelOptions">
+
+                <dxo-label
+                  text="Enregistrer comme modèle">
+                </dxo-label>
+              </dxi-item>
+
+              <dxi-item
+                [colSpan]="2">
+                <div *dxTemplate>
+                  <div *ngIf="interventions.savedModel.saved">
+                    <span class="label-t18">Nom de modèle:</span>
+                    <dx-text-box
+                      placeholder="Entrer un nom de modèle"
+                      [(value)]="interventions.savedModel.text">
+                      <dx-validator>
+                        <dxi-validation-rule
+                          type="required"
+                          message="Entrer un nom de modèle"></dxi-validation-rule>
+                      </dx-validator>
+                    </dx-text-box>
+                  </div>
+                </div>
+              </dxi-item>
+
+              <dxi-item
+                [colSpan]="1">
+                <div *dxTemplate>
+                  <div *ngIf="interventions.savedModel.saved">
+                    <span class="label-t18">Visible à tous:</span><br>
+                    <dx-switch
+                      [(value)]="interventions.savedModel.visible"
+                      onText="Oui"
+                      offText="Non"></dx-switch>
+                  </div>
+                </div>
+              </dxi-item>
+
+
+            </dxi-item>
+
+          </dxi-item>
+          <!--end Enregistrer comme modèle-->
+
+          <!--submit button-->
+          <dxi-item itemType="group" [colCount]="5">
+            <dx-button
+              id="buttonss"
+              text="Register"
+              type="success"
+              [useSubmitBehavior]="true">
+            </dx-button>
+            <!--<dxi-item-->
+            <!--itemType="button"-->
+            <!--[buttonOptions]="buttonsave"></dxi-item>-->
+          </dxi-item>
+          <!--end submit button-->
+
+        </dx-form>
+      </form>
+
+      <!--error messages-->
+      <div>
+        <div class="dx-fieldset">
+          <dx-validation-summary id="summary"></dx-validation-summary>
+        </div>
+      </div>
+
+      <!--end error messages-->
+
+    </div>
+  </div>
+</div>
+<!--*********************************************************************************-->
+<!--<dx-load-panel-->
+<!--#loadPanel-->
+<!--shadingColor="rgba(0,0,0,0.4)"-->
+<!--[position]="{my: 'center'}"-->
+<!--[(visible)]="loadingVisible"-->
+<!--[showIndicator]="true"-->
+<!--[showPane]="true"-->
+<!--[shading]="true"-->
+<!--[closeOnOutsideClick]="false">-->
+<!--</dx-load-panel>-->

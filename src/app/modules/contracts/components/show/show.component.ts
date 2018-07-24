@@ -8,10 +8,17 @@ import { Contract } from '../../../../shared/classes/contract';
 import { ContractsService } from '../../services/contracts.service';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { Helper } from '../../../../shared/classes/helper';
+<<<<<<< HEAD
 import {RightHolderService} from '../../services/right-holder.service';
 import {ParcelsService} from '../../../parcels/services/parcels.service';
 import {CardsService} from '../../../cards/services/cards.service';
 import {Parcel} from '../../../../shared/classes/parcel';
+=======
+import { RightHolderService } from '../../services/right-holder.service';
+import { LogicalParcel } from '../../../../shared/classes/logical-parcel';
+import { ParcelsService } from '../../../parcels/services/parcels.service';
+import { CardsService } from '../../../cards/services/cards.service';
+>>>>>>> 31b0ea9b34eea680db83b0bfcff5f225f9eabc34
 declare const require: any;
 const $ = require('jquery');
 
@@ -54,7 +61,7 @@ export class ShowComponent implements OnInit {
 
   ngOnInit() {
 
-      this.route.params.subscribe(
+    this.route.params.subscribe(
       params => {
         this.contractService.getContract(+params.id).subscribe(
           (res: any) => {
@@ -73,8 +80,8 @@ export class ShowComponent implements OnInit {
             this.isContractEncours = this.contract.status === 'inprogress';
 
             this.rightHolderService.getAllDx(this.id).subscribe((_res: any) => {
-                this.rightsholders = _res;
-              }
+              this.rightsholders = _res;
+            }
             );
 
           },
@@ -129,22 +136,22 @@ export class ShowComponent implements OnInit {
   onAddRightHolder(e: any) {
     const d = new $.Deferred();
     const newRightHolder = {
-      contract_id : this.id,
+      contract_id: this.id,
       full_name: e.data.full_name,
       cin: e.data.cin,
       description: e.data.description
     };
     e.cancel = false;
-    this.rightHolderService.addRightHolder( newRightHolder).subscribe(
+    this.rightHolderService.addRightHolder(newRightHolder).subscribe(
       res => {
         this.loadDocuments();
         d.resolve();
         e.cancel = true;
         this.toaster.success('L element a été ajouté avec succès.');
       }, error => {
-      //  d.resolve();
+        //  d.resolve();
         e.cancel = true;
-      d.reject('erreur');
+        d.reject('erreur');
       });
     e.cancel = d.promise();
   }
@@ -247,7 +254,7 @@ export class ShowComponent implements OnInit {
     }, err => {
       throw err;
     });
- }
+  }
 
 
   onUpdateRightHolder(e: any) {

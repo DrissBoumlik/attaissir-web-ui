@@ -30,7 +30,7 @@ export class PreconisationsIntrantsService {
 
 
   getListeAyants_droits(contract_id): Observable<any> {
-    return this.http.post<any[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify({contract_id : contract_id}), {
+    return this.http.post<any[]>(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify({ contract_id: contract_id }), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -65,11 +65,11 @@ export class PreconisationsIntrantsService {
 
   deliver(id: number, pin: any, rf_code: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/${this.routeName}/deliverpreconization`,
-      JSON.stringify({id: id , pin: pin , rfid : rf_code}), {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
+      JSON.stringify({ id: id, pin: pin, rfid: rf_code }), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
   }
 
 
