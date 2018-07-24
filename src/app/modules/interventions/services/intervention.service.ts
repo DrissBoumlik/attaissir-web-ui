@@ -65,7 +65,7 @@ export class InterventionService {
 
 
   getParcelsDx(params?: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/allparcels`, JSON.stringify(params), {
+    return this.http.post(`${environment.apiUrl}/logicalparcels/all`, JSON.stringify(params), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

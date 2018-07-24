@@ -2,7 +2,8 @@
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2></h2>
+     <!-- <h2>Appliquer un Template d'intervention sur plusieurs parcelle logique</h2> !-->
+   <!-- <p [appHighlight]="color" >test</p> !-->
     </div>
   </div>
 </div>
@@ -48,10 +49,10 @@
             [wordWrapEnabled]="true"
           #ref1>
             <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+            <dxi-column dataField="parent_id" caption=" "  [width]="100"  cellTemplate="parent_idTemplate"></dxi-column>
 
-            <dxi-column dataField="parent_id" caption=" "  [width]="100"  cellTemplate="employeeTemplate"></dxi-column>
-
-            <dxi-column dataField="name" [width]="300" caption="Parcelle"   cellTemplate="employeeTemplate1"></dxi-column>
+            <dxi-column dataField="name" [width]="300" caption="Parcelle"   cellTemplate="nameTemplate"></dxi-column>
             <dxi-column dataField="id" caption="Id"  [visible]="false"></dxi-column>
 
              <dxi-column dataField="cda" caption="CDA" ></dxi-column>
@@ -69,19 +70,19 @@
              <dxi-column dataField="annuel_surface" caption="Superficie annuelle" [visible]="false"></dxi-column>
              <dxi-column dataField="compaign_surface" caption="Superficie de la campagne"></dxi-column>
              <dxi-column dataField="company_name" caption="Raison social" [visible]="false"></dxi-column>
-             <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
+             <dxi-column dataField="tenure" caption="Mode faire-valoir" cellTemplate="tenureTemplate"></dxi-column>
              <dxi-column dataField="status" caption="Etat"  cellTemplate="statusTemplate"></dxi-column>
              <dxi-column dataField="third_party_type" caption="Type d'agrégé"></dxi-column>
 
 
-            <div *dxTemplate="let data of 'employeeTemplate'">
+            <div *dxTemplate="let data of 'parent_idTemplate'">
               <div *ngIf="data.value ==0">
                 <dx-check-box [value]="data.data.is_selected"  (valueChange)="selectedEventItem($event,data.data.id)"></dx-check-box> &nbsp; &nbsp; &nbsp;
               </div>
             </div>
 
 
-            <div *dxTemplate="let data of 'employeeTemplate1'">
+            <div *dxTemplate="let data of 'nameTemplate'">
               <div >
                 <span *ngIf="data.data.parent_id !=0" > &nbsp; &nbsp; ----  {{data.data.name}} </span>
                 <span *ngIf="data.data.parent_id ==0" > {{data.data.name}} </span>
@@ -89,8 +90,15 @@
             </div>
 
             <div *dxTemplate="let data of 'statusTemplate'">
-               <span >
+               <span  [ngClass]=" helper.getStatusColor(data.value)">
                        <p>{{helper.getStatut(data.value)}}</p>
+                </span>
+            </div>
+
+
+            <div *dxTemplate="let data of 'tenureTemplate'">
+               <span >
+                       <p>{{helper.tenureType(data.value)}}</p>
                 </span>
             </div>
 

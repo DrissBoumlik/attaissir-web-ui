@@ -49,6 +49,7 @@ export class Helper {
   }
 
   public static getStatut = (value: string): string => {
+    console.log('test ' + value)
     if (value === 'inprogress') {
       return 'ENCOURS';
     } else if (value === 'done') {
@@ -56,7 +57,7 @@ export class Helper {
     } else if (value === 'canceled') {
       return 'ANNULÉ';
     }
-    return 'ENCOURS';
+    return '';
   }
 
   public static articleType = (type) => {
@@ -76,18 +77,31 @@ export class Helper {
     if (isNull(value)) {
       return 'm-badge m-badge--primary m-badge--wide';
     }
-    if (value.toLowerCase() === 'inactif'.toLowerCase() || value.toLowerCase() === 'Inactive'.toLowerCase()) {
-      return 'm-badge m-badge--warning m-badge--wide';
-    } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'Encours'.toLowerCase()) {
-      return 'm-badge m-badge--info m-badge--wide';
-    } else if (value.toLowerCase() === 'actif'.toLowerCase() || value.toLowerCase() === 'Active'.toLowerCase()) {
-      return 'm-badge m-badge--success m-badge--wide';
-    } else if (value.toLowerCase() === 'suspended'.toLowerCase() || value.toLowerCase() === 'Suspendu'.toLowerCase()) {
-      return 'm-badge m-badge--danger m-badge--wide';
-    } else {
-      return 'm-badge m-badge--primary m-badge--wide';
-    }
+    console.log(value);
+    /* if (value.toLowerCase() === 'inactif'.toLowerCase() || value.toLowerCase() === 'Inactive'.toLowerCase()) {
+       return 'm-badge m-badge--warning m-badge--wide';
+     } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'Encours'.toLowerCase()) {
+       return 'm-badge m-badge--info m-badge--wide';
+     } else if (value.toLowerCase() === 'actif'.toLowerCase() || value.toLowerCase() === 'Active'.toLowerCase()) {
+       return 'm-badge m-badge--success m-badge--wide';
+     } else if (value.toLowerCase() === 'suspended'.toLowerCase() || value.toLowerCase() === 'Suspendu'.toLowerCase()) {
+       return 'm-badge m-badge--danger m-badge--wide';
+     } else {
+       return 'm-badge m-badge--primary m-badge--wide';
+     }*/
   }
+
+
+/*  public static getStatusColor = (value: string): string => {
+    if (value === 'inprogress') {
+      return 'ENCOURS';
+    } else if (value === 'done') {
+      return 'VALIDÉ';
+    } else if (value === 'canceled') {
+      return 'ANNULÉ';
+    }
+    return 'ENCOURS';
+  }*/
 
   public static getOrderStatusColor(value: string): string {
     console.log(value);
@@ -220,6 +234,7 @@ export class Helper {
   }
 
 
+<<<<<<< HEAD
   public static makeParcel = (data) => {
     if (data.hasOwnProperty('name')) {
       return {
@@ -279,5 +294,16 @@ export class Helper {
       code_ormva: data.code_ormva,
       parcels: []
     };
+=======
+  public static tenureType = (value: string): string => {
+    if (value === 'property') {
+      return 'propriété';
+    } else if (value === 'lease') {
+      return 'bail';
+    } else if (value === 'procuration') {
+      return 'procuration';
+    }
+    return value;
+>>>>>>> GENERAL
   }
 }
