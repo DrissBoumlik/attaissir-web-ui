@@ -30,6 +30,14 @@ export class InterventionService {
     });
   }
 
+  getServiceArticlesBySubCatID(sub_family_id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/interventionrequesttypes/services/${sub_family_id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   getLogicalParcelsByUserId(id: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/logicalparcels/${id}`, {
       headers: new HttpHeaders({

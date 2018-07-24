@@ -16,7 +16,6 @@
             <h3 class="m-portlet__head-text">
               {{ type.type_name }}
             </h3>
-            <p>Familles d'activités</p>
             <hr>
           </div>
           <form>
@@ -42,7 +41,6 @@
             <h3 class="m-portlet__head-text">
               {{ family.family_name }}
             </h3>
-            <p>Sous-familles d'activités</p>
             <hr>
           </div>
           <dx-form id="form2">
@@ -69,7 +67,7 @@
 
       <dx-load-panel
         #loadPanel
-        shadingColor="rgba(0,0,0,0.4)"
+        shadingColor="rgba(0,0,0,0.5)"
         [position]="{my: 'center'}"
         [(visible)]="loadingVisible"
         [showIndicator]="true"
