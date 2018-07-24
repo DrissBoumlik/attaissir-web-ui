@@ -17,11 +17,15 @@ import {
   DxCheckBoxModule,
   DxDataGridModule,
   DxFileUploaderModule,
-  DxLookupModule, DxPivotGridModule,
-  DxPopupModule, DxRadioGroupModule,
-  DxSelectBoxModule, DxSwitchModule,
+  DxLookupModule,
+  DxPivotGridModule,
+  DxPopupModule,
+  DxRadioGroupModule,
+  DxSelectBoxModule,
+  DxSwitchModule,
   DxTemplateModule
 } from 'devextreme-angular';
+
 import { SiamErrorHandler } from './shared/classes/siam-error-handler';
 import { ParcelsModule } from './modules/parcels/parcels.module';
 import { CardsModule } from './modules/cards/cards.module';
@@ -32,13 +36,15 @@ import { ArticlesModule } from './modules/articles/articles.module';
 import { MouvementsModule } from './modules/mouvements/mouvements.module';
 import { InterventionsModule } from './modules/interventions/interventions.module';
 import { DemandesModule } from './modules/demandes/demandes.module';
+
 import {PermissionDirective} from './_directives/permission.directive';
+import {UsersModule} from './modules/users/users.module';
 
 @NgModule({
   declarations: [
     ThemeComponent,
     AppComponent,
-    PermissionDirective,
+    PermissionDirective
   ],
   imports: [
     LayoutModule,
@@ -72,7 +78,8 @@ import {PermissionDirective} from './_directives/permission.directive';
     DemandesModule,
     ArticlesModule,
     SharedModule,
-    MouvementsModule
+    MouvementsModule,
+    UsersModule
   ],
   exports: [
     DxDataGridModule,
@@ -89,17 +96,19 @@ import {PermissionDirective} from './_directives/permission.directive';
     useValue: 'fr'
   },
     ScriptLoaderService,
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  },
-  {
-    provide: ErrorHandler,
-    useClass: SiamErrorHandler
-  }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: SiamErrorHandler
+    }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+}

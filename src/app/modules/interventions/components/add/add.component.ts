@@ -52,7 +52,7 @@ export class AddComponent implements OnInit {
   productsArticleOptions: any;
   SelectedProductsCategory: any;
   SelectedProductsSubCategory: any;
-  SelectedProductsArticle = {};
+  SelectedProductsArticle: any = {};
   productsQuantity: any;
   /*-------------------------------------------*/
   @ViewChild('semenceGrid') semenceGrid: DxDataGridComponent;

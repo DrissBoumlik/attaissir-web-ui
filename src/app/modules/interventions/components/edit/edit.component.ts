@@ -1,18 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-// import {ArticlesService} from '../../../articles/services/articles.service';
-// import 'rxjs/add/operator/toPromise';
-// import {InterventionService} from '../../services/intervention.service';
 import { ActivatedRoute, Router } from '@angular/router';
-// import {ThirdsService} from '../../../thirds/services/thirds.service';
-// import {WarehouseService} from '../../../distribution-center/services/warehouse.service';
-import { DxDataGridComponent } from 'devextreme-angular';
 import { InterventionService } from '../../services/intervention.service';
 import { NewComponent } from '../new/new.component';
-
-import notify from 'devextreme/ui/notify';
-
-
-import { DxValidatorModule } from 'devextreme-angular';
 
 
 @Component({
@@ -143,8 +132,7 @@ export class EditComponent implements OnInit {
       err => {
         this.router.navigate([`/404`]);
       }
-    )
-      ;
+    );
 
 
   }

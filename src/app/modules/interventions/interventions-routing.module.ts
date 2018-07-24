@@ -16,7 +16,7 @@ const routes: Routes = [{
     { path: 'template/ajouter', component: AddTempleteComponent },
     { path: 'list', component: ListComponent },
     { path: 'modifier/:id', component: EditComponent },
-    { path: 'appliquer-template-parcelle', component: AddTempleteComponent },
+    { path: 'appliquer-template-parcelle', component: AddTempleteComponent }
 
   ]
 }];
@@ -25,5 +25,5 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class InterventionsRoutingModule {
-}
+
+export class InterventionsRoutingModule { }

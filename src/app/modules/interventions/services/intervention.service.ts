@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import { HttpClientTestingBackend } from '@angular/common/http/testing/src/backend';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Rx';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,8 @@ export class InterventionService {
 
   routeName = 'categoriesdivision';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getFamiliesAndSubFamilies(): Observable<any> {
     const division = localStorage.getItem('tenantId');
@@ -71,8 +71,6 @@ export class InterventionService {
     });
   }
 
-
-
   /**
    * Get a Template
    * @returns {Observable<Template>}
@@ -80,8 +78,6 @@ export class InterventionService {
   getTemplates(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/interventionrequests/templates`);
   }
-
-
 
 
   addIng(item: any): Observable<any[]> {
@@ -93,4 +89,21 @@ export class InterventionService {
   }
 
 
+  updateIntervention(id: number, data: any) {
+    return this.http.put(`${environment.apiUrl}/interventionrequests/${id}`, JSON.stringify(data), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getInterventionById(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/interventionrequests/edit/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
 }
+
