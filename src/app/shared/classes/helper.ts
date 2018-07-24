@@ -76,8 +76,7 @@ export class Helper {
     if (isNull(value)) {
       return 'm-badge m-badge--primary m-badge--wide';
     }
-    console.log(value);
-    /* if (value.toLowerCase() === 'inactif'.toLowerCase() || value.toLowerCase() === 'Inactive'.toLowerCase()) {
+    if (value.toLowerCase() === 'inactif'.toLowerCase() || value.toLowerCase() === 'Inactive'.toLowerCase()) {
        return 'm-badge m-badge--warning m-badge--wide';
      } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'Encours'.toLowerCase()) {
        return 'm-badge m-badge--info m-badge--wide';
@@ -87,7 +86,7 @@ export class Helper {
        return 'm-badge m-badge--danger m-badge--wide';
      } else {
        return 'm-badge m-badge--primary m-badge--wide';
-     }*/
+     }
   }
 
 
