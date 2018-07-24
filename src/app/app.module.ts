@@ -39,6 +39,7 @@ import { InterventionsModule } from './modules/interventions/interventions.modul
 import { DemandesModule } from './modules/demandes/demandes.module';
 
 import {PermissionDirective} from './_directives/permission.directive';
+import {UsersModule} from './modules/users/users.module';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import {PermissionDirective} from './_directives/permission.directive';
     DemandesModule,
     ArticlesModule,
     SharedModule,
-    MouvementsModule
+    MouvementsModule,
+    UsersModule
   ],
   exports: [
     DxDataGridModule,
