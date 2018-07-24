@@ -49,7 +49,6 @@ export class Helper {
   }
 
   public static getStatut = (value: string): string => {
-    console.log('test ' + value)
     if (value === 'inprogress') {
       return 'ENCOURS';
     } else if (value === 'done') {
@@ -233,8 +232,6 @@ export class Helper {
     return value;
   }
 
-
-<<<<<<< HEAD
   public static makeParcel = (data) => {
     if (data.hasOwnProperty('name')) {
       return {
@@ -263,7 +260,7 @@ export class Helper {
         annuel_surface: data.annuel_surface,
         tenure: data.tenure,
         code_ormva: data.code_ormva,
-        parcels: data.parcels.map(p => this.makeParcel(p))
+        parcels: data.parcels.map(p => Helper.makeParcel(p))
       };
     }
     return {
@@ -294,7 +291,8 @@ export class Helper {
       code_ormva: data.code_ormva,
       parcels: []
     };
-=======
+  }
+
   public static tenureType = (value: string): string => {
     if (value === 'property') {
       return 'propriété';
@@ -304,6 +302,5 @@ export class Helper {
       return 'procuration';
     }
     return value;
->>>>>>> GENERAL
   }
 }

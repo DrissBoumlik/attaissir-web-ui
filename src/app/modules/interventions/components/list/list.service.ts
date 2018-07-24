@@ -184,8 +184,8 @@ let companies: Company[] = [{
   "State": "Illinois",
   "Zipcode": 60179,
   "Phone": "(847) 286-2500",
-  "Fax": "(847) 286-2501",
-  "Website": "http =//www.nowebsiteemart.com"
+  'Fax': "(847) 286-2501",
+  "Website": 'http =//www.nowebsiteemart.com'
 }, {
   "ID": 18,
   "CompanyName": "Walters",
