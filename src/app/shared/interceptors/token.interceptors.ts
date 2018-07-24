@@ -36,7 +36,7 @@ export class TokenInterceptor implements HttpInterceptor {
         // redirect to the signin page or show login modal here
         // Observable.throwError(error);
         this.router.navigate(['/login']); // remember to import router class and declare it in the class
-        this.toastr.warning('Token est expiré!');
+        // this.toastr.warning('Token est expiré!');
 
       } else {
         return Observable.throwError(error);
