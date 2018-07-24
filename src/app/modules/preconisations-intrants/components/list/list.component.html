@@ -69,7 +69,7 @@
 
         <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="getStatusColor(data.value)">
-                  {{ helper.getStatut(data.value) }}
+                  {{ data.value }}
       </span>
         </div>
 

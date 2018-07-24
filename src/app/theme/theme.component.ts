@@ -80,7 +80,7 @@ export class ThemeComponent implements OnInit {
       }
 
       if (isTimeout) {
-        this.auth.logout();
+        // this.auth.logout();
         this._router.navigate(['/login']);
       }
     }
