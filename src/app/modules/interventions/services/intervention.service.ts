@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Rx';
-import {HttpClientTestingBackend} from '@angular/common/http/testing/src/backend';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { HttpClientTestingBackend } from '@angular/common/http/testing/src/backend';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class InterventionService {
     });
   }
 
-  getInterventionById(id: number) {
+  getInterventionById(id: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/interventionrequests/edit/${id}`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -72,7 +72,6 @@ export class InterventionService {
   }
 
 
-
   getParcelsDx(params?: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/allparcels`, JSON.stringify(params), {
       headers: new HttpHeaders({
@@ -82,7 +81,6 @@ export class InterventionService {
   }
 
 
-
   /**
    * Get a Template
    * @returns {Observable<Template>}
@@ -90,8 +88,6 @@ export class InterventionService {
   getTemplates(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/interventionrequests/templates`);
   }
-
-
 
 
   addIng(item: any): Observable<any[]> {

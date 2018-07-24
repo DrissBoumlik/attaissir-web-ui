@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {InterventionService} from '../../services/intervention.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { InterventionService } from '../../services/intervention.service';
 import CustomStore from 'devextreme/data/custom_store';
-import {main} from '@angular/compiler-cli/src/main';
-import {DxDataGridComponent, DxTreeListComponent} from 'devextreme-angular';
-import {DxiRowComponent} from 'devextreme-angular/ui/nested/row-dxi';
-import {Helper} from '../../../../shared/classes/helper';
+import { main } from '@angular/compiler-cli/src/main';
+import { DxDataGridComponent, DxTreeListComponent } from 'devextreme-angular';
+import { DxiRowComponent } from 'devextreme-angular/ui/nested/row-dxi';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-add-templete',
@@ -25,8 +25,8 @@ export class AddTempleteComponent implements OnInit {
   _parcels: any = {};
 
 
-  constructor(private interventionService: InterventionService ) {
-     this.helper = Helper;
+  constructor(private interventionService: InterventionService) {
+    this.helper = Helper;
     this.template = {};
   }
 
@@ -40,11 +40,11 @@ export class AddTempleteComponent implements OnInit {
           .then(response => {
 
 
-           // const json = [ response.data[0] , response.data[5]];
-           // const json = [ response.data[0] , response.data[1] , response.data[5] ];
-           // console.log(json);
+            // const json = [ response.data[0] , response.data[5]];
+            // const json = [ response.data[0] , response.data[1] , response.data[5] ];
+            // console.log(json);
 
-            return response   ;
+            return response;
           })
           .catch(error => {
             throw error;
@@ -79,7 +79,8 @@ export class AddTempleteComponent implements OnInit {
           console.log(key);
           return key;
         }
-      })};
+      })
+    };
 
     this.buttonsave = {
       text: 'ENREGISTER',
@@ -90,13 +91,13 @@ export class AddTempleteComponent implements OnInit {
 
         const selected_parc = [];
 
-        this.ref1.instance.getVisibleRows().forEach((row: any)  => {
+        this.ref1.instance.getVisibleRows().forEach((row: any) => {
           if (row.data.is_selected && row.data.parent_id === 0) {
             console.log(selected_parc);
             selected_parc.push(row.data);
           }
         });
-        const item = [{template_id : this.template.template, selected_parc : selected_parc}];
+        const item = [{ template_id: this.template.template, selected_parc: selected_parc }];
         this.interventionService.addIng(item).subscribe((response) => {
           console.log(response);
         });
@@ -106,17 +107,17 @@ export class AddTempleteComponent implements OnInit {
   }
 
 
-  selectedEvent(event ) {
+  selectedEvent(event) {
 
-    this.ref1.instance.getVisibleRows().forEach((row: any)  => {
-        row.data.is_selected = event;
+    this.ref1.instance.getVisibleRows().forEach((row: any) => {
+      row.data.is_selected = event;
       console.log(row.data);
     });
   }
 
-  selectedEventItem(event, id ) {
+  selectedEventItem(event, id) {
 
-    this.ref1.instance.getVisibleRows().forEach((row: any)  => {
+    this.ref1.instance.getVisibleRows().forEach((row: any) => {
       if (row.data.id === id) {
         row.data.is_selected = event;
       }

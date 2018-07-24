@@ -1,18 +1,18 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 // import {ArticlesService} from '../../../articles/services/articles.service';
 // import 'rxjs/add/operator/toPromise';
 // import {InterventionService} from '../../services/intervention.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 // import {ThirdsService} from '../../../thirds/services/thirds.service';
 // import {WarehouseService} from '../../../distribution-center/services/warehouse.service';
-import {DxDataGridComponent} from 'devextreme-angular';
-import {InterventionService} from '../../services/intervention.service';
-import {NewComponent} from '../new/new.component';
+import { DxDataGridComponent } from 'devextreme-angular';
+import { InterventionService } from '../../services/intervention.service';
+import { NewComponent } from '../new/new.component';
 
 import notify from 'devextreme/ui/notify';
 
 
-import {DxValidatorModule} from 'devextreme-angular';
+import { DxValidatorModule } from 'devextreme-angular';
 
 
 @Component({
@@ -64,12 +64,12 @@ export class EditComponent implements OnInit {
   intervention = {};
 
   constructor(
-    private  interventionService: InterventionService,
+    private interventionService: InterventionService,
     private route: ActivatedRoute,
     private router: Router) {
   }
 
-  onFormSubmit = function (e) {
+  onFormSubmit = function(e) {
 
 
     const formData = {
@@ -105,7 +105,7 @@ export class EditComponent implements OnInit {
 
     const routParamsId = +this.route.snapshot.params['id'];
     this.interventionService.getInterventionById(routParamsId).subscribe(
-      response => {
+      (response: any) => {
         if (response.data) {
           // Informations Générales
           this.interventions.generaleInformations.cin = response.data.third_party_infos.third_party_cin;
@@ -135,8 +135,7 @@ export class EditComponent implements OnInit {
             this.interventions.savedModel.text = response.data.model_name;
             this.interventions.savedModel.visible = response.data.visible_to_all;
           }
-        }
-        else {
+        } else {
           this.router.navigate([`/404`]);
         }
 
@@ -145,7 +144,7 @@ export class EditComponent implements OnInit {
         this.router.navigate([`/404`]);
       }
     )
-    ;
+      ;
 
 
   }

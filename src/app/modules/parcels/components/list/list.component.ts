@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
   helper: any;
 
   constructor(public parcelsServices: ParcelsService,
-              private router: Router) {
+    private router: Router) {
     this.parcels = {};
     this.helper = Helper;
   }
