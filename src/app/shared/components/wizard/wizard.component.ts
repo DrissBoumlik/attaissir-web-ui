@@ -392,7 +392,7 @@ export class WizardComponent implements OnInit {
     this.contract.expiration_date = new Date();
     this.contract.structure_id = Number(tenantId);
     if (this.isEdit) {
-      this.contract.parent_id = this.contract.id;
+      this.contract.parent_id = (this.contract.status === 'inprogress') ? null : this.contract.id;
       this.contract.type = 'annual';
       this.contract.status = 'inprogress';
     }
