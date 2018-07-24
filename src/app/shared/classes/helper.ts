@@ -234,7 +234,6 @@ export class Helper {
   }
 
 
-<<<<<<< HEAD
   public static makeParcel = (data) => {
     if (data.hasOwnProperty('name')) {
       return {
@@ -266,35 +265,8 @@ export class Helper {
         parcels: data.parcels.map(p => this.makeParcel(p))
       };
     }
-    return {
-      id: data.id,
-      name: data.name,
-      soil_id: data.soil.id,
-      parcel_id: data.parcel_id,
-      perimeter: ((data.soil !== null) && (data.soil.perimeter !== null))
-        ? data.soil.perimeter : '',
-      region: ((data.soil !== null) && (data.soil.region !== null))
-        ? data.soil.region : '',
-      district: ((data.soil !== null) && (data.soil.district !== null))
-        ? data.soil.district : '',
-      rural_commune: ((data.soil !== null) && (data.soil.rural_commune !== null))
-        ? data.soil.rural_commune : '',
-      cda: ((data.soil !== null) && (data.soil.cda !== null))
-        ? data.soil.cda : '',
-      zone: ((data.soil !== null) && (data.soil.zone !== null))
-        ? data.soil.zone : '',
-      sector: ((data.soil !== null) && (data.soil.sector !== null))
-        ? data.soil.sector : '',
-      block: ((data.soil !== null) && (data.soil.block !== null))
-        ? data.soil.block : '',
-      registration_number: ((data.soil !== null) && (data.soil.registration_number !== null))
-        ? data.soil.registration_number : '',
-      annuel_surface: data.annuel_surface,
-      tenure: data.tenure,
-      code_ormva: data.code_ormva,
-      parcels: []
-    };
-=======
+  }
+
   public static tenureType = (value: string): string => {
     if (value === 'property') {
       return 'propriété';
@@ -304,6 +276,6 @@ export class Helper {
       return 'procuration';
     }
     return value;
->>>>>>> GENERAL
   }
+
 }
