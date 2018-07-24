@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Rx';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,22 +11,6 @@ export class InterventionService {
   routeName = 'categoriesdivision';
 
   constructor(private http: HttpClient) {
-  }
-
-  updateIntervention(id: number, data: any) {
-    return this.http.put(`${environment.apiUrl}/interventionrequests/${id}`, JSON.stringify(data), {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
-  }
-
-  getInterventionById(id: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/interventionrequests/edit/${id}`, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
   }
 
   getFamiliesAndSubFamilies(): Observable<any> {
@@ -40,6 +24,14 @@ export class InterventionService {
 
   getDataBySubFamily(sub_family_id: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/interventiontypesubcategories/${sub_family_id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getServiceArticlesBySubCatID(sub_family_id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/interventionrequesttypes/services/${sub_family_id}`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -72,13 +64,12 @@ export class InterventionService {
 
 
   getParcelsDx(params?: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/allparcels`, JSON.stringify(params), {
+    return this.http.post(`${environment.apiUrl}/logicalparcels/all`, JSON.stringify(params), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     });
   }
-
 
   /**
    * Get a Template
@@ -97,4 +88,22 @@ export class InterventionService {
     });
   }
 
+
+  updateIntervention(id: number, data: any) {
+    return this.http.put(`${environment.apiUrl}/interventionrequests/${id}`, JSON.stringify(data), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getInterventionById(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/interventionrequests/edit/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
 }
+

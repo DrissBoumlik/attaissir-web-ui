@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NewComponent } from './components/new/new.component';
@@ -21,4 +20,3 @@ const routes: Routes = [{
   exports: [RouterModule]
 })
 export class InterventionsRoutingModule { }
-
