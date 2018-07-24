@@ -192,7 +192,7 @@ export class ShowComponent implements OnInit {
     let zone: number;
     let soil_id: number;
     const parcels = this.selectedItems.map(p => {
-      annuel_surfaces += p.annuel_surface;
+      annuel_surfaces += Number(p.annuel_surface);
       name = `${p.cda}${p.zone}`;
       zone = p.zone_id;
       soil_id = p.soil_id;

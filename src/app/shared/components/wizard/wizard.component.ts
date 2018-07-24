@@ -166,7 +166,7 @@ export class WizardComponent implements OnInit {
         label: 'CDA',
         items: this.cdas,
         displayExpr: 'name',
-        valueExpr: 'code',
+        valueExpr: 'id',
         searchEnabled: true,
         onSelectionChanged: (e) => {
           // Zone
@@ -177,7 +177,7 @@ export class WizardComponent implements OnInit {
                 label: 'Zone',
                 items: this.zones,
                 displayExpr: 'name',
-                valueExpr: 'code',
+                valueExpr: 'id',
                 value: '',
                 searchEnabled: true,
                 onSelectionChanged: (event) => {
@@ -189,7 +189,7 @@ export class WizardComponent implements OnInit {
                         label: 'Secteur',
                         items: this.sectors,
                         displayExpr: 'name',
-                        valueExpr: 'code',
+                        valueExpr: 'id',
                         value: '',
                         searchEnabled: true,
                         onSelectionChanged: (event1) => {
@@ -202,7 +202,7 @@ export class WizardComponent implements OnInit {
                                 label: 'Bloc',
                                 items: this.blocs,
                                 displayExpr: 'name',
-                                valueExpr: 'code',
+                                valueExpr: 'id',
                                 value: '',
                                 searchEnabled: true,
                                 onSelectionChanged: (e2) => {
