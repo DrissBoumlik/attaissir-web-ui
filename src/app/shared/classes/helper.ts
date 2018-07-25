@@ -78,11 +78,15 @@ export class Helper {
     }
     if (value.toLowerCase() === 'inactif'.toLowerCase() || value.toLowerCase() === 'Inactive'.toLowerCase()) {
        return 'm-badge m-badge--warning m-badge--wide';
-     } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'Encours'.toLowerCase()) {
+     } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'En cours'.toLowerCase()) {
        return 'm-badge m-badge--info m-badge--wide';
-     } else if (value.toLowerCase() === 'actif'.toLowerCase() || value.toLowerCase() === 'Active'.toLowerCase()) {
+     } else if (value.toLowerCase() === 'actif'.toLowerCase() || value.toLowerCase() === 'Active'.toLowerCase()
+      || value.toLowerCase() === 'Validé'.toLowerCase()
+    ) {
        return 'm-badge m-badge--success m-badge--wide';
-     } else if (value.toLowerCase() === 'suspended'.toLowerCase() || value.toLowerCase() === 'Suspendu'.toLowerCase()) {
+     } else if (value.toLowerCase() === 'suspended'.toLowerCase() || value.toLowerCase() === 'Suspendu'.toLowerCase()
+      || value.toLowerCase() === 'Annulé'.toLowerCase()
+    ) {
        return 'm-badge m-badge--danger m-badge--wide';
      } else {
        return 'm-badge m-badge--primary m-badge--wide';

@@ -47,10 +47,14 @@ export class ThemeComponent implements OnInit {
     this.lastAction = localStorage.getItem(STORE_KEY);
     if (this.canRefresh) {
       this.auth.refresh().subscribe(data => {
+        console.log('testTenant');
         const currentUser: any = JSON.stringify(data);
         localStorage.setItem('currentUser', currentUser);
         localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
-        localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
+        // test Tenant
+        if (!localStorage.getItem('tenantId')) {
+          localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
+        }
       }, error1 => {
         this.toastr.warning(`La session n'est pas actualisée.`);
       });

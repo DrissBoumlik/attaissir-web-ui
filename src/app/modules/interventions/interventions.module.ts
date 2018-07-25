@@ -39,14 +39,14 @@ import { EtatDirective } from '../../shared/directives/etat.directive';
     DxTemplateModule,
     DxLoadPanelModule,
     DxCheckBoxModule,
-
+    DxTextBoxModule,
     DxSwitchModule,
     DxValidatorModule,
     DxValidationSummaryModule,
     DxCheckBoxModule,
     DxTreeListModule
   ],
-  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent]
+  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent  ]
 
 })
 export class InterventionsModule {
