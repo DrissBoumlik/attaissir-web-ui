@@ -1,15 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { UsersRoutingModule } from './users-routing.module';
-import { AddComponent } from './components/add/add.component';
-import { ListComponent } from './list/list.component';
+import {UsersRoutingModule} from './users-routing.module';
+import {AddComponent} from './components/add/add.component';
+import {ListComponent} from './components/list/list.component';
+import {SharedModule} from '../../shared/shared.module';
+import {DxSelectBoxModule} from 'devextreme-angular';
 
 @NgModule({
   imports: [
+    SharedModule,
     CommonModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    DxSelectBoxModule
   ],
   declarations: [AddComponent, ListComponent]
 })
-export class UsersModule { }
+export class UsersModule {
+}
