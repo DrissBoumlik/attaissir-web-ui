@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { NewComponent } from './components/new/new.component';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { AddComponent } from './components/add/add.component';
-import { AddTempleteComponent } from './components/add-templete/add-templete.component';
 import { ListComponent } from './components/list/list.component';
 import { EditComponent } from './components/edit/edit.component';
+import {AddTempleteComponent} from './components/add-templete/add-templete.component';
 
 const routes: Routes = [{
   path: 'interventions',

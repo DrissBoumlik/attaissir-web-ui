@@ -468,11 +468,11 @@
 <div class="dx-fieldset">
   <div class="dx-field">
     <div class="dx-field-value">
-      <dx-button width="180"  icon="fa fa-paper-plane"  text="LIVRER" [disabled]="preconisation.state == 'done'"  type="success" (onClick)="showDeliverPopup()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
+      <dx-button width="180"  icon="fa fa-paper-plane"  text="LIVRER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'"  type="success" (onClick)="showDeliverPopup()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
 
       <dx-button width="130" icon="fa fa-print"  (onClick)="print()" text="IMPRIMER" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp; &nbsp;
       <dx-button width="130" icon="fa fa-exchange"  text="RETOUR" type="default" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active" [disabled]="preconisation.state == 'delivered'" style="margin-left: 20px; margin-right: 20px;"  ></dx-button> &nbsp; &nbsp;
-      <dx-button width="130" icon="fa fa-trash"  text="ANNULER" [disabled]="preconisation.state == 'done'" type="danger" (onClick)="showDeletePopup()"  ></dx-button> &nbsp; &nbsp;
+      <dx-button width="130" icon="fa fa-trash"  text="ANNULER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'" type="danger" (onClick)="showDeletePopup()"  ></dx-button> &nbsp; &nbsp;
     </div>
   </div>
 </div>
