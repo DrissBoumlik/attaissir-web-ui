@@ -228,8 +228,8 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
     // print.document.write('</head><body >');
     //  print.document.write('<h1>' + document.title  + '</h1>');
-    print.document.write('<style type="text/css"> @page { size: auto;  margin: 0mm; } *{text-align: center;  }  </style>');
-    print.document.write('<style type="text/css"> p {  margin: -1px; }  body { width: 250px; }</style>');
+    print.document.write('<style type="text/css"> @page { size: auto;  margin: 0mm; } *{text-align: center;  } *{font-size: 10px} </style>');
+    print.document.write('<style type="text/css"> body { width: 250px; }</style>');
     print.document.write('<style type="text/css"> .div1 {  position:absolute; width:250px; height:300px; z-index:15; left:50%; margin:0px 0 0 -150px;}</style>');
 
 
@@ -240,15 +240,15 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
 
     print.document.write('<p><b style="font-weight: bolder;">BON DE LIVRAISON</b></p>' + '<p style="font-weight: bolder;">FACTURE</p> ' +
-      '<br/><p>-------------------------</p><br/>' +
+      '<p>-------------------------</p>' +
       '<p> <span style="float: left">' + this.preconisation.date +
       '</span> &nbsp; &nbsp;  <span style="float: right"> n ' + this.preconisation.id + ' </span></p>' +
-      '<br/><p>-------------------------</p><br/>' +
+      '<p>-------------------------</p>' +
       '<p> <span style="float: left;font-weight: bolder;">COMPAGNE </span>  <span style="float: right">' +
-      this.preconisation.campaign + ' </span></p> <br/>' +
+      this.preconisation.campaign + ' </span></p>' +
       '<p> <span style="font-weight: bolder;float: left;"> C/Z/P  </span>   <span style="float: right">' +
-      this.preconisation.parcel + '/' + this.preconisation.cda + '/' + this.preconisation.zone + ' </span></p>  <br/>' +
-      '<p> <span style="float: left;font-weight: bolder;">NOM COMPLET  </span>   <span style="float: right">' + this.preconisation.third_party_name + ' </span></p>  <br/>' +
+      this.preconisation.parcel + '/' + this.preconisation.cda + '/' + this.preconisation.zone + ' </span></p>' +
+      '<p> <span style="float: left;font-weight: bolder;">NOM COMPLET  </span>   <span style="float: right">' + this.preconisation.third_party_name + ' </span></p>' +
       '<p><span style="float: bottom">***** </span></p>');
 
     this.articles.forEach(function (element) {
@@ -282,6 +282,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
     this.rfid.nativeElement.addEventListener('input', () => {
       setTimeout( () => {
         this.rf_code = this.rfid.nativeElement.value;
+        this.rfid.nativeElement.value = '';
         this.focusout.nativeElement.focus();
 
         if ( this.popupDeliverVisible) {

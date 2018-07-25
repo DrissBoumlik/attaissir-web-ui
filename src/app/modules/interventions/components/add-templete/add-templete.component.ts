@@ -1,4 +1,3 @@
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { InterventionService } from '../../services/intervention.service';
 import CustomStore from 'devextreme/data/custom_store';

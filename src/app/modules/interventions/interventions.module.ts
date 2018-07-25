@@ -20,9 +20,9 @@ import { DxiGroupItemModule } from 'devextreme-angular/ui/nested/group-item-dxi'
 import { MouvementsRoutingModule } from '../mouvements/mouvements-routing.module';
 import { AddTempleteComponent } from './components/add-templete/add-templete.component';
 import { ListComponent } from './components/list/list.component';
-import { EditComponent } from './components/edit/edit.component';
-import {EtatDirective} from '../../shared/directives/etat.directive';
 
+import { EditComponent } from './components/edit/edit.component';
+import { EtatDirective } from '../../shared/directives/etat.directive';
 
 @NgModule({
   imports: [
@@ -41,18 +41,13 @@ import {EtatDirective} from '../../shared/directives/etat.directive';
     DxCheckBoxModule,
 
     DxSwitchModule,
-    DxTagBoxModule,
-    DxListModule,
-    DxiItemModule,
-    DxiGroupItemModule,
-    DxFormModule,
-    DxTextBoxModule,
     DxValidatorModule,
+    DxValidationSummaryModule,
     DxCheckBoxModule,
-    DxTreeListModule,
-    DxTextBoxModule,
-    DxValidationSummaryModule
+    DxTreeListModule
   ],
-  declarations: [NewComponent, AddComponent, AddTempleteComponent, EditComponent, ListComponent, EtatDirective  ]
+  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent]
+
 })
-export class InterventionsModule { }
+export class InterventionsModule {
+}
