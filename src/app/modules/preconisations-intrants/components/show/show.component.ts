@@ -62,9 +62,6 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
     this.evnt1 = false;
 
-    this.rightHolderService.getAllDx(12).subscribe((response) => {
-      console.log(response);
-    });
 
 
     this.preconisationsIntrantsService.getListeAyants_droits(1).subscribe((response) => {
