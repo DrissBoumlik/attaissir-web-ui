@@ -77,33 +77,33 @@ export class Helper {
       return 'm-badge m-badge--primary m-badge--wide';
     }
     if (value.toLowerCase() === 'inactif'.toLowerCase() || value.toLowerCase() === 'Inactive'.toLowerCase()) {
-       return 'm-badge m-badge--warning m-badge--wide';
-     } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'En cours'.toLowerCase()) {
-       return 'm-badge m-badge--info m-badge--wide';
-     } else if (value.toLowerCase() === 'actif'.toLowerCase() || value.toLowerCase() === 'Active'.toLowerCase()
+      return 'm-badge m-badge--warning m-badge--wide';
+    } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'En cours'.toLowerCase()) {
+      return 'm-badge m-badge--info m-badge--wide';
+    } else if (value.toLowerCase() === 'actif'.toLowerCase() || value.toLowerCase() === 'Active'.toLowerCase()
       || value.toLowerCase() === 'Validé'.toLowerCase()
     ) {
-       return 'm-badge m-badge--success m-badge--wide';
-     } else if (value.toLowerCase() === 'suspended'.toLowerCase() || value.toLowerCase() === 'Suspendu'.toLowerCase()
+      return 'm-badge m-badge--success m-badge--wide';
+    } else if (value.toLowerCase() === 'suspended'.toLowerCase() || value.toLowerCase() === 'Suspendu'.toLowerCase()
       || value.toLowerCase() === 'Annulé'.toLowerCase()
     ) {
-       return 'm-badge m-badge--danger m-badge--wide';
-     } else {
-       return 'm-badge m-badge--primary m-badge--wide';
-     }
+      return 'm-badge m-badge--danger m-badge--wide';
+    } else {
+      return 'm-badge m-badge--primary m-badge--wide';
+    }
   }
 
 
-/*  public static getStatusColor = (value: string): string => {
-    if (value === 'inprogress') {
+  /*  public static getStatusColor = (value: string): string => {
+      if (value === 'inprogress') {
+        return 'ENCOURS';
+      } else if (value === 'done') {
+        return 'VALIDÉ';
+      } else if (value === 'canceled') {
+        return 'ANNULÉ';
+      }
       return 'ENCOURS';
-    } else if (value === 'done') {
-      return 'VALIDÉ';
-    } else if (value === 'canceled') {
-      return 'ANNULÉ';
-    }
-    return 'ENCOURS';
-  }*/
+    }*/
 
   public static getOrderStatusColor(value: string): string {
     console.log(value);

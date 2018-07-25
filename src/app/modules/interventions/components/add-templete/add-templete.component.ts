@@ -5,7 +5,7 @@ import { main } from '@angular/compiler-cli/src/main';
 import { DxDataGridComponent, DxTreeListComponent } from 'devextreme-angular';
 import { DxiRowComponent } from 'devextreme-angular/ui/nested/row-dxi';
 import { Helper } from '../../../../shared/classes/helper';
-import {ToastrService} from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -28,8 +28,8 @@ export class AddTempleteComponent implements OnInit {
 
 
 
-  constructor(private interventionService: InterventionService , private toastr: ToastrService) {
-     this.helper = Helper;
+  constructor(private interventionService: InterventionService, private toastr: ToastrService) {
+    this.helper = Helper;
     this.template = {};
   }
 

@@ -47,7 +47,7 @@ import { EtatDirective } from '../../shared/directives/etat.directive';
     DxTreeListModule,
     DxTextBoxModule
   ],
-  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent  ]
+  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent]
 
 })
 export class InterventionsModule {

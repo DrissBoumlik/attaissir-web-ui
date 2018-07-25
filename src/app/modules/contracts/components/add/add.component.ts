@@ -28,4 +28,5 @@ export class AddComponent implements OnInit {
     this.currentThird.type = 'natural';
     this.currentThird.morale = false;
   }
+
 }

@@ -57,7 +57,7 @@ export class ListComponent implements OnInit {
       load: (loadOptions: any) => {
         if (!loadOptions.hasOwnProperty('filter')) {
           loadOptions['filter'] = [['ts_type', '=', this.thirdType]];
-        } else {
+        } else if (typeof loadOptions['filter'] !== 'undefined') {
           if (loadOptions['filter'].length === 3 && loadOptions['filter'][1] !== 'and' && !isArray(loadOptions['filter'][1])) {
             const tmp = loadOptions['filter'].splice(0, 3);
             loadOptions['filter'].push(tmp);

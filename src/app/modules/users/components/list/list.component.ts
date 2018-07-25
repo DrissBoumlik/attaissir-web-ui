@@ -10,9 +10,9 @@ export class ListComponent implements OnInit {
 
   dataSource: any;
 
-  constructor(public usersSerivces: UsersService) { 
-    
-   
+  constructor(public usersSerivces: UsersService) {
+
+
   }
 
   ngOnInit() {

@@ -62,9 +62,12 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
     this.evnt1 = false;
 
+    this.rightHolderService.getAllDx(12).subscribe((response) => {
+      console.log(response);
+    });
 
 
-    this.preconisationsIntrantsService.getListeAyants_droits(1).subscribe((response) => {
+    this.preconisationsIntrantsService.getListeAyants_droits(0).subscribe((response) => {
       this.ayants_droits = response.data;
 
     }, error1 => {
@@ -145,7 +148,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
     });
 
-   this.retourPopVisible = true;
+    this.retourPopVisible = true;
   }
 
   pinTextBox(event) {
@@ -248,7 +251,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
       '<p> <span style="float: left;font-weight: bolder;">NOM COMPLET  </span>   <span style="float: right">' + this.preconisation.third_party_name + ' </span></p>' +
       '<p><span style="float: bottom">***** </span></p>');
 
-    this.articles.forEach(function (element) {
+    this.articles.forEach(function(element) {
       print.document.write('<p style="font-weight: bolder;">' + element.category + '</p>');
       print.document.write('<p> ***** </p>');
       print.document.write('<p> <span style="float: left;">' + element.article_name + '</span><span style="float: right;"> ' + element.quantity + ' ' + 'QTE' + '</span></p>');

@@ -9,7 +9,7 @@
       <div *ngIf="!addThird">
 
         <div class="">
-          <div class="siam-empty-page" *ngIf="!currentThird.cin">
+          <div class="siam-empty-page" *ngIf="!currentThird.id">
             <div class="siam-empty-page-content">
               <h2>Choisir un agrégé</h2>
               <div class="row">
@@ -38,7 +38,7 @@
               </div>
             </div>
           </div>
-          <div *ngIf="currentThird.cin">
+          <div *ngIf="currentThird.id">
             <dx-form id="form"
                      [formData]="currentThird"
                      [readOnly]="isEdit"
@@ -111,7 +111,7 @@
 
   </aw-wizard-step>
 
-  <aw-wizard-step [stepTitle]="step2" [canEnter]="!!currentThird.cin"
+  <aw-wizard-step [stepTitle]="step2" [canEnter]="!!currentThird.id"
                   (stepExit)="goToArea()"
                   [navigationSymbol]="{ symbol: '&#xf151;', fontFamily: 'Flaticon'}"
                   i18n-step-title>
@@ -196,12 +196,11 @@
     </div>
   </aw-wizard-step>
   <aw-wizard-step stepTitle="4. Parcelle"
-                  [canEnter]="!!currentThird.cin && (campaigns.length > 0 && campaigns[0].surface > 0)"
+                  [canEnter]="!!currentThird.id && (campaigns.length > 0 && campaigns[0].surface > 0)"
                   i18n-step-title
                   [navigationSymbol]="{ symbol: '&#xf1a0;', fontFamily: 'Flaticon'}">
 
     <div>
-
       <div id="form-container">
         <dx-form id="form3"
                  [colCount]="4"
