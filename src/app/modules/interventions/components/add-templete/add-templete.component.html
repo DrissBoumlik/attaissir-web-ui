@@ -3,7 +3,7 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
      <!-- <h2>Appliquer un Template d'intervention sur plusieurs parcelle logique</h2> !-->
-   <!-- <p [appHighlight]="color" >test</p> !-->
+      <!--    <p [appHighlight]="color" >test</p>!-->
     </div>
   </div>
 </div>
@@ -72,7 +72,6 @@
              <dxi-column dataField="company_name" caption="Raison social" [visible]="false"></dxi-column>
              <dxi-column dataField="tenure" caption="Mode faire-valoir" cellTemplate="tenureTemplate"></dxi-column>
              <dxi-column dataField="status" caption="Etat"  cellTemplate="statusTemplate"></dxi-column>
-             <dxi-column dataField="third_party_type" caption="Type d'agrégé"></dxi-column>
 
 
             <div *dxTemplate="let data of 'parent_idTemplate'">
@@ -89,12 +88,13 @@
               </div>
             </div>
 
+
             <div *dxTemplate="let data of 'statusTemplate'">
                <span  [ngClass]=" helper.getStatusColor(data.value)">
-                       <p>{{helper.getStatut(data.value)}}</p>
+                       {{helper.getStatut(data.value)}}
                 </span>
-            </div>
 
+            </div>
 
             <div *dxTemplate="let data of 'tenureTemplate'">
                <span >

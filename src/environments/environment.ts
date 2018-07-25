@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://s9.nmouline.code.go' // 'http://api.siam618.graviton.ma',
+  apiUrl: 'http://s1.mboujaha.code.go' // 'http://api.siam618.graviton.ma',
 };
 
 /*

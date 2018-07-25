@@ -1,4 +1,3 @@
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { InterventionService } from '../../services/intervention.service';
 import CustomStore from 'devextreme/data/custom_store';
@@ -6,6 +5,7 @@ import { main } from '@angular/compiler-cli/src/main';
 import { DxDataGridComponent, DxTreeListComponent } from 'devextreme-angular';
 import { DxiRowComponent } from 'devextreme-angular/ui/nested/row-dxi';
 import { Helper } from '../../../../shared/classes/helper';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class AddTempleteComponent implements OnInit {
 
 
 
-  constructor(private interventionService: InterventionService ) {
+  constructor(private interventionService: InterventionService , private toastr: ToastrService) {
      this.helper = Helper;
     this.template = {};
   }
@@ -64,17 +64,14 @@ export class AddTempleteComponent implements OnInit {
           return this.interventionService.getTemplates()
             .toPromise()
             .then(response => {
-              console.log(response);
               const json = response.data;
               return json;
             })
             .catch(error => {
-              console.log(error);
               throw error;
             });
         },
         byKey: (key) => {
-          console.log(key);
           return key;
         }
 
@@ -93,14 +90,13 @@ export class AddTempleteComponent implements OnInit {
         this.ref1.instance.getVisibleRows().forEach((row: any) => {
 
           if (row.data.is_selected && row.data.parent_id === 0) {
-            console.log(selected_parc);
             selected_parc.push(row.data);
           }
         });
 
-        const item = [{ template_id: this.template.template, selected_parc: selected_parc }];
+        const item = { id: this.template.template, items: selected_parc };
         this.interventionService.addIng(item).subscribe((response) => {
-          console.log(response);
+          this.toastr.success('Les modifications ont été effectuées avec succès.');
         });
       }
     };
@@ -112,7 +108,6 @@ export class AddTempleteComponent implements OnInit {
 
     this.ref1.instance.getVisibleRows().forEach((row: any) => {
       row.data.is_selected = event;
-      console.log(row.data);
     });
   }
 

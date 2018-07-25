@@ -45,7 +45,7 @@ export class PreconisationsIntrantsService {
 
 
   cancelPreconisation(id: any): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/${this.routeName}/cancelpreconization/${id}`, {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/cancelpreconization`, JSON.stringify({ id: id }), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
