@@ -170,6 +170,46 @@ export class AddComponent implements OnInit {
                     },
                   );
                 });
+                this.parcelOptions = {
+                  displayExpr: 'label',
+                  valueExpr: 'id',
+                  items: this.third.parcels,
+                  searchEnabled: true,
+                  onSelectionChanged: (event) => {
+                    if (event.selectedItem) {
+                      this.interventions.contracted_surface = event.selectedItem.contracted_surface;
+                      this.interventions.actual_surface = event.selectedItem.actual_surface;
+                      this.interventions.remaining_surface = event.selectedItem.remaining_surface;
+                      this.stwOptions = {
+                        max: this.interventions.contracted_surface,
+                        min: 0,
+                        value: this.interventions.contracted_surface,
+                        /*onValueChanged: (stwEvent) => {
+                          if (this.interventions.contracted_surface && (stwEvent.value > this.interventions.contracted_surface )) {
+                            this.stwOptions.value = {
+                              min: 0,
+                              value: this.interventions.contracted_surface,
+                            };
+                            console.log(stwEvent);
+                            this.toastr.warning('La valeur que vous avez saisie dépasse la valeur de la superficie contractée.');
+                          }
+                        }*/
+                      };
+                      this.wareHouseService.getWarehousesByZone(event.selectedItem.id_zone).subscribe(
+                        (cds: any) => {
+                          this.CDs = cds.data;
+                          this.cdOptions = {
+                            displayExpr: 'name',
+                            valueExpr: 'id',
+                            items: this.CDs,
+                            searchEnabled: true,
+                            searchMode: 'contains',
+                          };
+                        }
+                      );
+                    }
+                  },
+                };
               }
             );
           }
@@ -306,7 +346,8 @@ export class AddComponent implements OnInit {
           valueExpr: 'sub_category_id',
           items: this.data.products[0].sub_categories,
           searchEnabled: true,
-          onSelectionChanged: (e) => {parcelOptions
+          onSelectionChanged: (e) => {
+            parcelOptions
             this.SelectedProductsSubCategory = e.selectedItem;
             this.articleService.getArticlesByFamily(e.selectedItem.sub_category_id)
               .subscribe(
