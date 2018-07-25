@@ -170,7 +170,6 @@ export class AddComponent implements OnInit {
                     },
                   );
                 });
-
               }
             );
           }
@@ -307,7 +306,7 @@ export class AddComponent implements OnInit {
           valueExpr: 'sub_category_id',
           items: this.data.products[0].sub_categories,
           searchEnabled: true,
-          onSelectionChanged: (e) => {
+          onSelectionChanged: (e) => {parcelOptions
             this.SelectedProductsSubCategory = e.selectedItem;
             this.articleService.getArticlesByFamily(e.selectedItem.sub_category_id)
               .subscribe(
