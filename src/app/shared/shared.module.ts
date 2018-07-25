@@ -37,6 +37,7 @@ import { ParcelsListComponent } from './components/parcels-list/parcels-list.com
     DxListModule,
     DxFormModule,
     DxButtonModule,
+    DxTextBoxModule,
     DxDataGridModule,
     ConseilleComponent,
     WarehouseComponent,
