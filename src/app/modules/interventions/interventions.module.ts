@@ -44,7 +44,8 @@ import { EtatDirective } from '../../shared/directives/etat.directive';
     DxValidatorModule,
     DxValidationSummaryModule,
     DxCheckBoxModule,
-    DxTreeListModule
+    DxTreeListModule,
+    DxTextBoxModule
   ],
   declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent  ]
 
