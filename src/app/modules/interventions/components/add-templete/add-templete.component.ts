@@ -6,6 +6,7 @@ import { DxDataGridComponent, DxTreeListComponent } from 'devextreme-angular';
 import { DxiRowComponent } from 'devextreme-angular/ui/nested/row-dxi';
 import { Helper } from '../../../../shared/classes/helper';
 
+
 @Component({
   selector: 'app-add-templete',
   templateUrl: './add-templete.component.html',
@@ -25,8 +26,9 @@ export class AddTempleteComponent implements OnInit {
   _parcels: any = {};
 
 
-  constructor(private interventionService: InterventionService) {
-    this.helper = Helper;
+
+  constructor(private interventionService: InterventionService ) {
+     this.helper = Helper;
     this.template = {};
   }
 
@@ -38,13 +40,8 @@ export class AddTempleteComponent implements OnInit {
         return this.interventionService.getParcelsDx(loadOptions)
           .toPromise()
           .then(response => {
-
-
-            // const json = [ response.data[0] , response.data[5]];
-            // const json = [ response.data[0] , response.data[1] , response.data[5] ];
-            // console.log(json);
-
             return response;
+
           })
           .catch(error => {
             throw error;
@@ -79,6 +76,7 @@ export class AddTempleteComponent implements OnInit {
           console.log(key);
           return key;
         }
+
       })
     };
 
@@ -92,19 +90,21 @@ export class AddTempleteComponent implements OnInit {
         const selected_parc = [];
 
         this.ref1.instance.getVisibleRows().forEach((row: any) => {
+
           if (row.data.is_selected && row.data.parent_id === 0) {
             console.log(selected_parc);
             selected_parc.push(row.data);
           }
         });
+
         const item = [{ template_id: this.template.template, selected_parc: selected_parc }];
         this.interventionService.addIng(item).subscribe((response) => {
           console.log(response);
         });
-
       }
     };
   }
+
 
 
   selectedEvent(event) {
@@ -115,9 +115,11 @@ export class AddTempleteComponent implements OnInit {
     });
   }
 
+
   selectedEventItem(event, id) {
 
     this.ref1.instance.getVisibleRows().forEach((row: any) => {
+
       if (row.data.id === id) {
         row.data.is_selected = event;
       }

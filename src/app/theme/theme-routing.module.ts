@@ -71,6 +71,10 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: '../modules/interventions/interventions.module#InterventionsModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/users/users.module#UsersModule'
       }
       ,
       {
