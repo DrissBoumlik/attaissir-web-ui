@@ -4,7 +4,7 @@ import { StockService } from '../../services/stock.service';
 import { ActivatedRoute } from '@angular/router';
 import CustomStore from 'devextreme/data/custom_store';
 import { WarehouseService } from '../../../distribution-center/services/warehouse.service';
-import {isArray} from "util";
+import {isArray} from 'util';
 
 
 @Component({
