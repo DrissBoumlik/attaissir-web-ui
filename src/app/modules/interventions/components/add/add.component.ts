@@ -347,7 +347,6 @@ export class AddComponent implements OnInit {
           items: this.data.products[0].sub_categories,
           searchEnabled: true,
           onSelectionChanged: (e) => {
-            parcelOptions
             this.SelectedProductsSubCategory = e.selectedItem;
             this.articleService.getArticlesByFamily(e.selectedItem.sub_category_id)
               .subscribe(

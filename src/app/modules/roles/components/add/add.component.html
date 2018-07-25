@@ -13,17 +13,16 @@
       <form style="height: auto">
           <div id="form-container">
               <dx-form id="form"
-                  [colCount]="1"
-                  [formData]="employee">
+                  [colCount]="1">
                   <dxi-item itemType="group" caption="Informations Générales" [colCount]="1">
                     <dxi-item dataField="Rôle" [editorOptions]="{ disabled: false }">
                         <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule>
                     </dxi-item>
-                  
-                  </dxi-item>     
+
+                  </dxi-item>
               </dx-form>
           </div>
       </form>
     </div>
   </div>
-</div>   
+</div>
