@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Rx';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 
 
@@ -15,9 +15,9 @@ export class InterventionService {
   constructor(private http: HttpClient) {
   }
 
-  getFamiliesAndSubFamilies(): Observable<any> {
+  getFamiliesAndSubFamilies(structureID: number): Observable<any> {
     const division = localStorage.getItem('tenantId');
-    return this.http.get(`${environment.apiUrl}/${this.routeName}/5`, {
+    return this.http.get(`${environment.apiUrl}/${this.routeName}/${structureID}`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {UsersRoutingModule} from './users-routing.module';
@@ -14,7 +14,8 @@ import {DxSelectBoxModule} from 'devextreme-angular';
     UsersRoutingModule,
     DxSelectBoxModule
   ],
-  declarations: [AddComponent, ListComponent]
+  declarations: [AddComponent, ListComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UsersModule {
 }

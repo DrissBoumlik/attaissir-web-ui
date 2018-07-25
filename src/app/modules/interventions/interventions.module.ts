@@ -39,20 +39,16 @@ import { EtatDirective } from '../../shared/directives/etat.directive';
     DxTemplateModule,
     DxLoadPanelModule,
     DxCheckBoxModule,
-
-    DxSwitchModule,
-    DxTagBoxModule,
-    DxListModule,
-    DxiItemModule,
-    DxiGroupItemModule,
-    DxFormModule,
     DxTextBoxModule,
+    DxSwitchModule,
     DxValidatorModule,
+    DxValidationSummaryModule,
     DxCheckBoxModule,
     DxTreeListModule,
-    DxTextBoxModule,
-    DxValidationSummaryModule
+    DxTextBoxModule
   ],
-  declarations: [NewComponent, AddComponent, AddTempleteComponent, EditComponent, ListComponent, EtatDirective  ]
+  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent]
+
 })
-export class InterventionsModule { }
+export class InterventionsModule {
+}

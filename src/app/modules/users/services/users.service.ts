@@ -35,4 +35,12 @@ export class UsersService {
     });
   }
 
+  getUsers(): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/users/grid`, JSON.stringify([]), {
+      headers: new HttpHeaders({
+        // "tenant":"10"
+      })
+    });
+  }
+
 }

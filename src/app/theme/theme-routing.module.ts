@@ -75,6 +75,10 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: '../modules/users/users.module#UsersModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/roles/roles.module#RolesModule'
       }
       ,
       {
