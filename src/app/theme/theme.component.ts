@@ -10,7 +10,7 @@ declare let mApp: any;
 declare let mUtil: any;
 declare let mLayout: any;
 const MINUTES_UNITL_AUTO_LOGOUT = 30;
-const CHECK_INTERVAL = 1000;
+const CHECK_INTERVAL = 10000;
 const STORE_KEY = 'lastAction';
 
 
@@ -36,7 +36,7 @@ export class ThemeComponent implements OnInit {
   initListener() {
     document.body.addEventListener('click', () => {
       if (this.auth.getToken()) {
-        console.log('click');
+        console.log(this.canRefresh);
         this.reset();
       }
     });
@@ -47,7 +47,6 @@ export class ThemeComponent implements OnInit {
     this.lastAction = localStorage.getItem(STORE_KEY);
     if (this.canRefresh) {
       this.auth.refresh().subscribe(data => {
-        console.log('testTenant');
         const currentUser: any = JSON.stringify(data);
         localStorage.setItem('currentUser', currentUser);
         localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
@@ -74,7 +73,7 @@ export class ThemeComponent implements OnInit {
       const timeleft: any = Number(this.lastAction) + MINUTES_UNITL_AUTO_LOGOUT * 60 * 1000;
       const diff = Number(timeleft) - Number(now);
       const isTimeout = diff < 0;
-      this.canRefresh = diff < 600000;
+      this.canRefresh = !this.canRefresh; // diff < 600000;
 
       if (diff < 1500000 && diff > 1499800) {
         this.toastr.warning('Votre session va expirer dans 5 minute!', '', {
