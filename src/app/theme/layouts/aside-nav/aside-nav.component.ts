@@ -124,7 +124,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         disabled: 'false'
       },
       {
-        name: 'Préconisations intrants',
+        name: 'préconisations en mass',
         icon: 'flaticon-tabs',
         url: '/interventions/appliquer-template-parcelle',
         description: 'Preconisations intrants',
