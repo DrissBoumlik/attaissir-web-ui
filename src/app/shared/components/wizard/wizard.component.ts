@@ -65,7 +65,6 @@ export class WizardComponent implements OnInit {
   step2: string;
 
   constructor(public tier: Third,
-    public tierService: ThirdsService,
     private toastr: ToastrService,
     private thirdService: ThirdsService,
     private soilsService: SoilsService,
@@ -166,7 +165,7 @@ export class WizardComponent implements OnInit {
         label: 'CDA',
         items: this.cdas,
         displayExpr: 'name',
-        valueExpr: 'id',
+        valueExpr: 'code',
         searchEnabled: true,
         onSelectionChanged: (e) => {
           // Zone
@@ -177,7 +176,7 @@ export class WizardComponent implements OnInit {
                 label: 'Zone',
                 items: this.zones,
                 displayExpr: 'name',
-                valueExpr: 'id',
+                valueExpr: 'code',
                 value: '',
                 searchEnabled: true,
                 onSelectionChanged: (event) => {
@@ -189,7 +188,7 @@ export class WizardComponent implements OnInit {
                         label: 'Secteur',
                         items: this.sectors,
                         displayExpr: 'name',
-                        valueExpr: 'id',
+                        valueExpr: 'code',
                         value: '',
                         searchEnabled: true,
                         onSelectionChanged: (event1) => {
@@ -202,7 +201,7 @@ export class WizardComponent implements OnInit {
                                 label: 'Bloc',
                                 items: this.blocs,
                                 displayExpr: 'name',
-                                valueExpr: 'id',
+                                valueExpr: 'code',
                                 value: '',
                                 searchEnabled: true,
                                 onSelectionChanged: (e2) => {
@@ -387,6 +386,10 @@ export class WizardComponent implements OnInit {
   finishFunction(e) {
     e.preventDefault();
     const tenantId = localStorage.getItem('tenantId');
+    console.log(this.currentThird);
+    if (!this.currentThird.id) {
+      console.log(this.currentThird);
+    }
     this.contract.third_party_id = this.currentThird.id;
     this.contract.signature_date = new Date();
     this.contract.expiration_date = new Date();

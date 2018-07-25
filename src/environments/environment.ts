@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://s1.mboujaha.code.go' // 'http://api.siam618.graviton.ma',
+  apiUrl: 'http://s1.mboujaha.code.go',
 };
 
 /*
@@ -14,4 +14,3 @@ export const environment = {
  * because it will have performance impact when throw error
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
-
