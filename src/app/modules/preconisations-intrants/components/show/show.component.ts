@@ -1,8 +1,8 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { PreconisationsIntrantsService } from '../../service/preconisations-intrants.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { RightHolderService } from '../../../contracts/services/right-holder.service';
+import {Component, OnInit, ElementRef, ViewChild, AfterViewInit} from '@angular/core';
+import {PreconisationsIntrantsService} from '../../service/preconisations-intrants.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {RightHolderService} from '../../../contracts/services/right-holder.service';
 
 @Component({
   selector: 'app-show',
@@ -37,9 +37,9 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
 
   constructor(private elementRef: ElementRef, private preconisationsIntrantsService: PreconisationsIntrantsService,
-    private rightHolderService: RightHolderService,
-    private router: Router,
-    private toastr: ToastrService, private route: ActivatedRoute) {
+              private rightHolderService: RightHolderService,
+              private router: Router,
+              private toastr: ToastrService, private route: ActivatedRoute) {
 
   }
 
@@ -67,7 +67,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
     });
 
 
-    this.preconisationsIntrantsService.getListeAyants_droits(1).subscribe((response) => {
+    this.preconisationsIntrantsService.getListeAyants_droits(0).subscribe((response) => {
       this.ayants_droits = response.data;
 
     }, error1 => {
@@ -280,12 +280,12 @@ export class ShowComponent implements OnInit, AfterViewInit {
     this.rfid.nativeElement.focus();
 
     this.rfid.nativeElement.addEventListener('input', () => {
-      setTimeout(() => {
+      setTimeout( () => {
         this.rf_code = this.rfid.nativeElement.value;
         this.rfid.nativeElement.value = '';
         this.focusout.nativeElement.focus();
 
-        if (this.popupDeliverVisible) {
+        if ( this.popupDeliverVisible) {
           this.preconisationsIntrantsService.deliver(this.preconisation.id, this.pin_code, this.rf_code)
             .toPromise()
             .then(response => {
