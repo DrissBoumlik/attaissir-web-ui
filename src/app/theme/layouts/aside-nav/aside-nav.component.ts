@@ -120,11 +120,11 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         name: 'Préconisations intrants',
         icon: 'flaticon-tabs',
         url: '/preconisations-intrants/liste',
-        description: 'Preconisations intrants',
+        description: 'Préconisations intrants',
         disabled: 'false'
       },
       {
-        name: 'préconisations en mass',
+        name: 'Préconisations en mass',
         icon: 'flaticon-tabs',
         url: '/interventions/appliquer-template-parcelle',
         description: 'Preconisations intrants',
