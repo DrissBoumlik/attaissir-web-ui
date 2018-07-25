@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ArticlesService } from '../../../articles/services/articles.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ArticlesService} from '../../../articles/services/articles.service';
 import 'rxjs/add/operator/toPromise';
-import { InterventionService } from '../../services/intervention.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { WarehouseService } from '../../../distribution-center/services/warehouse.service';
-import { DxDataGridComponent } from 'devextreme-angular';
-import { NewComponent } from '../new/new.component';
-import { DxiItemComponent } from 'devextreme-angular/ui/nested/item-dxi';
-import { ToastrService } from 'ngx-toastr';
+import {InterventionService} from '../../services/intervention.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {WarehouseService} from '../../../distribution-center/services/warehouse.service';
+import {DxDataGridComponent} from 'devextreme-angular';
+import {NewComponent} from '../new/new.component';
+import {DxiItemComponent} from 'devextreme-angular/ui/nested/item-dxi';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-add',
@@ -89,12 +89,12 @@ export class AddComponent implements OnInit {
   /*--------------------Constructor-----------------------*/
 
   constructor(public articleService: ArticlesService,
-    public interventionService: InterventionService,
-    private wareHouseService: WarehouseService,
-    private route: ActivatedRoute,
-    private thirdsService: ThirdsService,
-    private toastr: ToastrService,
-    private router: Router) {
+              public interventionService: InterventionService,
+              private wareHouseService: WarehouseService,
+              private route: ActivatedRoute,
+              private thirdsService: ThirdsService,
+              private toastr: ToastrService,
+              private router: Router) {
   }
 
   /*--------------------Initialize content-----------------------*/
@@ -170,7 +170,46 @@ export class AddComponent implements OnInit {
                     },
                   );
                 });
-
+                this.parcelOptions = {
+                  displayExpr: 'label',
+                  valueExpr: 'id',
+                  items: this.third.parcels,
+                  searchEnabled: true,
+                  onSelectionChanged: (event) => {
+                    if (event.selectedItem) {
+                      this.interventions.contracted_surface = event.selectedItem.contracted_surface;
+                      this.interventions.actual_surface = event.selectedItem.actual_surface;
+                      this.interventions.remaining_surface = event.selectedItem.remaining_surface;
+                      this.stwOptions = {
+                        max: this.interventions.contracted_surface,
+                        min: 0,
+                        value: this.interventions.contracted_surface,
+                        /*onValueChanged: (stwEvent) => {
+                          if (this.interventions.contracted_surface && (stwEvent.value > this.interventions.contracted_surface )) {
+                            this.stwOptions.value = {
+                              min: 0,
+                              value: this.interventions.contracted_surface,
+                            };
+                            console.log(stwEvent);
+                            this.toastr.warning('La valeur que vous avez saisie dépasse la valeur de la superficie contractée.');
+                          }
+                        }*/
+                      };
+                      this.wareHouseService.getWarehousesByZone(event.selectedItem.id_zone).subscribe(
+                        (cds: any) => {
+                          this.CDs = cds.data;
+                          this.cdOptions = {
+                            displayExpr: 'name',
+                            valueExpr: 'id',
+                            items: this.CDs,
+                            searchEnabled: true,
+                            searchMode: 'contains',
+                          };
+                        }
+                      );
+                    }
+                  },
+                };
               }
             );
           }
@@ -189,12 +228,12 @@ export class AddComponent implements OnInit {
                   colspan: 3,
                 };
                 switch (cf.type) {
-                  case (this.DB_NUMBER_BOX): {
+                  case (this.DB_NUMBER_BOX) : {
                     dxCustomField.editorType = this.DX_NUMBER_BOX;
                     dxCustomField.colspan = 2;
                     break;
                   }
-                  case (this.DB_CHECK_BOX): {
+                  case (this.DB_CHECK_BOX) : {
                     dxCustomField.editorType = this.DX_CHECK_BOX;
                     dxCustomField.colspan = 1;
                     break;
@@ -379,7 +418,7 @@ export class AddComponent implements OnInit {
       onClick: ($event) => {
         /*--------------------------------------------------------*/
         if (((!this.productsGrid && !this.data.services.length && this.semenceGrid) &&
-          this.semenceGrid.instance.getVisibleRows().length === 0)
+            this.semenceGrid.instance.getVisibleRows().length === 0)
           || ((!this.semenceGrid && !this.data.services.length && this.productsGrid) &&
             this.productsGrid.instance.getVisibleRows().length === 0)
           || ((!this.semenceGrid && !this.productsGrid && this.selectedItems) && this.selectedItems.length === 0)) {
@@ -432,7 +471,7 @@ export class AddComponent implements OnInit {
 
         this.selectedItems.forEach(
           st => {
-            data.service_articles.push({ article_id: st.id, quantity: 1 });
+            data.service_articles.push({article_id: st.id, quantity: 1});
           }
         );
         if (this.interventions.isSaveAsModel
