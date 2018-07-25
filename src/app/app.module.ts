@@ -37,14 +37,13 @@ import { MouvementsModule } from './modules/mouvements/mouvements.module';
 import { InterventionsModule } from './modules/interventions/interventions.module';
 import { DemandesModule } from './modules/demandes/demandes.module';
 
-import {PermissionDirective} from './_directives/permission.directive';
-import {UsersModule} from './modules/users/users.module';
+import { UsersModule } from './modules/users/users.module';
+import { PermissionDirective } from './_directives/permission.directive';
 
 @NgModule({
   declarations: [
     ThemeComponent,
-    AppComponent,
-    PermissionDirective
+    AppComponent, PermissionDirective
   ],
   imports: [
     LayoutModule,
@@ -96,15 +95,15 @@ import {UsersModule} from './modules/users/users.module';
     useValue: 'fr'
   },
     ScriptLoaderService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
-    {
-      provide: ErrorHandler,
-      useClass: SiamErrorHandler
-    }
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  },
+  {
+    provide: ErrorHandler,
+    useClass: SiamErrorHandler
+  }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
