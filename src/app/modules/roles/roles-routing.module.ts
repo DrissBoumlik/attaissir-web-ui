@@ -7,9 +7,9 @@ const routes: Routes = [{
   path: 'roles',
   component: DefaultComponent,
   children: [
-    {path: 'ajouter', component: AddComponent},
+    { path: 'ajouter', component: AddComponent },
   ]
-}]; 
+}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

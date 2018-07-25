@@ -1,14 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ArticlesService} from '../../../articles/services/articles.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ArticlesService } from '../../../articles/services/articles.service';
 import 'rxjs/add/operator/toPromise';
-import {InterventionService} from '../../services/intervention.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {WarehouseService} from '../../../distribution-center/services/warehouse.service';
-import {DxDataGridComponent} from 'devextreme-angular';
-import {NewComponent} from '../new/new.component';
-import {DxiItemComponent} from 'devextreme-angular/ui/nested/item-dxi';
-import {ToastrService} from 'ngx-toastr';
+import { InterventionService } from '../../services/intervention.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { WarehouseService } from '../../../distribution-center/services/warehouse.service';
+import { DxDataGridComponent } from 'devextreme-angular';
+import { NewComponent } from '../new/new.component';
+import { DxiItemComponent } from 'devextreme-angular/ui/nested/item-dxi';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add',
@@ -89,12 +89,12 @@ export class AddComponent implements OnInit {
   /*--------------------Constructor-----------------------*/
 
   constructor(public articleService: ArticlesService,
-              public interventionService: InterventionService,
-              private wareHouseService: WarehouseService,
-              private route: ActivatedRoute,
-              private thirdsService: ThirdsService,
-              private toastr: ToastrService,
-              private router: Router) {
+    public interventionService: InterventionService,
+    private wareHouseService: WarehouseService,
+    private route: ActivatedRoute,
+    private thirdsService: ThirdsService,
+    private toastr: ToastrService,
+    private router: Router) {
   }
 
   /*--------------------Initialize content-----------------------*/
@@ -228,12 +228,12 @@ export class AddComponent implements OnInit {
                   colspan: 3,
                 };
                 switch (cf.type) {
-                  case (this.DB_NUMBER_BOX) : {
+                  case (this.DB_NUMBER_BOX): {
                     dxCustomField.editorType = this.DX_NUMBER_BOX;
                     dxCustomField.colspan = 2;
                     break;
                   }
-                  case (this.DB_CHECK_BOX) : {
+                  case (this.DB_CHECK_BOX): {
                     dxCustomField.editorType = this.DX_CHECK_BOX;
                     dxCustomField.colspan = 1;
                     break;
@@ -347,6 +347,7 @@ export class AddComponent implements OnInit {
           items: this.data.products[0].sub_categories,
           searchEnabled: true,
           onSelectionChanged: (e) => {
+            parcelOptions
             this.SelectedProductsSubCategory = e.selectedItem;
             this.articleService.getArticlesByFamily(e.selectedItem.sub_category_id)
               .subscribe(
@@ -418,7 +419,7 @@ export class AddComponent implements OnInit {
       onClick: ($event) => {
         /*--------------------------------------------------------*/
         if (((!this.productsGrid && !this.data.services.length && this.semenceGrid) &&
-            this.semenceGrid.instance.getVisibleRows().length === 0)
+          this.semenceGrid.instance.getVisibleRows().length === 0)
           || ((!this.semenceGrid && !this.data.services.length && this.productsGrid) &&
             this.productsGrid.instance.getVisibleRows().length === 0)
           || ((!this.semenceGrid && !this.productsGrid && this.selectedItems) && this.selectedItems.length === 0)) {
@@ -471,7 +472,7 @@ export class AddComponent implements OnInit {
 
         this.selectedItems.forEach(
           st => {
-            data.service_articles.push({article_id: st.id, quantity: 1});
+            data.service_articles.push({ article_id: st.id, quantity: 1 });
           }
         );
         if (this.interventions.isSaveAsModel

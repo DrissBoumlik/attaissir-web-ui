@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Contract } from '../../classes/contract';
 import { Third } from '../../classes/third';
@@ -314,7 +314,7 @@ export class WizardComponent implements OnInit {
   }
 
   goToContractInfo = () => {
-    if (!this.currentThird.cin) {
+    if (!this.currentThird.id) {
       this.toastr.warning('Sélectionnez ou créez un agrégé pour avancer!');
     }
   }
