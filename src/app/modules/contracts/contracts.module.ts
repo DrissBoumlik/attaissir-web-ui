@@ -8,7 +8,10 @@ import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ListCurrentComponent } from './components/list-current/list-current.component';
-import { DxFileUploaderModule, DxSelectBoxModule, DxTemplateModule, DxTextAreaModule } from 'devextreme-angular';
+import {
+  DxFileUploaderModule, DxSelectBoxModule, DxTemplateModule, DxTextAreaModule,
+  DxTextBoxModule
+} from 'devextreme-angular';
 
 
 @NgModule({
@@ -19,7 +22,8 @@ import { DxFileUploaderModule, DxSelectBoxModule, DxTemplateModule, DxTextAreaMo
     DxSelectBoxModule,
     DxFileUploaderModule,
     DxTextAreaModule,
-    DxTemplateModule
+    DxTemplateModule,
+    DxTextBoxModule
   ],
   declarations: [
     ListComponent,

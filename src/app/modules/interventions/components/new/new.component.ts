@@ -40,7 +40,7 @@ export class NewComponent implements OnInit {
 
   ngOnInit() {
     const structureId = localStorage.getItem('tenantId');
-    this.interventionService.getFamiliesAndSubFamilies(structureId).subscribe(
+    this.interventionService.getFamiliesAndSubFamilies(+structureId).subscribe(
       (res: any) => {
         console.log(res);
         res.data.forEach((activity_family: any, index) => {
