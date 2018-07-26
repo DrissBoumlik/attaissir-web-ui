@@ -2,26 +2,97 @@
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Nouveau rôle</h2>
+      <h2>Nouveau Role</h2>
     </div>
   </div>
 </div>
-
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
-      <form style="height: auto">
-          <div id="form-container">
-              <dx-form id="form"
-                  [colCount]="1">
-                  <dxi-item itemType="group" caption="Informations Générales" [colCount]="1">
-                    <dxi-item dataField="Rôle" [editorOptions]="{ disabled: false }">
-                        <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule>
-                    </dxi-item>
+      <form style="margin-top: 20px"
+            (submit)="onFormSubmit($event)">
+        <dx-form id="roleForm"
+                 [formData]="role"
+                 [readOnly]="false"
+                 [showColonAfterLabel]="true"
+                 [showValidationSummary]="true"
+                 validationGroup="customerData">
 
-                  </dxi-item>
-              </dx-form>
-          </div>
+          <dxi-item itemType="group" caption="Role">
+            <dxi-item
+              dataField="name">
+              <dxo-label
+                text="Code">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="Le Code est obligatoire">
+              </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item
+              dataField="description">
+              <dxo-label
+                text="Designation">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="La Designation est obligatoire">
+              </dxi-validation-rule>
+            </dxi-item>
+          </dxi-item>
+
+
+          <dxi-item itemType="group" caption="Choix des permissions">
+
+            <div class="dx-field">
+              <div class="dx-field-label">les permissions</div>
+              <div class="dx-field-value">
+                <dx-select-box
+                  [dataSource]="listOfPermissions"
+                  displayExpr="description"
+                  valueExpr="id"
+                  [searchEnabled]="true"
+                  (onItemClick)="addToChoosingPermission($event)"
+                ></dx-select-box>
+              </div>
+            </div>
+
+
+          </dxi-item>
+
+          <dxi-item itemType="group">
+
+            <dx-data-grid
+              id="gridContainer"
+              keyExpr="id"
+              [dataSource]="choosingPermissions"
+              [allowColumnReordering]="true"
+              [showColumnLines]="true"
+              [showRowLines]="true"
+              [showBorders]="true"
+              [rowAlternationEnabled]="true"
+              [columnAutoWidth]="true"
+              [noDataText]="'Aucune permision n\'est ajoute!'"
+              (onRowRemoved)="removeItemFromChoosingPermissions($event)">
+
+              <dxo-paging [enabled]="true"></dxo-paging>
+              <dxo-editing
+                mode="row"
+                [allowDeleting]="true">
+              </dxo-editing>
+              <dxi-column
+                caption="les permissions choisis"
+                dataField="description"></dxi-column>
+            </dx-data-grid>
+
+          </dxi-item>
+
+          <dxi-item
+            itemType="button"
+            alignment="right"
+            [buttonOptions]="buttonOptions">
+          </dxi-item>
+        </dx-form>
       </form>
     </div>
   </div>
