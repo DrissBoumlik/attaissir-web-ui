@@ -16,12 +16,14 @@ import {Router} from '@angular/router';
 })
 export class AddTempleteComponent implements OnInit {
 
+
   statuses: string[];
   buttonsave: any;
   helper: any;
   templates: any;
   templateOptions: any = {};
   template: any;
+  dateOptions: any = {};
 
   @ViewChild('ref1') ref1: DxTreeListComponent;
 
@@ -84,7 +86,6 @@ export class AddTempleteComponent implements OnInit {
       useSubmitBehavior: true,
       onClick: () => {
 
-
         const selected_parc = [];
 
         this.ref1.instance.getVisibleRows().forEach((row: any) => {
@@ -93,14 +94,37 @@ export class AddTempleteComponent implements OnInit {
             selected_parc.push(row.data);
           }
         });
-        console.log(this.request_type_id);
 
-        const item = { id: this.template.template, request_type_id : this.request_type_id, items: selected_parc };
-        this.interventionService.addIng(item).subscribe((response) => {
-          this.toastr.success('Les modifications ont été effectuées avec succès.');
-           this.router.navigate(['/stock/situation']);
-        });
+        if( selected_parc.length > 0 ) {
+          const item = { id: this.template.template ,
+            date : this.template.date , description : this.template.description ,
+            request_type_id : this.request_type_id, items: selected_parc };
+
+          this.interventionService.addIng(item).subscribe((response) => {
+            this.toastr.success('Les modifications ont été effectuées avec succès.');
+            this.router.navigate(['/stock/situation']);
+          });
+        } else {
+          this.toastr.warning('la selection des parcelles est obligatoiregit');
+        }
+
       }
+    };
+
+
+    this.dateOptions = {
+      invalidDateMessage: 'La date doit avoir le format suivant: jj/MM/aaaa',
+      calendarOptions: {
+        dateSerializationFormat: 'dd/MM/yyyy',
+        displayFormat: 'yyyy-MM-dd',
+        forceIsoDateParsing: true
+      },
+      onValidated: (e) => {
+        if (!e.value) {
+          e.isValid = true;
+        }
+      },
+      width: '100%'
     };
   }
 
@@ -123,5 +147,6 @@ export class AddTempleteComponent implements OnInit {
       }
     });
   }
+
 
 }
