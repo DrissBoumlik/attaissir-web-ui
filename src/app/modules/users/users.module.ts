@@ -5,14 +5,19 @@ import {UsersRoutingModule} from './users-routing.module';
 import {AddComponent} from './components/add/add.component';
 import {ListComponent} from './components/list/list.component';
 import {SharedModule} from '../../shared/shared.module';
-import {DxSelectBoxModule} from 'devextreme-angular';
+import {DxButtonModule, DxListModule, DxPopupModule, DxSelectBoxModule, DxTemplateModule, DxTreeViewModule} from 'devextreme-angular';
 
 @NgModule({
   imports: [
     SharedModule,
     CommonModule,
     UsersRoutingModule,
-    DxSelectBoxModule
+    DxSelectBoxModule,
+    DxTreeViewModule,
+    DxListModule,
+    DxTemplateModule,
+    DxPopupModule,
+    DxButtonModule
   ],
   declarations: [AddComponent, ListComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
