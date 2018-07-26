@@ -1,4 +1,5 @@
-import { isNull } from 'util';
+import {isArray, isNull} from 'util';
+import {load} from '@angular/core/src/render3/instructions';
 
 export class Helper {
   /**
@@ -37,6 +38,33 @@ export class Helper {
         ID: key
       };
     });
+  }
+
+  public static addFilter = (loadOptions: any, name: string, value: string) => {
+    if (!loadOptions.hasOwnProperty('filter')) {
+      loadOptions['filter'] = [[name, '=', value]];
+    } else if (typeof loadOptions['filter'] !== 'undefined') {
+      if (loadOptions['filter'].length === 3 && loadOptions['filter'][1] !== 'and' && !isArray(loadOptions['filter'][1])) {
+        const tmp = loadOptions['filter'].splice(0, 3);
+        loadOptions['filter'].push(tmp);
+
+      }
+      loadOptions['filter'].push('and');
+      loadOptions['filter'].push([name, '=', value]);
+    }
+  }
+
+  public static editFilter = (loadOptions: any, name: string, value: string) => {
+    if (loadOptions.hasOwnProperty('filter')) {
+      if (typeof loadOptions['filter'] !== 'undefined') {
+        if (loadOptions['filter'].length === 3 && loadOptions['filter'][1] !== 'and' && !isArray(loadOptions['filter'][1])) {
+          const index = loadOptions['filter'].indexOf(name);
+          if (index !== -1) {
+            loadOptions[index] = value;
+          }
+        }
+      }
+    }
   }
 
   public static realObject = (spy) => {

@@ -25,6 +25,7 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this.parcels.store = new CustomStore({
       load: (loadOptions: any) => {
+        console.log(loadOptions);
         return this.parcelsServices.getParcelsDx(loadOptions)
           .toPromise()
           .then(response => {
