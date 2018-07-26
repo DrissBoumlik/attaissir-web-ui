@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import CustomStore from 'devextreme/data/custom_store';
 import { WarehouseService } from '../../../distribution-center/services/warehouse.service';
 import {isArray} from 'util';
+import {Helper} from '../../../../shared/classes/helper';
 
 
 @Component({
@@ -15,12 +16,13 @@ import {isArray} from 'util';
 export class ListComponent implements OnInit {
 
   stock: any = {};
-
+  helper: any;
   queryParams = '';
 
   constructor(private stockService: StockService,
     private route: ActivatedRoute,
     private warhouseService: WarehouseService) {
+    this.helper = Helper;
   }
 
   ngOnInit() {
@@ -33,16 +35,8 @@ export class ListComponent implements OnInit {
         }
         this.stock.store = new CustomStore({
           load: (loadOptions: any) => {
-            if (!loadOptions.hasOwnProperty('filter')) {
-              loadOptions['filter'] = [['warehouse_id', '=', params.magasin]];
-            } else if (typeof loadOptions['filter'] !== 'undefined') {
-              if (loadOptions['filter'].length === 3 && loadOptions['filter'][1] !== 'and' && !isArray(loadOptions['filter'][1])) {
-                const tmp = loadOptions['filter'].splice(0, 3);
-                loadOptions['filter'].push(tmp);
-
-              }
-              loadOptions['filter'].push('and');
-              loadOptions['filter'].push(['warehouse_id', '=', params.magasin]);
+            if (params.magasin) {
+              Helper.addFilter(loadOptions, 'warehouse_id', params.magasin);
             }
             return this.stockService.getStockSituationDx(loadOptions, this.queryParams)
               .toPromise()
