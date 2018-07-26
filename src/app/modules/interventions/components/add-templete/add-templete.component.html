@@ -58,10 +58,10 @@
              <dxi-column dataField="cda"  style="background-color: #ac2925 !important;" caption="CDA" ></dxi-column>
              <dxi-column dataField="zone" caption="Zone" ></dxi-column>
 
-             <dxi-column dataField="third_party_id" caption="Code Agrégé" ></dxi-column>
+             <dxi-column dataField="third_party_id" caption="Code Agrégé" cellTemplate="userTemplate"  ></dxi-column>
              <dxi-column dataField="cin" caption="CIN"></dxi-column>
              <dxi-column dataField="full_name" caption="Nom complet" style="color: #6d7fcc; align-content: center; cursor: pointer" ></dxi-column>
-             <dxi-column dataField="contract_id" caption="Réf. Contrat"  width="150px"></dxi-column>
+             <dxi-column dataField="contract_id" caption="Réf. Contrat" cellTemplate="contractTemplate"  width="150px"></dxi-column>
              <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
              <dxi-column dataField="code_ormva" caption="Code ORMVA"></dxi-column>
              <dxi-column dataField="application_date" caption="Date d'application" [visible]="false"></dxi-column>
@@ -88,6 +88,9 @@
               </div>
             </div>
 
+            <div *dxTemplate="let data of 'contractTemplate'">
+              <a style="color: #6d7fcc; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data.contract_id, router, toastr)">{{ data.data.contract_code }}</a>
+            </div>
 
             <div *dxTemplate="let data of 'statusTemplate'">
                <span  [ngClass]=" helper.getStatusColor(data.value)">
@@ -100,6 +103,10 @@
                <span>
                        <p>{{helper.tenureType(data.value)}}</p>
                 </span>
+            </div>
+
+            <div *dxTemplate="let data of 'userTemplate'">
+              <a class="siam-link" (click)="helper.gotoShow('tiers', data.value, router, toastr)">AG{{ data.value }}</a>
             </div>
 
 
