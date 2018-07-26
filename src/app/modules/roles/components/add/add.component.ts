@@ -29,7 +29,6 @@ export class AddComponent implements OnInit {
 
     if (permission_id.length) {
       const data = {
-        name: this.role.name,
         description: this.role.description,
         permission_id: permission_id
       };
