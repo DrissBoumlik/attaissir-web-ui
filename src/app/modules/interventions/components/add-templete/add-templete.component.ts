@@ -6,6 +6,7 @@ import { DxDataGridComponent, DxTreeListComponent } from 'devextreme-angular';
 import { DxiRowComponent } from 'devextreme-angular/ui/nested/row-dxi';
 import { Helper } from '../../../../shared/classes/helper';
 import { ToastrService } from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -25,10 +26,11 @@ export class AddTempleteComponent implements OnInit {
   @ViewChild('ref1') ref1: DxTreeListComponent;
 
   _parcels: any = {};
+  request_type_id: any;
 
 
 
-  constructor(private interventionService: InterventionService, private toastr: ToastrService) {
+  constructor(private interventionService: InterventionService, private toastr: ToastrService, private router: Router) {
     this.helper = Helper;
     this.template = {};
   }
@@ -51,9 +53,6 @@ export class AddTempleteComponent implements OnInit {
     });
 
 
-
-
-
     this.templateOptions = {
       label: 'Template',
       displayExpr: 'template_name',
@@ -64,7 +63,8 @@ export class AddTempleteComponent implements OnInit {
           return this.interventionService.getTemplates()
             .toPromise()
             .then(response => {
-              const json = response.data;
+              this.request_type_id = response.data.request_type_id;
+              const json = response.data.templates;
               return json;
             })
             .catch(error => {
@@ -93,10 +93,12 @@ export class AddTempleteComponent implements OnInit {
             selected_parc.push(row.data);
           }
         });
+        console.log(this.request_type_id);
 
-        const item = { id: this.template.template, items: selected_parc };
+        const item = { id: this.template.template, request_type_id : this.request_type_id, items: selected_parc };
         this.interventionService.addIng(item).subscribe((response) => {
           this.toastr.success('Les modifications ont été effectuées avec succès.');
+           this.router.navigate(['/stock/situation']);
         });
       }
     };
