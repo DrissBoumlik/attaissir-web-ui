@@ -225,7 +225,8 @@ export class ShowComponent implements OnInit {
       console.log(d);
       this.parcels = [];
       this.parcels.push(d);
-      this.parcels = this.parcels.concat(d['parcels']).map(dat => {
+      const physical_parcels = d['parcels'].filter(dat1 => !dat1.parcel_id);
+      this.parcels = this.parcels.concat(physical_parcels).map(dat => {
         return this.helper.makeParcel(dat);
       });
       this.toaster.success('Le parcelle logique est crée avec succés');
