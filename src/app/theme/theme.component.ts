@@ -10,7 +10,7 @@ declare let mApp: any;
 declare let mUtil: any;
 declare let mLayout: any;
 const MINUTES_UNITL_AUTO_LOGOUT = 30;
-const CHECK_INTERVAL = 10000;
+const CHECK_INTERVAL = 60000;
 const STORE_KEY = 'lastAction';
 
 
@@ -55,7 +55,7 @@ export class ThemeComponent implements OnInit {
           localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
         }
       }, error1 => {
-        this.toastr.warning(`La session n'est pas actualisée.`);
+        // this.toastr.warning(`La session n'est pas actualisée.`);
       });
     }
   }
