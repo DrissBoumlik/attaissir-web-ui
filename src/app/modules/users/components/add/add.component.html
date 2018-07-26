@@ -20,8 +20,10 @@
 
           <dxi-item itemType="group" caption="Informations générales">
             <dxi-item
-              dataField="name"
-              text="hello">
+              dataField="name">
+              <dxo-label
+                text="Nom complet">
+              </dxo-label>
               <dxi-validation-rule
                 type="required"
                 message="Nom complete est obligatoire">
@@ -39,12 +41,14 @@
             </dxi-item>
             <dxi-item dataField="password"
                       [editorOptions]="{ mode: 'password' }">
+              <dxo-label
+                text="Mot de passe">
+              </dxo-label>
               <dxi-validation-rule
                 type="required"
                 message="Password est obligatoire">
               </dxi-validation-rule>
             </dxi-item>
-
           </dxi-item>
 
           <dxi-item itemType="group">
