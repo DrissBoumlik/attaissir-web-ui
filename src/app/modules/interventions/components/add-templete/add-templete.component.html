@@ -52,10 +52,10 @@
             <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
             <dxi-column dataField="parent_id" caption=" "  [width]="100"  cellTemplate="parent_idTemplate"></dxi-column>
 
-            <dxi-column style="background-color: #ac2925 !important;"  dataField="name" [width]="300" caption="Parcelle"   cellTemplate="nameTemplate"></dxi-column>
+            <dxi-column dataField="name" [width]="300" caption="Parcelle"   cellTemplate="nameTemplate"></dxi-column>
             <dxi-column dataField="id" caption="Id"  [visible]="false"></dxi-column>
 
-             <dxi-column dataField="cda" caption="CDA" ></dxi-column>
+             <dxi-column dataField="cda"  style="background-color: #ac2925 !important;" caption="CDA" ></dxi-column>
              <dxi-column dataField="zone" caption="Zone" ></dxi-column>
 
              <dxi-column dataField="third_party_id" caption="Code Agrégé" ></dxi-column>
