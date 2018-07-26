@@ -1,8 +1,9 @@
-import {Component, OnInit, ElementRef, ViewChild, AfterViewInit} from '@angular/core';
-import {PreconisationsIntrantsService} from '../../service/preconisations-intrants.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {RightHolderService} from '../../../contracts/services/right-holder.service';
+
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { PreconisationsIntrantsService } from '../../service/preconisations-intrants.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { RightHolderService } from '../../../contracts/services/right-holder.service';
 
 @Component({
   selector: 'app-show',
@@ -37,9 +38,9 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
 
   constructor(private elementRef: ElementRef, private preconisationsIntrantsService: PreconisationsIntrantsService,
-              private rightHolderService: RightHolderService,
-              private router: Router,
-              private toastr: ToastrService, private route: ActivatedRoute) {
+    private rightHolderService: RightHolderService,
+    private router: Router,
+    private toastr: ToastrService, private route: ActivatedRoute) {
 
   }
 
@@ -54,6 +55,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
           this.preconisation = response.data;
           this.articles = response.data.articles;
           this.id = params.id;
+          this.ayants_droits = response.data.right_holders;
 
         }, error1 => {
           throw error1;
@@ -62,17 +64,8 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
     this.evnt1 = false;
 
-    this.rightHolderService.getAllDx(12).subscribe((response) => {
-      console.log(response);
-    });
 
 
-    this.preconisationsIntrantsService.getListeAyants_droits(0).subscribe((response) => {
-      this.ayants_droits = response.data;
-
-    }, error1 => {
-      throw error1;
-    });
 
 
   }
@@ -280,21 +273,19 @@ export class ShowComponent implements OnInit, AfterViewInit {
     this.rfid.nativeElement.focus();
 
     this.rfid.nativeElement.addEventListener('input', () => {
-      setTimeout( () => {
+      setTimeout(() => {
         this.rf_code = this.rfid.nativeElement.value;
         this.rfid.nativeElement.value = '';
         this.focusout.nativeElement.focus();
 
-        if ( this.popupDeliverVisible) {
+        if (this.popupDeliverVisible) {
           this.preconisationsIntrantsService.deliver(this.preconisation.id, this.pin_code, this.rf_code)
-            .toPromise()
-            .then(response => {
+            .subscribe(response => {
               console.log('oo1');
               this.toastr.success(` la préconisation d'intrans est livrée avec succès.`);
               this.router.navigate(['preconisations-intrants/liste']);
 
-            })
-            .catch(error => {
+            }, error => {
               this.toastr.error('Rfid est incorrect');
               console.log('oo');
             });

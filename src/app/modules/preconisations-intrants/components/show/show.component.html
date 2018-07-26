@@ -23,7 +23,7 @@
               <div class="row">
                 <div class="col-12">
                   <h3 class="m-form__section">
-                    Informations générales
+                    Informations générales ( {{preconisation.request_type_name}} )
 
                 <!--    <span class="siam-form-input-value _status_inprogress" *ngIf="mouvement.state == 'inprogress'">
                     <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
@@ -471,7 +471,7 @@
       <dx-button width="180"  icon="fa fa-paper-plane"  text="LIVRER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'"  type="success" (onClick)="showDeliverPopup()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
 
       <dx-button width="130" icon="fa fa-print"  (onClick)="print()" text="IMPRIMER" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp; &nbsp;
-      <dx-button width="130" icon="fa fa-exchange"  text="RETOUR" type="default" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active" [disabled]="preconisation.state == 'delivered'" style="margin-left: 20px; margin-right: 20px;"  ></dx-button> &nbsp; &nbsp;
+      <dx-button width="130" icon="fa fa-exchange" [disabled]="preconisation.state == 'canceled'" text="RETOUR" type="default" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active" [disabled]="preconisation.state == 'delivered'" style="margin-left: 20px; margin-right: 20px;"  ></dx-button> &nbsp; &nbsp;
       <dx-button width="130" icon="fa fa-trash"  text="ANNULER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'" type="danger" (onClick)="showDeletePopup()"  ></dx-button> &nbsp; &nbsp;
     </div>
   </div>

@@ -47,26 +47,12 @@ export class ListComponent implements OnInit {
 
 
   ngOnInit() {
-
-
-
     this.title = this.helper.getThirdTypeName(this.location.path());
     this.goTo = this.helper.getThirdLink(this.location.path());
     this.thirdType = this.helper.getThirdType(this.location.path());
     this.third_parties.store = new CustomStore({
       load: (loadOptions: any) => {
-        if (!loadOptions.hasOwnProperty('filter')) {
-          loadOptions['filter'] = [['ts_type', '=', this.thirdType]];
-        } else if (typeof loadOptions['filter'] !== 'undefined') {
-          if (loadOptions['filter'].length === 3 && loadOptions['filter'][1] !== 'and' && !isArray(loadOptions['filter'][1])) {
-            const tmp = loadOptions['filter'].splice(0, 3);
-            loadOptions['filter'].push(tmp);
-
-          }
-          loadOptions['filter'].push('and');
-          loadOptions['filter'].push(['ts_type', '=', this.thirdType]);
-        }
-        console.log(loadOptions);
+        Helper.addFilter(loadOptions, 'ts_type', this.thirdType);
         return this.tierService.getThirdsDx(this.thirdType, loadOptions)
           .toPromise()
           .then(response => {

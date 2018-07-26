@@ -266,6 +266,7 @@ export class WizardComponent implements OnInit {
       useSubmitBehavior: false,
       onClick: (e) => {
         this.campaigns.pop();
+        year -= 1;
       }
     };
 
