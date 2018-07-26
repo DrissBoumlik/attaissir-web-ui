@@ -1,3 +1,122 @@
-<p>
-  add works!
-</p>
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+      <h2>Nouvel utilisateur</h2>
+    </div>
+  </div>
+</div>
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+      <form style="margin-top: 20px"
+            (submit)="onFormSubmit($event)">
+        <dx-form id="utilisateursForm"
+                 [formData]="user"
+                 [readOnly]="false"
+                 [showColonAfterLabel]="true"
+                 [showValidationSummary]="true"
+                 validationGroup="customerData">
+
+          <dxi-item itemType="group" caption="Informations générales">
+            <dxi-item
+              dataField="name">
+              <dxo-label
+                text="Nom complet">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="Nom complete est obligatoire">
+              </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="email">
+              <dxi-validation-rule
+                type="required"
+                message="Email est obligatoire">
+              </dxi-validation-rule>
+              <dxi-validation-rule
+                type="email"
+                message="veuillez saisir une adresse email valide">
+              </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="password"
+                      [editorOptions]="{ mode: 'password' }">
+              <dxo-label
+                text="Mot de passe">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="Password est obligatoire">
+              </dxi-validation-rule>
+            </dxi-item>
+          </dxi-item>
+
+          <dxi-item itemType="group">
+
+            <dxi-item dataField="role_id"
+                      [editorOptions]="{ items: listOfRoles, displayExpr: 'description', valueExpr : 'id' }"
+                      editorType="dxSelectBox">
+              <dxo-label
+                text="Role">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="role est obligatoire"></dxi-validation-rule>
+            </dxi-item>
+
+          </dxi-item>
+
+          <dxi-item itemType="group" caption="Choix des structures">
+
+            <div class="dx-field">
+              <div class="dx-field-label">les structures</div>
+              <div class="dx-field-value">
+                <dx-select-box
+                  [dataSource]="listOfStructures"
+                  displayExpr="name"
+                  valueExpr="id"
+                  (onItemClick)="addToChoosingStructures($event)"
+                ></dx-select-box>
+              </div>
+            </div>
+
+
+          </dxi-item>
+
+          <dxi-item itemType="group">
+
+            <dx-data-grid
+              id="gridContainer"
+              keyExpr="id"
+              [dataSource]="choosingStructures"
+              [allowColumnReordering]="true"
+              [showColumnLines]="true"
+              [showRowLines]="true"
+              [showBorders]="true"
+              [rowAlternationEnabled]="true"
+              [columnAutoWidth]="true"
+              [noDataText]="'Aucune sructue n\'est ajoute!'"
+              (onRowRemoved)="removeItemFromChoosingStructures($event)">
+
+              <dxo-paging [enabled]="true"></dxo-paging>
+              <dxo-editing
+                mode="row"
+                [allowDeleting]="true">
+              </dxo-editing>
+              <dxi-column
+                caption="les sructues choisis"
+                dataField="name"></dxi-column>
+            </dx-data-grid>
+
+          </dxi-item>
+
+          <dxi-item
+            itemType="button"
+            alignment="right"
+            [buttonOptions]="buttonOptions">
+          </dxi-item>
+        </dx-form>
+      </form>
+    </div>
+  </div>
+</div>
