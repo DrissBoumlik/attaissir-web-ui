@@ -36,7 +36,6 @@ export class ThemeComponent implements OnInit {
   initListener() {
     document.body.addEventListener('click', () => {
       if (this.auth.getToken()) {
-        console.log(this.canRefresh);
         this.reset();
       }
     });
