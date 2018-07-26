@@ -33,6 +33,24 @@
             </dxi-item>
 
 
+            <dxi-item
+                      dataField="date"
+                      editorType="dxDateBox"
+                      [editorOptions]="dateOptions">
+              <dxo-label
+                text="Date" i18n-text>
+              </dxo-label>
+              <dxi-validation-rule type="required" message="Date est obligatoire"
+                                   i18n-message></dxi-validation-rule>
+                </dxi-item>
+
+
+            <dxi-item dataField="description">
+              <dxo-label
+                text="Description" i18n-text>
+              </dxo-label>
+            </dxi-item>
+
           </dxi-item>
 
 
