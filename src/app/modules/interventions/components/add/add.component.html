@@ -91,7 +91,7 @@
                 </dxi-validation-rule>
               </dxi-item>
 
-              <dxi-item dataField="proposition" editorType="dxSelectBox">
+              <dxi-item dataField="proposition" editorType="dxSelectBox" [editorOptions]="templateEditorOptions">
                 <dxo-label
                   text="Proposition">
                 </dxo-label>
@@ -176,11 +176,12 @@
                       [rowAlternationEnabled]="true"
                       [columnAutoWidth]="true"
                       [noDataText]="'Aucan article n\'est ajoute!'">
-                      <dxi-column dataField="category.category_name" caption="Famille"></dxi-column>
-                      <dxi-column dataField="sub_category.sub_category_name" caption="Sous famille"></dxi-column>
-                      <dxi-column dataField="article.name" caption="Article"></dxi-column>
-                      <dxi-column dataField="quantity" caption="Quantité"></dxi-column>
-                      <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+
+                      <dxi-column [allowEditing]="false" dataField="category.category_name" caption="Famille"></dxi-column>
+                      <dxi-column [allowEditing]="false" dataField="sub_category.sub_category_name" caption="Sous famille"></dxi-column>
+                      <dxi-column [allowEditing]="false" dataField="article.name" caption="Article"></dxi-column>
+                      <dxi-column [allowEditing]="true" dataField="quantity" caption="Quantité"></dxi-column>
+                      <dxo-scrolling  [showScrollbar]="'always'"></dxo-scrolling>
                       <dxo-remote-operations
                         [sorting]="true"
                         [paging]="false">
@@ -189,7 +190,7 @@
                       <dxo-editing
                         [useIcons]="true"
                         mode="row"
-                        [allowUpdating]="false"
+                        [allowUpdating]="true"
                         [allowDeleting]="true"
                         [allowAdding]="false">
                       </dxo-editing>
@@ -301,7 +302,7 @@
               <dx-form>
                 <dxi-item itemType="group" *ngIf="data.services.length"  [colCount]="5" caption="Choix des préstations de service" #choixServices>
                   <dx-list
-                    [items]="prestations"
+                    [dataSource]="prestations"
                     [showSelectionControls]="true"
                     selectionMode="multiple"
                     noDataText="Ce type d'intervention ne possède pas de préstations de service"
@@ -326,7 +327,7 @@
                 <dxi-item *ngFor="let field of DX_custom_fields"
                           [editorType]="field.editorType"
                           [dataField]="field.dataField"
-                          [editorOptions]="{placeholder: field.label}"
+                          [editorOptions]="field.editorOptions"
                           itemType="simple"
                           [colSpan]="field.colspan">
                   <dxo-label text="{{ field.label }}"></dxo-label>
