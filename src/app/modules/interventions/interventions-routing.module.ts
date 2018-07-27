@@ -14,7 +14,7 @@ const routes: Routes = [{
     { path: 'selectionner', component: NewComponent },
     { path: 'ajouter', component: AddComponent },
     { path: 'template/ajouter', component: AddTempleteComponent },
-    { path: 'list', component: ListComponent },
+    { path: 'liste', component: ListComponent },
     { path: 'modifier/:id', component: EditComponent },
     { path: 'appliquer-template-parcelle', component: AddTempleteComponent },
     { path: 'list', component: ListComponent },

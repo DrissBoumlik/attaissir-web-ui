@@ -69,7 +69,7 @@ export class EditComponent implements OnInit {
     this.interventionService.updateIntervention(routId, formData).subscribe(
       (value: any) => {
         NewComponent.notifyMe('Votre de mande a été traitée avec succès, Redirection.........', 'success');
-        this.router.navigate([`/`]);
+        this.router.navigate([`/interventions/liste`]);
       },
       (error: any) => {
         NewComponent.notifyMe('Une erreur s\'est produite, veuillez réessayer dans quelques secondes.', 'error');

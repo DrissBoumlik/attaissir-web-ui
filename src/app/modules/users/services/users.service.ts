@@ -20,7 +20,7 @@ export class UsersService {
   }
 
   getStructures(): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/structures/grid`, JSON.stringify([]), {
+    return this.http.get(`${environment.apiUrl}/structures-with-zones`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
