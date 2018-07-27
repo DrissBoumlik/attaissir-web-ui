@@ -54,10 +54,8 @@
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
         <dxi-column dataField="id" [width]="40" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
-        <dxi-column dataField="object"  caption="Objet"  ></dxi-column>
         <dxi-column dataField="date" format="dd-MM-yyyy" [width]="150"  dataType="date" caption="Date" ></dxi-column>
-        <dxi-column dataField="note" caption="Note"></dxi-column>
-        <dxi-column dataField="third_party_full_name" caption="Jeune promoteur" cellTemplate="third_partyTemplate" ></dxi-column>
+        <dxi-column dataField="third_party_full_name" caption="Fournisseur" cellTemplate="third_partyTemplate" ></dxi-column>
         <dxi-column dataField="warehouse_name" caption="Magasin" ></dxi-column>
         <dxi-column dataField="state" caption="Etat" [allowFiltering]="false"  cellTemplate="statusTemplate"></dxi-column>
 

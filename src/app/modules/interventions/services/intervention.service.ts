@@ -107,5 +107,13 @@ export class InterventionService {
     });
   }
 
+  getInterventions(): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/interventionrequests/grid`, JSON.stringify([]), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
 }
 
