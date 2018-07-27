@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Fiche {{ title }} ({{ third?.full_name | uppercase }})</h2>
+      <h2>Fiche {{ (thirdType === 'young_promoter') ? 'Centres de distribution' : title.toLowerCase() }} ({{ (thirdType === 'young_promoter') ? third?.company_name.toUpperCase() : third?.full_name.toUpperCase() }})</h2>
       <a class="siam-header-btn-new" routerLink="/{{ goTo }}/modifier/{{ third?.id }}" title="Modifier l'agrégé"><i
         class="fa fa-edit"></i></a>
     </div>
@@ -22,7 +22,7 @@
                 Fiche
               </a>
             </li>
-            <li class="nav-item m-tabs__item">
+            <li class="nav-item m-tabs__item" *ngIf="thirdType === 'aggregated'">
               <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
                 Contrats
               </a>
@@ -32,16 +32,22 @@
                 Comptes Bancaires
               </a>
             </li>
-            <li class="nav-item m-tabs__item">
+            <li class="nav-item m-tabs__item" *ngIf="thirdType === 'aggregated'">
               <a class="nav-link m-tabs__link" data-toggle="tab" (click)="loadDocuments()"
                  href="#m_user_profile_tab_4" role="tab">
                 Documents joints
               </a>
             </li>
-            <li class="nav-item m-tabs__item">
+            <li class="nav-item m-tabs__item" *ngIf="thirdType === 'aggregated'">
               <a class="nav-link m-tabs__link" data-toggle="tab"
                  href="#m_user_profile_tab_5" role="tab">
                 Cartes
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item" *ngIf="thirdType === 'young_promoter'">
+              <a class="nav-link m-tabs__link" data-toggle="tab"
+                 href="#m_user_warehouses_tab" role="tab">
+                 Magasins
               </a>
             </li>
           </ul>
@@ -49,6 +55,63 @@
             <div class="tab-pane active" id="m_user_profile_tab_1">
               <div class="m-form m-form--fit">
                 <div class="m-portlet__body">
+
+                  <div class="row">
+                    <div class="col-12">
+                      <h3 class="m-form__section">
+                        Société
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Raison sociale
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.company_name">{{ third?.company_name}}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.company_name">Pas
+                            de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Numéro de patente
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.patent_number">{{ third?.patent_number}}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.patent_number">
+                            Pas de données</p>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Identification fiscal
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.if">{{ third?.if}}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.if">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Identifiant commun de l’entreprise.
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="third?.ice">{{ third?.ice}}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.ice">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="col-12">
                       <h3 class="m-form__section">
@@ -255,62 +318,6 @@
                           <p class="siam-form-input-value" *ngIf="third?.zip_code !== null">{{ third?.zip_code}}</p>
                           <p class="siam-form-input-value siam-form-input-value-nodata"
                              *ngIf="third?.zip_code === null">Pas de données</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <h3 class="m-form__section">
-                        Société
-                      </h3>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="row">
-                        <label class="col-12">
-                          Raison sociale
-                        </label>
-                        <div class="col-12">
-                          <p class="siam-form-input-value" *ngIf="third?.company_name">{{ third?.company_name}}</p>
-                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.company_name">Pas
-                            de données</p>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <label class="col-12">
-                          Numéro de patente
-                        </label>
-                        <div class="col-12">
-                          <p class="siam-form-input-value" *ngIf="third?.patent_number">{{ third?.patent_number}}</p>
-                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.patent_number">
-                            Pas de données</p>
-                        </div>
-                      </div>
-
-                    </div>
-                    <div class="col-4">
-                      <div class="row">
-                        <label class="col-12">
-                          Identification fiscal
-                        </label>
-                        <div class="col-12">
-                          <p class="siam-form-input-value" *ngIf="third?.if">{{ third?.if}}</p>
-                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.if">Pas de
-                            données</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div class="row">
-                        <label class="col-12">
-                          Identifiant commun de l’entreprise.
-                        </label>
-                        <div class="col-12">
-                          <p class="siam-form-input-value" *ngIf="third?.ice">{{ third?.ice}}</p>
-                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.ice">Pas de
-                            données</p>
                         </div>
                       </div>
                     </div>
@@ -554,6 +561,27 @@
                 <dxo-pager
                   [showPageSizeSelector]="true"
                 ></dxo-pager>
+              </dx-data-grid>
+            </div>
+
+            <div class="tab-pane" id="m_user_warehouses_tab">
+              <dx-data-grid
+                id="warehouseContainer"
+                [dataSource]="warehouses"
+                [columnHidingEnabled]="false"
+                [allowColumnResizing]="false"
+                [allowColumnReordering]="true"
+                KeyExpr="id">
+
+                <dxo-scrolling mode="virtual"></dxo-scrolling>
+
+
+                <dxi-column dataField="name" caption="Name"></dxi-column>
+                <dxi-column dataField="convention_ref" caption="Référence Convention"></dxi-column>
+                <dxi-column dataField="address" caption="Adress"></dxi-column>
+                <dxi-column dataField="city" caption="Ville"></dxi-column>
+                <dxi-column dataField="zip_code" caption="Code postale"></dxi-column>
+                <dxi-column dataField="tel" caption="N° Téléphone"></dxi-column>
               </dx-data-grid>
             </div>
           </div>
