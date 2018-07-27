@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
-import { Helpers } from '../../../helpers';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit, ViewEncapsulation, AfterViewInit} from '@angular/core';
+import {Helpers} from '../../../helpers';
+import {ActivatedRoute, Router} from '@angular/router';
 
 declare let mLayout: any;
 
@@ -24,15 +24,25 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
     this.mainMenu = [
       {
+        name: 'Gestion des Utilisateurs',
+        icon: 'flaticon-user-add',
+        url: '/utilisateurs/ajouter',
+        description: 'Gestion des Utilisateurs',
+        subMenu: [
+          {icon: 'flaticon-plus', name: 'Nouvel utilisateur', url: '/utilisateurs/ajouter'}
+        ],
+        disabled: 'false'
+      },
+      {
         name: 'Contrats',
         icon: 'flaticon-file',
         url: '/contrats/liste',
         description: 'Gestion des Contrats',
         subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste' },
-          { icon: 'flaticon-list', name: 'Contrats actifs', url: '/contrats/liste/courant' },
-          { icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste' },
+          {icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter'},
+          {icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste'},
+          {icon: 'flaticon-list', name: 'Contrats actifs', url: '/contrats/liste/courant'},
+          {icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste'},
         ],
         disabled: 'false'
       },
@@ -53,8 +63,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/jeunepromoteurs/liste',
         description: 'Gestion des Centre de distribution',
         subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouvel Centre de distribution', url: '/jeunepromoteurs/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des Centre de distribution', url: '/jeunepromoteurs/liste' },
+          {icon: 'flaticon-plus', name: 'Nouvel Centre de distribution', url: '/jeunepromoteurs/ajouter'},
+          {icon: 'flaticon-list', name: 'Liste des Centre de distribution', url: '/jeunepromoteurs/liste'},
         ],
         disabled: 'false'
       },
@@ -65,8 +75,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion de stock',
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
-          { icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation' },
-          { icon: 'flaticon-plus', name: 'Approvisionnement de stock', url: '/stock/reappro' },
+          {icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation'},
+          {icon: 'flaticon-plus', name: 'Approvisionnement de stock', url: '/stock/reappro'},
           {
             name: 'Liste des mouvements', icon: 'fa fa-exchange', url: '/mouvements',
             description: 'Liste des mouvements', disabled: 'false'
@@ -75,18 +85,18 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
             name: 'Liste des demandes d\'achat', icon: 'fa  fa-shopping-cart', url: '/demandes',
             description: 'Centre de distrubition', disabled: 'false'
           },
-          { icon: 'flaticon-list', name: 'Liste des articles', url: '/articles/liste' },
+          {icon: 'flaticon-list', name: 'Liste des articles', url: '/articles/liste'},
         ],
         disabled: 'false'
       },
       {
         name: 'interventions',
         icon: 'flaticon-add',
-        url: '/interventions/selectionner',
+        url: '/interventions/liste',
         description: 'Gestion des interventions',
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
-          { icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner' }
+          {icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner'}
         ],
         disabled: 'false'
       },
@@ -96,8 +106,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/magasin/liste',
         description: 'magasin',
         subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouveau magasin', url: '/magasin/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des magasins', url: '/magasin/liste' },
+          {icon: 'flaticon-plus', name: 'Nouveau magasin', url: '/magasin/ajouter'},
+          {icon: 'flaticon-list', name: 'Liste des magasins', url: '/magasin/liste'},
           /*{ icon: 'flaticon-list', name: 'réapprovisionnement de stock', url: '/magasin/reapprovisionnement' },*/
         ],
         disabled: 'false'
@@ -133,8 +143,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
     ];
 
   }
-
-
 
 
   ngAfterViewInit() {

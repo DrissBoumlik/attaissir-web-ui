@@ -18,35 +18,9 @@ export class AddComponent implements OnInit {
   ) {
   }
 
-  listeDesCdas = [
-    {
-      id: '1_16',
-      text: 'CDA 1',
-      items: [{
-        id: '20',
-        text: '20',
-        price: 220
-      }, {
-        id: '2',
-        text: '2',
-        price: 270
-      }]
-    },
-    {
-      id: '2_16',
-      text: 'CDA 2',
-      items: [{
-        id: '65',
-        text: '65',
-        price: 220
-      }, {
-        id: '78',
-        text: '78',
-        price: 270
-      }]
-    }
-  ];
   checkedItems = [];
+  listeDesCdas = [];
+  currentStructurIdInPopUp: any;
 
   roleOptions: any;
   user: any = {};
@@ -61,18 +35,34 @@ export class AddComponent implements OnInit {
   };
 
 
-  popupVisible = true;
+  popupVisible = false;
 
-  showStructureZones(id: any) {
+  savePopUpCdas() {
+    for (let i = 0; i < this.choosingStructures.length; i++) {
+      if (this.choosingStructures[i].id === this.currentStructurIdInPopUp) {
+        this.choosingStructures[i].cdas = this.listeDesCdas.slice();
+        break;
+      }
+    }
+    // this.choosingStructures[this.currentStructurIdInPopUp].cdas = this.listeDesCdas;
+    this.popupVisible = false;
+  }
 
+  showStructureZones(data: any) {
+    this.currentStructurIdInPopUp = data.data.id;
+    this.listeDesCdas = [];
+    for (let i = 0; i < this.choosingStructures.length; i++) {
+      if (this.choosingStructures[i].id === data.data.id) {
+        this.listeDesCdas = this.choosingStructures[i].cdas.slice();
+        break;
+      }
+    }
+    this.popupVisible = true;
   }
 
 // tree elements
   selectionChanged(e) {
     let value = e.node;
-
-    console.log(e);
-
     if (this.isProduct(value)) {
       this.processProduct({
         id: value.key,
@@ -126,7 +116,8 @@ export class AddComponent implements OnInit {
 
     this.choosingStructures.push({
       id: e.itemData.id,
-      name: e.itemData.name
+      name: e.itemData.name,
+      cdas: e.itemData.cdas
     });
 
   }
@@ -136,16 +127,35 @@ export class AddComponent implements OnInit {
   }
 
   removeItemFromChoosingStructures(e) {
+    const tempData = [];
+    const foundEle = [];
+    for (let i = 0; i < e.data.cdas.length; i++) {
+      const items = e.data.cdas[i].items;
+      for (let j = 0; j < items.length; j++) {
+        for (let k = 0; k < this.checkedItems.length; k++) {
+          if (this.checkedItems[k].id === items[j].id) {
+            this.checkedItems.splice(k, 1);
+            // foundEle.push(items[j].id);
+          }
+        }
+      }
+    }
+
     const tmp = this.listOfStructures;
     tmp.push({
       id: e.data.id,
-      name: e.data.name
+      name: e.data.name,
+      cdas: e.data.cdas
     });
     this.listOfStructures = tmp;
   }
 
 
   onFormSubmit(e) {
+    const zone_id = [];
+    for (let i = 0; i < this.checkedItems.length; i++) {
+      zone_id.push(this.checkedItems[i].id);
+    }
     const structure_id = [];
     for (let i = 0; i < this.choosingStructures.length; i++) {
       structure_id.push(this.choosingStructures[i].id);
@@ -157,13 +167,13 @@ export class AddComponent implements OnInit {
         name: this.user.name,
         password: this.user.password,
         role_id: this.user.role_id,
-        structure_id: structure_id
+        structure_id: structure_id,
+        zone_id: zone_id
       };
-
       this.userService.saveUser(data).subscribe(
         (response: any) => {
           NewComponent.notifyMe('utilisateur créé avec succès, Redirection.........', 'success');
-          this.router.navigate([`/utilisateurs/list`]);
+          // this.router.navigate([`/utilisateurs/list`]);
 
         },
         (err) => {

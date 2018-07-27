@@ -111,23 +111,16 @@
                           caption="" width="200"
                           alignment="left"></dxi-column>
               <div *dxTemplate="let data of 'cellTemplate'">
-                <a (click)="showStructureZones(data.id)" style="text-align: left;color: black">Assigner les zones</a>
+                <a (click)="showStructureZones(data)"
+                   style="cursor:pointer; text-align: left;color: black">Assigner
+                  les zones</a>
               </div>
             </dx-data-grid>
 
           </dxi-item>
 
           <dxi-item itemType="group" caption="Choix des zones">
-            <dx-tree-view
-              id="selection-treeview"
-              [items]="listeDesCdas"
-              [width]="320"
-              showCheckBoxesMode="normal"
-              (onItemSelectionChanged)="selectionChanged($event)">
-              <div *dxTemplate="let data of 'item'">
-                {{data.text}}
-              </div>
-            </dx-tree-view>
+
           </dxi-item>
 
           <dxi-item
@@ -144,32 +137,36 @@
   <dx-popup
     class="popup"
     [showTitle]="true"
+    [width]="600"
     title="Selection des zones"
     [dragEnabled]="false"
     [closeOnOutsideClick]="true"
     [(visible)]="popupVisible">
     <div *dxTemplate="let data of 'content'">
-      <p>
-        Full Name:
-        <span>currentEmployee.FirstName</span>
-        <span>currentEmployee.LastName</span>
-      </p>
-      <p>
-        Birth Date:
-        <span>currentEmployee.BirthDate</span>
-      </p>
-      <p>
-        Address:
-        <span>currentEmployee.Address</span>
-      </p>
-      <p>
-        Hire Date:
-        <span>currentEmployee.HireDate</span>
-      </p>
-      <p>
-        Position:
-        <span>currentEmployee.Position</span>
-      </p>
+
+
+      <div class="pop-up-wrapper">
+        <div class="pop-up-body">
+          <dx-tree-view
+            id="selection-treeview"
+            [items]="listeDesCdas"
+            [width]="320"
+            showCheckBoxesMode="normal"
+            (onItemSelectionChanged)="selectionChanged($event)">
+            <div *dxTemplate="let data of 'item'">
+              <span *ngIf="data.items">CDA</span> {{data.name}}
+            </div>
+          </dx-tree-view>
+        </div>
+        <div class="pop-up-actions">
+          <dx-button style="margin-right: 20px"
+                     text="Terminer"
+                     type="success"
+                     (onClick)="savePopUpCdas()"></dx-button>
+        </div>
+      </div>
+
+
     </div>
   </dx-popup>
 
