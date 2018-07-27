@@ -133,7 +133,7 @@
     </dxi-column>
     <dxi-column dataField="city" caption="Ville" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="commune" caption="Commune" *ngIf="thirdType === 'aggregated'"  i18n-caption>
+    <dxi-column dataField="code_as400" caption="Ancien code" *ngIf="thirdType === 'aggregated'"  i18n-caption>
     </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate'">
       <a  (click)="helper.gotoShow(goTo, data.data.id, router, toastr)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>

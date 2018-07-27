@@ -35,7 +35,7 @@ export class AddComponent implements OnInit {
       this.roleService.saveRole(data).subscribe(
         (response: any) => {
           NewComponent.notifyMe('Role créé avec succès, Redirection.........', 'success');
-          // this.router.navigate([`/utilisateurs/list`]);
+          // this.router.navigate([`/utilisateurs/warehouse-list`]);
 
         },
         (err) => {
