@@ -173,7 +173,7 @@ export class AddComponent implements OnInit {
       this.userService.saveUser(data).subscribe(
         (response: any) => {
           NewComponent.notifyMe('utilisateur créé avec succès, Redirection.........', 'success');
-          // this.router.navigate([`/utilisateurs/list`]);
+          this.router.navigate([`/utilisateurs/liste`]);
 
         },
         (err) => {

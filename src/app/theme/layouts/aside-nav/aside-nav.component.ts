@@ -26,9 +26,10 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'Gestion des Utilisateurs',
         icon: 'flaticon-user-add',
-        url: '/utilisateurs/ajouter',
+        url: '/utilisateurs/liste',
         description: 'Gestion des Utilisateurs',
         subMenu: [
+          {icon: 'flaticon-users', name: 'Liste des utilisateurs', url: '/utilisateurs/liste'},
           {icon: 'flaticon-plus', name: 'Nouvel utilisateur', url: '/utilisateurs/ajouter'}
         ],
         disabled: 'false'
@@ -43,6 +44,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           {icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste'},
           {icon: 'flaticon-list', name: 'Contrats actifs', url: '/contrats/liste/courant'},
           {icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste'},
+
         ],
         disabled: 'false'
       },
@@ -53,7 +55,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des agrégés',
         /*subMenu: [
           { icon: 'flaticon-plus', name: 'Nouvel agrégé', url: '/tiers/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des agrégés', url: '/tiers/liste' },
+          { icon: 'flaticon-warehouse-list', name: 'Liste des agrégés', url: '/tiers/liste' },
         ],*/
         disabled: 'false'
       },
@@ -65,6 +67,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         subMenu: [
           {icon: 'flaticon-plus', name: 'Nouvel Centre de distribution', url: '/jeunepromoteurs/ajouter'},
           {icon: 'flaticon-list', name: 'Liste des Centre de distribution', url: '/jeunepromoteurs/liste'},
+
         ],
         disabled: 'false'
       },
@@ -77,6 +80,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
           {icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation'},
           {icon: 'flaticon-plus', name: 'Approvisionnement de stock', url: '/stock/reappro'},
+
           {
             name: 'Liste des mouvements', icon: 'fa fa-exchange', url: '/mouvements',
             description: 'Liste des mouvements', disabled: 'false'
@@ -86,6 +90,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
             description: 'Centre de distrubition', disabled: 'false'
           },
           {icon: 'flaticon-list', name: 'Liste des articles', url: '/articles/liste'},
+
         ],
         disabled: 'false'
       },
@@ -97,18 +102,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
           {icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner'}
-        ],
-        disabled: 'false'
-      },
-      {
-        name: 'Magasin',
-        icon: 'fa fa-shopping-bag',
-        url: '/magasin/liste',
-        description: 'magasin',
-        subMenu: [
-          {icon: 'flaticon-plus', name: 'Nouveau magasin', url: '/magasin/ajouter'},
-          {icon: 'flaticon-list', name: 'Liste des magasins', url: '/magasin/liste'},
-          /*{ icon: 'flaticon-list', name: 'réapprovisionnement de stock', url: '/magasin/reapprovisionnement' },*/
         ],
         disabled: 'false'
       },
@@ -128,7 +121,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Préconisations intrants',
-        icon: 'flaticon-list-3',
+        icon: 'flaticon-warehouse-list-3',
         url: '/preconisations-intrants/liste',
         description: 'Préconisations intrants',
         disabled: 'false'

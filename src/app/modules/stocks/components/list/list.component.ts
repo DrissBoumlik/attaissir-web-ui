@@ -44,7 +44,6 @@ export class ListComponent implements OnInit {
                 return {
                   data: stk.data.map((war: any) => {
                     const row = new Stock();
-                    row.ql = war.id;
                     row.ql = war.ql;
                     row.qts = war.qts;
                     row.qte = war.qte;

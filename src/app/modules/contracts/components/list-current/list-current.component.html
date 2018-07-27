@@ -59,10 +59,11 @@
         <dxi-column cellTemplate="cellTemplate" [allowSorting]="false" caption="" width="70px" allowColumnResizing="true">
         </dxi-column>
 
-        <dxi-column dataField="code" [hidingPriority]="2" [allowFiltering]="false" [allowSorting]="false" [allowGrouping]="false"  caption="Code">
+        <dxi-column dataField="code" [hidingPriority]="2" caption="Code">
         </dxi-column>
         <dxi-column dataField="third_cin" caption="CIN" i18n-caption>
         </dxi-column>
+        <dxi-column dataField="third_full_name" cellTemplate="thirdNameTemplate" caption="Nom" datatype="Text"></dxi-column>
         <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
         </dxi-column>
         <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
@@ -77,7 +78,6 @@
 
         <dxi-column dataField="status" cellTemplate="contractListTemplate" caption="Statut">
         </dxi-column>
-        <dxi-column dataField="third_full_name" cellTemplate="thirdNameTemplate" caption="Nom" datatype="Text"></dxi-column>
         <dxi-column dataField="structure_name" caption="Division" dataType="Text"></dxi-column>
 
         <div *dxTemplate="let contract of 'thirdNameTemplate'">

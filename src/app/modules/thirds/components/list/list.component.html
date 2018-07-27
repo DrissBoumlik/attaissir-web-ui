@@ -4,7 +4,7 @@
 
       <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
 
-      <h2>Liste des {{ title }}s</h2>
+      <h2>Liste des {{ (thirdType === 'young_promoter') ? 'centres de distribution' : title.toLowerCase() }}</h2>
       <!--<a class="siam-header-btn-new" routerLink="/tiers/ajouter"><i class="fa fa-plus"></i></a>-->
     </div>
 
@@ -81,9 +81,33 @@
     </dxi-column>
     <dxi-column dataField="code" caption="Code" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="full_name" allowHiding="true" hidden="hidden" caption="Nom complet" >
+    <dxi-column dataField="code" caption="CDA" *ngIf="thirdType !== 'aggregated'" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="full_name_ar" caption="الاسم الكامل" i18n-caption>
+    <dxi-column dataField="company_name" allowHiding="true" *ngIf="thirdType !== 'aggregated'"  hidden="hidden" caption="Raison sociale" >
+    </dxi-column>
+    <dxi-column dataField="full_name" caption="Nom complet" *ngIf="thirdType === 'aggregated'" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="full_name_ar" caption="الاسم الكامل" *ngIf="thirdType === 'aggregated'" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="patent_number" caption="Numéro de patente" *ngIf="thirdType !== 'aggregated'" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="rc" caption="Registre de commerce" *ngIf="thirdType !== 'aggregated'" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="ice" caption="ICE" *ngIf="thirdType !== 'aggregated'" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="if" caption="IF" *ngIf="thirdType !== 'aggregated'" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="address" caption="Adresse" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="full_name" [caption]="title"  *ngIf="thirdType !== 'aggregated'" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="cin" caption="CIN" *ngIf="thirdType !== 'aggregated'" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="email" caption="Email" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="tel1" caption="Téléphone 1" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="tel2" caption="Téléphone 2" i18n-caption>
     </dxi-column>
     <dxi-column dataField="birth_date" caption="Date de naissance" i18n-caption>
     </dxi-column>
@@ -98,29 +122,18 @@
       <i class="fa fa-id_card fa-5x" *ngIf=""></i>
     </div>--> 
 
-    <dxi-column dataField="sexe" cellTemplate="cellTemplate1" caption="Genre" allowColumnResizing="true">
+    <dxi-column dataField="sexe" cellTemplate="cellTemplate1" caption="Genre" *ngIf="thirdType === 'aggregated'"  allowColumnResizing="true">
     </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate1'">
       <i style="font-size: 150%; align-content: center; cursor: pointer" class="fa {{ getGender(data.data) }} fa-5x"></i>
     </div>
-    <dxi-column dataField="cin" caption="CIN" i18n-caption>
+    <dxi-column dataField="civil_status" caption="Situation" *ngIf="thirdType === 'aggregated'" i18n-caption>
     </dxi-column>
-
-    <dxi-column dataField="tel1" caption="Téléphone 1" i18n-caption>
-    </dxi-column>
-    <dxi-column dataField="tel2" caption="Téléphone 2" i18n-caption>
-    </dxi-column>
-    <dxi-column dataField="email" caption="Email" i18n-caption>
-    </dxi-column>
-    <dxi-column dataField="address" caption="Adresse" i18n-caption>
+    <dxi-column dataField="children_number" caption="Nombre d'enfants" *ngIf="thirdType === 'aggregated'" i18n-caption>
     </dxi-column>
     <dxi-column dataField="city" caption="Ville" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="commune" caption="Commune" i18n-caption>
-    </dxi-column>
-    <dxi-column dataField="civil_status" caption="Situation" i18n-caption>
-    </dxi-column>
-    <dxi-column dataField="children_number" caption="Nombre d'enfants" i18n-caption>
+    <dxi-column dataField="code_as400" caption="Ancien code" *ngIf="thirdType === 'aggregated'"  i18n-caption>
     </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate'">
       <a  (click)="helper.gotoShow(goTo, data.data.id, router, toastr)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>

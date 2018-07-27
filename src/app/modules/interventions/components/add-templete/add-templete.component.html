@@ -21,7 +21,7 @@
                  [showValidationSummary]="true"
                  labelLocation="top">
 
-          <dxi-item itemType="group" caption="Template" [colCount]="2" i18n-caption>
+          <dxi-item itemType="group" caption="Préconisations en mass" [colCount]="2" i18n-caption>
 
 
             <dxi-item dataField="template" editorType="dxSelectBox" [editorOptions]="templateOptions">
@@ -32,6 +32,24 @@
                                    i18n-message></dxi-validation-rule>
             </dxi-item>
 
+
+            <dxi-item
+                      dataField="date"
+                      editorType="dxDateBox"
+                      [editorOptions]="dateOptions">
+              <dxo-label
+                text="Date prévue" i18n-text>
+              </dxo-label>
+              <dxi-validation-rule type="required" message="Date est obligatoire"
+                                   i18n-message></dxi-validation-rule>
+                </dxi-item>
+
+
+            <dxi-item dataField="description" editorType="dxTextArea">
+              <dxo-label
+                text="Description" i18n-text>
+              </dxo-label>
+            </dxi-item>
 
           </dxi-item>
 
@@ -68,9 +86,6 @@
              <dxi-column dataField="perimeter" caption="Périmetre" [visible]="false"></dxi-column>
              <dxi-column dataField="block" caption="Bloc" [visible]="false"></dxi-column>
              <dxi-column dataField="annuel_surface" caption="Superficie annuelle" [visible]="false"></dxi-column>
-             <dxi-column dataField="compaign_surface" caption="Superficie de la campagne"></dxi-column>
-             <dxi-column dataField="company_name" caption="Raison social" [visible]="false"></dxi-column>
-             <dxi-column dataField="tenure" caption="Mode faire-valoir" cellTemplate="tenureTemplate"></dxi-column>
             <!-- <dxi-column dataField="status" caption="Etat"  cellTemplate="statusTemplate"></dxi-column> !-->
 
 
@@ -113,9 +128,6 @@
           </dx-tree-list>
 
 
-
-
-
             <br/>
             <dx-check-box
                (valueChange)="selectedEvent($event)"
@@ -125,7 +137,6 @@
             ></dx-check-box>
 
             </dxi-item>
-
 
 
           <div class="dx-fieldset">
