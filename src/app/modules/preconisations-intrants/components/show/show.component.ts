@@ -286,7 +286,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
               this.router.navigate(['preconisations-intrants/liste']);
 
             }, error => {
-              this.toastr.error('Rfid est incorrect');
+              this.toastr.error('RFID est incorrect');
             });
           this.popupDeliverVisible = false;
 

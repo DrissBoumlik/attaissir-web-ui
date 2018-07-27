@@ -8,7 +8,7 @@
 </div>
 
 <div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+  <div class="m-portlet m-portlet-remoteOperations-bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body m-portlet__body--no-padding">
       <dx-data-grid
         id="gridContainer"
@@ -18,7 +18,9 @@
         [allowColumnReordering]="true"
         [columnAutoWidth]="true"
         [filterValue]="[]"
-        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true, searching: true}"
+        [masterDetail]="{ enabled: false, template: 'detail' }"
+
         KeyExpr="id">
 
         <dxo-remote-operations
@@ -47,7 +49,7 @@
           [showPageSizeSelector]="true"
           [visible]="true">
         </dxo-pager>
-        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-paging [pageSize]="5"></dxo-paging>
 
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
