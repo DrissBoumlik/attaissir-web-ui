@@ -96,7 +96,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/magasin/liste',
         description: 'magasin',
         subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouveau magasin', url: '/magasin/ajouter' },
           { icon: 'flaticon-list', name: 'Liste des magasins', url: '/magasin/liste' },
           /*{ icon: 'flaticon-list', name: 'réapprovisionnement de stock', url: '/magasin/reapprovisionnement' },*/
         ],

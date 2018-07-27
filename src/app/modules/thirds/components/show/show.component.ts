@@ -22,6 +22,7 @@ export class ShowComponent implements OnInit {
 
   third: Third;
   contracts: Contract[];
+  warehouses: any;
   documents: any;
   cards: any;
   title: string;
@@ -75,6 +76,7 @@ export class ShowComponent implements OnInit {
             }];
             this.contracts = this.third['contracts'];
             this.cards = this.third.cards;
+            this.warehouses = this.third.warehouses;
           },
           (error) => {
             this.router.navigate(['/404']).catch(
