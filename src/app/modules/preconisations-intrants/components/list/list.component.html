@@ -34,7 +34,7 @@
         <dxo-sorting mode="multiple"></dxo-sorting>
 
         <dxo-filter-row
-          [visible]="true" [applyFilter]="applyFilter"></dxo-filter-row>
+          [visible]="true" [applyFilter]="'auto'"></dxo-filter-row>
 
 
         <dxo-header-filter [visible]="true"></dxo-header-filter>
@@ -60,6 +60,7 @@
         <dxi-column dataField="id" caption="Réf"></dxi-column>
         <dxi-column dataField="cda" caption="CDA" ></dxi-column>
         <dxi-column dataField="zone" caption="Zone"></dxi-column>
+        <dxi-column dataField="sub_irt_name" caption="sous catégorie"></dxi-column>
         <dxi-column dataField="code_ormva" caption="Parcelle"></dxi-column>
         <dxi-column dataField="full_name" caption="Nom d'agriculteur"></dxi-column>
         <dxi-column dataField="cin" caption="C.I.N d'agriculter"></dxi-column>
@@ -67,14 +68,10 @@
         <dxi-column dataField="date" caption="Date de commande" dataType="date"></dxi-column>
         <dxi-column dataField="state"  [allowSorting]="false" caption="Etat" cellTemplate="statusTemplate"></dxi-column>
 
-        <div *dxTemplate="let data of 'statusTemplate'">
+     <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="helper.getStatusColor(data.value)">
                {{ data.value}}
       </span>
-        </div>
-
-        <div *dxTemplate="let data of 'bon_nbrTemplate'" class="pull-left">
-          # {{data.value}}
         </div>
 
         <div *dxTemplate="let data of 'consulterTemplate'">

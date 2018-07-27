@@ -95,7 +95,7 @@ export class AddTempleteComponent implements OnInit {
           }
         });
 
-        if( selected_parc.length > 0 ) {
+        if ( selected_parc.length > 0 ) {
           const item = { id: this.template.template ,
             date : this.template.date , description : this.template.description ,
             request_type_id : this.request_type_id, items: selected_parc };
@@ -105,7 +105,7 @@ export class AddTempleteComponent implements OnInit {
             this.router.navigate(['/stock/situation']);
           });
         } else {
-          this.toastr.warning('la selection des parcelles est obligatoiregit');
+          this.toastr.warning('la selection des parcelles est obligatoire');
         }
 
       }
