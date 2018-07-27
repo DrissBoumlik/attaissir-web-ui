@@ -30,7 +30,7 @@
         </dxi-item>
 
       </dxi-item>-->
-      <dxi-item dataField="morale" editorType="dxSwitch" *ngIf="!morale" [editorOptions]="{
+      <dxi-item dataField="morale" editorType="dxSwitch" *ngIf="!morale && isAggregated" [editorOptions]="{
       onText: 'Oui',
       offText: 'Non'
     }" (change)="onMoraleChanged($event)">
@@ -78,6 +78,11 @@
             text="Code TVA" i18n-text>
           </dxo-label>
         </dxi-item>
+        <dxi-item dataField="address"  *ngIf="!isAggregated">
+          <dxo-label
+            text="Adresse" i18n-text>
+          </dxo-label>
+        </dxi-item>
 
 
       </dxi-item>
@@ -92,7 +97,7 @@
           <dxi-validation-rule type="required" message="Nom est obligatoire" i18n-message></dxi-validation-rule>
         </dxi-item>
 
-        <dxi-item dataField="full_name_ar">
+        <dxi-item dataField="full_name_ar" *ngIf="isAggregated">
           <dxo-label
             text="الاسم الكامل" i18n-text>
           </dxo-label>
@@ -124,12 +129,12 @@
           <dxi-validation-rule type="required" message="Sexe est obligatoire" i18n-message></dxi-validation-rule>
         </dxi-item>
 
-        <dxi-item dataField="address">
+        <dxi-item dataField="address"  *ngIf="isAggregated">
           <dxo-label
             text="Adresse" i18n-text>
           </dxo-label>
         </dxi-item>
-        <dxi-item dataField="address_ar">
+        <dxi-item dataField="address_ar" *ngIf="isAggregated">
           <dxo-label
             text="العنوان" i18n-text>
           </dxo-label>
@@ -152,13 +157,13 @@
           </dxi-validation-rule>
         </dxi-item>
 
-        <dxi-item dataField="district">
+        <dxi-item dataField="district"  *ngIf="isAggregated">
           <dxo-label
             text="Arrondissement" i18n-text>
           </dxo-label>
         </dxi-item>
 
-        <dxi-item dataField="commandment">
+        <dxi-item dataField="commandment" *ngIf="isAggregated">
           <dxo-label
             text="Commandement" i18n-text>
           </dxo-label>
@@ -172,7 +177,7 @@
                                i18n-message></dxi-validation-rule>
         </dxi-item>
 
-        <dxi-item dataField="commune">
+        <dxi-item dataField="commune"  *ngIf="isAggregated">
           <dxo-label
             text="Commune" i18n-text>
           </dxo-label>
@@ -241,14 +246,14 @@
           >
           </dxi-validation-rule>
         </dxi-item>
-        <dxi-item dataField="education_degree" editorType="dxSelectBox" [editorOptions]="education_degree">
+        <dxi-item dataField="education_degree" editorType="dxSelectBox" [editorOptions]="education_degree" *ngIf="isAggregated">
           <dxo-label
             text="Niveau d`instruction" i18n-text>
           </dxo-label>
         </dxi-item>
 
         <dxi-item dataField="civil_status"
-                  editorType="dxSelectBox" [editorOptions]="civil_status">
+                  editorType="dxSelectBox" [editorOptions]="civil_status"  *ngIf="isAggregated">
           <dxo-label
             text="Situation Familiale" i18n-text>
           </dxo-label>
@@ -256,7 +261,7 @@
                                i18n-message></dxi-validation-rule>
         </dxi-item>
         <dxi-item dataField="children_number" editorType="dxNumberBox"
-                  [editorOptions]="{ value: !isEdit ? 0 : tier?.children_number, min: 0 }">
+                  [editorOptions]="{ value: !isEdit ? 0 : tier?.children_number, min: 0 }" *ngIf="isAggregated">
           <dxo-label
             text="Nombre d'enfants" i18n-text>
           </dxo-label>
@@ -264,12 +269,12 @@
                                i18n-message></dxi-validation-rule>
         </dxi-item>
 
-        <dxi-item editorType="dxCheckBox" dataField="is_insured">
+        <dxi-item editorType="dxCheckBox" dataField="is_insured" *ngIf="isAggregated">
           <dxo-label
             text="Adhérant assurance" i18n-text>
           </dxo-label>
         </dxi-item>
-        <dxi-item editorType="dxCheckBox" dataField="is_retired">
+        <dxi-item editorType="dxCheckBox" dataField="is_retired" *ngIf="isAggregated">
           <dxo-label
             text="Adhérant retraite" i18n-text>
           </dxo-label>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { WarehoseService } from '../../service/warehose.service';
+import { WarehoseService } from '../../../warehouse/service/warehose.service';
 import CustomStore from 'devextreme/data/custom_store';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { ThirdsService } from '../../services/thirds.service';
 import { ZonesService } from '../../../contracts/services/zones.service';
 import { Helper } from '../../../../shared/classes/helper';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -73,7 +73,7 @@ export class ListComponent implements OnInit {
   }
 
   /**
-   * Delete a third and update the list
+   * Delete a third and update the warehouse-list
    * @param {number} thirdId
    */
   onRemoveThird(id: number): any {

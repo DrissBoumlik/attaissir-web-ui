@@ -30,9 +30,9 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des Contrats',
         subMenu: [
           { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste' },
-          { icon: 'flaticon-list', name: 'Contrats actifs', url: '/contrats/liste/courant' },
-          { icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste' },
+          { icon: 'flaticon-warehouse-list', name: 'Liste des contrats', url: '/contrats/liste' },
+          { icon: 'flaticon-warehouse-list', name: 'Contrats actifs', url: '/contrats/liste/courant' },
+          { icon: 'flaticon-warehouse-list', name: 'Liste des parcelles', url: '/parcelles/liste' },
         ],
         disabled: 'false'
       },
@@ -43,7 +43,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des agrégés',
         /*subMenu: [
           { icon: 'flaticon-plus', name: 'Nouvel agrégé', url: '/tiers/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des agrégés', url: '/tiers/liste' },
+          { icon: 'flaticon-warehouse-list', name: 'Liste des agrégés', url: '/tiers/liste' },
         ],*/
         disabled: 'false'
       },
@@ -54,7 +54,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des Centre de distribution',
         subMenu: [
           { icon: 'flaticon-plus', name: 'Nouvel Centre de distribution', url: '/jeunepromoteurs/ajouter' },
-          { icon: 'flaticon-list', name: 'Liste des Centre de distribution', url: '/jeunepromoteurs/liste' },
+          { icon: 'flaticon-warehouse-list', name: 'Liste des Centre de distribution', url: '/jeunepromoteurs/liste' },
         ],
         disabled: 'false'
       },
@@ -74,7 +74,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
             name: 'Liste des demandes d\'achat', icon: 'fa  fa-shopping-cart', url: '/demandes',
             description: 'Centre de distrubition', disabled: 'false'
           },
-          { icon: 'flaticon-list', name: 'Liste des articles', url: '/articles/liste' },
+          { icon: 'flaticon-warehouse-list', name: 'Liste des articles', url: '/articles/liste' },
         ],
         disabled: 'false'
       },
@@ -114,7 +114,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Préconisations intrants',
-        icon: 'flaticon-list-3',
+        icon: 'flaticon-warehouse-list-3',
         url: '/preconisations-intrants/liste',
         description: 'Préconisations intrants',
         subMenu: [
