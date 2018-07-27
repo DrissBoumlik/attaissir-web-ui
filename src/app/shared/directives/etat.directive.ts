@@ -19,17 +19,17 @@ export class EtatDirective implements OnInit {
   @HostBinding('style.color') color: string;
   constructor() { }
 
-  ngOnInit() {
-    if (this.etat == "etat1") {
-      this.backgroundColor = "#ffc107";
+  ngOnInit() { 
+    if (this.etat == "inprogress") {
+      this.backgroundColor = "#337ab7";
       this.color = "#fff";
     } else {
-      if (this.etat == "etat2") {
-        this.backgroundColor = "#4CAF50";
+      if (this.etat == "done") {
+        this.backgroundColor = "#449d44";
         this.color = "#fff";
       } else {
-        this.backgroundColor = "transparent";
-        this.color = "#000";
+        this.backgroundColor = "#c9302c";
+        this.color = "#fff";
       }
     }
 
