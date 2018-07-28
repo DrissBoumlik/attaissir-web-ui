@@ -293,7 +293,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
               }, 1000 );
 
             }, error => {
-              this.toastr.error('Rfid est incorrect');
+              this.toastr.error('RFID est incorrect');
             });
           this.popupDeliverVisible = false;
 

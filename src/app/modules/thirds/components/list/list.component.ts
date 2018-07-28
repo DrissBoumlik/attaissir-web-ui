@@ -91,7 +91,7 @@ export class ListComponent implements OnInit {
   }
 
   /**
-   * Delete a third and update the list
+   * Delete a third and update the warehouse-list
    * @param {number} thirdId
    */
   onRemoveThird(thirdId: number): any {
