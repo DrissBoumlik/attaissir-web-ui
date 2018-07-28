@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-     <h2>Liste des préconisations</h2>
+      <h2>Liste des préconisations</h2>
     </div>
   </div>
 </div>
@@ -56,27 +56,41 @@
         <dxo-group-panel [visible]="true"></dxo-group-panel>
         <dxo-grouping #expand [autoExpandAll]="false"></dxo-grouping>
 
-        <dxi-column dataField="id" [width]="40" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
+        <dxi-column dataField="id" [width]="40" caption="" [allowSorting]="false" [allowFiltering]="false"
+                    [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
         <dxi-column dataField="id" caption="Réf"></dxi-column>
-        <dxi-column dataField="cda" caption="CDA" ></dxi-column>
+        <dxi-column dataField="cda" caption="CDA"></dxi-column>
         <dxi-column dataField="zone" caption="Zone"></dxi-column>
+        <dxi-column dataField="type" caption="Type" cellTemplate="typeTemplate"></dxi-column>
         <dxi-column dataField="sub_irt_name" caption="sous catégorie"></dxi-column>
-        <dxi-column dataField="code_ormva" caption="Parcelle"></dxi-column>
+        <dxi-column dataField="name" caption="Parcelle"></dxi-column>
         <dxi-column dataField="full_name" caption="Nom d'agriculteur"></dxi-column>
         <dxi-column dataField="cin" caption="C.I.N d'agriculter"></dxi-column>
-        <dxi-column dataField="article_count" [allowSorting]="false" [allowFiltering]="false"   caption="Nombre d'article"></dxi-column>
+        <dxi-column dataField="article_count" [allowSorting]="false" [allowFiltering]="false"
+                    caption="Nombre d'article"></dxi-column>
         <dxi-column dataField="date" caption="Date de commande" dataType="date"></dxi-column>
-        <dxi-column dataField="state"  [allowSorting]="false" caption="Etat" cellTemplate="statusTemplate"></dxi-column>
+        <dxi-column dataField="state" [allowSorting]="false" caption="Etat" cellTemplate="statusTemplate"></dxi-column>
 
-     <div *dxTemplate="let data of 'statusTemplate'">
+
+        <div *dxTemplate="let data of 'typeTemplate'">
+          <div *ngIf="data.value === 'product'">
+            Produit
+          </div>
+          <div *ngIf="data.value === 'service'">
+            Service
+          </div>
+        </div>
+
+        <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="helper.getStatusColor(data.value)">
                {{ data.value}}
       </span>
         </div>
 
         <div *dxTemplate="let data of 'consulterTemplate'">
-          <a  routerLink="/preconisations-intrants/afficher/{{data.value}}" routerLinkActive="active"><i style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
-                                                                                            class="fa fa-info-circle fa-5x"></i></a>
+          <a routerLink="/preconisations-intrants/afficher/{{data.value}}" routerLinkActive="active"><i
+            style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+            class="fa fa-info-circle fa-5x"></i></a>
         </div>
 
       </dx-data-grid>

@@ -127,9 +127,9 @@ export class AddComponent implements OnInit {
                       .subscribe(
                         (templateData: any) => {
                           console.log(templateData);
-                          const sm: [] = templateData.data.articles.semences;
-                          const sr: [] = templateData.data.articles.service;
-                          const pd: [] = templateData.data.articles.product;
+                          const sm = templateData.data.articles.semences;
+                          const sr = templateData.data.articles.service;
+                          const pd = templateData.data.articles.product;
                           const custom_fields = templateData.data.custom_fields;
                           if (sm) {
                             sm.forEach((semence: any) => {

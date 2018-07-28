@@ -41,7 +41,7 @@ export class PreconisationsIntrantsService {
 
 
   getPreconisation(id: number): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/${this.routeName}/${id}`);
+    return this.http.get<any>(`${environment.apiUrl}/${this.routeName}/stockoperation/${id}`);
   }
 
 

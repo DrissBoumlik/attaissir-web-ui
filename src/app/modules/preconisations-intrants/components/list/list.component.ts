@@ -29,6 +29,7 @@ export class ListComponent implements OnInit {
         return this.preconisationsIntrantsService.getListeDemandesDx( loadOptions )
           .toPromise()
           .then(response => {
+            console.log(response);
             return response;
           })
           .catch(error => {

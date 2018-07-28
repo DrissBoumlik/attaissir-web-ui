@@ -47,6 +47,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
     this.route.params.subscribe(
       params => {
+        console.log(params);
         this.preconisationsIntrantsService.getPreconisation(params.id).subscribe((response) => {
           this.preconisation = response.data;
           this.articles = response.data.articles;
@@ -72,10 +73,13 @@ export class ShowComponent implements OnInit, AfterViewInit {
     this.preconisationsIntrantsService.deliver(this.preconisation.id, this.pin_code, this.rf_code)
       .toPromise()
       .then(response => {
-        this.toastr.success('ok');
-        this.router.navigate([`/preconisations-intrants/liste`]);
+        // this.router.navigate([`/preconisations-intrants/liste`]);
         this.popupDeliverVisible = false;
+        this.preconisation.state = 'done';
         this.toastr.success(` La préconisation d'intrans est livrée avec succès.`);
+        setTimeout(() => {
+          this.print();
+        }, 1000 );
 
       })
       .catch(error => {
@@ -282,8 +286,11 @@ export class ShowComponent implements OnInit, AfterViewInit {
         if (this.popupDeliverVisible) {
           this.preconisationsIntrantsService.deliver(this.preconisation.id, this.pin_code, this.rf_code)
             .subscribe(response => {
+              this.preconisation.state = 'done';
               this.toastr.success(` La préconisation d'intrans est livrée avec succès.`);
-              this.router.navigate(['preconisations-intrants/liste']);
+              setTimeout(() => {
+                this.print();
+              }, 1000 );
 
             }, error => {
               this.toastr.error('Rfid est incorrect');
