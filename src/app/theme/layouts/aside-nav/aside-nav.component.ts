@@ -121,7 +121,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Préconisations intrants',
-        icon: 'flaticon-warehouse-list-3',
+        icon: 'flaticon-list-1',
         url: '/preconisations-intrants/liste',
         description: 'Préconisations intrants',
         disabled: 'false'
