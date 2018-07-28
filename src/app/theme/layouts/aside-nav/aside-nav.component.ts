@@ -24,17 +24,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
     this.mainMenu = [
       {
-        name: 'Gestion des Utilisateurs',
-        icon: 'flaticon-user-add',
-        url: '/utilisateurs/liste',
-        description: 'Gestion des Utilisateurs',
-        subMenu: [
-          {icon: 'flaticon-users', name: 'Liste des utilisateurs', url: '/utilisateurs/liste'},
-          {icon: 'flaticon-plus', name: 'Nouvel utilisateur', url: '/utilisateurs/ajouter'}
-        ],
-        disabled: 'false'
-      },
-      {
         name: 'Contrats',
         icon: 'flaticon-file',
         url: '/contrats/liste',
