@@ -40,7 +40,7 @@ export class AddComponent implements OnInit {
           NewComponent.notifyMe('Role créé avec succès, Redirection.........', 'success');
           // NewComponent.notifyMe(JSON.stringify(response), 'success');
           console.log(JSON.stringify(response));
-          this.router.navigate([`/utilisateurs/list`]);
+          this.router.navigate([`/roles/liste`]);
 
 
         },err => {
@@ -74,7 +74,7 @@ export class AddComponent implements OnInit {
       id: e.itemData.id,
       description: e.itemData.description
     });
-  }
+  } 
   
   onChangeValue(i,j){
 
