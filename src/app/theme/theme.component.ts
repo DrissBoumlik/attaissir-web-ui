@@ -5,13 +5,11 @@ import { ScriptLoaderService } from '../_services/script-loader.service';
 
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../auth/_services';
+import {Observable} from 'rxjs';
 
 declare let mApp: any;
 declare let mUtil: any;
 declare let mLayout: any;
-const MINUTES_UNITL_AUTO_LOGOUT = 30;
-const CHECK_INTERVAL = 60000;
-const STORE_KEY = 'lastAction';
 
 
 @Component({
@@ -30,62 +28,29 @@ export class ThemeComponent implements OnInit {
     this.canRefresh = false;
     this.reset();
     this.initListener();
-    this.initInterval();
   }
 
   initListener() {
-    document.body.addEventListener('click', () => {
-      if (this.auth.getToken()) {
-        this.reset();
-      }
-    });
+    Observable.fromEvent(document, 'click').throttleTime(600000)
+      .subscribe(ev => {
+        if (this.auth.getToken()) {
+          this.reset();
+        }
+      });
   }
 
   reset() {
-    localStorage.setItem(STORE_KEY, Date.now().toString());
-    this.lastAction = localStorage.getItem(STORE_KEY);
-    if (this.canRefresh) {
-      this.auth.refresh().subscribe(data => {
-        const currentUser: any = JSON.stringify(data);
-        localStorage.setItem('currentUser', currentUser);
-        localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
-        // test Tenant
-        if (!localStorage.getItem('tenantId')) {
-          localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
-        }
-      }, error1 => {
-        // this.toastr.warning(`La session n'est pas actualisée.`);
-      });
-    }
-  }
-
-  initInterval() {
-    setInterval(() => {
-      this.check();
-    }, CHECK_INTERVAL);
-  }
-
-  check() {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (!!currentUser) {
-      const now = Date.now();
-      const timeleft: any = Number(this.lastAction) + MINUTES_UNITL_AUTO_LOGOUT * 60 * 1000;
-      const diff = Number(timeleft) - Number(now);
-      const isTimeout = diff < 0;
-      this.canRefresh = !this.canRefresh; // diff < 600000;
-
-      if (diff < 1500000 && diff > 1499800) {
-        this.toastr.warning('Votre session va expirer dans 5 minute!', '', {
-          enableHtml: true,
-          tapToDismiss: true
-        });
+    this.auth.refresh().subscribe(data => {
+      const currentUser: any = JSON.stringify(data);
+      localStorage.setItem('currentUser', currentUser);
+      localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
+      // test Tenant
+      if (!localStorage.getItem('tenantId')) {
+        localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
       }
-
-      if (isTimeout) {
-        // this.auth.logout();
-        this._router.navigate(['/login']);
-      }
-    }
+    }, error1 => {
+      // this.toastr.warning(`La session n'est pas actualisée.`);
+    });
   }
 
   ngOnInit() {
