@@ -1,29 +1,29 @@
 import { Injectable } from '@angular/core';
-import {Observable} from '../../../../../node_modules/rxjs/Rx';
-import {environment} from '../../../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable } from '../../../../../node_modules/rxjs/Rx';
+import { environment } from '../../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 let permissions = [
   {
-    permission:"permission1",
+    permission: "permission1",
     actions:
-    [
-      ["lire",false,'permissions1.lire'],
-      ["ecrire",false]
+      [
+        ["lire", false, 'permissions1.lire'],
+        ["ecrire", false]
+      ]
+  },
+  {
+    permission: "permission2",
+    actions: [
+      ["lire", false],
+      ["ecrire", false]
     ]
   },
   {
-    permission:"permission2",
-    actions:[
-      ["lire",false],
-      ["ecrire",false]
-    ]
-  },
-  {
-    permission:"permission3",
-    actions:[
-      ["lire",false],
-      ["ecrire",false]
+    permission: "permission3",
+    actions: [
+      ["lire", false],
+      ["ecrire", false]
     ]
   }
 

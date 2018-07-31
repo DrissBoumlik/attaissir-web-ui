@@ -5,7 +5,7 @@ import { WizardComponent } from './components/wizard/wizard.component';
 import {
   DxButtonModule,
   DxDataGridModule,
-  DxDateBoxModule,
+  DxDateBoxModule, DxFileUploaderModule,
   DxFormModule,
   DxListModule,
   DxNumberBoxModule,
@@ -38,6 +38,7 @@ import { RoleDirective } from './directives/role.directive';
     DxTextAreaModule,
     DxPopupModule,
     DxTemplateModule,
+    DxFileUploaderModule,
     DxSelectBoxModule
   ],
   exports: [
@@ -60,6 +61,7 @@ import { RoleDirective } from './directives/role.directive';
     DxPopupModule,
     DxTemplateModule,
     RfidCardReaderComponent,
+    DxFileUploaderModule,
     ParcelsListComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

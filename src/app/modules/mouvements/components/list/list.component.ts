@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import { WarehoseService } from '../../../warehouse/service/warehose.service';
+import { WarehouseService } from '../../../warehouse/service/warehose.service';
 import { Helper } from '../../../../shared/classes/helper';
 import { isNull } from 'util';
 import { MouvementsService } from '../../service/mouvements.service';
@@ -16,7 +16,7 @@ export class ListComponent implements OnInit {
   helper: any;
 
 
-  constructor(private warehoseService: WarehoseService, private mouvementsService: MouvementsService) {
+  constructor(private WarehouseService: WarehouseService, private mouvementsService: MouvementsService) {
     this.helper = Helper;
   }
 

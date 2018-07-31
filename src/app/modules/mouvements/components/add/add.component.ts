@@ -4,12 +4,12 @@ import { MouvementsService } from '../../service/mouvements.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { WarehoseService } from '../../../warehouse/service/warehose.service';
+import { WarehouseService } from '../../../warehouse/service/warehose.service';
 import { ArticleCategiesService } from '../../../articles/services/article-categies.service';
 import { ArticlesService } from '../../../articles/services/articles.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import {DemandesService} from '../../../demandes/service/demandes.service';
+import { DemandesService } from '../../../demandes/service/demandes.service';
 
 @Component({
   selector: 'app-add',
@@ -38,7 +38,7 @@ export class AddComponent implements OnInit {
   constructor(public mouvementService: MouvementsService,
     public commandeService: DemandesService,
     public thirdService: ThirdsService,
-    public warehouseService: WarehoseService,
+    public warehouseService: WarehouseService,
     public familleService: ArticleCategiesService,
     public articleService: ArticlesService,
     private router: Router,
@@ -56,7 +56,7 @@ export class AddComponent implements OnInit {
       type: 'success',
       useSubmitBehavior: false,
       onClick: (e) => {
-        console.log(e);
+        console.log(this.stock_operation);
 
         this.products.push({
           'famille_id': this.stock_operation.famille,

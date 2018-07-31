@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import {DemandesService} from '../../../demandes/service/demandes.service';
+import { DemandesService } from '../../../demandes/service/demandes.service';
 
 @Component({
   selector: 'app-replenishment',

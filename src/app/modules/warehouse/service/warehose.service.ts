@@ -7,7 +7,7 @@ import { Warehouse } from '../../../shared/classes/warehouse';
 @Injectable({
   providedIn: 'root'
 })
-export class WarehoseService {
+export class WarehouseService {
 
 
   routeName = 'warehouses';
@@ -15,6 +15,21 @@ export class WarehoseService {
   constructor(private http: HttpClient) {
   }
 
+  getWarehousesDx(params: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getWarehousesByZone(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/${this.routeName}/zone/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
 
   /**
    * Get a collection of Warehouse

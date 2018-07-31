@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { WarehoseService } from '../../../warehouse/service/warehose.service';
+import { WarehouseService } from '../../../warehouse/service/warehose.service';
 import CustomStore from 'devextreme/data/custom_store';
 import { ThirdsService } from '../../services/thirds.service';
 import { ZonesService } from '../../../contracts/services/zones.service';
@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
 
   loadIndicatorVisible: any = false;
 
-  constructor(private warehoseService: WarehoseService,
+  constructor(private WarehouseService: WarehouseService,
     private thirdService: ThirdsService,
     private zoneService: ZonesService,
     private router: Router,
@@ -35,7 +35,7 @@ export class ListComponent implements OnInit {
     this.warehouses.store = new CustomStore({
       load: (loadOptions: any) => {
         loadOptions['requireTotalCount'] = true;
-        return this.warehoseService.getAllDx(loadOptions)
+        return this.WarehouseService.getAllDx(loadOptions)
           .toPromise()
           .then(response => {
             return response;
@@ -46,7 +46,7 @@ export class ListComponent implements OnInit {
           });
       },
       remove: (event: any) => {
-        return this.warehoseService.deleteWarehouse(event.id)
+        return this.WarehouseService.deleteWarehouse(event.id)
           .toPromise()
           .then(res => {
             this.toastr.success('msg');
@@ -77,7 +77,7 @@ export class ListComponent implements OnInit {
    * @param {number} thirdId
    */
   onRemoveThird(id: number): any {
-    this.warehoseService.deleteWarehouse(id).subscribe(
+    this.WarehouseService.deleteWarehouse(id).subscribe(
       (res) => {
         this.toastr.success('Nouveau agrégé ajouté avec succès.');
       },
