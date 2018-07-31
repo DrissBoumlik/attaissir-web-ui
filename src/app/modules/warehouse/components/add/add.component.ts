@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WarehoseService } from '../../service/warehose.service';
+import { WarehouseService } from '../../service/warehose.service';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { Router } from '@angular/router';
 import { Warehouse } from '../../../../shared/classes/warehouse';
@@ -17,7 +17,7 @@ export class AddComponent implements OnInit {
   constructor(
     private router: Router,
     public warehouse: Warehouse,
-    public warehouseService: WarehoseService,
+    public warehouseService: WarehouseService,
     private toastr: ToastrService) {
     this.helper = Helper;
   }

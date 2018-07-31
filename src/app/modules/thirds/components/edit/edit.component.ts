@@ -6,7 +6,7 @@ import { Third } from '../../../../shared/classes/third';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from '../../../../shared/classes/helper';
 import { Warehouse } from '../../../../shared/classes/warehouse';
-import { WarehoseService } from '../../../warehouse/service/warehose.service';
+import { WarehouseService } from '../../../warehouse/service/warehose.service';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class EditComponent implements OnInit {
     private location: Location,
     public tier: Third,
     public warehouse: Warehouse,
-    private warehouseService: WarehoseService,
+    private warehouseService: WarehouseService,
     private router: Router,
     public thirdsService: ThirdsService,
     private toastr: ToastrService) {

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
+import { AfterViewInit, Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScriptLoaderService } from '../_services/script-loader.service';
 import { Helpers } from '../helpers';
@@ -15,7 +15,7 @@ declare let mUtil: any;
   encapsulation: ViewEncapsulation.None,
 })
 
-export class AuthComponent implements OnInit  , AfterViewInit {
+export class AuthComponent implements OnInit, AfterViewInit {
   model: any = {};
   loading = false;
   returnUrl: string;

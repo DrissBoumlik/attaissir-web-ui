@@ -19,6 +19,7 @@
         [columnHidingEnabled]="true"
         [allowColumnResizing]="false"
         [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         KeyExpr="id">
         <dxo-remote-operations
@@ -32,7 +33,7 @@
         <dxo-header-filter [visible]="true"></dxo-header-filter>
 
         <dxo-group-panel [visible]="true"></dxo-group-panel>
-        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+        <dxo-scrolling  [showScrollbar]="'always'"></dxo-scrolling>
         <dxo-editing
           mode="popup"
           [useIcons]="true"

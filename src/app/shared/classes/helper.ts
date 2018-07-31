@@ -1,5 +1,5 @@
-import {isArray, isNull} from 'util';
-import {load} from '@angular/core/src/render3/instructions';
+import { isArray, isNull } from 'util';
+import { load } from '@angular/core/src/render3/instructions';
 
 export class Helper {
   /**

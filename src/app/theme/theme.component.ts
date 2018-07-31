@@ -5,7 +5,7 @@ import { ScriptLoaderService } from '../_services/script-loader.service';
 
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../auth/_services';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 declare let mApp: any;
 declare let mUtil: any;
