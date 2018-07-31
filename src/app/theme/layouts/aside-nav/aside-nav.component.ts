@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {Component, OnInit, ViewEncapsulation, AfterViewInit} from '@angular/core';
 import {Helpers} from '../../../helpers';
 import {ActivatedRoute, Router} from '@angular/router';
