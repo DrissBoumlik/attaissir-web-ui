@@ -89,7 +89,7 @@
         aria-haspopup="true" routerLinkActive="m-menu__item--open"
         routerLinkActiveOptions="{ exact: true }" m-menu-submenu-toggle="hover" m-menu-link-redirect="1"
         aria-haspopup="true" *ngFor="let menuItem of mainMenu">
-        <a href="javascript:;" class="m-menu__link m-menu__toggle" [routerLink]="menuItem.url">
+        <a href="javascript:;" class="m-menu__link m-menu__toggle" [routerLink]="[menuItem.url]" [queryParams]="menuItem?.queryParams">
           <i class="m-menu__link-icon {{ menuItem.icon }}"></i>
           <span class="m-menu__link-text" i18n="">
 										{{ menuItem.name }}

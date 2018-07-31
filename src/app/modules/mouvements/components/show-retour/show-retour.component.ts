@@ -24,7 +24,8 @@ export class ShowRetourComponent implements OnInit {
   helper: any;
 
 
-  constructor(private preconisationsIntrantsService: PreconisationsIntrantsService, private route: ActivatedRoute, private toastr: ToastrService,
+  constructor(private preconisationsIntrantsService: PreconisationsIntrantsService,
+    private route: ActivatedRoute, private toastr: ToastrService,
     private mouvementService: MouvementsService, private router: Router) {
 
     this.helper = Helper;

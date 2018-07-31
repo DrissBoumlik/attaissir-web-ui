@@ -3,9 +3,9 @@ import { Stock } from '../../../../shared/classes/stock';
 import { StockService } from '../../services/stock.service';
 import { ActivatedRoute } from '@angular/router';
 import CustomStore from 'devextreme/data/custom_store';
-import { WarehouseService } from '../../../distribution-center/services/warehouse.service';
-import {isArray} from 'util';
-import {Helper} from '../../../../shared/classes/helper';
+import { isArray } from 'util';
+import { Helper } from '../../../../shared/classes/helper';
+import { WarehouseService } from '../../../warehouse/service/warehose.service';
 
 
 @Component({

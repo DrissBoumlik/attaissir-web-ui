@@ -13,7 +13,7 @@ export class RoleDirective implements OnInit {
 
   constructor() { }
 
-  ngOnInit(){
+  ngOnInit() {
 
   }
 
