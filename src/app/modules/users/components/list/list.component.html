@@ -3,16 +3,17 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Les utilisateurs</h2>
+      <a class="siam-header-btn-new" routerLink="/utilisateurs/ajouter" title="Ajouter utilisateur"><i
+        class="fa fa-plus"></i></a>
     </div>
   </div>
 </div>
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <dx-data-grid 
+    <dx-data-grid
       id="gridContainer"
       [dataSource]="dataSource"
-      [columnAutoWidth]="true"
-      >    
+      [columnAutoWidth]="true">
       <dxo-paging [pageSize]="5"></dxo-paging>
       <!-- <dxo-pager 
           [showPageSizeSelector]="true"
@@ -24,14 +25,18 @@
          [allowUpdating]="true">
       </dxo-editing> -->
       <!-- <dxo-selection mode="multiple"></dxo-selection> -->
-      
+
       <dxi-column dataField="id" caption="id" class="column"></dxi-column>
       <dxi-column dataField="name" caption="Nom"></dxi-column>
       <dxi-column dataField="email" caption="E-Mail"></dxi-column>
       <dxi-column dataField="description" caption="Role"></dxi-column>
-      
+      <dxi-column dataField="id" cellTemplate="cellTemplate" caption="" alignment="left"></dxi-column>
+      <div *dxTemplate="let data of 'cellTemplate'">
+        <a routerLink="/utilisateurs/modifier/{{data.value}}" style="text-align: left;color: black">
+          <span>Modifier</span>
+        </a>
+      </div>
 
-      
     </dx-data-grid>
   </div>
 </div>

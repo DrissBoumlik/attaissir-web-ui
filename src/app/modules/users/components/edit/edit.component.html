@@ -1,8 +1,8 @@
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
-      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Nouvel utilisateur</h2>
+      <a class="siam-header-back-btn" routerLink="/utilisateurs/liste"><i class="fa fa-angle-left"></i> Les utilisateurs</a>
+      <h2>Modifier utilisateur</h2>
     </div>
   </div>
 </div>
@@ -39,22 +39,12 @@
                 message="veuillez saisir une adresse email valide">
               </dxi-validation-rule>
             </dxi-item>
-            <dxi-item dataField="password"
-                      [editorOptions]="{ mode: 'password' }">
-              <dxo-label
-                text="Mot de passe">
-              </dxo-label>
-              <dxi-validation-rule
-                type="required"
-                message="Password est obligatoire">
-              </dxi-validation-rule>
-            </dxi-item>
           </dxi-item>
 
           <dxi-item itemType="group">
 
             <dxi-item dataField="role_id"
-                      [editorOptions]="{ items: listOfRoles, displayExpr: 'description', valueExpr : 'id' }"
+                      [editorOptions]="{ items: listOfRoles, displayExpr: 'description', valueExpr : 'id', value: userRole}"
                       editorType="dxSelectBox">
               <dxo-label
                 text="Role">
@@ -65,6 +55,7 @@
             </dxi-item>
 
           </dxi-item>
+
 
           <dxi-item itemType="group" caption="Choix des structures">
 
@@ -82,6 +73,7 @@
 
 
           </dxi-item>
+
 
           <dxi-item itemType="group">
 
@@ -119,10 +111,11 @@
 
           </dxi-item>
 
+
           <dxi-item
             itemType="button"
             alignment="right"
-            [buttonOptions]="buttonOptions">
+            [buttonOptions]="{text: 'Enregistrer',type: 'success',useSubmitBehavior: true}">
           </dxi-item>
         </dx-form>
       </form>
@@ -145,9 +138,10 @@
         <div class="pop-up-body">
           <dx-tree-view
             id="selection-treeview"
-            [items]="listeDesCdas"
+            [items]="choosingStructures[rowIndex].cdas"
             [width]="320"
             showCheckBoxesMode="normal"
+            selectedExpr="isSelected"
             (onItemSelectionChanged)="selectionChanged($event)">
             <div *dxTemplate="let data of 'item'">
               <span *ngIf="data.items">CDA</span> {{data.name}}
