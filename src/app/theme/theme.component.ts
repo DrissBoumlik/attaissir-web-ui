@@ -44,6 +44,8 @@ export class ThemeComponent implements OnInit {
       const currentUser: any = JSON.stringify(data);
       localStorage.setItem('currentUser', currentUser);
       localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
+      localStorage.setItem('permissions', JSON.parse(currentUser)['data']['permissions']);
+
       // test Tenant
       if (!localStorage.getItem('tenantId')) {
         localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);

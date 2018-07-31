@@ -23,6 +23,7 @@ import { ListComponent } from './components/list/list.component';
 
 import { EditComponent } from './components/edit/edit.component';
 import { EtatDirective } from '../../shared/directives/etat.directive';
+import {PermissionDirective} from '../../_directives/permission.directive';
 
 @NgModule({
   imports: [
@@ -47,7 +48,7 @@ import { EtatDirective } from '../../shared/directives/etat.directive';
     DxTreeListModule,
     DxTextBoxModule
   ],
-  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent]
+  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent , PermissionDirective]
 
 })
 export class InterventionsModule {

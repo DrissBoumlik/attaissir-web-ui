@@ -64,6 +64,7 @@ export class AuthComponent implements OnInit  , AfterViewInit {
           const currentUser: any = JSON.stringify(data);
           localStorage.setItem('currentUser', currentUser);
           localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
+          localStorage.setItem('permissions', JSON.parse(currentUser)['data']['permissions']);
           if (!localStorage.getItem('tenantId')) {
             localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
           }
