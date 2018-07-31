@@ -23,7 +23,6 @@ export class ShowComponent implements OnInit, AfterViewInit {
   rf_code: any;
   evnt1 = true;
   _evnt = false;
-  toOrder = [];
   selectedItems = [];
   retourArray = [];
   retour_valider_enabled = true;
@@ -33,9 +32,6 @@ export class ShowComponent implements OnInit, AfterViewInit {
   @ViewChild('rfid') rfid: ElementRef;
   @ViewChild('focusout') focusout: ElementRef;
   // -------------------------------------------------------------------------
-  ayants_droit: any;
-  rfidValue: any;
-
 
   constructor(private elementRef: ElementRef, private preconisationsIntrantsService: PreconisationsIntrantsService,
     private rightHolderService: RightHolderService,
@@ -51,6 +47,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
     this.route.params.subscribe(
       params => {
+        console.log(params);
         this.preconisationsIntrantsService.getPreconisation(params.id).subscribe((response) => {
           this.preconisation = response.data;
           this.articles = response.data.articles;
@@ -76,10 +73,13 @@ export class ShowComponent implements OnInit, AfterViewInit {
     this.preconisationsIntrantsService.deliver(this.preconisation.id, this.pin_code, this.rf_code)
       .toPromise()
       .then(response => {
-        this.toastr.success('ok');
-        this.router.navigate([`/preconisations-intrants/liste`]);
+        // this.router.navigate([`/preconisations-intrants/liste`]);
         this.popupDeliverVisible = false;
-        this.toastr.success(` la préconisation d'intrans est livrée avec succès.`);
+        this.preconisation.state = 'done';
+        this.toastr.success(` La préconisation d'intrans est livrée avec succès.`);
+        setTimeout(() => {
+          this.print();
+        }, 1000 );
 
       })
       .catch(error => {
@@ -161,7 +161,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
     this.preconisationsIntrantsService.cancelPreconisation(this.preconisation.id).subscribe((response) => {
 
-      this.toastr.success(` la préconisation d'intrans est supprimé avec succès.`);
+      this.toastr.success(` La préconisation d'intrans est supprimé avec succès.`);
       this.router.navigate(['preconisations-intrants/liste']);
 
     }, error1 => {
@@ -182,7 +182,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
         if (it.quantity < value) {
           this.retour_valider_enabled = false;
 
-          this.toastr.error('la quantité retour est supérieure à la quantité globale');
+          this.toastr.error('La quantité retour est supérieure à la quantité globale');
         } else {
           it.quantity_retour = value;
         }
@@ -221,9 +221,11 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
     // print.document.write('</head><body >');
     //  print.document.write('<h1>' + document.title  + '</h1>');
-    print.document.write('<style type="text/css"> @page { size: auto;  margin: 0mm; } *{text-align: center;  } *{font-size: 10px} </style>');
+    print.document.write('<style type="text/css"> @page { size: auto;  margin: 0mm; }' +
+      ' *{text-align: center;  } *{font-size: 10px} </style>');
     print.document.write('<style type="text/css"> body { width: 250px; }</style>');
-    print.document.write('<style type="text/css"> .div1 {  position:absolute; width:250px; height:300px; z-index:15; left:50%; margin:0px 0 0 -150px;}</style>');
+    print.document.write('<style type="text/css"> .div1 {  position:absolute; width:250px; ' +
+      'height:300px; z-index:15; left:50%; margin:0px 0 0 -150px;}</style>');
 
 
     print.document.write('</head>');
@@ -240,14 +242,17 @@ export class ShowComponent implements OnInit, AfterViewInit {
       '<p> <span style="float: left;font-weight: bolder;">COMPAGNE </span>  <span style="float: right">' +
       this.preconisation.campaign + ' </span></p>' +
       '<p> <span style="font-weight: bolder;float: left;"> C/Z/P  </span>   <span style="float: right">' +
-      this.preconisation.parcel + '/' + this.preconisation.cda + '/' + this.preconisation.zone + ' </span></p>' +
-      '<p> <span style="float: left;font-weight: bolder;">NOM COMPLET  </span>   <span style="float: right">' + this.preconisation.third_party_name + ' </span></p>' +
+      this.preconisation.parcel + '/' + this.preconisation.cda + '/' +
+      this.preconisation.zone + ' </span></p>' +
+      '<p> <span style="float: left;font-weight: bolder;">NOM COMPLET  </span>   <span style="float: right">' +
+      this.preconisation.third_party_name + ' </span></p>' +
       '<p><span style="float: bottom">***** </span></p>');
 
     this.articles.forEach(function(element) {
       print.document.write('<p style="font-weight: bolder;">' + element.category + '</p>');
       print.document.write('<p> ***** </p>');
-      print.document.write('<p> <span style="float: left;">' + element.article_name + '</span><span style="float: right;"> ' + element.quantity + ' ' + 'QTE' + '</span></p>');
+      print.document.write('<p> <span style="float: left;">' + element.article_name +
+        '</span><span style="float: right;"> ' + element.quantity + ' ' + 'QTE' + '</span></p>');
 
     });
 
@@ -281,13 +286,14 @@ export class ShowComponent implements OnInit, AfterViewInit {
         if (this.popupDeliverVisible) {
           this.preconisationsIntrantsService.deliver(this.preconisation.id, this.pin_code, this.rf_code)
             .subscribe(response => {
-              console.log('oo1');
-              this.toastr.success(` la préconisation d'intrans est livrée avec succès.`);
-              this.router.navigate(['preconisations-intrants/liste']);
+              this.preconisation.state = 'done';
+              this.toastr.success(` La préconisation d'intrans est livrée avec succès.`);
+              setTimeout(() => {
+                this.print();
+              }, 1000 );
 
             }, error => {
-              this.toastr.error('Rfid est incorrect');
-              console.log('oo');
+              this.toastr.error('RFID est incorrect');
             });
           this.popupDeliverVisible = false;
 

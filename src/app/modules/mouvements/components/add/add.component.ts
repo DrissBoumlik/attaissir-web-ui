@@ -242,7 +242,7 @@ export class AddComponent implements OnInit {
 
     this.commandeOptions = {
       label: 'Commande',
-      displayExpr: 'object',
+      displayExpr: 'code',
       valueExpr: 'id',
       searchEnabled: true,
       dataSource: new CustomStore({

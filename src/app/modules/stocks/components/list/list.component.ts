@@ -44,7 +44,6 @@ export class ListComponent implements OnInit {
                 return {
                   data: stk.data.map((war: any) => {
                     const row = new Stock();
-                    row.ql = war.id;
                     row.ql = war.ql;
                     row.qts = war.qts;
                     row.qte = war.qte;
@@ -56,8 +55,9 @@ export class ListComponent implements OnInit {
                     row.category_name = war.category_name;
                     row.sub_category_name = war.sub_category_name;
                     row.warehouse_zone_name = war.warehouse_zone_name;
+                    row.warehouse_zone_type = war.warehouse_zone_type;
                     row.article_name = war.article_name;
-                    row.threshold = war.threshold ? war.threshold : 'pas de données';
+                    row.threshold = war.threshold ? war.threshold : '';
                     return row;
                   }),
                   totalCount: stk.totalCount

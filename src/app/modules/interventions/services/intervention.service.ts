@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
-
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Rx';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
 
 
 @Injectable({
@@ -109,6 +108,22 @@ export class InterventionService {
 
   getInterventions(): Observable<any> {
     return this.http.post(`${environment.apiUrl}/interventionrequests/grid`, JSON.stringify([]), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getPropositionTemplates(idThirdParty: number, idSubCategory: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/interventionrequests/templates/${idThirdParty}/${idSubCategory}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getTemplateData(idTemplate: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/interventionrequests/edit/${idTemplate}`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

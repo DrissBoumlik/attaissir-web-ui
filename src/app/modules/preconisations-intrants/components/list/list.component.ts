@@ -14,9 +14,7 @@ import 'rxjs/add/operator/toPromise';
 export class ListComponent implements OnInit {
 
   preconisations_intrants: any = {};
-
   helper: any;
-  applyFilter: any = 'auto';
 
   constructor(private route: ActivatedRoute, private preconisationsIntrantsService: PreconisationsIntrantsService) {
     this.helper = Helper;
@@ -26,12 +24,12 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
 
-
     this.preconisations_intrants.store = new CustomStore({
       load: (loadOptions: any) => {
-        return this.preconisationsIntrantsService.getListeDemandesDx(loadOptions)
+        return this.preconisationsIntrantsService.getListeDemandesDx( loadOptions )
           .toPromise()
           .then(response => {
+            console.log(response);
             return response;
           })
           .catch(error => {
@@ -40,39 +38,8 @@ export class ListComponent implements OnInit {
       }
     });
 
-    this.route.params.subscribe(
-      params => {
-        if (params.cin == null) {
-          console.log('all');
-        } else {
-          console.log('by_search');
-        }
-      });
-
-
   }
 
-
-  gotoShow(event) {
-
-  }
-
-
-
-  getStatusColor(value: string): string {
-    if (isNull(value)) {
-      return 'm-badge m-badge--primary m-badge--wide';
-    }
-    if (value.toLowerCase() === 'done'.toLowerCase() || value.toLowerCase() === 'Done'.toLowerCase()) {
-      return 'm-badge m-badge--success m-badge--wide';
-    } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'Inprogress'.toLowerCase()) {
-      return 'm-badge m-badge--info m-badge--wide';
-    } else if (value.toLowerCase() === 'canceled'.toLowerCase() || value.toLowerCase() === 'Canceled'.toLowerCase()) {
-      return 'm-badge m-badge--danger m-badge--wide';
-    } else {
-      return 'm-badge m-badge--primary m-badge--wide';
-    }
-  }
 
 
 

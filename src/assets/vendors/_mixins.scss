@@ -486,7 +486,7 @@ xl: 1200px
 }
 
 //== Icon Sizing
-// sass list:  (lineawesome: 1.1rem, fontawesome: 1.2rem, metronic: 1.1rem)
+// sass warehouse-list:  (lineawesome: 1.1rem, fontawesome: 1.2rem, metronic: 1.1rem)
 @mixin icons-size($config) {
     // lineawesome
     [class^="la-"],
@@ -508,7 +508,7 @@ xl: 1200px
 }
 
 //== Icon attr
-// sass list:  (lineawesome: 1.1rem, fontawesome: 1.2rem, metronic: 1.1rem)
+// sass warehouse-list:  (lineawesome: 1.1rem, fontawesome: 1.2rem, metronic: 1.1rem)
 @mixin icons-attr($attr, $config) {
     // lineawesome
     [class^="la-"],

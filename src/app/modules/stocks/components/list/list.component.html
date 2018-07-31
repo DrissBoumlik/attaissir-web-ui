@@ -24,11 +24,11 @@
       >
 
         <dxi-column dataField="warehouse_name" caption="Magasin" alignment="center"></dxi-column>
-        <dxi-column dataField="warehouse_zone_name" caption="CDA" alignment="center"></dxi-column>
+        <dxi-column dataField="warehouse_zone_name" width="200px" cellTemplate="zoneTemplate" caption="Zone" alignment="center"></dxi-column>
         <dxi-column dataField="category_name" caption="Famille" alignment="center"></dxi-column>
-        <dxi-column dataField="qr" caption="Quantité en stock" alignment="center"></dxi-column>
         <dxi-column dataField="sub_category_name" caption="Sous-famille" alignment="center"></dxi-column>
         <dxi-column dataField="article_name" caption="Article" alignment="center"></dxi-column>
+        <dxi-column dataField="qr" caption="Quantité en stock" alignment="center"></dxi-column>
         <dxi-column dataField="ql" caption="Quantité Reçu" alignment="center"></dxi-column>
         <dxi-column dataField="qts" caption="Quantité Transfert Sortie" alignment="center"></dxi-column>
         <dxi-column dataField="qte" caption="Quantité Transfert Entrée" alignment="center"></dxi-column>
@@ -37,6 +37,9 @@
         <dxi-column dataField="qs" caption="Quantité servie" alignment="center"></dxi-column>
         <dxi-column dataField="threshold" caption="Seuil" alignment="center"></dxi-column>
 
+        <div *dxTemplate="let data of 'zoneTemplate'">
+          {{ data.data.warehouse_zone_type }}: <span class="badge badge-info">{{ data.data.warehouse_zone_name}}</span>
+        </div>
         <dxo-remote-operations
           [sorting]="true"
           [paging]="true">

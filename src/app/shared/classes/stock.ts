@@ -25,5 +25,6 @@ export class Stock {
   category_name?: string;
   sub_category_name?: string;
   warehouse_zone_name?: string;
+  warehouse_zone_type?: string;
   article_name?: string;
 }

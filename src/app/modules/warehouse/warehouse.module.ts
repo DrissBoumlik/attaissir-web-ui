@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import { DxDataGridModule, DxDateBoxModule, DxLoadIndicatorModule, DxSelectBoxModule, DxTextAreaModule } from 'devextreme-angular';
 import { ShowComponent } from './components/show/show.component';
-import { ListComponent } from './components/list/list.component';
+import { ListComponent } from '../thirds/components/warehouse-list/list.component';
 import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { WarehouseRoutingModule } from './warehouse-routing.module';

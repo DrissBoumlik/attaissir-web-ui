@@ -42,6 +42,7 @@ export class AddComponent implements OnInit {
           console.log(JSON.stringify(response));
           this.router.navigate([`/utilisateurs/list`]);
 
+
         },err => {
           console.log(JSON.stringify(err.error.errors));
           Object.keys(err.error.errors).forEach(

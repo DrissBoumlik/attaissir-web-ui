@@ -30,7 +30,8 @@ export class PreconisationsIntrantsService {
 
 
   getListeAyants_droits(contract_id): Observable<any> {
-    return this.http.post<any[]>(`${environment.apiUrl}/${this.routeName}/rightholders/grid`, JSON.stringify({ contract_id: contract_id }), {
+    return this.http.post<any[]>(`${environment.apiUrl}/${this.routeName}/rightholders/grid`,
+      JSON.stringify({ contract_id: contract_id }), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -40,7 +41,7 @@ export class PreconisationsIntrantsService {
 
 
   getPreconisation(id: number): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/${this.routeName}/${id}`);
+    return this.http.get<any>(`${environment.apiUrl}/${this.routeName}/stockoperation/${id}`);
   }
 
 

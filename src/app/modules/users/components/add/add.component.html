@@ -106,7 +106,20 @@
               <dxi-column
                 caption="les sructues choisis"
                 dataField="name"></dxi-column>
+              <dxi-column dataField="id"
+                          cellTemplate="cellTemplate"
+                          caption="" width="200"
+                          alignment="left"></dxi-column>
+              <div *dxTemplate="let data of 'cellTemplate'">
+                <a (click)="showStructureZones(data)"
+                   style="cursor:pointer; text-align: left;color: black">Assigner
+                  les zones</a>
+              </div>
             </dx-data-grid>
+
+          </dxi-item>
+
+          <dxi-item itemType="group" caption="Choix des zones">
 
           </dxi-item>
 
@@ -119,4 +132,43 @@
       </form>
     </div>
   </div>
+
+
+  <dx-popup
+    class="popup"
+    [showTitle]="true"
+    [width]="600"
+    title="Selection des zones"
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="true"
+    [(visible)]="popupVisible">
+    <div *dxTemplate="let data of 'content'">
+
+
+      <div class="pop-up-wrapper">
+        <div class="pop-up-body">
+          <dx-tree-view
+            id="selection-treeview"
+            [items]="listeDesCdas"
+            [width]="320"
+            showCheckBoxesMode="normal"
+            (onItemSelectionChanged)="selectionChanged($event)">
+            <div *dxTemplate="let data of 'item'">
+              <span *ngIf="data.items">CDA</span> {{data.name}}
+            </div>
+          </dx-tree-view>
+        </div>
+        <div class="pop-up-actions">
+          <dx-button style="margin-right: 20px"
+                     text="Terminer"
+                     type="success"
+                     (onClick)="savePopUpCdas()"></dx-button>
+        </div>
+      </div>
+
+
+    </div>
+  </dx-popup>
+
+
 </div>

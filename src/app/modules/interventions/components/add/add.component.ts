@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ArticlesService } from '../../../articles/services/articles.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ArticlesService} from '../../../articles/services/articles.service';
 import 'rxjs/add/operator/toPromise';
-import { InterventionService } from '../../services/intervention.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { WarehouseService } from '../../../distribution-center/services/warehouse.service';
-import { DxDataGridComponent } from 'devextreme-angular';
-import { NewComponent } from '../new/new.component';
-import { DxiItemComponent } from 'devextreme-angular/ui/nested/item-dxi';
-import { ToastrService } from 'ngx-toastr';
+import {InterventionService} from '../../services/intervention.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {WarehouseService} from '../../../distribution-center/services/warehouse.service';
+import {DxDataGridComponent, DxListComponent} from 'devextreme-angular';
+import {NewComponent} from '../new/new.component';
+import {DxiItemComponent} from 'devextreme-angular/ui/nested/item-dxi';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-add',
@@ -86,15 +86,20 @@ export class AddComponent implements OnInit {
   PRODUCT_TYPE = 'product';
   SERVICE_TYPE = 'service';
 
+  /*--------------------Templates-----------------------*/
+  templates: any[] = [];
+  templateEditorOptions: any;
+  selectedTemplate: any;
+
   /*--------------------Constructor-----------------------*/
 
   constructor(public articleService: ArticlesService,
-    public interventionService: InterventionService,
-    private wareHouseService: WarehouseService,
-    private route: ActivatedRoute,
-    private thirdsService: ThirdsService,
-    private toastr: ToastrService,
-    private router: Router) {
+              public interventionService: InterventionService,
+              private wareHouseService: WarehouseService,
+              private route: ActivatedRoute,
+              private thirdsService: ThirdsService,
+              private toastr: ToastrService,
+              private router: Router) {
   }
 
   /*--------------------Initialize content-----------------------*/
@@ -103,6 +108,77 @@ export class AddComponent implements OnInit {
       (qps: any) => {
         /*-------------------------------------------------------------------------*/
         this.request_type_id = qps.sub_family_id;
+        this.interventionService.getPropositionTemplates(qps.third_party_id, qps.sub_family_id)
+          .subscribe(
+            (templates: any) => {
+              this.templates = templates.data.length ? templates.data : [];
+              this.templateEditorOptions = {
+                displayExpr: 'template_name',
+                valueExpr: 'id',
+                items: this.templates,
+                searchEnabled: true,
+                onSelectionChanged: (event) => {
+                  this.selectedTemplate = event.selectedItem;
+                  this.semences = [];
+                  this.products = [];
+                  this.selectedItems = [];
+                  if (this.selectedTemplate) {
+                    this.interventionService.getTemplateData(this.selectedTemplate.id)
+                      .subscribe(
+                        (templateData: any) => {
+                          console.log(templateData);
+                          const sm = templateData.data.articles.semences;
+                          const sr = templateData.data.articles.service;
+                          const pd = templateData.data.articles.product;
+                          const custom_fields = templateData.data.custom_fields;
+                          if (sm) {
+                            sm.forEach((semence: any) => {
+                              this.semences.push({
+                                'category': {category_name: semence.category},
+                                'sub_category': {sub_category_name: semence.sub_category},
+                                'article': {id: semence.id, name: semence.article_name},
+                                'quantity': semence.quantity
+                              });
+                            });
+                          }
+                          if (pd) {
+                            pd.forEach((product: any) => {
+                              this.products.push({
+                                'category': {category_name: product.category},
+                                'sub_category': {sub_category_name: product.sub_category},
+                                'article': {id: product.id, name: product.article_name},
+                                'quantity': product.quantity
+                              });
+                            });
+                          }
+                          if (sr) {
+                            this.prestations.forEach(prestation => {
+                              sr.forEach((service: any) => {
+                               if (service.id === prestation.id) {
+                                 this.selectedItems.push(prestation);
+                               }
+                              });
+                            });
+                          }
+                          if (custom_fields) {
+                            custom_fields.forEach((cf: any) => {
+                              this.DX_custom_fields.forEach(custom => {
+                                if (cf[custom.dataField]) {
+                                  custom.editorOptions = {
+                                    placeholder: custom.label,
+                                    value: cf[custom.dataField],
+                                  };
+                                }
+                              });
+                            });
+                          }
+                        }
+                      );
+                  }
+                },
+              };
+            }
+          );
         /*-------------------------------------------------------------------------*/
         this.interventionService.getDataBySubFamily(qps.sub_family_id)
           .subscribe(
@@ -225,6 +301,7 @@ export class AddComponent implements OnInit {
                   label: cf.label,
                   required: cf.required,
                   editorType: this.DX_TEXT_BOX,
+                  editorOptions: {placeholder: cf.label},
                   colspan: 3,
                 };
                 switch (cf.type) {
@@ -417,13 +494,15 @@ export class AddComponent implements OnInit {
       icon: 'fa fa-save',
       onClick: ($event) => {
         /*--------------------------------------------------------*/
-        if (((!this.productsGrid && !this.data.services.length && this.semenceGrid) &&
-          this.semenceGrid.instance.getVisibleRows().length === 0)
-          || ((!this.semenceGrid && !this.data.services.length && this.productsGrid) &&
-            this.productsGrid.instance.getVisibleRows().length === 0)
-          || ((!this.semenceGrid && !this.productsGrid && this.selectedItems) && this.selectedItems.length === 0)) {
-          NewComponent.notifyMe('Aucun produit ou service n\'a été choisi.');
-          return -1;
+        if (this.data.services.length || this.data.semence.length || this.data.products.length) {
+          if (((!this.productsGrid && !this.data.services.length && this.semenceGrid) &&
+              this.semenceGrid.instance.getVisibleRows().length === 0)
+            || ((!this.semenceGrid && !this.data.services.length && this.productsGrid) &&
+              this.productsGrid.instance.getVisibleRows().length === 0)
+            || ((!this.semenceGrid && !this.productsGrid && this.selectedItems) && this.selectedItems.length === 0)) {
+            NewComponent.notifyMe('Aucun produit ou service n\'a été choisi.');
+            return -1;
+          }
         }
         /*--------------------------------------------------------*/
         const data = {
@@ -471,7 +550,7 @@ export class AddComponent implements OnInit {
 
         this.selectedItems.forEach(
           st => {
-            data.service_articles.push({ article_id: st.id, quantity: 1 });
+            data.service_articles.push({article_id: st.id, quantity: 1});
           }
         );
         if (this.interventions.isSaveAsModel
@@ -483,7 +562,7 @@ export class AddComponent implements OnInit {
         if (!data.logical_parcel_id
           || !data.date
           || data.surface_to_work === null
-          || (!data.warehouse_id && (this.data.products.length || this.data.products.length))) {
+          || (!data.warehouse_id && (this.data.semence.length || this.data.products.length))) {
           NewComponent.notifyMe('Veuillez remplir tous les champs obligatoires.');
           return -1;
         }

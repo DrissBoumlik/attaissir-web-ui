@@ -9,7 +9,7 @@ const routes: Routes = [{
   component: DefaultComponent,
   children: [
     {path: 'ajouter', component: AddComponent},
-    {path: 'list', component: ListComponent}
+    {path: 'liste', component: ListComponent}
   ]
 }];
 

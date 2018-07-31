@@ -324,6 +324,13 @@ export class Helper {
     };
   }
 
+
+  /**
+   * Format data depending of API
+   * @param {string} value
+   * @returns {string}
+   */
+
   public static tenureType = (value: string): string => {
     if (value === 'property') {
       return 'propriété';
@@ -334,5 +341,6 @@ export class Helper {
     }
     return value;
   }
+
 
 }
