@@ -138,7 +138,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'Utilisateurs',
         icon: 'fa fa-users',
-        url: '/roles/liste',
+        url: '/utilisateurs/liste',
         description: 'Gestion des roles',
         subMenu: [
           {icon: 'flaticon-plus', name: 'Nouvel utilisateur', url: '/utilisateurs/ajouter'},
