@@ -13,6 +13,7 @@ import { CommandeComponent } from './components/commande/commande.component';
 import { WarehouseComponent } from './components/warehouse/warehouse.component';
 import { RfidCardReaderComponent } from './components/rfid-card-reader/rfid-card-reader.component';
 import { ParcelsListComponent } from './components/parcels-list/parcels-list.component';
+import { RoleDirective } from './directives/role.directive';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { ParcelsListComponent } from './components/parcels-list/parcels-list.com
     ConseilleComponent,
     WarehouseComponent,
     RfidCardReaderComponent,
-    ParcelsListComponent]
+    ParcelsListComponent,
+    RoleDirective]
 })
 export class SharedModule { }
