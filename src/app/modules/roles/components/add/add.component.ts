@@ -28,25 +28,26 @@ export class AddComponent implements OnInit {
 
   onFormSubmit(e) {
 
-    console.log(JSON.stringify(this.data1));
 
-    const data = {
-      description: this.role.description,
-      permission_id: this.data1
-    };
-    console.log(data);
-    this.roleService.saveRole(data).subscribe(
-      (response: any) => {
-        NewComponent.notifyMe('Role créé avec succès, Redirection.........', 'success');
-        // NewComponent.notifyMe(JSON.stringify(response), 'success');
-        console.log(JSON.stringify(response));
-        this.router.navigate([`/utilisateurs/list`]);
+      console.log(JSON.stringify(this.data1));
+
+      const data = {
+        description: this.role.description,
+        permission_id: this.data1
+      };
+      console.log(data); 
+      this.roleService.saveRole(data).subscribe(
+        (response: any) => {
+          NewComponent.notifyMe('Role créé avec succès, Redirection.........', 'success');
+          // NewComponent.notifyMe(JSON.stringify(response), 'success');
+          console.log(JSON.stringify(response));
+          this.router.navigate([`/roles/liste`]);
 
 
-      }, err => {
-        console.log(JSON.stringify(err.error.errors));
-        Object.keys(err.error.errors).forEach(
-          (e: any) => {
+        },err => {
+          console.log(JSON.stringify(err.error.errors));
+          Object.keys(err.error.errors).forEach(
+            (e: any) => {
             NewComponent.notifyMe(err.error.errors[e], 'error');
           });
 
@@ -74,9 +75,10 @@ export class AddComponent implements OnInit {
       id: e.itemData.id,
       description: e.itemData.description
     });
-  }
-
-  onChangeValue(i, j) {
+    
+  } 
+  
+  onChangeValue(i,j){
 
     console.log(JSON.stringify(this.permissions[i].permissions[j].id));
 

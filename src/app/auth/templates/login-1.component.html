@@ -25,6 +25,9 @@
 								</div>
 							</div>
 
+              <div class="m-login__form-action" *ngIf="loading">
+              <dx-load-indicator id="medium-indicator" height="40" width="40"></dx-load-indicator>
+              </div>
 
 							<div class="m-login__form-action">
 								<button [disabled]="loading" [ngClass]="{'m-loader m-loader--right m-loader--light': loading}" id="m_login_signin_submit" class="btn m-btn m-btn--pill m-btn--air">

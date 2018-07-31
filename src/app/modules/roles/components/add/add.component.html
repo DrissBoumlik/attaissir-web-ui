@@ -40,7 +40,8 @@
                     <!-- <div>{{permission.actions | json}}</div> -->
                     <div class="" style="display: inline-block;margin-bottom:10px">
                       <div style="display: inline;min-width: 200px;" *ngFor="let action of permission.permissions; let j = index">
-                        <label class="permissions-label" >
+                        <!-- <br *ngIf="j%5 == 0"> -->
+                        <label class="permissions-label" style="margin-top: 20px;" >
                           <input type="checkbox" class="permissions-checkbox" (click)="onChangeValue(i,j)">
                           <span>{{action.action.name}}</span>
                         </label>
