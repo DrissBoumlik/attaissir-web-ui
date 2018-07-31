@@ -17,6 +17,7 @@
         [columnHidingEnabled]="true"
         [allowColumnResizing]="false"
         [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         >
 
@@ -30,7 +31,7 @@
         <dxo-header-filter [visible]="true"></dxo-header-filter>
 
         <dxo-group-panel [visible]="true"></dxo-group-panel>
-        <dxo-scrolling mode="always"></dxo-scrolling>
+        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
         <dxo-editing
           mode="popup"
           [useIcons]="true"

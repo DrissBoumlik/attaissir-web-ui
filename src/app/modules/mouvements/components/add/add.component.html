@@ -10,7 +10,7 @@
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
 
-      <form>
+      <form (submit)="AddMovement($event)">
         <dx-form id="form"
                  [formData]="stock_operation"
                  [readOnly]="false"
@@ -108,9 +108,9 @@
                           style="padding-top: 2vh"
                           [columnAutoWidth]="true"
                           [noDataText]="'Aucan article n\'est ajouter!'">
-              <dxi-column dataField="famille_id" caption="Famille"></dxi-column>
-              <dxi-column dataField="sub_famille_id" caption="Sous famille"></dxi-column>
-              <dxi-column dataField="article_id" caption="Article"></dxi-column>
+              <dxi-column dataField="famille_id" [calculateDisplayValue]="'category'" caption="Famille"></dxi-column>
+              <dxi-column dataField="sub_famille_id" [calculateDisplayValue]="'subCategory'" caption="Sous famille"></dxi-column>
+              <dxi-column dataField="article_id" [calculateDisplayValue]="'article'" caption="Article"></dxi-column>
               <dxi-column dataField="quantity1" caption="Quantité globale"></dxi-column>
               <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
               <dxo-remote-operations

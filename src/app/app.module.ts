@@ -42,7 +42,7 @@ import { PermissionDirective } from './_directives/permission.directive';
 @NgModule({
   declarations: [
     ThemeComponent,
-    AppComponent, PermissionDirective
+    AppComponent
   ],
   imports: [
     LayoutModule,

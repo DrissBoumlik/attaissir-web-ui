@@ -16,7 +16,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router) {
 
-  }
+  } 
 
   ngOnInit() {
     this.currentUrl = this.router.url.split('/')[1];
@@ -90,7 +90,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des interventions',
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
-          {icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner'}
+          {icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner'},
+          {icon: 'flaticon-list', name: 'Liste des interventions', url: '/interventions/liste'},
         ],
         disabled: 'false'
       },
@@ -122,6 +123,30 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Preconisations intrants',
         disabled: 'false'
       },
+      {
+        name: 'Roles',
+        icon: 'flaticon-lock',
+        url: '/roles/liste',
+        description: 'Gestion des roles',
+        subMenu: [
+          {icon: 'flaticon-plus', name: 'Nouveau role', url: '/roles/ajouter'},
+          {icon: 'flaticon-list', name: 'Liste des roles', url: '/roles/liste'},
+
+        ],
+        disabled: 'false'
+      },
+      {
+        name: 'Utilisateurs',
+        icon: 'fa fa-users',
+        url: '/utilisateurs/liste',
+        description: 'Gestion des roles',
+        subMenu: [
+          {icon: 'flaticon-plus', name: 'Nouvel utilisateur', url: '/utilisateurs/ajouter'},
+          {icon: 'flaticon-list', name: 'Liste des utilisateurs', url: '/utilisateurs/liste'},
+
+        ],
+        disabled: 'false'
+      }
     ];
 
   }

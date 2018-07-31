@@ -7,7 +7,7 @@ import {UsersRoutingModule} from './users-routing.module';
 
 import {AddComponent} from './components/add/add.component';
 import {ListComponent} from './components/list/list.component';
-import { EditComponent } from './components/edit/edit.component';
+import {EditComponent} from './components/edit/edit.component';
 
 @NgModule({
   imports: [
