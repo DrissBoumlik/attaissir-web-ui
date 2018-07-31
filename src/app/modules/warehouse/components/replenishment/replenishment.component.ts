@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import { Stock } from '../../../../shared/classes/stock';
-import { CommandeService } from '../../../commande/service/commande.service';
+import {DemandesService} from '../../../demandes/service/demandes.service';
 
 @Component({
   selector: 'app-replenishment',
@@ -11,7 +10,7 @@ import { CommandeService } from '../../../commande/service/commande.service';
 export class ReplenishmentComponent implements OnInit {
 
   replenishment: any;
-  constructor(public commandeService: CommandeService) {
+  constructor(public commandeService: DemandesService) {
     this.replenishment = {};
   }
 

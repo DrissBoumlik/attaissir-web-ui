@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Helper } from '../../../../shared/classes/helper';
 import { MouvementsService } from '../../service/mouvements.service';
-import { CommandeService } from '../../../commande/service/commande.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
@@ -10,6 +9,7 @@ import { ArticleCategiesService } from '../../../articles/services/article-categ
 import { ArticlesService } from '../../../articles/services/articles.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import {DemandesService} from '../../../demandes/service/demandes.service';
 
 @Component({
   selector: 'app-add',
@@ -36,7 +36,7 @@ export class AddComponent implements OnInit {
   helper: any;
 
   constructor(public mouvementService: MouvementsService,
-    public commandeService: CommandeService,
+    public commandeService: DemandesService,
     public thirdService: ThirdsService,
     public warehouseService: WarehoseService,
     public familleService: ArticleCategiesService,

@@ -4,7 +4,6 @@ import { WarehoseService } from '../../../warehouse/service/warehose.service';
 import { Helper } from '../../../../shared/classes/helper';
 import { isNull } from 'util';
 import { MouvementsService } from '../../service/mouvements.service';
-import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-list',

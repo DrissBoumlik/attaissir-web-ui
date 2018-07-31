@@ -72,7 +72,7 @@
                 <a href="#" (click)="showMenu()" (blur)="hideMenu()" class="m-nav__link m-dropdown__toggle">
                   <!--<a href="#" class="m-nav__link m-dropdown__toggle">-->
                   <span class="siam-user-pic-wrapper">
-                      <avatar [name]="currentUser.name" [displayType]="'circle'" [size]="30"></avatar>
+                      <avatar [name]="currentUser.name" [displayType]="'circle'" [background]="'green'" [size]="30"></avatar>
                     <!--<span class="siam-user-pic">
                       <span>{{ currentUser.name }}</span>
                     </span>-->
@@ -85,7 +85,7 @@
                     <div class="m-dropdown__header m--align-center">
                       <div class="m-card-user m-card-user--skin-light">
                         <div class="m-card-user__pic">
-                          <avatar [name]="currentUser.name" [displayType]="'circle'"></avatar>
+                          <avatar [name]="currentUser.name" [displayType]="'circle'" [background]="'green'"></avatar>
                         </div>
                         <div class="m-card-user__details">
 													<span class="m-card-user__name m--font-weight-500">
@@ -94,6 +94,7 @@
                           <a href="" class="m-card-user__email m--font-weight-300 m-link">
                             {{ currentUser.email }}
                           </a>
+                          <hr>
                           <a routerLink="/logout" class="m-nav__link m-dropdown__toggle">
                             <span class="m-nav__link-icon">
                               <i class="flaticon-logout"></i> Se déconnecter

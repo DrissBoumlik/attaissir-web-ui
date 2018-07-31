@@ -3,7 +3,15 @@ import { CommonModule } from '@angular/common';
 import { ArchwizardModule } from 'angular-archwizard';
 import { WizardComponent } from './components/wizard/wizard.component';
 import {
-  DxButtonModule, DxDataGridModule, DxDateBoxModule, DxFormModule, DxListModule, DxPopupModule, DxTemplateModule,
+  DxButtonModule,
+  DxDataGridModule,
+  DxDateBoxModule,
+  DxFormModule,
+  DxListModule,
+  DxNumberBoxModule,
+  DxPopupModule,
+  DxSelectBoxModule,
+  DxTemplateModule, DxTextAreaModule,
   DxTextBoxModule
 } from 'devextreme-angular';
 import { TiersFormComponent } from './components/tiers-form/tiers-form.component';
@@ -21,12 +29,15 @@ import { ParcelsListComponent } from './components/parcels-list/parcels-list.com
     DxFormModule,
     DxListModule,
     DxButtonModule,
+    DxNumberBoxModule,
     DxDataGridModule,
     DxTextBoxModule,
     DxDateBoxModule,
     FormsModule,
+    DxTextAreaModule,
     DxPopupModule,
-    DxTemplateModule
+    DxTemplateModule,
+    DxSelectBoxModule
   ],
   exports: [
     WizardComponent,
@@ -36,11 +47,17 @@ import { ParcelsListComponent } from './components/parcels-list/parcels-list.com
     FormsModule,
     DxListModule,
     DxFormModule,
+    DxTextAreaModule,
     DxButtonModule,
+    DxSelectBoxModule,
     DxTextBoxModule,
     DxDataGridModule,
+    DxNumberBoxModule,
     ConseilleComponent,
+    DxDateBoxModule,
     WarehouseComponent,
+    DxPopupModule,
+    DxTemplateModule,
     RfidCardReaderComponent,
     ParcelsListComponent
   ],
