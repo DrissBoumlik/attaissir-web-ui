@@ -63,7 +63,7 @@
         <dxi-column caption="" [width]="75" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="caTemplate"></dxi-column>
         <dxi-column dataField="id" caption="Consulter Stock" [width]="133" [allowSorting]="false"  [alignment]="'left'" [allowFiltering]="false"  [allowSorting]="false" cellTemplate="stockTemplate"></dxi-column>
         <dxi-column dataField="third_party_code" caption="Code"></dxi-column>
-        <dxi-column dataField="zone_name" caption="Zone" [width]="200"  cellTemplate="zoneTemplate"></dxi-column>
+        <dxi-column dataField="zone_name" caption="CDA" [width]="200"  cellTemplate="zoneTemplate"></dxi-column>
         <dxi-column dataField="third_party_cin" caption="CIN" i18n-caption>
         </dxi-column>
         <dxi-column dataField="third_party_full_name" caption="Jeune promoteur" cellTemplate="userTemplate"></dxi-column>
@@ -89,7 +89,7 @@
           <a  (click)="helper.gotoShow('jeunepromoteurs', data.data.third_party_id, router, toastr)"><i style="align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
         </div>
         <div *dxTemplate="let data of 'zoneTemplate'">
-          {{ data.data.zone_type }}: <span class="badge badge-info">{{ data.data.zone_name}}</span>
+          <span class="badge badge-info">{{ data.data.zone_name}}</span>
         </div>
 
         <div *dxTemplate="let data of 'stockTemplate'">

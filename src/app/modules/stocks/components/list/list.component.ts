@@ -57,6 +57,7 @@ export class ListComponent implements OnInit {
                     row.warehouse_zone_name = war.warehouse_zone_name;
                     row.warehouse_zone_type = war.warehouse_zone_type;
                     row.article_name = war.article_name;
+                    row.article_code = war.article_code;
                     row.threshold = war.threshold ? war.threshold : '';
                     return row;
                   }),
