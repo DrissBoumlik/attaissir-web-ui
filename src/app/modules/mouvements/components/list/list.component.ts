@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import { WarehouseService } from '../../../warehouse/service/warehose.service';
 import { Helper } from '../../../../shared/classes/helper';
 import { isNull } from 'util';
 import { MouvementsService } from '../../service/mouvements.service';
@@ -16,7 +15,7 @@ export class ListComponent implements OnInit {
   helper: any;
 
 
-  constructor(private WarehouseService: WarehouseService, private mouvementsService: MouvementsService) {
+  constructor(private mouvementsService: MouvementsService) {
     this.helper = Helper;
   }
 
@@ -41,9 +40,7 @@ export class ListComponent implements OnInit {
               } else if (it.from_warehouse_name != null) {
                 it.recepteur = it.from_warehouse_name;
               }
-
             });
-
 
             const json = response;
             return json;

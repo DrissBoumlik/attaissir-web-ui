@@ -1,8 +1,8 @@
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
-      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Nouvel utilisateur</h2>
+      <a class="siam-header-back-btn" routerLink="/utilisateurs/liste"><i class="fa fa-angle-left"></i> Les utilisateurs</a>
+      <h2>Modifier utilisateur</h2>
     </div>
   </div>
 </div>
@@ -39,22 +39,12 @@
                 message="veuillez saisir une adresse email valide">
               </dxi-validation-rule>
             </dxi-item>
-            <dxi-item dataField="password"
-                      [editorOptions]="{ mode: 'password' }">
-              <dxo-label
-                text="Mot de passe">
-              </dxo-label>
-              <dxi-validation-rule
-                type="required"
-                message="Password est obligatoire">
-              </dxi-validation-rule>
-            </dxi-item>
           </dxi-item>
 
           <dxi-item itemType="group">
 
             <dxi-item dataField="role_id"
-                      [editorOptions]="{ items: listOfRoles, displayExpr: 'description', valueExpr : 'id' }"
+                      [editorOptions]="{ items: listOfRoles, displayExpr: 'description', valueExpr : 'id', value: userRole}"
                       editorType="dxSelectBox">
               <dxo-label
                 text="Role">
@@ -65,6 +55,7 @@
             </dxi-item>
 
           </dxi-item>
+
 
           <dxi-item itemType="group" caption="Choix des structures">
 
@@ -82,6 +73,7 @@
 
 
           </dxi-item>
+
 
           <dxi-item itemType="group">
 
@@ -109,62 +101,66 @@
               <dxi-column dataField="id"
                           cellTemplate="cellTemplate"
                           caption="" width="200"
-                          alignment="left"></dxi-column>
+                          alignment="center"></dxi-column>
               <div *dxTemplate="let data of 'cellTemplate'">
                 <a (click)="showStructureZones(data)"
-                   style="cursor:pointer; text-align: left;color: black">Assigner
-                  les zones</a>
+                   style="cursor:pointer; text-align: left;color: black">
+                  <i class="flaticon-add" style="margin-right: 7px"></i>
+                  Assigner les zones</a>
               </div>
             </dx-data-grid>
 
           </dxi-item>
 
+
           <dxi-item
             itemType="button"
             alignment="right"
-            [buttonOptions]="buttonOptions">
+            [buttonOptions]="{text: 'Enregistrer',type: 'success',useSubmitBehavior: true}">
           </dxi-item>
         </dx-form>
       </form>
     </div>
   </div>
 
+  <div *ngIf="popupVisible">
+    <dx-popup
+      class="popup"
+      [showTitle]="true"
+      [width]="600"
+      title="Selection des zones"
+      [dragEnabled]="false"
+      [closeOnOutsideClick]="true"
+      [(visible)]="popupVisible">
+      <div *dxTemplate="let data of 'content'">
 
-  <dx-popup
-    class="popup"
-    [showTitle]="true"
-    [width]="600"
-    title="Selection des zones"
-    [dragEnabled]="false"
-    [closeOnOutsideClick]="true"
-    [(visible)]="popupVisible">
-    <div *dxTemplate="let data of 'content'">
 
-
-      <div class="pop-up-wrapper">
-        <div class="pop-up-body">
-          <dx-tree-view
-            id="selection-treeview"
-            [items]="listeDesCdas"
-            [width]="320"
-            showCheckBoxesMode="normal"
-            (onItemSelectionChanged)="selectionChanged($event)">
-            <div *dxTemplate="let data of 'item'">
-              <span *ngIf="data.items">CDA</span> {{data.name}}
-            </div>
-          </dx-tree-view>
+        <div class="pop-up-wrapper">
+          <div class="pop-up-body">
+            <dx-tree-view
+              id="selection-treeview"
+              [items]="choosingStructures[rowIndex].cdas"
+              [width]="320"
+              showCheckBoxesMode="normal"
+              selectedExpr="isSelected"
+              (onItemSelectionChanged)="selectionChanged($event)">
+              <div *dxTemplate="let data of 'item'">
+                <span *ngIf="data.items">CDA</span> {{data.name}}
+              </div>
+            </dx-tree-view>
+          </div>
+          <div class="pop-up-actions">
+            <dx-button style="margin-right: 20px"
+                       text="Terminer"
+                       type="success"
+                       (onClick)="savePopUpCdas()"></dx-button>
+          </div>
         </div>
-        <div class="pop-up-actions">
-          <dx-button style="margin-right: 20px"
-                     text="Terminer"
-                     type="success"
-                     (onClick)="savePopUpCdas()"></dx-button>
-        </div>
+
+
       </div>
-
-
-    </div>
-  </dx-popup>
+    </dx-popup>
+  </div>
 
 
 </div>

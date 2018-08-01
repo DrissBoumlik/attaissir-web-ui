@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../services/users.service';
+import {Component, OnInit} from '@angular/core';
+import {UsersService} from '../../services/users.service';
 import index from '@angular/cli/lib/cli';
 import number_box from 'devextreme/ui/number_box';
-import { NewComponent } from '../../../interventions/components/new/new.component';
-import { Router } from '@angular/router';
+import {NewComponent} from '../../../interventions/components/new/new.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -60,9 +60,9 @@ export class AddComponent implements OnInit {
     this.popupVisible = true;
   }
 
-  // tree elements
+// tree elements
   selectionChanged(e) {
-    let value = e.node;
+    const value = e.node;
     if (this.isProduct(value)) {
       this.processProduct({
         id: value.key,
@@ -104,7 +104,7 @@ export class AddComponent implements OnInit {
     }
   }
 
-  // end tree elements
+// end tree elements
 
 
   addToChoosingStructures(e) {

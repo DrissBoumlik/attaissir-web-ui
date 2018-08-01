@@ -55,11 +55,11 @@
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxi-column dataField="id" [width]="40" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
-        <dxi-column dataField="type" caption="Type" [allowFiltering]="false"  cellTemplate="typeTemplate">></dxi-column>
+        <dxi-column dataField="id" [width]="40" caption=""  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
+        <dxi-column dataField="type" caption="Type" [allowFiltering]="false" [calculateGroupValue]="helper.groupedMouvementValue" cellTemplate="typeTemplate">></dxi-column>
         <dxi-column dataField="order_id" caption="N° Bon de livraison fournisseur" cellTemplate="bon_nbrTemplate"></dxi-column>
-        <dxi-column dataField="emetter" caption="Emetteur" [allowFiltering]="false"  cellTemplate="emetterTemplate"></dxi-column>
-        <dxi-column dataField="recepteur" caption="Récepteur" [allowFiltering]="false"  cellTemplate="recepteurTemplate"></dxi-column>
+        <dxi-column dataField="emetter" caption="Emetteur" [allowFiltering]="false" [allowSorting]="false" cellTemplate="emetterTemplate"></dxi-column>
+        <dxi-column dataField="recepteur" caption="Récepteur" [allowFiltering]="false" [allowSorting]="false" cellTemplate="recepteurTemplate"></dxi-column>
         <dxi-column dataField="article_count"  [allowFiltering]="false" caption="Nombre d'article"></dxi-column>
 
         <dxi-column dataField="state" caption="Etat"  [allowFiltering]="false" cellTemplate="statusTemplate"></dxi-column>
@@ -80,7 +80,7 @@
         </div>
 
         <div *dxTemplate="let data of 'typeTemplate'">
-           {{helper.orderType(data.value)}}
+           {{ helper.orderType(data.value).toUpperCase() }}
         </div>
 
         <div *dxTemplate="let data of 'emetterTemplate'">

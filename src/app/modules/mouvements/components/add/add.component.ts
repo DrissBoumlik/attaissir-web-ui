@@ -28,6 +28,9 @@ export class AddComponent implements OnInit {
   emetteurOptions: any;
   commandeOptions: any;
   recepteurOptions: any;
+  category: string;
+  subCategory: string;
+  article: string;
   familleOptions: any;
   subFamilleOptions: any;
   articleOptions: any;
@@ -57,37 +60,25 @@ export class AddComponent implements OnInit {
       useSubmitBehavior: false,
       onClick: (e) => {
         console.log(this.stock_operation);
-
-        this.products.push({
-          'famille_id': this.stock_operation.famille,
-          'sub_famille_id': this.stock_operation.sub_famille,
-          'article_id': this.stock_operation.article,
-          'quantity1': this.stock_operation.quantity
-        });
+        if (this.stock_operation.quantity > 0) {
+          this.products.push({
+            category: this.category,
+            subCategory: this.subCategory,
+            article: this.article,
+            famille_id: this.stock_operation.famille,
+            sub_famille_id: this.stock_operation.sub_famille,
+            article_id: this.stock_operation.article,
+            quantity1: this.stock_operation.quantity
+          });
+        } else {
+          this.toastr.warning('La quantité doit être supérieure à 0.');
+        }
       }
     };
     this.buttonOptions = {
       text: 'ENREGISTER',
       type: 'success',
-      useSubmitBehavior: true,
-      onClick: () => {
-        console.log(this.stock_operation);
-        console.log(this.products);
-        const data = {
-          'stock_operation': this.stock_operation,
-          'products': this.products
-        };
-        this.mouvementService.addMouvement(data).subscribe(d => {
-          console.log(d);
-          d = this.helper.dataFormatter(d, false);
-          this.toastr.success(
-            `Mouvement ajouté avec succès.`);
-          this.router.navigate([`/mouvements/afficher/${d['id']}`]);
-        }, err => {
-          console.log(err);
-          this.toastr.error(err.error.message);
-        });
-      }
+      useSubmitBehavior: true
     };
 
     this.mouvementService.getMouvementVars().subscribe((data) => {
@@ -281,6 +272,7 @@ export class AddComponent implements OnInit {
         }
       }),
       onSelectionChanged: (event) => {
+        this.category = event.selectedItem.name;
         this.subFamilleOptions = {
           label: 'Sous Famille',
           displayExpr: 'name',
@@ -301,6 +293,7 @@ export class AddComponent implements OnInit {
             }
           }),
           onSelectionChanged: (e) => {
+            this.subCategory = e.selectedItem.name;
             this.articleOptions = {
               label: 'Sous Famille',
               displayExpr: 'name',
@@ -320,12 +313,35 @@ export class AddComponent implements OnInit {
                       throw error;
                     });
                 }
-              })
+              }),
+              onSelectionChanged: (evnt) => {
+                this.article = evnt.selectedItem.name;
+              }
             };
           }
         };
       }
     };
+  }
+
+  AddMovement = (e) => {
+    console.log(this.stock_operation);
+    console.log(this.products);
+    const data = {
+      'stock_operation': this.stock_operation,
+      'products': this.products
+    };
+    this.mouvementService.addMouvement(data).subscribe(d => {
+      console.log(d);
+      d = this.helper.dataFormatter(d, false);
+      this.toastr.success(
+        `Mouvement ajouté avec succès.`);
+      this.router.navigate([`/mouvements/afficher/${d['id']}`]);
+    }, err => {
+      console.log(err);
+      this.toastr.error(err.error.message);
+    });
+    e.preventDefault();
   }
 
 }

@@ -34,14 +34,14 @@
       <dxi-column dataField="date" caption="Date prevue"></dxi-column>
       <dxi-column dataField="state" caption="Etat" cellTemplate="cellTemplate2"></dxi-column>
 
-      <dxi-column dataField="id" cellTemplate="cellTemplate" caption="" alignment="left"></dxi-column>
+      <!-- <dxi-column dataField="id" cellTemplate="cellTemplate" caption="" alignment="left"></dxi-column> -->
       <dxi-column dataField="id" cellTemplate="cellTemplate1" caption="" alignment="left" ></dxi-column>
 
-      <div *dxTemplate="let data of 'cellTemplate'">
-        <a href="intervention/show/{{data.value}}" style="text-align: left;color: black">Consulter</a>
-      </div>
+      <!-- <div *dxTemplate="let data of 'cellTemplate'">
+        <a href="interventions/show/{{data.value}}" style="text-align: left;color: black">Consulter</a>
+      </div> -->
       <div *dxTemplate="let data of 'cellTemplate1'">
-        <a href="intervention/modifier/{{data.value}}" style="text-align: left;color: black">Editer</a>
+        <a href="interventions/modifier/{{data.value}}" style="text-align: left;color: black">Editer</a>
       </div>
       <div *dxTemplate="let data of 'cellTemplate2'">
         <label class="etat-class px-3 py-2" etat="{{data.value}}" *ngIf="(data.value == 'inprogress')" appEtat>En cours</label>
