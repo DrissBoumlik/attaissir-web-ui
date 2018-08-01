@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { ThemeComponent } from './theme.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/_guards';
-import { MouvementsModule } from '../modules/mouvements/mouvements.module';
-import { PreconisationsIntrantsModule } from '../modules/preconisations-intrants/preconisations-intrants.module';
-import { DemandesModule } from '../modules/demandes/demandes.module';
 
 const routes: Routes = [
   {
@@ -35,10 +32,6 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: '../modules/warehouse/warehouse.module#WarehouseModule'
-      },
-      {
-        path: '',
-        loadChildren: '../modules/commande/commande.module#CommandeModule'
       },
       {
         path: '',

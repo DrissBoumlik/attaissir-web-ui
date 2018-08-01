@@ -79,7 +79,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
         this.toastr.success(` La préconisation d'intrans est livrée avec succès.`);
         setTimeout(() => {
           this.print();
-        }, 1000 );
+        }, 1000);
 
       })
       .catch(error => {
@@ -290,7 +290,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
               this.toastr.success(` La préconisation d'intrans est livrée avec succès.`);
               setTimeout(() => {
                 this.print();
-              }, 1000 );
+              }, 1000);
 
             }, error => {
               this.toastr.error('RFID est incorrect');

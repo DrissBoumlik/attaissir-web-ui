@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { WarehoseService } from './warehose.service';
+import { WarehouseService } from './warehose.service';
 
 describe('CommandeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [WarehoseService]
+      providers: [WarehouseService]
     });
   });
 
-  it('should be created', inject([WarehoseService], (service: WarehoseService) => {
+  it('should be created', inject([WarehouseService], (service: WarehouseService) => {
     expect(service).toBeTruthy();
   }));
 });

@@ -36,16 +36,16 @@
       </div>
 
     <dx-data-grid
-  id="gridContainer"
-  [dataSource]="cards"
-  [columnHidingEnabled]="true"
-  [allowColumnReordering]="true"
-  [(selectedRowKeys)]="selectedItems"
-  [columnAutoWidth]="true"
-  [remoteOperations]="{ groupPaging: true }"
-  (onEditingStart)="onStartEdit($event.data.id)"
-  (onRowRemoving)="onRemoveThird($event.data.id)"
->
+      id="gridContainer"
+      [dataSource]="cards"
+      [columnHidingEnabled]="true"
+      [allowColumnReordering]="true"
+      [(selectedRowKeys)]="selectedItems"
+      [columnAutoWidth]="true"
+      [remoteOperations]="{ groupPaging: true }"
+      (onEditingStart)="onStartEdit($event.data.id)"
+      (onRowRemoving)="onRemoveThird($event.data.id)"
+    >
 
   <!--<dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>-->
 

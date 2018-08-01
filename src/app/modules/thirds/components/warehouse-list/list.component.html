@@ -24,6 +24,7 @@
         [columnHidingEnabled]="false"
         [allowColumnResizing]="false"
         [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
         (onEditingStart)="onStartEdit($event.data.id)"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         KeyExpr="id">

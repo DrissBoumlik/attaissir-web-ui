@@ -1,5 +1,5 @@
-import {isArray, isNull} from 'util';
-import {load} from '@angular/core/src/render3/instructions';
+import { isArray, isNull } from 'util';
+import { load } from '@angular/core/src/render3/instructions';
 
 export class Helper {
   /**
@@ -342,5 +342,10 @@ export class Helper {
     return value;
   }
 
+  /*************** Custom Grid Grouping Value ***************/
+
+  public static groupedMouvementValue = (e) => {
+    return Helper.orderType(e.type).toUpperCase();
+  }
 
 }

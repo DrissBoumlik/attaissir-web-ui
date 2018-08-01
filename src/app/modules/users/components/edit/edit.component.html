@@ -1,0 +1,164 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" routerLink="/utilisateurs/liste"><i class="fa fa-angle-left"></i> Les utilisateurs</a>
+      <h2>Modifier utilisateur</h2>
+    </div>
+  </div>
+</div>
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+      <form style="margin-top: 20px"
+            (submit)="onFormSubmit($event)">
+        <dx-form id="utilisateursForm"
+                 [formData]="user"
+                 [readOnly]="false"
+                 [showColonAfterLabel]="true"
+                 [showValidationSummary]="true"
+                 validationGroup="customerData">
+
+          <dxi-item itemType="group" caption="Informations générales">
+            <dxi-item
+              dataField="name">
+              <dxo-label
+                text="Nom complet">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="Nom complete est obligatoire">
+              </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="email">
+              <dxi-validation-rule
+                type="required"
+                message="Email est obligatoire">
+              </dxi-validation-rule>
+              <dxi-validation-rule
+                type="email"
+                message="veuillez saisir une adresse email valide">
+              </dxi-validation-rule>
+            </dxi-item>
+          </dxi-item>
+
+          <dxi-item itemType="group">
+
+            <dxi-item dataField="role_id"
+                      [editorOptions]="{ items: listOfRoles, displayExpr: 'description', valueExpr : 'id', value: userRole}"
+                      editorType="dxSelectBox">
+              <dxo-label
+                text="Role">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="role est obligatoire"></dxi-validation-rule>
+            </dxi-item>
+
+          </dxi-item>
+
+
+          <dxi-item itemType="group" caption="Choix des structures">
+
+            <div class="dx-field">
+              <div class="dx-field-label">les structures</div>
+              <div class="dx-field-value">
+                <dx-select-box
+                  [dataSource]="listOfStructures"
+                  displayExpr="name"
+                  valueExpr="id"
+                  (onItemClick)="addToChoosingStructures($event)"
+                ></dx-select-box>
+              </div>
+            </div>
+
+
+          </dxi-item>
+
+
+          <dxi-item itemType="group">
+
+            <dx-data-grid
+              id="gridContainer"
+              keyExpr="id"
+              [dataSource]="choosingStructures"
+              [allowColumnReordering]="true"
+              [showColumnLines]="true"
+              [showRowLines]="true"
+              [showBorders]="true"
+              [rowAlternationEnabled]="true"
+              [columnAutoWidth]="true"
+              [noDataText]="'Aucune sructue n\'est ajoute!'"
+              (onRowRemoved)="removeItemFromChoosingStructures($event)">
+
+              <dxo-paging [enabled]="true"></dxo-paging>
+              <dxo-editing
+                mode="row"
+                [allowDeleting]="true">
+              </dxo-editing>
+              <dxi-column
+                caption="les sructues choisis"
+                dataField="name"></dxi-column>
+              <dxi-column dataField="id"
+                          cellTemplate="cellTemplate"
+                          caption="" width="200"
+                          alignment="left"></dxi-column>
+              <div *dxTemplate="let data of 'cellTemplate'">
+                <a (click)="showStructureZones(data)"
+                   style="cursor:pointer; text-align: left;color: black">Assigner
+                  les zones</a>
+              </div>
+            </dx-data-grid>
+
+          </dxi-item>
+
+
+          <dxi-item
+            itemType="button"
+            alignment="right"
+            [buttonOptions]="{text: 'Enregistrer',type: 'success',useSubmitBehavior: true}">
+          </dxi-item>
+        </dx-form>
+      </form>
+    </div>
+  </div>
+
+
+  <dx-popup
+    class="popup"
+    [showTitle]="true"
+    [width]="600"
+    title="Selection des zones"
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="true"
+    [(visible)]="popupVisible">
+    <div *dxTemplate="let data of 'content'">
+
+
+      <div class="pop-up-wrapper">
+        <div class="pop-up-body">
+          <dx-tree-view
+            id="selection-treeview"
+            [items]="choosingStructures[rowIndex].cdas"
+            [width]="320"
+            showCheckBoxesMode="normal"
+            selectedExpr="isSelected"
+            (onItemSelectionChanged)="selectionChanged($event)">
+            <div *dxTemplate="let data of 'item'">
+              <span *ngIf="data.items">CDA</span> {{data.name}}
+            </div>
+          </dx-tree-view>
+        </div>
+        <div class="pop-up-actions">
+          <dx-button style="margin-right: 20px"
+                     text="Terminer"
+                     type="success"
+                     (onClick)="savePopUpCdas()"></dx-button>
+        </div>
+      </div>
+
+
+    </div>
+  </dx-popup>
+
+
+</div>

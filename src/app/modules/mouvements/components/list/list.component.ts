@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import { WarehoseService } from '../../../warehouse/service/warehose.service';
 import { Helper } from '../../../../shared/classes/helper';
 import { isNull } from 'util';
 import { MouvementsService } from '../../service/mouvements.service';
-import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-list',
@@ -17,7 +15,7 @@ export class ListComponent implements OnInit {
   helper: any;
 
 
-  constructor(private warehoseService: WarehoseService, private mouvementsService: MouvementsService) {
+  constructor(private mouvementsService: MouvementsService) {
     this.helper = Helper;
   }
 
@@ -42,9 +40,7 @@ export class ListComponent implements OnInit {
               } else if (it.from_warehouse_name != null) {
                 it.recepteur = it.from_warehouse_name;
               }
-
             });
-
 
             const json = response;
             return json;

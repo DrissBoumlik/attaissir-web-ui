@@ -11,8 +11,24 @@ export class UsersService {
   constructor(private http: HttpClient) {
   }
 
+  getUser(id: any): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/users/` + id, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   saveUser(data): Observable<any> {
     return this.http.post(`${environment.apiUrl}/users`, JSON.stringify(data), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  editUser(data, id): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/users/${id}`, JSON.stringify(data), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -42,5 +58,4 @@ export class UsersService {
       })
     });
   }
-
 }
