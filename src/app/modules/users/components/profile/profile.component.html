@@ -1,0 +1,150 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+    </div>
+  </div>
+</div>
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+
+
+
+      <div class="content" style="z-index: 2; margin-bottom: 80px">
+        <div class="card">
+          <div class="firstinfo"> <avatar [name]="'hamza'"   [displayType]="'circle'" [background]="'green'" [size]="120"></avatar>
+            <div class="profileinfo">
+              <h1>Arno</h1>
+              <h3>Role : role 1</h3>
+              <p class="bio">  Structures :  20 &nbsp;  &nbsp; Zone :  10 </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <dx-form id="form"
+               [formData]="employee">
+
+
+        <dxi-item itemType="group"  [colCount]="2">
+
+          <dxi-item dataField="Email"></dxi-item>
+
+        </dxi-item>
+
+        <dxi-item itemType="group" cssClass="first-group" [colCount]="4">
+
+
+
+
+        </dxi-item>
+        <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+          <dxi-item itemType="group">
+
+
+            <dxi-item dataField="Mot de passe"></dxi-item>
+          </dxi-item>
+          <dxi-item itemType="group">
+            <dxi-item dataField="Confirmer le mot de passe"></dxi-item>
+          </dxi-item>
+        </dxi-item>
+
+
+
+
+      <dxi-item>
+
+        <div class="faq-header">Structures</div>
+
+        <div class="faq-content">
+          <div class="faq-question">
+            <input id="q1" type="checkbox" class="panel">
+            <div class="plus">+</div>
+            <label for="q1" class="panel-title">structure 1</label>
+            <div class="panel-content">
+
+              <ul class="tree-menu">
+                <li><!--Les zones !-->
+                  <ul>
+                    <li>zone 1</li>
+                    <li>zone 2</li>
+                    <li>zone 3</li>
+                    <li>zone 4</li>
+                    <li>zone 5</li>
+                  </ul>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+
+          <div class="faq-question">
+            <input id="q2" type="checkbox" class="panel">
+            <div class="plus">+</div>
+            <label for="q2" class="panel-title">structure 2</label>
+            <div class="panel-content">
+
+
+              <ul class="tree-menu">
+                <li><!--Les zones !-->
+                  <ul>
+                    <li>zone 1</li>
+                    <li>zone 2</li>
+                  </ul>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+
+          <div class="faq-question">
+            <input id="q3" type="checkbox" class="panel">
+            <div class="plus">+</div>
+            <label for="q3" class="panel-title">structure 3</label>
+            <div class="panel-content">
+
+              <ul class="tree-menu" style="padding: 30px">
+                <li> <!--Les zones !-->
+                  <ul>
+                    <li>zone 1</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        </dxi-item>
+
+
+
+        <div class="dx-fieldset">
+          <div class="dx-field">
+            <div class="dx-field-value">
+              <dxi-item  itemType="button"  [buttonOptions]="buttonsave"></dxi-item>
+            </div>
+          </div>
+        </div>
+
+
+      </dx-form>
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
