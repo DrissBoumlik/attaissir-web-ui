@@ -25,6 +25,7 @@ export class PermissionDirective {
 
     if ( permissions) {
 
+      /***/
       if (this.permissionHidden[0] === 'none' ) {
         this.el.nativeElement.style.display = 'initial';
         return;
