@@ -12,6 +12,7 @@ declare let mLayout: any;
 export class AsideNavComponent implements OnInit, AfterViewInit {
   public sections: { icon: string, name: string, url: string }[];
   private currentUrl: string;
+  tenantId: string;
   mainMenu: any;
 
   constructor(private router: Router) {
@@ -20,7 +21,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.currentUrl = this.router.url.split('/')[1];
-
+    this.tenantId = localStorage.getItem('tenantId');
 
     this.mainMenu = [
       {
@@ -98,7 +99,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'Mon stock',
         icon: 'fa fa-archive',
-        url: '/mouvements/mon_stock',
+        url: '/stock/situation',
+        queryParams: { magazin: this.tenantId },
         description: 'mon stock',
         disabled: 'false'
       },
@@ -122,7 +124,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/interventions/appliquer-template-parcelle',
         description: 'Preconisations intrants',
         disabled: 'false'
-      },
+      },/*
       {
         name: 'Roles',
         icon: 'flaticon-lock',
@@ -146,7 +148,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
         ],
         disabled: 'false'
-      }
+      }*/
     ];
 
   }
