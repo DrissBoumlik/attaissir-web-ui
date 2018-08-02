@@ -17,8 +17,7 @@ const routes: Routes = [{
     { path: 'template/ajouter', component: AddTempleteComponent },
     { path: 'liste', component: ListComponent },
     { path: 'modifier/:id', component: EditComponent },
-    { path: 'appliquer-template-parcelle', component: AddTempleteComponent
-      , canActivate : [AuthGuard] , data: { permission: ['base.structures.destroy']} },
+    { path: 'appliquer-template-parcelle', component: AddTempleteComponent, canActivate : [AuthGuard] , data: { permission: ['base.structures.destroy']} },
     { path: 'list', component: ListComponent },
   ]
 }];
