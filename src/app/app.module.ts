@@ -37,7 +37,6 @@ import { MouvementsModule } from './modules/mouvements/mouvements.module';
 import { InterventionsModule } from './modules/interventions/interventions.module';
 import { DemandesModule } from './modules/demandes/demandes.module';
 import { UsersModule } from './modules/users/users.module';
-import { PermissionDirective } from './_directives/permission.directive';
 import {AuthGuard} from './_directives/guard.directive';
 
 @NgModule({
@@ -88,7 +87,7 @@ import {AuthGuard} from './_directives/guard.directive';
     FormsModule,
     DxPivotGridModule,
     DxTemplateModule,
-    DxCheckBoxModule,
+    DxCheckBoxModule
   ],
   providers: [{
     provide: LOCALE_ID,
