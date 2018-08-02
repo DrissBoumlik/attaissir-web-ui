@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ArticlesService } from '../../../articles/services/articles.service';
+import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import { InterventionService } from '../../services/intervention.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -104,6 +105,27 @@ export class AddComponent implements OnInit {
 
   /*--------------------Initialize content-----------------------*/
   ngOnInit() {
+    this.cdOptions = {
+          displayExpr: 'name',
+          valueExpr: 'id',
+          dataSource: new CustomStore({
+            load: (loadOptions: any) => {
+              return this.wareHouseService.getWarehousesDx(loadOptions)
+                .toPromise()
+                .then(response => {
+                  const json = response;
+                  console.log(response);
+                  return json;
+                })
+                .catch(error => {
+                  console.log(error);
+                  throw error;
+                });
+            },
+          }),
+          searchEnabled: true,
+          searchMode: 'contains',
+        };
     this.route.queryParams.subscribe(
       (qps: any) => {
         /*-------------------------------------------------------------------------*/

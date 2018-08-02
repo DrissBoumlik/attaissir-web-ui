@@ -79,7 +79,7 @@ export class WizardComponent implements OnInit {
   ngOnInit() {
     this.step2 = (!this.isEdit) ? '2. Contrat' : '2. Avenant';
     if (this.contract['status'] === 'inprogress') {
-        this.step2 = '2. Contrat' ;
+        this.step2 = '2. Contrat';
     }
     this.contractService.getContractsVars().subscribe((data) => {
       this.contracteditorOptions = {
@@ -440,13 +440,25 @@ export class WizardComponent implements OnInit {
               annuel_surface: soil.annuel_surface,
               code_ormva: soil.code_ormva
             };
-            this.parcelsService.addParcel(soilObject).subscribe(d => {
-              d = this.helper.dataFormatter(d, false);
-              const id = (this.isEdit) ? this.contract.id : contract['id'];
-              this.router.navigate([`/contrats/afficher/${id}`]);
-            }, error1 => {
-              this.toastr.warning(error1.error.message);
-            });
+            if (!!soil.parcel_tmp_id) {
+              soilObject['id'] = soil.parcel_tmp_id;
+              this.parcelsService.editParcel(soilObject).subscribe(d => {
+                d = this.helper.dataFormatter(d, false);
+                const id = (this.isEdit) ? this.contract.id : contract['id'];
+                this.router.navigate([`/contrats/afficher/${id}`]);
+              }, error1 => {
+                this.toastr.warning(error1.error.message);
+              });
+            }
+            else {
+              this.parcelsService.addParcel(soilObject).subscribe(d => {
+                d = this.helper.dataFormatter(d, false);
+                const id = (this.isEdit) ? this.contract.id : contract['id'];
+                this.router.navigate([`/contrats/afficher/${id}`]);
+              }, error1 => {
+                this.toastr.warning(error1.error.message);
+              });
+            }
             return soil;
           });
         }, error1 => {
@@ -464,7 +476,8 @@ export class WizardComponent implements OnInit {
               annuel_surface: soil.annuel_surface,
               code_ormva: soil.code_ormva
             };
-            if (!!soil.parcel_tmp_id) {
+            if (!!soil.parcel_tmp_id && !this.contract.parent_id) {
+              soilObject['id'] = soil.parcel_tmp_id;
               this.parcelsService.editParcel(soilObject).subscribe(d => {
                 d = this.helper.dataFormatter(d, false);
                 const id = (this.isEdit) ? this.contract.id : contract['id'];
