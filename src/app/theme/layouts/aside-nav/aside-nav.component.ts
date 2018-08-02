@@ -124,7 +124,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/interventions/appliquer-template-parcelle',
         description: 'Preconisations intrants',
         disabled: 'false'
-      },/*
+      },
       {
         name: 'Roles',
         icon: 'flaticon-lock',
@@ -148,7 +148,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
         ],
         disabled: 'false'
-      }*/
+      }
     ];
 
   }
