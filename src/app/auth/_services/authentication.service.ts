@@ -20,6 +20,10 @@ export class AuthenticationService {
     return this.http.post(`${environment.apiUrl}/login`, JSON.stringify({ email: email.toLowerCase(), password: password }), this.options);
   }
 
+  myPermission() {
+    return this.http.get(`${environment.apiUrl}/my-permissions`, this.options);
+  }
+
   refresh = () => {
     return this.http.get(`${environment.apiUrl}/refresh`);
   }

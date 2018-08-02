@@ -42,6 +42,9 @@ export class ThemeComponent implements OnInit {
   reset() {
     this.auth.refresh().subscribe(data => {
       const currentUser: any = JSON.stringify(data);
+
+
+
       localStorage.setItem('currentUser', currentUser);
       localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
       localStorage.setItem('permissions', JSON.parse(currentUser)['data']['permissions']);
@@ -56,6 +59,13 @@ export class ThemeComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+    this.auth.myPermission().subscribe(response => {
+     localStorage.setItem('permissions', response.data.permissions);
+    });
+
+    console.log('yooo');
     this._script.loadScripts('body', ['assets/vendors/base/vendors.bundle.js', 'assets/demo/demo12/base/scripts.bundle.js'], true)
       .then(result => {
         Helpers.setLoading(false);

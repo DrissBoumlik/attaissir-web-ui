@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ThemeComponent } from './theme.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/_guards';
+import {PermissionDeniedModule} from './pages/default/permission-denied/permission-denied.module';
 
 const routes: Routes = [
   {
@@ -77,6 +78,10 @@ const routes: Routes = [
       {
         path: '404',
         loadChildren: './pages/default/not-found/not-found.module#NotFoundModule'
+      },
+      {
+        path: '403',
+        loadChildren: './pages/default/permission-denied/permission-denied.module#PermissionDeniedModule'
       },
       {
         path: '',
