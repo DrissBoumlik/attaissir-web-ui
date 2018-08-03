@@ -23,7 +23,7 @@
               dataField="description">
               <dxo-label
                 text="Designation">
-              </dxo-label>
+              </dxo-label> 
               <dxi-validation-rule
                 type="required"
                 message="La Designation est obligatoire">
@@ -34,7 +34,13 @@
           <dxi-item itemType="group" caption="Choix des permissions">
             <div>
               <div class="col-12">
-                
+                <div style="display: inline;min-width: 200px;" >
+                  <!-- <br *ngIf="j%5 == 0"> -->
+                  <label class="permissions-label" style="margin-top: 20px;" >
+                    <input type="checkbox" class="permissions-checkbox" [(checked)]="checkAll" (click)="selecteAll()">
+                    <span>Tous</span>
+                  </label>
+                </div>
                 <div class="" style="margin-left: 30px;margin-top: 20px;" *ngFor="let permission of permissions; let i = index">
                     <div style="display: inline" class="action-class" ><label style="width: 200px;color: #90959a;font-weight: 400;">{{permission.name}}</label></div>
                     <!-- <div>{{permission.actions | json}}</div> -->
@@ -42,8 +48,15 @@
                       <div style="display: inline;min-width: 200px;" *ngFor="let action of permission.permissions; let j = index">
                         <!-- <br *ngIf="j%5 == 0"> -->
                         <label class="permissions-label" style="margin-top: 20px;" >
-                          <input type="checkbox" class="permissions-checkbox" (click)="onChangeValue(i,j)">
+                          <input type="checkbox" class="permissions-checkbox" [checked]="checkItem" (click)="onChangeValue(i,j)">
                           <span>{{action.action.name}}</span>
+                        </label>
+                      </div>
+                      <div *ngIf="permission.permissions.length>0" style="display: inline;min-width: 200px;" >
+                        <!-- <br *ngIf="j%5 == 0"> -->
+                        <label class="permissions-label" style="margin-top: 20px;" >
+                          <input type="checkbox" class="permissions-checkbox" [(checked)]="isChecked" (click)="selecteLigne(i,permission.id)">
+                          <span>Tous</span>
                         </label>
                       </div>
                     </div>

@@ -11,7 +11,7 @@ export class ListComponent implements OnInit {
 
   dataSource: any;
 
-  constructor(public usersSerivces: UsersService) {
+  constructor(public usersSerivces: UsersService,private router: Router) {
   }
 
   ngOnInit() {
@@ -21,6 +21,14 @@ export class ListComponent implements OnInit {
     }, err => {
 
     });
+  }
+
+  onStartEdit = (e) => {
+    this.router.navigate([`/utilisateurs/modifier/${e}`]).catch(
+      err => {
+        throw err; // this.toastr.error(err.error.message);
+      }
+    );
   }
 
 }
