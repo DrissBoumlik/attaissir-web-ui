@@ -6,11 +6,7 @@ import { AddComponent } from './components/add/add.component';
 import { ListComponent } from './components/list/list.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AddTempleteComponent } from './components/add-templete/add-templete.component';
-import {AuthGuard} from '../../_directives/guard.directive';
-
-// class hasPermissions implements CanActivate(){
-  
-// }
+import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 const routes: Routes = [{
   path: 'interventions',
@@ -20,7 +16,10 @@ const routes: Routes = [{
     { path: 'ajouter', component: AddComponent },
     { path: 'liste', component: ListComponent },
     { path: 'modifier/:id', component: EditComponent },
-    { path: 'appliquer-template-parcelle', component: AddTempleteComponent , canActivate : [AuthGuard] , data: { permission: ['none']} },
+    {
+      path: 'appliquer-template-parcelle', component: AddTempleteComponent,
+      canActivate: [PermissionGuard], data: { permission: ['none'] }
+    },
     { path: 'list', component: ListComponent },
   ]
 }];
