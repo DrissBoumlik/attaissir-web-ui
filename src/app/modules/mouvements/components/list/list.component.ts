@@ -30,15 +30,15 @@ export class ListComponent implements OnInit {
 
             response.data.forEach((it) => {
               if (it.to_warehouse_name != null) {
-                it.emetter = it.to_warehouse_name;
+                it.recepteur = it.to_warehouse_name;
               } else if (it.to_third_name != null) {
-                it.emetter = it.to_third_name;
+                it.recepteur = it.to_third_name;
               }
 
               if (it.from_third_name != null) {
-                it.recepteur = it.from_third_name;
+                it.emetter = it.from_third_name;
               } else if (it.from_warehouse_name != null) {
-                it.recepteur = it.from_warehouse_name;
+                it.emetter = it.from_warehouse_name;
               }
             });
 
