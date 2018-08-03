@@ -23,7 +23,7 @@ export class ThirdsService {
   getThirds(): Observable<Third[]> {
     return this.http.get<Third[]>(`${environment.apiUrl}/${this.routeName}`);
   }
- 
+
   /**
    * Get a collection of Third parties variables to be used in dropdowns in third parties forms
    * @returns {Observable<Third[]>}
@@ -39,7 +39,7 @@ export class ThirdsService {
    * @returns {Observable<Third[]>}
    */
   getThirdsDx(thirdType: string, params?: any): Observable<Third[]> {
-    console.log('ok'); 
+    console.log('ok');
     const type = (thirdType) ? `?third_type=${thirdType}` : '';
     return this.http.post<Third[]>(`${environment.apiUrl}/${this.routeName}/grid${type}`, JSON.stringify(params), {
       headers: new HttpHeaders({

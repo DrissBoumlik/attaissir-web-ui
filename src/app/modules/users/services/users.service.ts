@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {Observable} from '../../../../../node_modules/rxjs/Rx';
-import {environment} from '../../../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from '../../../../../node_modules/rxjs/Rx';
+import { environment } from '../../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root' 
+  providedIn: 'root'
 })
 export class UsersService {
 
