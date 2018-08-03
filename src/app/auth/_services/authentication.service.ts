@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {Response} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {environment} from '../../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class AuthenticationService {
 
-  private headers = new HttpHeaders({'Content-Type': 'application/json', 'charset': 'UTF-8'});
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
   private options = {
     headers: this.headers
   };
@@ -17,7 +17,7 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    return this.http.post(`${environment.apiUrl}/login`, JSON.stringify({email: email.toLowerCase(), password: password}), this.options);
+    return this.http.post(`${environment.apiUrl}/login`, JSON.stringify({ email: email.toLowerCase(), password: password }), this.options);
   }
 
   myPermission(): any {

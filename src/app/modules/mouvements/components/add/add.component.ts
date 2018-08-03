@@ -257,6 +257,8 @@ export class AddComponent implements OnInit {
       displayExpr: 'name',
       valueExpr: 'id',
       searchEnabled: true,
+      searchMode: 'startswith',
+      searchExpr: ['name'],
       dataSource: new CustomStore({
         load: (loadOptions: any) => {
           return this.familleService.getArticleCategoriesDx(loadOptions)
@@ -278,6 +280,8 @@ export class AddComponent implements OnInit {
           displayExpr: 'name',
           valueExpr: 'id',
           searchEnabled: true,
+          searchMode: 'startswith',
+          searchExpr: ['name'],
           dataSource: new CustomStore({
             load: (loadOptions: any) => {
               return this.familleService.getArticleSubCategories(event.selectedItem.id)
@@ -295,10 +299,12 @@ export class AddComponent implements OnInit {
           onSelectionChanged: (e) => {
             this.subCategory = e.selectedItem.name;
             this.articleOptions = {
-              label: 'Sous Famille',
+              label: 'Sous-Famille',
               displayExpr: 'name',
               valueExpr: 'id',
               searchEnabled: true,
+              searchMode: 'startswith',
+              searchExpr: ['name'],
               dataSource: new CustomStore({
                 load: (loadOptions: any) => {
                   return this.articleService.getArticlesByFamily(e.selectedItem.id)

@@ -53,7 +53,7 @@ export class ReplenishmentComponent implements OnInit {
                     row.threshold = war.threshold;
                     row.qr = war.qr;
                     row.dt = { warehouse_id: war.warehouse_id, article_id: war.article_id, provider_id: war.article_third_party_id };
-                    if ( row.qr <= row.threshold) {
+                    if (row.qr <= row.threshold) {
                       return row;
                     }
                   }),

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {UsersService} from '../../services/users.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../services/users.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -11,7 +11,7 @@ export class ListComponent implements OnInit {
 
   dataSource: any;
 
-  constructor(public usersSerivces: UsersService,private router: Router) {
+  constructor(public usersSerivces: UsersService, private router: Router) {
   }
 
   ngOnInit() {

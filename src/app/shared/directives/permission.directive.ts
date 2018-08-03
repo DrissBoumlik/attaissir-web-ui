@@ -1,12 +1,11 @@
-import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
-
+import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 
 @Directive({
   selector: '[appPermissionHidden]'
 })
-export class PermissionDirective  implements  OnInit {
+export class PermissionDirective implements OnInit {
 
-  @Input() permissionHidden: string[];
+  @Input() appPermissionHidden: string[];
 
   constructor(private el: ElementRef) {
 
@@ -16,35 +15,35 @@ export class PermissionDirective  implements  OnInit {
   ngOnInit() {
 
     // const permissions  = localStorage.getItem('permissions');
-    const permissions  = 'crypt.....';
+    const permissions = 'crypt.....';
     // var bytes  = CryptoJS.AES.decrypt(permissions,'test');
 
     //  let permissions_decrypt = bytes.toString(CryptoJS.enc.Utf8);
     const permissions_decrypt = localStorage.getItem('permissions');
 
 
-    if ( permissions) {
+    if (permissions) {
 
       /***/
-      if (this.permissionHidden[0] === 'none' ) {
+      if (this.appPermissionHidden[0] === 'none') {
         this.el.nativeElement.style.display = 'initial';
         return;
       }
 
-      const  per_array: Boolean[] = new Array(this.permissionHidden.length);
+      const per_array: Boolean[] = new Array(this.appPermissionHidden.length);
 
-      for (let i = 0 ; i < this.permissionHidden.length ; i++) {
+      for (let i = 0; i < this.appPermissionHidden.length; i++) {
         per_array[i] = false;
       }
 
-      let permission = new Array();
+      let permission = [];
       permission = permissions_decrypt.split(',');
 
       permission.forEach((it) => {
-        for ( let i = 0; i < this.permissionHidden.length ; i++) {
+        for (let i = 0; i < this.appPermissionHidden.length; i++) {
 
-          if ( it === this.permissionHidden[i]) {
-            console.log(this.permissionHidden[i]);
+          if (it === this.appPermissionHidden[i]) {
+            console.log(this.appPermissionHidden[i]);
 
             per_array[i] = true;
 
@@ -54,13 +53,13 @@ export class PermissionDirective  implements  OnInit {
       });
 
       let visibility = true;
-      for (let i = 0; i < this.permissionHidden.length ; i++) {
-        if ( per_array[i] === false ) {
+      for (let i = 0; i < this.appPermissionHidden.length; i++) {
+        if (per_array[i] === false) {
           visibility = false;
         }
       }
 
-      if ( visibility) {
+      if (visibility) {
         this.el.nativeElement.style.display = 'initial';
       }
 

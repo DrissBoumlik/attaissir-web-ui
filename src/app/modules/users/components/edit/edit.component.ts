@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UsersService} from '../../services/users.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NewComponent} from '../../../interventions/components/new/new.component';
-import {Subscription} from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { UsersService } from '../../services/users.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NewComponent } from '../../../interventions/components/new/new.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
@@ -138,7 +138,7 @@ export class EditComponent implements OnInit, OnDestroy {
     }
   }
 
-// end tree elements
+  // end tree elements
 
   showStructureZones(data: any) {
     this.rowIndex = data.rowIndex;
