@@ -12,6 +12,7 @@ import { HrefPreventDefaultDirective } from '../../_directives/href-prevent-defa
 import { UnwrapTagDirective } from '../../_directives/unwrap-tag.directive';
 import { SubHeaderComponent } from './sub-header/sub-header.component';
 import { AvatarModule } from 'ng2-avatar';
+import {PermissionDirective} from '../../_directives/permission.directive';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AvatarModule } from 'ng2-avatar';
     TooltipsComponent,
     HrefPreventDefaultDirective,
     UnwrapTagDirective,
-    SubHeaderComponent
+    SubHeaderComponent,
+    PermissionDirective ,
   ],
   exports: [
     HeaderNavComponent,
@@ -36,6 +38,7 @@ import { AvatarModule } from 'ng2-avatar';
     ScrollTopComponent,
     TooltipsComponent,
     HrefPreventDefaultDirective,
+    PermissionDirective ,
   ],
   imports: [
     CommonModule,

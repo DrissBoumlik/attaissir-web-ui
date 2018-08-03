@@ -22,6 +22,7 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
 import { RfidCardReaderComponent } from './components/rfid-card-reader/rfid-card-reader.component';
 import { ParcelsListComponent } from './components/parcels-list/parcels-list.component';
 import { RoleDirective } from './directives/role.directive';
+import {PermissionDirective} from '../_directives/permission.directive';
 
 @NgModule({
   imports: [

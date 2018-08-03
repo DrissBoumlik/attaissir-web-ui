@@ -87,7 +87,7 @@ import { PermissionDirective } from './_directives/permission.directive';
     FormsModule,
     DxPivotGridModule,
     DxTemplateModule,
-    DxCheckBoxModule,
+    DxCheckBoxModule
   ],
   providers: [{
     provide: LOCALE_ID,

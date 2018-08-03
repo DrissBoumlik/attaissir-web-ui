@@ -16,7 +16,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router) {
 
-  } 
+  }
 
   ngOnInit() {
     this.currentUrl = this.router.url.split('/')[1];
@@ -65,11 +65,11 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         icon: 'flaticon-open-box',
         url: '/stock/situation',
         description: 'Gestion de stock',
+        permission: 'preconization.incidents.index',
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
           {icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation'},
           {icon: 'flaticon-plus', name: 'Approvisionnement de stock', url: '/stock/reappro'},
-
           {
             name: 'Liste des mouvements', icon: 'fa fa-exchange', url: '/mouvements',
             description: 'Liste des mouvements', disabled: 'false'
