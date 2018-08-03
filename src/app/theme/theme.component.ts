@@ -1,15 +1,17 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Router, NavigationStart, NavigationEnd} from '@angular/router';
-import {Helpers} from '../helpers';
-import {ScriptLoaderService} from '../_services/script-loader.service';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { Helpers } from '../helpers';
+import { ScriptLoaderService } from '../_services/script-loader.service';
 
-import {ToastrService} from 'ngx-toastr';
-import {AuthenticationService} from '../auth/_services';
-import {Observable} from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../auth/_services';
+import { Observable } from 'rxjs';
 
 declare let mApp: any;
 declare let mUtil: any;
 declare let mLayout: any;
+
+import * as CryptoJS from 'crypto-js';
 
 
 @Component({
@@ -22,9 +24,9 @@ export class ThemeComponent implements OnInit {
   canRefresh: boolean;
 
   constructor(private _script: ScriptLoaderService,
-              private auth: AuthenticationService,
-              private _router: Router,
-              private toastr: ToastrService) {
+    private auth: AuthenticationService,
+    private _router: Router,
+    private toastr: ToastrService) {
     this.canRefresh = false;
     this.reset();
     this.initListener();
@@ -46,7 +48,7 @@ export class ThemeComponent implements OnInit {
 
       localStorage.setItem('currentUser', currentUser);
       localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
-      localStorage.setItem('permissions', JSON.parse(currentUser)['data']['permissions']);
+  //    localStorage.setItem('permissions', JSON.parse(currentUser)['data']['permissions']);
 
       // test Tenant
       if (!localStorage.getItem('tenantId')) {
@@ -61,7 +63,10 @@ export class ThemeComponent implements OnInit {
 
 
     this.auth.myPermission().subscribe(response => {
-      localStorage.setItem('permissions', response.data.permissions);
+
+      const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(response.data.permissions), 'Gra61884546585_55');
+      localStorage.setItem('permissions', ciphertext);
+//      localStorage.setItem('permissions', response.data.permissions);
     });
 
     console.log('yooo');
@@ -87,7 +92,7 @@ export class ThemeComponent implements OnInit {
         Helpers.setLoading(false);
         // content m-wrapper animation
         const animation = 'm-animate-fade-in-up';
-        $('.m-wrapper').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function (e) {
+        $('.m-wrapper').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(e) {
           $('.m-wrapper').removeClass(animation);
         }).removeClass(animation).addClass(animation);
       }

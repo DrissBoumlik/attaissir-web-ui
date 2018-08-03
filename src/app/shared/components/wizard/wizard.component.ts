@@ -79,7 +79,7 @@ export class WizardComponent implements OnInit {
   ngOnInit() {
     this.step2 = (!this.isEdit) ? '2. Contrat' : '2. Avenant';
     if (this.contract['status'] === 'inprogress') {
-        this.step2 = '2. Contrat' ;
+      this.step2 = '2. Contrat';
     }
     this.contractService.getContractsVars().subscribe((data) => {
       this.contracteditorOptions = {
@@ -431,15 +431,26 @@ export class WizardComponent implements OnInit {
 
     if (this.isEdit && !this.contract.parent_id) {
       this.contractService.editContract(this.contract).subscribe(contract => {
-          contract = this.helper.dataFormatter(contract, false);
-          this.groundsList.map((soil) => {
-            const soilObject = {
-              soil_id: soil.id,
-              tenure: soil.tenure,
-              contract_id: contract['id'],
-              annuel_surface: soil.annuel_surface,
-              code_ormva: soil.code_ormva
-            };
+        contract = this.helper.dataFormatter(contract, false);
+        this.groundsList.map((soil) => {
+          const soilObject = {
+            soil_id: soil.id,
+            tenure: soil.tenure,
+            contract_id: contract['id'],
+            annuel_surface: soil.annuel_surface,
+            code_ormva: soil.code_ormva
+          };
+          if (!!soil.parcel_tmp_id) {
+            soilObject['id'] = soil.parcel_tmp_id;
+            this.parcelsService.editParcel(soilObject).subscribe(d => {
+              d = this.helper.dataFormatter(d, false);
+              const id = (this.isEdit) ? this.contract.id : contract['id'];
+              this.router.navigate([`/contrats/afficher/${id}`]);
+            }, error1 => {
+              this.toastr.warning(error1.error.message);
+            });
+          }
+          else {
             this.parcelsService.addParcel(soilObject).subscribe(d => {
               d = this.helper.dataFormatter(d, false);
               const id = (this.isEdit) ? this.contract.id : contract['id'];
@@ -447,46 +458,48 @@ export class WizardComponent implements OnInit {
             }, error1 => {
               this.toastr.warning(error1.error.message);
             });
-            return soil;
-          });
-        }, error1 => {
-          throw error1;
+          }
+          return soil;
         });
+      }, error1 => {
+        throw error1;
+      });
     }
     else {
-        this.contractService.addContract(this.contract).subscribe(contract => {
-          contract = this.helper.dataFormatter(contract, false);
-          this.groundsList.map((soil) => {
-            const soilObject = {
-              soil_id: soil.id,
-              tenure: soil.tenure,
-              contract_id: contract['id'],
-              annuel_surface: soil.annuel_surface,
-              code_ormva: soil.code_ormva
-            };
-            if (!!soil.parcel_tmp_id) {
-              this.parcelsService.editParcel(soilObject).subscribe(d => {
-                d = this.helper.dataFormatter(d, false);
-                const id = (this.isEdit) ? this.contract.id : contract['id'];
-                this.router.navigate([`/contrats/afficher/${id}`]);
-              }, error1 => {
-                this.toastr.warning(error1.error.message);
-              });
-            }
-            else {
-              this.parcelsService.addParcel(soilObject).subscribe(d => {
-                d = this.helper.dataFormatter(d, false);
-                const id = (this.isEdit) ? this.contract.id : contract['id'];
-                this.router.navigate([`/contrats/afficher/${id}`]);
-              }, error1 => {
-                this.toastr.warning(error1.error.message);
-              });
-            }
-            return soil;
-          });
-        }, error1 => {
-          throw error1;
+      this.contractService.addContract(this.contract).subscribe(contract => {
+        contract = this.helper.dataFormatter(contract, false);
+        this.groundsList.map((soil) => {
+          const soilObject = {
+            soil_id: soil.id,
+            tenure: soil.tenure,
+            contract_id: contract['id'],
+            annuel_surface: soil.annuel_surface,
+            code_ormva: soil.code_ormva
+          };
+          if (!!soil.parcel_tmp_id && !this.contract.parent_id) {
+            soilObject['id'] = soil.parcel_tmp_id;
+            this.parcelsService.editParcel(soilObject).subscribe(d => {
+              d = this.helper.dataFormatter(d, false);
+              const id = (this.isEdit) ? this.contract.id : contract['id'];
+              this.router.navigate([`/contrats/afficher/${id}`]);
+            }, error1 => {
+              this.toastr.warning(error1.error.message);
+            });
+          }
+          else {
+            this.parcelsService.addParcel(soilObject).subscribe(d => {
+              d = this.helper.dataFormatter(d, false);
+              const id = (this.isEdit) ? this.contract.id : contract['id'];
+              this.router.navigate([`/contrats/afficher/${id}`]);
+            }, error1 => {
+              this.toastr.warning(error1.error.message);
+            });
+          }
+          return soil;
         });
+      }, error1 => {
+        throw error1;
+      });
     }
   }
 }

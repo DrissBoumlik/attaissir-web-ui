@@ -61,9 +61,9 @@
   <dxi-column dataField="cin" caption="CIN"></dxi-column>
   <dxi-column dataField="full_name" caption="Nom complet" style="color: #6d7fcc; align-content: center; cursor: pointer" ></dxi-column>
   <dxi-column dataField="contract_code" caption="Réf. Contrat" cellTemplate="contractTemplate" width="150px"></dxi-column>
-  <dxi-column dataField="application_date" caption="Date d'application" [visible]="false"></dxi-column>
-  <dxi-column dataField="annuel_surface" caption="Superficie annuelle"></dxi-column>
-  <dxi-column dataField="compaign_surface" caption="Superficie de la campagne"></dxi-column>
+  <dxi-column dataField="application_date" dataType="date" caption="Date d'application" [visible]="false"></dxi-column>
+  <dxi-column dataField="annuel_surface" dataType="number" caption="Superficie annuelle"></dxi-column>
+  <dxi-column dataField="compaign_surface" dataType="number" caption="Superficie de la campagne"></dxi-column>
   <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
   <dxi-column dataField="status" caption="Etat" cellTemplate="contractStatusTemplate"></dxi-column>
   <div *dxTemplate="let data of 'detail'">

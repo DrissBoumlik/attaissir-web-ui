@@ -16,7 +16,7 @@ export class ParcelsListComponent implements OnInit {
   helper: any;
 
   constructor(private router: Router,
-              private toastr: ToastrService) {
+    private toastr: ToastrService) {
     this.helper = Helper;
   }
 

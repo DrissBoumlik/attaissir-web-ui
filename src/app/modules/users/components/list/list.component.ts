@@ -12,7 +12,7 @@ export class ListComponent implements OnInit {
 
   dataSource: any = {};
 
-  constructor(public usersSerivces: UsersService,private router: Router) {
+  constructor(public usersSerivces: UsersService, private router: Router) {
   }
 
   ngOnInit() {

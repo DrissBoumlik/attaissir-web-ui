@@ -7,7 +7,7 @@ import { EditComponent } from './components/edit/edit.component';
 import { SharedModule } from '../../shared/shared.module';
 import { DxButtonModule, DxListModule, DxPopupModule, DxSelectBoxModule, DxTemplateModule, DxTreeViewModule } from 'devextreme-angular';
 import { ProfileComponent } from './components/profile/profile.component';
-import {AvatarModule} from 'ng2-avatar';
+import { AvatarModule } from 'ng2-avatar';
 
 @NgModule({
   imports: [
@@ -22,7 +22,7 @@ import {AvatarModule} from 'ng2-avatar';
     DxButtonModule,
     AvatarModule.forRoot()
   ],
-  declarations: [AddComponent, ListComponent, EditComponent , ProfileComponent],
+  declarations: [AddComponent, ListComponent, EditComponent, ProfileComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UsersModule {

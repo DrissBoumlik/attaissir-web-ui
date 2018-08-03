@@ -22,6 +22,7 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
 import { RfidCardReaderComponent } from './components/rfid-card-reader/rfid-card-reader.component';
 import { ParcelsListComponent } from './components/parcels-list/parcels-list.component';
 import { RoleDirective } from './directives/role.directive';
+import { PermissionDirective } from './directives/permission.directive';
 
 @NgModule({
   imports: [
@@ -39,7 +40,7 @@ import { RoleDirective } from './directives/role.directive';
     DxPopupModule,
     DxTemplateModule,
     DxFileUploaderModule,
-    DxSelectBoxModule
+    DxSelectBoxModule,
   ],
   exports: [
     WizardComponent,
@@ -62,7 +63,8 @@ import { RoleDirective } from './directives/role.directive';
     DxTemplateModule,
     RfidCardReaderComponent,
     DxFileUploaderModule,
-    ParcelsListComponent
+    ParcelsListComponent,
+    PermissionDirective
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -73,6 +75,8 @@ import { RoleDirective } from './directives/role.directive';
     WarehouseComponent,
     RfidCardReaderComponent,
     ParcelsListComponent,
-    RoleDirective]
+    RoleDirective,
+    PermissionDirective
+  ]
 })
 export class SharedModule { }
