@@ -11,6 +11,14 @@ export class UsersService {
   constructor(private http: HttpClient) {
   }
 
+  getUserInfo(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/user-informations`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   getUser(id: any): Observable<any> {
     return this.http.get(`${environment.apiUrl}/users/` + id, {
       headers: new HttpHeaders({

@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UsersService} from '../../services/users.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NewComponent} from '../../../interventions/components/new/new.component';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnDestroy {
   user: any = {};
   userRole: number;
   listOfRoles = [];
@@ -22,6 +23,8 @@ export class EditComponent implements OnInit {
 
   rowIndex: number;
 
+  private paramsSubscription: Subscription;
+  private httpSubscription: Subscription;
 
   constructor(
     private userService: UsersService,
@@ -63,9 +66,9 @@ export class EditComponent implements OnInit {
     /**
      * get user info
      */
-    this.route.params.subscribe(
+    this.paramsSubscription = this.route.params.subscribe(
       params => {
-        this.userService.getUser(params.id).subscribe(
+        this.httpSubscription = this.userService.getUser(params.id).subscribe(
           (response: any) => {
             this.userId = response.data.id;
             this.user.email = response.data.email;
@@ -219,23 +222,35 @@ export class EditComponent implements OnInit {
   removeItemFromChoosingStructures(e) {
     const tempData = [];
     const foundEle = [];
-    for (let i = 0; i < e.data.cdas.length; i++) {
-      const items = e.data.cdas[i].items;
-      for (let j = 0; j < items.length; j++) {
-        for (let k = 0; k < this.checkedItems.length; k++) {
-          if (this.checkedItems[k].id === items[j].id) {
-            this.checkedItems.splice(k, 1);
-            // foundEle.push(items[j].id);
-          }
-        }
+    // if (e.data.cdas) {
+    //   for (let i = 0; i < e.data.cdas.length; i++) {
+    //     const items = e.data.cdas[i].items;
+    //     for (let j = 0; j < items.length; j++) {
+    //       for (let k = 0; k < this.checkedItems.length; k++) {
+    //         if (this.checkedItems[k].id === items[j].id) {
+    //           this.checkedItems.splice(k, 1);
+    //           // foundEle.push(items[j].id);
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    const tmp = this.listOfStructures;
+    let itemToRmove = e.data;
+    itemToRmove.isSelected = false;
+    for (let i = 0; i < itemToRmove.cdas.length; i++) {
+      itemToRmove.cdas[i].isSelected = false;
+      for (let j = 0; j < itemToRmove.cdas[i].items.length; j++) {
+        itemToRmove.cdas[i].items[j].isSelected = false;
       }
+
     }
 
-    const tmp = this.listOfStructures;
+
     tmp.push({
-      id: e.data.id,
-      name: e.data.name,
-      cdas: e.data.cdas
+      id: itemToRmove.id,
+      name: itemToRmove.name,
+      cdas: itemToRmove.cdas
     });
     this.listOfStructures = tmp;
   }
@@ -286,6 +301,11 @@ export class EditComponent implements OnInit {
       NewComponent.notifyMe('veuillez attribuer une structure a ' + this.user.name, 'error');
 
     }
+  }
+
+  ngOnDestroy(): void {
+    this.paramsSubscription.unsubscribe();
+    this.httpSubscription.unsubscribe();
   }
 
 

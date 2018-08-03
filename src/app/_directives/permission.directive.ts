@@ -1,10 +1,10 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
 
 
 @Directive({
   selector: '[permissionHidden]'
 })
-export class PermissionDirective {
+export class PermissionDirective  implements  OnInit {
 
   @Input() permissionHidden: string[];
 
@@ -13,7 +13,7 @@ export class PermissionDirective {
     this.el.nativeElement.style.display = 'none';
   }
 
-  ngOnInit(el: ElementRef) {
+  ngOnInit() {
 
     // const permissions  = localStorage.getItem('permissions');
     const permissions  = 'crypt.....';
@@ -25,6 +25,7 @@ export class PermissionDirective {
 
     if ( permissions) {
 
+      /***/
       if (this.permissionHidden[0] === 'none' ) {
         this.el.nativeElement.style.display = 'initial';
         return;

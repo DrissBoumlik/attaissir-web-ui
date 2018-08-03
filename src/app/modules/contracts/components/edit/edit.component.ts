@@ -53,7 +53,8 @@ export class EditComponent implements OnInit {
             this.contract = res.data;
             const grounds = res.data.parcels.map(data => {
               return {
-                id: data['id'],
+                id: data['soil']['id'],
+                parcel_tmp_id: data['id'],
                 tenure: data['tenure_id'],
                 registration_number: data['soil']['registration_number'],
                 cda: data['soil']['cda_id'],

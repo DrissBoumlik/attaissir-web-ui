@@ -25,6 +25,7 @@ import { EditComponent } from './components/edit/edit.component';
 import { EtatDirective } from '../../shared/directives/etat.directive';
 import {PermissionDirective} from '../../_directives/permission.directive';
 import {LayoutModule} from '../../theme/layouts/layout.module';
+import {PermissionModule} from '../../_directives/permission.module';
 
 @NgModule({
   imports: [
@@ -48,9 +49,11 @@ import {LayoutModule} from '../../theme/layouts/layout.module';
     DxCheckBoxModule,
     DxTreeListModule,
     DxTextBoxModule,
-    LayoutModule
+    LayoutModule,
+    DxTextBoxModule,
+    PermissionModule
   ],
-  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent]
+  declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent ]
 
 })
 export class InterventionsModule {

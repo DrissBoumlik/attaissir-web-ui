@@ -11,7 +11,7 @@ export class ListComponent implements OnInit {
 
   rolesDataSource: any;
 
-  constructor(public roleService: RolesService,_router: Router) { }
+  constructor(public roleService: RolesService,_router: Router,private router: Router) { }
   
   ngOnInit() {
 
@@ -22,6 +22,14 @@ export class ListComponent implements OnInit {
   
     });
 
+  }
+
+  onStartEdit = (e) => {
+    this.router.navigate([`/roles/modifier/${e}`]).catch(
+      err => {
+        throw err; // this.toastr.error(err.error.message);
+      }
+    );
   }
 
 }

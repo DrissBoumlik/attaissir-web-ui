@@ -6,14 +6,17 @@ import { SharedModule } from '../../shared/shared.module';
 import { AddComponent } from './components/add/add.component';
 import { ShowComponent } from './components/show/show.component';
 import { ShowRetourComponent } from './components/show-retour/show-retour.component';
+import {PermissionDirective} from '../../_directives/permission.directive';
+import {PermissionModule} from '../../_directives/permission.module';
 
 @NgModule({
   imports: [
     SharedModule,
     CommonModule,
-    MouvementsRoutingModule
+    MouvementsRoutingModule,
+    PermissionModule
   ],
-  declarations: [ListComponent, AddComponent, ShowComponent, ShowRetourComponent],
+  declarations: [ListComponent, AddComponent, ShowComponent, ShowRetourComponent ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MouvementsModule { }
