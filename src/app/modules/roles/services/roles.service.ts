@@ -4,32 +4,6 @@ import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
 
-let permissions = [
-  {
-    permission: "permission1",
-    actions:
-      [
-        ["lire", false, 'permissions1.lire'],
-        ["ecrire", false]
-      ]
-  },
-  {
-    permission: "permission2",
-    actions: [
-      ["lire", false],
-      ["ecrire", false]
-    ]
-  },
-  {
-    permission: "permission3",
-    actions: [
-      ["lire", false],
-      ["ecrire", false]
-    ]
-  }
-
-];
-
 @Injectable({
   providedIn: 'root'
 })
@@ -83,6 +57,14 @@ export class RolesService {
 
   updateRole(data,roleID: number): Observable<any> {
     return this.http.put(`${environment.apiUrl}/roles/${roleID}`, JSON.stringify(data), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getRolesDx(params?: any): Observable<any[]> {
+    return this.http.post<any[]>(`${environment.apiUrl}/roles/grid`, JSON.stringify(params), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

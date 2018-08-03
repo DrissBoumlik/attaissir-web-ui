@@ -4,7 +4,7 @@ import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class UsersService {
 
@@ -63,6 +63,14 @@ export class UsersService {
     return this.http.post(`${environment.apiUrl}/users/grid`, JSON.stringify([]), {
       headers: new HttpHeaders({
         // "tenant":"10"
+      })
+    });
+  }
+
+  getUsersDx(params?: any): Observable<any[]> {
+    return this.http.post<any[]>(`${environment.apiUrl}/users/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
       })
     });
   }

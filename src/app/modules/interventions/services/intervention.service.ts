@@ -130,5 +130,13 @@ export class InterventionService {
     });
   }
 
+  getInterventionsDx(params?: any): Observable<any[]> {
+    return this.http.post<any[]>(`${environment.apiUrl}/interventionrequests/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
 }
 
