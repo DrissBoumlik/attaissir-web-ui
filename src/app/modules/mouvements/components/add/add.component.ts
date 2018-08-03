@@ -37,6 +37,8 @@ export class AddComponent implements OnInit {
   addProduct: any;
   buttonOptions: any;
   helper: any;
+  unit: string;
+  rules: any;
 
   constructor(public mouvementService: MouvementsService,
     public commandeService: DemandesService,
@@ -54,6 +56,7 @@ export class AddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.rules = { 'X': /[0-9]+/ };
     this.addProduct = {
       text: 'AJOUTER',
       type: 'success',
@@ -276,7 +279,7 @@ export class AddComponent implements OnInit {
       onSelectionChanged: (event) => {
         this.category = event.selectedItem.name;
         this.subFamilleOptions = {
-          label: 'Sous Famille',
+          label: 'Sous-Famille',
           displayExpr: 'name',
           valueExpr: 'id',
           searchEnabled: true,
@@ -299,7 +302,7 @@ export class AddComponent implements OnInit {
           onSelectionChanged: (e) => {
             this.subCategory = e.selectedItem.name;
             this.articleOptions = {
-              label: 'Sous-Famille',
+              label: 'Article',
               displayExpr: 'name',
               valueExpr: 'id',
               searchEnabled: true,
@@ -322,6 +325,7 @@ export class AddComponent implements OnInit {
               }),
               onSelectionChanged: (evnt) => {
                 this.article = evnt.selectedItem.name;
+                this.unit = evnt.selectedItem.unit;
               }
             };
           }
