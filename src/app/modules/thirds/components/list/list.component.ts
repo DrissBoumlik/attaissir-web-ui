@@ -36,7 +36,7 @@ export class ListComponent implements OnInit {
     this.third_parties = {};
     this.third_parties_count = 0;
     this.helper = Helper;
-  }
+  } 
 
   getGender = (data) => {
     if (!data.sexe) {
