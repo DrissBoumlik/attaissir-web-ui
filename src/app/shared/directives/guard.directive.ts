@@ -17,13 +17,13 @@ export class PermissionGuard implements CanActivate {
       return true;
     }
 
-    const permissions_  = localStorage.getItem('permissions');
+    const permissions_ = localStorage.getItem('permissions');
 
 
     if (permissions_) {
 
       try {
-        const bytes  = CryptoJS.AES.decrypt(permissions_, 'Gra61884546585_55');
+        const bytes = CryptoJS.AES.decrypt(permissions_, 'Gra61884546585_55');
         const permissions_decrypt = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
 
