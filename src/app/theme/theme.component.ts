@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
-import { Helpers } from '../helpers';
-import { ScriptLoaderService } from '../_services/script-loader.service';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Router, NavigationStart, NavigationEnd} from '@angular/router';
+import {Helpers} from '../helpers';
+import {ScriptLoaderService} from '../_services/script-loader.service';
 
-import { ToastrService } from 'ngx-toastr';
-import { AuthenticationService } from '../auth/_services';
-import { Observable } from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
+import {AuthenticationService} from '../auth/_services';
+import {Observable} from 'rxjs';
 
 declare let mApp: any;
 declare let mUtil: any;
@@ -22,9 +22,9 @@ export class ThemeComponent implements OnInit {
   canRefresh: boolean;
 
   constructor(private _script: ScriptLoaderService,
-    private auth: AuthenticationService,
-    private _router: Router,
-    private toastr: ToastrService) {
+              private auth: AuthenticationService,
+              private _router: Router,
+              private toastr: ToastrService) {
     this.canRefresh = false;
     this.reset();
     this.initListener();
@@ -42,6 +42,8 @@ export class ThemeComponent implements OnInit {
   reset() {
     this.auth.refresh().subscribe(data => {
       const currentUser: any = JSON.stringify(data);
+
+
       localStorage.setItem('currentUser', currentUser);
       localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
       localStorage.setItem('permissions', JSON.parse(currentUser)['data']['permissions']);
@@ -56,6 +58,13 @@ export class ThemeComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+    this.auth.myPermission().subscribe(response => {
+      localStorage.setItem('permissions', response.data.permissions);
+    });
+
+    console.log('yooo');
     this._script.loadScripts('body', ['assets/vendors/base/vendors.bundle.js', 'assets/demo/demo12/base/scripts.bundle.js'], true)
       .then(result => {
         Helpers.setLoading(false);
@@ -78,7 +87,7 @@ export class ThemeComponent implements OnInit {
         Helpers.setLoading(false);
         // content m-wrapper animation
         const animation = 'm-animate-fade-in-up';
-        $('.m-wrapper').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(e) {
+        $('.m-wrapper').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function (e) {
           $('.m-wrapper').removeClass(animation);
         }).removeClass(animation).addClass(animation);
       }
