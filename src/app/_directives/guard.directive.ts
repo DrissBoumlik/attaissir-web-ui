@@ -9,10 +9,10 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot) {
-     //return true;
+   //  return true;
 
 
-      if ( typeof route.data['permission'] === 'undefined' || route.data['permission'] === 'none') {
+      if ( typeof route.data['permission'] === 'undefined' || route.data['permission'][0] === 'none') {
         return true;
       }
 
@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
           per_array[i] = false;
         }
 
-        let permission = new Array();
+        let permission = [];
         permission = permissions_decrypt.split(',');
 
         permission.forEach((it) => {
