@@ -20,9 +20,17 @@ export class EditeComponent implements OnInit {
     type: 'success',
     useSubmitBehavior: true
   };
+  count:number;
+  checkAll:   any;
+  permissionsCount: number;
+  permissionsSelected: number;
+  isChecked: boolean;
+  isAll: any;
+  checkItem: boolean;
 
   constructor(private route: ActivatedRoute,public roleService: RolesService,private router: Router) {
     // this.route.params.subscribe( params => this.roleID = params.id );
+    this.checkAll = false;
   }
   onFormSubmit(e) {
     
@@ -86,6 +94,122 @@ export class EditeComponent implements OnInit {
 
     return bool;
   }
+  onSelectAll(i,j){
+    var bool = false;
+    var index = -1;
+    var k = 0;
+
+    for (k = 0; k < this.permissionsData.length; k++) {
+      if (this.permissionsData[k] == this.permissions[i].permissions[j].id) {
+        bool = true;
+        index = k;
+      }
+    }
+    if (!bool) {
+      this.permissionsData.push(this.permissions[i].permissions[j].id);
+    } else {
+    }
+  }
+  selectedItems = [];
+  selecteLigne(i,id){
+    let hasItem = false;
+    let index = -1;
+    for(let j=0;j<this.selectedItems.length;j++){
+      if(this.selectedItems[j] == id){
+        hasItem = true;
+        index = j;
+      }
+    }
+    if(hasItem){
+      this.selectedItems.splice(index,1);
+    }else{
+      this.selectedItems.push(id);
+    }
+    console.log("*********");
+    console.log(this.selectedItems.length);
+    console.log(this.permissionsCount);
+    console.log("*********");
+    if(this.selectedItems.length == this.permissionsCount){
+      this.checkAll = true;
+    }else{
+      this.checkAll = false;
+    }
+    
+    for(let j=0;j<this.permissions[i].permissions.length;j++){
+      this.onChangeValue(i,j);
+    }
+    console.log(this.permissionsData);
+  }
+  selecteAll(){
+    this.checkAll = !this.checkAll;
+    if(this.permissionsData.length == 0){
+      console.log('== 0');
+      this.isChecked=true;
+      // this.checkItem=true;
+      this.selectedItems=[];
+      let x=0;
+      for(let l=0;l<this.permissions.length;l++){
+        if(this.permissions[l].permissions.length>0){
+          this.selectedItems[x] = this.permissions[l].id;
+          x++;
+        }
+      }
+      console.log("*********");
+      console.log(this.selectedItems.length);
+      console.log(this.permissionsCount);
+      console.log("*********");
+      for(let i=0;i<this.permissions.length;i++){
+        for(let j=0;j<this.permissions[i].permissions.length;j++){
+          this.onSelectAll(i,j);
+        }
+      }
+      
+    }else{
+      if(this.permissionsData.length<this.count){
+        console.log('<');
+        this.permissionsData=[];
+        this.isChecked=true;
+        // this.checkItem=true;
+        this.selectedItems=[];
+        let x=0;
+        for(let l=0;l<this.permissions.length;l++){
+          if(this.permissions[l].permissions.length>0){
+            this.selectedItems[x] = this.permissions[l].id;
+            x++;
+          }
+        }
+        console.log("*********");
+        console.log(this.selectedItems.length);
+        console.log(this.permissionsCount);
+        console.log(this.isChecked);
+        console.log("*********");
+        for(let i=0;i<this.permissions.length;i++){
+          for(let j=0;j<this.permissions[i].permissions.length;j++){
+            this.onSelectAll(i,j);
+          }
+        }
+      }else{
+       
+        if(this.permissionsData.length == this.count){
+          this.permissionsData=[];
+          this.isChecked=false;
+          // this.checkItem=false;
+          this.selectedItems=[];
+          console.log('==');
+          console.log("*********");
+          console.log(this.selectedItems.length);
+          console.log(this.permissionsCount);
+          console.log(this.isChecked);
+          console.log("*********");
+          
+          
+        }
+      }
+    }
+    
+    
+    console.log(this.permissionsData);
+  }
 
   ngOnInit() {
     const roleID = +this.route.snapshot.params['id'];
@@ -100,6 +224,16 @@ export class EditeComponent implements OnInit {
     this.roleService.getPermissions().subscribe((data: any) => {
       this.permissions = data.data;
       console.log(data.data);
+      this.count = 0;
+      this.permissionsCount = 0;
+      for(let i=0;i<this.permissions.length;i++){
+        if(this.permissions[i].permissions.length>0){
+          this.permissionsCount++;
+        }
+        for(let j=0;j<this.permissions[i].permissions.length;j++){
+          this.count++;
+        }
+      }
     }, err => {
   
     });

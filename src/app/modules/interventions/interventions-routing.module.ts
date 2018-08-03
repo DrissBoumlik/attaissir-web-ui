@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { NewComponent } from './components/new/new.component';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { AddComponent } from './components/add/add.component';
 import { ListComponent } from './components/list/list.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AddTempleteComponent } from './components/add-templete/add-templete.component';
+
+// class hasPermissions implements CanActivate(){
+  
+// }
 
 const routes: Routes = [{
   path: 'interventions',
