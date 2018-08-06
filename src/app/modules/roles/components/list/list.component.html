@@ -48,7 +48,7 @@
         
         <dxo-editing   
            mode="row" 
-           [allowUpdating]="true"
+           [allowUpdating]="helper.permissionMethod(['distributionCenter.stocks.update'])"
            [useIcons]="true">
         </dxo-editing>
         <!-- <dxo-selection mode="multiple"></dxo-selection> -->

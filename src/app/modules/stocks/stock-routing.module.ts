@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'; 
 import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './components/list/list.component';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
@@ -11,10 +11,10 @@ const routes: Routes = [{
   path: 'stock',
   component: DefaultComponent,
   children: [
-    { path: '', component: BoardComponent, canActivate: [PermissionGuard], data: { permission: ['none'] } },
-    { path: 'situation', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['none'] } },
-    { path: 'reappro', component: ReplenishmentComponent, canActivate: [PermissionGuard], data: { permission: ['none'] } },
-    { path: 'board', component: BoardComponent, canActivate: [PermissionGuard], data: { permission: ['none'] } },
+    { path: '', component: BoardComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] } },
+    { path: 'situation', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] } },
+    { path: 'reappro', component: ReplenishmentComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.store'] } },
+    { path: 'board', component: BoardComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] } },
   ]
 }];
 

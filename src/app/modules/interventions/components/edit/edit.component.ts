@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InterventionService } from '../../services/intervention.service';
 import { NewComponent } from '../new/new.component';
-
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-edit',

@@ -22,6 +22,7 @@ import { EditComponent } from './components/edit/edit.component';
 import { EtatDirective } from '../../shared/directives/etat.directive';
 import { LayoutModule } from '../../theme/layouts/layout.module';
 
+
 @NgModule({
   imports: [
     CommonModule,

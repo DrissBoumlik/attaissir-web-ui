@@ -51,7 +51,7 @@
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxi-column dataField="id" [width]="40" caption=""  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
+        <dxi-column dataField="id" [width]="40" caption=""  [allowFiltering]="false" [visible]="helper.permissionMethod(['distributionCenter.stocks.update'])"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
         <dxi-column dataField="date" format="dd-MM-yyyy"  dataType="date" [allowFiltering]="false" caption="Date"></dxi-column>
         <dxi-column dataField="type" caption="Type" [allowFiltering]="false" [calculateGroupValue]="helper.groupedMouvementValue" cellTemplate="typeTemplate"></dxi-column>
         <dxi-column dataField="order_id" caption="N° Bon de livraison fournisseur" cellTemplate="bon_nbrTemplate"></dxi-column>

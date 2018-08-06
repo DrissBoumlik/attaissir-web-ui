@@ -10,9 +10,9 @@ const routes: Routes = [{
   path: 'roles',
   component: DefaultComponent,
   children: [
-    { path: 'ajouter', component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.store'] } },
-    { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] } },
-    { path: 'modifier/:id', component: EditeComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] } }
+    { path: 'ajouter', component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['user.roles.store'] } },
+    { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['user.roles.grid'] } },
+    { path: 'modifier/:id', component: EditeComponent, canActivate: [PermissionGuard], data: { permission: ['user.roles.update'] } }
   ]
 }];
 

@@ -11,6 +11,7 @@ import { NewComponent } from '../new/new.component';
 import { DxiItemComponent } from 'devextreme-angular/ui/nested/item-dxi';
 import { ToastrService } from 'ngx-toastr';
 import { WarehouseService } from '../../../warehouse/service/warehose.service';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-add',
@@ -94,7 +95,7 @@ export class AddComponent implements OnInit {
   selectedTemplate: any;
 
   /*--------------------Constructor-----------------------*/
-
+  helper : any;
   constructor(public articleService: ArticlesService,
     public interventionService: InterventionService,
     private wareHouseService: WarehouseService,
@@ -102,6 +103,7 @@ export class AddComponent implements OnInit {
     private thirdsService: ThirdsService,
     private toastr: ToastrService,
     private router: Router) {
+      this.helper = Helper;
   }
 
   /*--------------------Initialize content-----------------------*/

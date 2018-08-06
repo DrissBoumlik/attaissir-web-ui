@@ -62,7 +62,7 @@
         <dxo-group-panel [visible]="true"></dxo-group-panel>
         <dxo-grouping #expand [autoExpandAll]="false"></dxo-grouping>
 
-        <dxi-column dataField="" [allowSorting]="false" cellTemplate="cellTemplate" caption="" width="50px"  allowColumnResizing="true">
+        <dxi-column dataField="" [allowSorting]="false" [visible]="helper.permissionMethod(['distributionCenter.articlecategories.show'])" cellTemplate="cellTemplate" caption="" width="50px"  allowColumnResizing="true">
         </dxi-column>
         <div *dxTemplate="let data of 'cellTemplate'">
           <a  (click)="helper.gotoShow('articles', data.data.id, router, toastr)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>

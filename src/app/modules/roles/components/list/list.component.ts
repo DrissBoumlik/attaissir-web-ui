@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RolesService } from '../../services/roles.service';
 import { Router } from '../../../../../../node_modules/@angular/router';
 import custom_store from '../../../../../../node_modules/devextreme/data/custom_store';
+import { Helper } from '../../../../shared/classes/helper';
+
 
 @Component({
   selector: 'app-list',
@@ -11,8 +13,11 @@ import custom_store from '../../../../../../node_modules/devextreme/data/custom_
 export class ListComponent implements OnInit {
 
   rolesDataSource: any = {};
+  helper: any;
 
-  constructor(public roleService: RolesService, _router: Router, private router: Router) { }
+  constructor(public roleService: RolesService, _router: Router, private router: Router) { 
+    this.helper=Helper;
+  }
 
   ngOnInit() {
 

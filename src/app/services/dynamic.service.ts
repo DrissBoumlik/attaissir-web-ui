@@ -238,4 +238,12 @@ export class DynamicService {
     return this.http.get(`${environment.apiUrl}/document-types/${id}`);
   }
 
+  getUserRole(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/user-informations`, {
+      // headers: new HttpHeaders({
+      //   'Content-Type': 'application/json'
+      // })
+    });
+  }
+
 }

@@ -47,8 +47,8 @@
 
       
       <dxo-editing   
-         mode="row" 
-         [allowUpdating]="true"
+         mode="row"  
+         [allowUpdating]="helper.permissionMethod(['preconization.interventions.update'])"
          [useIcons]="true">
       </dxo-editing> 
       <dxi-column dataField="id" caption="id" alignment="left"></dxi-column>
@@ -58,7 +58,7 @@
       <dxi-column dataField="zone" caption="Zone"></dxi-column>
       <dxi-column dataField="parcel_id" caption="Parcelle"></dxi-column>
       <!-- <dxi-column dataField="article_count" caption="Nombre d'article"></dxi-column> -->
-      <dxi-column dataField="date" caption="Date prevue"></dxi-column>
+      <dxi-column dataField="date" dataType="date" caption="Date prevue"></dxi-column>
       <dxi-column dataField="state" caption="Etat" cellTemplate="cellTemplate2"></dxi-column>
 
       <!-- <dxi-column dataField="id" cellTemplate="cellTemplate" caption="" alignment="left"></dxi-column> -->

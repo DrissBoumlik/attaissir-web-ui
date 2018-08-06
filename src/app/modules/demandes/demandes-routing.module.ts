@@ -22,7 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'afficher/:id',
-        component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.orders.grid'] }
+        component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.orders.show'] }
       },
 
     ]
