@@ -3,7 +3,7 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Liste des contrats</h2>
-      <a class="siam-header-btn-new" routerLink="/contrats/ajouter" title="Ajouter contrat" appPermissionHidden='[agreement.contracts.store]' appPermissionHidden><i
+      <a class="siam-header-btn-new" routerLink="/contrats/ajouter" title="Ajouter contrat"  [appPermissionHidden]="['agreement.contracts.store']" ><i
         class="fa fa-plus"></i></a>
     </div>
   </div>
@@ -61,7 +61,7 @@
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
         <dxo-search-panel [visible]="false"></dxo-search-panel>
- 
+
         <dxi-column cellTemplate="cellTemplate" [visible]="helper.permissionMethod(['agreement.contracts.grid'])" [allowSorting]="false" caption="" width="70px">
         </dxi-column>
         <dxi-column cellTemplate="cellTemplate33" [visible]="helper.permissionMethod(['agreement.contracts.update'])" [allowSorting]="false" caption="" width="70px">
@@ -70,7 +70,7 @@
         <dxi-column dataField="code" [hidingPriority]="2" caption="Code">
         </dxi-column>
         <dxi-column dataField="third_cin" caption="CIN" i18n-caption>
-        </dxi-column> 
+        </dxi-column>
         <dxi-column dataField="third_full_name" cellTemplate="thirdNameTemplate" caption="Nom" datatype="Text"></dxi-column>
         <dxi-column dataField="application_date" [hidingPriority]="4" caption="Date d'application" dataType="date">
         </dxi-column>

@@ -368,7 +368,7 @@ export class Helper {
           per_array[i] = false;
         }
         permissions_decrypt.forEach((it) => {
-          for (let i = 0; i < value.length; i++) { 
+          for (let i = 0; i < value.length; i++) {
             if (it === value[i]) {
               per_array[i] = true;
             }
@@ -391,7 +391,6 @@ export class Helper {
       }
     } else {
       return false;
-      console.log('permission is empty');
-    }
+     }
   }
 }
