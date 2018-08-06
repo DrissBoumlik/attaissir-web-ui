@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from '../../../../../node_modules/rxjs/Rx';
-import { environment } from '../../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from '../../../../../node_modules/rxjs/Rx';
+import {environment} from '../../../../environments/environment';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +43,16 @@ export class UsersService {
     });
   }
 
-  getStructures(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/structures-with-zones`, {
+  getStructures(userId = -1): Observable<any> {
+    if (userId === -1) {
+      return this.http.get(`${environment.apiUrl}/structures-with-zones`, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
+    }
+
+    return this.http.get(`${environment.apiUrl}/structures-with-zones/${userId}`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
