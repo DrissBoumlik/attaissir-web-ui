@@ -12,15 +12,15 @@ export class ListComponent implements OnInit {
 
   rolesDataSource: any = {};
 
-  constructor(public roleService: RolesService,_router: Router,private router: Router) { }
-  
+  constructor(public roleService: RolesService, _router: Router, private router: Router) { }
+
   ngOnInit() {
 
     // this.roleService.getRoles().subscribe((data: any) => {
     //   this.rolesDataSource = data.data;
     //   console.log(data.data);
     // }, err => {
-  
+
     // });
 
     this.rolesDataSource.store = new custom_store({

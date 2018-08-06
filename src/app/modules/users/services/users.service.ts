@@ -1,15 +1,16 @@
-import {Injectable} from '@angular/core';
-import {Observable} from '../../../../../node_modules/rxjs/Rx';
-import {environment} from '../../../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from '../../../../../node_modules/rxjs/Rx';
+import { environment } from '../../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root' 
+  providedIn: 'root'
 })
 export class UsersService {
 
   constructor(private http: HttpClient) {
   }
+
 
   getUserInfo(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/user-informations`, {
@@ -34,6 +35,7 @@ export class UsersService {
       })
     });
   }
+
 
   editUser(data, id): Observable<any> {
     return this.http.put(`${environment.apiUrl}/users/${id}`, JSON.stringify(data), {

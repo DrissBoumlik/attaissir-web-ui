@@ -21,6 +21,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.currentUrl = this.router.url.split('/')[1];
+
     this.tenantId = localStorage.getItem('tenantId');
 
     this.mainMenu = [
@@ -55,9 +56,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/jeunepromoteurs/liste',
         description: 'Gestion des Centre de distribution',
         subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouveau Centre de distribution', url: '/jeunepromoteurs/ajouter' },
           { icon: 'flaticon-list', name: 'Liste des Centre de distribution', url: '/jeunepromoteurs/liste' },
-
         ],
         disabled: 'false'
       },
@@ -66,7 +65,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         icon: 'flaticon-open-box',
         url: '/stock/situation',
         description: 'Gestion de stock',
-        permission: 'preconization.incidents.index',
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
           { icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation' },
@@ -91,6 +89,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des interventions',
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
+          { icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner' },
           { icon: 'flaticon-plus', name: 'Nouvelle préconisation', url: '/interventions/selectionner' },
           { icon: 'flaticon-list', name: 'Liste des interventions', url: '/interventions/liste' },
         ],

@@ -62,6 +62,7 @@ export class AddComponent implements OnInit {
 
   // tree elements
   selectionChanged(e) {
+
     const value = e.node;
     if (this.isProduct(value)) {
       this.processProduct({

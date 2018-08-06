@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {UsersService} from '../../services/users.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../services/users.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import custom_store from '../../../../../../node_modules/devextreme/data/custom_store';
 
 @Component({
@@ -36,7 +36,7 @@ export class ListComponent implements OnInit {
           });
       }
     });
-    
+
   }
 
   onStartEdit = (e) => {
@@ -47,6 +47,6 @@ export class ListComponent implements OnInit {
     );
   }
 
-  
+
 
 }

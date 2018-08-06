@@ -1,0 +1,160 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+      <h2>GÉNÉRATEUR DE CARTES  <span class="workingMode" [ngClass]="{'on': !start}"></span></h2>
+    </div>
+
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body m-portlet__body--no-padding" style="padding: 30px">
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-7">
+            <dx-data-grid
+              #ref1
+              id="gridContainer"
+              keyExpr="ID"
+
+              [dataSource]="card_generator"
+              [columnHidingEnabled]="true"
+              [allowColumnReordering]="true"
+              [(selectedRowKeys)]="selectedItems"
+              [columnAutoWidth]="true"
+              [remoteOperations]="{ groupPaging: true }"
+
+               (onSelectionChanged)="selectionChangedHandler()"
+
+              [hoverStateEnabled]="true"
+              [showBorders]="true"
+
+
+
+            >
+
+              <!--<dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>-->
+
+              <dxo-remote-operations
+                [sorting]="true"
+                [paging]="true">
+              </dxo-remote-operations>
+
+               <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+
+              <dxo-sorting mode="multiple"></dxo-sorting>
+              <dxo-filter-row
+                [visible]="true" [applyFilter]="applyFilter"></dxo-filter-row>
+
+              <dxo-header-filter [visible]="false"></dxo-header-filter>
+              <dxo-selection mode="multiple"></dxo-selection>
+
+              <dxo-paging [pageSize]="10"></dxo-paging>
+
+              <dxo-column-chooser [enabled]="false" mode="select"></dxo-column-chooser>
+
+              <dxo-search-panel [visible]="false"></dxo-search-panel>
+
+              <dxo-group-panel [visible]="false"></dxo-group-panel>
+              <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+
+              <dxi-column dataField="enabled"  [width]="'40px'" [allowFiltering]="false" cellTemplate="statusTemplate" caption=" " i18n-caption>
+              </dxi-column>
+              <dxi-column dataField="full_name" caption="Nom complet" i18n-caption>
+              </dxi-column>
+              <dxi-column dataField="cin" caption="CIN" i18n-caption>
+              </dxi-column>
+              <dxi-column dataField="cda" caption="CDA" i18n-caption>
+              </dxi-column>
+               <dxi-column dataField="zone" caption="Zone" i18n-caption>
+              </dxi-column>
+
+              <dxi-column dataField="rfid" caption="Rfid" i18n-caption>
+              </dxi-column>
+
+               <div *dxTemplate="let data of 'statusTemplate'">
+                 <span >
+                       <span class="workingMode" [ngClass]="{'on': data.value}"></span>
+                  </span>
+              </div>
+
+
+            </dx-data-grid>
+          </div>
+          <div class="col-5">
+
+
+
+            <!--    <img src="http://s1.dboumlik.code.go/cards/4/generate?face=recto&amp;id=4&amp;rfid=333&amp;type=agri&amp;full_name=ZKAL ABDENBI &amp;cin=GK73601" width="350"> !-->
+             <img  *ngIf="img_scr_recto !== ''" [src]="img_scr_recto" width="350">
+             <img  *ngIf="img_scr_verso !== ''" [src]="img_scr_verso" width="350">
+
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+  </div>
+
+  <div class="dx-fieldset">
+    <div class="dx-field">
+      <div >
+
+
+        <div class="container">
+          <div class="row">
+            <div class="col-7">
+
+              <div class="pull-left">
+
+                <dx-button width="160" [icon]="start_btn.icon"  [text]="start_btn.text" [type]="start_btn.type" (onClick)="startFunc()"></dx-button>
+
+                <dx-button width="190" icon="fa fa-plus"  text="NOUVELLE CARTE" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button>
+                <dx-button width="140" icon="fa  fa-ban"   text="ANNULER" type="danger" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active"   style="margin-left: 20px; margin-right: 20px;"  ></dx-button>&nbsp;
+              </div>
+            </div>
+            <div class="col-5">
+
+              <div class="pull-right">
+                <dx-button width="145" (click)="export()" icon="fa fa-cloud-download"  text="EXPORTER"  type="primary"    style="margin-left: 10px; margin-right: 10px;"    ></dx-button>
+                <dx-button width="130" icon="fa fa-check"  text="VALIDER"  type="default"     style="margin-left: 10px; margin-right: 0px;"   ></dx-button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+<input type="text" name="rfid" style="width: 0; height: 0;border: none;"  #rfid>
+<input class="rfid-input" type="text"   name="focusout" style="width: 0; height: 0;border: none;"  #focusout>
+
