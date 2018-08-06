@@ -137,11 +137,12 @@
               <dxi-column dataField="id"
                           cellTemplate="cellTemplate"
                           caption="" width="200"
-                          alignment="left"></dxi-column>
+                          alignment="center"></dxi-column>
               <div *dxTemplate="let data of 'cellTemplate'">
                 <a (click)="showStructureZones(data)"
-                   style="cursor:pointer; text-align: left;color: black">Assigner
-                  les zones</a>
+                   style="cursor:pointer; text-align: left;color: black">
+                  <i class="flaticon-add" style="margin-right: 7px"></i>
+                  Assigner les zones</a>
               </div>
             </dx-data-grid>
 
