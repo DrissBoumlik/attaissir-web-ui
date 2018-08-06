@@ -3,10 +3,10 @@ import { Stock } from '../../../../shared/classes/stock';
 import CustomStore from 'devextreme/data/custom_store';
 import { StockService } from '../../services/stock.service';
 import { ActivatedRoute } from '@angular/router';
-import { WarehouseService } from '../../../distribution-center/services/warehouse.service';
 import { DxDataGridComponent } from 'devextreme-angular';
 import { ToastrService } from 'ngx-toastr';
 import * as _ from 'lodash';
+import { WarehouseService } from '../../../warehouse/service/warehose.service';
 
 @Component({
   selector: 'app-replenishment',
@@ -53,7 +53,9 @@ export class ReplenishmentComponent implements OnInit {
                     row.threshold = war.threshold;
                     row.qr = war.qr;
                     row.dt = { warehouse_id: war.warehouse_id, article_id: war.article_id, provider_id: war.article_third_party_id };
-                    return row;
+                    if (row.qr <= row.threshold) {
+                      return row;
+                    }
                   }),
                   totalCount: stk.totalCount
                 };

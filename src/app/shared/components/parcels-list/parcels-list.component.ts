@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Helper } from '../../classes/helper';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-parcels-list',
@@ -13,7 +15,8 @@ export class ParcelsListComponent implements OnInit {
 
   helper: any;
 
-  constructor() {
+  constructor(private router: Router,
+    private toastr: ToastrService) {
     this.helper = Helper;
   }
 

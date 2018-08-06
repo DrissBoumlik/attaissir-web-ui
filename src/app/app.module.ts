@@ -36,15 +36,14 @@ import { ArticlesModule } from './modules/articles/articles.module';
 import { MouvementsModule } from './modules/mouvements/mouvements.module';
 import { InterventionsModule } from './modules/interventions/interventions.module';
 import { DemandesModule } from './modules/demandes/demandes.module';
-
 import { UsersModule } from './modules/users/users.module';
-import { PermissionDirective } from './_directives/permission.directive';
 import {CardGeneratorModule} from "./modules/card-generator/card-generator.module";
+import { PermissionGuard } from './shared/directives/guard.directive';
 
 @NgModule({
   declarations: [
     ThemeComponent,
-    AppComponent, PermissionDirective
+    AppComponent
   ],
   imports: [
     LayoutModule,
@@ -90,7 +89,7 @@ import {CardGeneratorModule} from "./modules/card-generator/card-generator.modul
     FormsModule,
     DxPivotGridModule,
     DxTemplateModule,
-    DxCheckBoxModule,
+    DxCheckBoxModule
   ],
   providers: [{
     provide: LOCALE_ID,
@@ -105,7 +104,8 @@ import {CardGeneratorModule} from "./modules/card-generator/card-generator.modul
   {
     provide: ErrorHandler,
     useClass: SiamErrorHandler
-  }
+  },
+    PermissionGuard
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

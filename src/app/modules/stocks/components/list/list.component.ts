@@ -3,9 +3,9 @@ import { Stock } from '../../../../shared/classes/stock';
 import { StockService } from '../../services/stock.service';
 import { ActivatedRoute } from '@angular/router';
 import CustomStore from 'devextreme/data/custom_store';
-import { WarehouseService } from '../../../distribution-center/services/warehouse.service';
 import { isArray } from 'util';
 import { Helper } from '../../../../shared/classes/helper';
+import { WarehouseService } from '../../../warehouse/service/warehose.service';
 
 
 @Component({
@@ -55,8 +55,10 @@ export class ListComponent implements OnInit {
                     row.category_name = war.category_name;
                     row.sub_category_name = war.sub_category_name;
                     row.warehouse_zone_name = war.warehouse_zone_name;
+                    row.warehouse_zone_type = war.warehouse_zone_type;
                     row.article_name = war.article_name;
-                    row.threshold = war.threshold ? war.threshold : 'pas de données';
+                    row.article_code = war.article_code;
+                    row.threshold = war.threshold ? war.threshold : '';
                     return row;
                   }),
                   totalCount: stk.totalCount

@@ -12,6 +12,7 @@ declare let mLayout: any;
 export class AsideNavComponent implements OnInit, AfterViewInit {
   public sections: { icon: string, name: string, url: string }[];
   private currentUrl: string;
+  tenantId: string;
   mainMenu: any;
 
   constructor(private router: Router) {
@@ -21,6 +22,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.currentUrl = this.router.url.split('/')[1];
 
+    this.tenantId = localStorage.getItem('tenantId');
 
     this.mainMenu = [
       {
@@ -54,9 +56,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/jeunepromoteurs/liste',
         description: 'Gestion des Centre de distribution',
         subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouvel Centre de distribution', url: '/jeunepromoteurs/ajouter' },
           { icon: 'flaticon-list', name: 'Liste des Centre de distribution', url: '/jeunepromoteurs/liste' },
-
         ],
         disabled: 'false'
       },
@@ -69,7 +69,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
           { icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation' },
           { icon: 'flaticon-plus', name: 'Approvisionnement de stock', url: '/stock/reappro' },
-
           {
             name: 'Liste des mouvements', icon: 'fa fa-exchange', url: '/mouvements',
             description: 'Liste des mouvements', disabled: 'false'
@@ -90,14 +89,17 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des interventions',
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
-          { icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner' }
+          { icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner' },
+          { icon: 'flaticon-plus', name: 'Nouvelle préconisation', url: '/interventions/selectionner' },
+          { icon: 'flaticon-list', name: 'Liste des interventions', url: '/interventions/liste' },
         ],
         disabled: 'false'
       },
       {
         name: 'Mon stock',
         icon: 'fa fa-archive',
-        url: '/mouvements/mon_stock',
+        url: '/stock/situation',
+        queryParams: { magazin: this.tenantId },
         description: 'mon stock',
         disabled: 'false'
       },
@@ -122,6 +124,30 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Preconisations intrants',
         disabled: 'false'
       },
+      {
+        name: 'Roles',
+        icon: 'flaticon-lock',
+        url: '/roles/liste',
+        description: 'Gestion des roles',
+        subMenu: [
+          { icon: 'flaticon-plus', name: 'Nouveau role', url: '/roles/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des roles', url: '/roles/liste' },
+
+        ],
+        disabled: 'false'
+      },
+      {
+        name: 'Utilisateurs',
+        icon: 'fa fa-users',
+        url: '/utilisateurs/liste',
+        description: 'Gestion des roles',
+        subMenu: [
+          { icon: 'flaticon-plus', name: 'Nouvel utilisateur', url: '/utilisateurs/ajouter' },
+          { icon: 'flaticon-list', name: 'Liste des utilisateurs', url: '/utilisateurs/liste' },
+
+        ],
+        disabled: 'false'
+      }
     ];
 
   }

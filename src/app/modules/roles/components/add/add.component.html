@@ -7,10 +7,10 @@
   </div>
 </div>
 <div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " style="overflow: auto;white-space: nowrap;">
     <div class="m-portlet__body">
       <form style="margin-top: 20px"
-            (submit)="onFormSubmit($event)">
+            (submit)="onFormSubmit($event)" >
         <dx-form id="roleForm"
                  [formData]="role"
                  [readOnly]="false"
@@ -23,7 +23,7 @@
               dataField="description">
               <dxo-label
                 text="Designation">
-              </dxo-label>
+              </dxo-label> 
               <dxi-validation-rule
                 type="required"
                 message="La Designation est obligatoire">
@@ -34,71 +34,42 @@
           <dxi-item itemType="group" caption="Choix des permissions">
             <div>
               <div class="col-12">
-                <div class="col-12">
-                  <label for="permissions">Permissions</label>
+                <div style="display: inline;min-width: 200px;" >
+                  <!-- <br *ngIf="j%5 == 0"> -->
+                  <label class="permissions-label" style="margin-top: 20px;" >
+                    <input type="checkbox" class="permissions-checkbox" [(checked)]="checkAll" (click)="selecteAll()">
+                    <span>Tous</span>
+                  </label>
                 </div>
-                <div class="col-offset-2 col-10">
-                    <div class="col-4">Action</div>
-                    <div class="col-6">
-                        <button type="button" value="">Description1</button>
-                        <button type="button" value="">Description1</button>
+                <div class="" style="margin-left: 30px;margin-top: 20px;" *ngFor="let permission of permissions; let i = index">
+                    <div style="display: inline" class="action-class" ><label style="width: 200px;color: #90959a;font-weight: 400;">{{permission.name}}</label></div>
+                    <!-- <div>{{permission.actions | json}}</div> -->
+                    <div class="" style="display: inline-block;margin-bottom:10px">
+                      <div style="display: inline;min-width: 200px;" *ngFor="let action of permission.permissions; let j = index">
+                        <!-- <br *ngIf="j%5 == 0"> -->
+                        <label class="permissions-label" style="margin-top: 20px;" >
+                          <input type="checkbox" class="permissions-checkbox" [checked]="checkItem" (click)="onChangeValue(i,j)">
+                          <span>{{action.action.name}}</span>
+                        </label>
+                      </div>
+                      <div *ngIf="permission.permissions.length>0" style="display: inline;min-width: 200px;" >
+                        <!-- <br *ngIf="j%5 == 0"> -->
+                        <label class="permissions-label" style="margin-top: 20px;" >
+                          <input type="checkbox" class="permissions-checkbox" [(checked)]="isChecked" (click)="selecteLigne(i,permission.id)">
+                          <span>Tous</span>
+                        </label>
+                      </div>
                     </div>
                 </div>
               </div>
             </div>
           </dxi-item>
 
-
-          <!-- <dxi-item itemType="group" caption="Choix des permissions">
-
-            <div class="dx-field">
-              <div class="dx-field-label">les permissions</div>
-              <div class="dx-field-value">
-                <dx-select-box
-                  [dataSource]="listOfPermissions"
-                  displayExpr="description"
-                  valueExpr="id"
-                  [searchEnabled]="true"
-                  (onItemClick)="addToChoosingPermission($event)"
-                ></dx-select-box>
-              </div>
-            </div>
-
-
-          </dxi-item> -->
-
-          <!-- <dxi-item itemType="group">
-
-            <dx-data-grid
-              id="gridContainer"
-              keyExpr="id"
-              [dataSource]="choosingPermissions"
-              [allowColumnReordering]="true"
-              [showColumnLines]="true"
-              [showRowLines]="true"
-              [showBorders]="true"
-              [rowAlternationEnabled]="true"
-              [columnAutoWidth]="true"
-              [noDataText]="'Aucune permision n\'est ajoute!'"
-              (onRowRemoved)="removeItemFromChoosingPermissions($event)">
-
-              <dxo-paging [enabled]="true"></dxo-paging>
-              <dxo-editing
-                mode="row"
-                [allowDeleting]="true">
-              </dxo-editing>
-              <dxi-column
-                caption="les permissions choisis"
-                dataField="description"></dxi-column>
-            </dx-data-grid>
-
-          </dxi-item> -->
-
-          <!-- <dxi-item
+          <dxi-item
             itemType="button"
             alignment="right"
             [buttonOptions]="buttonOptions">
-          </dxi-item> -->
+          </dxi-item>
         </dx-form>
       </form>
     </div>

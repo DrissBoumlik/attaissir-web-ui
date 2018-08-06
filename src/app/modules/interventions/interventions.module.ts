@@ -15,14 +15,12 @@ import {
 } from 'devextreme-angular';
 import { AddComponent } from './components/add/add.component';
 import { SharedModule } from '../../shared/shared.module';
-import { DxiItemModule } from 'devextreme-angular/ui/nested/item-dxi';
-import { DxiGroupItemModule } from 'devextreme-angular/ui/nested/group-item-dxi';
-import { MouvementsRoutingModule } from '../mouvements/mouvements-routing.module';
 import { AddTempleteComponent } from './components/add-templete/add-templete.component';
 import { ListComponent } from './components/list/list.component';
 
 import { EditComponent } from './components/edit/edit.component';
 import { EtatDirective } from '../../shared/directives/etat.directive';
+import { LayoutModule } from '../../theme/layouts/layout.module';
 
 @NgModule({
   imports: [
@@ -45,6 +43,8 @@ import { EtatDirective } from '../../shared/directives/etat.directive';
     DxValidationSummaryModule,
     DxCheckBoxModule,
     DxTreeListModule,
+    DxTextBoxModule,
+    LayoutModule,
     DxTextBoxModule
   ],
   declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent]

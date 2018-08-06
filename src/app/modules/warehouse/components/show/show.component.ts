@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { WarehoseService } from '../../service/warehose.service';
+import { WarehouseService } from '../../service/warehose.service';
 
 @Component({
   selector: 'app-show',
@@ -11,7 +11,7 @@ export class ShowComponent implements OnInit {
 
   magasin: any = null;
 
-  constructor(private warehoseService: WarehoseService,
+  constructor(private WarehouseService: WarehouseService,
     private router: Router,
     private route: ActivatedRoute) {
     this.magasin = [];
@@ -23,7 +23,7 @@ export class ShowComponent implements OnInit {
 
     this.route.params.subscribe(
       params => {
-        this.warehoseService.getWarehouse(params.id).subscribe((response) => {
+        this.WarehouseService.getWarehouse(params.id).subscribe((response) => {
           this.magasin = response.data;
         });
       });

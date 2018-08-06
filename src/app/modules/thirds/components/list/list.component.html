@@ -18,7 +18,7 @@
     id="gridContainer"
     [dataSource]="third_parties"
     [columnHidingEnabled]="false"
-    [allowColumnResizing]="true"
+    [allowColumnResizing]="false"
     [columnAutoWidth]="true"
     [filterValue]="[]"
     [allowColumnReordering]="true"
@@ -55,7 +55,6 @@
 
     <dxo-filter-row
       [visible]="true" [applyFilter]="applyFilter"></dxo-filter-row>
-    <dxo-filter-panel [visible]="true"></dxo-filter-panel>
 
 
     <dxo-header-filter [visible]="true"></dxo-header-filter>
@@ -101,7 +100,7 @@
     </dxi-column>
     <dxi-column dataField="full_name" [caption]="title"  *ngIf="thirdType !== 'aggregated'" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="cin" caption="CIN" *ngIf="thirdType !== 'aggregated'" i18n-caption>
+    <dxi-column dataField="cin" caption="CIN" i18n-caption>
     </dxi-column>
     <dxi-column dataField="email" caption="Email" i18n-caption>
     </dxi-column>
@@ -127,7 +126,7 @@
     <div *dxTemplate="let data of 'cellTemplate1'">
       <i style="font-size: 150%; align-content: center; cursor: pointer" class="fa {{ getGender(data.data) }} fa-5x"></i>
     </div>
-    <dxi-column dataField="civil_status" caption="Situation" *ngIf="thirdType === 'aggregated'" i18n-caption>
+    <dxi-column dataField="civil_status" caption="Situation" [allowFiltering]="false" *ngIf="thirdType === 'aggregated'" i18n-caption>
     </dxi-column>
     <dxi-column dataField="children_number" caption="Nombre d'enfants" *ngIf="thirdType === 'aggregated'" i18n-caption>
     </dxi-column>

@@ -29,6 +29,7 @@ export class Third {
   death_date: Date;
   sexe: string; // 'f', 'm'
   address: string;
+  address_ar: string;
   city: string;
   district: string;
   commandment: string;

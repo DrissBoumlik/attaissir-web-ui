@@ -20,9 +20,13 @@ export class AuthenticationService {
     return this.http.post(`${environment.apiUrl}/login`, JSON.stringify({ email: email.toLowerCase(), password: password }), this.options);
   }
 
+  myPermission(): any {
+    return this.http.get(`${environment.apiUrl}/my-permissions`, this.options);
+  }
+
   refresh = () => {
     return this.http.get(`${environment.apiUrl}/refresh`);
-  }
+  };
 
   logout() {
     // remove user from local storage to log user out
@@ -32,9 +36,9 @@ export class AuthenticationService {
 
   getToken = () => {
     return localStorage.getItem('token');
-  }
+  };
 
   getTanent = () => {
     return localStorage.getItem('tenantId');
-  }
+  };
 }

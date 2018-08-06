@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Helper } from '../../../../shared/classes/helper';
 import { MouvementsService } from '../../service/mouvements.service';
-import { CommandeService } from '../../../commande/service/commande.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { WarehoseService } from '../../../warehouse/service/warehose.service';
+import { WarehouseService } from '../../../warehouse/service/warehose.service';
 import { ArticleCategiesService } from '../../../articles/services/article-categies.service';
 import { ArticlesService } from '../../../articles/services/articles.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { DemandesService } from '../../../demandes/service/demandes.service';
 
 @Component({
   selector: 'app-add',
@@ -28,17 +28,22 @@ export class AddComponent implements OnInit {
   emetteurOptions: any;
   commandeOptions: any;
   recepteurOptions: any;
+  category: string;
+  subCategory: string;
+  article: string;
   familleOptions: any;
   subFamilleOptions: any;
   articleOptions: any;
   addProduct: any;
   buttonOptions: any;
   helper: any;
+  unit: string;
+  rules: any;
 
   constructor(public mouvementService: MouvementsService,
-    public commandeService: CommandeService,
+    public commandeService: DemandesService,
     public thirdService: ThirdsService,
-    public warehouseService: WarehoseService,
+    public warehouseService: WarehouseService,
     public familleService: ArticleCategiesService,
     public articleService: ArticlesService,
     private router: Router,
@@ -51,43 +56,32 @@ export class AddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.rules = { 'X': /[0-9]+/ };
     this.addProduct = {
       text: 'AJOUTER',
       type: 'success',
       useSubmitBehavior: false,
       onClick: (e) => {
-        console.log(e);
-
-        this.products.push({
-          'famille_id': this.stock_operation.famille,
-          'sub_famille_id': this.stock_operation.sub_famille,
-          'article_id': this.stock_operation.article,
-          'quantity1': this.stock_operation.quantity
-        });
+        console.log(this.stock_operation);
+        if (this.stock_operation.quantity > 0) {
+          this.products.push({
+            category: this.category,
+            subCategory: this.subCategory,
+            article: this.article,
+            famille_id: this.stock_operation.famille,
+            sub_famille_id: this.stock_operation.sub_famille,
+            article_id: this.stock_operation.article,
+            quantity1: this.stock_operation.quantity
+          });
+        } else {
+          this.toastr.warning('La quantité doit être supérieure à 0.');
+        }
       }
     };
     this.buttonOptions = {
       text: 'ENREGISTER',
       type: 'success',
-      useSubmitBehavior: true,
-      onClick: () => {
-        console.log(this.stock_operation);
-        console.log(this.products);
-        const data = {
-          'stock_operation': this.stock_operation,
-          'products': this.products
-        };
-        this.mouvementService.addMouvement(data).subscribe(d => {
-          console.log(d);
-          d = this.helper.dataFormatter(d, false);
-          this.toastr.success(
-            `Mouvement ajouté avec succès.`);
-          this.router.navigate([`/mouvements/afficher/${d['id']}`]);
-        }, err => {
-          console.log(err);
-          this.toastr.error(err.error.message);
-        });
-      }
+      useSubmitBehavior: true
     };
 
     this.mouvementService.getMouvementVars().subscribe((data) => {
@@ -266,6 +260,8 @@ export class AddComponent implements OnInit {
       displayExpr: 'name',
       valueExpr: 'id',
       searchEnabled: true,
+      searchMode: 'startswith',
+      searchExpr: ['name'],
       dataSource: new CustomStore({
         load: (loadOptions: any) => {
           return this.familleService.getArticleCategoriesDx(loadOptions)
@@ -281,11 +277,14 @@ export class AddComponent implements OnInit {
         }
       }),
       onSelectionChanged: (event) => {
+        this.category = event.selectedItem.name;
         this.subFamilleOptions = {
-          label: 'Sous Famille',
+          label: 'Sous-Famille',
           displayExpr: 'name',
           valueExpr: 'id',
           searchEnabled: true,
+          searchMode: 'startswith',
+          searchExpr: ['name'],
           dataSource: new CustomStore({
             load: (loadOptions: any) => {
               return this.familleService.getArticleSubCategories(event.selectedItem.id)
@@ -301,11 +300,14 @@ export class AddComponent implements OnInit {
             }
           }),
           onSelectionChanged: (e) => {
+            this.subCategory = e.selectedItem.name;
             this.articleOptions = {
-              label: 'Sous Famille',
+              label: 'Article',
               displayExpr: 'name',
               valueExpr: 'id',
               searchEnabled: true,
+              searchMode: 'startswith',
+              searchExpr: ['name'],
               dataSource: new CustomStore({
                 load: (loadOptions: any) => {
                   return this.articleService.getArticlesByFamily(e.selectedItem.id)
@@ -320,12 +322,36 @@ export class AddComponent implements OnInit {
                       throw error;
                     });
                 }
-              })
+              }),
+              onSelectionChanged: (evnt) => {
+                this.article = evnt.selectedItem.name;
+                this.unit = evnt.selectedItem.unit;
+              }
             };
           }
         };
       }
     };
+  }
+
+  AddMovement = (e) => {
+    console.log(this.stock_operation);
+    console.log(this.products);
+    const data = {
+      'stock_operation': this.stock_operation,
+      'products': this.products
+    };
+    this.mouvementService.addMouvement(data).subscribe(d => {
+      console.log(d);
+      d = this.helper.dataFormatter(d, false);
+      this.toastr.success(
+        `Mouvement ajouté avec succès.`);
+      this.router.navigate([`/mouvements/afficher/${d['id']}`]);
+    }, err => {
+      console.log(err);
+      this.toastr.error(err.error.message);
+    });
+    e.preventDefault();
   }
 
 }

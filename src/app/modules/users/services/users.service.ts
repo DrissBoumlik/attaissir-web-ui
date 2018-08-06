@@ -11,8 +11,34 @@ export class UsersService {
   constructor(private http: HttpClient) {
   }
 
+
+  getUserInfo(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/user-informations`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getUser(id: any): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/users/` + id, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   saveUser(data): Observable<any> {
     return this.http.post(`${environment.apiUrl}/users`, JSON.stringify(data), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+
+  editUser(data, id): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/users/${id}`, JSON.stringify(data), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -43,4 +69,12 @@ export class UsersService {
     });
   }
 
+  getUsersDx(params?: any): Observable<any[]> {
+    return this.http.post<any[]>(`${environment.apiUrl}/users/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
 }
+

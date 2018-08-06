@@ -3,7 +3,15 @@ import { CommonModule } from '@angular/common';
 import { ArchwizardModule } from 'angular-archwizard';
 import { WizardComponent } from './components/wizard/wizard.component';
 import {
-  DxButtonModule, DxDataGridModule, DxDateBoxModule, DxFormModule, DxListModule, DxPopupModule, DxTemplateModule,
+  DxButtonModule,
+  DxDataGridModule,
+  DxDateBoxModule, DxFileUploaderModule,
+  DxFormModule,
+  DxListModule,
+  DxNumberBoxModule,
+  DxPopupModule,
+  DxSelectBoxModule,
+  DxTemplateModule, DxTextAreaModule,
   DxTextBoxModule
 } from 'devextreme-angular';
 import { TiersFormComponent } from './components/tiers-form/tiers-form.component';
@@ -13,6 +21,8 @@ import { CommandeComponent } from './components/commande/commande.component';
 import { WarehouseComponent } from './components/warehouse/warehouse.component';
 import { RfidCardReaderComponent } from './components/rfid-card-reader/rfid-card-reader.component';
 import { ParcelsListComponent } from './components/parcels-list/parcels-list.component';
+import { RoleDirective } from './directives/role.directive';
+import { PermissionDirective } from './directives/permission.directive';
 
 @NgModule({
   imports: [
@@ -21,12 +31,16 @@ import { ParcelsListComponent } from './components/parcels-list/parcels-list.com
     DxFormModule,
     DxListModule,
     DxButtonModule,
+    DxNumberBoxModule,
     DxDataGridModule,
     DxTextBoxModule,
     DxDateBoxModule,
     FormsModule,
+    DxTextAreaModule,
     DxPopupModule,
-    DxTemplateModule
+    DxTemplateModule,
+    DxFileUploaderModule,
+    DxSelectBoxModule,
   ],
   exports: [
     WizardComponent,
@@ -36,13 +50,21 @@ import { ParcelsListComponent } from './components/parcels-list/parcels-list.com
     FormsModule,
     DxListModule,
     DxFormModule,
+    DxTextAreaModule,
     DxButtonModule,
+    DxSelectBoxModule,
     DxTextBoxModule,
     DxDataGridModule,
+    DxNumberBoxModule,
     ConseilleComponent,
+    DxDateBoxModule,
     WarehouseComponent,
+    DxPopupModule,
+    DxTemplateModule,
     RfidCardReaderComponent,
-    ParcelsListComponent
+    DxFileUploaderModule,
+    ParcelsListComponent,
+    PermissionDirective
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -52,6 +74,9 @@ import { ParcelsListComponent } from './components/parcels-list/parcels-list.com
     ConseilleComponent,
     WarehouseComponent,
     RfidCardReaderComponent,
-    ParcelsListComponent]
+    ParcelsListComponent,
+    RoleDirective,
+    PermissionDirective
+  ]
 })
 export class SharedModule { }

@@ -3,7 +3,7 @@
 
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2> Fiche demande N°  {{order.id}} </h2>
+      <h2> Fiche demande {{order.code}} </h2>
     </div>
 
 
@@ -34,21 +34,6 @@
                 <div class="col-4">
                   <div class="row">
                     <label class="col-12">
-                      Objet
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-                        {{order.object}}
-                      </p>
-
-                    </div>
-                  </div>
-
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
                       Date
                     </label>
                     <div class="col-12">
@@ -61,20 +46,6 @@
                   </div>
 
                 </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Note
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-                        {{order.note || 'Pas de donée'}}
-                      </p>
-
-                    </div>
-                  </div>
-                </div>
                 <div class="col-4" *ngIf="order.third_party">
                   <div class="row">
                     <label class="col-12">
@@ -86,6 +57,19 @@
                           {{order.third_party.full_name}}
                       </p>
 
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4" *ngIf="order.state">
+                  <div class="row">
+                    <label class="col-12">
+                      Etat
+                    </label>
+                    <div class="col-12">
+
+                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                        {{ helper.getStatut(order.state) }}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -128,6 +112,7 @@
                 [columnHidingEnabled]="true"
                 [allowColumnResizing]="false"
                 [allowColumnReordering]="true"
+                [columnAutoWidth]="true"
                 [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
                 KeyExpr="id">
 
@@ -137,7 +122,7 @@
                 <dxo-header-filter [visible]="true"></dxo-header-filter>
 
                 <dxo-group-panel [visible]="true"></dxo-group-panel>
-                <dxo-scrolling mode="virtual"></dxo-scrolling>
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                 <dxo-editing
                   mode="popup"
                   [useIcons]="true"

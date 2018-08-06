@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Incident } from '../../classes/Incident';
+import { Incident } from '../../../../shared/classes/Incident';
 import { ToastrService } from 'ngx-toastr';
 import { IncidentService } from '../../services/incident.service';
 import CustomStore from 'devextreme/data/custom_store';

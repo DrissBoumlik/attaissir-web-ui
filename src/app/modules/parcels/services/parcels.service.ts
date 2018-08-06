@@ -72,9 +72,9 @@ export class ParcelsService {
    * @param Parcel
    * @returns {Observable<Parcel>}
    */
-  editParcel(parcel: Parcel): Observable<Parcel> {
+  editParcel(parcel: any): Observable<Parcel> {
     return this.http.put<Parcel>(`${environment.apiUrl}/${this.routeName}/${parcel.id}`,
-      JSON.stringify(Parcel), {
+      JSON.stringify(parcel), {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })

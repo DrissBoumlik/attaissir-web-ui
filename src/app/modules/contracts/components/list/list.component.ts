@@ -92,7 +92,7 @@ export class ListComponent implements OnInit {
   }
 
   onCellPrepared = (e) => {
-    if (e.columnIndex === 9) {
+    if (e.columnIndex === 10) {
       if (typeof e.key !== 'undefined') {
         if (e.key.status !== 'ENCOURS') {
           e.cellElement.find('.dx-link-delete').remove();

@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Nouveau Mouvement</h2>
+      <h2 [appPermissionHidden]="['preconization.incidents.destroy1']" >Nouveau Mouvement</h2>
     </div>
   </div>
 </div>
@@ -10,7 +10,7 @@
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
 
-      <form>
+      <form (submit)="AddMovement($event)">
         <dx-form id="form"
                  [formData]="stock_operation"
                  [readOnly]="false"
@@ -70,9 +70,9 @@
             </dxi-item>
             <dxi-item dataField="sub_famille" editorType="dxSelectBox" [editorOptions]="subFamilleOptions">
               <dxo-label
-                text="Sous Famille" i18n-text>
+                text="Sous-Famille" i18n-text>
               </dxo-label>
-              <dxi-validation-rule type="required" message="Sous Famille est obligatoire"
+              <dxi-validation-rule type="required" message="Sous-Famille est obligatoire"
                                    i18n-message></dxi-validation-rule>
             </dxi-item>
 
@@ -108,9 +108,9 @@
                           style="padding-top: 2vh"
                           [columnAutoWidth]="true"
                           [noDataText]="'Aucan article n\'est ajouter!'">
-              <dxi-column dataField="famille_id" caption="Famille"></dxi-column>
-              <dxi-column dataField="sub_famille_id" caption="Sous famille"></dxi-column>
-              <dxi-column dataField="article_id" caption="Article"></dxi-column>
+              <dxi-column dataField="famille_id" [calculateDisplayValue]="'category'" caption="Famille"></dxi-column>
+              <dxi-column dataField="sub_famille_id" [calculateDisplayValue]="'subCategory'" caption="Sous famille"></dxi-column>
+              <dxi-column dataField="article_id" [calculateDisplayValue]="'article'" caption="Article"></dxi-column>
               <dxi-column dataField="quantity1" caption="Quantité globale"></dxi-column>
               <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
               <dxo-remote-operations

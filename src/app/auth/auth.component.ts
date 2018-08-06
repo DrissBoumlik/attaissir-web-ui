@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation, } from '@angular/core';
+import { AfterViewInit, Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScriptLoaderService } from '../_services/script-loader.service';
 import { Helpers } from '../helpers';
@@ -8,13 +8,16 @@ import { AlertService, AuthenticationService, UserService } from './_services';
 declare let $: any;
 declare let mUtil: any;
 
+import * as CryptoJS from 'crypto-js';
+
 @Component({
   selector: '.m-grid.m-grid--hor.m-grid--root.m-page',
   templateUrl: './templates/login-1.component.html',
+  styleUrls: ['./templates/login-1.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, AfterViewInit {
   model: any = {};
   loading = false;
   returnUrl: string;
@@ -63,6 +66,18 @@ export class AuthComponent implements OnInit {
           const currentUser: any = JSON.stringify(data);
           localStorage.setItem('currentUser', currentUser);
           localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
+
+          const _data = JSON.stringify(JSON.parse(currentUser)['data']['permissions']);
+
+          //  console.log(JSON.parse(currentUser)['data']['permissions']);
+
+          // Encrypt
+          const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(_data), 'Gra61884546585_55');
+          localStorage.setItem('permissions', ciphertext);
+
+
+
+
           if (!localStorage.getItem('tenantId')) {
             localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
           }
@@ -174,6 +189,19 @@ export class AuthComponent implements OnInit {
       if (!form.valid()) {
         e.preventDefault();
         return;
+      }
+    });
+  }
+
+  ngAfterViewInit() {
+    $('.toggle-password').click(function() {
+
+      $(this).toggleClass('fa-eye fa-eye-slash');
+      const input = $($(this).attr('toggle'));
+      if (input.attr('type') === 'password') {
+        input.attr('type', 'text');
+      } else {
+        input.attr('type', 'password');
       }
     });
   }

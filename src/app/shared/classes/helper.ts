@@ -342,5 +342,10 @@ export class Helper {
     return value;
   }
 
+  /*************** Custom Grid Grouping Value ***************/
+
+  public static groupedMouvementValue = (e) => {
+    return Helper.orderType(e.type).toUpperCase();
+  }
 
 }
