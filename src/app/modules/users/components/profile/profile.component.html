@@ -29,7 +29,16 @@
 
         <dxi-item itemType="group"  [colCount]="2">
 
-          <dxi-item dataField="Email"></dxi-item>
+          <dxi-item>
+            <div class="dx-field">
+              <div class="dx-field-label">Email</div>
+              <div class="dx-field-value">
+                <dx-text-box [value]="userInfo.email"></dx-text-box>
+              </div>
+            </div>
+          </dxi-item>
+
+
 
         </dxi-item>
 

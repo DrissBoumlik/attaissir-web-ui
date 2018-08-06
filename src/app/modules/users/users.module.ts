@@ -2,7 +2,15 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddComponent } from './components/add/add.component';
 import { SharedModule } from '../../shared/shared.module';
-import { DxButtonModule, DxListModule, DxPopupModule, DxSelectBoxModule, DxTemplateModule, DxTreeViewModule } from 'devextreme-angular';
+import {
+  DxButtonModule,
+  DxListModule,
+  DxLoadPanelModule,
+  DxPopupModule,
+  DxSelectBoxModule,
+  DxTemplateModule,
+  DxTreeViewModule
+} from 'devextreme-angular';
 import { UsersRoutingModule } from './users-routing.module';
 import { ListComponent } from './components/list/list.component';
 import { EditComponent } from './components/edit/edit.component';
@@ -20,6 +28,7 @@ import { AvatarModule } from 'ng2-avatar';
     DxTemplateModule,
     DxPopupModule,
     DxButtonModule,
+    DxLoadPanelModule,
     AvatarModule.forRoot()
 
   ],

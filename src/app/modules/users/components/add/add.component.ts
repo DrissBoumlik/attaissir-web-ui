@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AddComponent implements OnInit {
 
+  loadingVisible: Boolean = false;
   constructor(
     private userService: UsersService,
     private router: Router
@@ -171,17 +172,19 @@ export class AddComponent implements OnInit {
         structure_id: structure_id,
         zone_id: zone_id
       };
+      this.loadingVisible = true;
       this.userService.saveUser(data).subscribe(
         (response: any) => {
           NewComponent.notifyMe('utilisateur créé avec succès, Redirection.........', 'success');
           this.router.navigate([`/utilisateurs/liste`]);
-
+          this.loadingVisible = false;
         },
         (err) => {
           Object.keys(err.error.errors).forEach(
             (e: any) => {
               NewComponent.notifyMe(err.error.errors[e], 'error');
             });
+          this.loadingVisible = false;
         }
       );
     } else {

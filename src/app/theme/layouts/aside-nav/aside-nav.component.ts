@@ -27,6 +27,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
     this.mainMenu = [
       {
         name: 'Contrats',
+        permission : ['agreement.contracts.grid'],
         icon: 'flaticon-file',
         url: '/contrats/liste',
         description: 'Gestion des Contrats',
@@ -41,6 +42,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Agrégés',
+        permission : ['none'],
         icon: 'flaticon-users',
         url: '/tiers/liste',
         description: 'Gestion des agrégés',
@@ -52,6 +54,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Centre de distribution',
+        permission : ['distributionCenter.warehouses.grid'],
         icon: 'flaticon-user',
         url: '/jeunepromoteurs/liste',
         description: 'Gestion des Centre de distribution',
@@ -63,6 +66,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'Stock',
         icon: 'flaticon-open-box',
+        permission : ['none'],
         url: '/stock/situation',
         description: 'Gestion de stock',
         subMenu: [
@@ -85,6 +89,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'interventions',
         icon: 'flaticon-add',
+        permission : ['none'],
         url: '/interventions/liste',
         description: 'Gestion des interventions',
         subMenu: [
@@ -97,6 +102,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Mon stock',
+        permission : ['none'],
         icon: 'fa fa-archive',
         url: '/stock/situation',
         queryParams: { magazin: this.tenantId },
@@ -105,6 +111,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Cartes',
+        permission : ['agreement.cards.grid'],
         icon: 'flaticon-tabs',
         url: '/cartes/liste',
         description: 'Generateur de cartes',
@@ -112,6 +119,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Préconisations intrants',
+        permission : ['none'],
         icon: 'flaticon-list-1',
         url: '/preconisations-intrants/liste',
         description: 'Préconisations intrants',
@@ -119,6 +127,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Préconisations en mass',
+        permission : ['none'],
         icon: 'flaticon-file-1',
         url: '/interventions/appliquer-template-parcelle',
         description: 'Preconisations intrants',
@@ -126,6 +135,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Roles',
+        permission : ['none'],
         icon: 'flaticon-lock',
         url: '/roles/liste',
         description: 'Gestion des roles',
@@ -138,6 +148,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Utilisateurs',
+        permission : ['none'],
         icon: 'fa fa-users',
         url: '/utilisateurs/liste',
         description: 'Gestion des roles',
