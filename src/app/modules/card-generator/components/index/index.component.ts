@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import CustomStore from 'devextreme/data/custom_store';
  import {ToastrService} from "ngx-toastr";
  import {DxDataGridComponent} from "devextreme-angular";
+ import {environment} from "../../../../../environments/environment";
 
 
 @Component({
@@ -30,7 +31,7 @@ export class IndexComponent implements OnInit {
   @ViewChild('rfid') rfid: ElementRef;
   @ViewChild('focusout') focusout: ElementRef;
 
-  constructor(private cardGeneratorService : CardGeneratorService ,private toastr : ToastrService) {
+  constructor(private cardGeneratorService : CardGeneratorService ,private toastr : ToastrService,private router : Router ) {
     this.card_generator = {};
   }
 
@@ -99,22 +100,23 @@ export class IndexComponent implements OnInit {
   }
 
 
+  event_ = false;
+
   sendRfid() {
 
 
 
     this.rf_code = '';
     this.rfid.nativeElement.focus();
+
     this.rfid.nativeElement.addEventListener('input', () => {
       setTimeout(() => {
         this.rf_code = '';
         this.rf_code = this.rfid.nativeElement.value;
         this.rfid.nativeElement.value = '';
         this.focusout.nativeElement.focus();
+        this.event_ = true;
 
-
-        if(this.rf_code !== '') {
-          console.log(this.rf_code);
 
 
           let  rf_code = this.rf_code ;
@@ -153,7 +155,6 @@ export class IndexComponent implements OnInit {
 
 
 
-        }
 
 
       }, 1000);
@@ -168,6 +169,7 @@ export class IndexComponent implements OnInit {
 
   selectionChangedHandler(){
 
+    this.selectedItems[this.selectedItems.length-1].enabled = false;
     this.img_scr_recto = 'http://s1.dboumlik.code.go/cards/4/generate?face=recto&id=4&rfid=334&type=agri&full_name=' + this.selectedItems[this.selectedItems.length-1].full_name +'&code=' + this.selectedItems[this.selectedItems.length-1].code + '&full_name_ar=' + this.selectedItems[this.selectedItems.length-1].full_name_ar +'&amp;cin='+this.selectedItems[this.selectedItems.length-1].cin;
     this.img_scr_verso = 'http://s1.dboumlik.code.go/cards/4/generate?face=verso&id=4&rfid=334&type=agri&full_name=' + this.selectedItems[this.selectedItems.length-1].full_name +'&code=' + this.selectedItems[this.selectedItems.length-1].code + '&full_name_ar=' + this.selectedItems[this.selectedItems.length-1].full_name_ar +'&amp;cin='+this.selectedItems[this.selectedItems.length-1].cin;
 
@@ -178,12 +180,14 @@ export class IndexComponent implements OnInit {
 
   export(){
 
-    console.log('lala');
+    console.log('___');
     this.cardGeneratorService.export( {'cards' : this.selectedItems})
       .toPromise()
       .then(response => {
         console.log(response);
-        return response;
+        window.open(`${environment.apiUrl}/cards/download/${response.data}`);
+
+        return response.data;
       })
       .catch(error => {
         throw error;
