@@ -81,6 +81,11 @@ export class EditeComponent implements OnInit {
     } else {
       this.permissionsData.splice(index, 1);
     }
+    if (this.count == this.permissionsData.length) {
+      this.checkAll = true;
+    } else {
+      this.checkAll = false;
+    }
     console.log(this.permissionsData);
   }
 
@@ -240,11 +245,16 @@ export class EditeComponent implements OnInit {
 
     this.roleService.getUserPermissions(roleID).subscribe((data: any) => {
       this.permissionsData = data.data.permissions;
-      console.log(JSON.stringify(this.permissionsData));
+      if (this.count == this.permissionsData.length) {
+        this.checkAll = true;
+      }
     })
+
+
 
   }
 
 
 
 }
+
