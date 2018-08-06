@@ -18,7 +18,7 @@
       [allowColumnResizing]="false"
       [allowColumnReordering]="true"
       [columnAutoWidth]="true"
-      [remoteOperations]="{ paging: true, sorting: true, filtering: true, searching: true}"
+      [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
       [masterDetail]="{ enabled: false, template: 'detail' }"
       (onEditingStart)="onStartEdit($event.data.id)" 
       >
@@ -31,10 +31,7 @@
     
       <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
       <dxo-selection mode="multiple"></dxo-selection>
-      <dxo-remote-operations
-        [sorting]="true"
-        [paging]="true">
-      </dxo-remote-operations>
+
       <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
     
       <dxo-pager

@@ -85,11 +85,18 @@
                     <div class="m-dropdown__header m--align-center">
                       <div class="m-card-user m-card-user--skin-light">
 
-                        <a  routerLink="/utilisateurs/profile" routerLinkActive="active">
+                        <a>
+                          <div class="m-card-user__pic">
+                            <avatar [name]="currentUser.name" [displayType]="'circle'" [background]="'green'"></avatar>
+                          </div>
+                        </a>
+
+                        <!-- <a  routerLink="/utilisateurs/profile" routerLinkActive="active">
                         <div class="m-card-user__pic">
                           <avatar [name]="currentUser.name" [displayType]="'circle'" [background]="'green'"></avatar>
                         </div>
                         </a>
+                        !-->
 
                         <div class="m-card-user__details">
 													<span class="m-card-user__name m--font-weight-500">

@@ -6,10 +6,10 @@
     </div>
   </div>
 </div>
-<div class="m-content">
+<div class="m-content" >
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
-      <form style="margin-top: 20px"
+      <form style="margin-top: 20px" id="employee"
             (submit)="onFormSubmit($event)">
         <dx-form id="utilisateursForm"
                  [formData]="user"
@@ -157,7 +157,6 @@
     </div>
   </div>
 
-
   <div *ngIf="popupVisible">
     <dx-popup
       class="popup"
@@ -197,5 +196,17 @@
     </dx-popup>
   </div>
 
-
 </div>
+
+
+<dx-load-panel
+  #loadPanel
+  shadingColor="rgba(0,0,0,0.4)"
+  [position]="{ of: '#_load' }"
+  [(visible)]="loadingVisible"
+  [showIndicator]="true"
+  [showPane]="true"
+  [shading]="true"
+  [closeOnOutsideClick]="false"
+ >
+</dx-load-panel>

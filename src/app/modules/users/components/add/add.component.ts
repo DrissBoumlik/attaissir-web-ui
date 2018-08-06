@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 })
 export class AddComponent implements OnInit {
 
+  loadingVisible: Boolean = false;
   constructor(
     private userService: UsersService,
     private router: Router
@@ -67,6 +68,7 @@ export class AddComponent implements OnInit {
 
   // tree elements
   selectionChanged(e) {
+
     const value = e.node;
     if (this.isProduct(value)) {
       this.processProduct({
@@ -279,17 +281,19 @@ export class AddComponent implements OnInit {
         zone_id: this.getCheckedZones(),
         warehouse_id: warehouse_id
       };
+      this.loadingVisible = true;
       this.userService.saveUser(data).subscribe(
         (response: any) => {
           NewComponent.notifyMe('utilisateur créé avec succès, Redirection.........', 'success');
           this.router.navigate([`/utilisateurs/liste`]);
-
+          this.loadingVisible = false;
         },
         (err) => {
           Object.keys(err.error.errors).forEach(
             (e: any) => {
               NewComponent.notifyMe(err.error.errors[e], 'error');
             });
+          this.loadingVisible = false;
         }
       );
     } else {

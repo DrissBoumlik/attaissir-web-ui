@@ -8,6 +8,8 @@ import { AlertService, AuthenticationService, UserService } from './_services';
 declare let $: any;
 declare let mUtil: any;
 
+import * as CryptoJS from 'crypto-js';
+
 @Component({
   selector: '.m-grid.m-grid--hor.m-grid--root.m-page',
   templateUrl: './templates/login-1.component.html',
@@ -64,7 +66,18 @@ export class AuthComponent implements OnInit, AfterViewInit {
           const currentUser: any = JSON.stringify(data);
           localStorage.setItem('currentUser', currentUser);
           localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
-          localStorage.setItem('permissions', JSON.parse(currentUser)['data']['permissions']);
+
+          const _data = JSON.stringify(JSON.parse(currentUser)['data']['permissions']);
+
+          //  console.log(JSON.parse(currentUser)['data']['permissions']);
+
+          // Encrypt
+          const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(_data), 'Gra61884546585_55');
+          localStorage.setItem('permissions', ciphertext);
+
+
+
+
           if (!localStorage.getItem('tenantId')) {
             localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
           }

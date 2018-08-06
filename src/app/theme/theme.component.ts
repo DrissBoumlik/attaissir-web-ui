@@ -11,6 +11,8 @@ declare let mApp: any;
 declare let mUtil: any;
 declare let mLayout: any;
 
+import * as CryptoJS from 'crypto-js';
+
 
 @Component({
   selector: '.m-grid.m-grid--hor.m-grid--root.m-page',
@@ -46,7 +48,7 @@ export class ThemeComponent implements OnInit {
 
       localStorage.setItem('currentUser', currentUser);
       localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
-      localStorage.setItem('permissions', JSON.parse(currentUser)['data']['permissions']);
+      //    localStorage.setItem('permissions', JSON.parse(currentUser)['data']['permissions']);
 
       // test Tenant
       if (!localStorage.getItem('tenantId')) {
@@ -61,10 +63,12 @@ export class ThemeComponent implements OnInit {
 
 
     this.auth.myPermission().subscribe(response => {
-      localStorage.setItem('permissions', response.data.permissions);
+
+      const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(response.data.permissions), 'Gra61884546585_55');
+      localStorage.setItem('permissions', ciphertext);
+      //      localStorage.setItem('permissions', response.data.permissions);
     });
 
-    console.log('yooo');
     this._script.loadScripts('body', ['assets/vendors/base/vendors.bundle.js', 'assets/demo/demo12/base/scripts.bundle.js'], true)
       .then(result => {
         Helpers.setLoading(false);

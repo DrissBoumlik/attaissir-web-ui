@@ -16,7 +16,7 @@
       [allowColumnResizing]="false"
       [allowColumnReordering]="true"
       [columnAutoWidth]="true"
-      [remoteOperations]="{ paging: true, sorting: true, filtering: true, searching: true}"
+      [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
       [masterDetail]="{ enabled: false, template: 'detail' }"
       (onEditingStart)="onStartEdit($event.data.id)"
       >    
@@ -57,7 +57,7 @@
       <dxi-column dataField="cda" caption="CDA"></dxi-column>
       <dxi-column dataField="zone" caption="Zone"></dxi-column>
       <dxi-column dataField="parcel_id" caption="Parcelle"></dxi-column>
-      <dxi-column dataField="article_count" caption="Nombre d'article"></dxi-column>
+      <!-- <dxi-column dataField="article_count" caption="Nombre d'article"></dxi-column> -->
       <dxi-column dataField="date" caption="Date prevue"></dxi-column>
       <dxi-column dataField="state" caption="Etat" cellTemplate="cellTemplate2"></dxi-column>
 
@@ -71,9 +71,9 @@
         <a href="interventions/modifier/{{data.value}}" style="text-align: left;color: black">Editer</a>
       </div> -->
       <div *dxTemplate="let data of 'cellTemplate2'">
-        <label class="etat-class px-3 py-2" etat="{{data.value}}" *ngIf="(data.value == 'inprogress')" appEtat>En cours</label>
-        <label class="etat-class px-3 py-2" etat="{{data.value}}" *ngIf="(data.value == 'canceled')" appEtat>Annule</label>
-        <label class="etat-class px-3 py-2" etat="{{data.value}}" *ngIf="(data.value == 'done')" appEtat>Valide</label>
+        <label class="etat-class px-3 py-2" etat="{{data.value}}" *ngIf="(data.value == 'inprogress')" appEtat>{{data.value}}</label>
+        <label class="etat-class px-3 py-2" etat="{{data.value}}" *ngIf="(data.value == 'canceled')" appEtat>{{data.value}}</label>
+        <label class="etat-class px-3 py-2" etat="{{data.value}}" *ngIf="(data.value == 'done')" appEtat>{{data.value}}</label>
       </div>
     </dx-data-grid>
   </div>
