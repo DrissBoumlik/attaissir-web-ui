@@ -381,7 +381,6 @@ export class Helper {
           }
         }
         if (visibility) {
-          // this.el.nativeElement.style.display = 'initial';
           v = true;
           return v;
         }

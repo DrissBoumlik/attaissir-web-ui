@@ -3,7 +3,7 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Les utilisateurs</h2>
-      <a class="siam-header-btn-new" routerLink="/utilisateurs/ajouter" title="Ajouter utilisateur"><i
+      <a class="siam-header-btn-new" routerLink="/utilisateurs/ajouter" [appPermissionHidden]="['user.users.store']" title="Ajouter utilisateur"><i
         class="fa fa-plus"></i></a>
     </div>
   </div>
