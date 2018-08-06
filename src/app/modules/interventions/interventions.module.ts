@@ -31,21 +31,16 @@ import { LayoutModule } from '../../theme/layouts/layout.module';
     DxTextAreaModule,
     DxDateBoxModule,
     DxDataGridModule,
-    DxButtonModule,
     DxPopupModule,
     DxButtonModule,
     DxTemplateModule,
     DxLoadPanelModule,
-    DxCheckBoxModule,
-    DxTextBoxModule,
     DxSwitchModule,
     DxValidatorModule,
     DxValidationSummaryModule,
     DxCheckBoxModule,
     DxTreeListModule,
-    DxTextBoxModule,
-    LayoutModule,
-    DxTextBoxModule
+    LayoutModule
   ],
   declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent]
 

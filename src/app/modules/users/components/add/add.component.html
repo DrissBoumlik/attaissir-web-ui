@@ -6,10 +6,10 @@
     </div>
   </div>
 </div>
-<div class="m-content">
+<div class="m-content" >
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
-      <form style="margin-top: 20px"
+      <form style="margin-top: 20px" id="employee"
             (submit)="onFormSubmit($event)">
         <dx-form id="utilisateursForm"
                  [formData]="user"
@@ -155,7 +155,7 @@
           </dx-tree-view>
         </div>
         <div class="pop-up-actions">
-          <dx-button style="margin-right: 20px"
+          <dx-button [disabled]="loadingVisible" style="margin-right: 20px"
                      text="Terminer"
                      type="success"
                      (onClick)="savePopUpCdas()"></dx-button>
@@ -168,3 +168,16 @@
 
 
 </div>
+
+
+<dx-load-panel
+  #loadPanel
+  shadingColor="rgba(0,0,0,0.4)"
+  [position]="{ of: '#_load' }"
+  [(visible)]="loadingVisible"
+  [showIndicator]="true"
+  [showPane]="true"
+  [shading]="true"
+  [closeOnOutsideClick]="false"
+ >
+</dx-load-panel>

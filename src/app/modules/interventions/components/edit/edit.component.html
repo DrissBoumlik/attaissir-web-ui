@@ -9,7 +9,7 @@
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
-      <form style="height: auto" (submit)="onFormSubmit($event)">
+      <form style="height: auto" (submit)="onFormSubmit($event)"  id="employee">
         <dx-form
           [formData]="interventions"
           [readOnly]="false"
@@ -268,6 +268,8 @@
     </div>
   </div>
 </div>
+
+
 <!--*********************************************************************************-->
 <!--<dx-load-panel-->
 <!--#loadPanel-->
