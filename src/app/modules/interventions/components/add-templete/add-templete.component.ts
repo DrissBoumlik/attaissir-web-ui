@@ -6,7 +6,7 @@ import { DxDataGridComponent, DxTreeListComponent } from 'devextreme-angular';
 import { DxiRowComponent } from 'devextreme-angular/ui/nested/row-dxi';
 import { Helper } from '../../../../shared/classes/helper';
 import { ToastrService } from 'ngx-toastr';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -95,10 +95,12 @@ export class AddTempleteComponent implements OnInit {
           }
         });
 
-        if ( selected_parc.length > 0 ) {
-          const item = { id: this.template.template ,
-            date : this.template.date , description : this.template.description ,
-            request_type_id : this.request_type_id, items: selected_parc };
+        if (selected_parc.length > 0) {
+          const item = {
+            id: this.template.template,
+            date: this.template.date, description: this.template.description,
+            request_type_id: this.request_type_id, items: selected_parc
+          };
 
           this.interventionService.addIng(item).subscribe((response) => {
             this.toastr.success('Les modifications ont été effectuées avec succès.');

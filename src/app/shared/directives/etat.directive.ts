@@ -19,7 +19,7 @@ export class EtatDirective implements OnInit {
   @HostBinding('style.color') color: string;
   constructor() { }
 
-  ngOnInit() { 
+  ngOnInit() {
     if (this.etat == "inprogress") {
       this.backgroundColor = "#337ab7";
       this.color = "#fff";

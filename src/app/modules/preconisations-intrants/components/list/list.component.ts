@@ -26,7 +26,7 @@ export class ListComponent implements OnInit {
 
     this.preconisations_intrants.store = new CustomStore({
       load: (loadOptions: any) => {
-        return this.preconisationsIntrantsService.getListeDemandesDx( loadOptions )
+        return this.preconisationsIntrantsService.getListeDemandesDx(loadOptions)
           .toPromise()
           .then(response => {
             console.log(response);

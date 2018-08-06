@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {RolesService} from '../../services/roles.service';
-import {NewComponent} from '../../../interventions/components/new/new.component';
+import { Component, OnInit } from '@angular/core';
+import { RolesService } from '../../services/roles.service';
+import { NewComponent } from '../../../interventions/components/new/new.component';
 
 @Component({
   selector: 'app-add',

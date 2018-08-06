@@ -79,6 +79,10 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: '../modules/roles/roles.module#RolesModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/card-generator/card-generator.module#CardGeneratorModule'
       }
       ,
       {

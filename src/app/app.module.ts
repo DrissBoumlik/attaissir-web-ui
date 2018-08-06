@@ -39,6 +39,7 @@ import { DemandesModule } from './modules/demandes/demandes.module';
 
 import { UsersModule } from './modules/users/users.module';
 import { PermissionDirective } from './_directives/permission.directive';
+import {CardGeneratorModule} from "./modules/card-generator/card-generator.module";
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { PermissionDirective } from './_directives/permission.directive';
     ArticlesModule,
     SharedModule,
     MouvementsModule,
+    CardGeneratorModule,
     UsersModule
   ],
   exports: [
