@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { ListComponent } from './components/list/list.component';
 import { ShowComponent } from './components/show/show.component';
+import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 
 
@@ -13,15 +14,15 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListComponent
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.orders.grid'] }
       },
       {
         path: 'liste',
-        component: ListComponent
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.orders.grid'] }
       },
       {
         path: 'afficher/:id',
-        component: ShowComponent
+        component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.orders.show'] }
       },
 
     ]

@@ -3,6 +3,7 @@ import { InterventionService } from '../../services/intervention.service';
 import { Router } from '../../../../../../node_modules/@angular/router';
 import custom_store from '../../../../../../node_modules/devextreme/data/custom_store';
 import DevExpress from '../../../../../../node_modules/devextreme/bundles/dx.all';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-list',
@@ -13,7 +14,10 @@ export class ListComponent implements OnInit {
 
   dataSource: any = {};
 
+  helper: any;
+
   constructor(public service: InterventionService, public router: Router) {
+    this.helper = Helper;
   }
 
   ngOnInit() {

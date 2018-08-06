@@ -69,7 +69,6 @@ export class ThemeComponent implements OnInit {
       //      localStorage.setItem('permissions', response.data.permissions);
     });
 
-    console.log('yooo');
     this._script.loadScripts('body', ['assets/vendors/base/vendors.bundle.js', 'assets/demo/demo12/base/scripts.bundle.js'], true)
       .then(result => {
         Helpers.setLoading(false);

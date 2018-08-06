@@ -107,7 +107,7 @@ export class InterventionService {
   }
 
   getInterventions(): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/interventionrequests/grid`, JSON.stringify([]), {
+    return this.http.post(`${environment.apiUrl}/interventionlist/grid`, JSON.stringify([]), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -131,7 +131,7 @@ export class InterventionService {
   }
 
   getInterventionsDx(params?: any): Observable<any[]> {
-    return this.http.post<any[]>(`${environment.apiUrl}/interventionrequests/grid`, JSON.stringify(params), {
+    return this.http.post<any[]>(`${environment.apiUrl}/interventionlist/grid`, JSON.stringify(params), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

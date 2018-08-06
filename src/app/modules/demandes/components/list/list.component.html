@@ -1,6 +1,6 @@
 <div class="m-subheader" appunwraptag="">
   <div class="d-flex align-items-center">
-    <div class="siam-page-header">
+    <div class="siam-page-header"> 
       <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Liste des Approvisionnements de stock</h2>
     </div>
@@ -54,7 +54,7 @@
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxi-column dataField="id" [width]="40" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
+        <dxi-column dataField="id" [width]="40" caption="" [visible]="helper.permissionMethod(['distributionCenter.orders.show'])" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
         <dxi-column dataField="code" caption="Code" ></dxi-column>
         <dxi-column dataField="date" format="dd-MM-yyyy" [width]="150"  dataType="date" caption="Date" ></dxi-column>
         <dxi-column dataField="third_party_full_name" caption="Fournisseur" cellTemplate="third_partyTemplate" ></dxi-column>
