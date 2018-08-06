@@ -3,7 +3,7 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Liste des contrats de la campagne en cours</h2>
-      <a class="siam-header-btn-new" routerLink="/contrats/ajouter" title="Ajouter contrat"><i
+      <a class="siam-header-btn-new" routerLink="/contrats/ajouter" title="Ajouter contrat" appPermissionHidden='[agreement.contracts.store]' appPermissionHidden><i
         class="fa fa-plus"></i></a>
     </div>
   </div>
@@ -37,7 +37,8 @@
           [useIcons]="true"
           [allowDeleting]="true"
           [allowEditing]="false"
-          [allowUpdating]="false">
+          [allowUpdating]="false"
+          appPermissionHidden='[agreement.contracts.destroy]' appPermissionHidden>
         </dxo-editing>
         <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
         <dxo-selection mode="multiple"></dxo-selection>
@@ -65,7 +66,7 @@
         </dxi-column>
         <dxi-column dataField="third_full_name" cellTemplate="thirdNameTemplate" caption="Nom" datatype="Text"></dxi-column>
         <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
-        </dxi-column>
+        </dxi-column> 
         <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
         </dxi-column>
         <!--<dxi-column dataField="type" caption="type de contrat" dataType="Text">
@@ -88,10 +89,10 @@
 
         <div *dxTemplate="let data of 'cellTemplate'">
           <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data.id, router, toastr)"
-             class="fa fa-info-circle fa-5x">
+             class="fa fa-info-circle fa-5x" appPermissionHidden='[agreement.contracts.grid]' appPermissionHidden>
           </i>
           <i *ngIf="data.data.status === 'ENCOURS'"  style="font-size: 150%; align-content: center; cursor: pointer;padding-left: 10px;" (click)="helper.gotoShow('contrats', data.data.id, router, toastr, 'modifier')"
-             class="fa fa-edit fa-5x">
+             class="fa fa-edit fa-5x" appPermissionHidden='[agreement.contracts.update]' appPermissionHidden>
           </i>
         </div>
         <div *dxTemplate="let data of 'contractListTemplate'">

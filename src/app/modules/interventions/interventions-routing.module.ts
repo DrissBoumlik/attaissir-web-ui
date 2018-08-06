@@ -12,15 +12,14 @@ const routes: Routes = [{
   path: 'interventions',
   component: DefaultComponent,
   children: [
-    { path: 'selectionner', component: NewComponent },
-    { path: 'ajouter', component: AddComponent },
-    { path: 'liste', component: ListComponent },
-    { path: 'modifier/:id', component: EditComponent },
+    { path: 'selectionner', component: NewComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.store'] } },
+    { path: 'ajouter', component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.store'] } },
+    { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.grid'] } },
+    { path: 'modifier/:id', component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.grid'] } },
     {
       path: 'appliquer-template-parcelle', component: AddTempleteComponent,
-      canActivate: [PermissionGuard], data: { permission: ['none'] }
-    },
-    { path: 'list', component: ListComponent },
+      canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.store'] }
+    }
   ]
 }];
 

@@ -46,7 +46,8 @@
       mode="row"
       [useIcons]="true"
       [allowUpdating]="true"
-      [allowDeleting]="false">
+      [allowDeleting]="false"
+      appPermissionHidden='[thirdParty.third-parties.update]' appPermissionHidden>
     </dxo-editing>
     <dxo-selection mode="multiple"></dxo-selection>
     <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
@@ -76,7 +77,7 @@
     <dxo-group-panel [visible]="true"></dxo-group-panel>
     <dxo-grouping #expand [autoExpandAll]="false"></dxo-grouping>
 
-    <dxi-column dataField="" [allowSorting]="false" cellTemplate="cellTemplate" caption="" width="50px"  allowColumnResizing="true">
+    <dxi-column dataField="" [allowSorting]="false" visible="false" cellTemplate="cellTemplate" caption="" width="50px"   allowColumnResizing="true" >
     </dxi-column>
     <dxi-column dataField="code" caption="Code" i18n-caption>
     </dxi-column>
@@ -134,11 +135,12 @@
     </dxi-column>
     <dxi-column dataField="code_as400" caption="Ancien code" *ngIf="thirdType === 'aggregated'"  i18n-caption>
     </dxi-column>
-    <div *dxTemplate="let data of 'cellTemplate'">
-      <a  (click)="helper.gotoShow(goTo, data.data.id, router, toastr)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
+    <div *dxTemplate="let data of 'cellTemplate'" >
+      
+      <a  (click)="helper.gotoShow(goTo, data.data.id, router, toastr)"  ><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
     </div>
     </dx-data-grid>
-
+    
     </div>
   </div>
 </div>

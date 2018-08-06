@@ -1,4 +1,4 @@
-<dx-data-grid
+<dx-data-grid 
   id="gridContainer"
   [dataSource]="data"
   [columnHidingEnabled]="true"
@@ -90,9 +90,9 @@
           </span>
   </div>
   <div *dxTemplate="let data of 'contractTemplate'">
-    <a style="color: #6d7fcc; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data.contract_id, router, toastr)">{{ data.data.contract_code }}</a>
+    <a style="color: #6d7fcc; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data.contract_id, router, toastr)" appPermissionHidden='[agreement.contracts.show]' appPermissionHidden>{{ data.data.contract_code }}</a>
   </div>
   <div *dxTemplate="let data of 'userTemplate'">
-    <a class="siam-link" (click)="helper.gotoShow('tiers', data.data.third_party_id, router, toastr)">{{ data.data.third_party_code }}</a>
+    <a class="siam-link" (click)="helper.gotoShow('tiers', data.data.third_party_id, router, toastr)" appPermissionHidden='[thirdParty.third-parties.show∫]' appPermissionHidden>{{ data.data.third_party_code }}</a>
   </div>
 </dx-data-grid>

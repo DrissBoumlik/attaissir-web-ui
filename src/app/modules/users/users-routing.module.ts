@@ -5,15 +5,16 @@ import { AddComponent } from './components/add/add.component';
 import { ListComponent } from './components/list/list.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditComponent } from './components/edit/edit.component';
+import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 const routes: Routes = [{
   path: 'utilisateurs',
   component: DefaultComponent,
   children: [
-    { path: 'profile', component: ProfileComponent },
-    { path: 'ajouter', component: AddComponent },
-    { path: 'liste', component: ListComponent },
-    { path: 'modifier/:id', component: EditComponent }
+    { path: 'profile', component: ProfileComponent, canActivate: [PermissionGuard], data: { permission: ['user.users.show'] } },
+    { path: 'ajouter', component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['user.users.store'] } },
+    { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['user.users.index'] } },
+    { path: 'modifier/:id', component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['user.users.update'] } }
   ]
 }];
 
