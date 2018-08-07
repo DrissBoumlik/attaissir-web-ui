@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {UsersService} from '../../services/users.service';
+import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../services/users.service';
 import index from '@angular/cli/lib/cli';
 import number_box from 'devextreme/ui/number_box';
-import {NewComponent} from '../../../interventions/components/new/new.component';
-import {Router} from '@angular/router';
+import { NewComponent } from '../../../interventions/components/new/new.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add',

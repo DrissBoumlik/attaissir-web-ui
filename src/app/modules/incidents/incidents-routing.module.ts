@@ -8,7 +8,7 @@ const routes: Routes = [{
   path: 'incidents',
   component: DefaultComponent,
   children: [
-    { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] }}
+    { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } }
   ]
 }];
 

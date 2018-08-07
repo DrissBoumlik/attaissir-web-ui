@@ -1,13 +1,13 @@
- import {CardGeneratorService} from "../../services/card-generator.service";
+import {CardGeneratorService} from "../../services/card-generator.service";
 import 'rxjs/add/operator/toPromise';
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { Helper } from '../../../../shared/classes/helper';
 import { isNull } from "util";
 import { ActivatedRoute, Router } from '@angular/router';
 import CustomStore from 'devextreme/data/custom_store';
- import {ToastrService} from "ngx-toastr";
- import {DxDataGridComponent} from "devextreme-angular";
- import {environment} from "../../../../../environments/environment";
+import {ToastrService} from "ngx-toastr";
+import {DxDataGridComponent} from "devextreme-angular";
+import {environment} from "../../../../../environments/environment";
 
 
 @Component({
