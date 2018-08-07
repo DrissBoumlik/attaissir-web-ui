@@ -62,7 +62,7 @@
               <dxo-group-panel [visible]="false"></dxo-group-panel>
               <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
-              <dxi-column dataField="enabled"  [width]="'40px'" [allowFiltering]="false" cellTemplate="statusTemplate" caption=" " i18n-caption>
+              <dxi-column dataField="playOn"  [width]="'40px'" [allowFiltering]="false" cellTemplate="statusTemplate" caption=" " i18n-caption>
               </dxi-column>
               <dxi-column dataField="full_name" caption="Nom complet" i18n-caption>
               </dxi-column>
@@ -86,6 +86,12 @@
             </dx-data-grid>
           </div>
           <div class="col-5">
+
+
+            <dx-gallery
+              [dataSource]="img_scr_recto_array"
+              [height]="300">
+            </dx-gallery>
 
 
 
@@ -125,15 +131,15 @@
 
                 <dx-button width="160" [icon]="start_btn.icon"  [text]="start_btn.text" [type]="start_btn.type" (onClick)="startFunc()"></dx-button>
 
-                <dx-button width="190" icon="fa fa-plus"  text="NOUVELLE CARTE" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button>
-                <dx-button width="140" icon="fa  fa-ban"   text="ANNULER" type="danger" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active"   style="margin-left: 20px; margin-right: 20px;"  ></dx-button>&nbsp;
+              <!--  <dx-button width="190" icon="fa fa-plus"  text="NOUVELLE CARTE" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> !-->
+                <dx-button width="140" icon="fa  fa-ban"   text="ANNULER" type="danger" (click)="cancel()" routerLinkActive="active"   style="margin-left: 20px; margin-right: 20px;"  ></dx-button>&nbsp;
               </div>
             </div>
             <div class="col-5">
 
               <div class="pull-right">
                 <dx-button width="145" (click)="export()" icon="fa fa-cloud-download"  text="EXPORTER"  type="primary"    style="margin-left: 10px; margin-right: 10px;"    ></dx-button>
-                <dx-button width="130" icon="fa fa-check"  text="VALIDER"  type="default"     style="margin-left: 10px; margin-right: 0px;"   ></dx-button>
+                <dx-button width="130" icon="fa fa-check"  text="VALIDER"  type="default"  (click)="validate()"    style="margin-left: 10px; margin-right: 0px;"   ></dx-button>
               </div>
 
             </div>
