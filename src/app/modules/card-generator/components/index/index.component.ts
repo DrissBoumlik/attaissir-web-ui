@@ -1,13 +1,13 @@
- import {CardGeneratorService} from "../../services/card-generator.service";
+import { CardGeneratorService } from "../../services/card-generator.service";
 import 'rxjs/add/operator/toPromise';
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Helper } from '../../../../shared/classes/helper';
 import { isNull } from "util";
 import { ActivatedRoute, Router } from '@angular/router';
 import CustomStore from 'devextreme/data/custom_store';
- import {ToastrService} from "ngx-toastr";
- import {DxDataGridComponent} from "devextreme-angular";
- import {environment} from "../../../../../environments/environment";
+import { ToastrService } from "ngx-toastr";
+import { DxDataGridComponent } from "devextreme-angular";
+import { environment } from "../../../../../environments/environment";
 
 
 @Component({
@@ -31,7 +31,7 @@ export class IndexComponent implements OnInit {
   @ViewChild('rfid') rfid: ElementRef;
   @ViewChild('focusout') focusout: ElementRef;
 
-  constructor(private cardGeneratorService : CardGeneratorService ,private toastr : ToastrService,private router : Router ) {
+  constructor(private cardGeneratorService: CardGeneratorService, private toastr: ToastrService, private router: Router) {
     this.card_generator = {};
   }
 
@@ -57,8 +57,8 @@ export class IndexComponent implements OnInit {
       text: "COMMENCER",
       type: "success",
       icon: "fa fa-play",
-    onClick: function (e) {
-       console.log(e)
+      onClick: function(e) {
+        console.log(e)
 
 
       }
@@ -80,20 +80,20 @@ export class IndexComponent implements OnInit {
   }
 
 
-  startFunc(){
-    if(this.start) {
-      this.start_btn.type ="danger";
-      this.start_btn.text ="ARRETER";
-      this.start_btn.icon ="fa fa-pause";
+  startFunc() {
+    if (this.start) {
+      this.start_btn.type = "danger";
+      this.start_btn.text = "ARRETER";
+      this.start_btn.icon = "fa fa-pause";
       this.start = false;
 
-       this.sendRfid();
+      this.sendRfid();
 
 
-    }else {
-      this.start_btn.type ="success";
-      this.start_btn.text ="COMMENCER";
-      this.start_btn.icon ="fa fa-play";
+    } else {
+      this.start_btn.type = "success";
+      this.start_btn.text = "COMMENCER";
+      this.start_btn.icon = "fa fa-play";
       this.start = true;
     }
 
@@ -119,39 +119,39 @@ export class IndexComponent implements OnInit {
 
 
 
-          let  rf_code = this.rf_code ;
-          let  _cardGeneratorService = this.cardGeneratorService ;
-         // let  sRfid = this.sendRfid();
-      /*    this._ref1.instance.getVisibleRows().some(function(row: any, i,rf_code,_cardGeneratorService) {
-
-
-              if(!true) {
-                console.log(row.data)
-
-                row.data.enabled= true;
-               // sRfid();
-
-                console.log(rf_code);
-                  row.data.rfid= rf_code;
-                _cardGeneratorService.getCards()
-                  .subscribe(response => {
-
-
-                    this.sendRfid();
-                  }, error => {
-
-                  });
-
-                 return true;
-
-              }
-
-
-
-          });
-
-
-       */
+        let rf_code = this.rf_code;
+        let _cardGeneratorService = this.cardGeneratorService;
+        // let  sRfid = this.sendRfid();
+        /*    this._ref1.instance.getVisibleRows().some(function(row: any, i,rf_code,_cardGeneratorService) {
+  
+  
+                if(!true) {
+                  console.log(row.data)
+  
+                  row.data.enabled= true;
+                 // sRfid();
+  
+                  console.log(rf_code);
+                    row.data.rfid= rf_code;
+                  _cardGeneratorService.getCards()
+                    .subscribe(response => {
+  
+  
+                      this.sendRfid();
+                    }, error => {
+  
+                    });
+  
+                   return true;
+  
+                }
+  
+  
+  
+            });
+  
+  
+         */
 
 
 
@@ -160,28 +160,28 @@ export class IndexComponent implements OnInit {
       }, 1000);
 
     });
-   }
+  }
 
 
 
-   img_scr_recto ='';
-   img_scr_verso ='';
+  img_scr_recto = '';
+  img_scr_verso = '';
 
-  selectionChangedHandler(){
+  selectionChangedHandler() {
 
-    this.selectedItems[this.selectedItems.length-1].enabled = false;
-    this.img_scr_recto = 'http://s1.dboumlik.code.go/cards/4/generate?face=recto&id=4&rfid=334&type=agri&full_name=' + this.selectedItems[this.selectedItems.length-1].full_name +'&code=' + this.selectedItems[this.selectedItems.length-1].code + '&full_name_ar=' + this.selectedItems[this.selectedItems.length-1].full_name_ar +'&amp;cin='+this.selectedItems[this.selectedItems.length-1].cin;
-    this.img_scr_verso = 'http://s1.dboumlik.code.go/cards/4/generate?face=verso&id=4&rfid=334&type=agri&full_name=' + this.selectedItems[this.selectedItems.length-1].full_name +'&code=' + this.selectedItems[this.selectedItems.length-1].code + '&full_name_ar=' + this.selectedItems[this.selectedItems.length-1].full_name_ar +'&amp;cin='+this.selectedItems[this.selectedItems.length-1].cin;
+    this.selectedItems[this.selectedItems.length - 1].enabled = false;
+    this.img_scr_recto = 'http://s1.dboumlik.code.go/cards/4/generate?face=recto&id=4&rfid=334&type=agri&full_name=' + this.selectedItems[this.selectedItems.length - 1].full_name + '&code=' + this.selectedItems[this.selectedItems.length - 1].code + '&full_name_ar=' + this.selectedItems[this.selectedItems.length - 1].full_name_ar + '&amp;cin=' + this.selectedItems[this.selectedItems.length - 1].cin;
+    this.img_scr_verso = 'http://s1.dboumlik.code.go/cards/4/generate?face=verso&id=4&rfid=334&type=agri&full_name=' + this.selectedItems[this.selectedItems.length - 1].full_name + '&code=' + this.selectedItems[this.selectedItems.length - 1].code + '&full_name_ar=' + this.selectedItems[this.selectedItems.length - 1].full_name_ar + '&amp;cin=' + this.selectedItems[this.selectedItems.length - 1].cin;
 
     console.log(this.img_scr_recto);
   }
 
 
 
-  export(){
+  export() {
 
     console.log('___');
-    this.cardGeneratorService.export( {'cards' : this.selectedItems})
+    this.cardGeneratorService.export({ 'cards': this.selectedItems })
       .toPromise()
       .then(response => {
         console.log(response);

@@ -95,7 +95,7 @@ export class AddComponent implements OnInit {
   selectedTemplate: any;
 
   /*--------------------Constructor-----------------------*/
-  helper : any;
+  helper: any;
   constructor(public articleService: ArticlesService,
     public interventionService: InterventionService,
     private wareHouseService: WarehouseService,
@@ -103,7 +103,7 @@ export class AddComponent implements OnInit {
     private thirdsService: ThirdsService,
     private toastr: ToastrService,
     private router: Router) {
-      this.helper = Helper;
+    this.helper = Helper;
   }
 
   /*--------------------Initialize content-----------------------*/

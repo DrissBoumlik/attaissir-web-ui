@@ -15,8 +15,8 @@ export class ListComponent implements OnInit {
   rolesDataSource: any = {};
   helper: any;
 
-  constructor(public roleService: RolesService, _router: Router, private router: Router) { 
-    this.helper=Helper;
+  constructor(public roleService: RolesService, _router: Router, private router: Router) {
+    this.helper = Helper;
   }
 
   ngOnInit() {

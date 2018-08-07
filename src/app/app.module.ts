@@ -37,7 +37,7 @@ import { MouvementsModule } from './modules/mouvements/mouvements.module';
 import { InterventionsModule } from './modules/interventions/interventions.module';
 import { DemandesModule } from './modules/demandes/demandes.module';
 import { UsersModule } from './modules/users/users.module';
-import {CardGeneratorModule} from "./modules/card-generator/card-generator.module";
+import { CardGeneratorModule } from "./modules/card-generator/card-generator.module";
 import { PermissionGuard } from './shared/directives/guard.directive';
 
 @NgModule({

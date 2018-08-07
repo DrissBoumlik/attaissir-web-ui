@@ -50,8 +50,8 @@ export class AddTempleteComponent implements OnInit {
 
           })
           .catch(error => {
-         return null;
-          //  throw error;
+            return null;
+            //  throw error;
           });
       }
     });

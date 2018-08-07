@@ -1,9 +1,9 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {UsersService} from '../../services/users.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NewComponent} from '../../../interventions/components/new/new.component';
-import {Subscription} from 'rxjs';
-import {valid} from 'semver';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { UsersService } from '../../services/users.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NewComponent } from '../../../interventions/components/new/new.component';
+import { Subscription } from 'rxjs';
+import { valid } from 'semver';
 
 @Component({
   selector: 'app-edit',

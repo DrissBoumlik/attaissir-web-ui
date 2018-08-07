@@ -390,6 +390,6 @@ export class Helper {
       }
     } else {
       return false;
-     }
+    }
   }
 }

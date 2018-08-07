@@ -5,7 +5,7 @@ import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { ShowComponent } from './components/show/show.component';
 import { PermissionGuard } from '../../shared/directives/guard.directive';
 
-const routes: Routes = [ 
+const routes: Routes = [
   {
     path: 'preconisations-intrants',
     component: DefaultComponent,
