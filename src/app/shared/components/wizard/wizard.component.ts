@@ -135,32 +135,45 @@ export class WizardComponent implements OnInit {
         z.zone_type_id = 7;
         z.code = e.mle;
 
-        this.soilsService.addGround(this.parcelForm).subscribe(ground => {
-          ground = this.helper.dataFormatter(ground, false);
-          ground['tenure'] = this.parcelForm.tenure;
-          ground['annuel_surface'] = this.parcelForm.annuel_surface;
-          ground['code_ormva'] = this.parcelForm.code_ormva;
-          if (Number(this.parcelForm.annuel_surface) > Number(this.parcelForm.total_surface)) {
-            this.toastr.warning('La superficie contractée doit être inférieure ou égale à la superficie totale.');
-          } else {
-            this.parcelForm = {
-              cda: null,
-              zone: null,
-              sector: null,
-              block: null,
-              registration_number: null,
-              total_surface: null,
-              annuel_surface: null,
-              code_ormva: null,
-              tenure: null,
-              parcel_tmp_id: null
-            };
-            this.groundsList.push(ground);
+        let soilExist = false;
+        this.groundsList.map((ground) => {
+          if (ground.cda_code === this.parcelForm.cda
+            && ground.zone_code === this.parcelForm.zone
+            && ground.registration_number === this.parcelForm.registration_number) {
+            soilExist = true;
           }
-          console.log(this.groundsList);
-        }, error1 => {
-          this.toastr.warning(error1.error.message);
+          return ground;
         });
+        if (!soilExist) {
+          this.soilsService.addGround(this.parcelForm).subscribe(ground => {
+            ground = this.helper.dataFormatter(ground, false);
+            ground['tenure'] = this.parcelForm.tenure;
+            ground['annuel_surface'] = this.parcelForm.annuel_surface;
+            ground['code_ormva'] = this.parcelForm.code_ormva;
+            if (Number(this.parcelForm.annuel_surface) > Number(this.parcelForm.total_surface)) {
+              this.toastr.warning('La superficie contractée doit être inférieure ou égale à la superficie totale.');
+            } else {
+              this.parcelForm = {
+                cda: null,
+                zone: null,
+                sector: null,
+                block: null,
+                registration_number: null,
+                total_surface: null,
+                annuel_surface: null,
+                code_ormva: null,
+                tenure: null,
+                parcel_tmp_id: null
+              };
+              this.groundsList.push(ground);
+            }
+            console.log(this.groundsList);
+          }, error1 => {
+            this.toastr.warning(error1.error.message);
+          });
+        } else {
+          this.toastr.warning('Parcelle déja ajouter!');
+        }
       }
     };
     this.zoneService.getCDAs().subscribe(cda => {
