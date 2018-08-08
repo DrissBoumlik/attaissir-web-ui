@@ -27,17 +27,30 @@ export class ShowComponent implements OnInit {
     this.helper = Helper;
   }
 
+
+
   ngOnInit() {
+
+
     this.mouvement = {
       state: 'inprogress'
     };
-    this.order = null;
-    this.to = null;
-    this.from = null;
+     this.order = null;
+    this.to = {};
+    this.from = {}
     this.articles = null;
+
+    this.from.name ='';
+    this.from.full_name  ='';
+     this.to.name  ='';
+    this.to.full_name  ='';
     this.route.params.subscribe(
       params => {
         this.mouvementsService.getMouvement(params.id).subscribe((response) => {
+
+
+          console.log(response);
+
           this.mouvement = this.helper.dataFormatter(response, false);
           this.order = this.mouvement.order;
           this.from = this.mouvement.from;
@@ -88,5 +101,81 @@ export class ShowComponent implements OnInit {
     this.popupDeleteVisible = false;
     this.popupDeliverVisible = false;
   }
+
+
+
+
+
+  print() {
+
+
+
+    const print = window.open('', 'PRINT', 'height=400,width=600');
+
+    print.document.write('<html><head>');
+
+    // print.document.write('</head><body >');
+    //  print.document.write('<h1>' + document.title  + '</h1>');
+    print.document.write('<style type="text/css"> @page { size: auto;  margin: 0mm; }' +
+      ' *{text-align: center;  } *{font-size: 10px} </style>');
+    print.document.write('<style type="text/css"> body { width: 250px; }</style>');
+    print.document.write('<style type="text/css"> .div1 {  position:absolute; width:250px; ' +
+      'height:300px; z-index:15; left:50%; margin:0px 0 0 -150px;}</style>');
+
+
+    print.document.write('</head>');
+
+    print.document.write('<body>');
+    print.document.write('<div class="div1">');
+
+    print.document.write('<p><b style="font-weight: bolder;">Bon de  ' + this.helper.orderType(this.mouvement.type) + '</b></p>' +
+      '<p> <span> N° ' + this.mouvement.id + ' </span></p>' +
+
+      '<p> <span style="float: right">' + this.mouvement.date + '</span> </p> <br/>' +
+
+      '<p> <span style="float: left"> COMPAGNE' +
+      '</span> &nbsp; &nbsp;  <span style="float: right">' + this.mouvement.campaign + ' </span></p>');
+
+    if(this.mouvement.type != 'transfer') {
+
+      print.document.write( '<p> <span style="float: left"> CDA' +
+        '</span> &nbsp; &nbsp;  <span style="float: right">  ' +  this.mouvement.cda +  '   </span></p>' +
+
+        '<p> <span style="float: left"> ZONE' +
+        '</span> &nbsp; &nbsp;  <span style="float: right">  ' +  this.mouvement.zone +  '  </span></p>' +
+
+
+        '<p> <span style="float: left"> PARCELLE' +
+        '</span> &nbsp; &nbsp;  <span style="float: right"> ' +  this.mouvement.parcel +  ' </span></p>');
+
+    }
+
+
+
+    print.document.write( '<p><span style="float: bottom">***** </span></p>');
+
+    this.articles.forEach(function(element) {
+      print.document.write('<p style="font-weight: bolder;">' + element.article.category.name + '</p>');
+      print.document.write('<p>   </p>');
+      print.document.write('<p> <span style="float: left;">' + element.article.name +
+        '</span><span style="float: right;"> ' + element.quantity + ' ' + 'QTE' + '</span></p>');
+
+    });
+
+    print.document.write(
+      '<br/> <p>-------------------------</p>' +
+      '<p>** MERCI **</p>' +
+      '<p>*****</p>');
+
+    print.document.write('</div>');
+
+    print.document.write('</body></html>');
+    print.document.close(); // necessary for IE >= 10
+    print.focus(); // necessary for IE >= 10*/
+    print.print();
+    print.close();
+    return true;
+  }
+
 
 }

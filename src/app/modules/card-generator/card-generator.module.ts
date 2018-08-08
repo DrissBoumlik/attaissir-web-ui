@@ -6,7 +6,8 @@ import {SharedModule} from "../../shared/shared.module";
 import {CardsRoutingModule} from "../cards/cards-routing.module";
 import {
   DxSelectBoxModule, DxFormModule, DxListModule, DxButtonModule, DxDataGridModule,
-  DxTextBoxModule, DxDateBoxModule, DxPopupModule, DxTemplateModule, DxLoadIndicatorModule, DxGalleryModule
+  DxTextBoxModule, DxDateBoxModule, DxPopupModule, DxTemplateModule, DxLoadIndicatorModule, DxGalleryModule,
+  DxCheckBoxModule
 } from "devextreme-angular";
 import {FormsModule} from "@angular/forms";
 
@@ -27,6 +28,7 @@ import {FormsModule} from "@angular/forms";
     DxPopupModule,
     DxTemplateModule,
     DxGalleryModule,
+    DxCheckBoxModule,
     CardGeneratorRoutingModule
 
     ],

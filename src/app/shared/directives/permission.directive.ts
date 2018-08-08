@@ -15,8 +15,8 @@ export class PermissionDirective implements OnInit {
   }
 
   ngOnInit() {
-     this.el.nativeElement.style.display = 'initial';
-    return true;
+    // this.el.nativeElement.style.display = 'initial';
+   // return true;
 
     const permissions_ = localStorage.getItem('permissions');
 
@@ -27,7 +27,6 @@ export class PermissionDirective implements OnInit {
         const bytes = CryptoJS.AES.decrypt(permissions_, 'Gra61884546585_55');
         const permissions_decrypt = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
-       // console.log(permissions_decrypt);
         if (this.appPermissionHidden[0] === 'none') {
           this.el.nativeElement.style.display = 'initial';
           return;
@@ -41,7 +40,8 @@ export class PermissionDirective implements OnInit {
 
 
 
-        permissions_decrypt.forEach((it) => {
+        permissions_decrypt.forEach(it => {
+
           for (let i = 0; i < this.appPermissionHidden.length; i++) {
 
             if (it === this.appPermissionHidden[i]) {
@@ -50,7 +50,6 @@ export class PermissionDirective implements OnInit {
           }
         });
 
-        console.log(per_array);
 
         let visibility = true;
         for (let i = 0; i < this.appPermissionHidden.length; i++) {
