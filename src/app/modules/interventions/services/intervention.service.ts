@@ -130,5 +130,17 @@ export class InterventionService {
     });
   }
 
+  /**
+   * Get a Third parties
+   * @param cin
+   * @returns {Observable<Third[]>}
+   */
+  getThirdByCIN(cin: string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/interventionrequests/third-parties/${cin}`);
+  }
+
+  getCDAByZone(zone_id: string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/cdabyzone/${zone_id}`);
+  }
 }
 

@@ -10,7 +10,6 @@
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body m-portlet__body--no-padding">
-
       <dx-data-grid
         id="stockGrid"
         [dataSource]="stock"
@@ -30,6 +29,7 @@
         <dxi-column dataField="article_code" caption="Code" alignment="center"></dxi-column>
         <dxi-column dataField="article_name" caption="Article" alignment="center"></dxi-column>
         <dxi-column dataField="qr" caption="Quantité en stock" alignment="center"></dxi-column>
+        <dxi-column dataField="qres" caption="Quantité réservée" alignment="center"></dxi-column>
         <dxi-column dataField="ql" caption="Quantité Reçu" alignment="center"></dxi-column>
         <dxi-column dataField="qts" caption="Quantité Transfert Sortie" alignment="center"></dxi-column>
         <dxi-column dataField="qte" caption="Quantité Transfert Entrée" alignment="center"></dxi-column>

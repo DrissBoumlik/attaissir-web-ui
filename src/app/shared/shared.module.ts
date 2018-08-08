@@ -23,6 +23,7 @@ import { RfidCardReaderComponent } from './components/rfid-card-reader/rfid-card
 import { ParcelsListComponent } from './components/parcels-list/parcels-list.component';
 import { RoleDirective } from './directives/role.directive';
 import {PermissionDirective} from '../_directives/permission.directive';
+import { ParcelGridComponent } from './components/parcel-grid/parcel-grid.component';
 
 @NgModule({
   imports: [
@@ -63,7 +64,8 @@ import {PermissionDirective} from '../_directives/permission.directive';
     DxTemplateModule,
     RfidCardReaderComponent,
     DxFileUploaderModule,
-    ParcelsListComponent
+    ParcelsListComponent,
+    ParcelGridComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -74,6 +76,7 @@ import {PermissionDirective} from '../_directives/permission.directive';
     WarehouseComponent,
     RfidCardReaderComponent,
     ParcelsListComponent,
-    RoleDirective]
+    RoleDirective,
+    ParcelGridComponent]
 })
 export class SharedModule { }

@@ -27,7 +27,6 @@ import {PermissionDirective} from '../../_directives/permission.directive';
     HrefPreventDefaultDirective,
     UnwrapTagDirective,
     SubHeaderComponent,
-    PermissionDirective ,
   ],
   exports: [
     HeaderNavComponent,
@@ -38,7 +37,6 @@ import {PermissionDirective} from '../../_directives/permission.directive';
     ScrollTopComponent,
     TooltipsComponent,
     HrefPreventDefaultDirective,
-    PermissionDirective ,
   ],
   imports: [
     CommonModule,

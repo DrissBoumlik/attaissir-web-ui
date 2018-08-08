@@ -11,7 +11,7 @@ import { CardsService } from '../../../cards/services/cards.service';
   styleUrls: ['./new.component.scss']
 })
 export class NewComponent implements OnInit {
-  loadingVisible = false;
+  loadingVisible = true;
   step = 0;
   family: any;
   sub_family: any;
@@ -42,7 +42,7 @@ export class NewComponent implements OnInit {
     const structureId = localStorage.getItem('tenantId');
     this.interventionService.getFamiliesAndSubFamilies(+structureId).subscribe(
       (res: any) => {
-        console.log(res);
+        this.loadingVisible = false;
         res.data.forEach((activity_family: any, index) => {
           const acfa = {
             type_name: activity_family.activity_family,
@@ -122,11 +122,11 @@ export class NewComponent implements OnInit {
      * If the user has entered a 'CIN' it must be verified
      */
     if (this.farmerData && !this.farmerData.rfid && this.farmerData.cin) {
-      this.thirdService.getThirdByCIN(this.farmerData.cin).subscribe(
+      this.interventionService.getThirdByCIN(this.farmerData.cin).subscribe(
         (res: any) => {
           this.loadingVisible = false;
           if (res.data.length === 0) {
-            NewComponent.notifyMe('Le CIN que vous avez saisi est incorrect ou n\'appartient pas à un agriculteur.');
+            NewComponent.notifyMe('Le CIN que vous avez saisi est incorrect ou la agriculteur est desactivée.');
             return;
           } else {
             this.data.third_party_id = res.data.id;
@@ -142,7 +142,7 @@ export class NewComponent implements OnInit {
         },
         (err) => {
           this.loadingVisible = false;
-          NewComponent.notifyMe('Le CIN que vous avez saisi est incorrect ou n\'appartient pas à un agriculteur.');
+          NewComponent.notifyMe('Le CIN que vous avez saisi est incorrect ou la agriculteur est desactivée.');
           return;
         });
     }

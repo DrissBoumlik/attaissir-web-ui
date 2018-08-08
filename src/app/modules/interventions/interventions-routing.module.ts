@@ -9,7 +9,7 @@ import { AddTempleteComponent } from './components/add-templete/add-templete.com
 import {AuthGuard} from '../../_directives/guard.directive';
 
 // class hasPermissions implements CanActivate(){
-  
+
 // }
 
 const routes: Routes = [{
@@ -21,7 +21,7 @@ const routes: Routes = [{
     { path: 'template/ajouter', component: AddTempleteComponent },
     { path: 'liste', component: ListComponent },
     { path: 'modifier/:id', component: EditComponent },
-    { path: 'appliquer-template-parcelle', component: AddTempleteComponent, canActivate : [AuthGuard] , data: { permission: ['base.structures.destroy']} },
+    { path: 'appliquer-template-parcelle', component: AddTempleteComponent },
     { path: 'list', component: ListComponent },
   ]
 }];

@@ -57,7 +57,6 @@
 
       <div *ngIf="step == 2" class="slide-right">
         <app-rfid-card-reader (outData)="readRFID($event)" (goBack)="goBack()"></app-rfid-card-reader>
-
         <div class="m-portlet__head">
           <div class="m-portlet__head-tools">
             <dx-button icon="fa fa-check" (onClick)="validate()" [text]="'Valider'" type="success"></dx-button>

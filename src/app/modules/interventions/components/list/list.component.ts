@@ -11,12 +11,15 @@ export class ListComponent implements OnInit {
 
   dataSource: any;
 
-  constructor(public service: InterventionService,public router: Router) {
+  constructor(public service: InterventionService,
+              public router: Router) {
   }
 
   ngOnInit() {
-    this.service.getInterventions().subscribe((data: any) => {
-      this.dataSource = data.data;
+    this.service.getInterventions().subscribe(
+      (data: any) => {
+        console.log(data);
+        this.dataSource = data.data;
     }, err => {
 
     });
@@ -29,5 +32,7 @@ export class ListComponent implements OnInit {
       }
     );
   }
+
+ 
 
 }

@@ -49,9 +49,12 @@ import {PermissionModule} from '../../_directives/permission.module';
     DxCheckBoxModule,
     DxTreeListModule,
     DxTextBoxModule,
+    PermissionModule,
+    DxTextBoxModule,
     LayoutModule,
     DxTextBoxModule,
-    PermissionModule
+    PermissionModule,
+    DxLoadPanelModule
   ],
   declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent ]
 

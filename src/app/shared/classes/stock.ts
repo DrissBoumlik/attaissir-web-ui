@@ -17,6 +17,7 @@ export class Stock {
   qrf = 0;
   qs = 0;
   qr = 0;
+  qres = 0;
   dt: any;
   toOrder: 0;
   threshold = 10;
