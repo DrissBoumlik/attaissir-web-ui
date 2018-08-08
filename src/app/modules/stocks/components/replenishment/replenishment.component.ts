@@ -19,6 +19,7 @@ export class ReplenishmentComponent implements OnInit {
   selectedItems: any;
   toOrder = [];
   queryParams = '';
+  loadingVisible = false;
 
 
   @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
@@ -73,19 +74,23 @@ export class ReplenishmentComponent implements OnInit {
 
 
   replenishStock() {
+    this.loadingVisible = true;
     const aCommander = this.toOrder.filter(to => {
       return to.qte > 0;
     });
     if (aCommander.length === 0) {
       this.toaser.warning('Rien à commander');
+      this.loadingVisible = false;
     } else {
       const cmd = _.orderBy(aCommander, ['provider_id', 'warehouse_id'], ['asc', 'asc']);
       this.stockService.placeOrder(cmd).subscribe(
         (res => {
           this.toaser.success('Votre commande a été passée avec succès.');
+          this.loadingVisible = false;
           this.dataGrid.instance.refresh();
         }),
         (err => {
+          this.loadingVisible = false;
           this.toaser.warning('Une erreur s\'est produite, veuillez réessayer dans quelques instants.');
         })
       );

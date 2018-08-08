@@ -10,7 +10,6 @@
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body m-portlet__body--no-padding">
-
       <dx-data-grid
         id="stockGrid"
         [dataSource]="stock"
@@ -29,14 +28,15 @@
         <dxi-column dataField="sub_category_name" caption="Sous-famille" alignment="center"></dxi-column>
         <dxi-column dataField="article_code" caption="Code" alignment="center"></dxi-column>
         <dxi-column dataField="article_name" caption="Article" alignment="center"></dxi-column>
-        <dxi-column dataField="qr" dataType="number" caption="Quantité en stock" alignment="center"></dxi-column>
-        <dxi-column dataField="ql" dataType="number" caption="Quantité Reçu" alignment="center"></dxi-column>
-        <dxi-column dataField="qts" dataType="number" caption="Quantité Transfert Sortie" alignment="center"></dxi-column>
-        <dxi-column dataField="qte" dataType="number" caption="Quantité Transfert Entrée" alignment="center"></dxi-column>
-        <dxi-column dataField="qra" dataType="number" caption="Quantité Retour Agriculteur" alignment="center"></dxi-column>
-        <dxi-column dataField="qrf" dataType="number" caption="Quantité Retour Fournisseur" alignment="center"></dxi-column>
-        <dxi-column dataField="qs" dataType="number" caption="Quantité servie" alignment="center"></dxi-column>
-        <dxi-column dataField="threshold" dataType="number" caption="Seuil" alignment="center"></dxi-column>
+        <dxi-column dataField="qr"  dataType="number"  caption="Quantité en stock" alignment="center"></dxi-column>
+        <dxi-column dataField="qres"  dataType="number" caption="Quantité réservée" alignment="center"></dxi-column>
+        <dxi-column dataField="ql"  dataType="number" caption="Quantité Reçu" alignment="center"></dxi-column>
+        <dxi-column dataField="qts"  dataType="number" caption="Quantité Transfert Sortie" alignment="center"></dxi-column>
+        <dxi-column dataField="qte" dataType="number"  caption="Quantité Transfert Entrée" alignment="center"></dxi-column>
+        <dxi-column dataField="qra"  dataType="number" caption="Quantité Retour Agriculteur" alignment="center"></dxi-column>
+        <dxi-column dataField="qrf"  dataType="number" caption="Quantité Retour Fournisseur" alignment="center"></dxi-column>
+        <dxi-column dataField="qs" dataType="number"  caption="Quantité servie" alignment="center"></dxi-column>
+        <dxi-column dataField="threshold"  dataType="number" caption="Seuil" alignment="center"></dxi-column>
 
         <div *dxTemplate="let data of 'zoneTemplate'">
           <span class="badge badge-info">{{ data.data.warehouse_zone_name}}</span>

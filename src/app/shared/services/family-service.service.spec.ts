@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { FamilyServiceService } from './family-service.service';
+import { FamilyService } from './family-service.service';
 
 describe('FamilyServiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FamilyServiceService]
+      providers: [FamilyService]
     });
   });
 
-  it('should be created', inject([FamilyServiceService], (service: FamilyServiceService) => {
+  it('should be created', inject([FamilyService], (service: FamilyService) => {
     expect(service).toBeTruthy();
   }));
 });

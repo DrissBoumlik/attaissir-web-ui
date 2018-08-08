@@ -6,16 +6,22 @@ import { AddComponent } from './components/add/add.component';
 import { ListComponent } from './components/list/list.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AddTempleteComponent } from './components/add-templete/add-templete.component';
+
+// class hasPermissions implements CanActivate(){
+
+// }
 import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 const routes: Routes = [{
   path: 'interventions',
   component: DefaultComponent,
   children: [
-    { path: 'selectionner', component: NewComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.store'] } },
-    { path: 'ajouter', component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.store'] } },
-    { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.grid'] } },
-    { path: 'modifier/:id', component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.update'] } },
+    { path: 'selectionner', component: NewComponent },
+    { path: 'ajouter', component: AddComponent },
+    { path: 'template/ajouter', component: AddTempleteComponent },
+    { path: 'liste', component: ListComponent },
+    { path: 'modifier/:id', component: EditComponent },
+    { path: 'list', component: ListComponent },
     {
       path: 'appliquer-template-parcelle', component: AddTempleteComponent,
       canActivate: [PermissionGuard], data: { permission: ['preconization.articletemplates.store'] }

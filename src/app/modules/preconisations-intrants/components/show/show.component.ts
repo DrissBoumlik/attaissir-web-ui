@@ -98,6 +98,8 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
   }
 
+
+
   showDeliverPopup() {
 
     this.evnt1 = false;

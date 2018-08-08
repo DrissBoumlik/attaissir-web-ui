@@ -16,11 +16,18 @@ export class ListComponent implements OnInit {
 
   helper: any;
 
-  constructor(public service: InterventionService, public router: Router) {
+  constructor(public service: InterventionService,
+              public router: Router) {
     this.helper = Helper;
   }
 
   ngOnInit() {
+    this.service.getInterventions().subscribe(
+      (data: any) => {
+        console.log(data);
+        this.dataSource = data.data;
+    }, err => {}
+    );
     // this.service.getInterventions().subscribe((data: any) => {
     //   this.dataSource = data.data;
     // }, err => {
@@ -64,7 +71,6 @@ export class ListComponent implements OnInit {
       }
     );
   }
-
 
 
 }

@@ -1,0 +1,71 @@
+<dx-data-grid
+  #dataGrid
+  id="parcelsGrid"
+  [dataSource]="data"
+  [columnHidingEnabled]="false"
+  [allowColumnReordering]="true"
+  [columnAutoWidth]="true"
+
+  noDataText="Aucun parcelle n'est disponible"
+  KeyExpr="id"
+  [rowAlternationEnabled]="true"
+>
+
+  <dxi-column dataField="id" [visible]="false"></dxi-column>
+  <dxi-column dataField="name" caption="Parcelle" alignment="center"></dxi-column>
+  <dxi-column dataField="cda_name" caption="CDA" alignment="center"></dxi-column>
+  <dxi-column dataField="zone_name" caption="Zone" alignment="center"></dxi-column>
+  <dxi-column dataField="code" caption="Code agrégé" alignment="center"></dxi-column>
+  <dxi-column dataField="cin" caption="CIN" alignment="center"></dxi-column>
+  <dxi-column dataField="full_name" caption="Nom complet" alignment="center"></dxi-column>
+  <dxi-column dataField="annuel_surface" caption="Supeficie (Ha)" alignment="center"></dxi-column>
+
+
+  <div *dxTemplate="let data of 'ContractTemplate'">
+    <a style="color: #6d7fcc; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data, router, toastr)">{{ data.data.contract_code }}</a>
+  </div>
+  <dxo-remote-operations
+    [sorting]="true"
+    [paging]="true">
+  </dxo-remote-operations>
+  <dxo-filter-row
+    [visible]="true" [applyFilter]="true"></dxo-filter-row>
+  <dxo-editing
+    mode="popup"
+    [useIcons]="true"
+    [allowAdding]="false"
+    [allowUpdating]="false"
+    [allowDeleting]="false">
+  </dxo-editing>
+  <dxo-selection mode="multiple"></dxo-selection>
+  <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+  <dxo-export [enabled]="false" fileName="situation_stock" [excelFilterEnabled]="true"
+              [allowExportSelectedData]="true"></dxo-export>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-pager
+    [allowedPageSizes]="[10]"
+    [showInfo]="true"
+    [showNavigationButtons]="true"
+    [showPageSizeSelector]="true"
+    [visible]="true">
+  </dxo-pager>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+  <dxo-search-panel [visible]="false"></dxo-search-panel>
+  <dxo-group-panel [visible]="true"
+                   emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+</dx-data-grid>
+<br>
+<div class="dx-field">
+  <div class="dx-field-value">
+    <dx-button
+      icon="check"
+      type="default"
+      text="Valider"
+      (onClick)="doneClick()">
+    </dx-button>
+  </div>
+</div>
+

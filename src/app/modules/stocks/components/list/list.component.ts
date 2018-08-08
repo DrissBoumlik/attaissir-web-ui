@@ -49,6 +49,7 @@ export class ListComponent implements OnInit {
                     row.qte = war.qte;
                     row.qra = war.qra;
                     row.qrf = war.qrf;
+                    row.qres = war.qres;
                     row.qs = war.qs;
                     row.qr = war.qr;
                     row.warehouse_name = war.warehouse_name;

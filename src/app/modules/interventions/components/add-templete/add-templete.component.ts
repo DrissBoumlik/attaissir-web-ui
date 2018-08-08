@@ -24,6 +24,7 @@ export class AddTempleteComponent implements OnInit {
   templateOptions: any = {};
   template: any;
   dateOptions: any = {};
+  loadingVisible = false;
 
   @ViewChild('ref1') ref1: DxTreeListComponent;
 
@@ -87,7 +88,7 @@ export class AddTempleteComponent implements OnInit {
       type: 'success',
       useSubmitBehavior: true,
       onClick: () => {
-
+        this.loadingVisible = true;
         const selected_parc = [];
 
         this.ref1.instance.getVisibleRows().forEach((row: any) => {
@@ -105,6 +106,7 @@ export class AddTempleteComponent implements OnInit {
           };
 
           this.interventionService.addIng(item).subscribe((response) => {
+            this.loadingVisible = false;
             this.toastr.success('Les modifications ont été effectuées avec succès.');
             this.router.navigate(['/stock/situation']);
           });
