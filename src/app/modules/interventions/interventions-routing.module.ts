@@ -6,7 +6,6 @@ import { AddComponent } from './components/add/add.component';
 import { ListComponent } from './components/list/list.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AddTempleteComponent } from './components/add-templete/add-templete.component';
-import {AuthGuard} from '../../_directives/guard.directive';
 
 // class hasPermissions implements CanActivate(){
 

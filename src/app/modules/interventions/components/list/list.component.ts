@@ -18,6 +18,7 @@ export class ListComponent implements OnInit {
 
   constructor(public service: InterventionService,
               public router: Router) {
+    this.helper = Helper;
   }
 
   ngOnInit() {
