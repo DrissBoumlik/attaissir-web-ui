@@ -506,7 +506,7 @@ export class WizardComponent implements OnInit {
             annuel_surface: soil.annuel_surface,
             code_ormva: soil.code_ormva ? soil.code_ormva : soil.registration_number,
             is_logical: this.groundsList.length === 1,
-            name: this.groundsList.length === 1 ? `${soil.cda} - ${soil.zone} - ${soil.code_ormva}` : ''
+            name: this.groundsList.length === 1 ? soil.code_ormva : ''
           };
           if (!!soil.parcel_tmp_id) {
             soilObject['id'] = soil.parcel_tmp_id;
@@ -536,7 +536,24 @@ export class WizardComponent implements OnInit {
     } else {
       this.contractService.addContract(this.contract).subscribe((contract: any) => {
         contract = this.helper.dataFormatter(contract, false);
-        this.groundsList.map((soil) => {
+        this.groundsList = this.groundsList.map((ground: any) => {
+            console.log(ground);
+            ground['soil_id'] =  ground['id'];
+            ground['contract_id'] =  contract['id'];
+            ground['campaign_id'] =  contract.campaign.id;
+            ground['zone_id'] =  contract.zone;
+            // delete ground.id;
+            return ground;
+        });
+        this.parcelsService.addParcel(this.groundsList).subscribe(d => {
+          d = this.helper.dataFormatter(d, false);
+          console.log(d);
+          this.router.navigate([`/contrats/afficher/${id}`]);
+        }, error1 => {
+          this.toastr.warning(error1.error.message);
+          this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
+        });
+        /*this.groundsList.map((soil) => {
           const soilObject = {
             soil_id: soil.id,
             tenure: soil.tenure,
@@ -544,7 +561,7 @@ export class WizardComponent implements OnInit {
             annuel_surface: soil.annuel_surface,
             code_ormva: soil.code_ormva ? soil.code_ormva : soil.registration_number,
             is_logical: this.groundsList.length === 1,
-            name: this.groundsList.length === 1 ? `${soil.cda} - ${soil.zone} - ${soil.code_ormva}` : ''
+            name: this.groundsList.length === 1 ? soil.code_ormva : ''
           };
           if (!!soil.parcel_tmp_id && !this.contract.parent_id) {
             soilObject['id'] = soil.parcel_tmp_id;
@@ -566,11 +583,11 @@ export class WizardComponent implements OnInit {
             });
           }
           return soil;
-        });
+        });*/
         console.log(this.groundsList);
-        this.createLogicalParcel(contract, this.groundsList);
+        // this.createLogicalParcel(contract, this.groundsList);
         const id = (this.isEdit) ? this.contract.id : contract['id'];
-        this.router.navigate([`/contrats/afficher/${id}`]);
+        // this.router.navigate([`/contrats/afficher/${id}`]);
       }, error1 => {
         throw error1;
       });
