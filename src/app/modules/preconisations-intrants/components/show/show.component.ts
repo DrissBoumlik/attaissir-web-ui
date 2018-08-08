@@ -236,32 +236,32 @@ export class ShowComponent implements OnInit, AfterViewInit {
     print.document.write('<div class="div1">');
 
 
-    print.document.write('<p><b style="font-weight: bolder;">BON DE LIVRAISON</b></p>' + '<p style="font-weight: bolder;">FACTURE</p> ' +
+    print.document.write('<p><b style="font-weight: bolder;">BON DE LIVRAISON</b></p>' +
       '<p>-------------------------</p>' +
 
       '<p> <span> N° ' + this.preconisation.id + ' </span></p>' +
 
-      '<p> <span style="float: right">' + this.preconisation.date +'</span> </p> <br/>' +
+      '<p> <span style="float: right"> DATE : ' + this.preconisation.date +'</span> </p> <br/>' +
 
       '<p> <span style="float: left;font-weight: bolder;">COMPAGNE </span>  <span style="float: right">' +
-      this.preconisation.campaign + ' </span></p>' +
+      this.preconisation.campaign + ' </span></p>  <br/>' +
 
       '<p> <span style="float: left;font-weight: bolder;">CDA </span>  <span style="float: right">' +
-      this.preconisation.cda  + ' </span></p>' +
+      this.preconisation.cda  + ' </span></p>  <br/>' +
 
       '<p> <span style="float: left;font-weight: bolder;">ZONE </span>  <span style="float: right">' +
-      this.preconisation.zone + ' </span></p>' +
+      this.preconisation.zone + ' </span></p>  <br/>' +
 
 
       '<p> <span style="float: left;font-weight: bolder;">PARCELLE </span>  <span style="float: right">' +
-      this.preconisation.parcel + ' </span></p>' +
+      this.preconisation.parcel + ' </span></p>  <br/>' +
 
       '<p> <span style="float: left;font-weight: bolder;">NOM COMPLET  </span>   <span style="float: right">' +
-      this.preconisation.third_party_name + ' </span></p>' +
-      '<p><span style="float: bottom">***** </span></p>');
+      this.preconisation.third_party_name + ' </span></p>  <br/>' +
+      '<p><span style="float: bottom">***** </span></p> <br/>');
 
     this.articles.forEach(function(element) {
-      print.document.write('<p style="font-weight: bolder;">' + element.category + '</p>');
+      print.document.write('<p style="font-weight: bolder;">' + element.category + '</p><br/>');
       print.document.write('<p> ***** </p>');
       print.document.write('<p> <span style="float: left;">' + element.article_name +
         '</span><span style="float: right;"> ' + element.quantity + ' ' + 'QTE' + '</span></p>');
