@@ -5,6 +5,7 @@ import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ShowComponent } from './components/show/show.component';
 import { ReplenishmentComponent } from './components/replenishment/replenishment.component';
+import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 
 const routes: Routes = [
@@ -14,19 +15,19 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ReplenishmentComponent
+        component: ReplenishmentComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.grid'] }
       },
       {
         path: 'modifier/:id',
-        component: EditComponent
+        component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.update'] }
       },
       {
         path: 'afficher/:id',
-        component: ShowComponent
+        component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.show'] }
       },
       {
         path: 'reapprovisionnement',
-        component: ReplenishmentComponent
+        component: ReplenishmentComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.grid'] }
       }
     ]
   }

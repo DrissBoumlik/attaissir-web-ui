@@ -46,11 +46,13 @@ export class AddTempleteComponent implements OnInit {
         return this.interventionService.getParcelsDx(loadOptions)
           .toPromise()
           .then(response => {
+            console.log(response);
             return response;
 
           })
           .catch(error => {
-            throw error;
+            return null;
+            //  throw error;
           });
       }
     });

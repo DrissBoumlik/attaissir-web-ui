@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ThemeComponent } from './theme.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/_guards';
-import {PermissionDeniedModule} from './pages/default/permission-denied/permission-denied.module';
+import { PermissionDeniedModule } from './pages/default/permission-denied/permission-denied.module';
 
 const routes: Routes = [
   {
@@ -73,6 +73,10 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: '../modules/roles/roles.module#RolesModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/card-generator/card-generator.module#CardGeneratorModule'
       }
       ,
       {

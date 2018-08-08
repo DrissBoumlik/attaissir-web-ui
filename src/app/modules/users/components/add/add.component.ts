@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {UsersService} from '../../services/users.service';
+import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../services/users.service';
 import index from '@angular/cli/lib/cli';
 import number_box from 'devextreme/ui/number_box';
-import {NewComponent} from '../../../interventions/components/new/new.component';
-import {Router} from '@angular/router';
+import { NewComponent } from '../../../interventions/components/new/new.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -12,18 +12,23 @@ import {Router} from '@angular/router';
 })
 export class AddComponent implements OnInit {
 
+  loadingVisible: Boolean = false;
   constructor(
     private userService: UsersService,
     private router: Router
   ) {
   }
 
+  roleSelectOptions: any;
   checkedItems = [];
   listeDesCdas = [];
   currentStructurIdInPopUp: any;
+  roleIsCentreDistribution = false;
+  rowIndex: number;
 
   roleOptions: any;
   user: any = {};
+  magasin: any = {};
   choosingStructures = [];
   listOfStructures = [];
   listOfRoles = [];
@@ -49,6 +54,7 @@ export class AddComponent implements OnInit {
   }
 
   showStructureZones(data: any) {
+    this.rowIndex = data.rowIndex;
     this.currentStructurIdInPopUp = data.data.id;
     this.listeDesCdas = [];
     for (let i = 0; i < this.choosingStructures.length; i++) {
@@ -60,8 +66,9 @@ export class AddComponent implements OnInit {
     this.popupVisible = true;
   }
 
-// tree elements
+  // tree elements
   selectionChanged(e) {
+
     const value = e.node;
     if (this.isProduct(value)) {
       this.processProduct({
@@ -104,21 +111,40 @@ export class AddComponent implements OnInit {
     }
   }
 
-// end tree elements
+  // end tree elements
 
 
   addToChoosingStructures(e) {
-    this.listOfStructures = this.listOfStructures.filter(
-      s => {
-        return s.id !== e.itemData.id;
-      }
-    );
+    this.magasin = {};
+    if (this.roleIsCentreDistribution) {
+      this.listOfStructures = this.listOfStructures.concat(this.choosingStructures);
+      this.listOfStructures = this.listOfStructures.filter(
+        s => {
+          return s.id !== e.itemData.id;
+        }
+      );
+      this.choosingStructures = [];
+      this.choosingStructures.push({
+        id: e.itemData.id,
+        name: e.itemData.name,
+        cdas: e.itemData.cdas,
+        warehouses: e.itemData.warehouses
+      });
+    } else {
+      this.listOfStructures = this.listOfStructures.filter(
+        s => {
+          return s.id !== e.itemData.id;
+        }
+      );
 
-    this.choosingStructures.push({
-      id: e.itemData.id,
-      name: e.itemData.name,
-      cdas: e.itemData.cdas
-    });
+      this.choosingStructures.push({
+        id: e.itemData.id,
+        name: e.itemData.name,
+        cdas: e.itemData.cdas,
+        warehouses: e.itemData.warehouses
+      });
+    }
+
 
   }
 
@@ -127,68 +153,155 @@ export class AddComponent implements OnInit {
   }
 
   removeItemFromChoosingStructures(e) {
+    this.magasin = {};
+
     const tempData = [];
     const foundEle = [];
-    for (let i = 0; i < e.data.cdas.length; i++) {
-      const items = e.data.cdas[i].items;
-      for (let j = 0; j < items.length; j++) {
-        for (let k = 0; k < this.checkedItems.length; k++) {
-          if (this.checkedItems[k].id === items[j].id) {
-            this.checkedItems.splice(k, 1);
-            // foundEle.push(items[j].id);
-          }
-        }
+    // if (e.data.cdas) {
+    //   for (let i = 0; i < e.data.cdas.length; i++) {
+    //     const items = e.data.cdas[i].items;
+    //     for (let j = 0; j < items.length; j++) {
+    //       for (let k = 0; k < this.checkedItems.length; k++) {
+    //         if (this.checkedItems[k].id === items[j].id) {
+    //           this.checkedItems.splice(k, 1);
+    //           // foundEle.push(items[j].id);
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    const tmp = this.listOfStructures;
+    const itemToRmove = e.data;
+    itemToRmove.isSelected = false;
+    for (let i = 0; i < itemToRmove.cdas.length; i++) {
+      itemToRmove.cdas[i].isSelected = false;
+      for (let j = 0; j < itemToRmove.cdas[i].items.length; j++) {
+        itemToRmove.cdas[i].items[j].isSelected = false;
       }
+
     }
 
-    const tmp = this.listOfStructures;
+
     tmp.push({
-      id: e.data.id,
-      name: e.data.name,
-      cdas: e.data.cdas
+      id: itemToRmove.id,
+      name: itemToRmove.name,
+      cdas: itemToRmove.cdas,
+      warehouses: itemToRmove.warehouses
     });
     this.listOfStructures = tmp;
   }
 
 
-  onFormSubmit(e) {
-    const zone_id = [];
-    for (let i = 0; i < this.checkedItems.length; i++) {
-      zone_id.push(this.checkedItems[i].id);
+  // onFormSubmitOrginal(e) {
+  //   const zone_id = [];
+  //   for (let i = 0; i < this.checkedItems.length; i++) {
+  //     zone_id.push(this.checkedItems[i].id);
+  //   }
+  //   const structure_id = [];
+  //   for (let i = 0; i < this.choosingStructures.length; i++) {
+  //     structure_id.push(this.choosingStructures[i].id);
+  //   }
+  //
+  //   if (structure_id.length) {
+  //     const data = {
+  //       email: this.user.email,
+  //       name: this.user.name,
+  //       password: this.user.password,
+  //       role_id: this.user.role_id,
+  //       structure_id: structure_id,
+  //       zone_id: zone_id
+  //     };
+  //     this.userService.saveUser(data).subscribe(
+  //       (response: any) => {
+  //         NewComponent.notifyMe('utilisateur créé avec succès, Redirection.........', 'success');
+  //         this.router.navigate([`/utilisateurs/liste`]);
+  //
+  //       },
+  //       (err) => {
+  //         Object.keys(err.error.errors).forEach(
+  //           (e: any) => {
+  //             NewComponent.notifyMe(err.error.errors[e], 'error');
+  //           });
+  //       }
+  //     );
+  //   } else {
+  //     NewComponent.notifyMe('veuillez attribuer une structure a ' + this.user.name, 'error');
+  //
+  //   }
+  //
+  //
+  // }
+
+
+  getCheckedZones() {
+    const tempZones = [];
+    for (let j = 0; j < this.choosingStructures.length; j++) {
+      const tempStructure = this.choosingStructures[j];
+      for (let k = 0; k < tempStructure.cdas.length; k++) {
+        const tempCda = tempStructure.cdas[k];
+        for (let l = 0; l < tempCda.items.length; l++) {
+          const item = tempCda.items[l];
+          if (item.isSelected) {
+            tempZones.push(item.id);
+          }
+        }
+      }
     }
+    return tempZones;
+  }
+
+  onFormSubmit(e) {
+    e.preventDefault();
     const structure_id = [];
     for (let i = 0; i < this.choosingStructures.length; i++) {
       structure_id.push(this.choosingStructures[i].id);
     }
 
-    if (structure_id.length) {
+    const formErrors = [];
+
+    if (!structure_id.length) {
+      formErrors.push('veuillez attribuer une structure a ' + this.user.name);
+    }
+
+    if (this.roleIsCentreDistribution) {
+      if (!this.magasin.warehouses_id) {
+        formErrors.push('veuillez attribuer un magasin a ' + this.user.name);
+      }
+    }
+
+
+    if (!formErrors.length) {
+      const warehouse_id = (this.roleIsCentreDistribution ? this.magasin.warehouses_id : '');
       const data = {
         email: this.user.email,
         name: this.user.name,
         password: this.user.password,
         role_id: this.user.role_id,
         structure_id: structure_id,
-        zone_id: zone_id
+        zone_id: this.getCheckedZones(),
+        warehouse_id: warehouse_id
       };
+      this.loadingVisible = true;
       this.userService.saveUser(data).subscribe(
         (response: any) => {
           NewComponent.notifyMe('utilisateur créé avec succès, Redirection.........', 'success');
           this.router.navigate([`/utilisateurs/liste`]);
-
+          this.loadingVisible = false;
         },
         (err) => {
           Object.keys(err.error.errors).forEach(
             (e: any) => {
               NewComponent.notifyMe(err.error.errors[e], 'error');
             });
+          this.loadingVisible = false;
         }
       );
     } else {
-      NewComponent.notifyMe('veuillez attribuer une structure a ' + this.user.name, 'error');
+      for (let i = 0; i < formErrors.length; i++) {
+        NewComponent.notifyMe(formErrors[i], 'error');
+      }
 
     }
-
-
   }
 
   ngOnInit() {
@@ -198,6 +311,20 @@ export class AddComponent implements OnInit {
     this.userService.getRoles().subscribe(
       (response: any) => {
         this.listOfRoles = response.data;
+        this.roleSelectOptions = {
+          items: this.listOfRoles,
+          displayExpr: 'description',
+          valueExpr: 'id',
+          onSelectionChanged: (event) => {
+            if (event.selectedItem.description === 'Centre distribution') {
+              this.roleIsCentreDistribution = true;
+              this.listOfStructures = this.listOfStructures.concat(this.choosingStructures);
+              this.choosingStructures = [];
+            } else {
+              this.roleIsCentreDistribution = false;
+            }
+          }
+        };
       },
       (err) => {
         console.log(err);
@@ -210,6 +337,10 @@ export class AddComponent implements OnInit {
     this.userService.getStructures().subscribe(
       (response: any) => {
         this.listOfStructures = response.data;
+        for (let i = 0; i < this.listOfStructures.length; i++) {
+          this.listOfStructures[i].isSelected = false;
+
+        }
       },
       (err) => {
         console.log(err);

@@ -176,12 +176,12 @@
             <dxi-item
               *ngIf="(campaigns[campaigns.length - 1].campaign === camp.campaign) && (campaigns.length < maxYears)"
               itemType="button"
-              alignment="bottom"
+              horizontalAlignment="bottom"
               [buttonOptions]="addButtonOptions">
             </dxi-item>
             <dxi-item *ngIf="(campaigns[campaigns.length - 1].campaign === camp.campaign) && (campaigns.length > 1)"
                       itemType="button"
-                      alignment="bottom"
+                      horizontalAlignment="bottom"
                       [buttonOptions]="removeButtonOptions">
             </dxi-item>
           </dxi-item>
@@ -250,7 +250,7 @@
             <dxo-label text="Code ORMVA"></dxo-label>
           </dxi-item>
           <dxi-item itemType="button"
-                    alignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null)"
+                    horizontalAlignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null) || (parcelForm.tenure === null)"
                     [buttonOptions]="addParcelOptions"></dxi-item>
         </dx-form>
       </div>
@@ -285,7 +285,7 @@
           <dxi-column dataField="registration_number" caption="Matricule" i18n-caption>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
-          <dxi-column dataField="cda" caption="CDA" i18n-caption>
+          <dxi-column dataField="cda_code" caption="CDA" i18n-caption>
             <dxo-lookup
               [dataSource]="cdas"
               displayExpr="name"
@@ -293,7 +293,7 @@
             </dxo-lookup>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
-          <dxi-column dataField="zone" caption="Zone" i18n-caption>
+          <dxi-column dataField="zone_code" caption="Zone"  i18n-caption>
             <dxo-lookup
               [dataSource]="zones"
               displayExpr="name"

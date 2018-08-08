@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InterventionService } from '../../services/intervention.service';
 import { NewComponent } from '../new/new.component';
-
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-edit',
@@ -58,8 +58,9 @@ export class EditComponent implements OnInit {
     private router: Router) {
   }
 
+  submitAction: Boolean = true;
   onFormSubmit = function(e) {
-
+    this.submitAction = false;
 
     const formData = {
       template_name: (this.savedModel.saved ? this.savedModel.text : ''),
@@ -68,10 +69,13 @@ export class EditComponent implements OnInit {
     const routId = +this.route.snapshot.params['id'];
     this.interventionService.updateIntervention(routId, formData).subscribe(
       (value: any) => {
+        this.submitAction = true;
+
         NewComponent.notifyMe('Votre de mande a été traitée avec succès, Redirection.........', 'success');
         this.router.navigate([`/interventions/liste`]);
       },
       (error: any) => {
+        this.submitAction = true;
         NewComponent.notifyMe('Une erreur s\'est produite, veuillez réessayer dans quelques secondes.', 'error');
       }
     );

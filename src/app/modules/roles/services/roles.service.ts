@@ -1,34 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Observable} from '../../../../../node_modules/rxjs/Rx';
-import {environment} from '../../../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable } from '../../../../../node_modules/rxjs/Rx';
+import { environment } from '../../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
-
-let permissions = [
-  {
-    permission: "permission1",
-    actions:
-      [
-        ["lire", false, 'permissions1.lire'],
-        ["ecrire", false]
-      ]
-  },
-  {
-    permission: "permission2",
-    actions: [
-      ["lire", false],
-      ["ecrire", false]
-    ]
-  },
-  {
-    permission: "permission3",
-    actions: [
-      ["lire", false],
-      ["ecrire", false]
-    ]
-  }
-
-];
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +12,8 @@ export class RolesService {
   data: any;
   roleID: number;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) { 
-    this.route.params.subscribe( params => this.roleID = params.id );
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+    this.route.params.subscribe(params => this.roleID = params.id);
   }
 
   saveRole(data): Observable<any> {
@@ -64,7 +38,7 @@ export class RolesService {
       })
     });
   }
-  
+
   getRole(roleID: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/roles/${roleID}`, {
       headers: new HttpHeaders({
@@ -73,7 +47,7 @@ export class RolesService {
     });
   }
 
-  getUserPermissions(roleID: number): Observable<any>{
+  getUserPermissions(roleID: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/roles/${roleID}`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -81,8 +55,16 @@ export class RolesService {
     });
   }
 
-  updateRole(data,roleID: number): Observable<any> {
+  updateRole(data, roleID: number): Observable<any> {
     return this.http.put(`${environment.apiUrl}/roles/${roleID}`, JSON.stringify(data), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getRolesDx(params?: any): Observable<any[]> {
+    return this.http.post<any[]>(`${environment.apiUrl}/roles/grid`, JSON.stringify(params), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

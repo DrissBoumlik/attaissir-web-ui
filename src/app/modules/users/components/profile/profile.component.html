@@ -15,9 +15,9 @@
         <div class="card">
           <div class="firstinfo"> <avatar [name]="'hamza'"   [displayType]="'circle'" [background]="'green'" [size]="120"></avatar>
             <div class="profileinfo">
-              <h1>Arno</h1>
-              <h3>Role : role 1</h3>
-              <p class="bio">  Structures :  20 &nbsp;  &nbsp; Zone :  10 </p>
+              <h1>{{userInfo.name}}</h1>
+              <h3>Role : {{role}}</h3>
+              <p class="bio">  Structures :  {{nbr_structs}} &nbsp;  &nbsp; Cda : {{nbr_cdas}} &nbsp; Zone :  {{nbr_zones}} </p>
             </div>
           </div>
         </div>
@@ -29,7 +29,16 @@
 
         <dxi-item itemType="group"  [colCount]="2">
 
-          <dxi-item dataField="Email"></dxi-item>
+          <dxi-item>
+            <div class="dx-field">
+              <div class="dx-field-label">Email</div>
+              <div class="dx-field-value">
+                <dx-text-box [value]="userInfo.email"></dx-text-box>
+              </div>
+            </div>
+          </dxi-item>
+
+
 
         </dxi-item>
 
@@ -58,66 +67,21 @@
         <div class="faq-header">Structures</div>
 
         <div class="faq-content">
-          <div class="faq-question">
-            <input id="q1" type="checkbox" class="panel">
+          <div *ngFor="let structure of structures; let i = index" class="faq-question">
+            <input [id]="i" type="checkbox" class="panel">
             <div class="plus">+</div>
-            <label for="q1" class="panel-title">structure 1</label>
+            <label [for]="i" class="panel-title"> {{structure.structure_name}} </label>
             <div class="panel-content">
 
               <ul class="tree-menu">
-                <li> CDA 1
-                  <ul>
-                    <li>zone 1</li>
-                    <li>zone 2</li>
-                    <li>zone 3</li>
-                    <li>zone 4</li>
-                    <li>zone 5</li>
+                <li *ngFor="let cda of structure.cdas" > {{cda.name}}
+                  <ul *ngFor="let zone of cda.zones">
+                    <li>{{zone.name}}</li>
                   </ul>
                 </li>
 
-                <li> CDA 2
-                  <ul>
-                    <li>zone 1</li>
-                    <li>zone 2</li>
-                  </ul>
-                </li>
               </ul>
 
-            </div>
-          </div>
-
-          <div class="faq-question">
-            <input id="q2" type="checkbox" class="panel">
-            <div class="plus">+</div>
-            <label for="q2" class="panel-title">structure 2</label>
-            <div class="panel-content">
-
-
-              <ul class="tree-menu">
-                <li> CDA 4
-                  <ul>
-                    <li>zone 1</li>
-                    <li>zone 2</li>
-                  </ul>
-                </li>
-              </ul>
-
-            </div>
-          </div>
-
-          <div class="faq-question">
-            <input id="q3" type="checkbox" class="panel">
-            <div class="plus">+</div>
-            <label for="q3" class="panel-title">structure 3</label>
-            <div class="panel-content">
-
-              <ul class="tree-menu" style="padding: 30px">
-                <li> CDA 7
-                  <ul>
-                    <li>zone 1</li>
-                  </ul>
-                </li>
-              </ul>
             </div>
           </div>
         </div>

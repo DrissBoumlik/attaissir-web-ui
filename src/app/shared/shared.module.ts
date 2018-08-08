@@ -24,6 +24,7 @@ import { ParcelsListComponent } from './components/parcels-list/parcels-list.com
 import { RoleDirective } from './directives/role.directive';
 import {PermissionDirective} from '../_directives/permission.directive';
 import { ParcelGridComponent } from './components/parcel-grid/parcel-grid.component';
+import { PermissionDirective } from './directives/permission.directive';
 
 @NgModule({
   imports: [
@@ -41,7 +42,7 @@ import { ParcelGridComponent } from './components/parcel-grid/parcel-grid.compon
     DxPopupModule,
     DxTemplateModule,
     DxFileUploaderModule,
-    DxSelectBoxModule
+    DxSelectBoxModule,
   ],
   exports: [
     WizardComponent,
@@ -64,8 +65,9 @@ import { ParcelGridComponent } from './components/parcel-grid/parcel-grid.compon
     DxTemplateModule,
     RfidCardReaderComponent,
     DxFileUploaderModule,
+    ParcelGridComponent,
     ParcelsListComponent,
-    ParcelGridComponent
+    PermissionDirective
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -77,6 +79,8 @@ import { ParcelGridComponent } from './components/parcel-grid/parcel-grid.compon
     RfidCardReaderComponent,
     ParcelsListComponent,
     RoleDirective,
-    ParcelGridComponent]
+    PermissionDirective,
+    ParcelGridComponent
+  ]
 })
 export class SharedModule { }

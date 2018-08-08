@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './components/list/list.component';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { ShowComponent } from './components/show/show.component';
+import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 const routes: Routes = [
   {
@@ -11,19 +12,19 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListComponent
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.articletemplates.grid'] }
       },
       {
         path: 'liste',
-        component: ListComponent
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.articletemplates.grid'] }
       },
       {
         path: 'liste/:cin',
-        component: ListComponent
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.articletemplates.show'] }
       },
       {
         path: 'afficher/:id',
-        component: ShowComponent
+        component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.articletemplates.show'] }
       }
     ]
   },

@@ -37,7 +37,8 @@ import { MouvementsModule } from './modules/mouvements/mouvements.module';
 import { InterventionsModule } from './modules/interventions/interventions.module';
 import { DemandesModule } from './modules/demandes/demandes.module';
 import { UsersModule } from './modules/users/users.module';
-import {AuthGuard} from './_directives/guard.directive';
+import { CardGeneratorModule } from "./modules/card-generator/card-generator.module";
+import { PermissionGuard } from './shared/directives/guard.directive';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import {AuthGuard} from './_directives/guard.directive';
     ArticlesModule,
     SharedModule,
     MouvementsModule,
+    CardGeneratorModule,
     UsersModule
   ],
   exports: [
@@ -103,7 +105,7 @@ import {AuthGuard} from './_directives/guard.directive';
     provide: ErrorHandler,
     useClass: SiamErrorHandler
   },
-    AuthGuard
+    PermissionGuard
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

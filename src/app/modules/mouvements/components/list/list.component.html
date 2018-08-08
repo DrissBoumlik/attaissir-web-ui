@@ -16,16 +16,12 @@
         id="gridContainer"
         [dataSource]="mouvements"
         showBorders="true"
-        [columnHidingEnabled]="true"
+        [columnHidingEnabled]="false"
         [allowColumnResizing]="false"
         [allowColumnReordering]="true"
         [columnAutoWidth]="true"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         KeyExpr="id">
-        <dxo-remote-operations
-          [sorting]="true"
-          [paging]="true">
-        </dxo-remote-operations>
 
         <dxo-export [enabled]="true" fileName="magasin" [allowExportSelectedData]="true"></dxo-export>
 
@@ -55,9 +51,7 @@
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxi-column dataField="id" [width]="40" caption=""  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
-        <dxi-column dataField="id" [allowFiltering]="false" caption="Id"></dxi-column>
-        <dxi-column dataField="article_count"  [allowFiltering]="false" caption="Nombre d'article"></dxi-column>
+        <dxi-column dataField="id" [width]="40" caption=""  [allowFiltering]="false" [visible]="helper.permissionMethod(['distributionCenter.stocks.update'])"  [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
         <dxi-column dataField="date" format="dd-MM-yyyy"  dataType="date" [allowFiltering]="false" caption="Date"></dxi-column>
         <dxi-column dataField="type" caption="Type" [allowFiltering]="false" [calculateGroupValue]="helper.groupedMouvementValue" cellTemplate="typeTemplate"></dxi-column>
         <dxi-column dataField="order_id" caption="N° Bon de livraison fournisseur" cellTemplate="bon_nbrTemplate"></dxi-column>

@@ -1,6 +1,7 @@
-import {Component, OnInit, ViewEncapsulation, AfterViewInit} from '@angular/core';
-import {Helpers} from '../../../helpers';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Helpers } from '../../../helpers';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DynamicService } from '../../../services/dynamic.service';
 
 declare let mLayout: any;
 
@@ -14,32 +15,45 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
   private currentUrl: string;
   tenantId: string;
   mainMenu: any;
+  role: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private service: DynamicService) {
 
   }
 
   ngOnInit() {
+
+    this.service.getUserRole().subscribe((data: any) => {
+      this.role = data.data.role[0];
+      console.log(JSON.stringify(data));
+
+    }, err => {
+
+    });
+
     this.currentUrl = this.router.url.split('/')[1];
+
     this.tenantId = localStorage.getItem('tenantId');
 
     this.mainMenu = [
       {
         name: 'Contrats',
+        permission: ['agreement.contracts.grid'],
         icon: 'flaticon-file',
         url: '/contrats/liste',
         description: 'Gestion des Contrats',
         subMenu: [
-          {icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter'},
-          {icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste'},
-          {icon: 'flaticon-list', name: 'Contrats actifs', url: '/contrats/liste/courant'},
-          {icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste'},
+          { icon: 'flaticon-plus', name: 'Nouveau contrat', url: '/contrats/ajouter', permission: ['agreement.contracts.store'], },
+          { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste', permission: ['agreement.contracts.grid'], },
+          { icon: 'flaticon-list', name: 'Contrats actifs', url: '/contrats/liste/courant', permission: ['agreement.contracts.grid'], },
+          { icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste', permission: ['agreement.parcels.grid'], },
 
         ],
         disabled: 'false'
       },
       {
         name: 'Agrégés',
+        permission: ['thirdParty.third-parties.grid'],
         icon: 'flaticon-users',
         url: '/tiers/liste',
         description: 'Gestion des agrégés',
@@ -51,35 +65,34 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Centre de distribution',
+        permission: ['distributionCenter.warehouses.grid'],
         icon: 'flaticon-user',
         url: '/jeunepromoteurs/liste',
         description: 'Gestion des Centre de distribution',
         subMenu: [
-          {icon: 'flaticon-plus', name: 'Nouvel Centre de distribution', url: '/jeunepromoteurs/ajouter'},
-          {icon: 'flaticon-list', name: 'Liste des Centre de distribution', url: '/jeunepromoteurs/liste'},
-
+          { icon: 'flaticon-list', name: 'Liste des Centre de distribution', url: '/jeunepromoteurs/liste', permission: ['distributionCenter.warehouses.grid'] },
         ],
         disabled: 'false'
       },
       {
         name: 'Stock',
         icon: 'flaticon-open-box',
+        permission: ['distributionCenter.stocks.grid'],
         url: '/stock/situation',
         description: 'Gestion de stock',
-        permission: 'preconization.incidents.index',
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
-          {icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation'},
-          {icon: 'flaticon-plus', name: 'Approvisionnement de stock', url: '/stock/reappro'},
+          { icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation', permission: ['distributionCenter.stocks.grid'] },
+          { icon: 'flaticon-plus', name: 'Approvisionnement de stock', url: '/stock/reappro', permission: ['distributionCenter.stocks.store'] },
           {
             name: 'Liste des mouvements', icon: 'fa fa-exchange', url: '/mouvements',
-            description: 'Liste des mouvements', disabled: 'false'
+            description: 'Liste des mouvements', disabled: 'false', permission: ['distributionCenter.stocks.grid']
           },
           {
             name: 'Liste des demandes d\'achat', icon: 'fa  fa-shopping-cart', url: '/demandes',
-            description: 'Centre de distrubition', disabled: 'false'
+            description: 'Centre de distrubition', disabled: 'false', permission: ['distributionCenter.orders.grid']
           },
-          {icon: 'flaticon-list', name: 'Liste des articles', url: '/articles/liste'},
+          { icon: 'flaticon-list', name: 'Liste des articles', url: '/articles/liste', permission: ['distributionCenter.articlecategories.grid'] },
 
         ],
         disabled: 'false'
@@ -87,17 +100,20 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'interventions',
         icon: 'flaticon-add',
+        permission: ['preconization.interventions.grid'],
         url: '/interventions/liste',
         description: 'Gestion des interventions',
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
-          {icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner'},
-          {icon: 'flaticon-list', name: 'Liste des interventions', url: '/interventions/liste'},
+          { icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner', permission: ['preconization.interventions.store'] },
+          { icon: 'flaticon-plus', name: 'Nouvelle préconisation', url: '/interventions/selectionner', permission: ['preconization.interventions.store'] },
+          { icon: 'flaticon-list', name: 'Liste des interventions', url: '/interventions/liste', permission: ['preconization.interventions.grid'] },
         ],
         disabled: 'false'
       },
       {
         name: 'Mon stock',
+        permission: ['distributionCenter.stocks.grid'],
         icon: 'fa fa-archive',
         url: '/stock/situation',
         queryParams: { magazin: this.tenantId },
@@ -106,6 +122,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Cartes',
+        permission: ['agreement.cards.index'],
         icon: 'flaticon-tabs',
         url: '/cartes/liste',
         description: 'Generateur de cartes',
@@ -113,6 +130,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Préconisations intrants',
+        permission: ['preconization.articletemplates.grid'],
         icon: 'flaticon-list-1',
         url: '/preconisations-intrants/liste',
         description: 'Préconisations intrants',
@@ -120,6 +138,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Préconisations en mass',
+        permission: ['preconization.articletemplates.store'],
         icon: 'flaticon-file-1',
         url: '/interventions/appliquer-template-parcelle',
         description: 'Preconisations intrants',
@@ -127,24 +146,26 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Roles',
+        permission: ['user.roles.grid'],
         icon: 'flaticon-lock',
         url: '/roles/liste',
         description: 'Gestion des roles',
         subMenu: [
-          {icon: 'flaticon-plus', name: 'Nouveau role', url: '/roles/ajouter'},
-          {icon: 'flaticon-list', name: 'Liste des roles', url: '/roles/liste'},
+          { icon: 'flaticon-plus', name: 'Nouveau role', url: '/roles/ajouter', permission: ['user.roles.store'] },
+          { icon: 'flaticon-list', name: 'Liste des roles', url: '/roles/liste', permission: ['user.roles.grid'] },
 
         ],
         disabled: 'false'
       },
       {
         name: 'Utilisateurs',
+        permission: ['user.users.index'],
         icon: 'fa fa-users',
         url: '/utilisateurs/liste',
         description: 'Gestion des roles',
         subMenu: [
-          {icon: 'flaticon-plus', name: 'Nouvel utilisateur', url: '/utilisateurs/ajouter'},
-          {icon: 'flaticon-list', name: 'Liste des utilisateurs', url: '/utilisateurs/liste'},
+          { icon: 'flaticon-plus', name: 'Nouvel utilisateur', url: '/utilisateurs/ajouter', permission: ['user.users.store'] },
+          { icon: 'flaticon-list', name: 'Liste des utilisateurs', url: '/utilisateurs/liste', permission: ['user.users.index'] },
 
         ],
         disabled: 'false'

@@ -4,7 +4,7 @@ import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { InterventionService } from '../../services/intervention.service';
 import notify from 'devextreme/ui/notify';
 import { CardsService } from '../../../cards/services/cards.service';
-
+import { Helper } from '../../../../shared/classes/helper';
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html',

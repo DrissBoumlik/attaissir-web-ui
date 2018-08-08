@@ -6,18 +6,19 @@ import { ShowComponent } from './components/show/show.component';
 import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ListCurrentComponent } from './components/list-current/list-current.component';
+import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 const routes: Routes = [
   {
     path: 'contrats',
     component: DefaultComponent,
     children: [
-      { path: '', component: ListComponent },
-      { path: 'ajouter', component: AddComponent },
-      { path: 'liste', component: ListComponent },
-      { path: 'liste/courant', component: ListCurrentComponent },
-      { path: 'afficher/:id', component: ShowComponent },
-      { path: 'modifier/:id', component: EditComponent }
+      { path: '', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.grid'] } },
+      { path: 'ajouter', component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.store'] } },
+      { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.grid'] } },
+      { path: 'liste/courant', component: ListCurrentComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.grid'] } },
+      { path: 'afficher/:id', component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.grid'] } },
+      { path: 'modifier/:id', component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.update'] } }
     ]
   }
 ];

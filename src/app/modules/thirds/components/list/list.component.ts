@@ -27,6 +27,7 @@ export class ListComponent implements OnInit {
   title: string;
   thirdType: string;
   goTo: string;
+  permission = ['agreement.contracts.grid'];
 
   constructor(public tierService: ThirdsService,
     private router: Router,

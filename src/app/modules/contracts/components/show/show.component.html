@@ -396,7 +396,7 @@
               </dx-data-grid>
             </div>
             <div class="tab-pane" id="parcelles">
-              <button class="btn btn-success" (click)="createLogicalParcel($event)" [disabled]="!selectedItems"><i class="fa fa-plus"></i> Crée une parcelle logique</button>
+              <button class="btn btn-success" *ngIf="false" (click)="createLogicalParcel($event)" [disabled]="!selectedItems"><i class="fa fa-plus"></i> Crée une parcelle logique</button>
               <hr>
               <dx-data-grid id="ParcelsGridContainer"
                             [allowColumnReordering]="true"

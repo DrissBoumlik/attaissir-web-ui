@@ -5,15 +5,16 @@ import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { ReplenishmentComponent } from './components/replenishment/replenishment.component';
 import { AddComponent } from '../mouvements/components/add/add.component';
 import { BoardComponent } from './components/board/board.component';
+import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 const routes: Routes = [{
   path: 'stock',
   component: DefaultComponent,
   children: [
-    { path: '', component: BoardComponent },
-    { path: 'situation', component: ListComponent },
-    { path: 'reappro', component: ReplenishmentComponent },
-    { path: 'board', component: BoardComponent },
+    { path: '', component: BoardComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] } },
+    { path: 'situation', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] } },
+    { path: 'reappro', component: ReplenishmentComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.store'] } },
+    { path: 'board', component: BoardComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] } },
   ]
 }];
 

@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Observable} from '../../../../../node_modules/rxjs/Rx';
-import {environment} from '../../../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from '../../../../../node_modules/rxjs/Rx';
+import { environment } from '../../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ export class UsersService {
 
   constructor(private http: HttpClient) {
   }
+
 
   getUserInfo(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/user-informations`, {
@@ -35,6 +36,7 @@ export class UsersService {
     });
   }
 
+
   editUser(data, id): Observable<any> {
     return this.http.put(`${environment.apiUrl}/users/${id}`, JSON.stringify(data), {
       headers: new HttpHeaders({
@@ -43,8 +45,16 @@ export class UsersService {
     });
   }
 
-  getStructures(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/structures-with-zones`, {
+  getStructures(userId = -1): Observable<any> {
+    if (userId === -1) {
+      return this.http.get(`${environment.apiUrl}/structures-with-zones`, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
+    }
+
+    return this.http.get(`${environment.apiUrl}/structures-with-zones/${userId}`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -66,4 +76,13 @@ export class UsersService {
       })
     });
   }
+
+  getUsersDx(params?: any): Observable<any[]> {
+    return this.http.post<any[]>(`${environment.apiUrl}/users/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
 }
+

@@ -8,7 +8,7 @@
 
 
 
-      <a class="siam-header-btn-new" routerLink="/magasin/ajouter" title="Ajouter conseille"><i
+      <a class="siam-header-btn-new" routerLink="/magasin/ajouter" title="Ajouter conseille" [appPermissionHidden]="['thirdParty.third-parties.store']"><i
         class="fa fa-plus"></i></a>
     </div>
   </div>
@@ -60,7 +60,7 @@
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxi-column caption="" [width]="75" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="caTemplate"></dxi-column>
+        <dxi-column caption="" [width]="75" [allowSorting]="false" [visible]="helper.permissionMethod(['thirdParty.third-parties.grid'])"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="caTemplate"></dxi-column>
         <dxi-column dataField="id" caption="Consulter Stock" [width]="133" [allowSorting]="false"  [alignment]="'left'" [allowFiltering]="false"  [allowSorting]="false" cellTemplate="stockTemplate"></dxi-column>
         <dxi-column dataField="third_party_code" caption="Code"></dxi-column>
         <dxi-column dataField="zone_name" caption="CDA" [width]="200"  cellTemplate="zoneTemplate"></dxi-column>

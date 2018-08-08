@@ -44,7 +44,7 @@
           <dxi-item itemType="group">
 
             <dxi-item dataField="role_id"
-                      [editorOptions]="{ items: listOfRoles, displayExpr: 'description', valueExpr : 'id', value: userRole}"
+                      [editorOptions]="roleSelectOptions"
                       editorType="dxSelectBox">
               <dxo-label
                 text="Role">
@@ -98,6 +98,36 @@
               <dxi-column
                 caption="les sructues choisis"
                 dataField="name"></dxi-column>
+
+
+              <dxi-column *ngIf="roleIsCentreDistribution"
+                          dataField="warehouses"
+                          cellTemplate="cellTemplate2"
+                          caption="Magasin" width="200"
+                          alignment="center"></dxi-column>
+              <div *dxTemplate="let data of 'cellTemplate2'">
+
+
+                <dx-form
+                  [formData]="magasin"
+                  [readOnly]="false"
+                  [showColonAfterLabel]="true"
+                  [showValidationSummary]="true"
+                  [showValidationSummary]="true">
+                  <dxi-item dataField="warehouses_id"
+                            [editorOptions]="{items: data.data.warehouses, displayExpr: 'warehouse_name', valueExpr: 'warehouse_id', value: tempSelectValue}"
+                            editorType="dxSelectBox">
+                    <dxo-label
+                      text="Magasin">
+                    </dxo-label>
+                    <dxi-validation-rule
+                      type="required"
+                      message="Magasin est obligatoire"></dxi-validation-rule>
+                  </dxi-item>
+                </dx-form>
+              </div>
+
+
               <dxi-column dataField="id"
                           cellTemplate="cellTemplate"
                           caption="" width="200"

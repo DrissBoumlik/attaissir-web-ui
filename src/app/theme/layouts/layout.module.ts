@@ -12,7 +12,7 @@ import { HrefPreventDefaultDirective } from '../../_directives/href-prevent-defa
 import { UnwrapTagDirective } from '../../_directives/unwrap-tag.directive';
 import { SubHeaderComponent } from './sub-header/sub-header.component';
 import { AvatarModule } from 'ng2-avatar';
-import {PermissionDirective} from '../../_directives/permission.directive';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -39,6 +39,7 @@ import {PermissionDirective} from '../../_directives/permission.directive';
     HrefPreventDefaultDirective,
   ],
   imports: [
+    SharedModule,
     CommonModule,
     RouterModule,
     AvatarModule.forRoot()

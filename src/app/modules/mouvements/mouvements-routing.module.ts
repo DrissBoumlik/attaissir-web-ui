@@ -5,6 +5,7 @@ import { ListComponent } from './components/list/list.component';
 import { AddComponent } from './components/add/add.component';
 import { ShowComponent } from './components/show/show.component';
 import { ShowRetourComponent } from './components/show-retour/show-retour.component';
+import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 
 
@@ -15,23 +16,23 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListComponent
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] }
       },
       {
         path: 'liste',
-        component: ListComponent
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] }
       },
       {
         path: 'ajouter',
-        component: AddComponent
+        component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.store'] }
       },
       {
         path: 'afficher/:id',
-        component: ShowComponent
+        component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.update'] }
       },
       {
         path: 'retour/:id',
-        component: ShowRetourComponent
+        component: ShowRetourComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.show'] }
       }
     ]
   }

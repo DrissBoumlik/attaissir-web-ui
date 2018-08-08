@@ -3,15 +3,15 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
      <!-- <h2>Appliquer un Template d'intervention sur plusieurs parcelle logique</h2> !-->
-          <p [permissionHidden]="['preconization.incidents.destroy']" >test</p>
+          <p [appPermissionHidden]="['distributionCenter.stocks.destroy','preconization.interventionrequests.index']" >.</p>
 
     </div>
   </div>
 </div>
+
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
-
 
       <form>
         <dx-form id="form"

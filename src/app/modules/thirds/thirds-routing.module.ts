@@ -6,6 +6,7 @@ import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ShowComponent } from './components/show/show.component';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
+import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 const routes: Routes = [
   {
@@ -14,23 +15,23 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListComponent
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.grid'] }
       },
       {
         path: 'ajouter',
-        component: AddComponent
+        component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.store'] }
       },
       {
         path: 'modifier/:id',
-        component: EditComponent
+        component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.update'] }
       },
       {
         path: 'afficher/:id',
-        component: ShowComponent
+        component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.show'] }
       },
       {
         path: 'liste',
-        component: ListComponent
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.grid'] }
       }
     ]
   },
@@ -40,23 +41,23 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListComponent
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.grid'] }
       },
       {
         path: 'ajouter',
-        component: AddComponent
+        component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.store'] }
       },
       {
         path: 'modifier/:id',
-        component: EditComponent
+        component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.update'] }
       },
       {
         path: 'afficher/:id',
-        component: ShowComponent
+        component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.show'] }
       },
       {
         path: 'liste',
-        component: WarehouseListComponent
+        component: WarehouseListComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.grid'] }
       }
     ]
   }

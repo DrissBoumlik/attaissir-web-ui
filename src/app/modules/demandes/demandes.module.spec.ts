@@ -1,13 +1,14 @@
-import { DemandesModule } from './demandes.module';
+import {DemandesModule} from './demandes.module';
+
 
 describe('DemandesModule', () => {
-  let DemandesModule: DemandesModule;
+  let demandesModule: DemandesModule;
 
   beforeEach(() => {
-    DemandesModule = new DemandesModule();
+    demandesModule = new DemandesModule();
   });
 
   it('should create an instance', () => {
-    expect(DemandesModule).toBeTruthy();
+    expect(demandesModule).toBeTruthy();
   });
 });

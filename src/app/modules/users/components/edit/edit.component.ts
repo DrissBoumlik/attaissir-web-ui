@@ -1,8 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UsersService} from '../../services/users.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NewComponent} from '../../../interventions/components/new/new.component';
-import {Subscription} from 'rxjs';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { UsersService } from '../../services/users.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NewComponent } from '../../../interventions/components/new/new.component';
+import { Subscription } from 'rxjs';
+import { valid } from 'semver';
 
 @Component({
   selector: 'app-edit',
@@ -11,6 +12,7 @@ import {Subscription} from 'rxjs';
 })
 export class EditComponent implements OnInit, OnDestroy {
   user: any = {};
+  magasin: any = {};
   userRole: number;
   listOfRoles = [];
   listOfStructures = [];
@@ -20,9 +22,11 @@ export class EditComponent implements OnInit, OnDestroy {
   listeDesCdas = [];
   currentStructurIdInPopUp: any;
   userId: any;
-
   rowIndex: number;
 
+  roleSelectOptions: any;
+  tempSelectValue = 4;
+  roleIsCentreDistribution = false;
   private paramsSubscription: Subscription;
   private httpSubscription: Subscription;
 
@@ -34,34 +38,7 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    /**
-     * get roles
-     */
-    this.userService.getRoles().subscribe(
-      (response: any) => {
-        this.listOfRoles = response.data;
 
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-
-    /**
-     * get structures
-     */
-    this.userService.getStructures().subscribe(
-      (response: any) => {
-        this.listOfStructures = response.data;
-        for (let i = 0; i < this.listOfStructures.length; i++) {
-          this.listOfStructures[i].isSelected = true;
-
-        }
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
 
     /**
      * get user info
@@ -74,12 +51,65 @@ export class EditComponent implements OnInit, OnDestroy {
             this.user.email = response.data.email;
             this.user.name = response.data.name;
             this.userRole = response.data.role[0];
+            if (response.data.role_name[0] === 'cd') {
+              this.roleIsCentreDistribution = true;
+              this.magasin = {
+                warehouses_id: response.data.warehouse_id
+              };
 
-            // set choosing structures
-            this.setChoosingStructures(response.data.structures);
+              this.tempSelectValue = response.data.warehouse_id;
+            }
 
-            // set checked zones
-            this.setcheckedZones(response.data.zones);
+            /**
+             * get structures
+             */
+            this.userService.getStructures(response.data.id).subscribe(
+              (res: any) => {
+                this.listOfStructures = res.data;
+                for (let i = 0; i < this.listOfStructures.length; i++) {
+                  this.listOfStructures[i].isSelected = true;
+
+                }
+
+                // set choosing structures
+                this.setChoosingStructures(response.data.structures);
+
+                // set checked zones
+                this.setcheckedZones(response.data.zones);
+
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+
+
+            /**
+             * get roles
+             */
+            this.userService.getRoles().subscribe(
+              (res: any) => {
+                this.listOfRoles = res.data;
+                this.roleSelectOptions = {
+                  items: this.listOfRoles,
+                  displayExpr: 'description',
+                  valueExpr: 'id',
+                  value: this.userRole,
+                  onSelectionChanged: (event) => {
+                    if (event.selectedItem.description === 'Centre distribution') {
+                      this.roleIsCentreDistribution = true;
+                      this.listOfStructures = this.listOfStructures.concat(this.choosingStructures);
+                      this.choosingStructures = [];
+                    } else {
+                      this.roleIsCentreDistribution = false;
+                    }
+                  }
+                };
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
 
           },
           (err) => {
@@ -138,7 +168,7 @@ export class EditComponent implements OnInit, OnDestroy {
     }
   }
 
-// end tree elements
+  // end tree elements
 
   showStructureZones(data: any) {
     this.rowIndex = data.rowIndex;
@@ -200,6 +230,8 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   setChoosingStructures(structures: any[]) {
+    this.magasin = {};
+
     for (let i = 0; i < structures.length; i++) {
       let userStructure = {};
       userStructure = this.listOfStructures.find((element) => {
@@ -220,6 +252,8 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   removeItemFromChoosingStructures(e) {
+    this.magasin = {};
+
     const tempData = [];
     const foundEle = [];
     // if (e.data.cdas) {
@@ -236,7 +270,7 @@ export class EditComponent implements OnInit, OnDestroy {
     //   }
     // }
     const tmp = this.listOfStructures;
-    let itemToRmove = e.data;
+    const itemToRmove = e.data;
     itemToRmove.isSelected = false;
     for (let i = 0; i < itemToRmove.cdas.length; i++) {
       itemToRmove.cdas[i].isSelected = false;
@@ -250,23 +284,45 @@ export class EditComponent implements OnInit, OnDestroy {
     tmp.push({
       id: itemToRmove.id,
       name: itemToRmove.name,
-      cdas: itemToRmove.cdas
+      cdas: itemToRmove.cdas,
+      warehouses: itemToRmove.warehouses
     });
     this.listOfStructures = tmp;
   }
 
-  addToChoosingStructures(e) {
-    this.listOfStructures = this.listOfStructures.filter(
-      s => {
-        return s.id !== e.itemData.id;
-      }
-    );
 
-    this.choosingStructures.push({
-      id: e.itemData.id,
-      name: e.itemData.name,
-      cdas: e.itemData.cdas
-    });
+  addToChoosingStructures(e) {
+    this.magasin = {};
+    if (this.roleIsCentreDistribution) {
+      this.listOfStructures = this.listOfStructures.concat(this.choosingStructures);
+      this.listOfStructures = this.listOfStructures.filter(
+        s => {
+          return s.id !== e.itemData.id;
+        }
+      );
+      this.choosingStructures = [];
+      this.choosingStructures.push({
+        id: e.itemData.id,
+        name: e.itemData.name,
+        cdas: e.itemData.cdas,
+        warehouses: e.itemData.warehouses
+      });
+    } else {
+      this.listOfStructures = this.listOfStructures.filter(
+        s => {
+          return s.id !== e.itemData.id;
+        }
+      );
+
+      this.choosingStructures.push({
+        id: e.itemData.id,
+        name: e.itemData.name,
+        cdas: e.itemData.cdas,
+        warehouses: e.itemData.warehouses
+      });
+    }
+
+
   }
 
   onFormSubmit(e) {
@@ -275,15 +331,32 @@ export class EditComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.choosingStructures.length; i++) {
       structure_id.push(this.choosingStructures[i].id);
     }
-    if (structure_id.length) {
+
+    const formErrors = [];
+
+    if (!structure_id.length) {
+      formErrors.push('veuillez attribuer une structure a ' + this.user.name);
+    }
+
+    if (this.roleIsCentreDistribution) {
+      if (!this.magasin.warehouses_id) {
+        formErrors.push('veuillez attribuer un magasin a ' + this.user.name);
+      }
+    }
+
+
+    if (!formErrors.length) {
+      const warehouse_id = (this.roleIsCentreDistribution ? this.magasin.warehouses_id : '');
       const data = {
         email: this.user.email,
         name: this.user.name,
         password: this.user.password,
         role_id: this.user.role_id,
         structure_id: structure_id,
-        zone_id: this.getCheckedZones()
+        zone_id: this.getCheckedZones(),
+        warehouse_id: warehouse_id
       };
+      console.log(data);
       this.userService.editUser(data, this.userId).subscribe(
         (response: any) => {
           NewComponent.notifyMe('utilisateur modifie avec succès, Redirection.........', 'success');
@@ -298,7 +371,9 @@ export class EditComponent implements OnInit, OnDestroy {
         }
       );
     } else {
-      NewComponent.notifyMe('veuillez attribuer une structure a ' + this.user.name, 'error');
+      for (let i = 0; i < formErrors.length; i++) {
+        NewComponent.notifyMe(formErrors[i], 'error');
+      }
 
     }
   }

@@ -3,7 +3,7 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Liste des contrats</h2>
-      <a class="siam-header-btn-new" routerLink="/contrats/ajouter" title="Ajouter contrat"><i
+      <a class="siam-header-btn-new" routerLink="/contrats/ajouter" title="Ajouter contrat"  [appPermissionHidden]="['agreement.contracts.store']" ><i
         class="fa fa-plus"></i></a>
     </div>
   </div>
@@ -37,7 +37,7 @@
         <dxo-editing
           mode="row"
           [useIcons]="true"
-          [allowDeleting]="true"
+          [allowDeleting]="helper.permissionMethod(['agreement.contracts.destroy'])"
           [allowEditing]="false"
           [allowUpdating]="false">
         </dxo-editing>
@@ -62,8 +62,10 @@
 
         <dxo-search-panel [visible]="false"></dxo-search-panel>
 
-        <dxi-column cellTemplate="cellTemplate" [allowSorting]="false" caption="" width="70px" allowColumnResizing="true">
+        <dxi-column cellTemplate="cellTemplate" [visible]="helper.permissionMethod(['agreement.contracts.grid'])" [allowSorting]="false" caption="" width="70px">
         </dxi-column>
+        <dxi-column cellTemplate="cellTemplate33" [visible]="helper.permissionMethod(['agreement.contracts.update'])" [allowSorting]="false" caption="" width="70px">
+          </dxi-column>
 
         <dxi-column dataField="code" [hidingPriority]="2" caption="Code">
         </dxi-column>
@@ -96,12 +98,14 @@
 
         <div *dxTemplate="let data of 'cellTemplate'">
           <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data.id, router, toastr)"
-             class="fa fa-info-circle fa-5x">
-          </i>
-          <i *ngIf="data.data.status === 'ENCOURS'" style="font-size: 150%; align-content: center; cursor: pointer;padding-left: 10px;" (click)="helper.gotoShow('contrats', data.data.id, router, toastr, 'modifier')"
-             class="fa fa-edit fa-5x">
+             class="fa fa-info-circle fa-5x"  allowColumnResizing="true">
           </i>
         </div>
+        <div *dxTemplate="let data of 'cellTemplate33'">
+            <i *ngIf="data.data.status === 'ENCOURS'" style="font-size: 150%; align-content: center; cursor: pointer;padding-left: 10px;" (click)="helper.gotoShow('contrats', data.data.id, router, toastr, 'modifier')"
+               class="fa fa-edit fa-5x"  allowColumnResizing="true">
+            </i>
+          </div>
         <div *dxTemplate="let data of 'contractListTemplate'">
           <span [ngClass]="helper.getStatusColor(data.value)">
               {{ data.value }}

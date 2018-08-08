@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ArticlesService } from '../../../articles/services/articles.service';
+
+import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import { InterventionService } from '../../services/intervention.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +11,7 @@ import { NewComponent } from '../new/new.component';
 import { DxiItemComponent } from 'devextreme-angular/ui/nested/item-dxi';
 import { ToastrService } from 'ngx-toastr';
 import { WarehouseService } from '../../../warehouse/service/warehose.service';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-add',
@@ -112,7 +115,7 @@ export class AddComponent implements OnInit {
   selectedTemplate: any;
 
   /*--------------------Constructor-----------------------*/
-
+  helper: any;
   constructor(public articleService: ArticlesService,
     public interventionService: InterventionService,
     private wareHouseService: WarehouseService,
@@ -120,10 +123,32 @@ export class AddComponent implements OnInit {
     private thirdsService: ThirdsService,
     private toastr: ToastrService,
     private router: Router) {
+    this.helper = Helper;
   }
 
   /*--------------------Initialize content-----------------------*/
   ngOnInit() {
+    this.cdOptions = {
+      displayExpr: 'name',
+      valueExpr: 'id',
+      dataSource: new CustomStore({
+        load: (loadOptions: any) => {
+          return this.wareHouseService.getWarehousesDx(loadOptions)
+            .toPromise()
+            .then(response => {
+              const json = response;
+              console.log(response);
+              return json;
+            })
+            .catch(error => {
+              console.log(error);
+              throw error;
+            });
+        },
+      }),
+      searchEnabled: true,
+      searchMode: 'contains',
+    };
     this.route.queryParams.subscribe(
       (qps: any) => {
         this.loadingVisible = true;

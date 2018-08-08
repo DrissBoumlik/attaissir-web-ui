@@ -11,6 +11,7 @@ import {AuthGuard} from '../../_directives/guard.directive';
 // class hasPermissions implements CanActivate(){
 
 // }
+import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 const routes: Routes = [{
   path: 'interventions',
@@ -21,8 +22,11 @@ const routes: Routes = [{
     { path: 'template/ajouter', component: AddTempleteComponent },
     { path: 'liste', component: ListComponent },
     { path: 'modifier/:id', component: EditComponent },
-    { path: 'appliquer-template-parcelle', component: AddTempleteComponent },
     { path: 'list', component: ListComponent },
+    {
+      path: 'appliquer-template-parcelle', component: AddTempleteComponent,
+      canActivate: [PermissionGuard], data: { permission: ['preconization.articletemplates.store'] }
+    }
   ]
 }];
 

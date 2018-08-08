@@ -1,5 +1,6 @@
 import { isArray, isNull } from 'util';
 import { load } from '@angular/core/src/render3/instructions';
+import * as CryptoJS from 'crypto-js';
 
 export class Helper {
   /**
@@ -348,4 +349,47 @@ export class Helper {
     return Helper.orderType(e.type).toUpperCase();
   }
 
+  /***************Premission methode ***************/
+
+  public static permissionMethod = (value: any): boolean => {
+    let v = false;
+    const permissions_ = localStorage.getItem('permissions');
+    if (permissions_) {
+      try {
+        const bytes = CryptoJS.AES.decrypt(permissions_, 'Gra61884546585_55');
+        const permissions_decrypt = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        console.log(permissions_decrypt);
+        if (value[0] === 'none') {
+          // this.el.nativeElement.style.display = 'initial';
+          v = true;
+        }
+        const per_array: Boolean[] = new Array(value.length);
+        for (let i = 0; i < value.length; i++) {
+          per_array[i] = false;
+        }
+        permissions_decrypt.forEach((it) => {
+          for (let i = 0; i < value.length; i++) {
+            if (it === value[i]) {
+              per_array[i] = true;
+            }
+          }
+        });
+        let visibility = true;
+        for (let i = 0; i < value.length; i++) {
+          if (per_array[i] === false) {
+            visibility = false;
+          }
+        }
+        if (visibility) {
+          v = true;
+          return v;
+        }
+        return v;
+      } catch (err) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
 }

@@ -16,7 +16,7 @@
       [allowColumnResizing]="false"
       [allowColumnReordering]="true"
       [columnAutoWidth]="true"
-      [remoteOperations]="{ paging: true, sorting: true, filtering: true, searching: true}"
+      [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
       [masterDetail]="{ enabled: false, template: 'detail' }"
       (onEditingStart)="onStartEdit($event.data.id)"
     >
@@ -47,6 +47,13 @@
 
 
       <dxo-editing
+         mode="row"
+         [allowUpdating]="helper.permissionMethod(['preconization.interventions.update'])"
+         [useIcons]="true">
+      </dxo-editing>
+      <dxi-column dataField="id" caption="id" alignment="left"></dxi-column>
+
+      <dxo-editing
         mode="row"
         [allowUpdating]="true"
         [useIcons]="true">
@@ -60,6 +67,7 @@
       <dxi-column dataField="article_count" caption="Nombre d'article"></dxi-column>
       <dxi-column dataField="date" caption="Date prevue"></dxi-column>
       <dxi-column dataField="state" caption="Etat" ></dxi-column>
+      <!-- <dxi-column dataField="article_count" caption="Nombre d'article"></dxi-column> -->
 
       <!-- <dxi-column dataField="id" cellTemplate="cellTemplate" caption="" alignment="left"></dxi-column> -->
       <!-- <dxi-column dataField="id" cellTemplate="cellTemplate1" caption="" alignment="left" ></dxi-column> -->
@@ -74,6 +82,9 @@
            <span [ngClass]="getStatusColor(data.value)">
                   {{ helper.getStatut(data.value) }}
              </span>
+        <label class="etat-class px-3 py-2" etat="{{data.value}}" *ngIf="(data.value == 'inprogress')" appEtat>{{data.value}}</label>
+        <label class="etat-class px-3 py-2" etat="{{data.value}}" *ngIf="(data.value == 'canceled')" appEtat>{{data.value}}</label>
+        <label class="etat-class px-3 py-2" etat="{{data.value}}" *ngIf="(data.value == 'done')" appEtat>{{data.value}}</label>
       </div>
     </dx-data-grid>
   </div>
