@@ -126,7 +126,6 @@ export class ShowComponent implements OnInit {
     e.cancel = d.promise();
   }
 
-
   onAddRightHolder(e: any) {
     const d = new $.Deferred();
     const newRightHolder = {
@@ -149,7 +148,6 @@ export class ShowComponent implements OnInit {
       });
     e.cancel = d.promise();
   }
-
 
   loadDocuments() {
     this.contractService.getContract(this.contract.id).subscribe(
@@ -182,8 +180,6 @@ export class ShowComponent implements OnInit {
       }
     );
   }
-
-
 
   createLogicalParcel = (e) => {
     console.log(this.selectedItems);
