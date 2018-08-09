@@ -268,7 +268,14 @@ export class AddComponent implements OnInit {
           return this.familleService.getArticleCategoriesDx(loadOptions)
             .toPromise()
             .then(response => {
-              const json = response;
+              const json: any = response;
+              if (Helper.permissionMethod(['distributionCenter.articles.reception'])) {
+                json.data = json.data.filter(
+                  arf => {
+                   //  return arf.
+                  }
+                );
+              }
               return json;
             })
             .catch(error => {

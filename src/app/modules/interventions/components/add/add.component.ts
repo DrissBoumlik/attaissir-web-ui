@@ -422,7 +422,7 @@ export class AddComponent implements OnInit {
                       this.SelectedSemenceArticle = ev.selectedItem;
                       this.SemenceQuantity = this.interventions.surface_to_work * (+this.SelectedSemenceArticle.dose);
                       this.semenceQuantityOptions = {
-                        format: '# ' + this.SelectedSemenceArticle.unit.toString(),
+                        format: '#0.## ' + this.SelectedSemenceArticle.unit.toString(),
                         value: this.interventions.surface_to_work * (+this.SelectedSemenceArticle.dose),
                         onValueChanged: (cc) => {
                           this.SemenceQuantity = cc.value;
