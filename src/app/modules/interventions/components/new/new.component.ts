@@ -24,7 +24,7 @@ export class NewComponent implements OnInit {
     private thirdService: ThirdsService,
     private interventionService: InterventionService) { }
 
-  static notifyMe(message: string, type = 'warning') {
+  static notifyMe(message: string, type = 'warning', duration = 1200) {
     return notify(
       {
         position: { my: 'center', at: 'center', of: window },
@@ -34,7 +34,7 @@ export class NewComponent implements OnInit {
         message: message,
       },
       type,
-      1200
+      duration
     );
   }
 

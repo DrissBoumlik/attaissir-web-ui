@@ -15,6 +15,8 @@ export class PermissionDirective implements OnInit {
   }
 
   ngOnInit() {
+    // this.el.nativeElement.style.display = 'initial';
+   // return true;
 
     const permissions_ = localStorage.getItem('permissions');
 

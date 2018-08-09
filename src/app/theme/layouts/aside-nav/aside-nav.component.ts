@@ -47,6 +47,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste', permission: ['agreement.contracts.grid'], },
           { icon: 'flaticon-list', name: 'Contrats actifs', url: '/contrats/liste/courant', permission: ['agreement.contracts.grid'], },
           { icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste', permission: ['agreement.parcels.grid'], },
+          { icon: 'flaticon-list', name: 'GÉNÉRATEUR DE CARTES', url: '/carte-generateur/index', permission: ['none'], },
 
         ],
         disabled: 'false'

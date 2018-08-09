@@ -17,6 +17,14 @@ import {environment} from "../../../../../environments/environment";
 })
 export class IndexComponent implements OnInit {
 
+
+  dataSource: string[];
+  slideshowDelay = 2000;
+
+  valueChanged(e) {
+    this.slideshowDelay = e.value ? 2000 : 0;
+  }
+
   start: Boolean = true;
   start_btn: any;
   card_generator: any;
@@ -32,14 +40,10 @@ export class IndexComponent implements OnInit {
   @ViewChild('focusout') focusout: ElementRef;
 
 
-  galleryData = [
-    'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
-    'https://cdn3.iconfinder.com/data/icons/free-social-icons/67/facebook_square-512.png',
-    'https://maxcdn.icons8.com/app/uploads/2016/08/Official-Facebook-Logo.png',
-  ];
 
   constructor(private cardGeneratorService : CardGeneratorService ,private toastr : ToastrService,private router : Router ) {
     this.card_generator = {};
+    this.selectedItems = [];
   }
 
 
@@ -52,6 +56,7 @@ export class IndexComponent implements OnInit {
           .toPromise()
           .then(response => {
             console.log(response);
+            response.totalCount = 1;
             return response;
           })
           .catch(error => {
@@ -127,13 +132,11 @@ export class IndexComponent implements OnInit {
         this.focusout.nativeElement.focus();
 
 
-        let lala = false;
-        this.selectedItems.some( (it) => {
+         this.selectedItems.some( (it) => {
 
           if(it.playOn == null && this.rf_code != '') {
 
             it.playOn = true;
-            lala = true;
             it.rfid = this.rf_code;
             return true;
 
@@ -151,40 +154,6 @@ export class IndexComponent implements OnInit {
         this.event_ = true;
 
 
-
-          let  rf_code = this.rf_code ;
-          let  _cardGeneratorService = this.cardGeneratorService ;
-         // let  sRfid = this.sendRfid();
-      /*    this._ref1.instance.getVisibleRows().some(function(row: any, i,rf_code,_cardGeneratorService) {
-
-
-              if(!true) {
-                console.log(row.data)
-
-                row.data.enabled= true;
-               // sRfid();
-
-                console.log(rf_code);
-                  row.data.rfid= rf_code;
-                _cardGeneratorService.getCards()
-                  .subscribe(response => {
-
-
-                    this.sendRfid();
-                  }, error => {
-
-                  });
-
-                 return true;
-
-              }
-
-
-
-          });
-
-
-       */
 
 
 
@@ -207,7 +176,7 @@ export class IndexComponent implements OnInit {
     this.selectedItems.forEach((it) => {
 
      // it.playOn= false;
-      let img = 'http://s1.dboumlik.code.go/cards/4/generate?face=recto&id=4&rfid=334&type=agri&full_name=' + it.full_name +'&code=' + it.code + '&full_name_ar=' + it.full_name_ar +'&amp;cin='+ it.cin;
+      let img = 'http://s1.dboumlik.code.go/cards/4/generate?face=recto&id=4&rfid=334&structure=' + it.structure +'&type=agri&full_name=' + it.full_name +'&code=' + it.code + '&full_name_ar=' + it.full_name_ar +'&amp;cin='+ it.cin;
 
       this.img_scr_recto_array.push(img);
 
@@ -261,7 +230,6 @@ export class IndexComponent implements OnInit {
       return;
     }
 
-
     let new_array = [];
 
     this.selectedItems.forEach((it) => {
@@ -272,14 +240,18 @@ export class IndexComponent implements OnInit {
 
     });
 
-   this.cardGeneratorService.validate(new_array).subscribe(response => {
 
-     this.toastr.success('Validation true');
+    if(new_array.length > 0) {
 
-     this.sendRfid();
-   }, error => {
+      this.cardGeneratorService.validate(new_array).subscribe(response => {
+        this.toastr.success('l \' enregistrement effectué avec succès');
+      }, error => {
 
-   });
+      });
+    } else {
+      this.toastr.warning('Faire glisser les cartes sur le lecteur');
+    }
+
 
 
   }

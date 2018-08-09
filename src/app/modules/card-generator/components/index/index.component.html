@@ -53,7 +53,7 @@
               <dxo-header-filter [visible]="false"></dxo-header-filter>
               <dxo-selection mode="multiple"></dxo-selection>
 
-              <dxo-paging [pageSize]="10"></dxo-paging>
+              <dxo-paging [pageSize]="5"></dxo-paging>
 
               <dxo-column-chooser [enabled]="false" mode="select"></dxo-column-chooser>
 
@@ -88,10 +88,18 @@
           <div class="col-5">
 
 
-            <dx-gallery
-              [dataSource]="img_scr_recto_array"
-              [height]="300">
-            </dx-gallery>
+            <div class="widget-container">
+              <dx-gallery #gallery
+                          id="gallery"
+                          [dataSource]="img_scr_recto_array"
+                          [height]="300"
+                          [slideshowDelay]="slideshowDelay"
+                          [loop]="false"
+                          [showNavButtons]="true"
+                          [showIndicator]="false"
+              ></dx-gallery>
+            </div>
+
 
 
 
@@ -138,13 +146,28 @@
             <div class="col-5">
 
               <div class="pull-right">
-                <dx-button width="145" (click)="export()" icon="fa fa-cloud-download"  text="EXPORTER"  type="primary"    style="margin-left: 10px; margin-right: 10px;"    ></dx-button>
-                <dx-button width="130" icon="fa fa-check"  text="VALIDER"  type="default"  (click)="validate()"    style="margin-left: 10px; margin-right: 0px;"   ></dx-button>
+                <dx-button width="145" (click)="export()" icon="fa fa-cloud-download" [disabled]="selectedItems.length < 1" text="EXPORTER"  type="primary"    style="margin-left: 10px; margin-right: 10px;"    ></dx-button>
+                <dx-button width="130" icon="fa fa-check"  text="VALIDER"  type="default"  [disabled]="selectedItems.length < 1"  (click)="validate()"    style="margin-left: 10px; margin-right: 0px;"   ></dx-button>
               </div>
 
             </div>
           </div>
         </div>
+
+
+        <!--<dx-button
+          id="button"
+          [height]="40"
+          [width]="180"
+          >
+          <div *dxTemplate="let data of 'content'">
+            <dx-load-indicator height="20" width="20" class='button-indicator'
+                               [visible]="true">
+            </dx-load-indicator>
+            <span class='dx-button-text'>EXPORTER</span>
+          </div>
+        </dx-button>
+        !-->
 
 
 
