@@ -13,6 +13,7 @@ export class AddComponent implements OnInit {
   groundsList?: any[];
   campaigns?: any[];
   helper: any;
+  step2: string;
 
   constructor(
     public contract: Contract,
@@ -24,6 +25,7 @@ export class AddComponent implements OnInit {
   ngOnInit() {
     this.groundsList = [];
     this.campaigns = [];
+    this.step2 = '2. Contrat';
 
     this.currentThird.type = 'natural';
     this.currentThird.morale = false;

@@ -18,6 +18,7 @@ export class EditComponent implements OnInit {
   campaigns?: any[];
   id: number;
   helper: any;
+  step2: string;
 
   constructor(
     public contract: Contract,
@@ -51,14 +52,16 @@ export class EditComponent implements OnInit {
           (res: any) => {
             this.id = params.id;
             this.contract = res.data;
+            this.step2 = (this.contract['status'] === 'inprogress') ? '2. Contrat' : '2. Avenant';
+
             const grounds = res.data.parcels.map(data => {
               return {
                 id: data['soil']['id'],
                 parcel_tmp_id: data['id'],
                 tenure: data['tenure_id'],
                 registration_number: data['soil']['registration_number'],
-                cda: data['soil']['cda_id'],
-                zone: data['soil']['zone_id'],
+                cda_code: data['soil']['cda_code'],
+                zone_code: data['soil']['zone_code'],
                 sector: data['soil']['sector'],
                 block: data['soil']['block'],
                 code_ormva: data['code_ormva'],
@@ -69,14 +72,6 @@ export class EditComponent implements OnInit {
             this.groundsList = grounds;
             this.currentThird = res.data.third_party;
             // this.campaigns = res.data.campaigns;
-            this.contractService.getStrcutureById(res.data.structure.id).subscribe(
-              (struct: Structure) => {
-                this.structure = this.helper.dataFormatter(struct, false);
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
           },
           (error) => {
             /*this.router.navigate(['/404']).catch(
