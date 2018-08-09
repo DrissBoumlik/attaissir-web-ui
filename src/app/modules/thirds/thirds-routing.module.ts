@@ -41,23 +41,23 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.grid'] }
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.grid'] }
       },
       {
         path: 'ajouter',
-        component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.store'] }
+        component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.store'] }
       },
       {
         path: 'modifier/:id',
-        component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.update'] }
+        component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.update'] }
       },
       {
         path: 'afficher/:id',
-        component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.show'] }
+        component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.show'] }
       },
       {
         path: 'liste',
-        component: WarehouseListComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.grid'] }
+        component: WarehouseListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.grid'] }
       }
     ]
   }

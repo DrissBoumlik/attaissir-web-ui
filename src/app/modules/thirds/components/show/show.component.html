@@ -536,11 +536,11 @@
                                  type="danger"
                                  (click)="DeclareLost(data.value)"
                                  [disabled]="!declareLost(data.value)"></dx-button>
-                      <dx-button [text]="'Activer'" style="margin-right: 3px"
+                      <dx-button    [appPermissionHidden]="['agreement.contracts.activate']" [text]="'Activer'" style="margin-right: 3px"
                                  type="success"
                                  (click)="activateCard(data.value)"
                                  [disabled]="!canActivateCard(data.value)"></dx-button>
-                      <dx-button [text]="'Désactiver'" style="margin-right: 3px"
+                      <dx-button   [appPermissionHidden]="['agreement.contracts.activate']"  [text]="'Désactiver'" style="margin-right: 3px"
                                  type="default"
                                  (click)="activateCard(data.value, true)"
                                  [disabled]="!canDeactivateCard(data.value)"></dx-button>

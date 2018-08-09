@@ -47,14 +47,14 @@ export class UsersService {
 
   getStructures(userId = -1): Observable<any> {
     if (userId === -1) {
-      return this.http.get(`${environment.apiUrl}/structures-with-zones`, {
+      return this.http.post(`${environment.apiUrl}/structures-with-zones`, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       });
     }
 
-    return this.http.get(`${environment.apiUrl}/structures-with-zones/${userId}`, {
+    return this.http.post(`${environment.apiUrl}/structures-with-zones/${userId}`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

@@ -32,7 +32,9 @@ export class PermissionDirective implements OnInit {
           return;
         }
 
-        const per_array: Boolean[] = new Array(this.appPermissionHidden.length);
+        console.log(permissions_decrypt);
+
+         const per_array: Boolean[] = new Array(this.appPermissionHidden.length);
 
         for (let i = 0; i < this.appPermissionHidden.length; i++) {
           per_array[i] = false;
