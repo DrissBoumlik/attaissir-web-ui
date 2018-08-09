@@ -257,14 +257,12 @@ export class ShowComponent implements OnInit, AfterViewInit {
       this.preconisation.parcel + ' </span></p>  <br/>' +
 
       '<p> <span style="float: left;font-weight: bolder;">NOM COMPLET  </span>   <span style="float: right">' +
-      this.preconisation.third_party_name + ' </span></p>  <br/>' +
-      '<p><span style="float: bottom">***** </span></p> <br/>');
+      this.preconisation.third_party_name + ' </span></p>  <br/>');
 
     this.articles.forEach(function(element) {
       print.document.write('<p style="font-weight: bolder;">' + element.category + '</p><br/>');
-      print.document.write('<p> ***** </p>');
       print.document.write('<p> <span style="float: left;">' + element.article_name +
-        '</span><span style="float: right;"> ' + element.quantity + ' ' + 'QTE' + '</span></p>');
+        '</span><span style="float: right;"> ' + element.quantity + ' ' + 'QTE' + '</span></p><br/>');
 
     });
 
