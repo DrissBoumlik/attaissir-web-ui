@@ -81,6 +81,15 @@ export class ParcelsService {
       });
   }
 
+  editMassParcel(parcel: any): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/${this.routeName}/mass`,
+      JSON.stringify(parcel), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
+  }
+
   /**
    * Delete a Parcel
    * @param id  the id of the Parcel intended to delete
