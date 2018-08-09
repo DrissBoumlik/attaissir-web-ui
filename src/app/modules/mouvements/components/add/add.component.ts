@@ -10,6 +10,7 @@ import { ArticlesService } from '../../../articles/services/articles.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { DemandesService } from '../../../demandes/service/demandes.service';
+import {NewComponent} from '../../../interventions/components/new/new.component';
 
 @Component({
   selector: 'app-add',
@@ -348,8 +349,11 @@ export class AddComponent implements OnInit {
         `Mouvement ajouté avec succès.`);
       this.router.navigate([`/mouvements/afficher/${d['id']}`]);
     }, err => {
-      console.log(err);
-      this.toastr.error(err.error.message);
+      if (err.error.data) {
+        NewComponent.notifyMe(err.error.data, 'warning', 5000);
+      } else {
+        NewComponent.notifyMe('Une erreur s\'est produite, veuillez réessayer dans quelques secondes.', 'error');
+      }
     });
     e.preventDefault();
   }

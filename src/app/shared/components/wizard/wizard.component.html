@@ -212,7 +212,7 @@
             <dxo-label text="CDA"></dxo-label>
             <dxi-validation-rule type="required" message="CDA est obligatoire"></dxi-validation-rule>
           </dxi-item>
-          <dxi-item dataField="zone" caption="Zone" i18n-caption editorType="dxSelectBox" Étape précédente
+          <dxi-item dataField="zone" caption="Zone" i18n-caption editorType="dxSelectBox"
                     [editorOptions]="zoneEditorOptions">
             <dxo-label text="Zone"></dxo-label>
             <dxi-validation-rule type="required" message="Zone est obligatoire"></dxi-validation-rule>
@@ -221,7 +221,7 @@
                     [editorOptions]="sectorEditorOptions">
             <dxo-label text="Secteur"></dxo-label>
           </dxi-item>
-          <dxi-item dataField="block" Secteur i18n-caption editorType="dxTextBox"
+          <dxi-item dataField="block" i18n-caption editorType="dxTextBox"
                     [editorOptions]="blocEditorOptions">
             <dxo-label text="Bloc"></dxo-label>
           </dxi-item>
@@ -230,7 +230,7 @@
             <dxi-validation-rule type="required" message="Matricule est obligatoire"></dxi-validation-rule>
           </dxi-item>
           >
-          <dxi-item dataField="total_surface" [editorOptions]="{ label: 'Superficie totale (ha)'}"
+          <dxi-item dataField="total_surface" [editorOptions]="{ label: 'Superficie totale (ha)' }"
                     editorType="dxNumberBox">
             <dxo-label text="Superficie totale (ha)"></dxo-label>
             <dxi-validation-rule type="required" message="Superficie totale est obligatoire"></dxi-validation-rule>
@@ -250,7 +250,7 @@
             <dxo-label text="Code ORMVA"></dxo-label>
           </dxi-item>
           <dxi-item itemType="button"
-                    horizontalAlignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null) || (parcelForm.tenure === null)"
+                    horizontalAlignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null) || (parcelForm.tenure === null) || (parcelForm.zone === null) "
                     [buttonOptions]="addParcelOptions"></dxi-item>
         </dx-form>
       </div>
@@ -261,6 +261,7 @@
           id="gridContainer"
           [dataSource]="groundsList"
           (onRowUpdating)="editParcels($event)"
+          (onInitialized)="initParcelRow($event)"
           keyExpr="id">
 
           <dxo-editing
