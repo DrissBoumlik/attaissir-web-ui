@@ -429,7 +429,7 @@ export class WizardComponent implements OnInit {
           // delete ground.id;
           return ground;
         });
-        this.parcelsService.editParcel(this.groundsList).subscribe(d => {
+        this.parcelsService.editMassParcel(this.groundsList).subscribe(d => {
           d = this.helper.dataFormatter(d, false);
           console.log(d);
           const id = (this.isEdit) ? this.contract.id : contract['id'];
