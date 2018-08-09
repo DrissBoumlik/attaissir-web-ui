@@ -22,6 +22,7 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
 import { RfidCardReaderComponent } from './components/rfid-card-reader/rfid-card-reader.component';
 import { ParcelsListComponent } from './components/parcels-list/parcels-list.component';
 import { RoleDirective } from './directives/role.directive';
+import { ParcelGridComponent } from './components/parcel-grid/parcel-grid.component';
 import { PermissionDirective } from './directives/permission.directive';
 
 @NgModule({
@@ -63,6 +64,7 @@ import { PermissionDirective } from './directives/permission.directive';
     DxTemplateModule,
     RfidCardReaderComponent,
     DxFileUploaderModule,
+    ParcelGridComponent,
     ParcelsListComponent,
     PermissionDirective
   ],
@@ -76,7 +78,8 @@ import { PermissionDirective } from './directives/permission.directive';
     RfidCardReaderComponent,
     ParcelsListComponent,
     RoleDirective,
-    PermissionDirective
+    PermissionDirective,
+    ParcelGridComponent
   ]
 })
 export class SharedModule { }

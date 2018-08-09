@@ -47,6 +47,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           { icon: 'flaticon-list', name: 'Liste des contrats', url: '/contrats/liste', permission: ['agreement.contracts.grid'], },
           { icon: 'flaticon-list', name: 'Contrats actifs', url: '/contrats/liste/courant', permission: ['agreement.contracts.grid'], },
           { icon: 'flaticon-list', name: 'Liste des parcelles', url: '/parcelles/liste', permission: ['agreement.parcels.grid'], },
+          { icon: 'flaticon-list', name: 'GÉNÉRATEUR DE CARTES', url: '/carte-generateur/index', permission: ['none'], },
 
         ],
         disabled: 'false'
@@ -106,7 +107,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
           { icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner', permission: ['preconization.interventions.store'] },
-          { icon: 'flaticon-plus', name: 'Nouvelle préconisation', url: '/interventions/selectionner', permission: ['preconization.interventions.store'] },
           { icon: 'flaticon-list', name: 'Liste des interventions', url: '/interventions/liste', permission: ['preconization.interventions.grid'] },
         ],
         disabled: 'false'

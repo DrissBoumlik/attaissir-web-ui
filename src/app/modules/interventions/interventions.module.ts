@@ -41,6 +41,11 @@ import { LayoutModule } from '../../theme/layouts/layout.module';
     DxValidationSummaryModule,
     DxCheckBoxModule,
     DxTreeListModule,
+    DxTextBoxModule,
+    DxTextBoxModule,
+    LayoutModule,
+    DxTextBoxModule,
+    DxLoadPanelModule,
     LayoutModule
   ],
   declarations: [NewComponent, AddComponent, AddTempleteComponent, ListComponent, EtatDirective, EditComponent]

@@ -512,7 +512,6 @@ export class WizardComponent implements OnInit {
             soilObject['id'] = soil.parcel_tmp_id;
             this.parcelsService.editParcel(soilObject).subscribe(d => {
               d = this.helper.dataFormatter(d, false);
-              const id = (this.isEdit) ? this.contract.id : contract['id'];
               // this.router.navigate([`/contrats/afficher/${id}`]);
             }, error1 => {
               this.toastr.warning(error1.error.message);

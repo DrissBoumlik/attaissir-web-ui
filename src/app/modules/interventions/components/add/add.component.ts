@@ -23,9 +23,11 @@ export class AddComponent implements OnInit {
   /*-------------------------------------------*/
   buttonsave: any;
   buttoncancel: any;
+  filterButton: any;
   /*-------------------------------------------*/
   addSemance: any;
   addProduct: any;
+  addAP: any;
   /*-------------------------------------------*/
   parcelOptions: any;
   stwOptions: any;
@@ -40,6 +42,7 @@ export class AddComponent implements OnInit {
   CDs = [];
   semences: any = [];
   products: any = [];
+  apis: any = [];
   saveAsModel = false;
   /*-------------------------------------------*/
   semenceCategoryOptions: any;
@@ -58,17 +61,30 @@ export class AddComponent implements OnInit {
   SelectedProductsArticle: any = {};
   productsQuantity: any;
   /*-------------------------------------------*/
+  APCategoryOptions: any;
+  APSubCategoryOptions: any;
+  APArticleOptions: any;
+  SelectedAPsCategory: any;
+  SelectedAPSubCategory: any;
+  SelectedAPArticle: any = {};
+  APQuantity: any;
+  APQuantityOptions;
+  /*-------------------------------------------*/
   @ViewChild('semenceGrid') semenceGrid: DxDataGridComponent;
   @ViewChild('productsGrid') productsGrid: DxDataGridComponent;
+  @ViewChild('apiGrid') apiGrid: DxDataGridComponent;
   /*-------------------------------------------*/
   @ViewChild('choixSemence') choixSemence: DxiItemComponent;
   @ViewChild('choixProducts') choixProducts: DxiItemComponent;
   @ViewChild('choixServices') choixServices: DxiItemComponent;
+  @ViewChild('logicalParcel') logicalParcel: DxiItemComponent;
   /*-------------------------------------------*/
   data = {
     semence: [],
     products: [],
-    services: []
+    services: [],
+    api: [],
+    autre: []
   };
   /*-------------------------------------------*/
   prestations = [];
@@ -88,7 +104,11 @@ export class AddComponent implements OnInit {
   SEMENCE_TYPE = 'SEME';
   PRODUCT_TYPE = 'product';
   SERVICE_TYPE = 'service';
+  AVANCES_ET_PRIMES_TYPE = 'API';
 
+  /*--------------------Popups-----------------------*/
+  parcelGridPopup = false;
+  parcels = [];
   /*--------------------Templates-----------------------*/
   templates: any[] = [];
   templateEditorOptions: any;
@@ -131,6 +151,7 @@ export class AddComponent implements OnInit {
     };
     this.route.queryParams.subscribe(
       (qps: any) => {
+        this.loadingVisible = true;
         /*-------------------------------------------------------------------------*/
         this.request_type_id = qps.sub_family_id;
         this.interventionService.getPropositionTemplates(qps.third_party_id, qps.sub_family_id)
@@ -142,6 +163,7 @@ export class AddComponent implements OnInit {
                 valueExpr: 'id',
                 items: this.templates,
                 searchEnabled: true,
+                searchMode: 'contains',
                 onSelectionChanged: (event) => {
                   this.selectedTemplate = event.selectedItem;
                   this.semences = [];
@@ -231,6 +253,9 @@ export class AddComponent implements OnInit {
                     if (type.name === this.SERVICE_TYPE) {
                       this.data.services.push(ctg);
                     }
+                    if (type.name === this.AVANCES_ET_PRIMES_TYPE) {
+                      this.data.api.push(ctg);
+                    }
                   });
                   this.data.services.forEach(cat => {
                     cat.sub_categories.forEach(subcat => {
@@ -254,11 +279,22 @@ export class AddComponent implements OnInit {
         /*-------------------------------------------------------------------------*/
         this.thirdsService.getThird(qps.third_party_id).subscribe(
           (tier: any) => {
+            this.loadingVisible = false;
             this.third = tier.data;
             this.interventions.third = this.third;
             this.interventionService.getLogicalParcelsByUserId(qps.third_party_id).subscribe(
               (parcels: any) => {
+                console.log(parcels);
                 this.third.parcels = [];
+                this.parcels = parcels.data;
+                this.parcels = this.parcels.map(parcel => {
+                  this.interventionService.getCDAByZone(parcel.zone_id).subscribe(
+                    (res: any) => {
+                      parcel.cda_name = res.data[0].cda_name;
+                    }
+                  );
+                  return parcel;
+                });
                 parcels.data.forEach(parcel => {
                   this.third.parcels.push(
                     {
@@ -276,6 +312,7 @@ export class AddComponent implements OnInit {
                   valueExpr: 'id',
                   items: this.third.parcels,
                   searchEnabled: true,
+                  searchMode: 'contains',
                   onSelectionChanged: (event) => {
                     if (event.selectedItem) {
                       this.interventions.contracted_surface = event.selectedItem.contracted_surface;
@@ -359,12 +396,12 @@ export class AddComponent implements OnInit {
 
 
     /*--------------------------------------------------------*/
-
     this.semenceCategoryOptions = {
       displayExpr: 'category_name',
       valueExpr: 'category_id',
       items: this.data.semence,
       searchEnabled: true,
+      searchMode: 'contains',
       onSelectionChanged: (event) => {
         this.SelectedSemenceCategory = event.selectedItem;
         this.semenceSubCategoryOptions = {
@@ -372,6 +409,7 @@ export class AddComponent implements OnInit {
           valueExpr: 'sub_category_id',
           items: this.data.semence[0].sub_categories,
           searchEnabled: true,
+          searchMode: 'contains',
           onSelectionChanged: (e) => {
             this.SelectedSemenceSubCategory = e.selectedItem;
             this.articleService.getArticlesByFamily(e.selectedItem.sub_category_id)
@@ -382,8 +420,10 @@ export class AddComponent implements OnInit {
                     valueExpr: 'id',
                     items: articles.data,
                     searchEnabled: true,
+                    searchMode: 'contains',
                     onSelectionChanged: (ev) => {
                       this.SelectedSemenceArticle = ev.selectedItem;
+                      this.SemenceQuantity = this.interventions.surface_to_work * (+this.SelectedSemenceArticle.dose);
                       this.semenceQuantityOptions = {
                         value: this.interventions.surface_to_work * (+this.SelectedSemenceArticle.dose),
                         onValueChanged: (cc) => {
@@ -398,7 +438,92 @@ export class AddComponent implements OnInit {
         };
       },
     };
-
+    this.APCategoryOptions = {
+      displayExpr: 'category_name',
+      valueExpr: 'category_id',
+      items: this.data.api,
+      searchEnabled: true,
+      searchMode: 'contains',
+      onSelectionChanged: (event) => {
+        this.SelectedAPsCategory = event.selectedItem;
+        this.APSubCategoryOptions = {
+          displayExpr: 'sub_category_name',
+          valueExpr: 'sub_category_id',
+          items: this.data.api[0].sub_categories,
+          searchEnabled: true,
+          searchMode: 'contains',
+          onSelectionChanged: (e) => {
+            this.SelectedAPSubCategory = e.selectedItem;
+            this.articleService.getArticlesByFamily(e.selectedItem.sub_category_id)
+              .subscribe(
+                (articles: any) => {
+                  this.APArticleOptions = {
+                    displayExpr: 'name',
+                    valueExpr: 'id',
+                    items: articles.data,
+                    searchEnabled: true,
+                    searchMode: 'contains',
+                    onSelectionChanged: (ev) => {
+                      this.SelectedAPArticle = ev.selectedItem;
+                      this.APQuantity = this.interventions.surface_to_work * (+this.SelectedAPArticle.dose);
+                      this.APQuantityOptions = {
+                        disabled: this.SelectedAPArticle.code !== 'GAV00003',
+                        value: this.interventions.surface_to_work * (+this.SelectedAPArticle.dose),
+                        onValueChanged: (cc) => {
+                          this.APQuantity = cc.value;
+                        }
+                      };
+                    }
+                  };
+                }
+              );
+          },
+        };
+      },
+    };
+    this.productsCategoryOptions = {
+      displayExpr: 'category_name',
+      valueExpr: 'category_id',
+      items: this.data.products,
+      searchEnabled: true,
+      searchMode: 'contains',
+      onSelectionChanged: (event) => {
+        this.SelectedProductsCategory = event.selectedItem;
+        this.productsSubCategoryOptions = {
+          displayExpr: 'sub_category_name',
+          valueExpr: 'sub_category_id',
+          items: this.data.products[0].sub_categories,
+          searchEnabled: true,
+          searchMode: 'contains',
+          onSelectionChanged: (e) => {
+            this.SelectedProductsSubCategory = e.selectedItem;
+            this.articleService.getArticlesByFamily(e.selectedItem.sub_category_id)
+              .subscribe(
+                (articles: any) => {
+                  this.productsArticleOptions = {
+                    displayExpr: 'name',
+                    valueExpr: 'id',
+                    items: articles.data,
+                    searchEnabled: true,
+                    searchMode: 'contains',
+                    onSelectionChanged: (ev) => {
+                      this.SelectedProductsArticle = ev.selectedItem;
+                      this.productsQuantity = this.interventions.surface_to_work * (+this.SelectedProductsArticle.dose);
+                      this.productsQuantityOptions = {
+                        value: this.interventions.surface_to_work * (+this.SelectedProductsArticle.dose),
+                        onValueChanged: (vv) => {
+                          this.productsQuantity = vv.value;
+                        }
+                      };
+                    }
+                  };
+                }
+              );
+          },
+        };
+      },
+    };
+    /*--------------------------------------------------------*/
     this.addSemance = {
       text: 'AJOUTER',
       type: 'default',
@@ -423,6 +548,7 @@ export class AddComponent implements OnInit {
             }
           });
         } catch (e) {
+
           throw e;
         }
         this.semences.push({
@@ -433,48 +559,40 @@ export class AddComponent implements OnInit {
         });
       }
     };
-
-    /*--------------------------------------------------------*/
-
-    this.productsCategoryOptions = {
-      displayExpr: 'category_name',
-      valueExpr: 'category_id',
-      items: this.data.products,
-      searchEnabled: true,
-      onSelectionChanged: (event) => {
-        this.SelectedProductsCategory = event.selectedItem;
-        this.productsSubCategoryOptions = {
-          displayExpr: 'sub_category_name',
-          valueExpr: 'sub_category_id',
-          items: this.data.products[0].sub_categories,
-          searchEnabled: true,
-          onSelectionChanged: (e) => {
-            this.SelectedProductsSubCategory = e.selectedItem;
-            this.articleService.getArticlesByFamily(e.selectedItem.sub_category_id)
-              .subscribe(
-                (articles: any) => {
-                  this.productsArticleOptions = {
-                    displayExpr: 'name',
-                    valueExpr: 'id',
-                    items: articles.data,
-                    searchEnabled: true,
-                    onSelectionChanged: (ev) => {
-                      this.SelectedProductsArticle = ev.selectedItem;
-                      this.productsQuantityOptions = {
-                        value: this.interventions.surface_to_work * (+this.SelectedProductsArticle.dose),
-                        onValueChanged: (vv) => {
-                          this.productsQuantity = vv.value;
-                        }
-                      };
-                    }
-                  };
-                }
-              );
-          },
-        };
-      },
+    this.addAP = {
+      text: 'AJOUTER',
+      type: 'default',
+      useSubmitBehavior: false,
+      onClick: () => {
+        if (!this.SelectedAPsCategory
+          || !this.SelectedAPSubCategory
+          || !this.SelectedAPArticle
+          || !this.APQuantity) {
+          NewComponent.notifyMe('Veuillez remplir tous les champs');
+          return -1;
+        }
+        try {
+          this.apiGrid.instance.getVisibleRows().forEach((row: any) => {
+            if (row.data.article.name === this.SelectedAPArticle.name
+              && row.data.category.category_name === this.SelectedAPsCategory.category_name
+              && row.data.sub_category.sub_category_name === this.SelectedAPSubCategory.sub_category_name
+              && row.data.quantity === this.APQuantity) {
+              const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
+              NewComponent.notifyMe(msg);
+              throw new Error(msg);
+            }
+          });
+        } catch (e) {
+          throw e;
+        }
+        this.apis.push({
+          'category': this.SelectedAPsCategory,
+          'sub_category': this.SelectedAPSubCategory,
+          'article': this.SelectedAPArticle,
+          'quantity': this.APQuantity
+        });
+      }
     };
-
     this.addProduct = {
       text: 'AJOUTER',
       type: 'default',
@@ -510,7 +628,6 @@ export class AddComponent implements OnInit {
         });
       }
     };
-
     /*--------------------------------------------------------*/
     this.buttonsave = {
       text: 'Enregistrer',
@@ -528,6 +645,9 @@ export class AddComponent implements OnInit {
             NewComponent.notifyMe('Aucun produit ou service n\'a été choisi.');
             return -1;
           }
+        } else if (this.data.api.length && this.apiGrid.instance.getVisibleRows().length === 0) {
+          NewComponent.notifyMe('Aucun produit (prime/avance) n\'a été choisi.');
+          return -1;
         }
         /*--------------------------------------------------------*/
         const data = {
@@ -544,6 +664,7 @@ export class AddComponent implements OnInit {
           semence_articles: [],
           product_articles: [],
           service_articles: [],
+          api_articles: [],
           custom_fields: []
         };
 
@@ -558,6 +679,15 @@ export class AddComponent implements OnInit {
         if (this.semenceGrid) {
           this.semenceGrid.instance.getVisibleRows().forEach(row => {
             data.semence_articles.push({
+              article_id: row.data.article.id,
+              quantity: row.data.quantity,
+            });
+          });
+        }
+
+        if (this.apiGrid) {
+          this.apiGrid.instance.getVisibleRows().forEach(row => {
+            data.api_articles.push({
               article_id: row.data.article.id,
               quantity: row.data.quantity,
             });
@@ -625,6 +755,7 @@ export class AddComponent implements OnInit {
 
       }
     };
+    /*--------------------------------------------------------*/
     this.buttoncancel = {
       text: 'Annuler',
       type: 'danger',
@@ -641,6 +772,17 @@ export class AddComponent implements OnInit {
 
       }
     };
+    /*--------------------------------------------------------*/
+    this.filterButton = {
+      text: 'Filtrer',
+      type: 'default',
+      icon: 'fa fa-filter',
+      useSubmitBehavior: false,
+      onClick: () => {
+        this.parcelGridPopup = true;
+      }
+    };
+    /*--------------------------------------------------------*/
     this.saveAsModelOptions = {
       onText: 'Oui',
       offText: 'Non',
@@ -649,9 +791,13 @@ export class AddComponent implements OnInit {
         this.saveAsModel = !this.saveAsModel;
       }
     };
-
+    /*--------------------------------------------------------*/
   }
-
   /*-------------------------------------------*/
-
+  selectLogicalParcel (e: any) {
+    this.parcelOptions.value = e.id;
+    this.logicalParcel.editorOptions = this.parcelOptions;
+    this.parcelGridPopup = false;
+  }
+  /*-------------------------------------------*/
 }
