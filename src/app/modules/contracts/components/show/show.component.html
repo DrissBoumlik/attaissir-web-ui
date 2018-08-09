@@ -404,7 +404,6 @@
                             [columnHidingEnabled]="false"
                             [allowColumnResizing]="false"
                             [showBorders]="true"
-                            [(selectedRowKeys)]="selectedItems"
                             (onRowPrepared)="initSelectionRows($event)"
                             (onEditingStart)="createLogicalParcel($event.data.id)"
                             [rowAlternationEnabled]="true"
@@ -453,7 +452,6 @@
                   [sorting]="true"
                   [paging]="false">
                 </dxo-remote-operations>
-                <dxo-selection mode="multiple"></dxo-selection>
                 <dxo-editing
                   [useIcons]="true"
                   mode="row"
