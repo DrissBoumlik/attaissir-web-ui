@@ -107,7 +107,7 @@ export class AddComponent implements OnInit {
                   return this.thirdService.getThirdsDx('products_supplier', loadOptions)
                     .toPromise()
                     .then(response => {
-                      const json = response;
+                      const json = response['data'];
                       console.log(response);
                       return json;
                     })
@@ -172,7 +172,7 @@ export class AddComponent implements OnInit {
                   return this.thirdService.getThirdsDx('products_supplier', loadOptions)
                     .toPromise()
                     .then(response => {
-                      const json = response;
+                      const json = response['data'];
                       console.log(response);
                       return json;
                     })
