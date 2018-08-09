@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://api.attaisir.graviton.ma'
+  apiUrl: 'http://api.attaissir.graviton.ma'
+
 };
