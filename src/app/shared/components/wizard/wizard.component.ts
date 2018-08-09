@@ -429,7 +429,8 @@ export class WizardComponent implements OnInit {
           // delete ground.id;
           return ground;
         });
-        this.parcelsService.editMassParcel(this.groundsList).subscribe(d => {
+
+        this.parcelsService.addParcel(this.groundsList).subscribe(d => {
           d = this.helper.dataFormatter(d, false);
           console.log(d);
           const id = (this.isEdit) ? this.contract.id : contract['id'];
@@ -440,6 +441,17 @@ export class WizardComponent implements OnInit {
             this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
           }
         });
+        /* this.parcelsService.editMassParcel(this.groundsList).subscribe(d => {
+          d = this.helper.dataFormatter(d, false);
+          console.log(d);
+          const id = (this.isEdit) ? this.contract.id : contract['id'];
+          this.router.navigate([`/contrats/afficher/${id}`]);
+        }, error1 => {
+          this.toastr.warning(error1.error.message);
+          if (!this.isEdit) {
+            this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
+          }
+        });*/
         /*this.groundsList.map((soil) => {
           const soilObject = {
             soil_id: soil.id,

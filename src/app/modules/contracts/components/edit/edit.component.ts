@@ -69,7 +69,7 @@ export class EditComponent implements OnInit {
                 annuel_surface: data['annuel_surface']
               };
             });
-            this.groundsList = null; // grounds;
+            this.groundsList = []; // grounds;
             this.currentThird = res.data.third_party;
             // this.campaigns = res.data.campaigns;
           },
