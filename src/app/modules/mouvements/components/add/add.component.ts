@@ -97,7 +97,7 @@ export class AddComponent implements OnInit {
           console.log(event);
           if (event.selectedItem.ID === 'receive' || event.selectedItem.ID === 'delivery') {
             this.emetteurOptions = {
-              label: 'Émetteur',
+              label: 'Fournisseur',
               displayExpr: 'full_name',
               valueExpr: 'id',
               searchEnabled: true,
@@ -118,30 +118,86 @@ export class AddComponent implements OnInit {
                 },
               })
             };
-            this.recepteurOptions = {
-              label: 'Récepteur',
-              displayExpr: 'name',
-              valueExpr: 'id',
-              searchEnabled: true,
-              dataSource: new CustomStore({
-                load: (loadOptions: any) => {
-                  return this.warehouseService.getAllDx(loadOptions)
-                    .toPromise()
-                    .then(response => {
-                      const json = response;
-                      console.log(response);
-                      return json;
-                    })
-                    .catch(error => {
-                      console.log(error);
-                      throw error;
-                    });
-                },
-              })
-            };
+            if (Helper.permissionMethod(['distributionCenter.articles.reception'])) {
+              this.familleOptions = {
+                label: 'Famille',
+                displayExpr: 'name',
+                valueExpr: 'id',
+                searchEnabled: true,
+                searchMode: 'startswith',
+                searchExpr: ['name'],
+                dataSource: [{id: 1, name: 'Semences', code: 'SEME', parent_id: null}],
+                onSelectionChanged: (event1) => {
+                  this.category = event1.selectedItem.name;
+                  this.subFamilleOptions = {
+                    label: 'Sous-Famille',
+                    displayExpr: 'name',
+                    valueExpr: 'id',
+                    searchEnabled: true,
+                    searchMode: 'startswith',
+                    searchExpr: ['name'],
+                    dataSource: new CustomStore({
+                      load: (loadOptions: any) => {
+                        return this.familleService.getArticleSubCategories(event1.selectedItem.id)
+                          .toPromise()
+                          .then(response => {
+                            const json = response.data;
+                            return json;
+                          })
+                          .catch(error => {
+                            console.log(error);
+                            throw error;
+                          });
+                      }
+                    }),
+                    onSelectionChanged: (e) => {
+                      this.subCategory = e.selectedItem.name;
+                      this.articleOptions = {
+                        label: 'Article',
+                        displayExpr: 'name',
+                        valueExpr: 'id',
+                        searchEnabled: true,
+                        searchMode: 'startswith',
+                        searchExpr: ['name'],
+                        dataSource: new CustomStore({
+                          load: (loadOptions: any) => {
+                            return this.articleService.getArticlesByFamily(e.selectedItem.id)
+                              .toPromise()
+                              .then(response => {
+                                const json = response.data;
+                                console.log(response);
+                                return json;
+                              })
+                              .catch(error => {
+                                console.log(error);
+                                throw error;
+                              });
+                          }
+                        }),
+                        onSelectionChanged: (evnt) => {
+                          this.article = evnt.selectedItem.name;
+                          this.unit = evnt.selectedItem.unit;
+                        }
+                      };
+                    }
+                  };
+                }
+              };
+            }
+            this.warehouseService.getByUserAndStructure().subscribe(
+              (res: any) => {
+                this.recepteurOptions = {
+                  label: 'Magasin',
+                  displayExpr: 'name',
+                  valueExpr: 'id',
+                  searchEnabled: true,
+                  dataSource: res.data,
+                };
+              }
+            );
           } else if (event.selectedItem.ID === 'return') {
             this.emetteurOptions = {
-              label: 'Émetteur',
+              label: 'Magasin',
               displayExpr: 'name',
               valueExpr: 'id',
               searchEnabled: true,
@@ -162,7 +218,7 @@ export class AddComponent implements OnInit {
               })
             };
             this.recepteurOptions = {
-              label: 'Récepteur',
+              label: 'Fournisseur',
               displayExpr: 'full_name',
               valueExpr: 'id',
               searchEnabled: true,
@@ -185,47 +241,29 @@ export class AddComponent implements OnInit {
             };
             // code
           } else if (event.selectedItem.ID === 'transfer') {
-            this.emetteurOptions = {
-              label: 'Émetteur',
-              displayExpr: 'name',
-              valueExpr: 'id',
-              searchEnabled: true,
-              dataSource: new CustomStore({
-                load: (loadOptions: any) => {
-                  return this.warehouseService.getAllDx(loadOptions)
-                    .toPromise()
-                    .then(response => {
-                      const json = response;
-                      console.log(response);
-                      return json;
-                    })
-                    .catch(error => {
-                      console.log(error);
-                      throw error;
-                    });
-                },
-              })
-            };
-            this.recepteurOptions = {
-              label: 'Récepteur',
-              displayExpr: 'name',
-              valueExpr: 'id',
-              searchEnabled: true,
-              dataSource: new CustomStore({
-                load: (loadOptions: any) => {
-                  return this.warehouseService.getAllDx(loadOptions)
-                    .toPromise()
-                    .then(response => {
-                      const json = response;
-                      console.log(response);
-                      return json;
-                    })
-                    .catch(error => {
-                      throw error;
-                    });
-                },
-              })
-            };
+            this.warehouseService.getAllWithUsines().subscribe(
+              (res) => {
+                this.emetteurOptions = {
+                  label: 'Magasin',
+                  displayExpr: 'name',
+                  valueExpr: 'id',
+                  searchEnabled: true,
+                  dataSource: res.data
+                };
+              }
+            );
+            this.warehouseService.getAllWithUsines().subscribe(
+              (res) => {
+                this.recepteurOptions = {
+                  label: 'Magasin',
+                  displayExpr: 'name',
+                  valueExpr: 'id',
+                  searchEnabled: true,
+                  dataSource: res.data
+                };
+
+              }
+            );
           }
         }
       };
@@ -268,7 +306,7 @@ export class AddComponent implements OnInit {
           return this.familleService.getArticleCategoriesDx(loadOptions)
             .toPromise()
             .then(response => {
-              const json = response;
+              const json: any = response;
               return json;
             })
             .catch(error => {
@@ -277,8 +315,8 @@ export class AddComponent implements OnInit {
             });
         }
       }),
-      onSelectionChanged: (event) => {
-        this.category = event.selectedItem.name;
+      onSelectionChanged: (event1) => {
+        this.category = event1.selectedItem.name;
         this.subFamilleOptions = {
           label: 'Sous-Famille',
           displayExpr: 'name',
@@ -288,7 +326,7 @@ export class AddComponent implements OnInit {
           searchExpr: ['name'],
           dataSource: new CustomStore({
             load: (loadOptions: any) => {
-              return this.familleService.getArticleSubCategories(event.selectedItem.id)
+              return this.familleService.getArticleSubCategories(event1.selectedItem.id)
                 .toPromise()
                 .then(response => {
                   const json = response.data;
@@ -333,6 +371,8 @@ export class AddComponent implements OnInit {
         };
       }
     };
+
+
   }
 
   AddMovement = (e) => {

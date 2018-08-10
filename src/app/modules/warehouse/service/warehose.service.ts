@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
-import { Observable } from 'rxjs';
-import { Warehouse } from '../../../shared/classes/warehouse';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
+import {Observable} from 'rxjs';
+import {Warehouse} from '../../../shared/classes/warehouse';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,30 @@ export class WarehouseService {
    */
   getAllDx(params?: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+
+  /**
+   * @returns {Observable<any>}
+   */
+  getAllWithUsines(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/${this.routeName}/getAll`,  {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  /**
+   * Get a collection of Warehouse
+   * * @returns {Observable<Warehouse[]>}
+   */
+  getByUserAndStructure(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/warehouses/byuserandstructure`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
