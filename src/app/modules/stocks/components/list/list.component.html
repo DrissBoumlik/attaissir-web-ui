@@ -16,13 +16,13 @@
         [columnHidingEnabled]="false"
         [allowColumnReordering]="true"
         [columnAutoWidth]="true"
-        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        [remoteOperations]="{ paging: false, sorting: false, filtering: false}"
         noDataText="Aucun article n'est disponible"
         KeyExpr="id"
         [rowAlternationEnabled]="true"
       >
 
-        <dxi-column dataField="warehouse_name" caption="Magasin" alignment="center"></dxi-column>
+        <dxi-column dataField="warehouse_name" sortOrder="asc" caption="Magasin" alignment="center"></dxi-column>
         <dxi-column dataField="warehouse_zone_name" cellTemplate="zoneTemplate" caption="CDA" alignment="center"></dxi-column>
         <dxi-column dataField="category_name" caption="Famille" alignment="center"></dxi-column>
         <dxi-column dataField="sub_category_name" caption="Sous-famille" alignment="center"></dxi-column>
@@ -41,10 +41,7 @@
         <div *dxTemplate="let data of 'zoneTemplate'">
           <span class="badge badge-info">{{ data.data.warehouse_zone_name}}</span>
         </div>
-        <dxo-remote-operations
-          [sorting]="true"
-          [paging]="true">
-        </dxo-remote-operations>
+
         <dxo-filter-row
           [visible]="true" [applyFilter]="true"></dxo-filter-row>
         <dxo-editing
@@ -67,7 +64,7 @@
           [showPageSizeSelector]="true"
           [visible]="true">
         </dxo-pager>
-        <dxo-paging [pageSize]="15"></dxo-paging>
+
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
         <dxo-search-panel [visible]="false"></dxo-search-panel>
         <dxo-group-panel [visible]="true"
