@@ -128,10 +128,10 @@ export class ShowComponent implements OnInit {
     print.document.write('<body>');
     print.document.write('<div class="div1">');
 
-    print.document.write('<p><b style="font-weight: bolder;">Bon de  ' + this.helper.orderType(this.mouvement.type) + '</b></p>' +
+    print.document.write('<p><b style="font-weight: bolder;">Bon DE  ' + this.helper.orderType(this.mouvement.type) + '</b></p>' +
       '<p> <span> N° ' + this.mouvement.id + ' </span></p>' +
 
-      '<p> <span style="float: right">' + this.mouvement.date + '</span> </p> <br/>' +
+      '<p> <span style="float: right"> DATE : ' + this.mouvement.date + '</span> </p> <br/>' +
 
       '<p> <span style="float: left"> COMPAGNE' +
       '</span> &nbsp; &nbsp;  <span style="float: right">' + this.mouvement.campaign + ' </span></p>');
@@ -152,8 +152,6 @@ export class ShowComponent implements OnInit {
 
 
 
-    print.document.write( '<p><span style="float: bottom">***** </span></p>');
-
     this.articles.forEach(function(element) {
       print.document.write('<p style="font-weight: bolder;">' + element.article.category.name + '</p>');
       print.document.write('<p>   </p>');
@@ -161,6 +159,10 @@ export class ShowComponent implements OnInit {
         '</span><span style="float: right;"> ' + element.quantity + ' ' + 'QTE' + '</span></p>');
 
     });
+
+    print.document.write( '<p><span style="float: bottom">'+ this.mouvement.from.full_name + '</span></p>');
+
+    print.document.write( '<p><span style="float: bottom">***** </span></p>');
 
     print.document.write(
       '<br/> <p>-------------------------</p>' +

@@ -20,8 +20,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="siam-dashboard-shortcuts">
-		<div class="siam-dashboard-shortcuts-item" [routerLink]="shortcut.url"  *ngFor="let shortcut of shortcutsList">
+	<div class="siam-dashboard-shortcuts" >
+		<div class="siam-dashboard-shortcuts-item"   [appPermissionHidden]="['thirdParty.third-parties.store','thirdParty.third-parties.grid']" [routerLink]="shortcut.url"  *ngFor="let shortcut of shortcutsList">
 			<div class="siam-dashboard-si-icon-wrapper">
 				<div class="siam-dashboard-si-icon">
 					<i class="{{shortcut.icon}}"></i>
@@ -33,8 +33,9 @@
 		</div>
 	</div>
 </div>
-<div class="siam-dashboard-tiles">
-	<div class="siam-dashboard-tiles-item" *ngFor="let tile of tilesList" [ngStyle]="{'background-color': tile.backgroundColor,'color': tile.textColor}">
+
+<div class="siam-dashboard-tiles"  >
+	<div class="siam-dashboard-tiles-item"  [appPermissionHidden]="['agreement.contracts.grid']"  *ngFor="let tile of tilesList" [ngStyle]="{'background-color': tile.backgroundColor,'color': tile.textColor}">
 		<div class="siam-dashboard-tiles-item-icon">
 			<i class="{{ tile.icon }}"></i>
 		</div>

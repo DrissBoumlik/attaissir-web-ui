@@ -4,6 +4,7 @@ import { PreconisationsIntrantsService } from '../../service/preconisations-intr
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RightHolderService } from '../../../contracts/services/right-holder.service';
+import {Helper} from "../../../../shared/classes/helper";
 
 @Component({
   selector: 'app-show',
@@ -27,6 +28,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
   retourArray = [];
   retour_valider_enabled = true;
   id;
+  helper: any;
 
   // -------------------------------------------------------------------------
   @ViewChild('rfid') rfid: ElementRef;
@@ -38,7 +40,11 @@ export class ShowComponent implements OnInit, AfterViewInit {
     private router: Router,
     private toastr: ToastrService, private route: ActivatedRoute) {
 
+    this.helper = Helper;
+
   }
+
+
 
   ngOnInit() {
 
