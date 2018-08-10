@@ -24,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: 'ajouter',
-        component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.store'] }
+        component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.update'] }
       },
       {
         path: 'afficher/:id',

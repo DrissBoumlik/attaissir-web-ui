@@ -465,7 +465,7 @@ export class AddComponent implements OnInit {
                       this.SelectedAPArticle = ev.selectedItem;
                       this.APQuantity = this.interventions.surface_to_work * (+this.SelectedAPArticle.dose);
                       this.APQuantityOptions = {
-                        format: '# ' + this.SelectedAPArticle.unit.toString(),
+                        format: '#0.## ' + this.SelectedAPArticle.unit.toString(),
                         disabled: this.SelectedAPArticle.code !== 'GAV00003',
                         value: this.interventions.surface_to_work * (+this.SelectedAPArticle.dose),
                         onValueChanged: (cc) => {
@@ -509,7 +509,7 @@ export class AddComponent implements OnInit {
                       this.SelectedProductsArticle = ev.selectedItem;
                       this.productsQuantity = this.interventions.surface_to_work * (+this.SelectedProductsArticle.dose);
                       this.productsQuantityOptions = {
-                        format: '# ' + this.SelectedProductsArticle.unit.toString(),
+                        format: '#0.## ' + this.SelectedProductsArticle.unit.toString(),
                         value: this.interventions.surface_to_work * (+this.SelectedProductsArticle.dose),
                         onValueChanged: (vv) => {
                           this.productsQuantity = vv.value;

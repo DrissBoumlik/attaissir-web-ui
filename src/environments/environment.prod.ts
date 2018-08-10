@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://api.siam618.graviton.ma'
+  apiUrl: 'http://api.attaissir.graviton.ma'
 
 };
+0
