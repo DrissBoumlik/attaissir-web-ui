@@ -60,9 +60,10 @@ export class ListComponent implements OnInit {
                     row.article_name = war.article_name;
                     row.article_code = war.article_code;
                     row.threshold = war.threshold ? war.threshold : '';
-                    if (Helper.permissionMethod([''])) {
+                    if (Helper.permissionMethod(['distributionCenter.stocks.stock'])) {
                         const current = JSON.parse(localStorage.getItem('currentUser'));
-                        if (current.email === war.warehouse_email) {
+                      console.log(current.data.email);
+                      if (current.data.email === war.warehouse_email) {
                             return row;
                         }
                     } else {
