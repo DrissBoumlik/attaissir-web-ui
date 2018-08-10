@@ -176,7 +176,9 @@ export class IndexComponent implements OnInit {
     this.selectedItems.forEach((it) => {
 
      // it.playOn= false;
-      let img = 'http://s1.dboumlik.code.go/cards/4/generate?face=recto&id=4&rfid=334&structure=' + it.structure +'&type=agri&full_name=' + it.full_name +'&code=' + it.code + '&full_name_ar=' + it.full_name_ar +'&amp;cin='+ it.cin;
+      let img = 'http://api.attaissir.graviton.ma/cards/4/generate?face=recto&id=4&rfid=334&structure='
+        + it.structure +'&type=agri&full_name=' + it.full_name +'&code='
+        + it.code + '&full_name_ar=' + it.full_name_ar +'&amp;cin='+ it.cin;
 
       this.img_scr_recto_array.push(img);
 

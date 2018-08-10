@@ -178,7 +178,7 @@ export class WizardComponent implements OnInit {
     };
     this.zoneService.getCDAs().subscribe(cda => {
       // CDA
-      this.cdas = this.helper.dataFormatter(cda, false);
+      this.cdas = this.helper.dataFormatter(cda, true);
       this.cdaEditorOptions = {
         label: 'CDA',
         items: this.cdas,
@@ -189,7 +189,7 @@ export class WizardComponent implements OnInit {
           // Zone
           if (e.selectedItem) {
             this.zoneService.getZonesByCDA(e.selectedItem.code).subscribe(zone => {
-              this.zones = this.helper.dataFormatter(zone, false);
+              this.zones = this.helper.dataFormatter(zone, true);
               this.zoneEditorOptions = {
                 label: 'Zone',
                 items: this.zones,
@@ -418,9 +418,41 @@ export class WizardComponent implements OnInit {
     }
 
     if (this.isEdit && !this.contract.parent_id) {
-      this.contractService.editContract(this.contract).subscribe(contract => {
+      this.contractService.editContract(this.contract).subscribe((contract: any) => {
         contract = this.helper.dataFormatter(contract, false);
-        this.groundsList.map((soil) => {
+        this.groundsList = this.groundsList.map((ground: any) => {
+          console.log(ground);
+          ground['soil_id'] =  ground['id'];
+          ground['contract_id'] =  contract['id'];
+          ground['campaign_id'] =  contract.campaign.id;
+          ground['zone_id'] =  contract.zone;
+          // delete ground.id;
+          return ground;
+        });
+
+        this.parcelsService.addParcel(this.groundsList).subscribe(d => {
+          d = this.helper.dataFormatter(d, false);
+          console.log(d);
+          const id = (this.isEdit) ? this.contract.id : contract['id'];
+          this.router.navigate([`/contrats/afficher/${id}`]);
+        }, error1 => {
+          this.toastr.warning(error1.error.message);
+          if (!this.isEdit) {
+            this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
+          }
+        });
+        /* this.parcelsService.editMassParcel(this.groundsList).subscribe(d => {
+          d = this.helper.dataFormatter(d, false);
+          console.log(d);
+          const id = (this.isEdit) ? this.contract.id : contract['id'];
+          this.router.navigate([`/contrats/afficher/${id}`]);
+        }, error1 => {
+          this.toastr.warning(error1.error.message);
+          if (!this.isEdit) {
+            this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
+          }
+        });*/
+        /*this.groundsList.map((soil) => {
           const soilObject = {
             soil_id: soil.id,
             tenure: soil.tenure,
@@ -450,7 +482,7 @@ export class WizardComponent implements OnInit {
           return soil;
         });
         const id = (this.isEdit) ? this.contract.id : contract['id'];
-        this.router.navigate([`/contrats/afficher/${id}`]);
+        this.router.navigate([`/contrats/afficher/${id}`]);*/
       }, error1 => {
         throw error1;
       });
@@ -469,6 +501,7 @@ export class WizardComponent implements OnInit {
         this.parcelsService.addParcel(this.groundsList).subscribe(d => {
           d = this.helper.dataFormatter(d, false);
           console.log(d);
+          const id = (this.isEdit) ? this.contract.id : contract['id'];
           this.router.navigate([`/contrats/afficher/${id}`]);
         }, error1 => {
           this.toastr.warning(error1.error.message);
@@ -508,7 +541,6 @@ export class WizardComponent implements OnInit {
           return soil;
         });*/
         // this.createLogicalParcel(contract, this.groundsList);
-        const id = (this.isEdit) ? this.contract.id : contract['id'];
         // this.router.navigate([`/contrats/afficher/${id}`]);
       }, error1 => {
         throw error1;

@@ -54,7 +54,7 @@ export class EditComponent implements OnInit {
             this.contract = res.data;
             this.step2 = (this.contract['status'] === 'inprogress') ? '2. Contrat' : '2. Avenant';
 
-            const grounds = res.data.parcels.map(data => {
+            const grounds = res.data.parcels.filter(p => p.is_logical === false).map(data => {
               return {
                 id: data['soil']['id'],
                 parcel_tmp_id: data['id'],
@@ -69,7 +69,7 @@ export class EditComponent implements OnInit {
                 annuel_surface: data['annuel_surface']
               };
             });
-            this.groundsList = grounds;
+            this.groundsList = []; // grounds;
             this.currentThird = res.data.third_party;
             // this.campaigns = res.data.campaigns;
           },
