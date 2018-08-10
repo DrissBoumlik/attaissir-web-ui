@@ -50,6 +50,14 @@ export class ListComponent implements OnInit {
           });
       }
     });
+
+
+
+    Helper.permissionMethod(['none'])
+    {
+      console.log('ok');
+
+    }
   }
 
 

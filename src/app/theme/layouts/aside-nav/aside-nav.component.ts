@@ -37,6 +37,15 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
     this.mainMenu = [
       {
+        name: 'Mon stock',
+        permission: ['distributionCenter.stocks.grid'],
+        icon: 'fa fa-archive',
+        url: '/stock/situation',
+        queryParams: { magazin: this.tenantId },
+        description: 'mon stock',
+        disabled: 'false'
+      },
+      {
         name: 'Contrats',
         permission: ['agreement.contracts.grid'],
         icon: 'flaticon-file',
@@ -84,7 +93,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
           { icon: 'flaticon-list', name: 'Situation de stock', url: '/stock/situation', permission: ['distributionCenter.stocks.grid'] },
-          { icon: 'flaticon-plus', name: 'Approvisionnement de stock', url: '/stock/reappro', permission: ['distributionCenter.stocks.store'] },
+          { icon: 'flaticon-plus', name: 'Approvisionnement de stock', url: '/stock/reappro', permission: ['distributionCenter.stocks.reapprovisionnement'] },
           {
             name: 'Liste des mouvements', icon: 'fa fa-exchange', url: '/mouvements',
             description: 'Liste des mouvements', disabled: 'false', permission: ['distributionCenter.stocks.grid']
@@ -109,15 +118,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           { icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner', permission: ['preconization.interventions.store'] },
           { icon: 'flaticon-list', name: 'Liste des interventions', url: '/interventions/liste', permission: ['preconization.interventions.grid'] },
         ],
-        disabled: 'false'
-      },
-      {
-        name: 'Mon stock',
-        permission: ['distributionCenter.stocks.grid'],
-        icon: 'fa fa-archive',
-        url: '/stock/situation',
-        queryParams: { magazin: this.tenantId },
-        description: 'mon stock',
         disabled: 'false'
       },
       {
