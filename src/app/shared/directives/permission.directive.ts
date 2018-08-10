@@ -40,7 +40,7 @@ export class PermissionDirective implements OnInit {
         }
 
 
-
+        console.log(permissions_decrypt);
 
         permissions_decrypt.forEach((it) => {
           for (let i = 0; i < this.appPermissionHidden.length; i++) {

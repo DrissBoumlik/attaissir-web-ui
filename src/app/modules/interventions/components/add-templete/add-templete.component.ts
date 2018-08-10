@@ -108,7 +108,7 @@ export class AddTempleteComponent implements OnInit {
           this.interventionService.addIng(item).subscribe((response) => {
             this.loadingVisible = false;
             this.toastr.success('Les modifications ont été effectuées avec succès.');
-            this.router.navigate(['/stock/situation']);
+            this.router.navigate(['/preconisations-intrants/liste']);
           });
         } else {
           this.toastr.warning('la selection des parcelles est obligatoire');
