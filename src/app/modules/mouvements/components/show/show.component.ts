@@ -160,9 +160,7 @@ export class ShowComponent implements OnInit {
 
     });
 
-    print.document.write( '<p><span style="float: bottom">'+ this.mouvement.from.full_name + '</span></p>');
-
-    print.document.write( '<p><span style="float: bottom">***** </span></p>');
+    print.document.write( '   <br/> <p>**  **</p> <p><span style="float: bottom">'+ this.mouvement.to.name + '</span> </p>  <p>**  **</p> <br/>');
 
     print.document.write(
       '<br/> <p>-------------------------</p>' +
