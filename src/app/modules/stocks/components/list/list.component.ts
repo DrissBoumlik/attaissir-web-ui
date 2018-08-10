@@ -60,7 +60,14 @@ export class ListComponent implements OnInit {
                     row.article_name = war.article_name;
                     row.article_code = war.article_code;
                     row.threshold = war.threshold ? war.threshold : '';
-                    return row;
+                    if (Helper.permissionMethod([''])) {
+                        const current = JSON.parse(localStorage.getItem('currentUser'));
+                        if (current.email === war.warehouse_email) {
+                            return row;
+                        }
+                    } else {
+                      return row;
+                    }
                   }),
                   totalCount: stk.totalCount
                 };
