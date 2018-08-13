@@ -12,11 +12,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.articletemplates.grid'] }
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.grid'] }
       },
       {
         path: 'liste',
-        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.articletemplates.grid'] }
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.grid'] }
       },
       {
         path: 'liste/:cin',

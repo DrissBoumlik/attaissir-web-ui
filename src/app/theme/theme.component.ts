@@ -41,14 +41,15 @@ export class ThemeComponent implements OnInit {
       });
   }
 
+
+
   reset() {
     this.auth.refresh().subscribe(data => {
       const currentUser: any = JSON.stringify(data);
 
-
       localStorage.setItem('currentUser', currentUser);
       localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
-      //    localStorage.setItem('permissions', JSON.parse(currentUser)['data']['permissions']);
+
 
       // test Tenant
       if (!localStorage.getItem('tenantId')) {
