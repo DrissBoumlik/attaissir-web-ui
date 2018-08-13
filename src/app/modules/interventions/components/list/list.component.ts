@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
   helper: any;
 
   constructor(public service: InterventionService,
-              public router: Router) {
+    public router: Router) {
     this.helper = Helper;
   }
 
@@ -26,7 +26,7 @@ export class ListComponent implements OnInit {
       (data: any) => {
         console.log(data);
         this.dataSource = data.data;
-    }, err => {}
+      }, err => { }
     );
     // this.service.getInterventions().subscribe((data: any) => {
     //   this.dataSource = data.data;

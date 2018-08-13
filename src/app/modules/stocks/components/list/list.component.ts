@@ -61,11 +61,11 @@ export class ListComponent implements OnInit {
                     row.article_code = war.article_code;
                     row.threshold = war.threshold ? war.threshold : '';
                     if (Helper.permissionMethod(['distributionCenter.stocks.stock'])) {
-                        const current = JSON.parse(localStorage.getItem('currentUser'));
+                      const current = JSON.parse(localStorage.getItem('currentUser'));
                       console.log(current.data.email);
                       if (current.data.email === war.warehouse_email) {
-                            return row;
-                        }
+                        return row;
+                      }
                     } else {
                       return row;
                     }

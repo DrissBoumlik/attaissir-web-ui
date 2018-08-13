@@ -23,7 +23,7 @@ import { RfidCardReaderComponent } from './components/rfid-card-reader/rfid-card
 import { ParcelsListComponent } from './components/parcels-list/parcels-list.component';
 import { RoleDirective } from './directives/role.directive';
 import { ParcelGridComponent } from './components/parcel-grid/parcel-grid.component';
-import {PermissionDirective} from './directives/permission.directive';
+import { PermissionDirective } from './directives/permission.directive';
 
 @NgModule({
   imports: [

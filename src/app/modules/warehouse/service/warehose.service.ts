@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
-import {Observable} from 'rxjs';
-import {Warehouse} from '../../../shared/classes/warehouse';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+import { Observable } from 'rxjs';
+import { Warehouse } from '../../../shared/classes/warehouse';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,7 @@ export class WarehouseService {
    * @returns {Observable<any>}
    */
   getAllWithUsines(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/${this.routeName}/getAll`,  {
+    return this.http.get(`${environment.apiUrl}/${this.routeName}/getAll`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

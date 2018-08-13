@@ -49,7 +49,7 @@ export class CardGeneratorService {
   }
 
   validate(params?: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/${this.routeName}/assign-rfid`, JSON.stringify( {"cards": params }), {
+    return this.http.put(`${environment.apiUrl}/${this.routeName}/assign-rfid`, JSON.stringify({ "cards": params }), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

@@ -11,7 +11,7 @@ import { ZonesService } from '../../../modules/contracts/services/zones.service'
 import { ParcelsService } from '../../../modules/parcels/services/parcels.service';
 import { ContractsService } from '../../../modules/contracts/services/contracts.service';
 import { Helper } from '../../classes/helper';
-import {Parcel} from '../../classes/parcel';
+import { Parcel } from '../../classes/parcel';
 
 
 @Component({
@@ -422,10 +422,10 @@ export class WizardComponent implements OnInit {
         contract = this.helper.dataFormatter(contract, false);
         this.groundsList = this.groundsList.map((ground: any) => {
           console.log(ground);
-          ground['soil_id'] =  ground['id'];
-          ground['contract_id'] =  contract['id'];
-          ground['campaign_id'] =  contract.campaign.id;
-          ground['zone_id'] =  contract.zone;
+          ground['soil_id'] = ground['id'];
+          ground['contract_id'] = contract['id'];
+          ground['campaign_id'] = contract.campaign.id;
+          ground['zone_id'] = contract.zone;
           // delete ground.id;
           return ground;
         });
@@ -490,14 +490,14 @@ export class WizardComponent implements OnInit {
       this.contractService.addContract(this.contract).subscribe((contract: any) => {
         contract = this.helper.dataFormatter(contract, false);
         this.groundsList = this.groundsList.map((ground: any) => {
-            console.log(ground);
-            ground['soil_id'] =  ground['id'];
-            ground['contract_id'] =  contract['id'];
-            ground['campaign_id'] =  contract.campaign.id;
-            ground['third_party_id'] =  this.currentThird.id;
-            ground['zone_id'] =  contract.zone;
-            // delete ground.id;
-            return ground;
+          console.log(ground);
+          ground['soil_id'] = ground['id'];
+          ground['contract_id'] = contract['id'];
+          ground['campaign_id'] = contract.campaign.id;
+          ground['third_party_id'] = this.currentThird.id;
+          ground['zone_id'] = contract.zone;
+          // delete ground.id;
+          return ground;
         });
         this.parcelsService.addParcel(this.groundsList).subscribe(d => {
           d = this.helper.dataFormatter(d, false);

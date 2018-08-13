@@ -35,15 +35,15 @@ export class ShowComponent implements OnInit {
     this.mouvement = {
       state: 'inprogress'
     };
-     this.order = null;
+    this.order = null;
     this.to = {};
     this.from = {}
     this.articles = null;
 
-    this.from.name ='';
-    this.from.full_name  ='';
-     this.to.name  ='';
-    this.to.full_name  ='';
+    this.from.name = '';
+    this.from.full_name = '';
+    this.to.name = '';
+    this.to.full_name = '';
     this.route.params.subscribe(
       params => {
         this.mouvementsService.getMouvement(params.id).subscribe((response) => {
@@ -136,17 +136,17 @@ export class ShowComponent implements OnInit {
       '<p> <span style="float: left"> COMPAGNE' +
       '</span> &nbsp; &nbsp;  <span style="float: right">' + this.mouvement.campaign + ' </span></p>');
 
-    if(this.mouvement.type != 'transfer') {
+    if (this.mouvement.type != 'transfer') {
 
-      print.document.write( '<p> <span style="float: left"> CDA' +
-        '</span> &nbsp; &nbsp;  <span style="float: right">  ' +  this.mouvement.cda +  '   </span></p>' +
+      print.document.write('<p> <span style="float: left"> CDA' +
+        '</span> &nbsp; &nbsp;  <span style="float: right">  ' + this.mouvement.cda + '   </span></p>' +
 
         '<p> <span style="float: left"> ZONE' +
-        '</span> &nbsp; &nbsp;  <span style="float: right">  ' +  this.mouvement.zone +  '  </span></p>' +
+        '</span> &nbsp; &nbsp;  <span style="float: right">  ' + this.mouvement.zone + '  </span></p>' +
 
 
         '<p> <span style="float: left"> PARCELLE' +
-        '</span> &nbsp; &nbsp;  <span style="float: right"> ' +  this.mouvement.parcel +  ' </span></p>');
+        '</span> &nbsp; &nbsp;  <span style="float: right"> ' + this.mouvement.parcel + ' </span></p>');
 
     }
 
@@ -160,7 +160,7 @@ export class ShowComponent implements OnInit {
 
     });
 
-    print.document.write( '   <br/> <p>**  **</p> <p><span style="float: bottom">'+ this.mouvement.to.name + '</span> </p>  <p>**  **</p> <br/>');
+    print.document.write('   <br/> <p>**  **</p> <p><span style="float: bottom">' + this.mouvement.to.name + '</span> </p>  <p>**  **</p> <br/>');
 
     print.document.write(
       '<br/> <p>-------------------------</p>' +
