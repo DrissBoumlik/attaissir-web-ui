@@ -68,16 +68,10 @@ export class AuthComponent implements OnInit, AfterViewInit {
           localStorage.setItem('currentUser', currentUser);
           localStorage.setItem('token', JSON.parse(currentUser)['data']['token']);
 
-         /*
+         const _data = JSON.stringify(JSON.parse(currentUser)['data']['permissions']);
 
-          //  console.log(JSON.parse(currentUser)['data']['permissions']);
 
-          // Encrypt
-
-*/
-
-          const _data = JSON.stringify(JSON.parse(currentUser)['data']['permissions']);
-          const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(_data), 'Gra61884546585_55');
+          const ciphertext = CryptoJS.AES.encrypt(_data, 'Gra61884546585_55');
           localStorage.setItem('permissions', ciphertext);
 
 
@@ -86,9 +80,9 @@ export class AuthComponent implements OnInit, AfterViewInit {
           }
           this.toastr.success(`Bonjour ${JSON.parse(currentUser).data.name.toUpperCase()}`);
 
+          this._router.navigate([this.returnUrl]);
 
         }
-        this._router.navigate([this.returnUrl]);
 
       },
       error => {
@@ -106,12 +100,12 @@ export class AuthComponent implements OnInit, AfterViewInit {
 
       const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(response.data.permissions), 'Gra61884546585_55');
       localStorage.setItem('permissions', ciphertext);
-        location.reload();
+      //  location.reload();
 
       //      localStorage.setItem('permissions', response.data.permissions);
     },
       error => {
-        location.reload();
+       //  location.reload();
       });
   }
 
