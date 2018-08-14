@@ -8,9 +8,9 @@ describe('ParcelGridComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ParcelGridComponent ]
+      declarations: [ParcelGridComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

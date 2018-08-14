@@ -11,7 +11,7 @@ import { ZonesService } from '../../../modules/contracts/services/zones.service'
 import { ParcelsService } from '../../../modules/parcels/services/parcels.service';
 import { ContractsService } from '../../../modules/contracts/services/contracts.service';
 import { Helper } from '../../classes/helper';
-import {Parcel} from '../../classes/parcel';
+import { Parcel } from '../../classes/parcel';
 
 
 @Component({
@@ -44,6 +44,7 @@ export class WizardComponent implements OnInit {
   blocs: any;
   mle: any;
   parcelForm: any;
+  clicked: boolean;
 
   cdaEditorOptions: any;
   zoneEditorOptions: any;
@@ -76,6 +77,7 @@ export class WizardComponent implements OnInit {
     private parcelsService: ParcelsService,
     private router: Router) {
     this.helper = Helper;
+    this.clicked = false;
   }
 
   ngOnInit() {
@@ -113,7 +115,11 @@ export class WizardComponent implements OnInit {
     this.checkBoxesMode = 'onClick';
     this.parcelForm = {
       cda: null,
+      cda_id: null,
+      cda_name: null,
       zone: null,
+      zone_id: null,
+      zone_name: null,
       secteur: null,
       block: null,
       registration_number: null,
@@ -155,7 +161,11 @@ export class WizardComponent implements OnInit {
             } else {
               this.parcelForm = {
                 cda: null,
+                cda_id: null,
+                cda_name: null,
                 zone: null,
+                zone_id: null,
+                zone_name: null,
                 sector: null,
                 block: null,
                 registration_number: null,
@@ -376,6 +386,8 @@ export class WizardComponent implements OnInit {
   }
 
   finishFunction(e) {
+    this.clicked = true;
+
     e.preventDefault();
     const tenantId = localStorage.getItem('tenantId');
     console.log(this.currentThird);
@@ -422,10 +434,9 @@ export class WizardComponent implements OnInit {
         contract = this.helper.dataFormatter(contract, false);
         this.groundsList = this.groundsList.map((ground: any) => {
           console.log(ground);
-          ground['soil_id'] =  ground['id'];
-          ground['contract_id'] =  contract['id'];
-          ground['campaign_id'] =  contract.campaign.id;
-          ground['zone_id'] =  contract.zone;
+          ground['soil_id'] = ground['id'];
+          ground['contract_id'] = contract['id'];
+          ground['campaign_id'] = contract.campaign.id;
           // delete ground.id;
           return ground;
         });
@@ -436,6 +447,7 @@ export class WizardComponent implements OnInit {
           const id = (this.isEdit) ? this.contract.id : contract['id'];
           this.router.navigate([`/contrats/afficher/${id}`]);
         }, error1 => {
+          this.clicked = false;
           this.toastr.warning(error1.error.message);
           if (!this.isEdit) {
             this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
@@ -490,14 +502,13 @@ export class WizardComponent implements OnInit {
       this.contractService.addContract(this.contract).subscribe((contract: any) => {
         contract = this.helper.dataFormatter(contract, false);
         this.groundsList = this.groundsList.map((ground: any) => {
-            console.log(ground);
-            ground['soil_id'] =  ground['id'];
-            ground['contract_id'] =  contract['id'];
-            ground['campaign_id'] =  contract.campaign.id;
-            ground['third_party_id'] =  this.currentThird.id;
-            ground['zone_id'] =  contract.zone;
-            // delete ground.id;
-            return ground;
+          console.log(ground);
+          ground['soil_id'] = ground['id'];
+          ground['contract_id'] = contract['id'];
+          ground['campaign_id'] = contract.campaign.id;
+          ground['third_party_id'] = this.currentThird.id;
+          // delete ground.id;
+          return ground;
         });
         this.parcelsService.addParcel(this.groundsList).subscribe(d => {
           d = this.helper.dataFormatter(d, false);
@@ -505,6 +516,7 @@ export class WizardComponent implements OnInit {
           const id = (this.isEdit) ? this.contract.id : contract['id'];
           this.router.navigate([`/contrats/afficher/${id}`]);
         }, error1 => {
+          this.clicked = false;
           this.toastr.warning(error1.error.message);
           if (!this.isEdit) {
             this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));

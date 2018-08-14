@@ -1,6 +1,6 @@
 import {CardGeneratorService} from "../../services/card-generator.service";
 import 'rxjs/add/operator/toPromise';
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, HostListener} from '@angular/core';
 import { Helper } from '../../../../shared/classes/helper';
 import { isNull } from "util";
 import { ActivatedRoute, Router } from '@angular/router';
@@ -93,6 +93,8 @@ export class IndexComponent implements OnInit {
 
 
   startFunc(){
+    this.rfid.nativeElement.focus();
+
     if(this.start) {
       this.start_btn.type ="danger";
       this.start_btn.text ="ARRETER";
@@ -117,51 +119,54 @@ export class IndexComponent implements OnInit {
   sendRfid() {
 
 
+    /*
 
-    this.rf_code = '';
-    this.rfid.nativeElement.focus();
-
-
-
-
-    this.rfid.nativeElement.addEventListener('input', () => {
-      setTimeout(() => {
         this.rf_code = '';
-        this.rf_code = this.rfid.nativeElement.value;
-        this.rfid.nativeElement.value = '';
-        this.focusout.nativeElement.focus();
+        this.rfid.nativeElement.focus();
 
 
-         this.selectedItems.some( (it) => {
 
-          if(it.playOn == null && this.rf_code != '') {
 
-            it.playOn = true;
-            it.rfid = this.rf_code;
-            return true;
+        this.rfid.nativeElement.addEventListener('input', () => {
+          setTimeout(() => {
+            this.rf_code = '';
+            this.rf_code = this.rfid.nativeElement.value;
+            this.rfid.nativeElement.value = '';
+            this.focusout.nativeElement.focus();
 
-          }
-          console.log(it);
+
+             this.selectedItems.some( (it) => {
+
+              if(it.playOn == null && this.rf_code != '') {
+
+                it.playOn = true;
+                it.rfid = this.rf_code;
+                return true;
+
+              }
+              console.log(it);
+            });
+
+
+            if( this.rf_code != '') {
+              this.sendRfid();
+            }
+
+          //  this.sendRfid();
+
+            this.event_ = true;
+
+
+
+
+
+
+
+          }, 1000);
+
         });
 
-
-        if( this.rf_code != '') {
-          this.sendRfid();
-        }
-
-      //  this.sendRfid();
-
-        this.event_ = true;
-
-
-
-
-
-
-
-      }, 1000);
-
-    });
+        */
    }
 
 
@@ -255,6 +260,51 @@ export class IndexComponent implements OnInit {
     }
 
 
+
+  }
+
+   barcode = "";
+   repeated = false ;
+
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+
+    if(!this.start) {
+      if (event.key !== 'Enter') {
+        this.barcode += event.key;
+      } else {
+
+
+        this.selectedItems.forEach(it => {
+          if(it.rfid == this.barcode ){
+            this.repeated = true;
+          }
+
+        });
+
+
+        if(!this.repeated){
+
+          this.selectedItems.some((it) => {
+
+            if (it.playOn == null) {
+
+              it.playOn = true;
+              it.rfid = this.barcode;
+              this.barcode = "";
+              return true;
+
+            }
+          });
+
+        }else {
+          this.toastr.warning('Rfid est déjà utilisé');
+        }
+
+
+
+      }
+   }
 
   }
 

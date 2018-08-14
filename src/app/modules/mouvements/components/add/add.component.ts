@@ -10,7 +10,7 @@ import { ArticlesService } from '../../../articles/services/articles.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { DemandesService } from '../../../demandes/service/demandes.service';
-import {NewComponent} from '../../../interventions/components/new/new.component';
+import { NewComponent } from '../../../interventions/components/new/new.component';
 
 @Component({
   selector: 'app-add',
@@ -122,7 +122,7 @@ export class AddComponent implements OnInit {
                 searchEnabled: true,
                 searchMode: 'startswith',
                 searchExpr: ['name'],
-                dataSource: [{id: 1, name: 'Semences', code: 'SEME', parent_id: null}],
+                dataSource: [{ id: 1, name: 'Semences', code: 'SEME', parent_id: null }],
                 onSelectionChanged: (event1) => {
                   this.category = event1.selectedItem.name;
                   this.subFamilleOptions = {

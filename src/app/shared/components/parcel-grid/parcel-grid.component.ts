@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {DxDataGridComponent} from 'devextreme-angular';
-import {NewComponent} from '../../../modules/interventions/components/new/new.component';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { DxDataGridComponent } from 'devextreme-angular';
+import { NewComponent } from '../../../modules/interventions/components/new/new.component';
 
 @Component({
   selector: 'app-parcel-grid',
@@ -18,7 +18,7 @@ export class ParcelGridComponent implements OnInit {
 
   ngOnInit() {
   }
-  doneClick () {
+  doneClick() {
     if (this.dataGrid.instance.getSelectedRowsData().length === 0 || this.dataGrid.instance.getSelectedRowsData().length > 1) {
       NewComponent.notifyMe('Vous avez sélectionné une seul parcelle.');
       return -1;
