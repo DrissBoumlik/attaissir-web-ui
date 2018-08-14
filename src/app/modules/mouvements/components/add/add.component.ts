@@ -95,29 +95,25 @@ export class AddComponent implements OnInit {
         valueExpr: 'ID',
         onSelectionChanged: (event) => {
           console.log(event);
-          if (event.selectedItem.ID === 'receive' || event.selectedItem.ID === 'delivery') {
-            this.emetteurOptions = {
-              label: 'Fournisseur',
-              displayExpr: 'full_name',
-              valueExpr: 'id',
-              searchEnabled: true,
-              dataSource: new CustomStore({
-                load: (loadOptions: any) => {
-                  loadOptions['filter'] = ['ts_type', '=', 'products_supplier'];
-                  return this.thirdService.getThirdsDx('products_supplier', loadOptions)
-                    .toPromise()
-                    .then(response => {
-                      const json = response['data'];
-                      console.log(response);
-                      return json;
-                    })
-                    .catch(error => {
-                      console.log(error);
-                      throw error;
-                    });
-                },
-              })
-            };
+          if (event.selectedItem.ID === 'receive') {
+            this.warehouseService.getERByType('return').subscribe(
+              (res: any) => {
+                this.emetteurOptions = {
+                  label: 'Fournisseur',
+                  displayExpr: 'full_name',
+                  valueExpr: 'id',
+                  searchEnabled: true,
+                  dataSource: res.data.recepteur
+                };
+                this.recepteurOptions = {
+                  label: 'Magasin',
+                  displayExpr: 'name',
+                  valueExpr: 'id',
+                  searchEnabled: true,
+                  dataSource: res.data.emetteur,
+                };
+              }
+            );
             if (Helper.permissionMethod(['distributionCenter.articles.reception'])) {
               this.familleOptions = {
                 label: 'Famille',
@@ -184,84 +180,42 @@ export class AddComponent implements OnInit {
                 }
               };
             }
-            this.warehouseService.getByUserAndStructure().subscribe(
-              (res: any) => {
-                this.recepteurOptions = {
-                  label: 'Magasin',
-                  displayExpr: 'name',
-                  valueExpr: 'id',
-                  searchEnabled: true,
-                  dataSource: res.data,
-                };
-              }
-            );
           } else if (event.selectedItem.ID === 'return') {
-            this.emetteurOptions = {
-              label: 'Magasin',
-              displayExpr: 'name',
-              valueExpr: 'id',
-              searchEnabled: true,
-              dataSource: new CustomStore({
-                load: (loadOptions: any) => {
-                  return this.warehouseService.getAllDx(loadOptions)
-                    .toPromise()
-                    .then(response => {
-                      const json = response;
-                      console.log(response);
-                      return json;
-                    })
-                    .catch(error => {
-                      console.log(error);
-                      throw error;
-                    });
-                },
-              })
-            };
-            this.recepteurOptions = {
-              label: 'Fournisseur',
-              displayExpr: 'full_name',
-              valueExpr: 'id',
-              searchEnabled: true,
-              dataSource: new CustomStore({
-                load: (loadOptions: any) => {
-                  loadOptions['filter'] = ['ts_type', '=', 'products_supplier'];
-                  return this.thirdService.getThirdsDx('products_supplier', loadOptions)
-                    .toPromise()
-                    .then(response => {
-                      const json = response['data'];
-                      console.log(response);
-                      return json;
-                    })
-                    .catch(error => {
-                      console.log(error);
-                      throw error;
-                    });
-                },
-              })
-            };
-            // code
-          } else if (event.selectedItem.ID === 'transfer') {
-            this.warehouseService.getAllWithUsines().subscribe(
+            this.warehouseService.getERByType('return').subscribe(
               (res) => {
                 this.emetteurOptions = {
                   label: 'Magasin',
                   displayExpr: 'name',
                   valueExpr: 'id',
                   searchEnabled: true,
-                  dataSource: res.data
+                  dataSource: res.data.emetteur
+                };
+                this.recepteurOptions = {
+                  label: 'Fournisseur',
+                  displayExpr: 'full_name',
+                  valueExpr: 'id',
+                  searchEnabled: true,
+                  dataSource: res.data.recepteur
                 };
               }
             );
-            this.warehouseService.getAllWithUsines().subscribe(
+          } else if (event.selectedItem.ID === 'transfer') {
+            this.warehouseService.getERByType('transfer').subscribe(
               (res) => {
+                this.emetteurOptions = {
+                  label: 'Magasin',
+                  displayExpr: 'name',
+                  valueExpr: 'id',
+                  searchEnabled: true,
+                  dataSource: res.data.emetteur
+                };
                 this.recepteurOptions = {
                   label: 'Magasin',
                   displayExpr: 'name',
                   valueExpr: 'id',
                   searchEnabled: true,
-                  dataSource: res.data
+                  dataSource: res.data.recepteur
                 };
-
               }
             );
           }
