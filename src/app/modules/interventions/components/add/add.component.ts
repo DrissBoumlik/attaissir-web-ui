@@ -284,6 +284,7 @@ export class AddComponent implements OnInit {
                 console.log(parcels);
                 this.third.parcels = [];
                 this.parcels = parcels.data;
+                this.parcels['name'] = parcels.data.code_ormva;
                 this.parcels = this.parcels.map(parcel => {
                   this.interventionService.getCDAByZone(parcel.zone_id).subscribe(
                     (res: any) => {
@@ -296,7 +297,7 @@ export class AddComponent implements OnInit {
                   this.third.parcels.push(
                     {
                       id: parcel.id,
-                      label: parcel.name,
+                      label: parcel.code_ormva,
                       contracted_surface: parcel.exploited_surface,
                       actual_surface: parcel.manuel_surface,
                       remaining_surface: parcel.abandoned_surface,
