@@ -76,9 +76,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
           localStorage.setItem('permissions', ciphertext);
 
 
-          if (!localStorage.getItem('tenantId')) {
-            localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
-          }
+          localStorage.setItem('tenantId', JSON.parse(currentUser)['data']['tenants'][0]['division_id']);
           this.toastr.success(`Bonjour ${JSON.parse(currentUser).data.name.toUpperCase()}`);
 
           this._router.navigate([this.returnUrl]);
