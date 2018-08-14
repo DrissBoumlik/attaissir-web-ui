@@ -59,7 +59,7 @@ export class EditComponent implements OnInit {
             this.tier.patent_number = this.helper.makeNullable(this.tier.patent_number);
             this.tier.if = this.helper.makeNullable(this.tier.if);
 
-            this.tier.rib = `${this.tier.bank_account_number}${this.tier.bank_code}${this.tier.bank_rib_key}`;
+            this.tier.rib = `${this.tier.bank_code}${this.tier.bank_account_number}${this.tier.bank_rib_key}`;
             this.warehouses = this.tier.warehouses;
           }, error1 => {
             this.toastr.warning('Utilisateur non trouvé.');
