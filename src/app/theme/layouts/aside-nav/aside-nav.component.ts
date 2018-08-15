@@ -127,7 +127,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Cartes',
         subMenu: [
           { icon: 'flaticon-tabs', name: 'Cartes', url: '/cartes/liste', permission: ['agreement.cards.index'] },
-          { icon: 'flaticon-list', name: 'Générateur de cartes', url: '/carte-generateur/index', permission: ['none'] },
+          { icon: 'flaticon-list', name: 'Générateur de cartes', url: '/carte-generateur/index', permission: ['agreement.cardsGenerator.show'] },
         ],
         disabled: 'false'
       },

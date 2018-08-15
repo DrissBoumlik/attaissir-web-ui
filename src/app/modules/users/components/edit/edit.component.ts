@@ -40,6 +40,42 @@ export class EditComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
 
+
+
+    /**
+     * get roles
+     */
+    this.userService.getRoles().subscribe(
+      (response: any) => {
+        this.listOfRoles = response.data;
+        this.roleSelectOptions = {
+          items: this.listOfRoles,
+          displayExpr: 'description',
+          valueExpr: 'id',
+          onSelectionChanged: (event) => {
+            if (event.selectedItem.description === 'Centre distribution') {
+              this.roleIsCentreDistribution = true;
+              this.listOfStructures = this.listOfStructures.concat(this.choosingStructures);
+              this.choosingStructures = [];
+            } else {
+              this.roleIsCentreDistribution = false;
+            }
+          }
+        };
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+
+
+
+
+
+
+
+
     /**
      * get user info
      */
@@ -84,32 +120,7 @@ export class EditComponent implements OnInit, OnDestroy {
             );
 
 
-            /**
-             * get roles
-             */
-            this.userService.getRoles().subscribe(
-              (res: any) => {
-                this.listOfRoles = res.data;
-                this.roleSelectOptions = {
-                  items: this.listOfRoles,
-                  displayExpr: 'description',
-                  valueExpr: 'id',
-                  value: this.userRole,
-                  onSelectionChanged: (event) => {
-                    if (event.selectedItem.description === 'Centre distribution') {
-                      this.roleIsCentreDistribution = true;
-                      this.listOfStructures = this.listOfStructures.concat(this.choosingStructures);
-                      this.choosingStructures = [];
-                    } else {
-                      this.roleIsCentreDistribution = false;
-                    }
-                  }
-                };
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
+
 
           },
           (err) => {
