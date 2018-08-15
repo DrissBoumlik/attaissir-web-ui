@@ -249,7 +249,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
       '<p> <span style="float: right"> DATE : ' + this.preconisation.date + '</span> </p> <br/>' +
 
-      '<p> <span style="float: left;font-weight: bolder;">COMPAGNE </span>  <span style="float: right">' +
+      '<p> <span style="float: left;font-weight: bolder;">CAMPAGNE </span>  <span style="float: right">' +
       this.preconisation.campaign + ' </span></p>  <br/>' +
 
       '<p> <span style="float: left;font-weight: bolder;">CDA </span>  <span style="float: right">' +
