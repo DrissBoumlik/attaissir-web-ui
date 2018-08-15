@@ -272,8 +272,15 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
     });
 
+
+    print.document.write('<p> <span >' +
+    this.preconisation.source_name + ' </span></p>  <br/>');
+
+
+
+
     print.document.write(
-      '<br/> <p>-------------------------</p>' +
+      '<p>-------------------------</p>' +
       '<p>** MERCI **</p>' +
       '<p>*****</p>');
 
