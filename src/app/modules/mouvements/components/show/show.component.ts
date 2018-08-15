@@ -135,7 +135,7 @@ export class ShowComponent implements OnInit {
 
       '<p>  <span style="float: right">' + this.mouvement.campaign + ' </span></p> <br/>');
 
-    if(this.mouvement.type != 'transfer' &&  this.mouvement.type != 'receive') {
+    if(this.mouvement.type != 'transfer' &&  this.mouvement.type != 'receive'  &&  this.mouvement.type != 'return') {
 
 
       print.document.write( '<p> <span style="float: left"> CDA' +
