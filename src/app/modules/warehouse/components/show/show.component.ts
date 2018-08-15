@@ -20,7 +20,6 @@ export class ShowComponent implements OnInit {
 
 
   ngOnInit() {
-
     this.route.params.subscribe(
       params => {
         this.WarehouseService.getWarehouse(params.id).subscribe((response) => {

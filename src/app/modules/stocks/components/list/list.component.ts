@@ -60,7 +60,8 @@ export class ListComponent implements OnInit {
                     row.article_name = war.article_name;
                     row.article_code = war.article_code;
                     row.threshold = war.threshold ? war.threshold : '';
-                    if (Helper.permissionMethod(['distributionCenter.stocks.stock'])) {
+                    return row;
+                    /*if (Helper.permissionMethod(['distributionCenter.stocks.stock'])) {
                       const current = JSON.parse(localStorage.getItem('currentUser'));
                       console.log(current.data.email);
                       if (current.data.email === war.warehouse_email) {
@@ -68,7 +69,7 @@ export class ListComponent implements OnInit {
                       }
                     } else {
                       return row;
-                    }
+                    }*/
                   }),
                   totalCount: stk.totalCount
                 };
