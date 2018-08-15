@@ -188,7 +188,7 @@ export class WizardComponent implements OnInit {
     };
     this.zoneService.getCDAs().subscribe(cda => {
       // CDA
-      this.cdas = this.helper.dataFormatter(cda, true);
+      this.cdas = this.helper.dataFormatter(cda, false);
       this.cdaEditorOptions = {
         label: 'CDA',
         items: this.cdas,
@@ -199,13 +199,12 @@ export class WizardComponent implements OnInit {
           // Zone
           if (e.selectedItem) {
             this.zoneService.getZonesByCDA(e.selectedItem.code).subscribe(zone => {
-              this.zones = this.helper.dataFormatter(zone, true);
+              this.zones = this.helper.dataFormatter(zone, false);
               this.zoneEditorOptions = {
                 label: 'Zone',
                 items: this.zones,
                 displayExpr: 'name',
                 valueExpr: 'code',
-                value: '',
                 searchEnabled: true,
                 onSelectionChanged: (event) => {
                 }
