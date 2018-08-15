@@ -376,7 +376,7 @@ export class WizardComponent implements OnInit {
         this.addThird = false;
     }, err => {
       this.toastr.warning(
-        `Problème dans les données saisies dans le système!`;
+        `Problème dans les données saisies dans le système!`);
     });
   }
 
