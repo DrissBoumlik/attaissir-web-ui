@@ -128,13 +128,12 @@ export class ShowComponent implements OnInit {
     print.document.write('<body>');
     print.document.write('<div class="div1">');
 
-    print.document.write('<p><b style="font-weight: bolder;">Bon DE  ' + this.helper.orderType(this.mouvement.type) + '</b></p>' +
+    print.document.write('<p><b style="font-weight: bolder;">Bon de  ' + this.helper.orderType(this.mouvement.type) + '</b></p>' +
       '<p> <span> N° ' + this.mouvement.id + ' </span></p>' +
 
       '<p> <span style="float: right"> DATE : ' + this.mouvement.date + '</span> </p> <br/>' +
 
-      '<p> <span style="float: left"> CAMPAGNE' +
-      '</span> &nbsp; &nbsp;  <span style="float: right">' + this.mouvement.campaign + ' </span></p>');
+      '<p>  <span style="float: right">' + this.mouvement.campaign + ' </span></p> <br/>');
 
     if(this.mouvement.type != 'transfer' &&  this.mouvement.type != 'receive') {
 
@@ -163,13 +162,13 @@ export class ShowComponent implements OnInit {
 
 
     print.document.write( '<br/><p> <span style="float: left"> Emetteur' +
-      '</span> &nbsp; &nbsp;  <span style="float: right">  ' +  this.mouvement.from.name +  '</span></p>' +
+      '</span> &nbsp; &nbsp;  <span style="float: right">  ' +  this.mouvement.from.full_name +  '</span></p>' +
 
       '<p> <span style="float: left"> Récepteur' +
       '</span> &nbsp; &nbsp;  <span style="float: right">  ' +  this.mouvement.to.name  +  '</span></p>');
 
 
-    print.document.write( ' <br/> <p>**  **</p> <p>**  **</p> ');
+    print.document.write( ' <br/> <p>**  **</p> <p>*  *</p> ');
 
     print.document.write(
       '<p>-------------------------</p>' +
