@@ -249,7 +249,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
       '<p> <span style="float: right"> DATE : ' + this.preconisation.date + '</span> </p> <br/>' +
 
-      '<p> <span style="float: left;font-weight: bolder;">CAMPAGNE </span>  <span style="float: right">' +
+      '<p> <span style="float: right">' +
       this.preconisation.campaign + ' </span></p>  <br/>' +
 
       '<p> <span style="float: left;font-weight: bolder;">CDA </span>  <span style="float: right">' +
@@ -272,8 +272,15 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
     });
 
+
+    print.document.write('<p> <span >' +
+    this.preconisation.source_name + ' </span></p>  <br/>');
+
+
+
+
     print.document.write(
-      '<br/> <p>-------------------------</p>' +
+      '<p>-------------------------</p>' +
       '<p>** MERCI **</p>' +
       '<p>*****</p>');
 
