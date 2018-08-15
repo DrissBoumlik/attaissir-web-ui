@@ -59,7 +59,7 @@ export class WarehouseService {
    * @returns {Observable<any>}
    */
   getERByType(type: string): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/${this.routeName}/getbyOpType`, JSON.stringify({'type': type}), {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/getbyOpType`, JSON.stringify({ 'type': type }), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

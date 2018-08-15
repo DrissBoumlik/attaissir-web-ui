@@ -121,7 +121,7 @@ export class TiersFormComponent implements OnInit {
       invalidDateMessage: 'La date doit avoir le format suivant: jj/MM/aaaa',
       calendarOptions: {
         dateSerializationFormat: 'dd/MM/yyyy',
-        displayFormat: 'yyyy-MM-dd',
+        displayFormat: 'dd/MM/yyyy',
         forceIsoDateParsing: true
       },
       onValidated: (e) => {

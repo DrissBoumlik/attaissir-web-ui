@@ -62,8 +62,8 @@ export class ArticlesService {
     });
   }
 
-  getByOperationType(type: string ): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/articles/articlebyoperationtype`, {'type': type}, {
+  getByOperationType(type: string): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/articles/articlebyoperationtype`, { 'type': type }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

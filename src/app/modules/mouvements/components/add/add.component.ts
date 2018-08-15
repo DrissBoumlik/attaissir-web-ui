@@ -451,74 +451,74 @@ export class AddComponent implements OnInit {
       })
     };
 
-  /*  this.articleService.getByOperationType('all').subscribe(
-      (res: any) => {
-        this.familleOptions = {
-          label: 'Famille',
-          displayExpr: 'name',
-          valueExpr: 'id',
-          searchEnabled: true,
-          searchMode: 'startswith',
-          searchExpr: ['name'],
-          dataSource: res.data,
-          onSelectionChanged: (event1) => {
-            this.category = event1.selectedItem.name;
-            this.subFamilleOptions = {
-              label: 'Sous-Famille',
-              displayExpr: 'name',
-              valueExpr: 'id',
-              searchEnabled: true,
-              searchMode: 'startswith',
-              searchExpr: ['name'],
-              dataSource: new CustomStore({
-                load: (loadOptions: any) => {
-                  return this.familleService.getArticleSubCategories(event1.selectedItem.id)
-                    .toPromise()
-                    .then(response => {
-                      const json = response.data;
-                      return json;
-                    })
-                    .catch(error => {
-                      console.log(error);
-                      throw error;
-                    });
-                }
-              }),
-              onSelectionChanged: (e) => {
-                this.subCategory = e.selectedItem.name;
-                this.articleOptions = {
-                  label: 'Article',
-                  displayExpr: 'name',
-                  valueExpr: 'id',
-                  searchEnabled: true,
-                  searchMode: 'startswith',
-                  searchExpr: ['name'],
-                  dataSource: new CustomStore({
-                    load: (loadOptions: any) => {
-                      return this.articleService.getArticlesByFamily(e.selectedItem.id)
-                        .toPromise()
-                        .then(response => {
-                          const json = response.data;
-                          console.log(response);
-                          return json;
-                        })
-                        .catch(error => {
-                          console.log(error);
-                          throw error;
-                        });
-                    }
-                  }),
-                  onSelectionChanged: (evnt) => {
-                    this.article = evnt.selectedItem.name;
-                    this.unit = evnt.selectedItem.unit;
+    /*  this.articleService.getByOperationType('all').subscribe(
+        (res: any) => {
+          this.familleOptions = {
+            label: 'Famille',
+            displayExpr: 'name',
+            valueExpr: 'id',
+            searchEnabled: true,
+            searchMode: 'startswith',
+            searchExpr: ['name'],
+            dataSource: res.data,
+            onSelectionChanged: (event1) => {
+              this.category = event1.selectedItem.name;
+              this.subFamilleOptions = {
+                label: 'Sous-Famille',
+                displayExpr: 'name',
+                valueExpr: 'id',
+                searchEnabled: true,
+                searchMode: 'startswith',
+                searchExpr: ['name'],
+                dataSource: new CustomStore({
+                  load: (loadOptions: any) => {
+                    return this.familleService.getArticleSubCategories(event1.selectedItem.id)
+                      .toPromise()
+                      .then(response => {
+                        const json = response.data;
+                        return json;
+                      })
+                      .catch(error => {
+                        console.log(error);
+                        throw error;
+                      });
                   }
-                };
-              }
-            };
-          }
-        };
-      }
-    );*/
+                }),
+                onSelectionChanged: (e) => {
+                  this.subCategory = e.selectedItem.name;
+                  this.articleOptions = {
+                    label: 'Article',
+                    displayExpr: 'name',
+                    valueExpr: 'id',
+                    searchEnabled: true,
+                    searchMode: 'startswith',
+                    searchExpr: ['name'],
+                    dataSource: new CustomStore({
+                      load: (loadOptions: any) => {
+                        return this.articleService.getArticlesByFamily(e.selectedItem.id)
+                          .toPromise()
+                          .then(response => {
+                            const json = response.data;
+                            console.log(response);
+                            return json;
+                          })
+                          .catch(error => {
+                            console.log(error);
+                            throw error;
+                          });
+                      }
+                    }),
+                    onSelectionChanged: (evnt) => {
+                      this.article = evnt.selectedItem.name;
+                      this.unit = evnt.selectedItem.unit;
+                    }
+                  };
+                }
+              };
+            }
+          };
+        }
+      );*/
 
   }
 
