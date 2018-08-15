@@ -4,7 +4,7 @@ import { PreconisationsIntrantsService } from '../../service/preconisations-intr
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RightHolderService } from '../../../contracts/services/right-holder.service';
-import {Helper} from "../../../../shared/classes/helper";
+import { Helper } from "../../../../shared/classes/helper";
 
 @Component({
   selector: 'app-show',
@@ -247,13 +247,13 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
       '<p> <span> N° ' + this.preconisation.id + ' </span></p>' +
 
-      '<p> <span style="float: right"> DATE : ' + this.preconisation.date +'</span> </p> <br/>' +
+      '<p> <span style="float: right"> DATE : ' + this.preconisation.date + '</span> </p> <br/>' +
 
       '<p> <span style="float: left;font-weight: bolder;">CAMPAGNE </span>  <span style="float: right">' +
       this.preconisation.campaign + ' </span></p>  <br/>' +
 
       '<p> <span style="float: left;font-weight: bolder;">CDA </span>  <span style="float: right">' +
-      this.preconisation.cda  + ' </span></p>  <br/>' +
+      this.preconisation.cda + ' </span></p>  <br/>' +
 
       '<p> <span style="float: left;font-weight: bolder;">ZONE </span>  <span style="float: right">' +
       this.preconisation.zone + ' </span></p>  <br/>' +

@@ -291,7 +291,7 @@ body {
     box-shadow: 1px 0 3px rgba(0,0,0,.30);
 }
 .siam-page-header {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     width: 100%;
 }
 .siam-page-header h2 {
@@ -655,13 +655,13 @@ background: linear-gradient(to bottom, #567ba2, #435e7b);
 	margin-left: 3px;
 }
 .btn .caret.single{
-	margin-left: 0px;
+	margin-left: 0;
 }
 .btn-group > .dropdown-menu{
 	font-size:13px;
 }
 .btn-group > .dropdown-menu li{
-	 padding-left: 0px;
+	 padding-left: 0;
 }
 /* */
 .left {

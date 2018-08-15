@@ -24,14 +24,13 @@ export class PermissionDirective implements OnInit {
 
         const bytes = CryptoJS.AES.decrypt(permissions_, 'Gra61884546585_55');
         const permissions_decrypt = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-
         if (this.appPermissionHidden[0] === 'none') {
           this.el.nativeElement.style.display = 'initial';
           return;
         }
 
 
-         const per_array: Boolean[] = new Array(this.appPermissionHidden.length);
+        const per_array: Boolean[] = new Array(this.appPermissionHidden.length);
 
         for (let i = 0; i < this.appPermissionHidden.length; i++) {
           per_array[i] = false;
@@ -47,7 +46,6 @@ export class PermissionDirective implements OnInit {
             }
           }
         });
-
 
         let visibility = true;
         for (let i = 0; i < this.appPermissionHidden.length; i++) {

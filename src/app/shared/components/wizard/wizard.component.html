@@ -55,7 +55,7 @@
                 <dxi-item dataField="cin" [disabled]="true">
                   <dxo-label text="CIN"></dxo-label>
                 </dxi-item>
-                <dxi-item dataField="birth_date" [editorOptions]="{ width: '100%'}" [disabled]="true">
+                <dxi-item dataField="birth_date" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy' }" [disabled]="true">
                   <dxo-label text="Date de naissance"></dxo-label>
                 </dxi-item>
 
@@ -96,8 +96,9 @@
                       *ngIf="addThird" (submit)="onFormSubmit($event)"></app-tiers-form>
     </div>
     <!-- End Agreggated Informations -->
-    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5" *ngIf="!addThird">
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5" *ngIf="!addThird && !!currentThird.id">
       <div class="m-form__actionss">
+        <button type="button" class="btn default float-left" (click)="cancelThird()" i18n>Étape précédente</button>
         <button type="button" class="btn btn-success float-right" awNextStep i18n>Étape suivante</button>
       </div>
     </div>
@@ -286,19 +287,19 @@
           <dxi-column dataField="registration_number" caption="Matricule" i18n-caption>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
-          <dxi-column dataField="cda_code" caption="CDA" i18n-caption>
+          <dxi-column dataField="cda_id" caption="CDA" i18n-caption>
             <dxo-lookup
               [dataSource]="cdas"
               displayExpr="name"
-              valueExpr="code">
+              valueExpr="id">
             </dxo-lookup>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
-          <dxi-column dataField="zone_code" caption="Zone"  i18n-caption>
+          <dxi-column dataField="zone_id" caption="Zone"  i18n-caption>
             <dxo-lookup
               [dataSource]="zones"
               displayExpr="name"
-              valueExpr="code">
+              valueExpr="id">
             </dxo-lookup>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
@@ -320,7 +321,7 @@
       <div class="m-form__actionss">
         <button type="button" class="btn default float-left" awPreviousStep i18n>Étape précédente</button>
         <button type="button" class="btn btn-success float-right" *ngIf="groundsList.length > 0"
-                (click)="finishFunction($event)" i18n>Finir
+                (click)="finishFunction($event)" [disabled]="clicked" i18n>Finir
         </button>
       </div>
     </div>

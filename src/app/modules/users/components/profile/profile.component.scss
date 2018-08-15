@@ -57,7 +57,7 @@ html {
   border-radius: 3px;
   background-color: #ECECEC;
   width: 480px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   position: absolute;
   z-index: -1;
   left: 10px;
@@ -66,7 +66,7 @@ html {
 }
 .badgescard span {
   font-size: 1.6em;
-  margin: 0px 6px;
+  margin: 0 6px;
   opacity: 0.6;
 }
 
@@ -81,7 +81,7 @@ html {
   height: 120px;
 }
 .firstinfo .profileinfo {
-  padding: 0px 20px;
+  padding: 0 20px;
 }
 .firstinfo .profileinfo h1 {
   font-size: 1.8em;
@@ -91,7 +91,7 @@ html {
   font-style: italic;
 }
 .firstinfo .profileinfo p.bio {
-  padding: 10px 0px;
+  padding: 10px 0;
   color: #5A5A5A;
   line-height: 1.2;
   font-style: initial;
@@ -104,7 +104,7 @@ html {
   }
   100% {
     opacity: 1;
-    bottom: 0px;
+    bottom: 0;
   }
 }
 @keyframes animainfos {
@@ -162,7 +162,7 @@ html {
 
 .panel-content {
   font-size: 20px;
-  padding: 0px 14px;
+  padding: 0 14px;
   margin: 0 40px;
   height: 0;
   overflow: hidden;

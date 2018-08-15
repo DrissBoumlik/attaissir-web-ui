@@ -1,4 +1,4 @@
-import {DemandesModule} from './demandes.module';
+import { DemandesModule } from './demandes.module';
 
 
 describe('DemandesModule', () => {

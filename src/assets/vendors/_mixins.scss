@@ -256,11 +256,11 @@
 
 @mixin input-autofill($color) {
     &:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0px 1000px $color inset !important;
+        -webkit-box-shadow: 0 0 0 1000px $color inset !important;
 
         &:hover,
         &:focus {
-           -webkit-box-shadow: 0 0 0px 1000px $color inset !important;
+           -webkit-box-shadow: 0 0 0 1000px $color inset !important;
         }
     }
 }
@@ -551,7 +551,7 @@ xl: 1200px
         font-style: normal;
         font-weight: normal;
         font-variant: normal;
-        line-height: 0px;
+        line-height: 0;
         text-decoration: inherit;
         text-rendering: optimizeLegibility;
         text-transform: none;
@@ -569,7 +569,7 @@ xl: 1200px
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
-    line-height: 0px;
+    line-height: 0;
     text-decoration: inherit;
     text-rendering: optimizeLegibility;
     text-transform: none;

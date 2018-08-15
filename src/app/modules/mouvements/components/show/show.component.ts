@@ -35,15 +35,15 @@ export class ShowComponent implements OnInit {
     this.mouvement = {
       state: 'inprogress'
     };
-     this.order = null;
+    this.order = null;
     this.to = {};
     this.from = {}
     this.articles = null;
 
-    this.from.name ='';
-    this.from.full_name  ='';
-     this.to.name  ='';
-    this.to.full_name  ='';
+    this.from.name = '';
+    this.from.full_name = '';
+    this.to.name = '';
+    this.to.full_name = '';
     this.route.params.subscribe(
       params => {
         this.mouvementsService.getMouvement(params.id).subscribe((response) => {
