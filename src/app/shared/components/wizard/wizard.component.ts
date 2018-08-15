@@ -363,6 +363,7 @@ export class WizardComponent implements OnInit {
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
         this.addThird = false;
+        this.cancelThird();
     }, err => {
       this.toastr.warning(
       `Problème dans les données saisies dans le système!`);
@@ -373,7 +374,7 @@ export class WizardComponent implements OnInit {
       this.currentThird = this.helper.dataFormatter(data, false);
       this.toastr.success(
         `Nouveau agrégé ajouté avec succès.`);
-        this.addThird = false;
+        this.cancelThird();
     }, err => {
       this.toastr.warning(
         `Problème dans les données saisies dans le système!`);
