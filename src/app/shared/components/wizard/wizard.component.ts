@@ -382,6 +382,7 @@ export class WizardComponent implements OnInit {
 
   cancelThird = () => {
     this.addThird = false;
+    this.currentThird = new Third();
     this.currentThird.cin = '';
   }
 
