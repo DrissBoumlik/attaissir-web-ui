@@ -90,20 +90,6 @@ export class WizardComponent implements OnInit {
         displayExpr: 'Name',
         valueExpr: 'ID',
         onSelectionChanged: (e) => {
-          let year = new Date().getFullYear();
-          this.campaigns = [
-            {
-              campaign: `${year}/${Number(year) + 1}`,
-              surface: 0
-            }
-          ];
-          if ('multiyear' === e.selectedItem.type) {
-            year += 1;
-            this.campaigns.push({
-              campaign: `${year}/${Number(year) + 1}`,
-              surface: 0
-            });
-          }
         }
       };
 
@@ -193,6 +179,57 @@ export class WizardComponent implements OnInit {
                 parcel_tmp_id: null
               };
               this.groundsList.push(ground);
+              
+              this.zoneService.getCDAs().subscribe(cda => {
+                // CDA
+                this.cdas = this.helper.dataFormatter(cda, false);
+                this.cdaEditorOptions = {
+                  label: 'CDA',
+                  items: this.cdas,
+                  displayExpr: 'name',
+                  valueExpr: 'zone_id',
+                  searchEnabled: true,
+                  onInitialized: (e) => {
+                    if (e.selectedItem) {
+                      this.zoneService.getZonesByCDA(e.selectedItem.zone_id).subscribe(zone => {
+                        this.zones = this.helper.dataFormatter(zone, false);
+                        this.zoneEditorOptions = {
+                          label: 'Zone',
+                          items: this.zones,
+                          displayExpr: 'name',
+                          valueExpr: 'zone_id',
+                          searchEnabled: true,
+                          onSelectionChanged: (event) => {
+                          }
+                        };
+                      }, error1 => {
+                        this.toastr.warning(error1.error.message);
+                      });
+                    }
+                  },
+                  onSelectionChanged: (e) => {
+                    // Zone
+                    if (e.selectedItem) {
+                      this.zoneService.getZonesByCDA(e.selectedItem.zone_id).subscribe(zone => {
+                        this.zones = this.helper.dataFormatter(zone, false);
+                        this.zoneEditorOptions = {
+                          label: 'Zone',
+                          items: this.zones,
+                          displayExpr: 'name',
+                          valueExpr: 'zone_id',
+                          searchEnabled: true,
+                          onSelectionChanged: (event) => {
+                          }
+                        };
+                      }, error1 => {
+                        this.toastr.warning(error1.error.message);
+                      });
+                    }
+                  }
+                };
+              }, error1 => {
+                this.toastr.warning(error1.error.message);
+              });
             }
             console.log(this.groundsList);
           }, error1 => {
@@ -203,6 +240,7 @@ export class WizardComponent implements OnInit {
         }
       }
     };
+    
     this.zoneService.getCDAs().subscribe(cda => {
       // CDA
       this.cdas = this.helper.dataFormatter(cda, false);
@@ -210,18 +248,18 @@ export class WizardComponent implements OnInit {
         label: 'CDA',
         items: this.cdas,
         displayExpr: 'name',
-        valueExpr: 'id',
+        valueExpr: 'zone_id',
         searchEnabled: true,
         onSelectionChanged: (e) => {
           // Zone
           if (e.selectedItem) {
-            this.zoneService.getZonesByCDA(e.selectedItem.id).subscribe(zone => {
+            this.zoneService.getZonesByCDA(e.selectedItem.zone_id).subscribe(zone => {
               this.zones = this.helper.dataFormatter(zone, false);
               this.zoneEditorOptions = {
                 label: 'Zone',
                 items: this.zones,
                 displayExpr: 'name',
-                valueExpr: 'id',
+                valueExpr: 'zone_id',
                 searchEnabled: true,
                 onSelectionChanged: (event) => {
                 }
@@ -245,13 +283,6 @@ export class WizardComponent implements OnInit {
         surface: 0
       }
     ];
-    if ('multiyear' === this.contract.type) {
-      year += 1;
-      this.campaigns.push({
-        campaign: `${year}/${Number(year) + 1}`,
-        surface: 0
-      });
-    }
 
     this.navBarLayout = 'large-filled-symbols';
 
@@ -416,8 +447,6 @@ export class WizardComponent implements OnInit {
   }
 
   finishFunction(e) {
-    this.clicked = true;
-
     e.preventDefault();
     const tenantId = localStorage.getItem('tenantId');
     console.log(this.currentThird);
@@ -432,6 +461,9 @@ export class WizardComponent implements OnInit {
       this.contract.parent_id = (this.contract.status === 'inprogress') ? null : this.contract.id;
       this.contract.type = 'annual';
       this.contract.status = 'inprogress';
+    }
+    if (this.campaigns.length === 1) {
+      this.contract.type = 'annual';
     }
     this.contract.contracted_surface = this.campaigns;
     this.contract.compaign_surface = this.campaigns[0].surface;
