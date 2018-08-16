@@ -88,7 +88,23 @@ export class WizardComponent implements OnInit {
         value: 'annual',
         dataSource: Helper.dataSourceformatter(data['contract_types']),
         displayExpr: 'Name',
-        valueExpr: 'ID'
+        valueExpr: 'ID',
+        onSelectionChanged: (e) => {
+          let year = new Date().getFullYear();
+          this.campaigns = [
+            {
+              campaign: `${year}/${Number(year) + 1}`,
+              surface: 0
+            }
+          ];
+          if ('multiyear' === e.selectedItem.type) {
+            year += 1;
+            this.campaigns.push({
+              campaign: `${year}/${Number(year) + 1}`,
+              surface: 0
+            });
+          }
+        }
       };
 
       this.worthEditorOptions = {
@@ -122,6 +138,7 @@ export class WizardComponent implements OnInit {
       zone_name: null,
       secteur: null,
       block: null,
+
       registration_number: null,
       total_surface: null,
       annuel_surface: null,
@@ -142,8 +159,8 @@ export class WizardComponent implements OnInit {
 
         let soilExist = false;
         this.groundsList.map((ground) => {
-          if (ground.cda_code === this.parcelForm.cda
-            && ground.zone_code === this.parcelForm.zone
+          if (ground.cda_id === this.parcelForm.cda
+            && ground.zone_id === this.parcelForm.zone
             && ground.registration_number === this.parcelForm.registration_number
             && ground.code_ormva === this.parcelForm.code_ormva) {
             soilExist = true;
@@ -193,18 +210,18 @@ export class WizardComponent implements OnInit {
         label: 'CDA',
         items: this.cdas,
         displayExpr: 'name',
-        valueExpr: 'code',
+        valueExpr: 'id',
         searchEnabled: true,
         onSelectionChanged: (e) => {
           // Zone
           if (e.selectedItem) {
-            this.zoneService.getZonesByCDA(e.selectedItem.code).subscribe(zone => {
+            this.zoneService.getZonesByCDA(e.selectedItem.id).subscribe(zone => {
               this.zones = this.helper.dataFormatter(zone, false);
               this.zoneEditorOptions = {
                 label: 'Zone',
                 items: this.zones,
                 displayExpr: 'name',
-                valueExpr: 'code',
+                valueExpr: 'id',
                 searchEnabled: true,
                 onSelectionChanged: (event) => {
                 }
@@ -228,6 +245,13 @@ export class WizardComponent implements OnInit {
         surface: 0
       }
     ];
+    if ('multiyear' === this.contract.type) {
+      year += 1;
+      this.campaigns.push({
+        campaign: `${year}/${Number(year) + 1}`,
+        surface: 0
+      });
+    }
 
     this.navBarLayout = 'large-filled-symbols';
 

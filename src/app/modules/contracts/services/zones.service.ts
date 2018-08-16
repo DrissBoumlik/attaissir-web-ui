@@ -29,13 +29,13 @@ export class ZonesService {
     return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}-type?type=cda`);
   }
   getZonesByCDA(code: number): Observable<Zone[]> {
-    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}-type?type=zone&code=${code}`);
+    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}-type?type=zone&id=${code}`);
   }
   getSectors(code: number): Observable<Zone[]> {
-    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}-type?type=secteur&code=${code}`);
+    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}-type?type=secteur&id=${code}`);
   }
   getBlocs(code: number): Observable<Zone[]> {
-    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}-type?type=bloc&code=${code}`);
+    return this.http.get<Zone[]>(`${environment.apiUrl}/${this.routeName}-type?type=bloc&id=${code}`);
   }
 
   /**
