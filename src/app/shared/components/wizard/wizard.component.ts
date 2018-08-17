@@ -499,6 +499,7 @@ export class WizardComponent implements OnInit {
           ground['soil_id'] = ground['id'];
           ground['contract_id'] = contract['id'];
           ground['campaign_id'] = contract.campaign.id;
+          ground['third_party_id'] = this.currentThird.id;
           // delete ground.id;
           return ground;
         });

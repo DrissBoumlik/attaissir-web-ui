@@ -58,6 +58,7 @@ export class ShowRetourComponent implements OnInit {
           this.mouvement.date = today;
 
           this.stock_operation = {
+            id: this.mouvement.id,
             bon_number: this.mouvement.bon_number,
             commande: this.mouvement.order_id,
             emetteur: this.mouvement.third_party_id,
