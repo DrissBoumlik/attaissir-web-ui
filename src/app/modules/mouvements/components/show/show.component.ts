@@ -84,6 +84,7 @@ export class ShowComponent implements OnInit {
       this.toastr.success('Mouvement validé.');
       this.mouvement.state = 'done';
       this.popupDeliverVisible = false;
+      this.print();
     }, err => {
       throw err;
     });
