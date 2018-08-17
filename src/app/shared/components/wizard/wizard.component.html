@@ -55,7 +55,7 @@
                 <dxi-item dataField="cin" [disabled]="true">
                   <dxo-label text="CIN"></dxo-label>
                 </dxi-item>
-                <dxi-item dataField="birth_date" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy' }" [disabled]="true">
+                <dxi-item dataField="birth_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }" [disabled]="true">
                   <dxo-label text="Date de naissance"></dxo-label>
                 </dxi-item>
 
@@ -98,7 +98,7 @@
     <!-- End Agreggated Informations -->
     <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5" *ngIf="!addThird && !!currentThird.id">
       <div class="m-form__actionss">
-        <button type="button" class="btn default float-left" (click)="cancelThird()" i18n>Étape précédente</button>
+        <button type="button" class="btn default float-left" *ngIf="!isEdit" (click)="cancelThird()" i18n>Étape précédente</button>
         <button type="button" class="btn btn-success float-right" awNextStep i18n>Étape suivante</button>
       </div>
     </div>
@@ -251,7 +251,8 @@
             <dxo-label text="Code ORMVA"></dxo-label>
           </dxi-item>
           <dxi-item itemType="button"
-                    horizontalAlignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null) || (parcelForm.tenure === null) || (parcelForm.zone === null) "
+                    horizontalAlignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null) || (parcelForm.tenure === null)
+                                                            || (parcelForm.zone === null) || (parcelForm.annuel_surface == 0) || (!parcelForm.annuel_surface)"
                     [buttonOptions]="addParcelOptions"></dxi-item>
         </dx-form>
       </div>
@@ -291,15 +292,15 @@
             <dxo-lookup
               [dataSource]="cdas"
               displayExpr="name"
-              valueExpr="id">
+              valueExpr="zone_id">
             </dxo-lookup>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
           <dxi-column dataField="zone_id" caption="Zone"  i18n-caption>
-            <dxo-lookup
+           <dxo-lookup
               [dataSource]="zones"
               displayExpr="name"
-              valueExpr="id">
+              valueExpr="zone_id">
             </dxo-lookup>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>

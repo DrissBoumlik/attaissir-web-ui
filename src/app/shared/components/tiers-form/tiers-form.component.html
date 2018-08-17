@@ -1,6 +1,6 @@
 <div id="form-container">
   <form>
-    <dx-form id="form"
+    <dx-form id="form" #tierForm
              [formData]="tier"
              [readOnly]="false"
              [showColonAfterLabel]="true"
@@ -293,7 +293,6 @@
             text="Banque" i18n-text>
           </dxo-label>
         </dxi-item>
-
 
         <dxi-item dataField="rib" [editorOptions]="{
                                                   useMaskedValue: false,

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { locale } from 'devextreme/localization';
 import 'devextreme-intl';
 import { Third } from '../../classes/third';
@@ -11,7 +11,6 @@ import { Helper } from '../../classes/helper';
   styleUrls: ['./tiers-form.component.scss']
 })
 export class TiersFormComponent implements OnInit {
-
   @Output() submit: EventEmitter<any> = new EventEmitter();
 
 
@@ -122,8 +121,10 @@ export class TiersFormComponent implements OnInit {
       calendarOptions: {
         dateSerializationFormat: 'dd/MM/yyyy',
         displayFormat: 'dd/MM/yyyy',
-        forceIsoDateParsing: true
+        forceIsoDateParsing: false
       },
+      type: 'date',
+      max: new Date(),
       onValidated: (e) => {
         if (!e.value) {
           e.isValid = true;
