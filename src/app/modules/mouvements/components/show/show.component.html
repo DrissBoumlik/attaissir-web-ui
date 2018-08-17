@@ -304,7 +304,7 @@
 <div class="dx-fieldset" *ngIf="mouvement.state === 'inprogress'">
     <div class="dx-field">
     <div class="dx-field-value">
-      <dx-button width="180"  icon="fa fa-paper-plane"  [appPermissionHidden]="['distributionCenter.stocks.validationOperation']" [visible]="(type === 'transfer' && to.canValidate) || (type !== 'transfer')" text="VALIDER" type="success"  style="margin-left: 20px; margin-right: 20px;" (onClick)="showDeliverPopup()"></dx-button>
+      <dx-button width="180"  icon="fa fa-paper-plane"  [appPermissionHidden]="['distributionCenter.stocks.validationOperation']" [visible]="(mouvement.type === 'transfer' && to.canValidate) || (mouvement.type !== 'transfer')" text="VALIDER" type="success"  style="margin-left: 20px; margin-right: 20px;" (onClick)="showDeliverPopup()"></dx-button>
 
       <dx-button width="150" icon="fa fa-print"  (onClick)="print()" text="IMPRIMER" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp; &nbsp;
 

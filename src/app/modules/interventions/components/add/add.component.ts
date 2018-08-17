@@ -539,10 +539,10 @@ export class AddComponent implements OnInit {
         }
         try {
           this.semenceGrid.instance.getVisibleRows().forEach((row: any) => {
-            if (row.data.article.name === this.SelectedProductsArticle.name
-              && row.data.category.category_name === this.SelectedProductsCategory.category_name
-              && row.data.sub_category.sub_category_name === this.SelectedProductsSubCategory.sub_category_name
-              && row.data.quantity === this.productsQuantity) {
+            if (row.data.article.name === this.SelectedSemenceArticle.name
+              && row.data.category.category_name === this.SelectedSemenceCategory.category_name
+              && row.data.sub_category.sub_category_name === this.SelectedSemenceSubCategory.sub_category_name
+              && row.data.quantity === this.SemenceQuantity) {
               const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
               NewComponent.notifyMe(msg);
               throw new Error(msg);
