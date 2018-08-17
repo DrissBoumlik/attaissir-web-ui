@@ -447,6 +447,7 @@ export class WizardComponent implements OnInit {
   }
 
   finishFunction(e) {
+    this.clicked = true;
     e.preventDefault();
     const tenantId = localStorage.getItem('tenantId');
     console.log(this.currentThird);
@@ -516,51 +517,9 @@ export class WizardComponent implements OnInit {
             this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
           }
         });
-        /* this.parcelsService.editMassParcel(this.groundsList).subscribe(d => {
-          d = this.helper.dataFormatter(d, false);
-          console.log(d);
-          const id = (this.isEdit) ? this.contract.id : contract['id'];
-          this.router.navigate([`/contrats/afficher/${id}`]);
-        }, error1 => {
-          this.toastr.warning(error1.error.message);
-          if (!this.isEdit) {
-            this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
-          }
-        });*/
-        /*this.groundsList.map((soil) => {
-          const soilObject = {
-            soil_id: soil.id,
-            tenure: soil.tenure,
-            contract_id: contract['id'],
-            annuel_surface: soil.annuel_surface,
-            code_ormva: soil.code_ormva ? soil.code_ormva : soil.registration_number,
-            is_logical: this.groundsList.length === 1,
-            name: this.groundsList.length === 1 ? soil.code_ormva : ''
-          };
-          if (!!soil.parcel_tmp_id) {
-            soilObject['id'] = soil.parcel_tmp_id;
-            this.parcelsService.editParcel(soilObject).subscribe(d => {
-              d = this.helper.dataFormatter(d, false);
-              // this.router.navigate([`/contrats/afficher/${id}`]);
-            }, error1 => {
-              this.toastr.warning(error1.error.message);
-            });
-          } else {
-            this.parcelsService.addParcel(soilObject).subscribe(d => {
-              d = this.helper.dataFormatter(d, false);
-              // this.router.navigate([`/contrats/afficher/${id}`]);
-            }, error1 => {
-              this.toastr.warning(error1.error.message);
-              this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
-            });
-          }
-          return soil;
-        });
-        const id = (this.isEdit) ? this.contract.id : contract['id'];
-        this.router.navigate([`/contrats/afficher/${id}`]);*/
       }, error1 => {
         throw error1;
-      });
+      }).finalize( () => this.clicked = false);
     } else {
       this.contractService.addContract(this.contract).subscribe((contract: any) => {
         contract = this.helper.dataFormatter(contract, false);
@@ -585,42 +544,9 @@ export class WizardComponent implements OnInit {
             this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
           }
         });
-        /*this.groundsList.map((soil) => {
-          const soilObject = {
-            soil_id: soil.id,
-            tenure: soil.tenure,
-            contract_id: contract['id'],
-            annuel_surface: soil.annuel_surface,
-            code_ormva: soil.code_ormva ? soil.code_ormva : soil.registration_number,
-            is_logical: this.groundsList.length === 1,
-            name: this.groundsList.length === 1 ? soil.code_ormva : ''
-          };
-          if (!!soil.parcel_tmp_id && !this.contract.parent_id) {
-            soilObject['id'] = soil.parcel_tmp_id;
-            this.parcelsService.editParcel(soilObject).subscribe(d => {
-              d = this.helper.dataFormatter(d, false);
-              const id = (this.isEdit) ? this.contract.id : contract['id'];
-              // this.router.navigate([`/contrats/afficher/${id}`]);
-            }, error1 => {
-              this.toastr.warning(error1.error.message);
-            });
-          } else {
-            this.parcelsService.addParcel(soilObject).subscribe(d => {
-              d = this.helper.dataFormatter(d, false);
-              soil['parcel_tmp_id'] = d['id'];
-              // this.router.navigate([`/contrats/afficher/${id}`]);
-            }, error1 => {
-              this.toastr.warning(error1.error.message);
-              this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
-            });
-          }
-          return soil;
-        });*/
-        // this.createLogicalParcel(contract, this.groundsList);
-        // this.router.navigate([`/contrats/afficher/${id}`]);
       }, error1 => {
         throw error1;
-      });
+      }).finalize( () => this.clicked = false);
     }
   }
 }
