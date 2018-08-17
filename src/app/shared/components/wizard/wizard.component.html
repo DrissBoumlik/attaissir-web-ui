@@ -251,7 +251,8 @@
             <dxo-label text="Code ORMVA"></dxo-label>
           </dxi-item>
           <dxi-item itemType="button"
-                    horizontalAlignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null) || (parcelForm.tenure === null) || (parcelForm.zone === null) "
+                    horizontalAlignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null) || (parcelForm.tenure === null)
+                                                            || (parcelForm.zone === null) || (parcelForm.annuel_surface == 0) || (!parcelForm.annuel_surface)"
                     [buttonOptions]="addParcelOptions"></dxi-item>
         </dx-form>
       </div>

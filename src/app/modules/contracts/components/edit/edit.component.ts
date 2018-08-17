@@ -70,6 +70,7 @@ export class EditComponent implements OnInit {
                 block: data['soil']['block'],
                 code_ormva: data['code_ormva'],
                 total_surface: data['soil']['total_surface'],
+                third_party_id: res.data.third_party.id,
                 annuel_surface: data['annuel_surface']
               };
             });
