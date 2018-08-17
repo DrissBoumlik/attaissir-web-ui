@@ -74,6 +74,7 @@ export class AddComponent implements OnInit {
             article_id: this.stock_operation.article,
             quantity1: this.stock_operation.quantity
           });
+          this.stock_operation.quantity = 0;
         } else {
           this.toastr.warning('La quantité doit être supérieure à 0.');
         }
