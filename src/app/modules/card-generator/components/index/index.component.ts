@@ -182,7 +182,7 @@ export class IndexComponent implements OnInit {
 
       // it.playOn= false;
       let img = 'http://api.attaissir.graviton.ma/cards/4/generate?face=recto&id=4&rfid=334&structure='
-        + it.structure + '&type=agri&full_name=' + it.full_name + '&code='
+        + it.structure_id + '&name=' + it.name + '&name_ar=' + it.name_ar +  '&tel=' + it.tel +  '&address=' + it.address + '&type=agri&full_name=' + it.full_name + '&code='
         + it.code + '&full_name_ar=' + it.full_name_ar + '&amp;cin=' + it.cin;
 
       this.img_scr_recto_array.push(img);
@@ -191,8 +191,8 @@ export class IndexComponent implements OnInit {
     /*
         this.selectedItems[this.selectedItems.length-1].enabled = false;
         this.img_scr_recto = 'http://s1.dboumlik.code.go/cards/4/generate?face=recto&id=4&rfid=334&type=agri&full_name=' + this.selectedItems[this.selectedItems.length-1].full_name +'&code=' + this.selectedItems[this.selectedItems.length-1].code + '&full_name_ar=' + this.selectedItems[this.selectedItems.length-1].full_name_ar +'&amp;cin='+this.selectedItems[this.selectedItems.length-1].cin;
-        this.img_scr_verso = 'http://s1.dboumlik.code.go/cards/4/generate?face=verso&id=4&rfid=334&type=agri&full_name=' + this.selectedItems[this.selectedItems.length-1].full_name +'&code=' + this.selectedItems[this.selectedItems.length-1].code + '&full_name_ar=' + this.selectedItems[this.selectedItems.length-1].full_name_ar +'&amp;cin='+this.selectedItems[this.selectedItems.length-1].cin;
-    
+        this.img_scr_verso = 'http://s1.dboumlik.code.go/cards/4/generate?face=verso&id=4&rfid=334&type=agri&fullfi_name=' + this.selectedItems[this.selectedItems.length-1].full_name +'&code=' + this.selectedItems[this.selectedItems.length-1].code + '&full_name_ar=' + this.selectedItems[this.selectedItems.length-1].full_name_ar +'&amp;cin='+this.selectedItems[this.selectedItems.length-1].cin;
+
         this.img_scr_recto_array.push(this.img_scr_recto);
         console.log(this.img_scr_recto);
         */
