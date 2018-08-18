@@ -419,8 +419,11 @@ export class WizardComponent implements OnInit {
         `Nouveau agrégé ajouté avec succès.`);
         this.addThird = false;
     }, err => {
-      this.toastr.warning(
-      `Problème dans les données saisies dans le système!`);
+      let msg = `Problème dans les données saisies dans le système!`;
+      if (err.error.errors['cin'] !== undefined) {
+          msg = `Ce CIN exist déja exist!`;
+      }
+      this.toastr.warning(msg);
     });
   }
   saveThird = (e) => {
@@ -430,8 +433,11 @@ export class WizardComponent implements OnInit {
         `Nouveau agrégé ajouté avec succès.`);
         this.addThird = false;
     }, err => {
-      this.toastr.warning(
-        `Problème dans les données saisies dans le système!`);
+      let msg = `Problème dans les données saisies dans le système!`;
+      if (err.error.errors['cin'] !== undefined) {
+          msg = `Ce CIN exist déja exist!`;
+      }
+      this.toastr.warning(msg);
     });
   }
 
@@ -447,7 +453,6 @@ export class WizardComponent implements OnInit {
   }
 
   finishFunction(e) {
-    this.clicked = true;
     e.preventDefault();
     const tenantId = localStorage.getItem('tenantId');
     console.log(this.currentThird);
@@ -493,7 +498,8 @@ export class WizardComponent implements OnInit {
     }
 
     if (this.isEdit && !this.contract.parent_id) {
-      this.contractService.editContract(this.contract).subscribe((contract: any) => {
+      this.contractService.editContract(this.contract).throttleTime(3000)
+        .subscribe((contract: any) => {
         contract = this.helper.dataFormatter(contract, false);
         this.groundsList = this.groundsList.map((ground: any) => {
           console.log(ground);
@@ -511,7 +517,6 @@ export class WizardComponent implements OnInit {
           const id = (this.isEdit) ? this.contract.id : contract['id'];
           this.router.navigate([`/contrats/afficher/${id}`]);
         }, error1 => {
-          this.clicked = false;
           this.toastr.warning(error1.error.message);
           if (!this.isEdit) {
             this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
@@ -519,9 +524,10 @@ export class WizardComponent implements OnInit {
         });
       }, error1 => {
         throw error1;
-      }).finalize( () => this.clicked = false);
+      });
     } else {
-      this.contractService.addContract(this.contract).subscribe((contract: any) => {
+      this.contractService.addContract(this.contract).throttleTime(3000)
+        .subscribe((contract: any) => {
         contract = this.helper.dataFormatter(contract, false);
         this.groundsList = this.groundsList.map((ground: any) => {
           console.log(ground);
@@ -538,7 +544,6 @@ export class WizardComponent implements OnInit {
           const id = (this.isEdit) ? this.contract.id : contract['id'];
           this.router.navigate([`/contrats/afficher/${id}`]);
         }, error1 => {
-          this.clicked = false;
           this.toastr.warning(error1.error.message);
           if (!this.isEdit) {
             this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
@@ -546,7 +551,7 @@ export class WizardComponent implements OnInit {
         });
       }, error1 => {
         throw error1;
-      }).finalize( () => this.clicked = false);
+      });
     }
   }
 }
