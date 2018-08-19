@@ -288,13 +288,35 @@
 
 
       <dxi-item itemType="group" [colCount]="2" caption="Données bancaires" i18n-caption>
-        <dxi-item dataField="bank_name" [disabled]="tier.payment_method !== 'transfer'" editorType="dxSelectBox" [editorOptions]="bank_names">
+        
+        <dxi-item>
+          <div *dxTemplate>
+            <span class="label-t18">Banque</span>
+            <dx-select-box [disabled]="tier.payment_method !== 'transfer'" [(value)]="tier.bank_name" [dataSource]="banks"
+              displayExpr="Name"
+              valueExpr="ID"
+              searchEnabled="true"></dx-select-box>
+          </div>
+        </dxi-item>
+        <!--<dxi-item dataField="bank_name" [disabled]="tier.payment_method !== 'transfer'" editorType="dxSelectBox" [editorOptions]="bank_names">
           <dxo-label
             text="Banque" i18n-text>
           </dxo-label>
+        </dxi-item>-->
+        <dxi-item [colSpan]="2">
+          <div *dxTemplate>
+            <span class="label-t18">RIB</span>
+            <dx-text-box [disabled]="tier.payment_method !== 'transfer'" [(value)]="tier.rib" 
+                         [useMaskedValue]="false"
+                         mask="000000 0000000000000000 00"
+                         maskInvalidMessage="RIB est invalide">
+              <dx-validator>
+                <dxi-validation-rule *ngIf="tier.payment_method === 'transfer'" type="required" message="Le RIB est obligatoire" i18n-message></dxi-validation-rule>
+              </dx-validator>
+            </dx-text-box>
+          </div>
         </dxi-item>
-
-        <dxi-item dataField="rib" [disabled]="tier.payment_method !== 'transfer'" [editorOptions]="{
+        <!--<dxi-item dataField="rib" [disabled]="tier.payment_method !== 'transfer'" [editorOptions]="{
                                                   useMaskedValue: false,
                                                   mask: '000000 0000000000000000 00',
                                                   maskInvalidMessage: 'RIB est invalide'
@@ -311,7 +333,7 @@
             message="RIB est invalide" i18n-message>
           </dxi-validation-rule>
 
-        </dxi-item>
+        </dxi-item>-->
       </dxi-item>
 
       <dxi-item dataField="etat" editorType="dxSwitch" *ngIf="false">
