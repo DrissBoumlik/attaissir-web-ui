@@ -288,13 +288,13 @@
 
 
       <dxi-item itemType="group" [colCount]="2" caption="Données bancaires" i18n-caption>
-        <dxi-item dataField="bank_name" editorType="dxSelectBox" [editorOptions]="bank_names">
+        <dxi-item dataField="bank_name" [disabled]="tier.payment_method !== 'transfer'" editorType="dxSelectBox" [editorOptions]="bank_names">
           <dxo-label
             text="Banque" i18n-text>
           </dxo-label>
         </dxi-item>
 
-        <dxi-item dataField="rib" [editorOptions]="{
+        <dxi-item dataField="rib" [disabled]="tier.payment_method !== 'transfer'" [editorOptions]="{
                                                   useMaskedValue: false,
                                                   mask: '000000 0000000000000000 00',
                                                   maskInvalidMessage: 'RIB est invalide'
@@ -302,7 +302,7 @@
           <dxo-label
             text="RIB" i18n-text>
           </dxo-label>
-          <dxi-validation-rule type="required" message="Le RIB est obligatoire" i18n-message>
+          <dxi-validation-rule  *ngIf="tier.payment_method === 'transfer'" type="required" message="Le RIB est obligatoire" i18n-message>
           </dxi-validation-rule>
 
           <dxi-validation-rule
