@@ -35,6 +35,7 @@ export class WizardComponent implements OnInit {
   checkBoxesMode: any;
   tierData: string;
   helper: any;
+  isCane: boolean;
 
   navBarLayout: string;
   block_id: number;
@@ -78,10 +79,13 @@ export class WizardComponent implements OnInit {
     private router: Router) {
     this.helper = Helper;
     this.clicked = false;
+    this.isCane = false;
   }
 
   ngOnInit() {
-
+    if (localStorage.getItem('tenantId') === '3' || localStorage.getItem('tenantId') === '8' || localStorage.getItem('tenantId') === '9') {
+      this.isCane = true;
+    }
     this.contractService.getContractsVars().subscribe((data) => {
       this.contracteditorOptions = {
         label: 'Type contrat',
@@ -153,6 +157,7 @@ export class WizardComponent implements OnInit {
           }
           return ground;
         });
+        this.parcelForm.registration_number = this.parcelForm.registration_number.split('_').join('-');
         if (!soilExist) {
           this.soilsService.addGround(this.parcelForm).subscribe(ground => {
             ground = this.helper.dataFormatter(ground, false);
@@ -396,6 +401,10 @@ export class WizardComponent implements OnInit {
       this.toastr.warning('Remplissez les champs du contrat pour avancer!');
     } else {
       this.maxYears = (this.contract.type === 'annual') ? 1 : 5;
+
+      if (localStorage.getItem('tenantId') === '3' || localStorage.getItem('tenantId') === '8' || localStorage.getItem('tenantId') === '9') {
+        this.maxYears = 7;
+      }
       if (this.isEdit) {
         this.maxYears = 1;
       }
@@ -480,7 +489,7 @@ export class WizardComponent implements OnInit {
 
     this.contract.expiration_date.setFullYear(this.contract.application_date.getFullYear() + this.campaigns.length);
 
-    if (this.isEdit) {
+    if (!!this.contract.parent_id) {
       this.contract.expiration_date.setFullYear(this.contract.application_date.getFullYear() + 1);
     }
 
