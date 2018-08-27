@@ -324,8 +324,8 @@ export class WizardComponent implements OnInit {
     };
   }
   initParcelRow = (e) => {
-    /*console.log(e);
-    this.zoneService.getZonesByCDA().subscribe(zone => {
+    console.log(e);
+    /*this.zoneService.getZonesByCDA().subscribe(zone => {
       this.zones = this.helper.dataFormatter(zone, false);
       this.zoneEditorOptions = {
         label: 'Zone',
@@ -340,6 +340,12 @@ export class WizardComponent implements OnInit {
     }, error1 => {
       this.toastr.warning(error1.error.message);
     });*/
+  }
+  removeParcelRow = (e) => {
+    console.log(e);
+    if (!!e.data.parcel_tmp_id) {
+      this.parcelsService.deleteParcel(e.data.parcel_tmp_id).subscribe( data => console.log(data), err => console.log(err));
+    }
   }
   editParcels = (e) => {
     if (e.newData.hasOwnProperty('annuel_surface') && e.newData.hasOwnProperty('total_surface')) {
@@ -400,11 +406,9 @@ export class WizardComponent implements OnInit {
     if (!this.contract.application_date) {
       this.toastr.warning('Remplissez les champs du contrat pour avancer!');
     } else {
-      this.maxYears = (this.contract.type === 'annual') ? 1 : 5;
+      const jahr = (localStorage.getItem('tenantId') === '3' || localStorage.getItem('tenantId') === '8' || localStorage.getItem('tenantId') === '9') ?  7 : 5;
+      this.maxYears = (this.contract.type === 'annual') ? 1 : jahr;
 
-      if (localStorage.getItem('tenantId') === '3' || localStorage.getItem('tenantId') === '8' || localStorage.getItem('tenantId') === '9') {
-        this.maxYears = 7;
-      }
       if (this.isEdit) {
         this.maxYears = 1;
       }

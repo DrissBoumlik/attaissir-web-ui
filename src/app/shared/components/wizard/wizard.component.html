@@ -267,6 +267,7 @@
           [dataSource]="groundsList"
           (onRowUpdating)="editParcels($event)"
           (onInitialized)="initParcelRow($event)"
+          (onRowRemoving)="removeParcelRow($event)"
           keyExpr="id">
 
           <dxo-editing
