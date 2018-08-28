@@ -17,7 +17,7 @@
             <div class="profileinfo">
               <h1>{{userInfo.name}}</h1>
               <h3>Role : {{role}}</h3>
-              <p class="bio">  Structures :  {{nbr_structs}} &nbsp;  &nbsp; Cda : {{nbr_cdas}} &nbsp; Zone :  {{nbr_zones}} </p>
+              <p class="bio">   Divisions :  {{nbr_structs}} &nbsp;  &nbsp; Cda : {{nbr_cdas}} &nbsp; Zone :  {{nbr_zones}} </p>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@
           <div *ngFor="let structure of structures; let i = index" class="faq-question">
             <input [id]="i" type="checkbox" class="panel">
             <div class="plus">+</div>
-            <label [for]="i" class="panel-title"> {{structure.structure_name}} </label>
+            <label [for]="i" class="panel-title"> {{structure.name}} </label>
             <div class="panel-content">
 
               <ul class="tree-menu">
