@@ -412,6 +412,7 @@
                             [masterDetail]="{ enabled: true, template: 'detail' }"
                             [noDataText]="'Le contrat ne dispose pas de parcels'">
 
+                <dxo-export [enabled]="true" fileName="contrats" [allowExportSelectedData]="true" [formats]="['PNG', 'PDF', 'JPEG', 'SVG', 'GIF']"></dxo-export>
                 <dxi-column dataField="name" caption="Nom"></dxi-column>
                 <dxi-column dataField="cda" caption="CDA" sortOrder="desc"></dxi-column>
                 <dxi-column dataField="zone" caption="Zone"></dxi-column>

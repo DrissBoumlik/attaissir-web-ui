@@ -27,6 +27,7 @@ export class TiersFormComponent implements OnInit {
 
   buttonOptions: any;
   vars: any;
+  banks: any;
   education_degree: any;
   civil_status: any;
   dateOptions: any;
@@ -44,9 +45,11 @@ export class TiersFormComponent implements OnInit {
   regions: any;
   bank_names: any;
   societe: string;
+  helper: any;
 
   constructor(public thirdsServices: ThirdsService) {
     locale('fr');
+    this.helper = Helper;
   }
 
   ngOnInit() {
@@ -54,6 +57,7 @@ export class TiersFormComponent implements OnInit {
     this.societe = (this.isAggregated) ? 'Société' : 'Centre de distribution';
     this.thirdsServices.getThirdsVars().subscribe(data => {
       this.vars = data;
+      this.banks = Helper.dataSourceformatter(this.vars['banc_names']);
 
       this.education_degree = {
         dataSource: Helper.dataSourceformatter(this.vars['education_degree']),

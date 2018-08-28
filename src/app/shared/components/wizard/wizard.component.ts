@@ -35,6 +35,7 @@ export class WizardComponent implements OnInit {
   checkBoxesMode: any;
   tierData: string;
   helper: any;
+  isCane: boolean;
 
   navBarLayout: string;
   block_id: number;
@@ -78,10 +79,13 @@ export class WizardComponent implements OnInit {
     private router: Router) {
     this.helper = Helper;
     this.clicked = false;
+    this.isCane = false;
   }
 
   ngOnInit() {
-
+    if (localStorage.getItem('tenantId') === '3' || localStorage.getItem('tenantId') === '8' || localStorage.getItem('tenantId') === '9') {
+      this.isCane = true;
+    }
     this.contractService.getContractsVars().subscribe((data) => {
       this.contracteditorOptions = {
         label: 'Type contrat',
@@ -153,6 +157,7 @@ export class WizardComponent implements OnInit {
           }
           return ground;
         });
+        this.parcelForm.registration_number = this.parcelForm.registration_number.split('_').join('-');
         if (!soilExist) {
           this.soilsService.addGround(this.parcelForm).subscribe(ground => {
             ground = this.helper.dataFormatter(ground, false);
@@ -319,8 +324,8 @@ export class WizardComponent implements OnInit {
     };
   }
   initParcelRow = (e) => {
-    /*console.log(e);
-    this.zoneService.getZonesByCDA().subscribe(zone => {
+    console.log(e);
+    /*this.zoneService.getZonesByCDA().subscribe(zone => {
       this.zones = this.helper.dataFormatter(zone, false);
       this.zoneEditorOptions = {
         label: 'Zone',
@@ -335,6 +340,12 @@ export class WizardComponent implements OnInit {
     }, error1 => {
       this.toastr.warning(error1.error.message);
     });*/
+  }
+  removeParcelRow = (e) => {
+    console.log(e);
+    if (!!e.data.parcel_tmp_id) {
+      this.parcelsService.deleteParcel(e.data.parcel_tmp_id).subscribe( data => console.log(data), err => console.log(err));
+    }
   }
   editParcels = (e) => {
     if (e.newData.hasOwnProperty('annuel_surface') && e.newData.hasOwnProperty('total_surface')) {
@@ -395,7 +406,9 @@ export class WizardComponent implements OnInit {
     if (!this.contract.application_date) {
       this.toastr.warning('Remplissez les champs du contrat pour avancer!');
     } else {
-      this.maxYears = (this.contract.type === 'annual') ? 1 : 5;
+      const jahr = (localStorage.getItem('tenantId') === '3' || localStorage.getItem('tenantId') === '8' || localStorage.getItem('tenantId') === '9') ?  7 : 5;
+      this.maxYears = (this.contract.type === 'annual') ? 1 : jahr;
+
       if (this.isEdit) {
         this.maxYears = 1;
       }
@@ -419,8 +432,11 @@ export class WizardComponent implements OnInit {
         `Nouveau agrégé ajouté avec succès.`);
         this.addThird = false;
     }, err => {
-      this.toastr.warning(
-      `Problème dans les données saisies dans le système!`);
+      let msg = `Problème dans les données saisies dans le système!`;
+      if (err.error.errors['cin'] !== undefined) {
+          msg = `Ce CIN exist déja exist!`;
+      }
+      this.toastr.warning(msg);
     });
   }
   saveThird = (e) => {
@@ -430,8 +446,11 @@ export class WizardComponent implements OnInit {
         `Nouveau agrégé ajouté avec succès.`);
         this.addThird = false;
     }, err => {
-      this.toastr.warning(
-        `Problème dans les données saisies dans le système!`);
+      let msg = `Problème dans les données saisies dans le système!`;
+      if (err.error.errors['cin'] !== undefined) {
+          msg = `Ce CIN exist déja exist!`;
+      }
+      this.toastr.warning(msg);
     });
   }
 
@@ -447,7 +466,6 @@ export class WizardComponent implements OnInit {
   }
 
   finishFunction(e) {
-    this.clicked = true;
     e.preventDefault();
     const tenantId = localStorage.getItem('tenantId');
     console.log(this.currentThird);
@@ -475,7 +493,7 @@ export class WizardComponent implements OnInit {
 
     this.contract.expiration_date.setFullYear(this.contract.application_date.getFullYear() + this.campaigns.length);
 
-    if (this.isEdit) {
+    if (!!this.contract.parent_id) {
       this.contract.expiration_date.setFullYear(this.contract.application_date.getFullYear() + 1);
     }
 
@@ -493,7 +511,8 @@ export class WizardComponent implements OnInit {
     }
 
     if (this.isEdit && !this.contract.parent_id) {
-      this.contractService.editContract(this.contract).subscribe((contract: any) => {
+      this.contractService.editContract(this.contract).throttleTime(3000)
+        .subscribe((contract: any) => {
         contract = this.helper.dataFormatter(contract, false);
         this.groundsList = this.groundsList.map((ground: any) => {
           console.log(ground);
@@ -511,7 +530,6 @@ export class WizardComponent implements OnInit {
           const id = (this.isEdit) ? this.contract.id : contract['id'];
           this.router.navigate([`/contrats/afficher/${id}`]);
         }, error1 => {
-          this.clicked = false;
           this.toastr.warning(error1.error.message);
           if (!this.isEdit) {
             this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
@@ -519,9 +537,10 @@ export class WizardComponent implements OnInit {
         });
       }, error1 => {
         throw error1;
-      }).finalize( () => this.clicked = false);
+      });
     } else {
-      this.contractService.addContract(this.contract).subscribe((contract: any) => {
+      this.contractService.addContract(this.contract).throttleTime(3000)
+        .subscribe((contract: any) => {
         contract = this.helper.dataFormatter(contract, false);
         this.groundsList = this.groundsList.map((ground: any) => {
           console.log(ground);
@@ -538,7 +557,6 @@ export class WizardComponent implements OnInit {
           const id = (this.isEdit) ? this.contract.id : contract['id'];
           this.router.navigate([`/contrats/afficher/${id}`]);
         }, error1 => {
-          this.clicked = false;
           this.toastr.warning(error1.error.message);
           if (!this.isEdit) {
             this.contractService.deleteContract(contract.id).subscribe(c => console.log(c), err => console.log(err));
@@ -546,7 +564,7 @@ export class WizardComponent implements OnInit {
         });
       }, error1 => {
         throw error1;
-      }).finalize( () => this.clicked = false);
+      });
     }
   }
 }
