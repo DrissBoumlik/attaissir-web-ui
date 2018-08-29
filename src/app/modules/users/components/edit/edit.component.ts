@@ -47,6 +47,8 @@ export class EditComponent implements OnInit, OnDestroy {
      */
     this.userService.getRoles().subscribe(
       (response: any) => {
+
+
         this.listOfRoles = response.data;
         this.roleSelectOptions = {
           items: this.listOfRoles,
@@ -81,13 +83,20 @@ export class EditComponent implements OnInit, OnDestroy {
      */
     this.paramsSubscription = this.route.params.subscribe(
       params => {
+
+
+
+        console.log('JJJ3');
+
+
         this.httpSubscription = this.userService.getUser(params.id).subscribe(
           (response: any) => {
+            console.log(response);
             this.userId = response.data.id;
             this.user.email = response.data.email;
             this.user.name = response.data.name;
             this.userRole = response.data.role[0];
-            if (response.data.role_name[0] === 'cd') {
+            if (response.data.role[0] === 'cd') {
               this.roleIsCentreDistribution = true;
               this.magasin = {
                 warehouses_id: response.data.warehouse_id
@@ -99,8 +108,12 @@ export class EditComponent implements OnInit, OnDestroy {
             /**
              * get structures
              */
-            this.userService.getStructures(response.data.id).subscribe(
+
+            console.log('JJJ4');
+
+            this.userService.getStructures().subscribe(
               (res: any) => {
+
                 this.listOfStructures = res.data;
                 for (let i = 0; i < this.listOfStructures.length; i++) {
                   this.listOfStructures[i].isSelected = true;

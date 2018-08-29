@@ -23,83 +23,75 @@
         </div>
       </div>
 
-      <dx-form id="form"
-               [formData]="user">
 
 
-        <dxi-item itemType="group"  [colCount]="2">
+      <form style="margin-top: 20px" id="user" >
+        <dx-form id="utilisateursForm"
+                 [formData]="user"
+                 [readOnly]="false"
+                 [showColonAfterLabel]="true"
+                 [showValidationSummary]="true"
+                 validationGroup="customerData">
 
-          <dxi-item>
+          <dxi-item itemType="group" caption="Informations générales">
+            <dxi-item  dataField="old_password">
+              <dxo-label
+                text="Ancien mot de passe">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="Nom complete est obligatoire">
+              </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="email">
+              <dxi-validation-rule
+                type="required"
+                message="Email est obligatoire">
+              </dxi-validation-rule>
+              <dxi-validation-rule
+                type="email"
+                message="veuillez saisir une adresse email valide">
+              </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="new_password"
+                      [editorOptions]="{ mode: 'password' }">
+              <dxo-label
+                text="Tapez le nouveau mot de passe">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="Password est obligatoire">
+              </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="new_password1"
+                      [editorOptions]="{ mode: 'password' }">
+              <dxo-label
+                text="Retapez le nouveau mot de passe">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="Password est obligatoire">
+              </dxi-validation-rule>
+            </dxi-item>
+
+          </dxi-item>
+
+
+
+          <div class="dx-fieldset">
             <div class="dx-field">
-              <div class="dx-field-label">Email</div>
               <div class="dx-field-value">
-                <dx-text-box [value]="userInfo.email"></dx-text-box>
+                <dxi-item  itemType="button"  [buttonOptions]="buttonsave"></dxi-item>
               </div>
             </div>
-          </dxi-item>
-
-
-
-        </dxi-item>
-
-        <dxi-item itemType="group" cssClass="first-group" [colCount]="4">
-
-
-
-
-        </dxi-item>
-        <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
-          <dxi-item itemType="group">
-
-
-            <dxi-item dataField="Mot de passe"></dxi-item>
-          </dxi-item>
-          <dxi-item itemType="group">
-            <dxi-item dataField="Confirmer le mot de passe"></dxi-item>
-          </dxi-item>
-        </dxi-item>
-
-
-
-
-      <dxi-item>
-
-        <div class="faq-header">Structures</div>
-
-        <div class="faq-content">
-          <div *ngFor="let structure of structures; let i = index" class="faq-question">
-            <input [id]="i" type="checkbox" class="panel">
-            <div class="plus">+</div>
-            <label [for]="i" class="panel-title"> {{structure.name}} </label>
-            <div class="panel-content">
-
-              <ul class="tree-menu">
-                <li *ngFor="let cda of structure.cdas" > {{cda.name}}
-                  <ul *ngFor="let zone of cda.zones">
-                    <li>{{zone.name}}</li>
-                  </ul>
-                </li>
-
-              </ul>
-
-            </div>
           </div>
-        </div>
-
-        </dxi-item>
 
 
 
-        <div class="dx-fieldset">
-          <div class="dx-field">
-            <div class="dx-field-value">
-              <dxi-item  itemType="button"  [buttonOptions]="buttonsave"></dxi-item>
-            </div>
-          </div>
-        </div>
 
-
-      </dx-form>
+        </dx-form>
+      </form>
 
 
 
@@ -112,10 +104,4 @@
 
 
 </div>
-
-
-
-
-
-
 

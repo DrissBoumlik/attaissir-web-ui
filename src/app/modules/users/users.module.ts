@@ -29,7 +29,8 @@ import { AvatarModule } from 'ng2-avatar';
     DxPopupModule,
     DxButtonModule,
     DxLoadPanelModule,
-    AvatarModule.forRoot()
+    AvatarModule.forRoot(),
+
 
   ],
   declarations: [AddComponent, ListComponent, EditComponent, ProfileComponent],

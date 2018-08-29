@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
   ) {
+    this.user = {};
     this.userInfo = {};
   }
 
@@ -51,10 +52,26 @@ export class ProfileComponent implements OnInit {
       useSubmitBehavior: true,
       onClick: () => {
 
+
+        console.log(this.user);
+
+
+        this.userService.editProfile(this.user).subscribe(response => {
+        });
+
       }
     };
 
   }
+
+
+
+
+  selectItem($event) {
+
+  }
+
+
 
 
 }
