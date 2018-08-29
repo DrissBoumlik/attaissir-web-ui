@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
   ) {
+    this.user = {};
     this.userInfo = {};
   }
 
@@ -35,20 +36,14 @@ export class ProfileComponent implements OnInit {
     this.userService.getUserInfo().subscribe(response => {
       this.userInfo = response.data;
       this.structures = response.data.structures;
-      this.nbr_structs = response.data.structures.length;
+      this.nbr_structs = response.data.structures_count;
+      this.nbr_zones = response.data.zones_count;
+      this.nbr_cdas = response.data.cdas_count;
+
       this.role = response.data.structures.role;
 
-      response.data.structures.forEach((it) => {
-        this.nbr_cdas += it.cdas.length;
-      });
 
-      response.data.structures.forEach((it) => {
-        it.cdas.forEach((_it) => {
-          this.nbr_zones += _it.zones.length;
-        });
-      });
 
-      console.log(this.userInfo);
     });
 
     this.buttonsave = {
@@ -57,10 +52,26 @@ export class ProfileComponent implements OnInit {
       useSubmitBehavior: true,
       onClick: () => {
 
+
+        console.log(this.user);
+
+
+        this.userService.editProfile(this.user).subscribe(response => {
+        });
+
       }
     };
 
   }
+
+
+
+
+  selectItem($event) {
+
+  }
+
+
 
 
 }

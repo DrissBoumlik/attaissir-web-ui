@@ -84,5 +84,16 @@ export class UsersService {
       })
     });
   }
+
+
+  editProfile(user): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/profile/edit`, JSON.stringify(user), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+
 }
 
