@@ -86,19 +86,19 @@
                       <div class="m-card-user m-card-user--skin-light">
 
 
-                       <a  routerLink="/utilisateurs/profile" routerLinkActive="active" style="text-decoration: none;">
+                       <a  style="text-decoration: none;">
                         <div class="m-card-user__pic">
                           <avatar [name]="currentUser.name" [displayType]="'circle'" [background]="'green'"></avatar>
                         </div>
                         </a>
 
                         <div class="m-card-user__details">
-                            <a  routerLink="/utilisateurs/profile" routerLinkActive="active">
+                            
 													<span class="m-card-user__name m--font-weight-500">
 														{{ currentUser.name }}
                           </span>
-                          </a>
-                          <a routerLink="/utilisateurs/profile" routerLinkActive="active" class="m-card-user__email m--font-weight-300 m-link">
+                           
+                          <a class="m-card-user__email m--font-weight-300 m-link">
                             {{ currentUser.email }}
                           </a>
                           <hr>
