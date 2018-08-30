@@ -96,6 +96,7 @@ export class EditComponent implements OnInit, OnDestroy {
             this.user.email = response.data.email;
             this.user.name = response.data.name;
             this.userRole = response.data.role[0];
+            this.user.role_id = response.data.role[0];
             if (response.data.role[0] === 'cd') {
               this.roleIsCentreDistribution = true;
               this.magasin = {
