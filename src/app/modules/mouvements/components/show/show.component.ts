@@ -152,17 +152,15 @@ export class ShowComponent implements OnInit {
     }
 
 
-
     this.articles.forEach(function(element) {
-      print.document.write('<p style="font-weight: bolder;">' + element.article.category.name + '</p>');
-      print.document.write('<p>   </p>');
       print.document.write('<p> <span style="float: left;">' + element.article.name +
-        '</span><span style="float: right;"> ' + element.quantity + ' ' + 'QTE' + '</span></p>');
-
+        '</span><span style="float: right;"> ' + element.quantity + ' ' + 'QTE' + '</span></p> <br/>');
     });
 
+    print.document.write('<p>-------------------</p>');
 
-    print.document.write( '<br/><p> <span style="float: left"> Emetteur' +
+
+    print.document.write( '<p> <span style="float: left"> Emetteur' +
       '</span> &nbsp; &nbsp;  <span style="float: right">  ' +  this.mouvement.from.full_name +  '</span></p>' +
 
       '<p> <span style="float: left"> Récepteur' +
@@ -172,7 +170,7 @@ export class ShowComponent implements OnInit {
     print.document.write( ' <br/> <p>**  **</p> <p>*  *</p> ');
 
     print.document.write(
-      '<p>-------------------------</p>' +
+      '<p>------------------------</p>' +
       '<p>** MERCI **</p>' +
       '<p>*****</p>');
 
