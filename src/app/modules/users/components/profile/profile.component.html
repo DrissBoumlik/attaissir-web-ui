@@ -16,7 +16,7 @@
           <div class="firstinfo"> <avatar name="{{userInfo.name}}"   [displayType]="'circle'" [background]="'green'" [size]="120"></avatar>
             <div class="profileinfo">
               <h1>{{userInfo.name}}</h1>
-              <h3>Role : {{role}}</h3>
+              <h3>Role : {{userInfo.role_name}}</h3>
               <p class="bio">   Divisions :  {{nbr_structs}} &nbsp;  &nbsp; Cda : {{nbr_cdas}} &nbsp; Zone :  {{nbr_zones}} </p>
             </div>
           </div>
@@ -34,7 +34,8 @@
                  validationGroup="customerData">
 
           <dxi-item itemType="group" caption="Informations générales">
-            <dxi-item  dataField="old_password">
+            <dxi-item  dataField="old_password"
+            [editorOptions]="{ mode: 'password' }">
               <dxo-label
                 text="Ancien mot de passe">
               </dxo-label>
