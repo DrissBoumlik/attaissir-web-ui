@@ -141,6 +141,11 @@ export class ShowComponent implements OnInit {
         d.resolve();
         e.cancel = true;
         this.toaster.success('L element a été ajouté avec succès.');
+
+         this.rightHolderService.getAllDx(this.id).subscribe((_res: any) => {
+              this.rightsholders = _res;
+            });
+
       }, error => {
         //  d.resolve();
         e.cancel = true;
