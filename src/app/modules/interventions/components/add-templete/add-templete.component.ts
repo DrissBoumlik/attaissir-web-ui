@@ -113,17 +113,20 @@ export class AddTempleteComponent implements OnInit {
         } else {
           this.toastr.warning('la selection des parcelles est obligatoire');
         }
+        
 
       }
     };
 
-
+  let date_now = new Date();
+    
     this.dateOptions = {
       invalidDateMessage: 'La date doit avoir le format suivant: jj/MM/aaaa',
       calendarOptions: {
         dateSerializationFormat: 'dd/MM/yyyy',
         displayFormat: 'yyyy-MM-dd',
-        forceIsoDateParsing: true
+        forceIsoDateParsing: true,
+        min: date_now
       },
       onValidated: (e) => {
         if (!e.value) {

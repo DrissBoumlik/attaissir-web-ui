@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../services/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -25,6 +26,7 @@ export class ProfileComponent implements OnInit {
     private userService: UsersService,
     private router: Router,
     private route: ActivatedRoute,
+    private toastr : ToastrService
   ) {
     this.user = {};
     this.userInfo = {};
@@ -56,8 +58,21 @@ export class ProfileComponent implements OnInit {
         console.log(this.user);
 
 
-        this.userService.editProfile(this.user).subscribe(response => {
-        });
+        this.userService.editProfile(this.user).subscribe(
+          result => {
+            console.log(result);
+
+         this.toastr.success(result.message);
+         this.router.navigate(['/']);
+          },
+          error => {
+            this.toastr.error(error.error.message)
+           // this.errors = error;
+          }
+        );
+
+
+        
 
       }
     };

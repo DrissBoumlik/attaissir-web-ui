@@ -39,6 +39,7 @@ export class ShowComponent implements OnInit {
   helper: any;
   rightsholders: any;
   selectedItems: any[];
+  cinPattern = /^[A-Za-z][A-Za-z0-9]{3,9}/;
 
 
 
@@ -141,6 +142,11 @@ export class ShowComponent implements OnInit {
         d.resolve();
         e.cancel = true;
         this.toaster.success('L element a été ajouté avec succès.');
+
+         this.rightHolderService.getAllDx(this.id).subscribe((_res: any) => {
+              this.rightsholders = _res;
+            });
+
       }, error => {
         //  d.resolve();
         e.cancel = true;
