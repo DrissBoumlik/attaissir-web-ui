@@ -96,7 +96,6 @@ export class WizardComponent implements OnInit {
         onSelectionChanged: (e) => {
         }
       };
-
       this.worthEditorOptions = {
         label: 'Mode faire-valoir',
         dataSource: Helper.dataSourceformatter(data['tenure']),
@@ -114,7 +113,6 @@ export class WizardComponent implements OnInit {
     this.contract.application_date = new Date();
     this.expirationDateOptions = {
       label: 'Date d\'expiration',
-      value: new Date(2019, 3, 27),
       min: this.contract.application_date
     };
     this.allMode = 'allPages';
@@ -406,8 +404,10 @@ export class WizardComponent implements OnInit {
     if (!this.contract.application_date) {
       this.toastr.warning('Remplissez les champs du contrat pour avancer!');
     } else {
-      const jahr = (localStorage.getItem('tenantId') === '3' || localStorage.getItem('tenantId') === '8' || localStorage.getItem('tenantId') === '9') ?  7 : 5;
-      this.maxYears = (this.contract.type === 'annual') ? 1 : jahr;
+      this.maxYears = (this.contract.type === 'annual') ? 1 : 5;
+      if (localStorage.getItem('tenantId') === '3' || localStorage.getItem('tenantId') === '8' || localStorage.getItem('tenantId') === '9') {
+        this.maxYears = 7;
+      }
 
       if (this.isEdit) {
         this.maxYears = 1;
@@ -495,6 +495,9 @@ export class WizardComponent implements OnInit {
 
     if (!!this.contract.parent_id) {
       this.contract.expiration_date.setFullYear(this.contract.application_date.getFullYear() + 1);
+    }
+    if (localStorage.getItem('tenantId') === '3' || localStorage.getItem('tenantId') === '8' || localStorage.getItem('tenantId') === '9') {
+      this.contract.expiration_date.setFullYear(this.contract.application_date.getFullYear() + 7);
     }
 
     let surfaces = 0;

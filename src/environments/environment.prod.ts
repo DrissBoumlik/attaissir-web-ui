@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://api.attaissir.graviton.ma'// 'https://api.agrigestion.attaissir.com'
+  apiUrl: 'https://api.agrigestion.attaissir.com'
 };
