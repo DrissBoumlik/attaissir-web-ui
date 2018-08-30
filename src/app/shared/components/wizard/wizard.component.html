@@ -232,7 +232,6 @@
             <dxo-label text="Matricule parcelle"></dxo-label>
             <dxi-validation-rule type="required" message="Matricule est obligatoire"></dxi-validation-rule>
           </dxi-item>
-          >
           <dxi-item dataField="total_surface" [editorOptions]="{ label: 'Superficie totale (ha)' }"
                     editorType="dxNumberBox">
             <dxo-label text="Superficie totale (ha)"></dxo-label>
@@ -273,7 +272,7 @@
           (onRowUpdating)="editParcels($event)"
           (onInitialized)="initParcelRow($event)"
           (onRowRemoving)="removeParcelRow($event)"
-          keyExpr="id">
+          keyExpr="name">
 
           <dxo-editing
             mode="row"
