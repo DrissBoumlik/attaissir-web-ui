@@ -56,8 +56,18 @@ export class ProfileComponent implements OnInit {
         console.log(this.user);
 
 
-        this.userService.editProfile(this.user).subscribe(response => {
-        });
+        this.userService.editProfile(this.user).subscribe(
+          result => {
+            // Handle result
+            console.log(result)
+          },
+          error => {
+           // this.errors = error;
+          }
+        );
+
+
+        
 
       }
     };

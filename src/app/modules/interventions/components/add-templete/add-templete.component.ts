@@ -113,6 +113,7 @@ export class AddTempleteComponent implements OnInit {
         } else {
           this.toastr.warning('la selection des parcelles est obligatoire');
         }
+        
 
       }
     };

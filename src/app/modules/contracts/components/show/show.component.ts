@@ -39,6 +39,7 @@ export class ShowComponent implements OnInit {
   helper: any;
   rightsholders: any;
   selectedItems: any[];
+  cinPattern = /^[A-Za-z][A-Za-z0-9]{3,9}/;
 
 
 
