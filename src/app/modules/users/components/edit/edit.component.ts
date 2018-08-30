@@ -86,13 +86,11 @@ export class EditComponent implements OnInit, OnDestroy {
 
 
 
-        console.log('JJJ3');
 
 
         this.httpSubscription = this.userService.getUser(params.id).subscribe(
           (response: any) => {
-            console.log(response);
-            this.userId = response.data.id;
+             this.userId = response.data.id;
             this.user.email = response.data.email;
             this.user.name = response.data.name;
             this.userRole = response.data.role[0];
@@ -110,7 +108,6 @@ export class EditComponent implements OnInit, OnDestroy {
              * get structures
              */
 
-            console.log('JJJ4');
 
             this.userService.getStructures().subscribe(
               (res: any) => {
@@ -201,6 +198,11 @@ export class EditComponent implements OnInit, OnDestroy {
     this.listeDesCdas = [];
     for (let i = 0; i < this.choosingStructures.length; i++) {
       if (this.choosingStructures[i].id === data.data.id) {
+
+        this.choosingStructures[i].cdas.forEach((it) => {
+          it.Tree_id = Math.floor((Math.random() * 10008800) + 1);
+        });
+
         this.listeDesCdas = this.choosingStructures[i].cdas.slice();
         break;
       }

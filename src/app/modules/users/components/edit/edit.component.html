@@ -174,19 +174,35 @@
       <div *dxTemplate="let data of 'content'">
 
 
-        <div class="pop-up-wrapper">
-          <div class="pop-up-body">
-            <dx-tree-view
-              id="selection-treeview"
-              [items]="choosingStructures[rowIndex].cdas"
-              [width]="320"
-              showCheckBoxesMode="normal"
-              selectedExpr="isSelected"
-              (onItemSelectionChanged)="selectionChanged($event)">
-              <div *dxTemplate="let data of 'item'">
-                <span *ngIf="data.items">CDA</span> {{data.name}}
-              </div>
-            </dx-tree-view>
+        <div class="pop-up-wrapper" >
+          <div class="pop-up-body" style="overflow: scroll">
+
+
+
+
+              <dx-tree-view
+
+                keyExpr="Tree_id"
+                id="selection-treeview"
+                [items]="choosingStructures[rowIndex].cdas"
+                [width]="320"
+                showCheckBoxesMode="normal"
+                selectedExpr="isSelected"
+                (onItemSelectionChanged)="selectionChanged($event)"
+              >
+
+                <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
+
+
+                  <div *dxTemplate="let data of 'item'">
+                    <span *ngIf="data.items">CDA</span> {{data.name}}
+                  </div>
+
+
+              </dx-tree-view>
+
+
+
           </div>
           <div class="pop-up-actions">
             <dx-button style="margin-right: 20px"
