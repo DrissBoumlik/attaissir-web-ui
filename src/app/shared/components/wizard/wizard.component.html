@@ -306,7 +306,7 @@
           </dxi-column>
           <dxi-column dataField="zone_id" caption="Zone"  i18n-caption>
            <dxo-lookup
-              [dataSource]="getZones(this.cda_id)"
+              [dataSource]="zones"
               displayExpr="name"
               valueExpr="zone_id">
             </dxo-lookup>
