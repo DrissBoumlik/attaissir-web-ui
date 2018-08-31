@@ -20,6 +20,7 @@ export class Stock {
   qres = 0;
   dt: any;
   toOrder: 0;
+  article_unit: '';
   threshold = 10;
 
   warehouse_name?: string;
