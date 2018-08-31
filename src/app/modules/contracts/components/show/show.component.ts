@@ -63,7 +63,7 @@ export class ShowComponent implements OnInit {
             this.id = params.id;
             this.contract = res.data;
             this.third = res.data.third_party;
-            this.campagnes = res.data.contracted_surface;
+            this.campagnes = [res.data.campaign];
             this.avenants = res.data.amendments;
             this.avenant = (this.avenants.length > 0) ? this.avenants[this.avenants.length - 1] : null;
             this.parcels = res.data.parcels.map((data) => {
