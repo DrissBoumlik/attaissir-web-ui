@@ -300,7 +300,8 @@
             <dxo-lookup
               [dataSource]="cdas"
               displayExpr="name"
-              valueExpr="zone_id">
+              valueExpr="zone_id"
+              applyValueMode="useButtons">
             </dxo-lookup>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
@@ -308,7 +309,8 @@
            <dxo-lookup
               [dataSource]="zones"
               displayExpr="name"
-              valueExpr="zone_id">
+              valueExpr="zone_id"
+              applyValueMode="useButtons">
             </dxo-lookup>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>

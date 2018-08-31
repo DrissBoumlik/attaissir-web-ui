@@ -417,7 +417,7 @@ export class WizardComponent implements OnInit {
 
 
   goToParcels = () => {
-    if (!this.currentThird.cin) {
+    if (!this.currentThird.id) {
       this.toastr.warning('Sélectionnez ou créez un agrégé pour avancer!');
     } else if (this.campaigns.length <= 0 || this.campaigns[0].surface <= 0) {
       this.toastr.warning('Sélectionnez au moins une campagne pour continuer et la superficie doit être supérieure à 0!');
@@ -458,11 +458,13 @@ export class WizardComponent implements OnInit {
     this.addThird = false;
     this.currentThird = new Third();
     this.currentThird.cin = '';
+    this.currentThird.id = 0;
   }
 
   newThird = () => {
     this.addThird = true;
     this.currentThird.cin = '';
+    this.currentThird.id = 0;
   }
 
   finishFunction(e) {
