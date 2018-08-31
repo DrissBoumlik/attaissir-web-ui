@@ -300,17 +300,15 @@
             <dxo-lookup
               [dataSource]="cdas"
               displayExpr="name"
-              valueExpr="zone_id"
-              applyValueMode="useButtons">
+              valueExpr="zone_id">
             </dxo-lookup>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
           <dxi-column dataField="zone_id" caption="Zone"  i18n-caption>
            <dxo-lookup
-              [dataSource]="zones"
+              [dataSource]="getZones(this.cda_id)"
               displayExpr="name"
-              valueExpr="zone_id"
-              applyValueMode="useButtons">
+              valueExpr="zone_id">
             </dxo-lookup>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>

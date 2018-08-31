@@ -321,6 +321,13 @@ export class WizardComponent implements OnInit {
       items: ['cas', 'bas']
     };
   }
+  
+  getZones => (cda_id) => {
+    return this.zoneService.getZonesByCDA(cda_id).subscribe(zone => {
+      return this.helper.dataFormatter(zone, false);
+    });
+  }
+  
   initParcelRow = (e) => {
     console.log(e);
     /*this.zoneService.getZonesByCDA().subscribe(zone => {
