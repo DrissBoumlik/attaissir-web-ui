@@ -247,7 +247,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
       '<p> <span> N° ' + this.preconisation.id + ' </span></p>' +
 
-      '<p> <span style="float: right"> DATE : ' + this.preconisation.date + '</span> </p> <br/>' +
+      '<p> <span style="float: right"> Date : ' + this.preconisation.date + '</span> </p> <br/>' +
 
       '<p> <span style="float: right">' +
       this.preconisation.campaign + ' </span></p>  <br/>' +
@@ -265,18 +265,17 @@ export class ShowComponent implements OnInit, AfterViewInit {
       '<p> <span style="float: left;font-weight: bolder;">NOM COMPLET  </span>   <span style="float: right">' +
       this.preconisation.third_party_name + ' </span></p>  <br/>');
 
+      print.document.write('<p>-------------------------</p>');
+      
     this.articles.forEach(function(element) {
-      print.document.write('<p style="font-weight: bolder;">' + element.category + '</p><br/>');
+     // print.document.write('<p style="font-weight: bolder;">' + element.category + '</p><br/>');
       print.document.write('<p> <span style="float: left;">' + element.article_name +
-        '</span><span style="float: right;"> ' + element.quantity + ' ' + 'QTE' + '</span></p><br/>');
+        '</span><span style="float: right;"> ' + element.quantity + ' ' + element.unit + '</span></p>');
 
     });
 
 
-    print.document.write('<p> <span >' +
-    this.preconisation.source_name + ' </span></p>  <br/>');
-
-
+    print.document.write( ' <br/> <p>**  **</p> <p>*  *</p> ');
 
 
     print.document.write(

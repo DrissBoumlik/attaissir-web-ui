@@ -129,10 +129,13 @@ export class ShowComponent implements OnInit {
     print.document.write('<body>');
     print.document.write('<div class="div1">');
 
-    print.document.write('<p><b style="font-weight: bolder;">Bon de  ' + this.helper.orderType(this.mouvement.type) + '</b></p>' +
+
+
+    print.document.write('<p><b style="font-weight: bolder;">BON DE  ' + this.helper.orderType(this.mouvement.type).toUpperCase() + '</b></p>'  +
+    '<p>-------------------------</p>' +
       '<p> <span> N° ' + this.mouvement.id + ' </span></p>' +
 
-      '<p> <span style="float: right"> DATE : ' + this.mouvement.date + '</span> </p> <br/>' +
+      '<p> <span style="float: right"> Date : ' + this.mouvement.date + '</span> </p> <br/>' +
 
       '<p>  <span style="float: right">' + this.mouvement.campaign + ' </span></p> <br/>');
 
@@ -145,16 +148,16 @@ export class ShowComponent implements OnInit {
         '<p> <span style="float: left"> ZONE' +
         '</span> &nbsp; &nbsp;  <span style="float: right">  ' +  this.mouvement.zone +  '  </span></p>' +
 
-
         '<p> <span style="float: left"> PARCELLE' +
         '</span> &nbsp; &nbsp;  <span style="float: right"> ' +  this.mouvement.parcel +  ' </span></p>');
 
     }
 
+    print.document.write('<p>-------------------</p>');
 
     this.articles.forEach(function(element) {
       print.document.write('<p> <span style="float: left;">' + element.article.name +
-        '</span><span style="float: right;"> ' + element.quantity + ' ' + 'QTE' + '</span></p> <br/>');
+        '</span><span style="float: right;"> ' + element.quantity + ' ' + element.article.unit + '</span></p> <br/>');
     });
 
     print.document.write('<p>-------------------</p>');
