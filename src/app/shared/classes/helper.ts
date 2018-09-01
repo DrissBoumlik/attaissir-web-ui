@@ -253,7 +253,7 @@ export class Helper {
 
   public static orderType = (value: string): string => {
     if (value === 'transfer') {
-      return 'transfère entrée/sortie';
+      return 'transfert';
     } else if (value === 'delivery') {
       return 'LIVRAISON';
     } else if (value === 'return') {
