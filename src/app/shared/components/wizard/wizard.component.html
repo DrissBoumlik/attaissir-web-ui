@@ -208,7 +208,7 @@
         <dx-form id="form3"
                  [colCount]="4"
                  labelLocation="top"
-                 [readOnly]="groundsList.length > 2"
+
                  [formData]="parcelForm">
 
           <dxi-item dataField="cda" i18n-label editorType="dxSelectBox" [editorOptions]="cdaEditorOptions">
@@ -258,7 +258,7 @@
           
           
           <dxi-item itemType="button"
-                    horizontalAlignment="right" [disabled]="(groundsList.length > 2) || (parcelForm.cda === null) || (parcelForm.tenure === null)
+                    horizontalAlignment="right" [disabled]=" (parcelForm.cda === null) || (parcelForm.tenure === null)
                                                             || (parcelForm.zone === null) || (parcelForm.annuel_surface == 0) || (!parcelForm.annuel_surface)"
                     [buttonOptions]="addParcelOptions"></dxi-item>
         </dx-form>
