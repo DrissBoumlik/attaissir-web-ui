@@ -88,6 +88,14 @@
              <dxi-column dataField="annuel_surface" caption="Superficie annuelle" [visible]="false"></dxi-column>
             <!-- <dxi-column dataField="status" caption="Etat"  cellTemplate="statusTemplate"></dxi-column> !-->
 
+              <dxo-paging
+                      [enabled]="true">
+              </dxo-paging>
+              <dxo-pager
+                      [showPageSizeSelector]="true"
+                      [allowedPageSizes]="[10, 20, 50]"
+                      [showNavigationButtons]="true">
+              </dxo-pager>
 
             <div *dxTemplate="let data of 'parent_idTemplate'">
               <div *ngIf="data.value ==0">
