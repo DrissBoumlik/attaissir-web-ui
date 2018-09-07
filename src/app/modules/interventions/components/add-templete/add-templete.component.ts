@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { InterventionService } from '../../services/intervention.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {InterventionService} from '../../services/intervention.service';
 import CustomStore from 'devextreme/data/custom_store';
-import { main } from '@angular/compiler-cli/src/main';
-import { DxDataGridComponent, DxTreeListComponent } from 'devextreme-angular';
-import { DxiRowComponent } from 'devextreme-angular/ui/nested/row-dxi';
-import { Helper } from '../../../../shared/classes/helper';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import {DxTreeListComponent} from 'devextreme-angular';
+import {Helper} from '../../../../shared/classes/helper';
+import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -30,7 +28,6 @@ export class AddTempleteComponent implements OnInit {
 
   _parcels: any = {};
   request_type_id: any;
-
 
 
   constructor(private interventionService: InterventionService, private toastr: ToastrService, private router: Router) {
@@ -113,13 +110,13 @@ export class AddTempleteComponent implements OnInit {
         } else {
           this.toastr.warning('la selection des parcelles est obligatoire');
         }
-        
+
 
       }
     };
 
-  let date_now = new Date();
-    
+    const date_now = new Date();
+
     this.dateOptions = {
       invalidDateMessage: 'La date doit avoir le format suivant: jj/MM/aaaa',
       calendarOptions: {
@@ -138,19 +135,19 @@ export class AddTempleteComponent implements OnInit {
   }
 
 
-
   selectedEvent(event) {
-
-    this.ref1.instance.getVisibleRows().forEach((row: any) => {
-      row.data.is_selected = event;
+    this.ref1.instance.selectAll().then(msg => {
+      this.ref1.instance.getSelectedRowsData().forEach((row: any) => {
+        row.is_selected = event;
+      });
     });
+
+
   }
 
 
   selectedEventItem(event, id) {
-
     this.ref1.instance.getVisibleRows().forEach((row: any) => {
-
       if (row.data.id === id) {
         row.data.is_selected = event;
       }

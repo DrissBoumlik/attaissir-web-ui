@@ -60,14 +60,14 @@
             id="tasks"
             [dataSource]="_parcels"
             keyExpr="id"
+            [showBorders]="true"
             parentIdExpr="parent_id"
-            [expandedRowKeys]="[1, 2]"
-            [selectedRowKeys]="[1, 29, 42]"
             [columnAutoWidth]="true"
             [wordWrapEnabled]="true"
           #ref1>
             <dxo-filter-row [visible]="true"></dxo-filter-row>
-            <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-scrolling  mode="standard" [showScrollbar]="'always'"></dxo-scrolling>
             <dxi-column dataField="parent_id" caption=" "  [width]="100"  cellTemplate="parent_idTemplate"></dxi-column>
 
             <dxi-column dataField="name" [width]="300" caption="Parcelle"   cellTemplate="nameTemplate"></dxi-column>
@@ -94,7 +94,7 @@
               </dxo-paging>
               <dxo-pager
                       [showPageSizeSelector]="true"
-                      [allowedPageSizes]="[10, 20, 50]"
+                      [allowedPageSizes]="[10, 15, 20]"
                       [showNavigationButtons]="true">
               </dxo-pager>
 
