@@ -140,17 +140,15 @@ export class AddTempleteComponent implements OnInit {
 
 
   selectedEvent(event) {
-
-    this.ref1.instance.getVisibleRows().forEach((row: any) => {
-      row.data.is_selected = event;
+      this.ref1.instance.selectAll();
+    this.ref1.instance.getSelectedRowsData().forEach((row: any) => {
+      row.is_selected = event;
     });
   }
 
 
   selectedEventItem(event, id) {
-
     this.ref1.instance.getVisibleRows().forEach((row: any) => {
-
       if (row.data.id === id) {
         row.data.is_selected = event;
       }

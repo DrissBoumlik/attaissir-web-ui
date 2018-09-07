@@ -61,8 +61,7 @@
             [dataSource]="_parcels"
             keyExpr="id"
             parentIdExpr="parent_id"
-            [expandedRowKeys]="[1, 2]"
-            [selectedRowKeys]="[1, 29, 42]"
+            [showBorders]="true"
             [columnAutoWidth]="true"
             [wordWrapEnabled]="true"
           #ref1>
@@ -90,7 +89,7 @@
 
               <dxo-paging
                       [enabled]="true"
-              [pageSize]="10">
+                        [pageSize]="10">
               </dxo-paging>
               <dxo-pager
                       [showPageSizeSelector]="true"

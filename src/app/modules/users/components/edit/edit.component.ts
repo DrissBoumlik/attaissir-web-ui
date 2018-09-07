@@ -378,7 +378,7 @@ export class EditComponent implements OnInit, OnDestroy {
       const data = {
         email: this.user.email,
         name: this.user.name,
-        password: this.user.password,
+        password: this.user._password,
         role_id: this.user.role_id,
         structure_id: structure_id,
         zone_id: this.getCheckedZones(),
