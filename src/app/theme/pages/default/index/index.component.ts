@@ -11,7 +11,9 @@ import { ThirdsService } from '../../../../modules/thirds/services/thirds.servic
 export class IndexComponent implements OnInit, AfterViewInit {
   shortcutsList: any;
   tilesList: any;
-
+  tenants:any = [];
+  tenant:any = [];
+  tenant_name:any = [];
 
   constructor(
     private _script: ScriptLoaderService,
@@ -20,6 +22,23 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
   }
   ngOnInit() {
+
+
+    const data = JSON.parse(localStorage.getItem('currentUser'));
+    this.tenants = data.data.tenants;
+
+
+    
+    this.tenant = localStorage.getItem('tenantId');
+
+    console.log(this.tenants);
+
+    this.tenant_name = this.tenants.filter(x => x.division_id == this.tenant );
+
+    console.log(this.tenant_name[0].division );
+
+    // this.tenant_name = this.tenants
+
     // var _this = this;
     this.thirdsService.getStats().subscribe(data => {
       this.tilesList = [

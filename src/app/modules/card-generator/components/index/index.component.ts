@@ -182,7 +182,8 @@ export class IndexComponent implements OnInit {
 
       // it.playOn= false;
 
-      let img = 'http://api.attaissir.graviton.ma/cards/4/generate?face=recto&id=4&rfid=334&structure='
+      
+      let img = environment.apiUrl + '/cards/4/generate?face=recto&id=4&rfid=334&structure='
       + it.structure_id + '&name=' + it.name + '&name_ar=' + it.name_ar +  '&tel=' +
       it.tel +  '&address=' + it.address + '&type=agri&full_name=' + it.full_name + '&code='
       + it.code + '&full_name_ar=' + it.full_name_ar + '&amp;cin=' + it.cin;
@@ -277,25 +278,17 @@ export class IndexComponent implements OnInit {
       } else {
 
 
-        let keys = {
-          "&" : "1",
-          "é" : "2",
-          '"' : "3",
-          "'" : "4",
-          "(" : "5",
-          "-" : "6",
-          "è" : "7",
-          "_" : "8",
-          "ç" : "9",
-          "à" : "0",
-        };
-
-
-
-
-        for (let key in keys) {
-          this.barcode= this.barcode.replace(key,  keys[key])
-        }
+        
+        this.barcode= this.barcode.replace(/à/g,"0");
+        this.barcode= this.barcode.replace(/&/g,"1");
+        this.barcode= this.barcode.replace(/é/g,"2");
+        this.barcode= this.barcode.replace('"',"3");
+        this.barcode= this.barcode.replace("'","4");
+        this.barcode= this.barcode.replace("(","5");
+        this.barcode= this.barcode.replace("-","6");
+        this.barcode= this.barcode.replace(/è/g,"7");
+        this.barcode= this.barcode.replace("_" ,"8");
+        this.barcode= this.barcode.replace(/ç/g,"9");
 
 
         this.selectedItems.forEach(it => {

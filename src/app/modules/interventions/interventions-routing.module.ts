@@ -19,7 +19,6 @@ const routes: Routes = [{
     { path: 'selectionner', component: NewComponent },
     { path: 'ajouter', component: AddComponent },
     { path: 'template/ajouter', component: AddTempleteComponent },
-    { path: 'liste', component: ListComponent },
     { path: 'modifier/:id', component: EditComponent },
     { path: 'list', component: ListComponent },
     {

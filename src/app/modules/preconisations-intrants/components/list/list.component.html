@@ -6,11 +6,28 @@
     </div>
   </div>
 </div>
+ 
 
 <div class="m-content">
-  <div class="m-portlet m-portlet-remoteOperations-bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body m-portlet__body--no-padding">
-      <dx-data-grid
+    <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+      <div class="m-portlet__body m-portlet__body--no-padding">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-tools">
+            <div class="buttons">
+              <dx-button
+                icon="fa fa-credit-card-alt"
+                style="font-weight: bold"
+                [type]="'success'"
+                text=" Recherche par carte"
+                (onClick)="Scan()">
+              </dx-button>
+            </div>
+          </div>
+        </div>
+
+
+         <dx-data-grid
+       #proclist
         id="gridContainer"
         [dataSource]="preconisations_intrants"
         [columnHidingEnabled]="true"
@@ -41,6 +58,8 @@
 
         <dxo-header-filter [visible]="true"></dxo-header-filter>
         <dxo-export [enabled]="true" fileName="intrants" [allowExportSelectedData]="true"></dxo-export>
+
+        <dx-button width="90" text="'deleteButtonOptions.text'" type="success"></dx-button>
 
         <dxo-pager
           [allowedPageSizes]="[5, 8, 15, 30]"
@@ -96,6 +115,63 @@
         </div>
 
       </dx-data-grid>
+    
+
+
+
+
     </div>
   </div>
 </div>
+
+
+
+
+<div  name="popup" id="popup" #popup>
+  <dx-popup
+  class="popup"
+  [width]="580"
+  [height]="400"
+  [showTitle]="true"
+  title="Confirmation "
+  [dragEnabled]="false"
+  (onShown)="SearchByRfid()"
+  [closeOnOutsideClick]="true"
+  [(visible)]="popupRfidVisible"
+  (window:keypress)="doSomething($event)"
+>
+  <div *dxTemplate="let data of 'content'">
+
+    <div class="gilsser"  >
+      <h1>GLISSER LA CARTE</h1>
+      <p>Faire glisser la carte sur le lecteur de carte pour lancer la recherche</p>
+      <div class="glisser-carte-agriculteur">
+        <div class="credit-card">
+          <div class="rfid-tripe"></div>
+        </div>
+        <div class="swiper-top"></div>
+        <div class="swiper-bottom">
+          <div class="light-indicator"></div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</dx-popup>
+
+</div>
+
+
+
+<input type="text" name="rfid" style="width: 0; height: 0;border: none;"  #rfid>
+<input class="rfid-input" type="text"   name="focusout" style="width: 0; height: 0;border: none;"  #focusout>
+
+
+
+
+
+
+
+
+
+

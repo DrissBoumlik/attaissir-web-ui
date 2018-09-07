@@ -234,6 +234,7 @@ export class EditComponent implements OnInit, OnDestroy {
       const tempStructure = this.choosingStructures[j];
       for (let k = 0; k < tempStructure.cdas.length; k++) {
         const tempCda = tempStructure.cdas[k];
+        console.log(tempCda);
         for (let l = 0; l < tempCda.items.length; l++) {
           const item = tempCda.items[l];
           if (item.isSelected) {

@@ -488,6 +488,7 @@ export class AddComponent implements OnInit {
       searchEnabled: true,
       searchMode: 'contains',
       onSelectionChanged: (event) => {
+        console.log(event);
         this.SelectedProductsCategory = event.selectedItem;
         this.productsSubCategoryOptions = {
           displayExpr: 'sub_category_name',
