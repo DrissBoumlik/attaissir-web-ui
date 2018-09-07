@@ -485,3 +485,99 @@
 <input type="text" name="rfid" style="width: 0; height: 0;border: none;"  #rfid>
 <input class="rfid-input" type="text"   name="focusout" style="width: 0; height: 0;border: none;"  #focusout>
 
+
+
+ 
+
+<div style="display:none;">
+
+<div id="t1">
+<div id="receipt-wrapper"   >
+    <div class="receipt-block">
+        <div class="receipt-head">
+            <div>BON DE LIVRAISON</div>
+        </div>
+
+        <div style="text-align : center; margin-bottom: 10px;">
+            <div>N° {{this.preconisation.id}}</div>
+
+        </div>
+
+
+        <div style="text-align : right;  margin-bottom: 5px;">
+            <div>Date : {{this.preconisation.date }}</div>
+        </div>
+
+        <div style="text-align : right; margin-bottom: 10px;">
+            <div>{{this.preconisation.campaign}}</div>
+        </div>
+ 
+ 
+ 
+          <div class="receipt-info">
+            <div class="receipt-item">
+                <div class="receipt-item-lbl">CDA</div>
+                <div class="receipt-item-price">{{this.preconisation.cda}}</div>
+            </div>
+            <div class="receipt-item">
+                <div class="receipt-item-lbl">ZONE</div>
+                <div class="receipt-item-price">{{this.preconisation.zone }}</div>
+            </div>
+            <div class="receipt-item">
+                <div class="receipt-item-lbl">PARCELLE</div>
+                <div class="receipt-item-price">{{this.preconisation.parcel}}</div>
+            </div>
+
+            
+
+         </div>
+         
+
+         <div class="receipt-info">
+
+            <div style="text-align : center;">
+                <div>NOM COMPLET </div><br/>
+                <div>{{this.preconisation.third_party_name}}</div>
+
+            </div>
+ 
+       
+        </div>
+
+        <div class="receipt-items"   *ngFor="let article of articles; let i = index"> 
+          
+ 
+
+            <div class="receipt-item receipt-name">
+                <div class="receipt-item-lbl">{{article.category}}</div>
+            </div>
+ 
+                        <div class="receipt-item">
+                            <div class="receipt-item-lbl">- {{article.article_name}}</div>
+                            
+                            <div class="receipt-item-price"> {{article.quantity}}  {{article.unit}}</div>
+                       </div>
+               
+        </div>
+ 
+ 
+        <div class="signature">
+            <div>**  **</div>
+
+            <div>*  *</div>
+
+            <div>-------------------------</div>
+
+            <div>** MERCI **</div>
+
+            <div>*****</div>
+            <div>***</div>
+
+        </div>
+      
+    </div>
+
+    </div>
+
+
+  </div>

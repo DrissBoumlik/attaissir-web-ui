@@ -1218,3 +1218,432 @@ font-size: 28px;
 .dx-switch-on-value.dx-state-focused .dx-switch-handle:before {
   background-color: #49eb90;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+*    Hide the header and footer of paper
+**/
+  
+/**
+*    Delivery note style
+**/
+.module-commande-agriculteur
+{
+    
+}
+
+.app-with-sidebar .app-sidebar-wrapper .custom-main
+{
+    padding: 0;
+}
+
+.module-commande-agriculteur#page-afficher header,
+.module-commande-agriculteur#page-afficher .custom-sidebare,
+.module-commande-agriculteur#page-afficher .ui.message,
+.module-commande-agriculteur#page-afficher #btn-imprimer,
+.module-commande-agriculteur#page-afficher .stats-filters-outter-wrapper>.right,
+.module-commande-agriculteur#page-afficher .stats-filters-outter-wrapper>.left h2,
+.module-commande-agriculteur#page-afficher .stats-filters-outter-wrapper>.left span,
+.module-commande-agriculteur#page-afficher .tiers-info-title,
+.form-submit
+{
+    display: none !important;
+}
+
+.module-commande-agriculteur .custom-main
+{
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+.module-commande-agriculteur .tiers-info
+{
+    border: none;
+}
+
+.module-commande-agriculteur .tiers-info .column>table>tbody>tr:first-child 
+{
+    /* display: inline-block; */
+    /* position: absolute; */
+    /* top: -50px; */
+    /* left: 0px; */
+    /* right: 0; */
+    /* width: 100%; */
+    /* text-align: right; */
+}
+
+.module-commande-agriculteur .tiers-info .column>table>tbody>tr:first-child td:first-child {
+    /* float: left; */
+    /* padding: 0; */
+}
+
+.module-commande-agriculteur .tiers-info .column>table>tbody>tr:last-child td:first-child {
+    float: left;
+    width: 10%;
+}
+
+
+.module-commande-agriculteur table.table th,
+.module-commande-agriculteur table.table td
+{
+    font-size: 11px !important;
+}
+
+#section-stats-filters .stats-filters-outter-wrapper,
+#section-stats-filters .left h3
+{
+    margin: 0;
+    color: black;
+}
+
+#section-stats-filters .stats-filters-outter-wrapper>.left
+{
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.tiers-info .ui.two.column>.row>.column:last-child
+{
+    display: none;
+}
+
+.tiers-info .ui.two.column>.row>.column:first-child,
+.tiers-info .ui.two.column>.row>.column:first-child>table
+{
+    width: 100%;
+}
+
+.tiers-info .ui.two.column>.row>.column tr
+{
+    float: left;
+    width: 100%;
+}
+
+.tiers-info .ui.two.column>.row>.column tr:nth-child(2)
+{
+    display: none;
+}
+
+.tiers-info td
+{
+    font-size: 12px;
+}
+
+.tiers-info tr td:last-child
+{
+    color: #000000;
+    /* width: 99%; */
+    font-weight: 700;
+    letter-spacing: 0px;
+    font-size: 12px;
+}
+
+.tiers-info
+{
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.tiers-info .celled.line.table th:nth-child(3),
+.tiers-info .celled.line.table td:nth-child(3)
+{
+    display: none;
+}
+
+.tiers-info tr td:first-child
+{
+    padding-right: 0;
+}
+
+.module-commande-agriculteur .tiers-info .column>table>tbody>tr:last-child td:first-child {
+    float: initial !important;
+    width: 0%;
+}
+
+table.ui.fixed.table
+{
+    margin: 0;
+}
+
+table.ui.fixed.table>thead>tr>th:nth-child(2)
+{
+    display: none;
+}
+
+table.ui.fixed.table>tbody>tr>td:nth-child(2)
+{
+    display: none;
+    position: absolute;
+    left: 8%;
+    font-weight: 800;
+    border: none;
+    margin-top: -2px;
+}
+
+table.ui.fixed.table>tbody>tr>td:nth-child(2):after 
+{
+    content: ' - ';
+}
+
+#receipt-wrapper {
+    width: 198.425px;
+    margin: 0 auto;
+    padding: 28.3465px;
+    font-size: 11.3px;
+    font-weight: 700;
+    font-family: "courier new";
+    text-transform: uppercase;
+}
+
+/*#receipt-wrapper .receipt-block:first-child {*/
+/*    padding-bottom: 50px;*/
+/*    border-bottom: 1px dotted #000;*/
+/*}*/
+
+/*#receipt-wrapper .receipt-block:last-child {*/
+/*    padding-top: 50px;   */
+/*}*/
+
+#receipt-wrapper .receipt-head {
+    text-align: center;
+    font-weight: bold;
+    font-size: 17px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #000;
+    padding-bottom: 10px;
+}
+
+#receipt-wrapper .receipt-head p {
+    margin: 0;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+#receipt-wrapper .receipt-date-n {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#receipt-wrapper .receipt-info {
+    padding-top: 10px;
+    margin-bottom: 10px;
+    border-top: 1px dashed #000;
+}
+
+#receipt-wrapper .receipt-items {
+    border-top: 1px dashed #000;
+    margin-bottom: 0;
+    padding:10px 0;
+}
+#receipt-wrapper .receipt-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#receipt-wrapper .receipt-item .receipt-item-lbl, 
+#receipt-wrapper .receipt-item .receipt-item-price {
+    text-transform: uppercase;
+}
+
+#receipt-wrapper .total {
+    display: flex;
+    font-weight: 700;
+    flex-direction: row;
+    justify-content: flex-end;
+    border-top: 1px dashed #000;
+    padding: 10px 0;
+}
+
+#receipt-wrapper .total>div:first-child {
+    margin-right: 15px;
+}
+
+#receipt-wrapper .receipt-info.footer 
+{
+    padding-top: 0;
+    border-top: none;
+}
+
+#receipt-wrapper .receipt-info.footer>.divider
+{
+    text-align: center;
+    flex-direction: column;
+}
+
+#receipt-wrapper .receipt-info.footer>.receipt-item
+{
+    text-align: center;
+    flex-direction: column;
+}
+
+#receipt-wrapper .receipt-info.footer>.receipt-item>p 
+{
+    margin: 0;
+}
+#receipt-wrapper .receipt-info.footer>.receipt-item.note 
+{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #000;
+}
+#receipt-wrapper .receipt-item-header
+{
+    flex: 1;
+    flex-direction: column;
+    text-align: left;
+    padding: 5px 0;
+}
+
+#receipt-wrapper .signature
+{
+    height: 80px;
+    padding: 10px;
+    text-align: center;
+}
+
+#receipt-wrapper .receipt-item.sub>div:first-child
+{
+    padding-left: 40%;
+}
+
+#bon-convocation #receipt-wrapper {
+    width: auto !important;
+    font-size: 12px;
+}
+#bon-convocation #receipt-wrapper .receipt-head {
+    margin-top: -5px;   
+    border-bottom: 1px solid #000;
+}
+#bon-convocation .head-content {
+    display: inline-block;
+}
+#bon-convocation .head-content.col-1 {
+    width: 18%;
+    position: relative;
+    top: -10px;
+}
+#bon-convocation .head-content.col-4 {
+    width: 60%;
+}
+#bon-convocation .head-content.col-1 img {
+    width: 80px;
+    line-height: 88px;
+}
+#bon-convocation .head-content.col-4 p>strong {
+    font-weight: 800;
+}
+#bon-convocation .receipt-content-head {
+    margin-bottom: 10px;
+}
+#bon-convocation .receipt-content-head>h3 {
+    width: 30%;
+    float: left;
+}
+#bon-convocation .receipt-content-head>div {
+    text-align: center;
+    width: 100%;
+} 
+#bon-convocation .receipt-content-body {
+    display: block;
+    float: left;
+    width: 100%;
+}
+#bon-convocation .with-pulpe .receipt-content-body {
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #404040;
+}
+#bon-convocation .receipt-content-item {
+    text-align: right;
+    direction: rtl;
+    display: block;
+    width: 100%;
+    float: left;
+}
+#bon-convocation .with-pulpe .receipt-content-item>p {
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+#bon-convocation .receipt-content-item>p>strong {
+    font-size: 14px;    
+    font-weight: bolder;
+}
+
+#bon-convocation .receipt-content-item.item-1>p {
+    float: right;
+    width: 100%;
+}
+#bon-convocation .receipt-content-item.item-2>p {
+    float: right;
+    width: 50%;
+}
+#bon-convocation .receipt-content-item.item-3>p {
+    float: right;
+    width: 33%;
+}
+#bon-convocation #bar-code>img {
+    width: 100%;
+    position: relative;
+    top: 5px;
+    height: 40px;
+}
+#bon-convocation #bar-code>span {
+    font-size: 14px;
+}
+#bon-convocation #logo {
+    text-align: right;
+}
+#bon-convocation .sheet.padding-10mm {
+    padding: 10mm;
+    padding-top: 5mm;
+    padding-bottom: 5mm;
+}
+
+#bon-convocation .receipt-footer #logo>img{
+    width: 60px;
+}
+
+#bon-convocation .receipt-footer .receipt-content-item {
+    display: block;
+}
+
+#bon-convocation .receipt-footer .receipt-content-item.item-5>p{
+    display: inline-block;
+    width: 20%;
+}
+
+#bon-convocation .receipt-footer .receipt-content-item.item-1>p{
+    margin-top: 3px;   
+    margin-bottom: 3px;   
+}
+
+#bon-convocation .sheet, #bon-convocation .sheet:last-child {
+    page-break-after: auto;
+}
+
+.receipt-name {
+        text-align: center !important;
+}
+.custom_name {
+        text-align: center !important;
+
+}
+
+

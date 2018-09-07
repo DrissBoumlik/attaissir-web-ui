@@ -220,12 +220,18 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
     this.retourPopVisible = false;
   }
+  
 
   print() {
 
-    const print = window.open('', 'PRINT', 'height=400,width=600');
+ /*  const print = window.open('', 'PRINT', 'height=400,width=600');
 
     print.document.write('<html><head>');
+
+    print.document.write('<link  media="all" rel="stylesheet"href="https://fonts.googleapis.com/css?family=Tangerine">');
+    print.document.write("<style type='text/css'> @media print { body { font-family: 'Tangerine', serif; font-size: 48px;} }</style>");
+
+    
 
     // print.document.write('</head><body >');
     //  print.document.write('<h1>' + document.title  + '</h1>');
@@ -251,7 +257,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
       '<p> <span> N° ' + this.preconisation.id + ' </span></p>' +
 
-      '<p> <span style="float: right"> Date : ' + this.preconisation.date + '</span> </p> <br/>' +
+      '<p> <span style="float: right;font-family: Tangerine;"> Date : ' + this.preconisation.date + '</span> </p> <br/>' +
 
       '<p> <span style="float: right">' +
       this.preconisation.campaign + ' </span></p>  <br/>' +
@@ -292,9 +298,85 @@ export class ShowComponent implements OnInit, AfterViewInit {
     print.document.write('</body></html>');
     print.document.close(); // necessary for IE >= 10
     print.focus(); // necessary for IE >= 10*/
+   //  print.print();
+   // print.close();
+   // return true;
+
+     
+
+
+
+
+
+/*
+   const print = window.open('', 'PRINT', 'height=400,width=600');
+
+    print.document.write('<!DOCTYPE html>');
+
+    print.document.write('<html>');
+    print.document.write('<head>');
+
+    print.document.write(' <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  <title> - Système dinformation de gestion d amont agricole</title>  <meta name="description" content="Système de gestion des intrants"> <meta name="viewport" content="width=device-width, initial-scale=1">');
+
+     print.document.write('<link rel="stylesheet" href="http://localhost/test2/intrants_print.css" type="text/css" />');
+
+ 
+
+    print.document.write(' </head> <body>  <!-- Recu agriculteur --> <div id="receipt-wrapper"> <div class="receipt-block">   <div class="receipt-head">  <div>BON DE LIVRAISON</div>  <div>FACTURE</div>   </div> <div class="receipt-date-n">  <div>12/11/2018</div>  <div>N° 23</div>    </div>   <div class="receipt-info">   <div class="receipt-item">    <div class="receipt-item-lbl">Campagne</div>   <div class="receipt-item-price">237</div>   </div>   <div class="receipt-item">    <div class="receipt-item-lbl">C/Z/P</div> <div class="receipt-item-price">34/45/45</div>   </div>   <div class="receipt-item">   <div class="receipt-item-lbl">C.I.N</div>    <div class="receipt-item-price">D46474</div>  </div>  <div class="receipt-item receipt-name">    <div class="receipt-item-lbl">Nom</div>    <div class="receipt-item-price">Test test2</div>   </div>   </div>   <div class="receipt-items">  <div class="receipt-item-header">   <div>ttttst </div>   <div>*****</div>   </div>  <div class="receipt-item">  <div class="receipt-item-lbl">- hhhhhhh</div>   </div> <div class="receipt-item sub">  <div class="receipt-item-lbl">ggggggeeee</div>  <div class="receipt-item-price"> 66633 DH</div>  </div> </div>  <div class="total">   <div>montant total </div>  <div>344DH</div>  </div>  <div class="signature">    <div>** VISA **</div>   </div> <div class="receipt-info footer">  <div class="receipt-item divider">*****</div>    <div class="receipt-item note"><p>Les prix sont hors de <b>frais de finance</b> et <b>frais de gestion</b></p></div>  <div class="receipt-item">   <p>servi par </p>   <p>Pour nous contacter </p>   <p>+212 437 39378 </p>   <p>adress</p>   </div>  </div>   </div>  </div>');
+
+    print.document.write(' </body></html>');
+
     print.print();
     print.close();
     return true;
+
+        */
+
+
+     let  w=window.open('', 'PRINT', 'height=400,width=600');
+
+
+     w.document.write('<!DOCTYPE html>');
+
+     w.document.write('<html>');
+     w.document.write('<head>');
+
+
+     
+
+     w.document.write('<link rel="stylesheet" href="/assets/app/css/print.css" type="text/css" />');
+
+
+     
+
+     w.document.write('</head>');
+     w.document.write('<body>');
+w.document.write($('#t1').html());
+
+ 
+w.document.write('</body>');
+w.document.write('</html>');
+//w.print();
+
+
+
+w.print();
+
+
+setTimeout(() => {
+  w.close();
+}, 2000);
+
+
+return true;
+
+//w.close();
+
+      // window.print();
+   
+        
+ 
+   
   }
 
   changeLivrerPopup() {
