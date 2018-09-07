@@ -135,7 +135,6 @@ export class Helper {
     }*/
 
   public static getOrderStatusColor(value: string): string {
-    console.log(value);
     if (isNull(value)) {
       return 'm-badge m-badge--primary m-badge--wide';
     }
@@ -358,7 +357,7 @@ export class Helper {
       try {
         const bytes = CryptoJS.AES.decrypt(permissions_, 'Gra61884546585_55');
         const permissions_decrypt = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-        console.log(permissions_decrypt);
+
         if (value[0] === 'none') {
           // this.el.nativeElement.style.display = 'initial';
           v = true;

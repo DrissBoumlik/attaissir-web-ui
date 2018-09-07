@@ -230,11 +230,15 @@ export class ShowComponent implements OnInit, AfterViewInit {
     // print.document.write('</head><body >');
     //  print.document.write('<h1>' + document.title  + '</h1>');
     print.document.write('<style type="text/css"> @page { size: auto;  margin: 0mm; }' +
-      ' *{text-align: center;  } *{font-size: 10px} </style>');
-    print.document.write('<style type="text/css"> body { width: 250px; }</style>');
-    print.document.write('<style type="text/css"> .div1 {  position:absolute; width:250px; ' +
-      'height:300px; z-index:15; left:50%; margin:0px 0 0 -150px;}</style>');
+      ' *{text-align: center;  } *{font-size: 15px} </style>');
+      
+    print.document.write('<style type="text/css"> body { width: auto; }</style>');
+    print.document.write('<style type="text/css"> .div1 {  position:absolute; width:auto; ' +
+      'height:300px; z-index:15; left:50%; margin:0px 0 0 0px;}</style>');
 
+    print.document.write('<style type="text/css">@media print { .div1{  position:absolute; width:300px; height:300px; z-index:15; top:50%;left:50%; margin:-150px 0 0 -150px;}}</style>');
+
+      
 
     print.document.write('</head>');
 
@@ -304,6 +308,20 @@ export class ShowComponent implements OnInit, AfterViewInit {
         this.rf_code = this.rfid.nativeElement.value;
         this.rfid.nativeElement.value = '';
         this.focusout.nativeElement.focus();
+
+        if(this.rf_code != '') {
+          
+        this.rf_code= this.rf_code.replace(/à/g,"0");
+        this.rf_code= this.rf_code.replace(/&/g,"1");
+        this.rf_code= this.rf_code.replace(/é/g,"2");
+        this.rf_code= this.rf_code.replace('"',"3");
+        this.rf_code= this.rf_code.replace("'","4");
+        this.rf_code= this.rf_code.replace("(","5");
+        this.rf_code= this.rf_code.replace("-","6");
+        this.rf_code= this.rf_code.replace(/è/g,"7");
+        this.rf_code= this.rf_code.replace("_" ,"8");
+        this.rf_code= this.rf_code.replace(/ç/g,"9");
+        }
 
         if (this.popupDeliverVisible) {
           this.preconisationsIntrantsService.deliver(this.preconisation.id, this.pin_code, this.rf_code)
