@@ -4,6 +4,7 @@ import { ListComponent } from './components/list/list.component';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { ShowComponent } from './components/show/show.component';
 import { PermissionGuard } from '../../shared/directives/guard.directive';
+import { PrecoAvanceListComponent } from './components/preco-avance-list/preco-avance-list.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: 'afficher/:id',
         component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.articletemplates.show'] }
+      },
+      {
+        path: 'avance-primes',
+        component: PrecoAvanceListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.grid'] }
       }
     ]
   },

@@ -114,7 +114,7 @@ export class ShowComponent implements OnInit {
         w.document.write('<html>');
         w.document.write('<head>');
   
-        w.document.write('<link rel="stylesheet" href="http://localhost/test2/intrants_print.css" type="text/css" />'); 
+        w.document.write('<link rel="stylesheet" href="/assets/app/css/print.css" type="text/css" />');
         w.document.write('</head>');
         w.document.write('<body>');
         w.document.write($('#t1').html());

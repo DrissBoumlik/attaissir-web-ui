@@ -14,6 +14,7 @@ import {
   DxTextBoxModule
 } from 'devextreme-angular';
 import { ShowComponent } from './components/show/show.component';
+import { PrecoAvanceListComponent } from './components/preco-avance-list/preco-avance-list.component';
 
 
 
@@ -34,7 +35,8 @@ import { ShowComponent } from './components/show/show.component';
   ],
   declarations: [
     ListComponent,
-    ShowComponent
+    ShowComponent,
+    PrecoAvanceListComponent
   ]
 })
 export class PreconisationsIntrantsModule { }

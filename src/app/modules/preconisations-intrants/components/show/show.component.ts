@@ -333,48 +333,78 @@ export class ShowComponent implements OnInit, AfterViewInit {
         */
 
 
-     let  w=window.open('', 'PRINT', 'height=400,width=600');
 
+       const print = window.open('', 'PRINT', 'height=400,width=600');
 
-     w.document.write('<!DOCTYPE html>');
+       print.document.write('<html><head>');
+       print.document.write('<link rel="stylesheet" href="/assets/app/css/print.css" type="text/css" />');
+       print.document.write('</head>');
+   
+       print.document.write('<body>');
 
-     w.document.write('<html>');
-     w.document.write('<head>');
+       print.document.write(' <div id="receipt-wrapper"><div class="receipt-block"> <div class="receipt-head"> <div>BON DE LIVRAISON</div> </div> <div style="text-align : center; margin-bottom: 10px;">');
 
+       print.document.write('<div> N° '+this.preconisation.id +'</div> </div>');
 
-     
+      
+       print.document.write(' <div style="text-align : right;  margin-bottom: 5px;"><div>Date :' + this.preconisation.date + '</div></div>');
 
-     w.document.write('<link rel="stylesheet" href="/assets/app/css/print.css" type="text/css" />');
+        
+       print.document.write(' <div style="text-align : right; margin-bottom: 10px;"> <div>' +this.preconisation.campaign +'</div>  </div>');
 
+       
 
-     
-
-     w.document.write('</head>');
-     w.document.write('<body>');
-w.document.write($('#t1').html());
+       print.document.write('<div> N° '+this.preconisation.id +'</div> </div>');
 
  
-w.document.write('</body>');
-w.document.write('</html>');
-//w.print();
+       print.document.write(' <div class="receipt-info"> <div class="receipt-item"> <div class="receipt-item-lbl">CDA</div> <div class="receipt-item-price">' + this.preconisation.cda +' </div> </div>');
+
+ 
+       print.document.write(' <div class="receipt-item"> <div class="receipt-item-lbl">ZONE</div> <div class="receipt-item-price">'+this.preconisation.zone + '</div> </div>');
 
 
+       print.document.write('<div class="receipt-item"> <div class="receipt-item-lbl">PARCELLE</div> <div class="receipt-item-price">' + this.preconisation.parcel +'</div></div></div>');
 
-w.print();
-
-
-setTimeout(() => {
-  w.close();
-}, 2000);
+       print.document.write(' <div class="receipt-info"> <div style="text-align : center;"><div>NOM COMPLET </div>     <div>' + this.preconisation.third_party_name +'</div> </div> </div>');
 
 
-return true;
-
-//w.close();
-
-      // window.print();
-   
         
+     
+       print.document.write('<div class="receipt-items" >');
+
+
+          
+       this.articles.forEach(function(element) {
+        // print.document.write('<p style="font-weight: bolder;">' + element.category + '</p><br/>');
+         print.document.write('<div class="receipt-item receipt-name"> <div class="receipt-item-lbl">' + element.category +
+           '  </div> </div> <div class="receipt-item"> <div class="receipt-item-lbl">-  ' + element.article_name + ' </div> <div class="receipt-item-price"> ' +element.quantity +' ' +  element.unit +'</div> </div>');
+   
+       });
+            
+
+              
+      
+                     
+       print.document.write('</div>');
+
+        
+ 
+
+        print.document.write('   <div class="signature">  <div>**  **</div>  <div>*  *</div> <div>-------------------------</div> <div>** MERCI **</div> <div>*****</div><div>***</div> </div></div></div>');
+
+ 
+     
+
+
+
+       print.document.write('</body>');
+       print.document.write('</html>');
+
+       print.document.close(); // necessary for IE >= 10
+       print.focus(); // necessary for IE >= 10*/
+        print.print();
+     //  print.close();
+       return true;
  
    
   }
