@@ -136,6 +136,10 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         icon: 'flaticon-list-1',
         url: '/preconisations-intrants/liste',
         description: 'Préconisations intrants',
+        subMenu: [
+          { icon: 'flaticon-tabs', name: 'Préconisations intrants', url: '/preconisations-intrants/liste', permission: ['preconization.articletemplates.grid'] },
+          { icon: 'flaticon-list', name: 'Avances et primes', url: '/preconisations-intrants/avance-primes', permission: ['preconization.articletemplates.grid'] },
+        ],
         disabled: 'false'
       },
       {
