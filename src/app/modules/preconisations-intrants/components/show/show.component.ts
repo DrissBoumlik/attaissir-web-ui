@@ -360,13 +360,14 @@ w.document.write('</html>');
 
 
 
-w.print();
+      setTimeout(() => {
+          w.print();
+      }, 3000);
 
 
-setTimeout(() => {
-  w.close();
-}, 2000);
-
+      setTimeout(() => {
+          w.close();
+      }, 5000);
 
 return true;
 

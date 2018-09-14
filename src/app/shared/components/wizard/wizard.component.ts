@@ -515,7 +515,7 @@ export class WizardComponent implements OnInit {
       return ground;
     });
 
-    if (Number(this.contract.compaign_surface) !== Number(surfaces)) {
+    if (Number((this.contract.compaign_surface).toFixed(2)) !== Number((surfaces).toFixed(2))) {
       console.log(surfaces);
       console.log(this.contract.compaign_surface);
       this.toastr.warning('Les superficies contractées doivent être égales à la superficie de la campagne courant.');
