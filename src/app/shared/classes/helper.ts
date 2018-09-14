@@ -122,6 +122,16 @@ export class Helper {
     }
   }
 
+  public static getStatusValue(value: string): string {
+    if (value === 'inprogress') {
+      return 'En cours';
+    }
+    if (value === 'canceled') {
+      return 'Annulé';
+    }
+    return 'Validé';
+  }
+
 
   /*  public static getStatusColor = (value: string): string => {
       if (value === 'inprogress') {

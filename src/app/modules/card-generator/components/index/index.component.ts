@@ -55,8 +55,6 @@ export class IndexComponent implements OnInit {
         return this.cardGeneratorService.getCards(loadOptions)
           .toPromise()
           .then(response => {
-            console.log(response);
-            response.totalCount = 1;
             return response;
           })
           .catch(error => {
