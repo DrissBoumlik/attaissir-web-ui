@@ -43,6 +43,10 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/stock/situation',
         queryParams: { magazin: this.tenantId },
         description: 'mon stock',
+        subMenu: [
+          { icon: 'fa fa-archive', name: 'Mon stock', url: '/stock/situation', permission: ['distributionCenter.stocks.grid'], },
+
+        ],
         disabled: 'false'
       },
       {
@@ -66,10 +70,9 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         icon: 'flaticon-users',
         url: '/tiers/liste',
         description: 'Gestion des agrégés',
-        /*subMenu: [
-          { icon: 'flaticon-plus', name: 'Nouvel agrégé', url: '/tiers/ajouter' },
-          { icon: 'flaticon-warehouse-list', name: 'Liste des agrégés', url: '/tiers/liste' },
-        ],*/
+        subMenu: [
+          { icon: 'flaticon-users', name: 'Liste des agrégés', url: '/tiers/liste', permission: ['thirdParty.third-parties.grid'] },
+        ],
         disabled: 'false'
       },
       {
@@ -114,7 +117,10 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         description: 'Gestion des interventions',
         subMenu: [
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
-          { icon: 'flaticon-plus', name: 'Nouvelle  demande d\'intervention', url: '/interventions/selectionner', permission: ['preconization.interventions.store'] }
+          { icon: 'flaticon-plus', name: 'Préconisation individuelle', url: '/interventions/selectionner', permission: ['preconization.interventions.store'] },
+          { icon: 'flaticon-tabs', name: 'Liste des préconisations des intrants', url: '/preconisations-intrants/liste', permission: ['preconization.articletemplates.grid'] },
+          { icon: 'flaticon-list', name: 'Liste des  avances et primes', url: '/preconisations-intrants/avance-primes', permission: ['preconization.articletemplates.grid'] },
+          { icon: 'flaticon-file-1', name: 'Préconisation en mass', url: '/interventions/appliquer-template-parcelle', permission: ['preconization.articletemplates.store'] },
         ],
         disabled: 'false'
       },
@@ -128,26 +134,6 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           { icon: 'flaticon-tabs', name: 'Cartes', url: '/cartes/liste', permission: ['agreement.cards.index'] },
           { icon: 'flaticon-list', name: 'Générateur de cartes', url: '/carte-generateur/index', permission: ['agreement.cardsGenerator.show'] },
         ],
-        disabled: 'false'
-      },
-      {
-        name: 'Préconisations intrants',
-        permission: ['preconization.articletemplates.grid'],
-        icon: 'flaticon-list-1',
-        url: '/preconisations-intrants/liste',
-        description: 'Préconisations intrants',
-        subMenu: [
-          { icon: 'flaticon-tabs', name: 'Préconisations intrants', url: '/preconisations-intrants/liste', permission: ['preconization.articletemplates.grid'] },
-          { icon: 'flaticon-list', name: 'Avances et primes', url: '/preconisations-intrants/avance-primes', permission: ['preconization.articletemplates.grid'] },
-        ],
-        disabled: 'false'
-      },
-      {
-        name: 'Préconisations en mass',
-        permission: ['preconization.articletemplates.store'],
-        icon: 'flaticon-file-1',
-        url: '/interventions/appliquer-template-parcelle',
-        description: 'Preconisations intrants',
         disabled: 'false'
       },
       {
