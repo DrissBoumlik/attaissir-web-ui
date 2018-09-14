@@ -99,7 +99,7 @@ let  code =  this.rf_code;
         return this.preconisationsIntrantsService.getListeAvancesDx(loadOptions)
           .toPromise()
           .then(response => {
-            console.log(response);
+
             return response;
           })
           .catch(error => {

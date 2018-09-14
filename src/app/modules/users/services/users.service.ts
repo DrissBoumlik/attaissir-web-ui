@@ -94,6 +94,20 @@ export class UsersService {
     });
   }
 
+  
+  /**
+   * Delete a user
+   * @param id  the id of the contracts intended to delete
+   * @returns {Observable<any>}
+   */
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/users/` + id, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
 
 }
 

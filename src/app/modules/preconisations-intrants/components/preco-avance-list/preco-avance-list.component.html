@@ -103,7 +103,11 @@
 
         <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="helper.getStatusColor(data.value)">
+<<<<<<< HEAD
+                 {{helper.getStatut(data.value)}}
+=======
                {{ helper.getStatusValue(data.value) }}
+>>>>>>> b51118e275bbc81a77da1836a64100634404c8b6
       </span>
         </div>
 

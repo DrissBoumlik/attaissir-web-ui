@@ -112,7 +112,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'interventions',
         icon: 'flaticon-add',
-        permission: ['preconization.interventions.grid'],
+        permission: ['preconization.interventions.store'],
         url: '/interventions/selectionner',
         description: 'Gestion des interventions',
         subMenu: [

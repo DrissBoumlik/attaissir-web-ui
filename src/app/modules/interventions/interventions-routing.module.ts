@@ -6,18 +6,16 @@ import { AddComponent } from './components/add/add.component';
 import { ListComponent } from './components/list/list.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AddTempleteComponent } from './components/add-templete/add-templete.component';
-
-// class hasPermissions implements CanActivate(){
-
-// }
 import { PermissionGuard } from '../../shared/directives/guard.directive';
+
+
 
 const routes: Routes = [{
   path: 'interventions',
   component: DefaultComponent,
   children: [
     { path: 'selectionner', component: NewComponent },
-    { path: 'ajouter', component: AddComponent },
+    { path: 'ajouter', component: AddComponent , data: { permission: ['preconization.interventions.store'] } },
     { path: 'template/ajouter', component: AddTempleteComponent },
     { path: 'modifier/:id', component: EditComponent },
     { path: 'list', component: ListComponent },
