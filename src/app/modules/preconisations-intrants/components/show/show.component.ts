@@ -352,10 +352,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
         
        print.document.write(' <div style="text-align : right; margin-bottom: 10px;"> <div>' +this.preconisation.campaign +'</div>  </div>');
 
-       
-
-       print.document.write('<div> N° '+this.preconisation.id +'</div> </div>');
-
+    
  
        print.document.write(' <div class="receipt-info"> <div class="receipt-item"> <div class="receipt-item-lbl">CDA</div> <div class="receipt-item-price">' + this.preconisation.cda +' </div> </div>');
 
@@ -377,7 +374,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
        this.articles.forEach(function(element) {
         // print.document.write('<p style="font-weight: bolder;">' + element.category + '</p><br/>');
          print.document.write('<div class="receipt-item receipt-name"> <div class="receipt-item-lbl">' + element.category +
-           '  </div> </div> <div class="receipt-item"> <div class="receipt-item-lbl">-  ' + element.article_name + ' </div> <div class="receipt-item-price"> ' +element.quantity +' ' +  element.unit +'</div> </div>');
+           '  </div> </div> <div class="receipt-item"> <div class="receipt-item-lbl">  ' + element.article_name + ' </div> <div class="receipt-item-price"> : ' +element.quantity +' ' +  element.unit +'</div> </div>');
    
        });
             

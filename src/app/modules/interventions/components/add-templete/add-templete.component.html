@@ -69,7 +69,9 @@
             <dxo-filter-row [visible]="true"></dxo-filter-row>
             <dxo-header-filter [visible]="true"></dxo-header-filter>
             <dxo-scrolling  mode="standard" [showScrollbar]="'always'"></dxo-scrolling>
-            <dxi-column dataField="parent_id" caption=" "  [width]="100"  cellTemplate="parent_idTemplate"></dxi-column>
+            <dxi-column dataField="parent_id" caption=" "  [width]="100"  cellTemplate="parent_idTemplate"
+            [allowSorting]="false" [allowFiltering]="false"
+            ></dxi-column>
 
             <dxi-column dataField="name" [width]="300" caption="Parcelle"   cellTemplate="nameTemplate"></dxi-column>
             <dxi-column dataField="id" caption="Id"  [visible]="false"></dxi-column>
