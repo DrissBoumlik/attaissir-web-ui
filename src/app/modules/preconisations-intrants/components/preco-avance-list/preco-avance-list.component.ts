@@ -26,7 +26,7 @@ export class PrecoAvanceListComponent implements OnInit {
   @ViewChild('popup') popup: ElementRef;
   @ViewChild('proclist') proclist: DxDataGridComponent;
 
-  
+
 
 
   constructor(private route: ActivatedRoute, private preconisationsIntrantsService: PreconisationsIntrantsService) {
@@ -37,13 +37,19 @@ export class PrecoAvanceListComponent implements OnInit {
 
   ngOnInit() {
 
-    
+
 this.preconisations.store = new CustomStore({
       load: (loadOptions: any) => {
         loadOptions.rfid  = 0;
         return this.preconisationsIntrantsService.getListeAvancesDx(loadOptions)
           .toPromise()
           .then(response => {
+            const res = {};
+            console.log(response);
+            response.data.forEach( rs => {
+             rs.state = this.helper.getStatusValue(rs.state);
+             rs.rib =  rs.rib ? `${rs.bank_code}${rs.rib}${rs.bank_rib_key}` : '' ;
+           });
             console.log(response);
             return response;
           })
@@ -55,10 +61,10 @@ this.preconisations.store = new CustomStore({
 
   }
 
- 
+
 
   SearchByRfid() {
-  
+
 
     this.popup.nativeElement.addEventListener('click', () => {
       this.rfid.nativeElement.focus();
@@ -69,13 +75,13 @@ this.preconisations.store = new CustomStore({
     this.rfid.nativeElement.addEventListener('input', () => {
 
       setTimeout(() => {
-         
+
 
 
       this.rf_code = this.rfid.nativeElement.value;
       this.rfid.nativeElement.value = '';
       this.focusout.nativeElement.focus();
-    
+
 
       if(this.rf_code != ''){
 
@@ -107,17 +113,17 @@ let  code =  this.rf_code;
           });
       }
     });
-  
+
 
       }
-     
+
 
       this.popupRfidVisible = false;
- 
+
       }, 1000);
 
 
-      
+
 
     });
 
