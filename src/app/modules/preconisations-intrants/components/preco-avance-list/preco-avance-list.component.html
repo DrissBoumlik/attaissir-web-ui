@@ -82,7 +82,7 @@
                     [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
         <dxi-column dataType="Number" sortOrder="desc" dataField="id" caption="Réf"></dxi-column>
         <dxi-column dataType="Date" dataField="date" caption="Date d'octroi"></dxi-column>
-        <dxi-column  dataField="division" caption="Division"></dxi-column>
+        <dxi-column dataField="division" caption="Division"></dxi-column>
         <dxi-column dataField="cda" caption="CDA"></dxi-column>
         <dxi-column dataField="zone" caption="Zone"></dxi-column>
         <dxi-column dataField="secteur" caption="Secteur"></dxi-column>
@@ -103,11 +103,7 @@
 
         <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="helper.getStatusColor(data.value)">
-<<<<<<< HEAD
-                 {{helper.getStatut(data.value)}}
-=======
-               {{ helper.getStatusValue(data.value) }}
->>>>>>> b51118e275bbc81a77da1836a64100634404c8b6
+           {{data.value}}
       </span>
         </div>
 
