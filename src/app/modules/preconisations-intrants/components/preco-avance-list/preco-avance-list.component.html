@@ -11,19 +11,7 @@
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body m-portlet__body--no-padding">
-      <div class="m-portlet__head">
-        <div class="m-portlet__head-tools">
-          <div class="buttons">
-            <dx-button
-              icon="fa fa-check"
-              style="font-weight: bold"
-              [type]="'success'"
-              text=" Recherche par carte"
-              (onClick)="Scan()">
-            </dx-button>
-          </div>
-        </div>
-      </div>
+     
 
       <dx-data-grid
         #proclist
@@ -103,11 +91,7 @@
 
         <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="helper.getStatusColor(data.value)">
-<<<<<<< HEAD
-                 {{helper.getStatut(data.value)}}
-=======
                {{ helper.getStatusValue(data.value) }}
->>>>>>> b51118e275bbc81a77da1836a64100634404c8b6
       </span>
         </div>
 
