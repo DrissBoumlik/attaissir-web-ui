@@ -78,20 +78,19 @@
         <dxo-grouping #expand [autoExpandAll]="false"></dxo-grouping>
 
         <dxi-column dataField="id" [width]="40" caption="" [visible]="helper.permissionMethod(['preconization.interventions.show'])" [allowSorting]="false" [allowFiltering]="false"
-                    [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
+                    cellTemplate="consulterTemplate"></dxi-column>
         <dxi-column dataType="Number" sortOrder="desc" dataField="id" caption="Réf"></dxi-column>
         <dxi-column dataField="cda" caption="CDA"></dxi-column>
-        <dxi-column dataType="Date" dataField="date" caption="Date de commande"></dxi-column>
         <dxi-column dataField="zone" caption="Zone"></dxi-column>
+        <dxi-column dataField="name" caption="Parcelle"></dxi-column>
+        <dxi-column dataType="Date" dataField="date" caption="Date de commande"></dxi-column>
         <dxi-column dataField="type" caption="Type" cellTemplate="typeTemplate"></dxi-column>
         <dxi-column dataField="sub_irt_name" caption="Sous-Famille"></dxi-column>
-        <dxi-column dataField="name" caption="Parcelle"></dxi-column>
         <dxi-column dataField="full_name" caption="Nom d'agriculteur"></dxi-column>
         <dxi-column dataField="cin" caption="C.I.N d'agriculter"></dxi-column>
         <!--<dxi-column dataField="article_count" [allowSorting]="false" [allowFiltering]="false"
                     caption="Nombre d'article"></dxi-column>-->
         <dxi-column dataField="state" [allowSorting]="false" caption="Etat" cellTemplate="statusTemplate"></dxi-column>
-
 
         <div *dxTemplate="let data of 'typeTemplate'">
           <div *ngIf="data.value === 'product'">
