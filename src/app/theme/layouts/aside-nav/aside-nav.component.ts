@@ -119,7 +119,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
           { icon: 'flaticon-plus', name: 'Préconisation individuelle', url: '/interventions/selectionner', permission: ['preconization.interventions.store'] },
           { icon: 'flaticon-tabs', name: 'Liste des préconisations des intrants', url: '/preconisations-intrants/liste', permission: ['preconization.articletemplates.grid'] },
-          { icon: 'flaticon-list', name: 'Liste des  avances et primes', url: '/preconisations-intrants/avance-primes', permission: ['preconization.articletemplates.grid'] },
+          { icon: 'flaticon-list', name: 'Liste des  avances et primes', url: '/preconisations-intrants/avance-primes', permission: ['preconization.interventions.avance_prime'] },
           { icon: 'flaticon-file-1', name: 'Préconisation en mass', url: '/interventions/appliquer-template-parcelle', permission: ['preconization.articletemplates.store'] },
         ],
         disabled: 'false'
