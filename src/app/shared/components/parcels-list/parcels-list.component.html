@@ -1,4 +1,4 @@
-<dx-data-grid 
+<dx-data-grid
   id="gridContainer"
   [dataSource]="data"
   [columnHidingEnabled]="true"
@@ -56,10 +56,14 @@
   <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
 
+  <dxi-column dataField="cda" caption="CDA"></dxi-column>
+  <dxi-column dataField="zone" caption="Zone"></dxi-column>
+  <dxi-column dataField="sector" caption="Secteur"></dxi-column>
   <dxi-column dataField="name" caption="Nom de la parcelle"></dxi-column>
   <dxi-column dataField="third_party_code" caption="Code Agrégé" cellTemplate="userTemplate" [visible]="helper.permissionMethod(['thirdParty.third-parties.show'])" width="150px"></dxi-column>
   <dxi-column dataField="cin" caption="CIN"></dxi-column>
   <dxi-column dataField="full_name" caption="Nom complet" style="color: #6d7fcc; align-content: center; cursor: pointer" ></dxi-column>
+  <dxi-column dataField="rib" caption="RIB" style="color: #6d7fcc; align-content: center; cursor: pointer" ></dxi-column>
   <dxi-column dataField="contract_code" caption="Réf. Contrat" cellTemplate="contractTemplate" [visible]="helper.permissionMethod(['agreement.contracts.grid'])" width="150px"></dxi-column>
   <dxi-column dataField="application_date" dataType="date" caption="Date d'application" [visible]="false"></dxi-column>
   <dxi-column dataField="annuel_surface" dataType="number" caption="Superficie annuelle"></dxi-column>

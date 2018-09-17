@@ -34,6 +34,7 @@ export class ListComponent implements OnInit {
               console.log(a);
               a['parcels'] = [];
               for (let i = 0; i < data['data'].length; i++) {
+                data['data'][i].rib =  `${data['data'][i].bank_code}${data['data'][i].bank_account_number}${data['data'][i].bank_rib_key}`;
                 if (a.id === data['data'][i].parcel_id) {
                   a['parcels'].push(data['data'][i]);
                 }
