@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://json.code.go',
+  apiUrl: 'http://api.siam618.graviton.ma',
   deleteThirdApiUrl: '',
 };
 
