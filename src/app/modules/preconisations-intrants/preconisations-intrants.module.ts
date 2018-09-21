@@ -15,6 +15,7 @@ import {
 } from 'devextreme-angular';
 import { ShowComponent } from './components/show/show.component';
 import { PrecoAvanceListComponent } from './components/preco-avance-list/preco-avance-list.component';
+import { DetailsComponent } from './components/details/details.component';
 import { SharedModule } from '../../shared/shared.module';
 
 
@@ -37,7 +38,8 @@ import { SharedModule } from '../../shared/shared.module';
   declarations: [
     ListComponent,
     ShowComponent,
-    PrecoAvanceListComponent
+    PrecoAvanceListComponent,
+    DetailsComponent
   ]
 })
 export class PreconisationsIntrantsModule { }

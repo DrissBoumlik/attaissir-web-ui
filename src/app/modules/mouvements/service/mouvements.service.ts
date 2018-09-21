@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
-import { Article } from '../../../shared/classes/article';
-import { Warehouse } from '../../../shared/classes/warehouse';
-import { Third } from '../../../shared/classes/third';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../../../environments/environment';
+import {Article} from '../../../shared/classes/article';
+import {Third} from '../../../shared/classes/third';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +18,20 @@ export class MouvementsService {
 
   getListeDemandesDx(params?: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/${this.routeName}/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+
+  /**
+   *
+   * @param params
+   * @returns {Observable<any>}
+   */
+  getListeMouvementDetailsDx(params?: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/mouvement/details`, JSON.stringify(params), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

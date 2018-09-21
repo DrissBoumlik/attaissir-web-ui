@@ -26,6 +26,21 @@ export class PreconisationsIntrantsService {
     });
   }
 
+  getListPreconisationsDetailsDx(params?: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/preconizations/detail`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getListPreconisationsDetailKPIs(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/preconizations/detail/kpis`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
 
 
 
@@ -101,7 +116,7 @@ export class PreconisationsIntrantsService {
 
 
 
-  
+
   getListeAvancesDx(params?: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/interventionlist/ap/grid`, JSON.stringify(params), {
       headers: new HttpHeaders({

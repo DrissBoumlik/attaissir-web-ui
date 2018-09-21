@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import { Helper } from '../../../../shared/classes/helper';
-import { isNull } from 'util';
-import { MouvementsService } from '../../service/mouvements.service';
+import {Helper} from '../../../../shared/classes/helper';
+import {isNull} from 'util';
+import {MouvementsService} from '../../service/mouvements.service';
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -20,14 +21,39 @@ export class DetailsComponent implements OnInit {
   }
 
 
-
   ngOnInit() {
     this.mouvements.store = new CustomStore({
       load: (loadOptions: any) => {
-        return this.mouvementsService.getListeDemandesDx(loadOptions)
+        return this.mouvementsService.getListeMouvementDetailsDx(loadOptions)
           .toPromise()
           .then(response => {
             console.log(response);
+            const res = [];
+            response.data.map(
+              (mv: any) => {
+                mv.emetteur = {
+                  id: mv.ss_id ? mv.ss_id : mv.tsd_id,
+                  name: mv.ss_name ? mv.ss_name : mv.tsd_full_name,
+                  address: mv.ss_address ? mv.ss_address : mv.tsd_address,
+                  tel: mv.ss_tel ? mv.ss_tel : mv.tsd_tel1,
+                  email: mv.ss_email ? mv.ss_email : mv.tsd_email,
+                  rc: mv.tsd_rc ? mv.tsd_rc : '',
+                  patent_number: mv.tsd_patent_number ? mv.tsd_patent_number : '',
+                  i_f: mv.tsd_if ? mv.tsd_if : '',
+                  ice: mv.tsd_ice ? mv.tsd_ice : '',
+                  tva_code: mv.tsd_tva_code ? mv.tsd_tva_code : '',
+                };
+                mv.recepteur = {
+                  id: mv.sd_id ? mv.sd_id : mv.sd_id,
+                  name: mv.sd_name ? mv.sd_name : mv.sd_name,
+                  address: mv.sd_address ? mv.sd_address : mv.sd_address,
+                  tel: mv.sd_tel ? mv.sd_tel : mv.sd_tel,
+                  email: mv.sd_email ? mv.sd_email : mv.sd_email
+                };
+                return mv;
+              }
+            );
+            /*console.log(response);
             response.data.forEach((it) => {
               if (it.to_warehouse_name != null) {
                 it.recepteur = it.to_warehouse_name;
@@ -41,7 +67,7 @@ export class DetailsComponent implements OnInit {
                 it.emetter = it.from_warehouse_name;
               }
             });
-
+*/
             const json = response;
             return json;
           })
@@ -50,7 +76,6 @@ export class DetailsComponent implements OnInit {
           });
       }
     });
-
 
 
     Helper.permissionMethod(['none'])
