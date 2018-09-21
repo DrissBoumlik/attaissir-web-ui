@@ -1,0 +1,170 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+      <h2>Liste détaillée des préconisations</h2>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body m-portlet__body--no-padding">
+      <dx-data-grid
+        id="gridContainer"
+        [dataSource]="preconisations"
+        showBorders="true"
+        [columnHidingEnabled]="false"
+        [allowColumnResizing]="false"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        KeyExpr="id">
+
+        <dxo-export [enabled]="true" fileName="magasin" [allowExportSelectedData]="true"></dxo-export>
+
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxo-group-panel [visible]="true"></dxo-group-panel>
+        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+        <dxo-editing
+          mode="popup"
+          [useIcons]="true"
+          [allowDeleting]="false"
+          [allowUpdating]="false"
+        >
+        </dxo-editing>
+        <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+        <dxo-selection mode="multiple"></dxo-selection>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxo-pager
+          [allowedPageSizes]="[5, 8, 15, 30]"
+          [showInfo]="true"
+          [showNavigationButtons]="true"
+          [showPageSizeSelector]="true"
+          [visible]="true">
+        </dxo-pager>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+        <dxi-column   dataField="soa_id" caption="Réf"></dxi-column>
+        <dxi-column   dataField="so_date" format="dd-MM-yyyy" dataType="date de mouvement" [allowFiltering]="true"
+                    caption="Date"></dxi-column>
+        <dxi-column  dataField="so_state" caption="Etat" [allowFiltering]="false"
+                    cellTemplate="statusTemplate"></dxi-column>
+        <dxi-column  dataField="s_name" caption="Division"></dxi-column>
+        <dxi-column [visible]="false" dataField="s_name_ar" caption="Division(AR)"></dxi-column>
+        <dxi-column [visible]="false" dataField="s_code" caption="Code division"></dxi-column>
+        <dxi-column [visible]="false" dataField="s_city" caption="Ville division"></dxi-column>
+        <dxi-column [visible]="false" dataField="s_address" caption="Adresse division"></dxi-column>
+        <dxi-column [visible]="false" dataField="s_address" caption="Adresse division"></dxi-column>
+        <dxi-column [visible]="false" dataField="s_zip_code" caption="Code postale division"></dxi-column>
+        <dxi-column [visible]="false" dataField="s_tel1" caption="№ tel (Division)"></dxi-column>
+        <dxi-column  dataField="w_name" caption="CD"></dxi-column>
+        <dxi-column [visible]="false" dataField="w_address" caption="Adresse (CD)"></dxi-column>
+        <dxi-column [visible]="false" dataField="w_tel" caption="№ tel (CD)"></dxi-column>
+        <dxi-column [visible]="false" dataField="w_email" caption="Adresse mail (CD)"></dxi-column>
+        <dxi-column  dataField="cda_name" caption="CDA"></dxi-column>
+        <dxi-column [visible]="false" dataField="cda_code" caption="Code CDA"></dxi-column>
+        <dxi-column  dataField="z_name" caption="Zone"></dxi-column>
+        <dxi-column [visible]="false" dataField="z_code" caption="Code zone"></dxi-column>
+        <dxi-column  dataField="p_name" caption="Parcelle"></dxi-column>
+        <dxi-column [visible]="false" dataField="p_code_ormva" caption="Code ORMVA"></dxi-column>
+        <dxi-column  dataField="request_surface_work" caption="Superficie(Ha)"></dxi-column>
+        <dxi-column  dataField="tp_full_name" caption="Nom complet (agrégé)"></dxi-column>
+        <dxi-column  dataField="tp_full_name_ar" caption="Nom complet(AR) (agrégé)"></dxi-column>
+        <dxi-column  dataField="tp_cin" caption="CIN (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_email" caption="Email (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_birth_date" caption="Date de naissance (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_death_date" caption="Date de décès (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_sexe" caption="Sexe (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_address" caption="Adresse (agrégé) "></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_address_ar" caption="Adresse(AR) (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_city" caption="Ville (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_district" caption="District (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_commandment" caption="Commandement (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_commune" caption="Commune (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_region" caption="Région (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_zip_code" caption="Code postale (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_tel1" caption="№ tel (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_is_insured" caption="Assuré(e) (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_is_retired" caption="retraité(e) (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_payment_method" caption="Mode de paiement (agrégé)"></dxi-column>
+        <dxi-column [visible]="false" dataField="tp_bank_name" caption="Banque (agrégé)"></dxi-column>
+        <dxi-column  dataField="tp_code" caption="Code agrégé"></dxi-column>
+        <dxi-column  dataField="tp_rib" caption="RIB (agrégé)"></dxi-column>
+        <dxi-column  dataField="ar_name" caption="Article"></dxi-column>
+        <dxi-column [visible]="false" dataField="ar_code" caption="Code article"></dxi-column>
+        <dxi-column [visible]="false" dataField="ar_unit" caption="Unité"></dxi-column>
+        <dxi-column [visible]="false" dataField="ar_variety" caption="Vartieté"></dxi-column>
+        <dxi-column [visible]="false" dataField="ar_value" caption="Valeur"></dxi-column>
+        <dxi-column  dataField="arcp_name" caption="Famille"></dxi-column>
+        <dxi-column [visible]="false" dataField="arcp_code" caption="Code famille"></dxi-column>
+        <dxi-column  dataField="arc_name" caption="Sous famille"></dxi-column>
+        <dxi-column [visible]="false" dataField="arc_code" caption="Code sous-famille"></dxi-column>
+        <dxi-column  dataField="soa_quantity" caption="Quantité"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_full_name" caption="Nom Complet (Fournisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_code" caption="Code (Fournisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_rc" caption="RC (Fournisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_patent_number" caption="№ Patente (Fournisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_if" caption="IF (Fournisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_ice" caption="ICE (Fournisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_address" caption="Adresse (Fournisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_city" caption="Ville (Fournisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_tel1" caption="№ Tel (Fo urnisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_tva_code" caption="Codee TVA (Fournisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_email" caption="Adresse mail (Fournisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_rib" caption="RIB (Fournisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="fournisseur_bank_name" caption="Banque (Fournisseur)"></dxi-column>
+        <dxi-column [visible]="false" dataField="a_code" caption="Code (Contrat)"></dxi-column>
+        <dxi-column [visible]="false" dataField="a_application_date" caption="Date d'application (Contrat)"></dxi-column>
+        <dxi-column [visible]="false" dataField="a_type" caption="Type (Contrat)"></dxi-column>
+        <dxi-column [visible]="false" dataField="a_contracted_surface" caption="Superficie contractée (Ha)(Contrat)"></dxi-column>
+        <dxi-column [visible]="false" dataField="a_compaign_surface" caption="Superficie de la campagne (Ha)(Contrat)"></dxi-column>
+        <dxi-column [visible]="false" dataField="cmp_description" caption="Campagne"></dxi-column>
+        <dxi-column [visible]="false" dataField="cmp_estimated_surface" caption="Superficie estimée (Ha)(Campagne)"></dxi-column>
+        <dxi-column [visible]="false" dataField="cmp_estimated_tonnage" caption="Tonnage estimé (Campagne)"></dxi-column>
+        <!--<dxi-column dataField="so_type" caption="Type"  [calculateGroupValue]="helper.groupedMouvementValue" cellTemplate="typeTemplate"></dxi-column>
+        <dxi-column dataField="so_bon_number" caption="N° Bon de livraison fournisseur" cellTemplate="bon_nbrTemplate"></dxi-column>
+        <dxi-column dataField="so_state" caption="Etat"  [allowFiltering]="false" cellTemplate="statusTemplate"></dxi-column>
+        <dxi-column dataField="ar_name" caption="Article"></dxi-column>
+        <dxi-column dataField="soa_quantity" caption="Quantité"></dxi-column>
+        <dxi-column dataField="ar_code" caption="Code article"></dxi-column>
+        <dxi-column dataField="ar_unit" caption="Unité"></dxi-column>
+        <dxi-column dataField="ar_variety" caption="Varieté"></dxi-column>
+        <dxi-column dataField="ar_value" caption="Valeur"></dxi-column>
+        <dxi-column dataField="arc_name" caption="Groupe d'article"></dxi-column>
+        <dxi-column dataField="arc_doe" caption="Code groupe article"></dxi-column>
+        <dxi-column dataField="emetteur.name" caption="Emetteur"></dxi-column>
+        <dxi-column dataField="emetteur.address" caption="Adresse emetteur"></dxi-column>
+        <dxi-column dataField="emetteur.tel" caption="Tél emetteur"></dxi-column>
+        <dxi-column dataField="emetteur.email" caption="Adresse mail emetteur"></dxi-column>
+        <dxi-column dataField="emetteur.rc" caption="RC emetteur"></dxi-column>
+        <dxi-column dataField="emetteur.patent_number" caption="numéro de patente emetteur"></dxi-column>
+        <dxi-column dataField="emetteur.i_f" caption="IF emetteur"></dxi-column>
+        <dxi-column dataField="emetteur.ice" caption="ICE emetteur"></dxi-column>
+        <dxi-column dataField="emetteur.tva_code" caption="Code TVA emetteur"></dxi-column>
+        <dxi-column dataField="recepteur.name" caption="Récepteur"></dxi-column>
+        <dxi-column dataField="recepteur.address" caption="Adresse récepteur"></dxi-column>
+        <dxi-column dataField="recepteur.tel" caption="Tél récepteur"></dxi-column>
+        <dxi-column dataField="recepteur.email" caption="Adresse mail récepteur"></dxi-column>-->
+        <div *dxTemplate="let data of 'statusTemplate'">
+      <span [ngClass]="getStatusColor(data.value)">
+                  {{ data.value }}
+      </span>
+        </div>
+
+        <div *dxTemplate="let data of 'bon_nbrTemplate'" class="pull-left">
+          # {{data.value}}
+        </div>
+
+        <div *dxTemplate="let data of 'typeTemplate'">
+          {{ helper.orderType(data.value).toUpperCase() }}
+        </div>
+
+      </dx-data-grid>
+    </div>
+  </div>
+</div>

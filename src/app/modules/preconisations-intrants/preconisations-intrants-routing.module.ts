@@ -5,6 +5,7 @@ import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { ShowComponent } from './components/show/show.component';
 import { PermissionGuard } from '../../shared/directives/guard.directive';
 import { PrecoAvanceListComponent } from './components/preco-avance-list/preco-avance-list.component';
+import {DetailsComponent} from './components/details/details.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'liste',
         component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.grid'] }
+      },
+      {
+        path: 'liste/details',
+        component: DetailsComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.grid'] }
       },
       {
         path: 'liste/:cin',

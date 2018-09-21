@@ -43,7 +43,7 @@ export class ListComponent implements OnInit {
             });
             console.log(data);
             response['data'] = data;
-            response['totalCount'] = data.filter(total => total.is_logical).length;
+           //  response['totalCount'] = data.filter(total => total.is_logical).length;
             return response;
           })
           .catch(error => {
