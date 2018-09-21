@@ -30,6 +30,14 @@ export class EditComponent implements OnInit, OnDestroy {
   private paramsSubscription: Subscription;
   private httpSubscription: Subscription;
 
+
+  popupRfidVisible = false;
+  rf_code = null;
+
+  @ViewChild('rfid') rfid: ElementRef;
+  @ViewChild('focusout') focusout: ElementRef;
+  @ViewChild('popup') popup: ElementRef;
+
   constructor(
     private userService: UsersService,
     private router: Router,
@@ -92,6 +100,7 @@ export class EditComponent implements OnInit, OnDestroy {
           (response: any) => {
              this.userId = response.data.id;
             this.user.email = response.data.email;
+            this.user.rfid = response.data.rfid;
             this.user.name = response.data.name;
             this.userRole = response.data.role[0];
             this.user.role_id = response.data.role[0];
@@ -378,6 +387,7 @@ export class EditComponent implements OnInit, OnDestroy {
       const data = {
         email: this.user.email,
         name: this.user.name,
+        rfid: this.user.rfid,
         password: this.user._password,
         role_id: this.user.role_id,
         structure_id: structure_id,
@@ -409,6 +419,90 @@ export class EditComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.paramsSubscription.unsubscribe();
     this.httpSubscription.unsubscribe();
+  }
+
+
+
+  
+
+
+  SearchByRfid() {
+
+    this.rf_code  = '';
+
+    this.popup.nativeElement.addEventListener('click', () => {
+      this.rfid.nativeElement.focus();
+    });
+
+    this.rfid.nativeElement.focus();
+
+    this.rfid.nativeElement.addEventListener('input', () => {
+
+      setTimeout(() => {
+
+      this.rf_code = this.rfid.nativeElement.value;
+      this.rfid.nativeElement.value = '';
+      this.focusout.nativeElement.focus();
+
+
+      if(this.rf_code != ''){
+
+        this.rf_code= this.rf_code.replace(/à/g,"0");
+        this.rf_code= this.rf_code.replace(/&/g,"1");
+        this.rf_code= this.rf_code.replace(/é/g,"2");
+        this.rf_code= this.rf_code.replace('"',"3");
+        this.rf_code= this.rf_code.replace("'","4");
+        this.rf_code= this.rf_code.replace("(","5");
+        this.rf_code= this.rf_code.replace("-","6");
+        this.rf_code= this.rf_code.replace(/è/g,"7");
+        this.rf_code= this.rf_code.replace("_" ,"8");
+        this.rf_code= this.rf_code.replace(/ç/g,"9");
+
+        console.log(this.rf_code);
+
+        this.user.rfid = this.rf_code;
+//this.preconisations = {};
+/*
+let  code =  this.rf_code;
+       this.preconisations.store = new CustomStore({
+      load: (loadOptions: any) => {
+        loadOptions.rfid  = code;
+        return this.preconisationsIntrantsService.getListeAvancesDx(loadOptions)
+          .toPromise()
+          .then(response => {
+
+            return response;
+          })
+          .catch(error => {
+            throw error;
+          });
+      }
+    });
+*/
+
+      }
+
+
+      this.popupRfidVisible = false;
+
+      }, 1000);
+
+    });
+
+  }
+
+
+  
+  Scan() {
+    console.log('ok');
+    this.popupRfidVisible = true;
+  }
+
+
+  doSomething(event) {
+    if (this.popupRfidVisible) {
+      this.rf_code = event.value;
+    }
   }
 
 

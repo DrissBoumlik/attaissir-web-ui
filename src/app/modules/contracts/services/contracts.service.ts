@@ -115,4 +115,16 @@ export class ContractsService {
   printContract(idContract: number): any {
     return this.http.get(`${environment.apiUrl}/${this.routeName}/${idContract}/prints`);
   }
+
+
+   
+  changeStatus(id: number, rf_code: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/change_status`,
+      JSON.stringify({ id: id, rfid: rf_code }), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
+  }
+  
 }
