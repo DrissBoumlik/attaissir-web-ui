@@ -29,6 +29,17 @@ export class ShowComponent implements OnInit, AfterViewInit {
   id;
   helper: any;
 
+
+
+  popup2RfidVisible = false;
+  rf_code2 = null;
+  @ViewChild('rfid2') rfid2: ElementRef;
+  @ViewChild('focusout2') focusout2: ElementRef;
+  @ViewChild('popup2') popup2: ElementRef;
+
+
+
+
   // -------------------------------------------------------------------------
   @ViewChild('rfid') rfid: ElementRef;
   @ViewChild('focusout') focusout: ElementRef;
@@ -410,5 +421,79 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
 
   }
+
+
+
+
+
+
+  SearchByRfid() {
+
+    this.popup2.nativeElement.addEventListener('click', () => {
+      this.rfid2.nativeElement.focus();
+    });
+
+    this.rfid2.nativeElement.focus();
+
+    this.rfid2.nativeElement.addEventListener('input', () => {
+
+      setTimeout(() => {
+
+      this.rf_code2 = this.rfid2.nativeElement.value;
+      this.rfid2.nativeElement.value = '';
+      this.focusout2.nativeElement.focus();
+
+
+      if(this.rf_code2 != ''){
+
+        this.rf_code2= this.rf_code2.replace(/à/g,"0");
+        this.rf_code2= this.rf_code2.replace(/&/g,"1");
+        this.rf_code2= this.rf_code2.replace(/é/g,"2");
+        this.rf_code2= this.rf_code2.replace('"',"3");
+        this.rf_code2= this.rf_code2.replace("'","4");
+        this.rf_code2= this.rf_code2.replace("(","5");
+        this.rf_code2= this.rf_code2.replace("-","6");
+        this.rf_code2= this.rf_code2.replace(/è/g,"7");
+        this.rf_code2= this.rf_code2.replace("_" ,"8");
+        this.rf_code2= this.rf_code2.replace(/ç/g,"9");
+
+     this.preconisationsIntrantsService.changeStatus(this.preconisation.id, this.rf_code2)
+            .subscribe(response => {
+              this.preconisation.state = 'inprogress';
+              this.toastr.success(response.data)
+              setTimeout(() => {
+              }, 1000);
+
+            }, error => {
+              this.toastr.error(error.error.message)
+            });
+
+      }
+
+
+      this.popup2RfidVisible = false;
+
+      }, 1000);
+
+    });
+
+  }
+
+
+  
+  Scan() {
+    console.log('ok');
+    this.popup2RfidVisible = true;
+  }
+
+
+  doSomething2(event) {
+    if (this.popup2RfidVisible) {
+      this.rf_code2 = event.value;
+    }
+  }
+
+
+
 
 }

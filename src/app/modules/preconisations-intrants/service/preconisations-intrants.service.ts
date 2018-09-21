@@ -89,6 +89,20 @@ export class PreconisationsIntrantsService {
   }
 
 
+  
+
+  changeStatus(id: number, rf_code: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/change_status`,
+      JSON.stringify({ id: id, rfid: rf_code }), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
+  }
+
+
+  
+
 
 
   getByRfid(_rfid): Observable<any> {

@@ -298,8 +298,8 @@ export class AddComponent implements OnInit {
                     {
                       id: parcel.id,
                       label: parcel.code_ormva,
-                      contracted_surface: parcel.exploited_surface,
-                      actual_surface: parcel.manuel_surface,
+                      contracted_surface: parcel.annuel_surface,
+                      actual_surface: parcel.annuel_surface,
                       remaining_surface: parcel.abandoned_surface,
                       id_zone: parcel.zone_id ? parcel.zone_id : 2
                     },

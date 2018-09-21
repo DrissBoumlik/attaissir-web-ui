@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MouvementsService } from '../../service/mouvements.service';
 import { ToastrService } from 'ngx-toastr';
@@ -19,6 +19,16 @@ export class ShowComponent implements OnInit {
   articles: any;
   to: any;
   from: any;
+
+
+  popupRfidVisible = false;
+  rf_code = null;
+
+  @ViewChild('rfid') rfid: ElementRef;
+  @ViewChild('focusout') focusout: ElementRef;
+  @ViewChild('popup') popup: ElementRef;
+
+
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -90,6 +100,7 @@ export class ShowComponent implements OnInit {
     });
   }
 
+
   showDeliverPopup() {
     this.popupDeliverVisible = true;
   }
@@ -136,7 +147,84 @@ export class ShowComponent implements OnInit {
         return true;
      }
 
+
+
+
+
+
+
+
+  SearchByRfid() {
+
+    this.popup.nativeElement.addEventListener('click', () => {
+      this.rfid.nativeElement.focus();
+    });
+
+    this.rfid.nativeElement.focus();
+
+    this.rfid.nativeElement.addEventListener('input', () => {
+
+      setTimeout(() => {
+
+      this.rf_code = this.rfid.nativeElement.value;
+      this.rfid.nativeElement.value = '';
+      this.focusout.nativeElement.focus();
+
+
+      if(this.rf_code != ''){
+
+        this.rf_code= this.rf_code.replace(/à/g,"0");
+        this.rf_code= this.rf_code.replace(/&/g,"1");
+        this.rf_code= this.rf_code.replace(/é/g,"2");
+        this.rf_code= this.rf_code.replace('"',"3");
+        this.rf_code= this.rf_code.replace("'","4");
+        this.rf_code= this.rf_code.replace("(","5");
+        this.rf_code= this.rf_code.replace("-","6");
+        this.rf_code= this.rf_code.replace(/è/g,"7");
+        this.rf_code= this.rf_code.replace("_" ,"8");
+        this.rf_code= this.rf_code.replace(/ç/g,"9");
  
+       console.log(this.rf_code);
+
+      this.mouvementsService.changeStatus(this.mouvement.id,this.rf_code)
+          .toPromise()
+          .then(response => {
+
+
+            this.mouvement.state = 'inprogress';
+            this.toastr.success(response.data)
+            return response;
+          })
+          .catch(error => {
+            this.toastr.error(error.error.message)
+            throw error;
+          });
+      
+ 
+      }
+
+
+      this.popupRfidVisible = false;
+
+      }, 1000);
+
+    });
+
+  }
+
+
+  
+  Scan() {
+    console.log('ok');
+    this.popupRfidVisible = true;
+  }
+
+
+  doSomething(event) {
+    if (this.popupRfidVisible) {
+      this.rf_code = event.value;
+    }
+  }
 
 
 }

@@ -16,13 +16,14 @@ import {
 import { ShowComponent } from './components/show/show.component';
 import { PrecoAvanceListComponent } from './components/preco-avance-list/preco-avance-list.component';
 import { DetailsComponent } from './components/details/details.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 
 @NgModule({
   imports: [
     CommonModule,
-
+    SharedModule,
     DxSelectBoxModule,
     DxTextAreaModule,
     DxDateBoxModule,
@@ -42,3 +43,6 @@ import { DetailsComponent } from './components/details/details.component';
   ]
 })
 export class PreconisationsIntrantsModule { }
+
+
+ 

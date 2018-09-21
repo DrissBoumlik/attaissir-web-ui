@@ -3,7 +3,10 @@
 
     <div class="siam-page-header">
       <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2> Fiche  Préconisation d'intrans N°  {{preconisation.id}}</h2>
+      <h2> Fiche  Préconisation d'intrans N°  {{preconisation.id}}
+
+
+      </h2>
     </div>
 
 
@@ -22,25 +25,24 @@
             <div class="m-portlet__body">
               <div class="row">
                 <div class="col-12">
-                  <h3 class="m-form__section">
-                    Informations générales ( {{preconisation.request_type_name}} )
-
-                <!--    <span class="siam-form-input-value _status_inprogress" *ngIf="mouvement.state == 'inprogress'">
-                    <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
-                  </span>
-
-
-                    <span class="siam-form-input-value _status_done" *ngIf="mouvement.state == 'done'">
-                    <i class="fa  fa-spinner" aria-hidden="true"></i> VALIDÉ
-                  </span>
-
-                    <span class="siam-form-input-value _status_cancled" *ngIf="mouvement.state == 'cancled'">
-                    <i class="fa  fa-spinner" aria-hidden="true"></i> ANNULÉ
-                  </span>
-                  !-->
-
-
-                  </h3>
+                  
+                    <h3 class="m-form__section">
+                        Informations générales
+    
+                        <span class="siam-form-input-value _status_inprogress" *ngIf="preconisation.state == 'inprogress'">
+                        <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
+                      </span>
+    
+    
+                        <span class="siam-form-input-value _status_done" *ngIf="preconisation.state == 'done'">
+                        <i class="fa  fa-check" aria-hidden="true"></i> VALIDÉ
+                      </span>
+    
+                        <span class="siam-form-input-value _status_cancled" *ngIf="preconisation.state == 'canceled'">
+                        <i class="fa  fa-times" aria-hidden="true"></i> ANNULÉ
+                      </span>
+                      <span   [appPermissionHidden]="['preconization.interventions.change_status']" style="font-size: 12px; padding-left: 12px; cursor: pointer;" *ngIf="preconisation.state === 'done'"   > <a (click)="Scan()"> <i class="fa fa-refresh" aria-hidden="true"></i> <span style="text-decoration: underline;"> En cours </span> </a> </span>
+                    </h3>
                   <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
                 </div>
               </div>
@@ -273,7 +275,7 @@
 
     <div  *ngIf="evnt1" style="text-align: center;">
       <h1>GLISSER LA CARTE</h1>
-      <p>Faire glisser la carte sur le lecteur de carte pour lancer la recherche</p>
+      <p>Faire glisser la carte sur le lecteur de carte </p>
       <div class="glisser-carte-agriculteur">
         <div class="credit-card">
           <div class="rfid-tripe"></div>
@@ -473,7 +475,7 @@
     <div class="dx-field-value">
       <dx-button width="180"  icon="fa fa-paper-plane"  *ngIf="helper.permissionMethod(['preconization.interventions.deliverPreconization'])"  text="LIVRER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'"  type="success" (onClick)="showDeliverPopup()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
 
-      <dx-button width="130" icon="fa fa-print"   (onClick)="print()" text="IMPRIMER" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp; &nbsp;
+      <dx-button width="130" icon="fa fa-print"  *ngIf="preconisation.state == 'done'"   (onClick)="print()" text="IMPRIMER" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp; &nbsp;
       <dx-button width="130" icon="fa fa-exchange"  *ngIf="helper.permissionMethod(['distributionCenter.stocks.returnOperation'])" [disabled]="preconisation.state !== 'done'" text="RETOUR" type="default" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active" [disabled]="preconisation.state == 'delivered'" style="margin-left: 20px; margin-right: 20px;"  ></dx-button> &nbsp; &nbsp;
       <dx-button width="130" icon="fa fa-trash"     *ngIf="helper.permissionMethod(['preconization.interventions.cancelPreconization'])"  text="ANNULER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'" type="danger" (onClick)="showDeletePopup()"  ></dx-button> &nbsp; &nbsp;
     </div>
@@ -484,10 +486,49 @@
 
 <input type="text" name="rfid" style="width: 0; height: 0;border: none;"  #rfid>
 <input class="rfid-input" type="text"   name="focusout" style="width: 0; height: 0;border: none;"  #focusout>
-
-
-
  
+
+  
+<div name="popup" id="popup2" #popup2>
+    <dx-popup
+      class="popup"
+      [width]="580"
+      [height]="400"
+      [showTitle]="true"
+      title="Confirmation "
+      [dragEnabled]="false"
+      (onShown)="SearchByRfid()"
+      [closeOnOutsideClick]="true"
+      [(visible)]="popup2RfidVisible"
+      (window:keypress)="doSomething2($event)"
+    >
+      <div *dxTemplate="let data of 'content'">
+  
+        <div class="gilsser">
+          <h1>GLISSER LA CARTE</h1>
+          <p>Faire glisser la carte sur le lecteur de carte changer le status</p>
+          <div class="glisser-carte-agriculteur">
+            <div class="credit-card">
+              <div class="rfid-tripe"></div>
+            </div>
+            <div class="swiper-top"></div>
+            <div class="swiper-bottom">
+              <div class="light-indicator"></div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </dx-popup>
+  
+  </div>
+
+
+  <input type="text" name="rfid2" style="width: 0; height: 0;border: none;" #rfid2>
+  <input class="rfid-input" type="text" name="focusout2" style="width: 0; height: 0;border: none;" #focusout2>
+  
+
+
 
 <div style="display:none;">
 
@@ -591,3 +632,16 @@
 
 
   </div>
+
+
+
+
+
+
+
+
+
+ 
+
+
+  

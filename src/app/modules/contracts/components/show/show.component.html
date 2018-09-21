@@ -5,7 +5,11 @@
 
       <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Liste des
         contrats</a>
-      <h2>{{ (!contract?.parent_id) ? 'Contrat Agrégat-Agrégé' : 'Avenant'}} {{ contract?.code }}</h2>
+      <h2>{{ (!contract?.parent_id) ? 'Contrat Agrégat-Agrégé' : 'Avenant'}} {{ contract?.code }}
+
+    
+      
+      </h2>
       <a class="siam-header-btn-new" href="javascript::void(0)" (click)="downloadContract()"><i
         class="fa fa-print"></i></a>
     </div>
@@ -18,6 +22,40 @@
     <div class="m-portlet__body">
       <div class="row">
         <div class="col-xl-12 col-lg-12">
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="m-form__section" style="padding-top: 30px;">
+                        Informations générales
+        
+                        <span class="siam-form-input-value _status_inprogress" *ngIf="contract?.status == 'inprogress'">
+                        <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
+                      </span>
+        
+        
+                        <span class="siam-form-input-value _status_done" *ngIf="contract?.status == 'actif'">
+                        <i class="fa  fa-check" aria-hidden="true"></i> VALIDÉ
+                      </span>
+        
+                        <span class="siam-form-input-value _status_cancled" *ngIf="contract?.status == 'canceled'">
+                        <i class="fa  fa-times" aria-hidden="true"></i> ANNULÉ
+                      </span>
+                      <span [appPermissionHidden]="['agreement.contracts.change_status']"  style="font-size: 12px; padding-left: 12px; cursor: pointer;" *ngIf="contract?.status === 'actif'"   > <a (click)="Scan()"> <i class="fa fa-refresh" aria-hidden="true"></i> <span style="text-decoration: underline;"> En cours </span> </a> </span>
+                    </h3>
+                  
+                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                </div>
+              </div>
+
+
+
+           
+
+
+
+
           <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
             <li class="nav-item m-tabs__item">
               <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
@@ -176,7 +214,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12">
                       <div class="row">
                         <div class="col-12">
-                          <h3 class="m-form__section">
+                          <h3 class="m-form__section" style="margin-top: 20px;">
                             Informations générales
                           </h3>
                         </div>
@@ -758,3 +796,52 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+ 
+  
+<div name="popup" id="popup" #popup>
+    <dx-popup
+      class="popup"
+      [width]="580"
+      [height]="400"
+      [showTitle]="true"
+      title="Confirmation "
+      [dragEnabled]="false"
+      (onShown)="SearchByRfid()"
+      [closeOnOutsideClick]="true"
+      [(visible)]="popupRfidVisible"
+      (window:keypress)="doSomething($event)"
+    >
+      <div *dxTemplate="let data of 'content'">
+  
+        <div class="gilsser">
+          <h1>GLISSER LA CARTE</h1>
+          <p>Faire glisser la carte sur le lecteur de carte pour changer le status</p>
+          <div class="glisser-carte-agriculteur">
+            <div class="credit-card">
+              <div class="rfid-tripe"></div>
+            </div>
+            <div class="swiper-top"></div>
+            <div class="swiper-bottom">
+              <div class="light-indicator"></div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </dx-popup>
+  
+  </div>
+
+
+
+  
+  <input type="text" name="rfid" style="width: 0; height: 0;border: none;" #rfid>
+  <input class="rfid-input" type="text" name="focusout" style="width: 0; height: 0;border: none;" #focusout>
+  
+  
