@@ -66,6 +66,20 @@
 
           </dxi-item>
 
+          
+        <dxi-item itemType="group" [colCount]="6" >
+            <dxi-item [colSpan]="1">
+              <dx-button style="background-color: #676767; border: none" icon="fa fa-id-card" text="Scanner la carte administrateur" (onClick)="Scan()" type="default"></dx-button>
+            </dxi-item>
+            <dxi-item [colSpan]="5">
+              <dx-text-box [disabled]="true" placeholder="RFid" [(value)]="user.rfid">
+              </dx-text-box>
+            </dxi-item>
+          </dxi-item>
+
+
+         
+
           <dxi-item itemType="group" caption="Choix des structures">
 
             <div class="dx-field">
@@ -211,3 +225,51 @@
   [closeOnOutsideClick]="false"
  >
 </dx-load-panel>
+
+
+
+
+
+
+
+<div name="popup" id="popup" #popup>
+    <dx-popup
+      class="popup"
+      [width]="580"
+      [height]="400"
+      [showTitle]="true"
+      title="Confirmation "
+      [dragEnabled]="false"
+      (onShown)="SearchByRfid()"
+      [closeOnOutsideClick]="true"
+      [(visible)]="popupRfidVisible"
+      (window:keypress)="doSomething($event)"
+    >
+      <div *dxTemplate="let data of 'content'">
+  
+        <div class="gilsser">
+          <h1>GLISSER LA CARTE</h1>
+          <p>Faire glisser la carte sur le lecteur de carte pour lancer la recherche</p>
+          <div class="glisser-carte-agriculteur">
+            <div class="credit-card">
+              <div class="rfid-tripe"></div>
+            </div>
+            <div class="swiper-top"></div>
+            <div class="swiper-bottom">
+              <div class="light-indicator"></div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </dx-popup>
+  
+  </div>
+
+
+
+  
+  <input type="text" name="rfid" style="width: 0; height: 0;border: none;" #rfid>
+  <input class="rfid-input" type="text" name="focusout" style="width: 0; height: 0;border: none;" #focusout>
+  
+  
