@@ -11,20 +11,7 @@
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body m-portlet__body--no-padding">
-      <div class="m-portlet__head">
-        <div class="m-portlet__head-tools">
-          <div class="buttons">
-            <dx-button
-              icon="fa fa-check"
-              style="font-weight: bold"
-              [type]="'success'"
-              text=" Recherche par carte"
-              (onClick)="Scan()">
-            </dx-button>
-          </div>
-        </div>
-      </div>
-
+    
       <dx-data-grid
         #proclist
         id="gridContainer"
@@ -82,7 +69,7 @@
                     [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
         <dxi-column dataType="Number" sortOrder="desc" dataField="id" caption="Réf"></dxi-column>
         <dxi-column dataType="Date" dataField="date" caption="Date d'octroi"></dxi-column>
-        <dxi-column dataField="division" caption="Division"></dxi-column>
+        <dxi-column  dataField="division" caption="Division"></dxi-column>
         <dxi-column dataField="cda" caption="CDA"></dxi-column>
         <dxi-column dataField="zone" caption="Zone"></dxi-column>
         <dxi-column dataField="secteur" caption="Secteur"></dxi-column>
@@ -103,7 +90,7 @@
 
         <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="helper.getStatusColor(data.value)">
-           {{data.value}}
+               {{ helper.getStatusValue(data.value) }}
       </span>
         </div>
 

@@ -34,7 +34,7 @@ const routes: Routes = [
       },
       {
         path: 'avance-primes',
-        component: PrecoAvanceListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.grid'] }
+        component: PrecoAvanceListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.avance_prime'] }
       }
     ]
   },
