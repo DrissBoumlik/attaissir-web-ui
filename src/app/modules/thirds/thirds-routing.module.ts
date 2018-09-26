@@ -32,6 +32,10 @@ const routes: Routes = [
       {
         path: 'liste',
         component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.grid'] }
+      },
+      {
+        path: 'liste/recherche/:name',
+        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['thirdParty.third-parties.grid'] }
       }
     ]
   },
@@ -58,10 +62,15 @@ const routes: Routes = [
       {
         path: 'liste',
         component: WarehouseListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.grid'] }
+      },
+      {
+        path: 'liste/recherche/:name',
+        component: WarehouseListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.grid'] }
       }
     ]
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

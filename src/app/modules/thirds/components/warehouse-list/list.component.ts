@@ -5,7 +5,7 @@ import CustomStore from 'devextreme/data/custom_store';
 import { ThirdsService } from '../../services/thirds.service';
 import { ZonesService } from '../../../contracts/services/zones.service';
 import { Helper } from '../../../../shared/classes/helper';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -56,6 +56,23 @@ export class ListComponent implements OnInit {
           });
       }
     });
+
+
+
+    this.reloadRoute();
+    this.router.events.subscribe(
+      (event) => {
+        if (event instanceof NavigationEnd) {
+           this.reloadRoute();
+       }
+ 
+      }
+    );
+
+
+    
+
+
   }
 
 
@@ -103,6 +120,34 @@ export class ListComponent implements OnInit {
   }
 
 
+  reloadRoute(){
+ 
+   
+    this.route.params.subscribe(
+      params => {
+
+        if(params.name != null ) {
+          this.warehouses = {};
+        this.warehouses.store = new CustomStore({
+          load: (loadOptions: any) => {
+            Helper.addContainFilter(loadOptions, 'third_party_full_name', params.name);
+            return this.WarehouseService.getAllDx(loadOptions)
+              .toPromise()
+              .then(response => {
+                const json = response;
+                return json;
+              })
+              .catch(error => {
+                throw error;
+              });
+          }
+        });
+      }
+
+      }
+    );
+
+  }
 
 
 }
