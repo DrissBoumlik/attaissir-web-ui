@@ -114,7 +114,7 @@ export class Helper {
     ) {
       return 'm-badge m-badge--success m-badge--wide';
     } else if (value.toLowerCase() === 'suspended'.toLowerCase() || value.toLowerCase() === 'Suspendu'.toLowerCase()
-      || value.toLowerCase() === 'Annulé'.toLowerCase()
+      || value.toLowerCase() === 'Annulé'.toLowerCase() || value.toLowerCase() === 'canceled'.toLowerCase()
     ) {
       return 'm-badge m-badge--danger m-badge--wide';
     } else {

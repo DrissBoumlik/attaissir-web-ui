@@ -43,7 +43,7 @@
 
 
         <dxo-header-filter [visible]="true"></dxo-header-filter>
-        <dxo-export [enabled]="true" fileName="intrants" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-export [enabled]="true" [fileName]="'Avances ' + today +' export'" [allowExportSelectedData]="true"></dxo-export>
 
         <dx-button width="90" text="'deleteButtonOptions.text'" type="success"></dx-button>
 
@@ -90,7 +90,7 @@
 
         <div *dxTemplate="let data of 'statusTemplate'">
       <span [ngClass]="helper.getStatusColor(data.value)">
-               {{ helper.getStatusValue(data.value) }}
+               {{ data.value }}
       </span>
         </div>
 
