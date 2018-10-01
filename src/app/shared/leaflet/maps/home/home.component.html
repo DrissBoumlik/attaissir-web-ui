@@ -1,0 +1,25 @@
+
+<div class="grid-container">
+  <div class="map">
+    <div style="height: 400px;"
+         leaflet
+         [leafletOptions]="options"
+         [leafletLayersControl]="layersControl"
+         [leafletLayers]="layers">
+    </div>
+  </div>
+  <div class="CDAs">
+    <dx-list
+      #list
+      [dataSource]="cdas"
+      [height]="400"
+      [searchEnabled]="true"
+      valueExpr="id"
+      searchExpr="name"
+      searchMode="contains">
+      <div *dxTemplate="let data of 'item'">
+        <div>CDA {{data.name}}</div>
+      </div>
+    </dx-list>
+  </div>
+</div>

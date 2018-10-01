@@ -16,7 +16,8 @@ export class PrecoAvanceListComponent implements OnInit {
 
   preconisations: any = {};
   helper: any;
-  mouvements :any = {};
+  today = [new Date().getDate(), new Date().getMonth() + 1, new Date().getFullYear()].join('/');
+  mouvements : any = {};
 
   popupRfidVisible = false;
   rf_code = null;

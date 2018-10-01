@@ -41,7 +41,7 @@
                     <i class="flaticon-apps"></i>
                   </span>
                 </a>
-                <div class="m-dropdown__wrapper" *ngIf="displayMenu">
+                <div style="z-index: 1000;" class="m-dropdown__wrapper" *ngIf="displayMenu">
                   <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
                   <div class="m-dropdown__inner">
                     <div class="m-dropdown__body">
@@ -93,11 +93,11 @@
                         </a>
 
                         <div class="m-card-user__details">
-                            
+
 													<span class="m-card-user__name m--font-weight-500">
 														{{ currentUser.name }}
                           </span>
-                           
+
                           <a class="m-card-user__email m--font-weight-300 m-link">
                             {{ currentUser.email }}
                           </a>

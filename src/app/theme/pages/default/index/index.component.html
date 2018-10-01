@@ -1,11 +1,11 @@
-<div class="siam-dashboard-intro">
-	<div class="row">
+<!--<div class="siam-dashboard-intro">
+&lt;!&ndash;	<div class="row">
 		<div class="col-md-6">
 			<div class="siam-dashboard-intro-wm">
 				<h2 class="siam-dashboard-intro-wm-title"> Bienvenue dans Attaissir </h2>
 				<h1 class="siam-dashboard-intro-wm-subtitle"> {{tenant_name[0].division}} </h1>
 
-			
+
 			</div>
 		</div>
     <div class="col-md-3">
@@ -33,10 +33,21 @@
 				{{shortcut.title}}
 			</div>
 		</div>
-	</div>
-</div>
+	</div>&ndash;&gt;
 
-<div class="siam-dashboard-tiles"  >
+
+</div>-->
+<div class="siam-dashboard-intro">
+  <div class="grid-container-vector">
+    <div class="VAECTOR-MAP">
+      <app-kpis></app-kpis>
+    </div>
+    <div class="SIGAAKPIS">
+    </div>
+  </div>
+</div>
+<!--<app-home-leaflet></app-home-leaflet>-->
+<!--<div class="siam-dashboard-tiles"  >
 	<div class="siam-dashboard-tiles-item"  [appPermissionHidden]="['agreement.contracts.grid']"  *ngFor="let tile of tilesList" [ngStyle]="{'background-color': tile.backgroundColor,'color': tile.textColor}">
 		<div class="siam-dashboard-tiles-item-icon">
 			<i class="{{ tile.icon }}"></i>
@@ -52,8 +63,8 @@
     </div>
 	</div>
 </div>
-<!-- BEGIN: Subheader -->
-<!--<div class="m-subheader" appunwraptag="">
+&lt;!&ndash; BEGIN: Subheader &ndash;&gt;
+&lt;!&ndash;<div class="m-subheader" appunwraptag="">
 	<div class="d-flex align-items-center">
 		<div class="mr-auto">
 			<h3 class="m-subheader__title">
@@ -61,8 +72,9 @@
 			</h3>
 		</div>
 	</div>
-</div>-->
-<!-- END: Subheader -->
+</div>&ndash;&gt;
+&lt;!&ndash; END: Subheader &ndash;&gt;
 <div class="m-content">
 
-</div>
+</div>-->
+

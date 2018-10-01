@@ -27,6 +27,14 @@ export class IncidentService {
     });
   }
 
+  getFieldStatesDx(params: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/fieldstates/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   editIncident(id: number, incident: Incident): Observable<any> {
     return this.http.put(`${environment.apiUrl}/${this.routeName}/${id}`, incident, {
       headers: new HttpHeaders({
