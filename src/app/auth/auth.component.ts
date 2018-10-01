@@ -1,14 +1,21 @@
-import { AfterViewInit, Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ScriptLoaderService } from '../_services/script-loader.service';
-import { Helpers } from '../helpers';
-import { ToastrService } from 'ngx-toastr';
-import { AlertComponent } from './_directives';
-import { AlertService, AuthenticationService, UserService } from './_services';
+import {
+  AfterViewInit,
+  Component,
+  ComponentFactoryResolver,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+  ViewEncapsulation
+} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ScriptLoaderService} from '../_services/script-loader.service';
+import {Helpers} from '../helpers';
+import {ToastrService} from 'ngx-toastr';
+import {AlertService, AuthenticationService, UserService} from './_services';
+import * as CryptoJS from 'crypto-js';
+
 declare let $: any;
 declare let mUtil: any;
-
-import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: '.m-grid.m-grid--hor.m-grid--root.m-page',
@@ -21,24 +28,24 @@ export class AuthComponent implements OnInit, AfterViewInit {
   model: any = {};
   loading = false;
   returnUrl: string;
+  errorMessage: string;
 
   @ViewChild('alertSignin',
-    { read: ViewContainerRef }) alertSignin: ViewContainerRef;
+    {read: ViewContainerRef}) alertSignin: ViewContainerRef;
   @ViewChild('alertSignup',
-    { read: ViewContainerRef }) alertSignup: ViewContainerRef;
+    {read: ViewContainerRef}) alertSignup: ViewContainerRef;
   @ViewChild('alertForgotPass',
-    { read: ViewContainerRef }) alertForgotPass: ViewContainerRef;
+    {read: ViewContainerRef}) alertForgotPass: ViewContainerRef;
 
-  constructor(
-    private _router: Router,
-    private _script: ScriptLoaderService,
-    private _userService: UserService,
-    private _route: ActivatedRoute,
-    private _authService: AuthenticationService,
+  constructor(private _router: Router,
+              private _script: ScriptLoaderService,
+              private _userService: UserService,
+              private _route: ActivatedRoute,
+              private _authService: AuthenticationService,
+              private _alertService: AlertService,
+              private cfr: ComponentFactoryResolver,
+              private toastr: ToastrService) {
 
-    private _alertService: AlertService,
-    private cfr: ComponentFactoryResolver,
-    private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -50,11 +57,11 @@ export class AuthComponent implements OnInit, AfterViewInit {
     this._script.loadScripts('body', [
       'assets/vendors/base/vendors.bundle.js',
       'assets/demo/demo12/base/scripts.bundle.js'], true).then(() => {
-        Helpers.setLoading(false);
-        this.handleSignInFormSubmit();
-      });
+      Helpers.setLoading(false);
+      this.handleSignInFormSubmit();
+    });
     // Set page height
-    document.getElementById('m_login').style.height = (screen.height - 118) + 'px';
+    // document.getElementById('m_login').style.height = (screen.height - 118) + 'px';
     // m-login--signin
   }
 
@@ -87,7 +94,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
       error => {
         this.showAlert('alertSignin');
         if (error.error) {
-          console.log(error.error.error);
+          this.errorMessage = 'Email ou mot de passe incorrect!';
           this._alertService.error('Email ou mot de passe incorrect!');
         }
         this.loading = false;
@@ -97,47 +104,47 @@ export class AuthComponent implements OnInit, AfterViewInit {
     this._authService.myPermission().subscribe(response => {
 
 
-      const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(response.data.permissions), 'Gra61884546585_55');
-      localStorage.setItem('permissions', ciphertext);
+        const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(response.data.permissions), 'Gra61884546585_55');
+        localStorage.setItem('permissions', ciphertext);
 
 
-      //      localStorage.setItem('permissions', response.data.permissions);
-    },
+        //      localStorage.setItem('permissions', response.data.permissions);
+      },
       error => {
         //  location.reload();
       });
   }
 
-  displaySignUpForm() {
-    const login = document.getElementById('m_login');
-    mUtil.removeClass(login, 'm-login--forget-password');
-    mUtil.removeClass(login, 'm-login--signin');
+  /*  displaySignUpForm() {
+      const login = document.getElementById('m_login');
+      mUtil.removeClass(login, 'm-login--forget-password');
+      mUtil.removeClass(login, 'm-login--signin');
 
-    mUtil.addClass(login, 'm-login--signup');
-    mUtil.animateClass(login.getElementsByClassName('m-login__signup')[0], 'flipInX animated');
-  }
+      mUtil.addClass(login, 'm-login--signup');
+      mUtil.animateClass(login.getElementsByClassName('m-login__signup')[0], 'flipInX animated');
+    }*/
 
-  displaySignInForm() {
-    const login = document.getElementById('m_login');
-    mUtil.removeClass(login, 'm-login--forget-password');
-    mUtil.removeClass(login, 'm-login--signup');
-    try {
-      $('form').data('validator').resetForm();
-    } catch (e) {
-    }
+  /*  displaySignInForm() {
+      const login = document.getElementById('m_login');
+      mUtil.removeClass(login, 'm-login--forget-password');
+      mUtil.removeClass(login, 'm-login--signup');
+      try {
+        $('form').data('validator').resetForm();
+      } catch (e) {
+      }
 
-    mUtil.addClass(login, 'm-login--signin');
-    mUtil.animateClass(login.getElementsByClassName('m-login__signin')[0], 'flipInX animated');
-  }
+      mUtil.addClass(login, 'm-login--signin');
+      mUtil.animateClass(login.getElementsByClassName('m-login__signin')[0], 'flipInX animated');
+    }*/
 
-  displayForgetPasswordForm() {
-    const login = document.getElementById('m_login');
-    mUtil.removeClass(login, 'm-login--signin');
-    mUtil.removeClass(login, 'm-login--signup');
+  /*  displayForgetPasswordForm() {
+      const login = document.getElementById('m_login');
+      mUtil.removeClass(login, 'm-login--signin');
+      mUtil.removeClass(login, 'm-login--signup');
 
-    mUtil.addClass(login, 'm-login--forget-password');
-    mUtil.animateClass(login.getElementsByClassName('m-login__forget-password')[0], 'flipInX animated');
-  }
+      mUtil.addClass(login, 'm-login--forget-password');
+      mUtil.animateClass(login.getElementsByClassName('m-login__forget-password')[0], 'flipInX animated');
+    }*/
 
 
   signup() {
@@ -149,7 +156,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
           'Thank you. To complete your registration please check your email.',
           true);
         this.loading = false;
-        this.displaySignInForm();
+        // this.displaySignInForm();
         this.model = {};
       },
       error => {
@@ -168,7 +175,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
           'Cool! Password recovery instruction has been sent to your email.',
           true);
         this.loading = false;
-        this.displaySignInForm();
+        // this.displaySignInForm();
         this.model = {};
       },
       error => {
@@ -179,10 +186,10 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
 
   showAlert(target) {
-    this[target].clear();
-    const factory = this.cfr.resolveComponentFactory(AlertComponent);
-    const ref = this[target].createComponent(factory);
-    ref.changeDetectorRef.detectChanges();
+    // this[target].clear();
+    //const factory = this.cfr.resolveComponentFactory(AlertComponent);
+    //const ref = this[target].createComponent(factory);
+    //ref.changeDetectorRef.detectChanges();
   }
 
   handleSignInFormSubmit() {
@@ -207,7 +214,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    $('.toggle-password').click(function() {
+    $('.toggle-password').click(function () {
 
       $(this).toggleClass('fa-eye fa-eye-slash');
       const input = $($(this).attr('toggle'));

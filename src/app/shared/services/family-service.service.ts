@@ -30,4 +30,16 @@ export class FamilyService {
     return this.http.get(`${environment.apiUrl}/${this.routeName}/type/${id}`);
   }
 
+  getKpiData(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/zones/kpis`);
+  }
+
+  /**
+   *
+   * @returns {Observable<any>}
+   */
+  getCdaData(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/zones/kpis/cda/${id}`);
+  }
+
 }

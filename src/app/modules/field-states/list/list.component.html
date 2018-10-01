@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Liste des incidents</h2>
+      <h2>Etat de la culture</h2>
     </div>
   </div>
 </div>
@@ -10,29 +10,33 @@
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body m-portlet__body--no-padding">
-
       <dx-data-grid
-        id="incidentsGrid"
-        [dataSource]="incidents"
+        id="fieldStatesGrid"
+        [dataSource]="fieldStates"
         [columnHidingEnabled]="false"
         align="center"
         [allowColumnReordering]="true"
         [columnAutoWidth]="true"
         [remoteOperations]="{ groupPaging: true }"
-        noDataText="Aucun incident n'a été rapporté"
+        noDataText="Aucune donnée disponible"
         KeyExpr="id">
 
-        <dxi-column [alignment]="'center'" dataField="id" caption="Réf" [visible]="true"></dxi-column>
-        <dxi-column [alignment]="'center'" dataField="cda" caption="CDA"></dxi-column>
-        <dxi-column [alignment]="'center'" dataField="zone" caption="Zone"></dxi-column>
-        <dxi-column [alignment]="'center'" dataField="parcel_name" caption="Parcelle"></dxi-column>
-        <dxi-column [alignment]="'center'" [width]="200" dataField="description" caption="Description"></dxi-column>
-        <dxi-column [alignment]="'center'" dataField="type" caption="Type"></dxi-column>
-        <dxi-column [alignment]="'center'" dataField="priority" cellTemplate="severityTemplate"  caption="Priorité"></dxi-column>
-        <dxi-column [alignment]="'center'" dataField="severity"  cellTemplate="severityTemplate" caption="Gravité"></dxi-column>
-        <dxi-column [alignment]="'center'" dataField="contagion_risk" cellTemplate="severityTemplate" caption="Risque de contagion"></dxi-column>
-        <dxi-column [alignment]="'center'" dataField="affected_surface" caption="Superficie sinistrée (ha)"></dxi-column>
-        <dxi-column [alignment]="'center'" dataField="lost_surface" caption="Superficie perdue (ha)"></dxi-column>
+        <dxi-column [allowHeaderFiltering]="true" [alignment]="'center'" dataType="Number" dataField="id" caption="Réf" [visible]="true"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="cda" caption="CDA"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="zone" caption="Zone"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="parcel_name" caption="Parcelle"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="campaign" caption="Campagne"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="state" caption="Etat"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" [width]="200" dataField="description"
+                    caption="Description"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Number" dataField="leaf_stage"
+                    caption="Stade des feuilles"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Number" dataField="leaf_density"
+                    caption="Densité des feuilles"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Date" dataField="check_date"
+                    caption="Date de dernière visite"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Date" dataField="next_check_date"
+                    caption="Date de prochaine visite"></dxi-column>
 
         <dxo-remote-operations
           [sorting]="true"
@@ -66,13 +70,15 @@
           [visible]="true">
         </dxo-pager>
         <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-export [enabled]="true" fileName="etat_culture" [allowExportSelectedData]="true"></dxo-export>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
-        <dxo-search-panel [visible]="true"></dxo-search-panel>
+        <dxo-search-panel [visible]="false"></dxo-search-panel>
         <dxo-group-panel [visible]="true"
                          emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
         <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
         <div *dxTemplate="let data of 'severityTemplate'">
-          <span class="dot" *ngFor="let i of arrayOne(5); let indx = index" [ngStyle]="{'background-color': helper.getSeverityColor(indx, data.value)}"></span>
+          <span class="dot" *ngFor="let i of arrayOne(5); let indx = index"
+                [ngStyle]="{'background-color': helper.getSeverityColor(indx, data.value)}"></span>
         </div>
       </dx-data-grid>
     </div>

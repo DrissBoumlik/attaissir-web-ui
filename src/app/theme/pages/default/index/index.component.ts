@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
-import { ScriptLoaderService } from '../../../../_services/script-loader.service';
-import { ThirdsService } from '../../../../modules/thirds/services/thirds.service';
+import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ScriptLoaderService} from '../../../../_services/script-loader.service';
+import {ThirdsService} from '../../../../modules/thirds/services/thirds.service';
 
 
 @Component({
@@ -11,16 +11,15 @@ import { ThirdsService } from '../../../../modules/thirds/services/thirds.servic
 export class IndexComponent implements OnInit, AfterViewInit {
   shortcutsList: any;
   tilesList: any;
-  tenants:any = [];
-  tenant:any = [];
-  tenant_name:any = [];
+  tenants: any = [];
+  tenant: any = [];
+  tenant_name: any = [];
 
-  constructor(
-    private _script: ScriptLoaderService,
-    private thirdsService: ThirdsService
-  ) {
+  constructor(private _script: ScriptLoaderService,
+              private thirdsService: ThirdsService) {
 
   }
+
   ngOnInit() {
 
 
@@ -28,62 +27,60 @@ export class IndexComponent implements OnInit, AfterViewInit {
     this.tenants = data.data.tenants;
 
 
-    
     this.tenant = localStorage.getItem('tenantId');
 
-    console.log(this.tenants);
 
-    this.tenant_name = this.tenants.filter(x => x.division_id == this.tenant );
+    this.tenant_name = this.tenants.filter(x => x.division_id === this.tenant);
 
-    console.log(this.tenant_name[0].division );
 
     // this.tenant_name = this.tenants
 
     // var _this = this;
-    this.thirdsService.getStats().subscribe(data => {
-      this.tilesList = [
-        {
-          title: 'Contrats confirmés',
-          subTitle: 'Nombre de contrats confirmés',
-          value: data['actif'] + data['inactif'],
-          unit: '',
-          icon: 'flaticon-interface-5',
-          url: '',
-          backgroundColor: '',
-          textColor: ''
-        },
-        {
-          title: 'Contrats en cours',
-          subTitle: 'Nombre de contrats en cours',
-          value: data['encours'],
-          unit: '',
-          icon: 'flaticon-interface-9',
-          url: '',
-          backgroundColor: '',
-          textColor: ''
-        },
-        {
-          title: 'Superficie contractée',
-          subTitle: 'Totale superficie contractée',
-          value: `${data['sup_contracted']} (ha)`,
-          unit: '',
-          icon: 'flaticon-background',
-          url: '',
-          backgroundColor: '',
-          textColor: ''
-        },
-        {
-          title: 'Agrégés',
-          subTitle: 'Nombre des agrégés',
-          value: data['aggregated'],
-          unit: '',
-          icon: 'flaticon-users',
-          url: '',
-          backgroundColor: '',
-          textColor: ''
-        }
-      ];
-    });
+    this.thirdsService.getStats().subscribe(
+      (data: any) => {
+        this.tilesList = [
+          {
+            title: 'Contrats confirmés',
+            subTitle: 'Nombre de contrats confirmés',
+            value: data['actif'] + data['inactif'],
+            unit: '',
+            icon: 'flaticon-interface-5',
+            url: '',
+            backgroundColor: '',
+            textColor: ''
+          },
+          {
+            title: 'Contrats en cours',
+            subTitle: 'Nombre de contrats en cours',
+            value: data['encours'],
+            unit: '',
+            icon: 'flaticon-interface-9',
+            url: '',
+            backgroundColor: '',
+            textColor: ''
+          },
+          {
+            title: 'Superficie contractée',
+            subTitle: 'Totale superficie contractée',
+            value: `${data['sup_contracted']} (ha)`,
+            unit: '',
+            icon: 'flaticon-background',
+            url: '',
+            backgroundColor: '',
+            textColor: ''
+          },
+          {
+            title: 'Agrégés',
+            subTitle: 'Nombre des agrégés',
+            value: data['aggregated'],
+            unit: '',
+            icon: 'flaticon-users',
+            url: '',
+            backgroundColor: '',
+            textColor: ''
+          }
+        ];
+      });
     this.shortcutsList = [
       {
         title: 'Ajouter un nouveau contrat d\'agrégation',
@@ -110,7 +107,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
           request.open('POST', url);
           request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
           request.responseType = 'json';
-          request.onload = (function() {
+          request.onload = (function () {
             if (this.status >= 200 && this.status < 300) {
               resolve(request.response);
             } else {
@@ -120,7 +117,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
               });
             }
           });
-          request.onerror = (function() {
+          request.onerror = (function () {
             reject({
               status: this.status,
               statusText: request.statusText
@@ -169,6 +166,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       const place = document.getElementById('w-city');
       place.innerHTML = location;
     }
+
     function updateTemperature(value) {
       const temperatureCont = document.getElementById('w-temp');
       temperatureCont.innerHTML = value;
@@ -187,25 +185,33 @@ export class IndexComponent implements OnInit, AfterViewInit {
       let dayOfWeek: any = date.getDay();
       dayOfWeek = ((value) => {
         switch (value) {
-          case 1: return 'Lundi';
-          case 2: return 'Mardi';
-          case 3: return 'Mercredi';
-          case 4: return 'Jeudi';
-          case 5: return 'Vendredi';
-          case 6: return 'Samedi';
-          default: return 'Dimanche';
+          case 1:
+            return 'Lundi';
+          case 2:
+            return 'Mardi';
+          case 3:
+            return 'Mercredi';
+          case 4:
+            return 'Jeudi';
+          case 5:
+            return 'Vendredi';
+          case 6:
+            return 'Samedi';
+          default:
+            return 'Dimanche';
         }
       })(dayOfWeek);
-
-      hourCont.innerHTML = addZeroBefore(hours) + ':' + addZeroBefore(minutes);
-      dayw.innerHTML = dayOfWeek;
+      if (hourCont) {
+        hourCont.innerHTML = addZeroBefore(hours) + ':' + addZeroBefore(minutes);
+        dayw.innerHTML = dayOfWeek;
+      }
     }
+
     function addZeroBefore(n) {
       return (n < 10 ? '0' : '') + n;
     }
 
   }
-
 
 
   ngAfterViewInit() {

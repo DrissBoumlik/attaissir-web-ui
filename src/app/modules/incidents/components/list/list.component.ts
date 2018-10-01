@@ -3,6 +3,7 @@ import { Incident } from '../../../../shared/classes/Incident';
 import { ToastrService } from 'ngx-toastr';
 import { IncidentService } from '../../services/incident.service';
 import CustomStore from 'devextreme/data/custom_store';
+import {Helper} from '../../../../shared/classes/helper';
 
 declare const require: any;
 const $ = require('jquery');
@@ -15,9 +16,11 @@ const $ = require('jquery');
 export class ListComponent implements OnInit {
 
   incidents: any = {};
+  helper: any;
 
   constructor(private incidentService: IncidentService,
     private toaster: ToastrService) {
+   this.helper =  Helper;
   }
 
   ngOnInit() {
@@ -32,6 +35,21 @@ export class ListComponent implements OnInit {
           .toPromise()
           .then(response => {
             console.log(response);
+            response.data = [
+              {
+                id: 1,
+                cda: 223,
+                zone: 7,
+                parcel_name: 'SPB2',
+                description: 'descriptiondescriptiondescriptiondescriptiondescriptiondescription',
+                type: 'type',
+                priority: 1,
+                severity: 3.2,
+                contagion_risk: 5,
+                affected_surface: 3.2,
+                lost_surface: 3.2
+              }
+            ];
             const json = response;
             return json;
           })
@@ -65,6 +83,10 @@ export class ListComponent implements OnInit {
           });
       }
     });
+  }
+
+  arrayOne(n: number): any[] {
+    return Array(Math.round(n));
   }
 
   /*onEditIncident(e: any) {

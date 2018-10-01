@@ -13,12 +13,26 @@
       <div class="m-portlet__head">
         <div class="m-portlet__head-tools">
           <div class="buttons">
+
             <dx-button
+              width="500"
+              class="d-none d-sm-block pull-right"
               style="font-weight: bold"
               [type]="'success'"
               text="Créer une commande  et envoyer un mail de  réapprovisionnement"
               (onClick)="replenishStock()">
             </dx-button>
+
+            <dx-button 
+            width="50"
+            class="d-block d-sm-none pull-right"
+            style="font-weight: bold"
+            [type]="'success'"
+            text="+"
+            (onClick)="replenishStock()">
+          </dx-button>
+
+            
           </div>
         </div>
       </div>

@@ -39,10 +39,8 @@
 .credit-card{
   width: 250px;
   height: 140px;
-  background-image:  url('../../../../assets/images/generate.png');
   background-size:     cover;
-  background-repeat:   no-repeat;
-  background-position: center center;
+  background: url('../../../../assets/images/generate.png') no-repeat center center;
   border-radius:10px;
   position:relative;
   z-index: 2;
