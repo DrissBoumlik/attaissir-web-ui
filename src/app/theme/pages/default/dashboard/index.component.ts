@@ -3,17 +3,16 @@ import { NgModule, Component, enableProdMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DragulaService } from 'ng2-dragula';
 
- 
+
 
 @Component({
-  selector: 'app-index',
+  selector: 'app-dash-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
-  
 
 })
-export class IndexComponent   {
-  
+export class IndexDashComponent   {
+
   buttonOptions:any;
   popupVisible = false;
   widgetOptions = {};
@@ -56,15 +55,15 @@ export class IndexComponent   {
   ngOnInit(){
 
     this.widgets = this.from_back;
-  
- 
+
+
     this.widgets.sort(function(a, b) {
       let posA = a.possition;
       var posB =  b.possition;
-  
+
       if (posA < posB) return -1;
       if (posA > posB) return 1;
-  
+
       return 0;
   });
 
@@ -103,7 +102,7 @@ this.widgetOptions = {
   valueExpr: 'id',
   items: this.valueChangeEvents,
   searchEnabled: true,
-  
+
 };
 
 
@@ -114,7 +113,7 @@ this.widgetOptions = {
 showPopup(){
 
 }
- 
+
 
  AddMovement(event) {
 
@@ -122,7 +121,7 @@ showPopup(){
 
  if(this.widget.type ==1){
 
-  this.widgets.push({title:this.widget.title,nbr :3,sub_title :'sub Tit' , type: this.widget.type ,align : 'left' }) 
+  this.widgets.push({title:this.widget.title,nbr :3,sub_title :'sub Tit' , type: this.widget.type ,align : 'left' })
 
  } else if(this.widget.type ==2) {
 
@@ -137,13 +136,13 @@ showPopup(){
   this.widgets.push({title:this.widget.title,table : this.table , type: this.widget.type })
 
  }
-  
-  
-  
+
+
+
   this.popupVisible = false;
   this.widget = {};
 }
-      
+
 close(item){
   const index = this.widgets.indexOf(item);
   this.widgets.splice(index, 1);

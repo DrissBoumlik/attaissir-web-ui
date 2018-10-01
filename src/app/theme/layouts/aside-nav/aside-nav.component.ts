@@ -37,15 +37,16 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
     this.mainMenu = [
       {
-        name: 'Mon stock',
+        name: 'Incidents',
         permission: ['distributionCenter.stocks.grid'],
-        icon: 'fa fa-archive',
-        url: '/stock/situation',
+        icon: 'fa flaticon-clipboard',
+        url: 'Liste des incidents',
         queryParams: { magazin: this.tenantId },
-        description: 'mon stock',
+        description: 'Incidents et état de la culture',
         subMenu: [
-          { icon: 'fa fa-archive', name: 'Mon stock', url: '/stock/situation', permission: ['distributionCenter.stocks.grid'], },
-
+         /* { icon: 'fa fa-archive', name: 'Mon stock', url: '/stock/situation', permission: ['distributionCenter.stocks.grid'], },*/
+          { icon: 'fa flaticon-clipboard', name: 'Liste des incidents', url: '/incidents/liste', permission: ['preconization.interventions.store'], },
+          { icon: 'fa flaticon-clipboard', name: 'Etat de la culture', url: '/fieldstates/liste', permission: ['preconization.interventions.store'], }
         ],
         disabled: 'false'
       },

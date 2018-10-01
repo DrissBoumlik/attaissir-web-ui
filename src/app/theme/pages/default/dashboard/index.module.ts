@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { IndexComponent } from './index.component';
 import { LayoutModule } from '../../../layouts/layout.module';
 import { DefaultComponent } from '../default.component';
 import { SharedModule } from '../../../../shared/shared.module';
@@ -12,6 +11,8 @@ import { Widget1Component } from './widget/widget1.component';
 import { Widget2Component } from './widget/widget2.component';
 import { Widget3Component } from './widget/widget3.component';
 import { Widget4Component } from './widget/widget4.component';
+import {IndexDashComponent} from './index.component';
+import {IndexComponent} from '../index/index.component';
 
 
 
@@ -51,25 +52,22 @@ const routes: Routes = [
     DxValidationSummaryModule,
     DxLoadPanelModule,
     LayoutModule,
-
     DxChartModule,
     DxLinearGaugeModule,
 
     DragulaModule
   ],
   exports: [
-    RouterModule
+    RouterModule,
+    IndexDashComponent
   ], declarations: [
-    IndexComponent,
+    IndexDashComponent,
     Widget1Component ,
      Widget2Component,
      Widget3Component,
      Widget4Component
-
   ]
 })
 export class DashboardModule {
-
-
 
 }

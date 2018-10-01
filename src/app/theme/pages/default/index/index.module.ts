@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { IndexComponent } from './index.component';
+import { IndexComponent as IndexComponent1 } from './index.component';
 import { LayoutModule } from '../../../layouts/layout.module';
 import { DefaultComponent } from '../default.component';
 import { SharedModule } from '../../../../shared/shared.module';
+import {DashboardModule} from '../dashboard/index.module';
 
 const routes: Routes = [
   {
@@ -13,22 +14,18 @@ const routes: Routes = [
     'children': [
       {
         'path': '',
-        'component': IndexComponent
+        'component': IndexComponent1
       }
     ]
   }
 ];
 @NgModule({
   imports: [
-    CommonModule, RouterModule.forChild(routes), LayoutModule, SharedModule
+    CommonModule, RouterModule.forChild(routes), LayoutModule, SharedModule, DashboardModule
   ], exports: [
     RouterModule
   ], declarations: [
-    IndexComponent
+    IndexComponent1
   ]
 })
-export class IndexModule {
-
-
-
-}
+export class IndexModule {}
