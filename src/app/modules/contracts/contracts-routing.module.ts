@@ -16,6 +16,7 @@ const routes: Routes = [
       { path: '', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.grid'] } },
       { path: 'ajouter', component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.store'] } },
       { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.grid'] } },
+      { path: 'liste/recherche/:name', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.grid'] } },
       { path: 'liste/courant', component: ListCurrentComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.grid'] } },
       { path: 'afficher/:id', component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.grid'] } },
       { path: 'modifier/:id', component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.contracts.update'] } }

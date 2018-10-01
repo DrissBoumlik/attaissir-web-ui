@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ThirdsService } from '../../services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
 import CustomStore from 'devextreme/data/custom_store';
@@ -65,6 +65,18 @@ export class ListComponent implements OnInit {
           });
       }
     });
+
+    this.reloadRoute();
+    this.router.events.subscribe(
+      (event) => {
+        if (event instanceof NavigationEnd) {
+           this.reloadRoute();
+       }
+ 
+      }
+    );
+
+
   }
 
   /**
@@ -116,5 +128,37 @@ export class ListComponent implements OnInit {
         this.toastr.error(err.error.message);
       }
     );
+  }
+
+
+  reloadRoute(){
+ 
+    this.route.params.subscribe(
+      params => {
+        console.log(params);
+
+        if(params.name != null ) {
+
+          this.third_parties = {};
+        this.third_parties.store = new CustomStore({
+          load: (loadOptions: any) => {
+            Helper.addFilter(loadOptions, 'ts_type', this.thirdType);
+            Helper.addContainFilter(loadOptions, 'full_name', params.name);
+            return this.tierService.getThirdsDx(this.thirdType,loadOptions)
+              .toPromise()
+              .then(response => {
+                const json = response;
+                return json;
+              })
+              .catch(error => {
+                throw error;
+              });
+          }
+        });
+      }
+
+      }
+    );
+
   }
 }

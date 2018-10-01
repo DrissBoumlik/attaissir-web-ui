@@ -115,6 +115,7 @@
               <dxo-paging [enabled]="true"></dxo-paging>
               <dxo-editing
                 mode="row"
+                [useIcons]="true"
                 [allowDeleting]="true">
               </dxo-editing>
               <dxi-column
@@ -125,7 +126,7 @@
               <dxi-column *ngIf="roleIsCentreDistribution"
                           dataField="warehouses"
                           cellTemplate="cellTemplate2"
-                          caption="Magasin" width="200"
+                          caption="Magasin" 
                           alignment="center"></dxi-column>
               <div *dxTemplate="let data of 'cellTemplate2'">
                 <dx-form
@@ -150,13 +151,20 @@
 
               <dxi-column dataField="id"
                           cellTemplate="cellTemplate"
-                          caption="" width="200"
+                          caption=""  
                           alignment="center"></dxi-column>
               <div *dxTemplate="let data of 'cellTemplate'">
                 <a (click)="showStructureZones(data)"
                    style="cursor:pointer; text-align: left;color: black">
-                  <i class="flaticon-add" style="margin-right: 7px"></i>
-                  Assigner les zones</a>
+                
+                  <span class="d-block d-sm-none">
+                      <i class="flaticon-add"></i> </span>
+
+                   <span class="d-none d-sm-block">
+                   <i class="flaticon-add" style="margin-right: 7px"></i>
+                  Assigner les zones </span> 
+
+                </a>
               </div>
             </dx-data-grid>
 
