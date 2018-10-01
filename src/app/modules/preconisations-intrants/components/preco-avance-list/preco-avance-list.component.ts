@@ -88,10 +88,14 @@ this.preconisations.store = new CustomStore({
         this.rf_code= this.rf_code.replace(/à/g,"0");
         this.rf_code= this.rf_code.replace(/&/g,"1");
         this.rf_code= this.rf_code.replace(/é/g,"2");
-        this.rf_code= this.rf_code.replace('"',"3");
-        this.rf_code= this.rf_code.replace("'","4");
-        this.rf_code= this.rf_code.replace("(","5");
-        this.rf_code= this.rf_code.replace("-","6");
+        
+        this.rf_code= this.rf_code.replace(/"/g,"3");
+
+        this.rf_code= this.rf_code.replace(/'/g,"4");
+
+        this.rf_code= this.rf_code.replace(/\(/g,"5");
+        this.rf_code= this.rf_code.replace(/-/g,"6");
+
         this.rf_code= this.rf_code.replace(/è/g,"7");
         this.rf_code= this.rf_code.replace("_" ,"8");
         this.rf_code= this.rf_code.replace(/ç/g,"9");

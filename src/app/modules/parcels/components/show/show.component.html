@@ -1,0 +1,304 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader" appunwraptag="">
+    <div class="d-flex align-items-center">
+      <div class="siam-page-header">
+  
+        <a class="siam-header-back-btn" routerLink="/parcelles/liste"><i class="fa fa-angle-left"></i>
+          Liste des parcelles</a>
+        <h2>Fiche parcelle</h2>
+         
+      </div>
+    </div>
+  </div>
+  
+  <!-- END: Subheader -->
+  <div class="m-content">
+    <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+      <div class="m-portlet__body">
+        <div class="row">
+          <div class="col-xl-12 col-lg-12">
+  
+
+
+
+
+
+              <header>
+
+                  <div class="container">
+                
+                    <div class="profile">
+                
+                      <div class="profile-image">                
+
+                        <iframe width="390" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-8.218753114342691%2C32.84330321121957%2C-8.171803727746012%2C32.86933155420198&amp;layer=mapnik"  style="border: 1px solid black"></iframe>
+
+                       <!--   <img src="https://cdn3.iconfinder.com/data/icons/countries-and-continents/512/Spain-512.png" style="width :390px; height :250px;"  />
+                        <a href="#" class="thumbnail googleMapImg" data-address="Wien, AT" data-marker="true" data-type="roadmap"></a>
+                !-->
+
+                      </div>
+                
+                      <div class="profile-user-settings">
+                
+                        <h1 class="profile-user-name"> {{parcel.name}}</h1>
+                                                
+                      </div>
+                
+                      <div class="profile-stats">
+                
+                        <ul>
+                          <li><span class="profile-stat-count">{{parcel.annuel_surface}} </span> Superficie  contractée </li>
+                          <li><span class="profile-stat-count">{{parcel.exploited_surface}}  </span> Superficie servie</li>
+                          <li><span class="profile-stat-count">{{parcel.gps_surface}}</span> Superficie réelle</li>
+                          
+
+                        </ul>
+                
+                      </div>
+
+                      <div>
+                      <span class="n_span">CDA : {{parcel.soil.cda}}</span>
+                      <span class="n_span">ZONE : {{parcel.soil.zone}}</span>
+                      <span class="n_span">SECTEUR : {{parcel.soil.sector}} </span>
+                      <span class="n_span">NATURE DU SOL : --</span>
+
+                      <span class="n_span">AGREGE : {{parcel.full_name}}</span>
+
+
+                      </div>
+                      
+                
+                    </div>
+                    <!-- End of profile section -->
+                
+                  </div>
+                  <!-- End of container -->
+                
+                </header>
+ 
+                
+  
+              <div class="row">
+                  <div class="col-12">
+                      <h3 class="m-form__section" style="padding-top: 30px;">
+                          Informations générales
+                     </h3>
+                    
+                    <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                  </div>
+                </div>
+  
+  
+  
+             
+  
+  
+  
+  
+            <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link active show" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
+                  <i class="flaticon-share m--hide"></i>
+                  Liste des préconisations des intrants <span style="background-color: #1142a7; color: #fff;" class="badge badge-secondary"> {{preconisations_intrants_count}}</span>
+                </a>
+              </li>
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
+                    Liste des  avances et primes  <span style="background-color: #1142a7; color: #fff;"  class="badge badge-secondary"> {{avances_count}}</span>
+                </a> 
+              </li>
+              <!--<li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_4" role="tab">
+                  Site
+                </a>
+              </li>-->
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
+                    Liste des incidents  <span style="background-color: #1142a7; color: #fff;"  class="badge badge-secondary"> {{incidents_count}}</span>
+                </a>
+              </li>
+            
+              
+            </ul>
+            <div class="tab-content">
+ 
+
+
+              <div class="tab-pane active show" id="m_user_profile_tab_1">
+                  <dx-data-grid id="CampaignGridContainer"
+                                [allowColumnReordering]="true"
+                                [dataSource]="preconisations_intrants"
+                                [showColumnLines]="true"
+                                [showRowLines]="true"
+                                [showBorders]="true"
+                                [rowAlternationEnabled]="true"
+                                style="padding-top: 2vh"
+                                [columnAutoWidth]="true"
+                                [noDataText]="'Pas de données'">
+         
+                                
+        <dxi-column dataField="id" [width]="40" caption="" [visible]="helper.permissionMethod(['preconization.interventions.show'])" [allowSorting]="false" [allowFiltering]="false"
+        cellTemplate="consulterTemplate"></dxi-column>
+        <dxi-column dataType="Number" sortOrder="desc" dataField="id" caption="Réf"></dxi-column>
+        <dxi-column dataType="Date" dataField="date" caption="Date de commande"></dxi-column>
+        <dxi-column dataField="type" caption="Type" cellTemplate="typeTemplate"></dxi-column>
+        <dxi-column dataField="sub_irt_name" caption="Sous-Famille"></dxi-column>
+        <dxi-column dataField="state" [allowSorting]="false" caption="Etat" cellTemplate="statusTemplate"></dxi-column>
+
+
+
+        <div *dxTemplate="let data of 'typeTemplate'">
+            <div *ngIf="data.value === 'product'">
+              Produit
+            </div>
+            <div *ngIf="data.value === 'service'">
+              Service
+            </div>
+          </div>
+
+          <div *dxTemplate="let data of 'consulterTemplate'">
+            <a routerLink="/preconisations-intrants/afficher/{{data.value}}" routerLinkActive="active"><i
+              style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+              class="fa fa-info-circle fa-5x"></i></a>
+          </div>
+
+
+        <div *dxTemplate="let data of 'statusTemplate'">
+          <span [ngClass]="helper.getStatusColor(data.value)">
+                   {{ data.value}}
+          </span>
+            </div>
+
+                    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                    <dxo-remote-operations
+                      [sorting]="true"
+                      [paging]="false">
+                    </dxo-remote-operations>
+                    <dxo-selection mode="none"></dxo-selection>
+                    <dxo-editing
+                      [useIcons]="true"
+                      mode="row"
+                      [allowUpdating]="false"
+                      [allowDeleting]="false"
+                      [allowAdding]="false">
+                    </dxo-editing>
+                    <dxo-pager
+                      [showPageSizeSelector]="false"
+                    ></dxo-pager>
+                  </dx-data-grid>
+                </div>
+
+
+              <div class="tab-pane" id="m_user_profile_tab_2">
+                  <dx-data-grid id="CampaignGridContainer"
+                                [allowColumnReordering]="true"
+                                [dataSource]="avances"
+                                [showColumnLines]="true"
+                                [showRowLines]="true"
+                                [showBorders]="true"
+                                [rowAlternationEnabled]="true"
+                                style="padding-top: 2vh"
+                                [columnAutoWidth]="true"
+                                [noDataText]="'Pas de données'">
+                  
+                                <dxi-column dataField="id" [width]="40" caption=""
+                                [visible]="helper.permissionMethod(['preconization.interventions.show'])" [allowSorting]="false"
+                                [allowFiltering]="false"
+                                [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
+                    <dxi-column dataType="Number" sortOrder="desc" dataField="id" caption="Réf"></dxi-column>
+                    <dxi-column dataType="Date" dataField="date" caption="Date d'octroi"></dxi-column>
+                    <dxi-column  dataField="division" caption="Division"></dxi-column>                    
+                    <dxi-column dataField="montant" caption="Montant" cellTemplate="montantTemplate"></dxi-column>
+                    <dxi-column dataField="state" [allowSorting]="false" caption="Etat" cellTemplate="statusTemplate"></dxi-column>
+            
+
+
+        <div *dxTemplate="let data of 'montantTemplate'">
+          {{ data.value}} DH
+        </div>
+
+        <div *dxTemplate="let data of 'statusTemplate'">
+      <span [ngClass]="helper.getStatusColor(data.value)">
+               {{ helper.getStatusValue(data.value) }}
+      </span>
+        </div>
+
+        <div *dxTemplate="let data of 'consulterTemplate'">
+          <a routerLink="/preconisations-intrants/afficher/{{data.value}}" routerLinkActive="active"><i
+            style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+            class="fa fa-info-circle fa-5x"></i></a>
+        </div>
+
+                    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                    <dxo-remote-operations
+                      [sorting]="true"
+                      [paging]="false">
+                    </dxo-remote-operations>
+                    <dxo-selection mode="none"></dxo-selection>
+                    <dxo-editing
+                      [useIcons]="true"
+                      mode="row"
+                      [allowUpdating]="false"
+                      [allowDeleting]="false"
+                      [allowAdding]="false">
+                    </dxo-editing>
+                    <dxo-pager
+                      [showPageSizeSelector]="false"
+                    ></dxo-pager>
+                  </dx-data-grid>
+                </div>
+
+
+
+              <div class="tab-pane" id="m_user_profile_tab_3">
+                  <dx-data-grid id="CampaignGridContainer"
+                                [allowColumnReordering]="true"
+                                [dataSource]="incidents"
+                                [showColumnLines]="true"
+                                [showRowLines]="true"
+                                [showBorders]="true"
+                                [rowAlternationEnabled]="true"
+                                style="padding-top: 2vh"
+                                [columnAutoWidth]="true"
+                                [noDataText]="'Waiting '">
+                    
+                       
+                                
+        
+
+                    <div *dxTemplate="let data of 'cellTemplate1'">
+                       (ha)
+                    </div>
+                    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                    <dxo-remote-operations
+                      [sorting]="true"
+                      [paging]="false">
+                    </dxo-remote-operations>
+                    <dxo-selection mode="none"></dxo-selection>
+                    <dxo-editing
+                      [useIcons]="true"
+                      mode="row"
+                      [allowUpdating]="false"
+                      [allowDeleting]="false"
+                      [allowAdding]="false">
+                    </dxo-editing>
+                    <dxo-pager
+                      [showPageSizeSelector]="false"
+                    ></dxo-pager>
+                  </dx-data-grid>
+                </div>
+ 
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+    
+  

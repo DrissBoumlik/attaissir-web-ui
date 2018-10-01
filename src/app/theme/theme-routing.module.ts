@@ -15,6 +15,10 @@ const routes: Routes = [
         loadChildren: './pages/default/index/index.module#IndexModule'
       },
       {
+        path: 'dash',
+        loadChildren: './pages/default/dashboard/index.module#DashboardModule'
+      },
+      {
         path: '',
         loadChildren: '../modules/contracts/contracts.module#ContractsModule'
       },

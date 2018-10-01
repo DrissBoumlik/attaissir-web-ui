@@ -381,11 +381,11 @@
     
             </div>
     
-            <div style="text-align : right;  margin-bottom: 5px;">
+            <div style="text-align : right;  margin-bottom: 5px; font-size:12px;">
                 <div>Date : {{this.mouvement.date }}</div>
             </div>
     
-            <div style="text-align : right; margin-bottom: 10px;">
+            <div style="text-align : right; margin-bottom: 10px; font-size:12px;">
                 <div>{{this.mouvement.campaign}}</div>
             </div>
      
@@ -413,7 +413,7 @@
               
        
                             <div class="receipt-item">
-                                <div class="receipt-item-lbl">- {{article.article.name}}</div>
+                                <div class="receipt-item-lbl" style="font-size:13px;"> {{article.article.name}}</div>
                                 
                                 <div class="receipt-item-price"> {{article.quantity}}  {{article.article.unit}}</div>
                            </div>
@@ -426,19 +426,19 @@
 
                   
                 <div class="receipt-item">
-                    <div class="receipt-item-lbl">Emetteur</div>
-                    <div class="receipt-item-price">{{this.mouvement.from.full_name }}</div>
+                    <div class="receipt-item-lbl" style="font-size:13px;">Emetteur</div>
+                    <div class="receipt-item-price"> &nbsp; {{this.mouvement.from.full_name }}</div>
                 </div>
                 <div class="receipt-item">
-                    <div class="receipt-item-lbl">Récepteur</div>
-                    <div class="receipt-item-price">{{this.mouvement.to.name}}</div>
+                    <div class="receipt-item-lbl" style="font-size:13px;">Récepteur</div>
+                    <div class="receipt-item-price"> &nbsp; {{this.mouvement.to.name}}</div>
                 </div>
 
             </div>
 
  
      
-            <div class="signature">
+            <div class="signature" style="font-size:12px;">
                 <div>**  **</div>
     
                 <div>*  *</div>

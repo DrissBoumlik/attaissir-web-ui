@@ -16,6 +16,7 @@ import {
   DxTemplateModule,
   DxTextAreaModule
 } from 'devextreme-angular';
+import { ShowComponent } from './components/show/show.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,6 @@ import {
     DxCheckBoxModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [ListComponent, AddComponent]
+  declarations: [ListComponent, AddComponent, ShowComponent]
 })
 export class ParcelsModule { }

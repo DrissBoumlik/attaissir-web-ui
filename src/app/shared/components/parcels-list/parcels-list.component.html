@@ -56,6 +56,8 @@
   <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
 
+  <dxi-column dataField="id" [width]="40" caption="" [visible]="helper.permissionMethod(['preconization.interventions.show'])" [allowSorting]="false" [allowFiltering]="false"
+  cellTemplate="consulterTemplate"></dxi-column>
   <dxi-column dataField="cda" caption="CDA"></dxi-column>
   <dxi-column dataField="zone" caption="Zone"></dxi-column>
   <dxi-column dataField="sector" caption="Secteur"></dxi-column>
@@ -88,6 +90,16 @@
       </div>
     </dx-data-grid>
   </div>
+
+
+
+  <div *dxTemplate="let data of 'consulterTemplate'">
+      <a  (click)="helper.gotoShow('parcelles', data.data.id, router, toastr)"><i
+        style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+        class="fa fa-info-circle fa-5x"></i></a>
+    </div>
+
+
   <div *dxTemplate="let data of 'contractStatusTemplate'">
           <span [ngClass]="helper.getStatusColor(data.value)">
               {{ data.value }}

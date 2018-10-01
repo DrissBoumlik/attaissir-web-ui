@@ -1,0 +1,283 @@
+ 
+
+
+ <div class="container" style="margin-top: 80px;">
+		<div class="row">
+			<div class="col">
+
+
+					<div class="row">
+							<div class="col">
+								<p>STATISTIQUES GÉNÉRALE</p>
+								</div>
+								<div class="col">
+									<a href="#" (click)="showWidgetPopup()">
+									<p class="pull-right" style="color:#868A93;">
+ 												<i class="fa fa-plus" aria-hidden="true"></i>
+												 AJOUTER UN WIDGET
+											</p>
+										</a>
+ 									</div>
+									</div>
+
+					<div class="ScrollStyle">
+		
+
+<div>
+    <div class="wrapper">
+
+				<div class="container">
+
+				<div class="row">
+						<div class="col">
+
+								<div  dragula="DRAGULA_FACTS"  style="width: 100%;	height: 100%;">
+
+										<div *ngFor="let item of widgets" >
+										<widget1   title="{{item.title}}" nbr="{{item.nbr}}"  sub_title="{{item.sub_title}}" (close)="close(item)"   (config)="config(item)" (info)="info(item)" *ngIf="item.type==1 && item.align == 'left' " ></widget1>
+										<widget2   title="{{item.title}}" nbr1="{{item.nbr1}}" nbr2="{{item.nbr2}}" sub_title="{{item.sub_title}}" (close)="close(item)"  (config)="config(item)" (info)="info(item)" *ngIf="item.type==2 && item.align == 'left'" ></widget2>
+										<widget3  title="{{item.title}}" startValue="{{item.startValue}}" endValue="{{item.endValue}}" tickInterval="{{item.tickInterval}}"  (close)="close(item)" (config)="config(item)" (info)="info(item)"  *ngIf="item.type==3 && item.align == 'left'" ></widget3>
+
+									</div>
+ 
+ 
+
+								</div>
+								
+
+
+							</div>
+							<div class="col">
+
+									<div  dragula="DRAGULA_FACTS" style="width: 100%;	height: 100%;">
+											
+										 
+										<div *ngFor="let item of widgets" >
+												<widget1   title="{{item.title}}" nbr="{{item.nbr}}"  sub_title="{{item.sub_title}}" (close)="close(item)"   (config)="config(item)" (info)="info(item)" *ngIf="item.type==1 && item.align == 'right' "></widget1>
+												<widget2   title="{{item.title}}" nbr1="{{item.nbr1}}" nbr2="{{item.nbr2}}" sub_title="{{item.sub_title}}" (close)="close(item)"  (config)="config(item)" (info)="info(item)" *ngIf="item.type==2 && item.align == 'right'"></widget2>
+												<widget3  title="{{item.title}}" startValue="{{item.startValue}}" endValue="{{item.endValue}}" tickInterval="{{item.tickInterval}}"  (close)="close(item)" (config)="config(item)" (info)="info(item)"  *ngIf="item.type==3 && item.align == 'right'"></widget3>
+		
+											</div>
+
+									
+										</div>
+
+
+								</div>
+			 </div>
+</div>
+
+
+
+ 	 <div class="row">
+					<div class="col">
+							<div dragula="DRAGULA_FACTS2"  style="width: 100%;	height: 100%;">
+
+						  	<div *ngFor="let item of widgets" >
+						      	<widget4  title="{{item.title}}" [table]="item.table"  *ngIf="item.type==4" (close)="close(item)" ></widget4>
+				   		</div>	
+						</div>
+	
+			  	</div>
+  	</div>		
+ 
+
+
+
+
+      
+     
+    </div>
+	</div>
+
+	 
+						</div>
+				
+			</div>
+			<div class="col">
+					<div style="width: 100%"><iframe width="100%" height="500" src="https://maps.google.com/maps?width=100%&amp;height=470&amp;hl=en&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/create-google-map/">Google map generator</a></iframe></div>
+
+			</div>
+	</div>
+
+
+ 
+
+
+<!-- 
+		<div class='container' dragula="PERSON" id="left" [(dragulaModel)]="left">
+				<div *ngFor="let person of left">{{person | json}}</div>
+			</div>
+			<div class='container' dragula="PERSON" id="right" [(dragulaModel)]="right">
+				<div *ngFor="let person of right">{{person | json}}</div>
+			</div>
+			
+
+
+
+
+
+
+			<h3><code>ng2-dragula</code></h3>
+
+these are some basics to get you started -- modify as you see fit.
+
+<div class="flex">
+  <div class="container" dragula="VAMPIRES" [(dragulaModel)]="vamps">
+    <div class="vamp" *ngFor="let vamp of vamps">{{ vamp.name }}</div>
+  </div>
+
+  <div class="container" dragula="VAMPIRES" [(dragulaModel)]="vamps2">
+    <div class="vamp" *ngFor="let vamp of vamps2">{{ vamp.name }}</div>
+  </div>
+</div>
+!-->
+
+
+<dx-popup
+class="popup"
+[width]="580"
+[height]="300"
+[showTitle]="true"
+title="Confirmation "
+[dragEnabled]="false"
+(onShown)="showPopup()"
+[closeOnOutsideClick]="true"
+[(visible)]="popupVisible"
+>
+<div *dxTemplate="let data of 'content'">
+
+	<div class="gilsser">
+
+
+		<form (submit)="AddMovement($event)" >
+        <dx-form id="form"
+                 [formData]="widget"
+                 [readOnly]="false"
+                 [showColonAfterLabel]="true"
+                 [showValidationSummary]="true"
+                 labelLocation="top">
+
+
+          <dxi-item itemType="group"  i18n-caption>
+
+							<dxi-item dataField="type" editorType="dxSelectBox" [editorOptions]="widgetOptions">
+									<dxo-label
+										text="Type" i18n-text>
+									</dxo-label>
+									<dxi-validation-rule type="required" message="Article est obligatoire"
+																			 i18n-message></dxi-validation-rule>
+								</dxi-item>
+
+
+
+								<dxi-item dataField="title" editorType="dxTextBox" >
+										<dxo-label
+											text="Titre">
+										</dxo-label>
+									</dxi-item>
+
+
+
+									<dxi-item
+									itemType="button"
+									alignment="right"
+									[buttonOptions]="buttonOptions">
+								</dxi-item>
+ 
+				</dxi-item>
+
+ 
+        </dx-form>
+      </form>
+
+
+
+
+
+		<div class="glisser-carte-agriculteur">
+			<div class="credit-card">
+				<div class="rfid-tripe"></div>
+			</div>
+			<div class="swiper-top"></div>
+			<div class="swiper-bottom">
+				<div class="light-indicator"></div>
+			</div>
+		</div>
+	</div>
+
+</div>
+</dx-popup>
+
+
+
+
+
+
+
+<dx-popup
+class="popup"
+[width]="580"
+[height]="300"
+[showTitle]="true"
+title="Info "
+[dragEnabled]="false"
+[closeOnOutsideClick]="true"
+[(visible)]="popupInfoVisible"
+>
+<div *dxTemplate="let data of 'content'">
+
+	<div class="gilsser">
+ 
+
+   info
+
+
+		<div class="glisser-carte-agriculteur">
+			<div class="credit-card">
+				<div class="rfid-tripe"></div>
+			</div>
+			<div class="swiper-top"></div>
+			<div class="swiper-bottom">
+				<div class="light-indicator"></div>
+			</div>
+		</div>
+	</div>
+
+</div>
+</dx-popup>
+
+
+
+
+<dx-popup
+class="popup"
+[width]="580"
+[height]="300"
+[showTitle]="true"
+title="Config "
+[dragEnabled]="false"
+[closeOnOutsideClick]="true"
+[(visible)]="popupConfigVisible"
+>
+<div *dxTemplate="let data of 'content'">
+
+	<div class="gilsser">
+ 
+
+			Config
+
+
+		<div class="glisser-carte-agriculteur">
+			<div class="credit-card">
+				<div class="rfid-tripe"></div>
+			</div>
+			<div class="swiper-top"></div>
+			<div class="swiper-bottom">
+				<div class="light-indicator"></div>
+			</div>
+		</div>
+	</div>
+
+</div>
+</dx-popup>

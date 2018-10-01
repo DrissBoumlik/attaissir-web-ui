@@ -42,6 +42,8 @@ export class ListComponent implements OnInit {
 
 
     this.reloadRoute();
+
+    
     this.router.events.subscribe(
       (event) => {
         if (event instanceof NavigationEnd) {

@@ -33,8 +33,8 @@ export class ParcelsService {
    * @param id
    * @returns {Observable<Parcel[]>}
    */
-  getParcel(id: number): Observable<Parcel> {
-    return this.http.get<Parcel>(`${environment.apiUrl}/${this.routeName}/${id}`);
+  getParcel(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/${this.routeName}/${id}`);
   }
 
   /**

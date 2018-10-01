@@ -457,6 +457,9 @@ export class ShowComponent implements OnInit, AfterViewInit {
         this.rf_code2= this.rf_code2.replace("_" ,"8");
         this.rf_code2= this.rf_code2.replace(/ç/g,"9");
 
+        console.log('test rfid : ' + this.rf_code);
+
+
      this.preconisationsIntrantsService.changeStatus(this.preconisation.id, this.rf_code2)
             .subscribe(response => {
               this.preconisation.state = 'inprogress';
