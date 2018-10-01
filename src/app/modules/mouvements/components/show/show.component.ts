@@ -131,14 +131,18 @@ export class ShowComponent implements OnInit {
         w.document.write($('#t1').html());
 
         w.document.write('</body>');
-        w.document.write('</html>');   
-        w.print();
+        w.document.write('</html>');
 
-        
+      setTimeout(() => {
+          w.print();
+      }, 3000);
 
-setTimeout(() => {
-  w.close();
-}, 2000);
+
+      setTimeout(() => {
+          w.close();
+      }, 5000);
+
+
  
         return true;
      }

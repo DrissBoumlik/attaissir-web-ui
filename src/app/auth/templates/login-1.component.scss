@@ -1,46 +1,339 @@
-.field-icon {
-  float: right;
-  padding-right: 23px;
-  margin-left: -25px;
-  margin-top: -30px;
-  position: relative;
-  z-index: 2;
+/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
 }
 
-.container{
-  padding-top:50px;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Sans-Serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.v-header {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.container-landing {
+  max-width: 960px;
+  padding-left: 1rem;
+  padding-right: 1rem;
   margin: auto;
+  text-align: center;
+  align-content: center;
+}
+
+.fullscreen-video-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.fullscreen-video-wrap video {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.header-overlay {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(135, 135, 135);
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.content-landing {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(150%, 50%);
+}
+
+
+/* ------------------------------------- */
+
+
+
+
+
+.login-html {
+
+}
+
+.login-html .sign-in,
+.login-form .group .check {
+  display: none;
 }
 
 
 
-::ng-deep .form {
-  padding: 10px 0 0 10px;
+
+/*change the form properties */
+
+.login-form {
+  min-width: 100%;
+  width: 25vw;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
-::ng-deep .label {
-  margin-bottom: 10px;
-  font-size: 16px;
+
+.login-form .group {
+  margin-bottom: 15px;
 }
-::ng-deep .label:not(:first-child) {
-  margin-top: 30px;
+
+/*change color of inside button and inouts */
+
+.login-form .group .label,
+.login-form .group .input {
+  width: 100%;
+  color: #ffd600;
+  display: block;
 }
-::ng-deep #small-indicator, #medium-indicator, #large-indicator {
-  vertical-align: middle;
-  margin-right: 10px;
+
+.login-form .group .button {
+  color: white;
+  width: 60%;
 }
-::ng-deep #button,
-::ng-deep #button .dx-button-content {
-  padding: 0;
+
+.login-form .group .input,
+.login-form .group .button {
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
 }
-::ng-deep #button .button-indicator {
-  height: 32px;
-  width: 32px;
+
+.login-form .group input[data-type="password"] {
+  text-security: circle;
+  -webkit-text-security: circle;
+}
+
+
+
+/*change button color */
+.login-form .group .button {
+  background: rgba(255, 214, 0, 0.8);
+  cursor: pointer;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+}
+
+.login-form .group .input {
+  background: rgb(255, 255, 255);
+  color: #000;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+  opacity: 0.8;
+}
+
+.login-form .group label .icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  position: relative;
   display: inline-block;
-  vertical-align: middle;
-  margin-right: 5px;
+  background: rgba(255, 255, 255, .1);
+}
+
+.login-form .group label .icon:before,
+.login-form .group label .icon:after {
+  content: '';
+  width: 10px;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  transition: all .2s ease-in-out 0s;
+}
+
+.login-form .group label .icon:before {
+  left: 3px;
+  width: 5px;
+  bottom: 6px;
+  -webkit-transform: scale(0) rotate(0);
+  transform: scale(0) rotate(0);
+}
+
+.login-form .group label .icon:after {
+  top: 6px;
+  right: 0;
+  -webkit-transform: scale(0) rotate(0);
+  transform: scale(0) rotate(0);
+}
+
+/*when checking adjust color */
+.login-form .group .check:checked + label {
+  color: #fff;
+}
+
+.login-form .group .check:checked + label .icon {
+  background: #ffd600;
+}
+
+.login-form .group .check:checked + label .icon:before {
+  -webkit-transform: scale(1) rotate(45deg);
+  transform: scale(1) rotate(45deg);
+}
+
+.login-form .group .check:checked + label .icon:after {
+  -webkit-transform: scale(1) rotate(-45deg);
+  transform: scale(1) rotate(-45deg);
+}
+
+
+.mb4 {
+  margin-bottom: 2%;
 }
 
 
 
+// YOU CAN CHANGE THE COLOR OF LOGO HERE.
+
+$color-logo: rgb(249, 255, 252);
+
+// MIXIN
+
+@mixin center() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// LOGO STYLES
+
+.logo-wrapper {
+  @include center();
+
+  //Logo responsive, just change the value of "max-width" for another size.
 
 
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  position: relative;
+
+  #logo-webbab {
+    overflow: visible;
+    .word {
+      -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+      animation: heartbeat 1.5s ease-in-out infinite both;
+      fill: $color-logo;
+      font-weight: bold;
+      box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+      opacity: 0;
+    }
+    #mask {
+      #alpha {
+        fill: #fff;
+      }
+    }
+  }
+  #iso {
+    fill: $color-logo;
+    opacity: 0;
+    mask: url(#mask);
+  }
+}
+
+
+.cf:before,
+.cf:after {
+  content: " ";
+  display: table;
+}
+
+.cf:after {
+  clear: both;
+}
+
+.cf {
+  *zoom: 1;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2018-10-1 1:47:49
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation heartbeat
+ * ----------------------------------------
+ */
+@-webkit-keyframes heartbeat {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  10% {
+    -webkit-transform: scale(0.91);
+    transform: scale(0.91);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  17% {
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  33% {
+    -webkit-transform: scale(0.87);
+    transform: scale(0.87);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  45% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+}
+@keyframes heartbeat {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  10% {
+    -webkit-transform: scale(0.91);
+    transform: scale(0.91);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  17% {
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  33% {
+    -webkit-transform: scale(0.87);
+    transform: scale(0.87);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  45% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+}

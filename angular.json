@@ -39,10 +39,12 @@
               "node_modules/ngx-toastr/toastr.css",
               "src/assets/vendors/metronic/css/style.bundle.css",
               "src/assets/vendors/metronic/css/styles.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/test.js",
               "node_modules/dragula/dist/dragula.js"
             ]
           },

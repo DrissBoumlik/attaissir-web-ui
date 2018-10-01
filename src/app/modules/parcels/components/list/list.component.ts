@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ParcelsService } from '../../services/parcels.service';
+import {Component, OnInit} from '@angular/core';
+import {ParcelsService} from '../../services/parcels.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import 'devextreme/integration/jquery';
-import { Router } from '@angular/router';
-import { Helper } from '../../../../shared/classes/helper';
+import {Router} from '@angular/router';
+import {Helper} from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-list',
@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
   helper: any;
 
   constructor(public parcelsServices: ParcelsService,
-    private router: Router) {
+              private router: Router) {
     this.parcels = {};
     this.helper = Helper;
   }
@@ -28,9 +28,12 @@ export class ListComponent implements OnInit {
         console.log(loadOptions);
         return this.parcelsServices.getParcelsDx(loadOptions)
           .toPromise()
-          .then(response => {
-            let data = response;
-            data = data['data'].filter((a) => {
+          .then((response: any) => {
+            response.data.map((parcel) => {
+              parcel.rib = !parcel.bank_code ? '' :  `${parcel.bank_code}${parcel.bank_account_number}${parcel.bank_rib_key}`;
+              return parcel;
+            });
+            /*data = data['data'].filter((a) => {
               console.log(a);
               a['parcels'] = [];
               for (let i = 0; i < data['data'].length; i++) {
@@ -42,8 +45,8 @@ export class ListComponent implements OnInit {
               return !a.parcel_id;
             });
             console.log(data);
-            response['data'] = data;
-           //  response['totalCount'] = data.filter(total => total.is_logical).length;
+            response['data'] = data;*/
+            //  response['totalCount'] = data.filter(total => total.is_logical).length;
             return response;
           })
           .catch(error => {
@@ -53,8 +56,11 @@ export class ListComponent implements OnInit {
     });
   }
 
-  onStartEdit = (e) => { };
-  onRemoveParcel = (e) => { };
-  deleteRecords = () => { };
+  onStartEdit = (e) => {
+  };
+  onRemoveParcel = (e) => {
+  };
+  deleteRecords = () => {
+  };
 
 }

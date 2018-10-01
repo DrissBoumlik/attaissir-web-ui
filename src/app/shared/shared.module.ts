@@ -12,7 +12,7 @@ import {
   DxPopupModule,
   DxSelectBoxModule,
   DxTemplateModule, DxTextAreaModule,
-  DxTextBoxModule
+  DxTextBoxModule, DxVectorMapModule
 } from 'devextreme-angular';
 import { TiersFormComponent } from './components/tiers-form/tiers-form.component';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +24,10 @@ import { ParcelsListComponent } from './components/parcels-list/parcels-list.com
 import { RoleDirective } from './directives/role.directive';
 import { ParcelGridComponent } from './components/parcel-grid/parcel-grid.component';
 import { PermissionDirective } from './directives/permission.directive';
+import { LeafLetHomeComponent } from './leaflet/maps/home/home.component';
+import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import { KpisComponent } from './components/kpis/kpis.component';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @NgModule({
   imports: [
@@ -42,6 +46,8 @@ import { PermissionDirective } from './directives/permission.directive';
     DxTemplateModule,
     DxFileUploaderModule,
     DxSelectBoxModule,
+    DxVectorMapModule,
+    LeafletModule.forRoot()
   ],
   exports: [
     WizardComponent,
@@ -66,7 +72,9 @@ import { PermissionDirective } from './directives/permission.directive';
     DxFileUploaderModule,
     ParcelGridComponent,
     ParcelsListComponent,
-    PermissionDirective
+    PermissionDirective,
+    LeafLetHomeComponent,
+    KpisComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -79,7 +87,9 @@ import { PermissionDirective } from './directives/permission.directive';
     ParcelsListComponent,
     RoleDirective,
     ParcelGridComponent,
-    PermissionDirective
+    PermissionDirective,
+    LeafLetHomeComponent,
+    KpisComponent
   ]
 })
 export class SharedModule { }

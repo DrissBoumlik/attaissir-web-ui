@@ -28,6 +28,14 @@ const routes: Routes = [
       },
       {
         path: '',
+        loadChildren: '../modules/field-states/field-states.module#FieldStatesModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/incidents/incidents.module#IncidentsModule'
+      },
+      {
+        path: '',
         loadChildren: '../modules/cards/cards.module#CardsModule'
       },
       {

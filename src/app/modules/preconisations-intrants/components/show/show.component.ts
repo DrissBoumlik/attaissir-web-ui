@@ -359,10 +359,10 @@ export class ShowComponent implements OnInit, AfterViewInit {
     }, 3000);
 
 
-    setTimeout(() => {
-      w.close();
-    }, 5000);
 
+      setTimeout(() => {
+          w.close();
+      }, 5000);
 
     return true;
 

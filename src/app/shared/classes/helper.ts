@@ -131,7 +131,7 @@ export class Helper {
     ) {
       return 'm-badge m-badge--success m-badge--wide';
     } else if (value.toLowerCase() === 'suspended'.toLowerCase() || value.toLowerCase() === 'Suspendu'.toLowerCase()
-      || value.toLowerCase() === 'Annulé'.toLowerCase()
+      || value.toLowerCase() === 'Annulé'.toLowerCase() || value.toLowerCase() === 'canceled'.toLowerCase()
     ) {
       return 'm-badge m-badge--danger m-badge--wide';
     } else {
@@ -176,6 +176,19 @@ export class Helper {
     }
   }
 
+  public static getSeverityColor(i: number, value: number): string {
+    let color = '#d7182d';
+    if ( +value <= 4) {
+      color = '#d76725';
+    }
+    if ( +value <= 3) {
+      color = '#d7b112';
+    }
+    if (+value <= 2) {
+      color = '#4fd755';
+    }
+    return i < value ? color : '#d6d6d7';
+  }
 
   /**
    * get Third party type

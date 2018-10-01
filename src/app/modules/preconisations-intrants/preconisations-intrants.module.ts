@@ -11,7 +11,7 @@ import {
   DxNumberBoxModule,
   DxTemplateModule,
   DxTextAreaModule,
-  DxTextBoxModule
+  DxTextBoxModule, DxLinearGaugeModule
 } from 'devextreme-angular';
 import { ShowComponent } from './components/show/show.component';
 import { PrecoAvanceListComponent } from './components/preco-avance-list/preco-avance-list.component';
@@ -33,7 +33,8 @@ import { SharedModule } from '../../shared/shared.module';
     DxPopupModule,
     DxButtonModule,
     DxTemplateModule, DxTextBoxModule,
-    PreconisationsIntrantsRoutingModule
+    PreconisationsIntrantsRoutingModule,
+    DxLinearGaugeModule
   ],
   declarations: [
     ListComponent,
@@ -45,4 +46,4 @@ import { SharedModule } from '../../shared/shared.module';
 export class PreconisationsIntrantsModule { }
 
 
- 
+
