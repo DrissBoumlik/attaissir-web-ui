@@ -57,7 +57,7 @@ export class Helper {
 
 
 
-  
+
   public static addContainFilter = (loadOptions: any, name: string, value: string) => {
     if (!loadOptions.hasOwnProperty('filter')) {
       loadOptions['filter'] = [[name, 'contains', value]];
@@ -178,10 +178,10 @@ export class Helper {
 
   public static getSeverityColor(i: number, value: number): string {
     let color = '#d7182d';
-    if ( +value <= 4) {
+    if (+value <= 4) {
       color = '#d76725';
     }
-    if ( +value <= 3) {
+    if (+value <= 3) {
       color = '#d7b112';
     }
     if (+value <= 2) {

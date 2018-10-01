@@ -25,9 +25,9 @@ import { RoleDirective } from './directives/role.directive';
 import { ParcelGridComponent } from './components/parcel-grid/parcel-grid.component';
 import { PermissionDirective } from './directives/permission.directive';
 import { LeafLetHomeComponent } from './leaflet/maps/home/home.component';
-import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { KpisComponent } from './components/kpis/kpis.component';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 @NgModule({
   imports: [

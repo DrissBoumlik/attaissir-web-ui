@@ -8,9 +8,9 @@ describe('PrecoAvanceListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrecoAvanceListComponent ]
+      declarations: [PrecoAvanceListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

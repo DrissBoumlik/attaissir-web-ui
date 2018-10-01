@@ -6,7 +6,7 @@ import { LayoutModule } from '../../../layouts/layout.module';
 import { DefaultComponent } from '../default.component';
 import { SharedModule } from '../../../../shared/shared.module';
 
-import {DragulaModule} from "ng2-dragula/index";
+import { DragulaModule } from 'ng2-dragula';
 import { DxTextBoxModule, DxSelectBoxModule, DxTemplateModule, DxPopupModule, DxButtonModule, DxLoadPanelModule, DxValidationSummaryModule, DxValidatorModule, DxSwitchModule, DxTextAreaModule, DxChartModule, DxLinearGaugeModule } from 'devextreme-angular';
 import { Widget1Component } from './widget/widget1.component';
 import { Widget2Component } from './widget/widget2.component';
@@ -55,16 +55,17 @@ const routes: Routes = [
     DxChartModule,
     DxLinearGaugeModule,
 
-    DragulaModule
+    DragulaModule.forRoot()
+
   ],
   exports: [
     RouterModule
   ], declarations: [
     IndexComponent,
-    Widget1Component ,
-     Widget2Component,
-     Widget3Component,
-     Widget4Component
+    Widget1Component,
+    Widget2Component,
+    Widget3Component,
+    Widget4Component
 
   ]
 })

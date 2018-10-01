@@ -15,7 +15,7 @@ export class ListComponent implements OnInit {
   dataSource: any = {};
   helper: any;
 
-  constructor(public usersSerivces: UsersService, private router: Router ,private toastr : ToastrService) {
+  constructor(public usersSerivces: UsersService, private router: Router, private toastr: ToastrService) {
     this.helper = Helper;
   }
 
@@ -38,7 +38,7 @@ export class ListComponent implements OnInit {
           .catch(error => {
             throw error;
           });
-      } ,
+      },
       remove: (event: any) => {
         return this.usersSerivces.deleteUser(event.id)
           .toPromise()

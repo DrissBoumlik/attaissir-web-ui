@@ -3,10 +3,10 @@ import { NgModule, Component, enableProdMode, Input, Output, EventEmitter } from
 import { BrowserModule } from '@angular/platform-browser';
 import { DragulaService } from 'ng2-dragula';
 
- 
+
 @Component({
   selector: 'widget1',
- styles: [`
+  styles: [`
  
  
  
@@ -30,6 +30,9 @@ import { DragulaService } from 'ng2-dragula';
      border-color: #868A93;
      border-style: solid;
      border-width: thin;
+
+     margin-bottom: 30px;
+
  }
  
  .big-widget{
@@ -122,32 +125,32 @@ import { DragulaService } from 'ng2-dragula';
 
 })
 
-export class Widget1Component   {
-  
-  
-    @Input() title: String;
-    @Input() nbr: String;
-    @Input() sub_title: String;
-
-    @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
-
-    closeBtn() {
-        this.close.emit(1);
-    }
+export class Widget1Component {
 
 
-    @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
+  @Input() title: String;
+  @Input() nbr: String;
+  @Input() sub_title: String;
 
-    ConfigBtn() {
-        this.config.emit(1);
-    }
+  @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
 
-   @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
+  closeBtn() {
+    this.close.emit(1);
+  }
 
-   InfoBtn() {
-        this.info.emit(1);
-    }
-    
+
+  @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
+
+  ConfigBtn() {
+    this.config.emit(1);
+  }
+
+  @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
+
+  InfoBtn() {
+    this.info.emit(1);
+  }
+
 
 }
 

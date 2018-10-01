@@ -36,7 +36,7 @@
 										<div *ngFor="let item of widgets" >
 										<widget1   title="{{item.title}}" nbr="{{item.nbr}}"  sub_title="{{item.sub_title}}" (close)="close(item)"   (config)="config(item)" (info)="info(item)" *ngIf="item.type==1 && item.align == 'left' " ></widget1>
 										<widget2   title="{{item.title}}" nbr1="{{item.nbr1}}" nbr2="{{item.nbr2}}" sub_title="{{item.sub_title}}" (close)="close(item)"  (config)="config(item)" (info)="info(item)" *ngIf="item.type==2 && item.align == 'left'" ></widget2>
-										<widget3  title="{{item.title}}" startValue="{{item.startValue}}" endValue="{{item.endValue}}" tickInterval="{{item.tickInterval}}"  (close)="close(item)" (config)="config(item)" (info)="info(item)"  *ngIf="item.type==3 && item.align == 'left'" ></widget3>
+										<widget3   title="{{item.title}}" startValue="{{item.startValue}}" endValue="{{item.endValue}}" tickInterval="{{item.tickInterval}}"  (close)="close(item)" (config)="config(item)" (info)="info(item)"  *ngIf="item.type==3 && item.align == 'left'" ></widget3>
 
 									</div>
  
@@ -95,7 +95,11 @@
 				
 			</div>
 			<div class="col">
-					<div style="width: 100%"><iframe width="100%" height="500" src="https://maps.google.com/maps?width=100%&amp;height=470&amp;hl=en&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/create-google-map/">Google map generator</a></iframe></div>
+					<div style="width: 100%">
+					
+						      <app-kpis></app-kpis>
+
+					</div>
 
 			</div>
 	</div>

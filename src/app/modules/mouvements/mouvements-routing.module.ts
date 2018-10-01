@@ -6,7 +6,7 @@ import { AddComponent } from './components/add/add.component';
 import { ShowComponent } from './components/show/show.component';
 import { ShowRetourComponent } from './components/show-retour/show-retour.component';
 import { PermissionGuard } from '../../shared/directives/guard.directive';
-import {DetailsComponent} from './components/details/details.component';
+import { DetailsComponent } from './components/details/details.component';
 
 
 

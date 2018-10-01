@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ListComponent} from './list/list.component';
-import {PermissionGuard} from '../../shared/directives/guard.directive';
-import {DefaultComponent} from '../../theme/pages/default/default.component';
+import { ListComponent } from './list/list.component';
+import { PermissionGuard } from '../../shared/directives/guard.directive';
+import { DefaultComponent } from '../../theme/pages/default/default.component';
 
 const routes: Routes = [{
   path: 'fieldstates',

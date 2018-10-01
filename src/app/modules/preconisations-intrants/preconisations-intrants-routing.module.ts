@@ -5,7 +5,7 @@ import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { ShowComponent } from './components/show/show.component';
 import { PermissionGuard } from '../../shared/directives/guard.directive';
 import { PrecoAvanceListComponent } from './components/preco-avance-list/preco-avance-list.component';
-import {DetailsComponent} from './components/details/details.component';
+import { DetailsComponent } from './components/details/details.component';
 
 const routes: Routes = [
   {

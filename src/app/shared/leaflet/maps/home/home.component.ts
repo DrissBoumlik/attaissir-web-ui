@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {circle, icon, latLng, marker, polygon, tileLayer} from 'leaflet';
-import {ZonesService} from '../../../../modules/contracts/services/zones.service';
+import { Component, OnInit } from '@angular/core';
+import { circle, icon, latLng, marker, polygon, tileLayer } from 'leaflet';
+import { ZonesService } from '../../../../modules/contracts/services/zones.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class LeafLetHomeComponent implements OnInit {
         {
           maxZoom: 17,
           attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS,' +
-          ' AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            ' AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         })
     ],
     zoom: 16,
@@ -35,11 +35,11 @@ export class LeafLetHomeComponent implements OnInit {
       'google': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS,' +
-        ' AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+          ' AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
       }),
     },
     overlays: {
-      'Big Circle': circle([46.95, -122], {radius: 5000}),
+      'Big Circle': circle([46.95, -122], { radius: 5000 }),
       'Big Square': polygon([[46.8, -121.55], [46.9, -121.55], [46.9, -121.7], [46.8, -121.7]]),
       'marker': marker([46.879966, -121.726909], {
         icon: icon({
@@ -78,11 +78,11 @@ export class LeafLetHomeComponent implements OnInit {
         -8.4743214
       ]
     ], {
-      color: 'red',
-      stroke: true,
-      fillColor: 'red',
-      fillOpacity: 1
-    }),
+        color: 'red',
+        stroke: true,
+        fillColor: 'red',
+        fillOpacity: 1
+      }),
   ];
 
   constructor(private zonesService: ZonesService) {

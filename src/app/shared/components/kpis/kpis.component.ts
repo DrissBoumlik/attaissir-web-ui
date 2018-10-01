@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FamilyService} from '../../services/family-service.service';
-import {DxVectorMapComponent} from 'devextreme-angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FamilyService } from '../../services/family-service.service';
+import { DxVectorMapComponent } from 'devextreme-angular';
 import DataSource from 'devextreme/data/data_source';
 
 @Component({
@@ -49,7 +49,7 @@ export class KpisComponent implements OnInit {
       '<div class="cda_item_head"><h3>CDA: ' + arg.attribute('name') + '</h3></div>' +
       '<div class="cda_item_body"> <ul>' +
       '<li style="text-align: left; padding-bottom: 5px""> '
-      + (arg.attribute('kpis')[0].sup_contracted ? arg.attribute('kpis')[0].sup_contracted  : 0)
+      + (arg.attribute('kpis')[0].sup_contracted ? arg.attribute('kpis')[0].sup_contracted : 0)
       + ' (Ha) contractée</li>' +
       '<li style="text-align: left; padding-bottom: 5px""> ' + 0 + ' (Ha) programmée</li>' +
       '<li style="text-align: left; padding-bottom: 5px""> ' + arg.attribute('kpis')[0].nb_ag + ' agrégés</li>' +

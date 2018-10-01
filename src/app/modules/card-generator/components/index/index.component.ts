@@ -68,7 +68,7 @@ export class IndexComponent implements OnInit {
       type: "success",
       icon: "fa fa-play",
       onClick: function(e) {
-       // console.log(e)
+        // console.log(e)
 
 
       }
@@ -180,11 +180,11 @@ export class IndexComponent implements OnInit {
 
       // it.playOn= false;
 
-      
+
       let img = environment.apiUrl + '/cards/4/generate?face=recto&id=4&rfid=334&structure='
-      + it.structure_id + '&name=' + it.name + '&name_ar=' + it.name_ar +  '&tel=' +
-      it.tel +  '&address=' + it.address + '&type=agri&full_name=' + it.full_name + '&code='
-      + it.code + '&full_name_ar=' + it.full_name_ar + '&amp;cin=' + it.cin;
+        + it.structure_id + '&name=' + it.name + '&name_ar=' + it.name_ar + '&tel=' +
+        it.tel + '&address=' + it.address + '&type=agri&full_name=' + it.full_name + '&code='
+        + it.code + '&full_name_ar=' + it.full_name_ar + '&amp;cin=' + it.cin;
 
       this.img_scr_recto_array.push(img);
 
@@ -276,17 +276,17 @@ export class IndexComponent implements OnInit {
       } else {
 
 
-        
-        this.barcode= this.barcode.replace(/à/g,"0");
-        this.barcode= this.barcode.replace(/&/g,"1");
-        this.barcode= this.barcode.replace(/é/g,"2");
-        this.barcode= this.barcode.replace('"',"3");
-        this.barcode= this.barcode.replace("'","4");
-        this.barcode= this.barcode.replace("(","5");
-        this.barcode= this.barcode.replace("-","6");
-        this.barcode= this.barcode.replace(/è/g,"7");
-        this.barcode= this.barcode.replace("_" ,"8");
-        this.barcode= this.barcode.replace(/ç/g,"9");
+
+        this.barcode = this.barcode.replace(/à/g, "0");
+        this.barcode = this.barcode.replace(/&/g, "1");
+        this.barcode = this.barcode.replace(/é/g, "2");
+        this.barcode = this.barcode.replace('"', "3");
+        this.barcode = this.barcode.replace("'", "4");
+        this.barcode = this.barcode.replace("(", "5");
+        this.barcode = this.barcode.replace("-", "6");
+        this.barcode = this.barcode.replace(/è/g, "7");
+        this.barcode = this.barcode.replace("_", "8");
+        this.barcode = this.barcode.replace(/ç/g, "9");
 
 
         this.selectedItems.forEach(it => {
