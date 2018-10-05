@@ -26,6 +26,7 @@ export class AddComponent implements OnInit {
   addSemance: any;
   addProduct: any;
   addAP: any;
+  addBTR: any;
   /*-------------------------------------------*/
   parcelOptions: any;
   stwOptions: any;
@@ -41,6 +42,7 @@ export class AddComponent implements OnInit {
   semences: any = [];
   products: any = [];
   apis: any = [];
+  btrs: any = [];
   saveAsModel = false;
   /*-------------------------------------------*/
   semenceCategoryOptions: any;
@@ -68,9 +70,19 @@ export class AddComponent implements OnInit {
   APQuantity: any;
   APQuantityOptions;
   /*-------------------------------------------*/
+  BTRCategoryOptions: any;
+  BTRSubCategoryOptions: any;
+  BTRArticleOptions: any;
+  SelectedBTRsCategory: any;
+  SelectedBTRSubCategory: any;
+  SelectedBTRArticle: any = {};
+  BTRQuantity: any;
+  BTRQuantityOptions;
+  /*-------------------------------------------*/
   @ViewChild('semenceGrid') semenceGrid: DxDataGridComponent;
   @ViewChild('productsGrid') productsGrid: DxDataGridComponent;
   @ViewChild('apiGrid') apiGrid: DxDataGridComponent;
+  @ViewChild('btrGrid') btrGrid: DxDataGridComponent;
   /*-------------------------------------------*/
   @ViewChild('choixSemence') choixSemence: DxiItemComponent;
   @ViewChild('choixProducts') choixProducts: DxiItemComponent;
@@ -82,6 +94,7 @@ export class AddComponent implements OnInit {
     products: [],
     services: [],
     api: [],
+    btr: [],
     autre: []
   };
   /*-------------------------------------------*/
@@ -102,6 +115,7 @@ export class AddComponent implements OnInit {
   SEMENCE_TYPE = 'SEME';
   PRODUCT_TYPE = 'product';
   SERVICE_TYPE = 'service';
+  BTR_TYPE = 'BTR';
   AVANCES_ET_PRIMES_TYPE = 'API';
 
   /*--------------------Popups-----------------------*/
@@ -252,6 +266,9 @@ export class AddComponent implements OnInit {
                     }
                     if (type.name === this.AVANCES_ET_PRIMES_TYPE) {
                       this.data.api.push(ctg);
+                    }
+                    if (type.name === this.BTR_TYPE) {
+                      this.data.btr.push(ctg);
                     }
                   });
                   this.data.services.forEach(cat => {
@@ -481,6 +498,50 @@ export class AddComponent implements OnInit {
         };
       },
     };
+    this.BTRCategoryOptions = {
+      displayExpr: 'category_name',
+      valueExpr: 'category_id',
+      items: this.data.btr,
+      searchEnabled: true,
+      searchMode: 'contains',
+      onSelectionChanged: (event) => {
+        this.SelectedBTRsCategory = event.selectedItem;
+        this.BTRSubCategoryOptions = {
+          displayExpr: 'sub_category_name',
+          valueExpr: 'sub_category_id',
+          items: this.data.btr[0].sub_categories,
+          searchEnabled: true,
+          searchMode: 'contains',
+          onSelectionChanged: (e) => {
+            this.SelectedBTRSubCategory = e.selectedItem;
+            this.articleService.getArticlesByFamily(e.selectedItem.sub_category_id)
+              .subscribe(
+                (articles: any) => {
+                  this.BTRArticleOptions = {
+                    displayExpr: 'name',
+                    valueExpr: 'id',
+                    items: articles.data,
+                    searchEnabled: true,
+                    searchMode: 'contains',
+                    onSelectionChanged: (ev) => {
+                      this.SelectedBTRArticle = ev.selectedItem;
+                      this.BTRQuantity = this.interventions.surface_to_work * (+this.SelectedAPArticle.dose);
+                      this.BTRQuantityOptions = {
+                        format: '#0.## ' + this.SelectedBTRArticle.unit.toString(),
+                        disabled: this.SelectedBTRArticle.code !== 'GAV00003',
+                        value: this.interventions.surface_to_work * (+this.SelectedBTRArticle.dose),
+                        onValueChanged: (cc) => {
+                          this.BTRQuantity = cc.value;
+                        }
+                      };
+                    }
+                  };
+                }
+              );
+          },
+        };
+      },
+    };
     this.productsCategoryOptions = {
       displayExpr: 'category_name',
       valueExpr: 'category_id',
@@ -592,6 +653,40 @@ export class AddComponent implements OnInit {
           'sub_category': this.SelectedAPSubCategory,
           'article': this.SelectedAPArticle,
           'quantity': this.APQuantity
+        });
+      }
+    };
+    this.addBTR = {
+      text: 'AJOUTER',
+      type: 'default',
+      useSubmitBehavior: false,
+      onClick: () => {
+        if (!this.SelectedBTRsCategory
+          || !this.SelectedBTRSubCategory
+          || !this.SelectedBTRArticle
+          || !this.BTRQuantity) {
+          NewComponent.notifyMe('Veuillez remplir tous les champs');
+          return -1;
+        }
+        try {
+          this.btrGrid.instance.getVisibleRows().forEach((row: any) => {
+            if (row.data.article.name === this.SelectedBTRArticle.name
+              && row.data.category.category_name === this.SelectedBTRsCategory.category_name
+              && row.data.sub_category.sub_category_name === this.SelectedBTRSubCategory.sub_category_name
+              && row.data.quantity === this.BTRQuantity) {
+              const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
+              NewComponent.notifyMe(msg);
+              throw new Error(msg);
+            }
+          });
+        } catch (e) {
+          throw e;
+        }
+        this.apis.push({
+          'category': this.SelectedBTRsCategory,
+          'sub_category': this.SelectedBTRSubCategory,
+          'article': this.SelectedBTRArticle,
+          'quantity': this.BTRQuantity
         });
       }
     };
