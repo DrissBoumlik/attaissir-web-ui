@@ -409,7 +409,7 @@
           <dxi-item>
             <div *dxTemplate>
               <dx-form
-                id="form5"
+                id="form6"
                 [formData]="interventions"
                 [readOnly]="false"
                 [showColonAfterLabel]="true"
@@ -452,10 +452,10 @@
 
                   <dxi-item [colSpan]="5" *ngIf="data.btr.length" >
                     <dx-data-grid
-                      #apiGrid
+                      #btrGrid
                       id="btrGrid"
                       [allowColumnReordering]="true"
-                      [dataSource]="apis"
+                      [dataSource]="btrs"
                       [showColumnLines]="true"
                       [showRowLines]="true"
                       [showBorders]="true"

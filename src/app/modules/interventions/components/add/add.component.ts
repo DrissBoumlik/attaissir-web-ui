@@ -528,7 +528,6 @@ export class AddComponent implements OnInit {
                       this.BTRQuantity = this.interventions.surface_to_work * (+this.SelectedAPArticle.dose);
                       this.BTRQuantityOptions = {
                         format: '#0.## ' + this.SelectedBTRArticle.unit.toString(),
-                        disabled: this.SelectedBTRArticle.code !== 'GAV00003',
                         value: this.interventions.surface_to_work * (+this.SelectedBTRArticle.dose),
                         onValueChanged: (cc) => {
                           this.BTRQuantity = cc.value;
@@ -682,7 +681,7 @@ export class AddComponent implements OnInit {
         } catch (e) {
           throw e;
         }
-        this.apis.push({
+        this.btrs.push({
           'category': this.SelectedBTRsCategory,
           'sub_category': this.SelectedBTRSubCategory,
           'article': this.SelectedBTRArticle,
@@ -745,6 +744,9 @@ export class AddComponent implements OnInit {
         } else if (this.data.api.length && this.apiGrid.instance.getVisibleRows().length === 0) {
           NewComponent.notifyMe('Aucun produit (prime/avance) n\'a été choisi.');
           return -1;
+        } else if (this.data.btr.length && this.btrGrid.instance.getVisibleRows().length === 0) {
+          NewComponent.notifyMe('Aucun produit (prime/avance) n\'a été choisi.');
+          return -1;
         }
         /*--------------------------------------------------------*/
         const data = {
@@ -762,6 +764,7 @@ export class AddComponent implements OnInit {
           product_articles: [],
           service_articles: [],
           api_articles: [],
+          btr_articles: [],
           custom_fields: []
         };
 
@@ -790,7 +793,14 @@ export class AddComponent implements OnInit {
             });
           });
         }
-
+        if (this.btrGrid) {
+          this.btrGrid.instance.getVisibleRows().forEach(row => {
+            data.btr_articles.push({
+              article_id: row.data.article.id,
+              quantity: row.data.quantity,
+            });
+          });
+        }
         if (this.productsGrid) {
           this.productsGrid.instance.getVisibleRows().forEach(row => {
             data.product_articles.push({
