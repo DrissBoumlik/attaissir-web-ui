@@ -1,6 +1,7 @@
 import { isArray, isNull } from 'util';
 import { load } from '@angular/core/src/render3/instructions';
 import * as CryptoJS from 'crypto-js';
+import {Observable} from 'rxjs/Rx';
 
 export class Helper {
   /**
@@ -57,7 +58,7 @@ export class Helper {
 
 
 
-  
+
   public static addContainFilter = (loadOptions: any, name: string, value: string) => {
     if (!loadOptions.hasOwnProperty('filter')) {
       loadOptions['filter'] = [[name, 'contains', value]];
@@ -431,4 +432,5 @@ export class Helper {
       return false;
     }
   }
+
 }

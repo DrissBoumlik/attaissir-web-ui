@@ -1,0 +1,100 @@
+<dx-data-grid
+  id="ReportingContracts"
+  [dataSource]="contracts"
+  [columnHidingEnabled]="false"
+  align="center"
+  [allowColumnReordering]="true"
+  [columnAutoWidth]="true"
+  [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+  noDataText="Aucun incident n'a été rapporté"
+  [rowAlternationEnabled]="true"
+  KeyExpr="id"
+  #ReportingContracts>
+
+  <dxi-column [alignment]="'center'" dataField="cda_name" caption="CDA"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="z_name" caption="Zone"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="secteur" caption="Secteur"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="p_name" caption="Parcelle"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="p_annuel_surface"
+              caption="Superficie contractée"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="tp_cin" caption="CIN de l'agriculteur"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="tp_full_name" caption="Nom et prénom"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="tp_tel1" caption="Numéro de téléphone"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="a_application_date" caption="Date d'application"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="a_parent_id" cellTemplate="TypeTemplate"
+              caption="Type"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="a_status" cellTemplate="contractListTemplate"
+              caption="Status"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="za_advisors" caption="Conseiller"></dxi-column>
+  <dxo-selection mode="multiple"></dxo-selection>
+  <dxo-scrolling mode="standard" [showScrollbar]="'always'"></dxo-scrolling>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-export [enabled]="true" fileName="situation_contracts" [excelFilterEnabled]="true"
+              [allowExportSelectedData]="true"></dxo-export>
+  <dxo-filter-row
+    [visible]="true" [applyFilter]="true"></dxo-filter-row>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-pager
+    [allowedPageSizes]="[5, 8, 15, 30]"
+    [showInfo]="true"
+    [showNavigationButtons]="true"
+    [showPageSizeSelector]="true"
+    [visible]="true">
+  </dxo-pager>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+  <dxo-search-panel [visible]="true"></dxo-search-panel>
+  <dxo-group-panel [visible]="true"
+                   emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+  <div *dxTemplate="let data of 'TypeTemplate'">
+    <div *ngIf="data.value">Avenant</div>
+    <div *ngIf="!data.value">Contrat</div>
+  </div>
+  <div *dxTemplate="let data of 'contractListTemplate'">
+          <span [ngClass]="helper.getStatusColor(data.value)">
+              {{ data.value }}
+          </span>
+  </div>
+  <div *dxTemplate="let data of 'consTemplate'">
+    <div>{{ getConsByZone(data.value) }}</div>
+  </div>
+
+  <dxo-summary [calculateCustomSummary]="calculateDistinctCin">
+    <dxi-total-item
+      column="p_annuel_surface"
+      summaryType="sum"
+      displayFormat="Total: {0}"
+      showInColumn="z_name"
+      valueFormat="#.## (ha) contractée">
+    </dxi-total-item>
+    <dxi-total-item
+      name="SelectedRowsSummary"
+      summaryType="custom"
+      valueFormat="# agrégés"
+      displayFormat="Total: {0}"
+      showInColumn="cda_name">
+    </dxi-total-item>
+    <dxi-total-item
+      summaryType="avg"
+      column="p_annuel_surface"
+      valueFormat="#.## (ha)/Parcelle"
+      displayFormat="Moyenne: {0}"
+      showInColumn="p_name">
+    </dxi-total-item>
+    <dxi-group-item
+      column="p_annuel_surface"
+      summaryType="avg"
+      valueFormat="#.## (ha)/Parcelle"
+      displayFormat="Moyenne: {0}">
+    </dxi-group-item>
+    <dxi-group-item
+      column="p_annuel_surface"
+      summaryType="sum"
+      displayFormat="Total: {0}"
+      valueFormat="#.## (ha) contractée">
+    </dxi-group-item>
+  </dxo-summary>
+</dx-data-grid>
+

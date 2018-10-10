@@ -21,7 +21,8 @@
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
         KeyExpr="id">
 
-        <dxo-export [enabled]="true" fileName="magasin" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-export [enabled]="true" fileName="magasin" [excelFilterEnabled]="true"
+                    [allowExportSelectedData]="true"></dxo-export>
 
         <dxo-filter-row [visible]="true"></dxo-filter-row>
         <dxo-header-filter [visible]="true"></dxo-header-filter>

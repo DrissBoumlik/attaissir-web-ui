@@ -1,12 +1,12 @@
 <dx-vector-map
   id="vector-map"
   [center]="center"
-  [height]="900"
-  [zoomFactor]="300"
+  [zoomFactor]="50"
   [bounds]="[-90, 45, 90, -30]">
-  <dxo-loading-indicator show="true" text="Chargement....">
+  <dxo-loading-indicator  backgroundColor="rgba(0,0,0,0)" show="true" text="Chargement....">
 
   </dxo-loading-indicator>
+  <dxo-size [height]="800"></dxo-size>
   <dxo-tooltip
     [enabled]="true"
     color="grba(0,0,0,0)"
@@ -21,10 +21,11 @@
     borderColor="#989da3"
     selectionMode="single"
     hoveredBorderColor="#989da3"
-    borderWidth="2"
+    borderWidth="3.5"
     hoveredColor="rgba(0, 167, 231, 0.35)"
-    hoveredBorderWidth="2"
+    hoveredBorderWidth="5"
     [dataSource]="infiniteList"
+    type="area"
     [customize]="customizeLayers">
     <dxo-label  [enabled]="true" dataField="name">
       <dxo-font color="#b8bbbf" size="16"></dxo-font>
