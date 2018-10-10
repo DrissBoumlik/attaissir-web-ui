@@ -1,0 +1,43 @@
+<div class="field_infos" style="opacity: 0.9; top: 60px; z-index: 1001">
+  <div class="block_info">
+    <div class="field_infos_header">
+      <div class="p_info">
+        <span id="field_infos_id">{{ilot.name}}</span>
+      </div>
+      <div class="p_surface">
+        <span id="field_infos_surface">{{ilot.contracted_surface}}</span>
+      </div>
+    </div>
+    <ul>
+      <li>Réf : <span id="field_infos_ref_zone">{{ ilot.id }}</span></li>
+      <li>
+        <div class="field_infos_zones">CDA : <span id="field_infos_cda">{{ ilot.cda }}</span>/</div>
+        <div class="field_infos_zones">Zone : <span id="field_infos_zone">{{ ilot.zone }}</span> /</div>
+        <div class="field_infos_zones">Parcelle : <span id="field_infos_code_client">{{ilot.name}}</span></div>
+      </li>
+      <li>Superficie contractée : <span id="field_infos_sup_total_ilots">{{ilot.contracted_surface}}</span></li>
+      <li>Nom d'agriculteur : <span id="field_infos_agri_name">{{ilot.ag_name}}</span></li>
+      <li>Téléphone : <span id="field_infos_agri_tel">{{ilot.ag_tel}}</span></li>
+      <li>Prestataire : <span id="field_infos_prestataire">{{ilot.prestataire}}</span></li>
+      <li>Semoir : <span id="field_infos_object">{{ilot.semoir}}</span></li>
+      <li>Date de semis : <span id="field_infos_start_date">{{ilot.date_semis}}</span></li>
+    </ul>
+    <div class="controls">
+    </div>
+  </div>
+  <div class="field_images">
+    <h1 class="block_title">Ilots de meme parcelle</h1>
+  </div>
+  <div class="block_field_editor" style="display: none;">
+    <div class="field_editor_merge_fields">
+      Parcelles à fusionner
+    </div>
+    <a class="field_editor_window_btn" href="javascript:saveFieldEditor()">Enregister</a>
+    <a class="field_editor_window_btn_close" href="javascript:closeFieldEditor()"><i class="fa fa-times"></i></a>
+  </div>
+  <div class="block_field_childs">
+    <a href="javascript:showFieldinfo(10308)">OG7<span class="surface">3.37</span></a>
+    <a href="javascript:showFieldinfo(21044)">OG7<span class="surface">4.05</span></a>
+    <a href="javascript:showFieldinfo(22401)">OG7<span class="surface">4.07</span></a>
+  </div>
+</div>

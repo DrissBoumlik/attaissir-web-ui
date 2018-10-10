@@ -30,7 +30,7 @@ export class ListComponent implements OnInit {
           .toPromise()
           .then((response: any) => {
             response.data.map((parcel) => {
-              parcel.rib = !parcel.bank_code ? '' :  `${parcel.bank_code}${parcel.bank_account_number}${parcel.bank_rib_key}`;
+              parcel.rib = !parcel.bank_code ? '' : `${parcel.bank_code}${parcel.bank_account_number}${parcel.bank_rib_key}`;
               return parcel;
             });
             /*data = data['data'].filter((a) => {

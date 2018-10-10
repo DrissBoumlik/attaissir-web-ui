@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ArchwizardModule } from 'angular-archwizard';
 import { WizardComponent } from './components/wizard/wizard.component';
 import {
+  DxBoxModule,
   DxButtonModule,
   DxDataGridModule,
   DxDateBoxModule, DxFileUploaderModule,
@@ -28,6 +29,8 @@ import { LeafLetHomeComponent } from './leaflet/maps/home/home.component';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import { KpisComponent } from './components/kpis/kpis.component';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { CdaSigaaComponent } from './components/cda-sigaa/cda-sigaa.component';
+import { ParcelInfoComponent } from './components/parcel-info/parcel-info.component';
 
 @NgModule({
   imports: [
@@ -47,6 +50,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     DxFileUploaderModule,
     DxSelectBoxModule,
     DxVectorMapModule,
+    DxBoxModule,
     LeafletModule.forRoot()
   ],
   exports: [
@@ -74,7 +78,8 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     ParcelsListComponent,
     PermissionDirective,
     LeafLetHomeComponent,
-    KpisComponent
+    KpisComponent,
+    DxBoxModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -89,7 +94,9 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     ParcelGridComponent,
     PermissionDirective,
     LeafLetHomeComponent,
-    KpisComponent
+    KpisComponent,
+    CdaSigaaComponent,
+    ParcelInfoComponent
   ]
 })
 export class SharedModule { }

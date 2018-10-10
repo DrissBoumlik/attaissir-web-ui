@@ -1,0 +1,15 @@
+::ng-deep .buttons {
+  padding: 2px;
+  .dx-button{
+    color: #fff;
+    background-color: #34bfa3;
+  }
+}
+::ng-deep .buttons-save {
+  padding: 2px;
+  .dx-button{
+    color: #fff;
+    border-radius: 3px;
+    background-color: rgb(5, 255, 225);
+  }
+}

@@ -167,14 +167,9 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       {
         name: 'Reporting',
         permission: ['preconization.interventions.grid'],
-        icon: 'flaticon-line-graph',
-        url: '/preconisations-intrants/liste/details',
-        description: 'Gestion des roles',
-        subMenu: [
-          { icon: 'flaticon-map', name: 'Préconisations', url: '/preconisations-intrants/liste/details', permission: ['preconization.interventions.grid'] },
-          { icon: 'flaticon-graphic-1', name: 'Mouvements', url: '/mouvements/liste/details', permission: ['distributionCenter.stocks.grid'] },
-
-        ],
+        icon: 'flaticon-graphic-1',
+        url: '/reporting/contracts',
+        description: 'Reporting',
         disabled: 'false'
       }
     ];
