@@ -13,9 +13,10 @@
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body m-portlet__body--no-padding">
+
       <app-parcels-list [data]="parcels"
-        (onEditingStart)="onStartEdit($event.data.id)"
-        (onRowRemoving)="onRemoveParcel($event.data.id)"></app-parcels-list>
+                        (onEditingStart)="onStartEdit($event.data.id)"
+                        (onRowRemoving)="onRemoveParcel($event.data.id)"></app-parcels-list>
 
     </div>
   </div>

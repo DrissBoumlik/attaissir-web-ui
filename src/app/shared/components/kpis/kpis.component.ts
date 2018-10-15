@@ -45,6 +45,47 @@ export class KpisComponent implements OnInit {
     }*/
 
     // console.log(this.map.instance.getLayers()[0].getDataSource().filter());
+    const node1 = '<div class="box">\n' +
+      '  <div class="box__header">\n' +
+      '    <h3 class="box__header-title">CDA: ' + arg.attribute('name') + '</h3>\n' +
+      '  </div>\n' +
+      '  <div class="box__body">\n' +
+      '    <div class="stats stats--main">\n' +
+      '      <div class="stats__amount">'
+      + (arg.attribute('kpis')[0].sup_contracted ? arg.attribute('kpis')[0].sup_contracted : 0)
+      + '</div>\n' +
+      '      <div class="stats__caption"> (Ha) contractée</div>\n' +
+      '      <div class="stats__change">\n' +
+      '        <div class="stats__value stats__value--positive">+6 (Ha)</div>\n' +
+      '        <div class="stats__period">Aujourd\'Hui</div>\n' +
+      '      </div>\n' +
+      '    </div>\n' +
+      '\n' +
+      '    <div class="stats">\n' +
+      '      <div class="stats__amount">'
+      + (arg.attribute('kpis')[0].sup_programmed ? arg.attribute('kpis')[0].sup_programmed : 0)
+      + '</div>\n' +
+      '      <div class="stats__caption"> (Ha) programmée</div>\n' +
+      '      <div class="stats__change">\n' +
+      '        <div class="stats__value stats__value--positive">+6 (Ha)</div>\n' +
+      '        <div class="stats__period">Aujourd\'Hui</div>\n' +
+      '      </div>\n' +
+      '    </div>\n' +
+      '\n' +
+      '    <div class="stats">\n' +
+      '      <div class="stats__amount">'
+      + (arg.attribute('kpis')[0].nb_ag ? arg.attribute('kpis')[0].nb_ag : 0)
+      + '</div>\n' +
+      '      <div class="stats__caption">agrégés</div>\n' +
+      '      <div class="stats__change">\n' +
+      '        <div class="stats__value">+78</div>\n' +
+      '        <div class="stats__period">Aujourd\'Hui</div>\n' +
+      '      </div>\n' +
+      '    </div>\n' +
+      '\n' +
+      '  </div>\n' +
+      '</div>';
+
     const node = '<div class="hover-tool-tip">' +
       '<div class="cda_item_head"><h3>CDA: ' + arg.attribute('name') + '</h3></div>' +
       '<div class="cda_item_body"> <ul>' +
@@ -54,8 +95,9 @@ export class KpisComponent implements OnInit {
       '<li style="text-align: left; padding-bottom: 5px""> ' + 0 + ' (Ha) programmée</li>' +
       '<li style="text-align: left; padding-bottom: 5px""> ' + arg.attribute('kpis')[0].nb_ag + ' agrégés</li>' +
       '</ul> </div></div>';
+
     return {
-      html: node
+      html: node1
     };
   }
 

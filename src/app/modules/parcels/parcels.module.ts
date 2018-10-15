@@ -7,6 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AddComponent } from './components/add/add.component';
 import { InterventionsRoutingModule } from '../interventions/interventions-routing.module';
 import {
+  DxBoxModule,
   DxButtonModule,
   DxCheckBoxModule,
   DxDataGridModule,
@@ -33,7 +34,8 @@ import { ShowComponent } from './components/show/show.component';
     DxButtonModule,
     DxTemplateModule,
     DxLoadPanelModule,
-    DxCheckBoxModule
+    DxCheckBoxModule,
+    DxBoxModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [ListComponent, AddComponent, ShowComponent]

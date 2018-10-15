@@ -35,21 +35,6 @@ export class ListComponent implements OnInit {
           .toPromise()
           .then(response => {
             console.log(response);
-            response.data = response.data.length ? response.data : [
-              {
-                id: 1,
-                cda: 223,
-                zone: 7,
-                parcel_name: 'SPB2',
-                description: 'descriptiondescriptiondescriptiondescriptiondescriptiondescription',
-                type: 'type',
-                priority: 1,
-                severity: 3.2,
-                contagion_risk: 5,
-                affected_surface: 3.2,
-                lost_surface: 3.2
-              }
-            ];
             const json = response;
             return json;
           })

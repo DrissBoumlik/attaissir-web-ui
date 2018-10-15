@@ -3,6 +3,14 @@
 @import "assets/vendors/mixins";
 @import "assets/vendors/functions";
 
+body {
+  overflow: hidden;
+}
+
+.m-grid__item .m-grid__item--order-tablet-and-mobile-2 .m-login__aside {
+
+}
+
 /* Graviton Custom style */
 span.dx-field-item-required-mark {
   color: #f00;
@@ -890,7 +898,7 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
 
 .m-login__content:after {
   content: '';
-  overflow-y: overlay;
+  overflow-y: hidden;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -1007,9 +1015,14 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
 
 /* Dashboard Intro */
 .siam-dashboard-intro {
-  padding: 80px;
-  padding-top: 30px;
+  padding: 5px;
+  /*
+  padding-top: 60px;
+  */
+  padding-top: 10px;
+  /*
   padding-bottom: 160px;
+  */
   position: relative;
   background-image: url('/assets/images/bg.jpg');
   background-size: cover;
@@ -1017,7 +1030,9 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
   background-position: center center;
   width: 100%;
   height: 100vh;
+  /*
   overflow: hidden;
+  */
   &:before {
     content: '';
     overflow-y: hidden;
@@ -1035,6 +1050,7 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
     background: linear-gradient(135deg, rgb(31, 40, 57) 0%, rgba(32, 51, 65, 0.6) 100%);
   }
 }
+
 
 .grid-container-vector {
   display: grid;
@@ -1893,7 +1909,7 @@ table.ui.fixed.table > tbody > tr > td:nth-child(2):after {
 .grid-container {
   display: grid;
   height: 100%;
-  grid-template-columns: 0.4fr 1.6fr;
+  grid-template-columns: 0.2fr 1.8fr;
   grid-template-rows: 1fr;
   grid-gap: 1px 1px;
   grid-template-areas: "CDAs map";
@@ -1902,11 +1918,11 @@ table.ui.fixed.table > tbody > tr > td:nth-child(2):after {
 
 .map {
   grid-area: map;
+  padding-left: inherit;
 }
 
 .CDAs {
   grid-area: CDAs;
-  background-color: white;
 }
 
 .hover-tool-tip {
@@ -1956,6 +1972,7 @@ table.ui.fixed.table > tbody > tr > td:nth-child(2):after {
     transform: scaleY(1);
   }
 }
+
 @keyframes scale-up-ver-center {
   0% {
     -webkit-transform: scaleY(0.4);
@@ -1965,4 +1982,119 @@ table.ui.fixed.table > tbody > tr > td:nth-child(2):after {
     -webkit-transform: scaleY(1);
     transform: scaleY(1);
   }
+}
+
+.box {
+  background: linear-gradient(#3e4d73, #0a2a84);
+  margin: 15px auto 0;
+  border-radius: 5px;
+  width: 300px;
+  z-index: 350;
+}
+
+.box__header {
+  padding: 15px 25px;
+  position: relative;
+}
+
+.box__header-title {
+  color: #fff;
+  font-size: 18px;
+}
+
+.box__body {
+  padding: 0 25px;
+}
+
+/* STATS */
+
+.stats {
+  color: #fff;
+  position: relative;
+  padding-bottom: 25px;
+}
+
+.stats__amount {
+  font-size: 42px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.stats__caption {
+  font-size: 18px;
+
+}
+
+.stats__change {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  text-align: right;
+  color: #B1B7C8;
+}
+
+.stats__value {
+  font-size: 18px;
+}
+
+.stats__period {
+  font-size: 14px;
+}
+
+.stats__value--positive {
+  color: #AEDC6F;
+}
+
+.stats__value--negative {
+  color: #FB5055;
+}
+
+.stats--main .stats__amount {
+  font-size: 54px;
+}
+
+::ng-deep .dxm-layers {
+  background-color: red;
+  color: red;
+  display: none;
+}
+
+.m-grid__item .m-grid__item--fluid .m-grid m-grid--ver-desktop .m-grid--desktop .m-grid--tablet-and-mobile .m-grid--hor-tablet-and-mobile .m-login .m-login--1 .m-login--signin {
+  display: -webkit-box;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .m-grid.m-grid--hor-tablet-and-mobile.m-grid--tablet-and-mobile {
+    display: block;
+    display: -ms-flexbox;
+    flex-direction: column;
+  }
+  .m-grid.m-grid--hor:not(.m-grid--desktop):not(.m-grid--desktop-and-tablet):not(.m-grid--tablet):not(.m-grid--tablet-and-mobile):not(.m-grid--mobile) > .m-grid__item {
+    flex: none;
+    display: -webkit-box;
+  }
+}
+
+
+body {
+  overflow: visible;
+}
+
+.dx-datagrid-summary-item.dx-datagrid-text-content {
+  overflow: visible;
+}
+
+.dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-state-hover {
+  background-color: rgba(0,0,0,0);
+}
+
+.dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-state-focused {
+  background-color: rgba(222, 228, 235, 0);
+  color: #fff;
+}
+
+.dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-list-item-selected {
+  background-color: rgba(230, 230, 230, 0);
+  color: #333;
 }

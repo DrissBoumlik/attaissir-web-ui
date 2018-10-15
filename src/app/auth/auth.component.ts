@@ -1,7 +1,7 @@
 import {
   AfterViewInit,
   Component,
-  ComponentFactoryResolver,
+  ComponentFactoryResolver, ElementRef,
   OnInit,
   ViewChild,
   ViewContainerRef,
@@ -13,6 +13,7 @@ import { Helpers } from '../helpers';
 import { ToastrService } from 'ngx-toastr';
 import { AlertService, AuthenticationService, UserService } from './_services';
 import * as CryptoJS from 'crypto-js';
+import {AlertComponent} from './_directives/alert.component';
 
 declare let $: any;
 declare let mUtil: any;
@@ -35,7 +36,8 @@ export class AuthComponent implements OnInit, AfterViewInit {
   @ViewChild('alertSignup',
     { read: ViewContainerRef }) alertSignup: ViewContainerRef;
   @ViewChild('alertForgotPass',
-    { read: ViewContainerRef }) alertForgotPass: ViewContainerRef;
+    {read: ViewContainerRef}) alertForgotPass: ViewContainerRef;
+  @ViewChild('video') video: ElementRef;
 
   constructor(private _router: Router,
     private _script: ScriptLoaderService,
@@ -49,7 +51,13 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
+    window.addEventListener('click', () => {
+      this.video.nativeElement.play();
+    });
+
     this.model.remember = true;
+
     // get return url from route parameters or default to '/'
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
     this._router.navigate([this.returnUrl]);
@@ -61,7 +69,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
         this.handleSignInFormSubmit();
       });
     // Set page height
-    // document.getElementById('m_login').style.height = (screen.height - 118) + 'px';
+    //document.getElementById('m_login').style.height = (screen.height - 118) + 'px';
     // m-login--signin
   }
 
@@ -115,16 +123,16 @@ export class AuthComponent implements OnInit, AfterViewInit {
       });
   }
 
-  /*  displaySignUpForm() {
+   displaySignUpForm() {
       const login = document.getElementById('m_login');
       mUtil.removeClass(login, 'm-login--forget-password');
       mUtil.removeClass(login, 'm-login--signin');
 
       mUtil.addClass(login, 'm-login--signup');
       mUtil.animateClass(login.getElementsByClassName('m-login__signup')[0], 'flipInX animated');
-    }*/
+    }
 
-  /*  displaySignInForm() {
+  displaySignInForm() {
       const login = document.getElementById('m_login');
       mUtil.removeClass(login, 'm-login--forget-password');
       mUtil.removeClass(login, 'm-login--signup');
@@ -135,16 +143,16 @@ export class AuthComponent implements OnInit, AfterViewInit {
 
       mUtil.addClass(login, 'm-login--signin');
       mUtil.animateClass(login.getElementsByClassName('m-login__signin')[0], 'flipInX animated');
-    }*/
+    }
 
-  /*  displayForgetPasswordForm() {
+  displayForgetPasswordForm() {
       const login = document.getElementById('m_login');
       mUtil.removeClass(login, 'm-login--signin');
       mUtil.removeClass(login, 'm-login--signup');
 
       mUtil.addClass(login, 'm-login--forget-password');
       mUtil.animateClass(login.getElementsByClassName('m-login__forget-password')[0], 'flipInX animated');
-    }*/
+    }
 
 
   signup() {
@@ -186,10 +194,10 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
 
   showAlert(target) {
-    // this[target].clear();
-    //const factory = this.cfr.resolveComponentFactory(AlertComponent);
-    //const ref = this[target].createComponent(factory);
-    //ref.changeDetectorRef.detectChanges();
+     this[target].clear();
+    const factory = this.cfr.resolveComponentFactory(AlertComponent);
+    const ref = this[target].createComponent(factory);
+    ref.changeDetectorRef.detectChanges();
   }
 
   handleSignInFormSubmit() {

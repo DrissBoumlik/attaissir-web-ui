@@ -15,6 +15,10 @@ const routes: Routes = [
         loadChildren: './pages/default/index/index.module#IndexModule'
       },
       {
+        path: '',
+        loadChildren: '../modules/reporting/reporting.module#ReportingModule'
+      },
+      {
         path: 'dash',
         loadChildren: './pages/default/dashboard/index.module#DashboardModule'
       },
@@ -105,6 +109,10 @@ const routes: Routes = [
         pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: 'carte',
+    loadChildren: '../modules/cartographie/cartographie.module#CartographieModule'
   },
   {
     path: '**',

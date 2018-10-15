@@ -1,0 +1,99 @@
+.cda_item {
+  float: left;
+  background: rgba(0, 0, 0, 0.09);
+  text-align: center;
+  margin-right: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  padding: 20px;
+  height: 170px;
+  width: 100%;
+  border-radius: 4px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.cda_item {
+  float:left;
+  background: rgba(0, 0, 0, 0.09);
+  text-align:center;
+  margin-right: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  padding: 20px;
+  height: 170px;
+  width: 100%;
+  border-radius: 4px;
+  transition: all 0.5s ease;
+  cursor:pointer;
+  margin-bottom: 12px;
+  position:relative;
+}
+.cda_item.active {
+  border: 1px solid #00a7e7;
+}
+.cda_item.active:after {
+  content:'';
+  width:10px;
+  height:10px;
+  position:absolute;
+  top:0;
+  left:0px;
+  width: 20px;
+  height: 20px;
+  border-bottom: solid 10px transparent;
+  border-left: solid 10px #00a7e7;
+  border-right: solid 10px transparent;
+  border-top: solid 10px #00a7e7;
+}
+
+.cda_item:hover,
+.home_window_header .left-menu>li>a:hover {
+  background: #00a7e7;
+  background: -moz-linear-gradient(-45deg,  #00a7e7 0%, #104ba0 100%);
+  background: -webkit-linear-gradient(-45deg,  #00a7e7 0%,#104ba0 100%);
+  background: linear-gradient(135deg,  #00a7e7 0%,#104ba0 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00a7e7', endColorstr='#104ba0',GradientType=1 );
+  border: 1px solid #00a7e7;
+}
+.cda_item:hover h1 {
+  color:#fff;
+}
+.cda_item:hover i {
+  color:#fff;
+}
+.cda_item:hover polygon {
+  opacity:1;
+}
+
+.cda_item h1 {
+  color: #b8bbbf;
+  font-size: 16px;
+  margin-top: 0;
+}
+.cda_item svg polygon {
+  fill:rgba(255, 255, 255, 0) !important;
+  stroke:#fff !important;
+  stroke-width:1 !important;
+  transition: 400ms;
+  transition-timing-function: ease-in-out;
+  -webkit-transition: 400ms;
+  -webkit-transition-timing-function: ease-in-out;
+  opacity:0.7;
+}
+
+.cda_item_head
+{
+  height: 25px;
+  line-height: 20px;
+}
+
+.cda_item_body {
+  height: 110px;
+  width: 150px;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 52px;
+  line-height: 46px;
+  color: rgba(173, 177, 181, 0.73);
+}

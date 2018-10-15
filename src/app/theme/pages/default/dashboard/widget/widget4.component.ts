@@ -147,8 +147,7 @@ import { DragulaService } from 'ng2-dragula';
                       <dxo-label [visible]="true" backgroundColor="#5B5E61"></dxo-label>
                   </dxi-series>
                   <dxo-argument-axis>
-                      <dxo-label [customizeText]="customizeText"></dxo-label>
-                  </dxo-argument-axis>
+                   </dxo-argument-axis>
                   <dxi-value-axis>
                       <dxo-label [visible]="false"></dxo-label>
                   </dxi-value-axis>
