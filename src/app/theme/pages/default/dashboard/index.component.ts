@@ -2,38 +2,106 @@
 import { NgModule, Component, enableProdMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DragulaService } from 'ng2-dragula';
-
+import { WidgetService } from './services/widget-service.service';
+import { Helper } from '../../../../shared/classes/helper';
+import CustomStore from "devextreme/data/custom_store";
+import DataSource from "devextreme/data/data_source";
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 
 @Component({
-  selector: 'app-index',
+  selector: 'app-dash-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
 
-
 })
-export class IndexComponent {
+export class IndexDashComponent   {
 
-  buttonOptions: any;
+  subs = new Subscription();
+
+
+  buttonOptions:any;
+  cancelOptions:any;
+  newWidgetButtonOptions:any;
   popupVisible = false;
   widgetOptions = {};
   valueChangeEvents: any[];
   widgets: any;
+  widgets_right :any;
+  widgets_left :any;
   widget: any;
+  new_widget:any;
   popupConfigVisible = false;
   popupInfoVisible = false;
+  selectedWidget:any;
+  filter:any;
+  selectedWidget_id:any;
 
-  constructor() {
+  companiesOptions:any;
+
+  divisionOptions:any;
+  cdaOptions:any;
+
+  zoneOptions:any;
+
+
+  constructor(private widgetService : WidgetService , private toastrService: ToastrService
+    ,private dragulaService: DragulaService
+    ) {
+    this.new_widget = {};
     this.widget = {};
+    
+    this.filter = {};
     this.widgets = [];
+    this.cdaOptions = {};
+    this.zoneOptions = {};
+    this.cancelPopVisible = false;
+    this.subs.add(dragulaService.drop('DRAGULA_FACTS')
+    .subscribe(({ el, target, source, sibling }) => {
+      console.log(target.id);
+      console.log( this.getElementIndex(el));
+      console.log(el.id);
+
+      let align;
+      if(target.id =='right'){
+        align = 'left';
+      }else if(target.id =='left'){
+        align = 'right';
+      }
+
+      this.widgetService.changePositionWidget({id : el.id, position : this.getElementIndex(el) ,align : align}).subscribe((data: any) => {
+
+      }, err => {
+  
+      }); 
+
+      /*
+      console.log('dropModel:');
+      console.log(el);
+      console.log(source);
+      console.log(target);
+      console.log(sourceModel);
+      console.log(targetModel);
+*/
+      
+
+    })
+  );
+  
+
+
+    
+
   }
 
+ 
 
-  from_back = [{ title: 'title 1', startValue: 0, endValue: 5, tickInterval: 2.5, sub_title: 'sub Tit3', type: 3, align: 'right', possition: 1 },
-  { title: 'title 2', nbr1: 33, nbr2: 9, sub_title: 'sub Tit', type: 2, align: 'left', possition: 2 },
-  { title: 'title 3', nbr1: 3, nbr2: 9, sub_title: 'sub Title 3', type: 2, align: 'left', possition: 3 },
+private getElementIndex(el: any) {
+    return [].slice.call(el.parentElement.children).indexOf(el);
+}
 
-  ];
+ 
 
   ngAfterViewInit() {
   }
@@ -44,8 +112,6 @@ export class IndexComponent {
 
   addWidget(event) {
 
-    console.log(event);
-    console.log(this.widget);
     //this.widgets.push({title : this.widget.title , type : this.widget.type})
   }
 
@@ -53,19 +119,152 @@ export class IndexComponent {
 
   }
 
+
+
   ngOnInit() {
 
-    this.widgets = this.from_back;
+    this.widgetService.getAll(1).subscribe((data: any) => {
+
+      console.log(data);
+
+      data.forEach((it) => {
+
+        this.widgets.push({ id: it.id , title: it.title, params: it.params , type: it.type, align: it.align , filter: it.filter ,updated_at : it.updated_at })
+      });
+
+       
+       this.widgets.sort(function(a, b) {
+        let posA = a.possition;
+        let posB =  b.possition;
+  
+  
+        if (posA < posB) return -1;
+        if (posA > posB) return 1;
+   
+        let dateA = new Date(a.updated_at);
+        let dateB = new Date(b.updated_at);
+        
+
+        if (posA = posB && dateA <  dateB){ console.log('dt1'); return -1;}
+        if (posA = posB && dateA >  dateB ){ console.log('dt2'); return 1;}
+        
+        return 0;
+      });
 
 
-    this.widgets.sort(function(a, b) {
-      let posA = a.possition;
-      var posB = b.possition;
 
-      if (posA < posB) return -1;
-      if (posA > posB) return 1;
 
-      return 0;
+      this.widgets.sort(function(a, b) {
+        let posA = a.possition;
+        let posB =  b.possition;
+   
+        let dateA = new Date(a.updated_at);
+        let dateB = new Date(b.updated_at);
+        
+        console.log(dateA);
+        console.log(dateB);
+
+        if (posA == posB && dateA > dateB ){ console.log('dt1'); return -1;}
+        if (posA == posB && dateA < dateB ){ console.log('dt2'); return 1;}
+        
+        return 0;
+      });
+ 
+     
+
+     }, err => {
+
+     });
+
+     this.selectedWidget = {};
+     this.widgetService.getList().subscribe((data: any) => {
+
+      this.widgetOptions = {
+        displayExpr: 'name',
+        valueExpr: 'id',
+        items: data,
+        searchEnabled: true,
+        onSelectionChanged: (e) => {
+          this.selectedWidget = e.selectedItem;
+           console.log(e.selectedItem);
+           this.new_widget.title = e.selectedItem.name;
+           this.new_widget.type = e.selectedItem.id;
+
+        }
+      
+      };
+      
+
+    }, err => {
+
+    });
+
+
+
+    this.widgetService.getCompaniesList().subscribe((data: any) => {
+
+      this.companiesOptions = {
+        displayExpr: 'name',
+        valueExpr: 'id',
+        items: data,
+        searchEnabled: true,
+        onSelectionChanged: (e) => {
+          
+          this.divisionOptions = {};
+          this.cdaOptions = {};
+          this.zoneOptions = {};
+
+          this.widgetService.getDivisionList(e.selectedItem.id).subscribe(
+            (res: any) => {
+              this.divisionOptions = {
+                displayExpr: 'name',
+                valueExpr: 'id',
+                items:  res,
+                searchEnabled: true,
+                onSelectionChanged: (e1) => {
+                   console.log(e);
+
+                   this.cdaOptions = {};
+                   this.zoneOptions = {};
+                   this.widgetService.getCdasList(e1.selectedItem.id).subscribe(
+                     (res: any) => {
+                       this.cdaOptions = {
+                         displayExpr: 'name',
+                         valueExpr: 'id',
+                         items:  res,
+                         searchEnabled: true,
+                         onSelectionChanged: (e2) => {
+                            
+                          
+                          this.zoneOptions = {};
+                          this.widgetService.getZonesList(e2.selectedItem.id).subscribe(
+                            (res2: any) => {
+                              this.zoneOptions = {
+                                displayExpr: 'name',
+                                valueExpr: 'id',
+                                items:  res2,
+                                searchEnabled: true,
+                                onSelectionChanged: (e3) => {
+                                   console.log(e3);
+                                }
+                              };
+                            }
+                          );
+
+                         }
+                       };
+                     }
+                   );
+
+
+                }
+              };
+            }
+          );         
+        }
+      };
+    }, err => {
+
     });
 
 
@@ -73,119 +272,205 @@ export class IndexComponent {
     this.buttonOptions = {
       text: 'ENREGISTER',
       type: 'success',
-      useSubmitBehavior: true
-    };
+      useSubmitBehavior: true,
+      onClick: (e) => {
+       // console.log(this.widget);
+  
+       this.widgetService.changeWidgetFilter(this.filter,this.selectedWidget_id).subscribe((data: any) => {
 
-    this.valueChangeEvents = [
-      {
-        id: 1,
-        name: 'widget 1'
-      },
-      {
-        id: 2,
-        name: 'widget 2'
-      },
-      {
-        id: 3,
-        name: 'widget 3'
-      },
-      {
-        id: 4,
-        name: 'widget 4'
+       // this.toastrService.success(data.message);
+
+         this.widgets.forEach(it => {
+           if( this.widget == it){
+            it.params = data.params;
+            it.filter = data.filter;
+           }
+         });
+
+        this.toastrService.success('Widget a été modifié avec succès');
+
+        
+        this.widget = {};
+        this.popupConfigVisible = false;
+  
+      }, err => {
+  
+      });
+
+
+       console.log(this.selectedWidget);
       }
-
-    ];
-
-
-
-    this.widgetOptions = {
-      displayExpr: 'name',
-      valueExpr: 'id',
-      items: this.valueChangeEvents,
-      searchEnabled: true,
-
     };
 
 
-
-  }
-
-
-  showPopup() {
-
-  }
-
-
-  AddMovement(event) {
-
-    console.log(this.widget.type);
-
-    if (this.widget.type == 1) {
-
-      this.widgets.push({ title: this.widget.title, nbr: 3, sub_title: 'sub Tit', type: this.widget.type, align: 'left' })
-
-    } else if (this.widget.type == 2) {
-
-      this.widgets.push({ title: this.widget.title, nbr1: 33, nbr2: 9, sub_title: 'sub Tit', type: this.widget.type, align: 'left' })
-
-    } else if (this.widget.type == 3) {
-
-      this.widgets.push({ title: this.widget.title, startValue: 0, endValue: 5, tickInterval: 2.5, sub_title: 'sub Tit3', type: this.widget.type, align: 'left' })
-
-    } else if (this.widget.type == 4) {
-
-      this.widgets.push({ title: this.widget.title, table: this.table, type: this.widget.type })
-
-    }
+    this.cancelOptions = {
+      text: 'Annuler',
+      type: 'default',
+      useSubmitBehavior: true,
+      onClick: (e) => {
+         this.popupConfigVisible = false;
+      }
+    };
 
 
+    this.newWidgetButtonOptions  = {
+      text: 'ENREGISTER',
+      type: 'success',
+      useSubmitBehavior: true,
+      onClick: (e) => {
+      
+        
+        this.widgetService.createWidget(this.new_widget).subscribe((data: any) => {
 
-    this.popupVisible = false;
-    this.widget = {};
-  }
+            console.log(data);
 
-  close(item) {
-    const index = this.widgets.indexOf(item);
-    this.widgets.splice(index, 1);
-  }
+            this.widgets.unshift({ id :data.id , title: data.title, params: data.params, type: data.type, align: data.align , filter: data.filter, updated_at: data.updated_at })
+              
+         
+           this.popupVisible = false;
+           this.new_widget = {};
 
+
+        });
+        
+      }
+    };
+
+
+    
+
+    };
+
+  
+
+ 
+ 
+
+ 
+
+
+  _filter : any;
+  filter_title:any;
   info(item) {
+    this._filter = item.filter;
+    this.filter_title = item.title;
+    console.log(item);
+   // this._filter.title = item.title;
+    console.log(this._filter);
     this.popupInfoVisible = true;
 
   }
 
+  
   config(item) {
+
+    this.filter = {};
+    this.widget  = item;
+
+   /* 
+    let filter:any = JSON.parse(item.filter);
+    
+    console.log(filter);
+
+    if(filter.ste ){
+
+
+          this.widgetService.getDivisionList(filter.ste).subscribe(
+            (res: any) => {
+              this.divisionOptions.items =  res;
+              
+            });
+                
+    } 
+    if(filter.structure){
+
+      console.log('cdaas')
+      this.widgetService.getCdasList(filter.structure).subscribe(
+        (res: any) => {
+          console.log('cdaas1')
+
+          this.cdaOptions = {
+            displayExpr: 'name',
+            valueExpr: 'id',
+            items:  res,
+            searchEnabled: true,
+            onSelectionChanged: (e2) => {
+                            
+                          
+              this.zoneOptions = {};
+              this.widgetService.getZonesList(e2.selectedItem.id).subscribe(
+                (res2: any) => {
+                  this.zoneOptions = {
+                    displayExpr: 'name',
+                    valueExpr: 'id',
+                    items:  res2,
+                    searchEnabled: true,
+                    onSelectionChanged: (e3) => {
+                       console.log(e3);
+                    }
+                  };
+                }
+              );
+
+             }
+          };
+
+     
+      
+        });
+    } 
+    if(filter.cda){
+
+      this.widgetService.getZonesList(filter.cda).subscribe(
+        (res: any) => {
+          
+          this.zoneOptions = {
+            displayExpr: 'name',
+            valueExpr: 'id',
+            items:  res,
+            searchEnabled: true
+          };
+  
+        });
+
+    }
+
+    
+     this.filter = filter;*/
     this.popupConfigVisible = true;
+    this.selectedWidget_id = item.id;
 
   }
 
 
 
+ 
 
-  table: any[] = [{
-    arg: 1950,
-    val: 2525778669
-  }, {
-    arg: 1960,
-    val: 3026002942
-  }, {
-    arg: 1970,
-    val: 3691172616
-  }, {
-    arg: 1980,
-    val: 4449048798
-  }, {
-    arg: 1990,
-    val: 5320816667
-  }, {
-    arg: 2000,
-    val: 6127700428
-  }, {
-    arg: 2010,
-    val: 6916183482
-  }];
+  cancelPopVisible:any;
+  deletedItem :any;
+  close(item){
+    this.cancelPopVisible = true;
+    this.deletedItem = item;
+  }
 
 
+  delete() {
+
+    this.widgetService.deleteWidget(this.deletedItem.id).subscribe((data: any) => {
+      const index = this.widgets.indexOf(this.deletedItem);
+      this.widgets.splice(index, 1); 
+      this.toastrService.success(data.message);  
+      this.cancelPopVisible = false;
+   
+    });
+    
+    
+  }
+   
+
+  cancelPopup(){
+    this.cancelPopVisible = false;
+  }
 
 }
 

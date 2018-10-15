@@ -1,287 +1,489 @@
+
+
  
+<div class="container">
 
-
- <div class="container" style="margin-top: 80px;">
-		<div class="row">
-			<div class="col">
-
-
-					<div class="row">
-							<div class="col">
-								<p>STATISTIQUES GÉNÉRALE</p>
-								</div>
-								<div class="col">
-									<a href="#" (click)="showWidgetPopup()">
-									<p class="pull-right" style="color:#868A93;">
- 												<i class="fa fa-plus" aria-hidden="true"></i>
-												 AJOUTER UN WIDGET
-											</p>
-										</a>
- 									</div>
-									</div>
-
-					<div class="ScrollStyle">
-		
-
-<div>
-    <div class="wrapper">
-
-				<div class="container">
-
-				<div class="row">
-						<div class="col">
-
-								<div  dragula="DRAGULA_FACTS"  style="width: 100%;	height: 100%;">
-
-										<div *ngFor="let item of widgets" >
-										<widget1   title="{{item.title}}" nbr="{{item.nbr}}"  sub_title="{{item.sub_title}}" (close)="close(item)"   (config)="config(item)" (info)="info(item)" *ngIf="item.type==1 && item.align == 'left' " ></widget1>
-										<widget2   title="{{item.title}}" nbr1="{{item.nbr1}}" nbr2="{{item.nbr2}}" sub_title="{{item.sub_title}}" (close)="close(item)"  (config)="config(item)" (info)="info(item)" *ngIf="item.type==2 && item.align == 'left'" ></widget2>
-										<widget3   title="{{item.title}}" startValue="{{item.startValue}}" endValue="{{item.endValue}}" tickInterval="{{item.tickInterval}}"  (close)="close(item)" (config)="config(item)" (info)="info(item)"  *ngIf="item.type==3 && item.align == 'left'" ></widget3>
-
-									</div>
- 
- 
-
-								</div>
-								
-
-
-							</div>
-							<div class="col">
-
-									<div  dragula="DRAGULA_FACTS" style="width: 100%;	height: 100%;">
-											
-										 
-										<div *ngFor="let item of widgets" >
-												<widget1   title="{{item.title}}" nbr="{{item.nbr}}"  sub_title="{{item.sub_title}}" (close)="close(item)"   (config)="config(item)" (info)="info(item)" *ngIf="item.type==1 && item.align == 'right' "></widget1>
-												<widget2   title="{{item.title}}" nbr1="{{item.nbr1}}" nbr2="{{item.nbr2}}" sub_title="{{item.sub_title}}" (close)="close(item)"  (config)="config(item)" (info)="info(item)" *ngIf="item.type==2 && item.align == 'right'"></widget2>
-												<widget3  title="{{item.title}}" startValue="{{item.startValue}}" endValue="{{item.endValue}}" tickInterval="{{item.tickInterval}}"  (close)="close(item)" (config)="config(item)" (info)="info(item)"  *ngIf="item.type==3 && item.align == 'right'"></widget3>
-		
-											</div>
-
-									
-										</div>
-
-
-								</div>
-			 </div>
-</div>
-
-
-
- 	 <div class="row">
-					<div class="col">
-							<div dragula="DRAGULA_FACTS2"  style="width: 100%;	height: 100%;">
-
-						  	<div *ngFor="let item of widgets" >
-						      	<widget4  title="{{item.title}}" [table]="item.table"  *ngIf="item.type==4" (close)="close(item)" ></widget4>
-				   		</div>	
-						</div>
 	
-			  	</div>
-  	</div>		
- 
-
-
-
-
-      
-     
-    </div>
-	</div>
-
-	 
-						</div>
-				
-			</div>
-			<div class="col">
-					<div style="width: 100%">
-					
-						      <app-kpis></app-kpis>
-
-					</div>
-
-			</div>
-	</div>
-
-
- 
-
-
-<!-- 
-		<div class='container' dragula="PERSON" id="left" [(dragulaModel)]="left">
-				<div *ngFor="let person of left">{{person | json}}</div>
-			</div>
-			<div class='container' dragula="PERSON" id="right" [(dragulaModel)]="right">
-				<div *ngFor="let person of right">{{person | json}}</div>
-			</div>
 			
 
+  <div class="row">
+
+		
+    <div class="col">
+
+
+	
+
+
+      <div class="row" style="margin-bottom: 10px;">
+        <div class="col">
+
+            <form id="search">
+                <input type="text" placeholder="Search" #search>
+              </form>
+
+         <!-- <h4 style="color: #989da3;">STATISTIQUES GÉNÉRALE</h4> !-->
+        </div>
+        <div class="col">
+          <a href="#" (click)="showWidgetPopup()">
+            <h5 class="pull-right" style="color:#989da3;">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              AJOUTER UN WIDGET
+            </h5>
+          </a>
+        </div>
+      </div>
+
+      <div class="ScrollStyle">
+        <div>
+          <div class="wrapper">
+
+            <div class="container">
+ 
+              <div class="row">
+                <div class="col-6">
 
 
 
 
 
-			<h3><code>ng2-dragula</code></h3>
 
-these are some basics to get you started -- modify as you see fit.
+                  <div dragula="DRAGULA_FACTS" style="width: 100%;	height: 100%;"    id="right">
 
-<div class="flex">
-  <div class="container" dragula="VAMPIRES" [(dragulaModel)]="vamps">
-    <div class="vamp" *ngFor="let vamp of vamps">{{ vamp.name }}</div>
+
+                    <div *ngFor="let item of widgets  | filter: search.value" id="{{item.id}}">
+
+                      <widget1 id="{{item.id}}" title="{{item.title}}" nbr="{{ item.params.nbr1 }}" sub_title="{{item.sub_title}}"
+                               (close)="close(item)" (config)="config(item)" (info)="info(item)"
+                               *ngIf="item.type==1 && item.align == 'left' "></widget1>
+                      <widget2 id="{{item.id}}" title="{{item.title}}" nbr1="{{item.params.nbr1}}" nbr2="{{item.params.nbr2}}"
+                               sub_title="{{item.sub_title}}" (close)="close(item)" (config)="config(item)"
+                               (info)="info(item)" *ngIf="item.type==2 && item.align == 'left'"></widget2>
+                      <widget3 id="{{item.id}}" title="{{item.title}}" startValue="{{item.startValue}}" endValue="{{item.endValue}}"
+                               tickInterval="{{item.tickInterval}}" (close)="close(item)" (config)="config(item)"
+                               (info)="info(item)" *ngIf="item.type==3 && item.align == 'left'"></widget3>
+                    </div>
+
+
+                  </div>
+
+
+                </div>
+                <div class="col-6">
+
+                  <div dragula="DRAGULA_FACTS" style="width: 100%;	height: 100%;"      id="left">
+
+
+                    <div *ngFor="let item of widgets | filter: search.value" id="{{item.id}}">
+                      <widget1 [attr.item-id]="4" id="{{item.id}}"  title="{{item.title}}"  nbr="{{ item.params.nbr1 }}"  sub_title="{{item.sub_title}}"
+                               (close)="close(item)" (config)="config(item)" (info)="info(item)"
+                               *ngIf="item.type==1 && item.align == 'right' "></widget1>
+                      <widget2 id="{{item.id}}" title="{{item.title}}" nbr1="{{item.params.nbr1}}" nbr2="{{item.params.nbr2}}"
+                               sub_title="{{item.sub_title}}" (close)="close(item)" (config)="config(item)"
+                               (info)="info(item)" *ngIf="item.type==2 && item.align == 'right'"></widget2>
+                      <widget3 id="{{item.id}}" title="{{item.title}}" startValue="{{item.startValue}}" endValue="{{item.endValue}}"
+                               tickInterval="{{item.tickInterval}}" (close)="close(item)" (config)="config(item)"
+                               (info)="info(item)" *ngIf="item.type==3 && item.align == 'right'"></widget3>
+
+                    </div>
+
+
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col">
+                <div dragula="DRAGULA_FACTS2" style="width: 100%;	height: 100%;">
+
+
+               
+
+
+                  <div *ngFor="let item of widgets | filter: search.value">
+                    <widget4 id="{{item.id}}" title="{{item.title}}" [table]="item.params.table" *ngIf="item.type==4"
+                    (config)="config(item)" (info)="info(item)"  (close)="close(item)"></widget4>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <!--
+          <div class='container' dragula="PERSON" id="left" [(dragulaModel)]="left">
+                  <div *ngFor="let person of left">{{person | json}}</div>
+              </div>
+              <div class='container' dragula="PERSON" id="right" [(dragulaModel)]="right">
+                  <div *ngFor="let person of right">{{person | json}}</div>
+              </div>
 
-  <div class="container" dragula="VAMPIRES" [(dragulaModel)]="vamps2">
-    <div class="vamp" *ngFor="let vamp of vamps2">{{ vamp.name }}</div>
+              <h3><code>ng2-dragula</code></h3>
+
+  these are some basics to get you started -- modify as you see fit.
+
+  <div class="flex">
+    <div class="container" dragula="VAMPIRES" [(dragulaModel)]="vamps">
+      <div class="vamp" *ngFor="let vamp of vamps">{{ vamp.name }}</div>
+    </div>
+
+    <div class="container" dragula="VAMPIRES" [(dragulaModel)]="vamps2">
+      <div class="vamp" *ngFor="let vamp of vamps2">{{ vamp.name }}</div>
+    </div>
   </div>
-</div>
-!-->
+  !-->
+
+  <dx-popup
+    class="popup"
+    [width]="580"
+    [height]="300"
+    [showTitle]="true"
+    title="AJOUTER UN WIDGET "
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="true"
+    [(visible)]="popupVisible"
+  >
+    <div *dxTemplate="let data of 'content'">
+
+      <div>
+
+
+        <form>
+          <dx-form id="form"
+                   [formData]="new_widget"
+                   [readOnly]="false"
+                   [showColonAfterLabel]="true"
+                   [showValidationSummary]="true"
+                   labelLocation="top">
+
+
+            <dxi-item itemType="group" i18n-caption>
+
+              <dxi-item dataField="type" editorType="dxSelectBox" [editorOptions]="widgetOptions">
+                <dxo-label
+                  text="Type" i18n-text>
+                </dxo-label>
+                <dxi-validation-rule type="required" message="Type est obligatoire"
+                                     i18n-message></dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="title" editorType="dxTextBox">
+                <dxo-label
+                  text="Titre">
+                </dxo-label>
+              </dxi-item>
+
+
+              <dxi-item
+                itemType="button"
+                alignment="right"
+                [buttonOptions]="newWidgetButtonOptions">
+              </dxi-item>
+
+            </dxi-item>
+
+
+          </dx-form>
+        </form>
+
+
+        <div class="glisser-carte-agriculteur">
+          <div class="credit-card">
+            <div class="rfid-tripe"></div>
+          </div>
+          <div class="swiper-top"></div>
+          <div class="swiper-bottom">
+            <div class="light-indicator"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </dx-popup>
+
+
+  
+  <dx-popup
+    class="popup"
+    [width]="580"
+    [height]="300"
+    [showTitle]="true"
+    [title]="filter_title"
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="true"
+    [(visible)]="popupInfoVisible"
+  >
+    <div *dxTemplate="let data of 'content'">
+
+      <div class="gilsser">
+
+
+        
+        
+
+
+
+        <div class="row">
+         
+
+          <div class="col-4">
+            <div class="row">
+              <label class="col-12">
+                Societé
+              </label>
+              <div class="col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                  {{_filter.company}}
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-4">
+            <div class="row">
+              <label class="col-12">
+                Division
+              </label>
+              <div class="col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                  {{_filter.structure}}
+
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-4">
+            <div class="row">
+              <label class="col-12">
+                Cda
+              </label>
+              <div class="col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                  {{_filter.cda}}
+
+                </p>
+
+              </div>
+            </div>
+          </div>
+ 
+          <div class="col-4">
+            <div class="row">
+              <label class="col-12">
+                Zone
+              </label>
+              <div class="col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                  {{_filter.zone}}
+
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-4">
+            <div class="row">
+              <label class="col-12">
+                Date de début 
+              </label>
+              <div class="col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                  {{_filter.start_date}}
+
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-4">
+            <div class="row">
+              <label class="col-12">
+                Date de fin 
+              </label>
+              <div class="col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                  {{_filter.end_date}}
+
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+         
+        </div>
+
+
+
+
+        <div class="glisser-carte-agriculteur">
+          <div class="credit-card">
+            <div class="rfid-tripe"></div>
+          </div>
+          <div class="swiper-top"></div>
+          <div class="swiper-bottom">
+            <div class="light-indicator"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </dx-popup>
+
+
+  <dx-popup
+    class="popup"
+    [width]="580"
+    [height]="300"
+    [showTitle]="true"
+    title="Filtre"
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="true"
+    [(visible)]="popupConfigVisible"
+  >
+    <div *dxTemplate="let data of 'content'">
+
+      <div class="gilsser">
+
+
+				
+					<form>
+							<dx-form id="form"
+											 [formData]="filter"
+											 [readOnly]="false"
+											 [showColonAfterLabel]="true"
+											 [showValidationSummary]="true"
+											 labelLocation="top">
+		
+		
+								<dxi-item itemType="group" [colCount]="3" i18n-caption>
+		
+									<dxi-item dataField="ste" editorType="dxSelectBox" [editorOptions]="companiesOptions">
+										<dxo-label
+											text="Societé" i18n-text>
+										</dxo-label>
+                  </dxi-item>
+                  
+
+
+                  <dxi-item dataField="structure" editorType="dxSelectBox" [editorOptions]="divisionOptions">
+										<dxo-label
+											text="Division" i18n-text>
+										</dxo-label>
+                  </dxi-item>
+                  
+		
+									<dxi-item dataField="cda" editorType="dxSelectBox" [editorOptions]="cdaOptions">
+											<dxo-label
+												text="Cda" i18n-text>
+											</dxo-label>
+										</dxi-item>
+
+
+                    <dxi-item dataField="zone" editorType="dxSelectBox" [editorOptions]="zoneOptions">
+											<dxo-label
+												text="Zone" i18n-text>
+											</dxo-label>
+                    </dxi-item>
+                    
+    
+                    
+                    <dxi-item dataField="start_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }" >
+                      <dxo-label text="Date de début "></dxo-label>
+                    </dxi-item>
+
+
+                    <dxi-item dataField="end_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }" >
+                      <dxo-label text="Date de fin "></dxo-label>
+                    </dxi-item>
+     
+                </dxi-item>
+                
+
+
+       <dxi-item itemType="group"  i18n-caption>
+
+                <dxi-item
+                itemType="button"
+                alignment="right"
+                [buttonOptions]="buttonOptions">
+              </dxi-item>
+              
+          <!--    <dxi-item
+                itemType="button"
+                alignment="left"
+                [buttonOptions]="buttonOptions">
+              </dxi-item> !-->
+    
+         </dxi-item>
+
+
+							</dx-form>
+						</form>
+      </div>
+
+    </div>
+  </dx-popup>
+
+
+
 
 
 <dx-popup
 class="popup"
-[width]="580"
-[height]="300"
+[width]="350"
+[height]="150"
 [showTitle]="true"
 title="Confirmation "
 [dragEnabled]="false"
-(onShown)="showPopup()"
 [closeOnOutsideClick]="true"
-[(visible)]="popupVisible"
+[(visible)]="cancelPopVisible"
 >
 <div *dxTemplate="let data of 'content'">
+  <p>
+    Voulez-vous vraiment supprimer cet widget ?
+  </p>
 
-	<div class="gilsser">
+  <div  class="pull-right">
 
+    <dx-button class="pull-left"
+               width="80"
+               type="danger"
+               text="Oui"
+               (onClick)="delete()">
+    </dx-button>
+    &nbsp;
+    &nbsp;
 
-		<form (submit)="AddMovement($event)" >
-        <dx-form id="form"
-                 [formData]="widget"
-                 [readOnly]="false"
-                 [showColonAfterLabel]="true"
-                 [showValidationSummary]="true"
-                 labelLocation="top">
-
-
-          <dxi-item itemType="group"  i18n-caption>
-
-							<dxi-item dataField="type" editorType="dxSelectBox" [editorOptions]="widgetOptions">
-									<dxo-label
-										text="Type" i18n-text>
-									</dxo-label>
-									<dxi-validation-rule type="required" message="Article est obligatoire"
-																			 i18n-message></dxi-validation-rule>
-								</dxi-item>
-
-
-
-								<dxi-item dataField="title" editorType="dxTextBox" >
-										<dxo-label
-											text="Titre">
-										</dxo-label>
-									</dxi-item>
-
-
-
-									<dxi-item
-									itemType="button"
-									alignment="right"
-									[buttonOptions]="buttonOptions">
-								</dxi-item>
- 
-				</dxi-item>
-
- 
-        </dx-form>
-      </form>
-
-
-
-
-
-		<div class="glisser-carte-agriculteur">
-			<div class="credit-card">
-				<div class="rfid-tripe"></div>
-			</div>
-			<div class="swiper-top"></div>
-			<div class="swiper-bottom">
-				<div class="light-indicator"></div>
-			</div>
-		</div>
-	</div>
-
-</div>
-</dx-popup>
-
-
-
-
-
-
-
-<dx-popup
-class="popup"
-[width]="580"
-[height]="300"
-[showTitle]="true"
-title="Info "
-[dragEnabled]="false"
-[closeOnOutsideClick]="true"
-[(visible)]="popupInfoVisible"
->
-<div *dxTemplate="let data of 'content'">
-
-	<div class="gilsser">
- 
-
-   info
-
-
-		<div class="glisser-carte-agriculteur">
-			<div class="credit-card">
-				<div class="rfid-tripe"></div>
-			</div>
-			<div class="swiper-top"></div>
-			<div class="swiper-bottom">
-				<div class="light-indicator"></div>
-			</div>
-		</div>
-	</div>
-
-</div>
-</dx-popup>
-
-
-
-
-<dx-popup
-class="popup"
-[width]="580"
-[height]="300"
-[showTitle]="true"
-title="Config "
-[dragEnabled]="false"
-[closeOnOutsideClick]="true"
-[(visible)]="popupConfigVisible"
->
-<div *dxTemplate="let data of 'content'">
-
-	<div class="gilsser">
- 
-
-			Config
-
-
-		<div class="glisser-carte-agriculteur">
-			<div class="credit-card">
-				<div class="rfid-tripe"></div>
-			</div>
-			<div class="swiper-top"></div>
-			<div class="swiper-bottom">
-				<div class="light-indicator"></div>
-			</div>
-		</div>
-	</div>
+    <dx-button class="pull-right"
+               class="button-info"
+               width="80"
+               text="No"
+               (onClick)="cancelPopup()">
+    </dx-button>
+  </div>
 
 </div>
 </dx-popup>

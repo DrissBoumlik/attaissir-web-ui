@@ -35,7 +35,7 @@ export class ListComponent implements OnInit {
           .toPromise()
           .then(response => {
             console.log(response);
-            response.data = [
+            response.data = response.data.length ? response.data : [
               {
                 id: 1,
                 cda: 223,

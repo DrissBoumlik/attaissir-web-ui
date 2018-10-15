@@ -21,7 +21,7 @@ import { DragulaService } from 'ng2-dragula';
  .widget {
      margin : 5px;
      width: 100%;
-     height: 150px;
+     height: 125px;
      border-radius: 5px;
      border-color: #868A93;
      padding: 2px;
@@ -47,13 +47,24 @@ import { DragulaService } from 'ng2-dragula';
      color:#868A93;
      font-weight: bold;
      padding-left: 5px;
- }
+     font-size: 0.9vw;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+
+     display: block;
+     text-overflow: ellipsis;
+     word-wrap: break-word;
+     overflow: hidden;
+    }
  
  .nbr {
-     font-size: 50px;
-     text-align: center;
-     padding-top: 20px;
-     font-weight: bold;
+    
+    font-size: 16px;
+    text-align: center;
+    padding-top: 10px;
+    font-weight: bold;
+    color: #fff;
  }
  
  .text {
@@ -80,6 +91,14 @@ import { DragulaService } from 'ng2-dragula';
  
  
  
+.title a {
+    color:#868A93;
+}
+
+ .title a:hover{
+    text-decoration: none;
+}
+ 
  
  
  `],
@@ -90,28 +109,28 @@ import { DragulaService } from 'ng2-dragula';
   <div class="widget">
 
   <div class="row">
-          <div class="col">
-              <span  class="title">	{{title}} </span>
+          <div class="col-10">
+          <span  class="title">  <a href="#"  (click)="InfoBtn()">	{{title}} </a> </span>
               </div>
-              <div class="col">
+              <div class="col-2">
                   
                       <a href="#" (click)="closeBtn()" class="pull-right">
                               <i class="fa fa-times" style="margin: 3px; color:#868A93; font-size: 12px;" aria-hidden="true"></i>
                       </a>
                       <a href="#" (click)="ConfigBtn()"  class="pull-right" >
-                      <i class="fa  fa-cog"  style="margin: 3px;color:#868A93; font-size: 12px;" aria-hidden="true"></i>
+                      <i class="fa  fa-filter"  style="margin: 3px;color:#868A93; font-size: 12px;" aria-hidden="true"></i>
                   </a>
                   
-                      <a href="#"  (click)="InfoBtn()" class="pull-right">
+                  <!--       <a href="#"  (click)="InfoBtn()" class="pull-right">
                               <i class="fa  fa-info-circle" style="margin: 3px;color:#868A93; font-size: 12px;" aria-hidden="true"></i>
-                          </a>
+                          </a> !-->
 
                   </div>
 
           </div>
           
-          <div class="row">
-                  <div class="col">
+          <div  >
+                  <div>
                       <p class="nbr">{{nbr1}}/{{nbr1}}</p>	
                       <p class="text"> {{sub_title}}</p>
                       </div>
@@ -125,7 +144,8 @@ import { DragulaService } from 'ng2-dragula';
 
 export class Widget2Component {
 
-
+  
+  @Input() id: String;
   @Input() title: String;
   @Input() nbr1: number;
   @Input() nbr2: number;

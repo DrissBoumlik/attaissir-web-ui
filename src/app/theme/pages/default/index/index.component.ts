@@ -14,10 +14,14 @@ export class IndexComponent implements OnInit, AfterViewInit {
   tenants: any = [];
   tenant: any = [];
   tenant_name: any = [];
+  date:any;
 
   constructor(private _script: ScriptLoaderService,
     private thirdsService: ThirdsService) {
 
+      let event = new Date( Date.now());
+      let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      this.date = event.toLocaleDateString('fr-FR', options);
   }
 
   ngOnInit() {

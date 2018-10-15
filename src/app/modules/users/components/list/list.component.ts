@@ -20,12 +20,7 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.usersSerivces.getUsers().subscribe((data: any) => {
-    //   this.dataSource = data.data;
-    //   console.log(data.data);
-    // }, err => {
-
-    // });
+   
 
     this.dataSource.store = new custom_store({
       load: (loadOptions: any) => {
