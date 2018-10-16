@@ -1,7 +1,7 @@
 import { isArray, isNull } from 'util';
 import { load } from '@angular/core/src/render3/instructions';
 import * as CryptoJS from 'crypto-js';
-import {Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 export class Helper {
   /**
@@ -179,10 +179,10 @@ export class Helper {
 
   public static getSeverityColor(i: number, value: number): string {
     let color = '#d7182d';
-    if ( +value <= 4) {
+    if (+value <= 4) {
       color = '#d76725';
     }
-    if ( +value <= 3) {
+    if (+value <= 3) {
       color = '#d7b112';
     }
     if (+value <= 2) {

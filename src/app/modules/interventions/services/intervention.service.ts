@@ -122,7 +122,7 @@ export class InterventionService {
     });
   }
 
-  getTemplateData(warehouse_id: number,surface_to_work: number,id_intervention: number): Observable<any> {
+  getTemplateData(warehouse_id: number, surface_to_work: number, id_intervention: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/interventionrequests/clone/${id_intervention}/${surface_to_work}/${warehouse_id}`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

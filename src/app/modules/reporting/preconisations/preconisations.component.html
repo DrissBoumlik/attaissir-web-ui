@@ -9,21 +9,13 @@
   [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
   KeyExpr="id">
 
-  <dxo-export [enabled]="true" fileName="magasin" [excelFilterEnabled]="true"
-              [allowExportSelectedData]="true"></dxo-export>
+  <dxo-export [enabled]="true" fileName="preconisations" [allowExportSelectedData]="true"></dxo-export>
 
   <dxo-filter-row [visible]="true"></dxo-filter-row>
   <dxo-header-filter [visible]="true"></dxo-header-filter>
 
   <dxo-group-panel [visible]="true"></dxo-group-panel>
   <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
-  <dxo-editing
-    mode="popup"
-    [useIcons]="true"
-    [allowDeleting]="false"
-    [allowUpdating]="false"
-  >
-  </dxo-editing>
   <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
   <dxo-selection mode="multiple"></dxo-selection>
   <dxo-header-filter [visible]="true"></dxo-header-filter>
@@ -93,7 +85,7 @@
   <dxi-column [visible]="false" dataField="arcp_code" caption="Code famille"></dxi-column>
   <dxi-column  dataField="arc_name" caption="Sous famille"></dxi-column>
   <dxi-column [visible]="false" dataField="arc_code" caption="Code sous-famille"></dxi-column>
-  <dxi-column  dataField="soa_quantity" caption="Quantité"></dxi-column>
+  <dxi-column  dataField="soa_quantity"  datatype="Number" caption="Quantité"></dxi-column>
   <dxi-column [visible]="false" dataField="fournisseur_full_name" caption="Nom Complet (Fournisseur)"></dxi-column>
   <dxi-column [visible]="false" dataField="fournisseur_code" caption="Code (Fournisseur)"></dxi-column>
   <dxi-column [visible]="false" dataField="fournisseur_rc" caption="RC (Fournisseur)"></dxi-column>

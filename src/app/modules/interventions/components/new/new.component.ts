@@ -98,16 +98,16 @@ export class NewComponent implements OnInit {
     this.farmerData = e;
     if (this.farmerData.rfid) {
 
-        this.farmerData.rfid= this.farmerData.rfid.replace(/à/g,"0");
-        this.farmerData.rfid= this.farmerData.rfid.replace(/&/g,"1");
-        this.farmerData.rfid= this.farmerData.rfid.replace(/é/g,"2");
-        this.farmerData.rfid= this.farmerData.rfid.replace('"',"3");
-        this.farmerData.rfid= this.farmerData.rfid.replace("'","4");
-        this.farmerData.rfid= this.farmerData.rfid.replace("(","5");
-        this.farmerData.rfid= this.farmerData.rfid.replace("-","6");
-        this.farmerData.rfid= this.farmerData.rfid.replace(/è/g,"7");
-        this.farmerData.rfid= this.farmerData.rfid.replace("_" ,"8");
-        this.farmerData.rfid= this.farmerData.rfid.replace(/ç/g,"9");
+      this.farmerData.rfid = this.farmerData.rfid.replace(/à/g, "0");
+      this.farmerData.rfid = this.farmerData.rfid.replace(/&/g, "1");
+      this.farmerData.rfid = this.farmerData.rfid.replace(/é/g, "2");
+      this.farmerData.rfid = this.farmerData.rfid.replace('"', "3");
+      this.farmerData.rfid = this.farmerData.rfid.replace("'", "4");
+      this.farmerData.rfid = this.farmerData.rfid.replace("(", "5");
+      this.farmerData.rfid = this.farmerData.rfid.replace("-", "6");
+      this.farmerData.rfid = this.farmerData.rfid.replace(/è/g, "7");
+      this.farmerData.rfid = this.farmerData.rfid.replace("_", "8");
+      this.farmerData.rfid = this.farmerData.rfid.replace(/ç/g, "9");
 
       this.validate();
     }

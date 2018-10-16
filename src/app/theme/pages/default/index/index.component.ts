@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ScriptLoaderService} from '../../../../_services/script-loader.service';
-import {ThirdsService} from '../../../../modules/thirds/services/thirds.service';
+import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ScriptLoaderService } from '../../../../_services/script-loader.service';
+import { ThirdsService } from '../../../../modules/thirds/services/thirds.service';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
   tenant_name: any = [];
 
   constructor(private _script: ScriptLoaderService,
-              private thirdsService: ThirdsService) {
+    private thirdsService: ThirdsService) {
 
   }
 
@@ -107,7 +107,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
           request.open('POST', url);
           request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
           request.responseType = 'json';
-          request.onload = (function () {
+          request.onload = (function() {
             if (this.status >= 200 && this.status < 300) {
               resolve(request.response);
             } else {
@@ -117,7 +117,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
               });
             }
           });
-          request.onerror = (function () {
+          request.onerror = (function() {
             reject({
               status: this.status,
               statusText: request.statusText

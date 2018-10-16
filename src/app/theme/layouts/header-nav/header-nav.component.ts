@@ -46,26 +46,26 @@ export class HeaderNavComponent implements OnInit, AfterViewInit {
 
 
   searchType = 'agre';
-  searchBtn(type,value) {
+  searchBtn(type, value) {
 
-    if(value != ''){
+    if (value != '') {
 
-    this.searchType = type;
-    console.log('search ' +this.searchType  +' '+ value )
+      this.searchType = type;
+      console.log('search ' + this.searchType + ' ' + value)
 
-    if(this.searchType =='agre') {
+      if (this.searchType == 'agre') {
 
-      this.router.navigate(['/tiers/liste/recherche/' +  value ]);
-    }else if(this.searchType =='contrat') {
-      this.router.navigate(['contrats/liste/recherche/' + value ]);
+        this.router.navigate(['/tiers/liste/recherche/' + value]);
+      } else if (this.searchType == 'contrat') {
+        this.router.navigate(['contrats/liste/recherche/' + value]);
 
-    }else if(this.searchType =='distribution'){
-      this.router.navigate(['jeunepromoteurs/liste/recherche/' + value ]);
+      } else if (this.searchType == 'distribution') {
+        this.router.navigate(['jeunepromoteurs/liste/recherche/' + value]);
+      }
     }
-  }
 
   }
 
- 
+
 
 }

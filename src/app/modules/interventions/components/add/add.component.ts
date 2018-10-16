@@ -181,7 +181,7 @@ export class AddComponent implements OnInit {
                   this.products = [];
                   this.selectedItems = [];
                   if (this.selectedTemplate) {
-                    this.interventionService.getTemplateData(this.interventions.warehouse,this.interventions.surface_to_work,this.selectedTemplate.id)
+                    this.interventionService.getTemplateData(this.interventions.warehouse, this.interventions.surface_to_work, this.selectedTemplate.id)
                       .subscribe(
                         (templateData: any) => {
                           console.log(templateData);

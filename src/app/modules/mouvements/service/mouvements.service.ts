@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../../../environments/environment';
-import {Article} from '../../../shared/classes/article';
-import {Third} from '../../../shared/classes/third';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
+import { Article } from '../../../shared/classes/article';
+import { Third } from '../../../shared/classes/third';
 
 @Injectable({
   providedIn: 'root'
@@ -109,7 +109,7 @@ export class MouvementsService {
   }
 
 
-  
+
   changeStatus(id: number, rf_code: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/${this.routeName}/change_status`,
       JSON.stringify({ id: id, rfid: rf_code }), {

@@ -12,7 +12,7 @@ const routes: Routes = [{
   path: 'utilisateurs',
   component: DefaultComponent,
   children: [
-   /* { path: 'profile', component: ProfileComponent, canActivate: [PermissionGuard], data: { permission: ['none'] } }, */
+    /* { path: 'profile', component: ProfileComponent, canActivate: [PermissionGuard], data: { permission: ['none'] } }, */
     { path: 'ajouter', component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['user.users.store'] } },
     { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['user.users.index'] } },
     { path: 'modifier/:id', component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['user.users.update'] } }

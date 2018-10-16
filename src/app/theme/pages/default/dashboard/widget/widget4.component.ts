@@ -3,10 +3,10 @@ import { NgModule, Component, enableProdMode, Input, Output, EventEmitter } from
 import { BrowserModule } from '@angular/platform-browser';
 import { DragulaService } from 'ng2-dragula';
 
- 
+
 @Component({
   selector: 'widget4',
- styles: [`
+  styles: [`
  
  
  
@@ -135,33 +135,33 @@ import { DragulaService } from 'ng2-dragula';
 
 })
 
-export class Widget4Component   {
-  
-  
-    @Input() title: String;
-    @Input() table: any[];
-    @Input() sub_title: String;
+export class Widget4Component {
 
 
-    @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
-  
-    closeBtn() {
-        this.close.emit(1);
-    }
+  @Input() title: String;
+  @Input() table: any[];
+  @Input() sub_title: String;
 
 
-    @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
+  @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
 
-    ConfigBtn() {
-        this.config.emit(1);
-    }
+  closeBtn() {
+    this.close.emit(1);
+  }
 
-   @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
 
-   InfoBtn() {
-        this.info.emit(1);
-    }
-    
+  @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
+
+  ConfigBtn() {
+    this.config.emit(1);
+  }
+
+  @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
+
+  InfoBtn() {
+    this.info.emit(1);
+  }
+
 }
 
 

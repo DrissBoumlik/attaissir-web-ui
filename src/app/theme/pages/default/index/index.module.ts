@@ -5,7 +5,7 @@ import { IndexComponent as IndexComponent1 } from './index.component';
 import { LayoutModule } from '../../../layouts/layout.module';
 import { DefaultComponent } from '../default.component';
 import { SharedModule } from '../../../../shared/shared.module';
-import {DashboardModule} from '../dashboard/index.module';
+import { DashboardModule } from '../dashboard/index.module';
 
 const routes: Routes = [
   {
@@ -28,4 +28,4 @@ const routes: Routes = [
     IndexComponent1
   ]
 })
-export class IndexModule {}
+export class IndexModule { }

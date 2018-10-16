@@ -8,9 +8,9 @@ describe('ParcelInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ParcelInfoComponent ]
+      declarations: [ParcelInfoComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

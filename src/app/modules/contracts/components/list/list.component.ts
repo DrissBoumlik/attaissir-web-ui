@@ -43,13 +43,13 @@ export class ListComponent implements OnInit {
 
     this.reloadRoute();
 
-    
+
     this.router.events.subscribe(
       (event) => {
         if (event instanceof NavigationEnd) {
-           this.reloadRoute();
-       }
- 
+          this.reloadRoute();
+        }
+
       }
     );
 
@@ -85,8 +85,8 @@ export class ListComponent implements OnInit {
     });
 
 
-    
-    
+
+
 
   }
 
@@ -130,28 +130,28 @@ export class ListComponent implements OnInit {
 
 
 
-  reloadRoute(){
- 
+  reloadRoute() {
+
     this.route.params.subscribe(
       params => {
 
-        if(params.name != null ) {
+        if (params.name != null) {
           this.contracts = {};
-        this.contracts.store = new CustomStore({
-          load: (loadOptions: any) => {
-            Helper.addContainFilter(loadOptions, 'third_full_name', params.name);
-            return this.contractsService.getContractsDx(loadOptions)
-              .toPromise()
-              .then(response => {
-                const json = response;
-                return json;
-              })
-              .catch(error => {
-                throw error;
-              });
-          }
-        });
-      }
+          this.contracts.store = new CustomStore({
+            load: (loadOptions: any) => {
+              Helper.addContainFilter(loadOptions, 'third_full_name', params.name);
+              return this.contractsService.getContractsDx(loadOptions)
+                .toPromise()
+                .then(response => {
+                  const json = response;
+                  return json;
+                })
+                .catch(error => {
+                  throw error;
+                });
+            }
+          });
+        }
 
       }
     );

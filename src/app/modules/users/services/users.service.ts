@@ -94,7 +94,7 @@ export class UsersService {
     });
   }
 
-  
+
   /**
    * Delete a user
    * @param id  the id of the contracts intended to delete

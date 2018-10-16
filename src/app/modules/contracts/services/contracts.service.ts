@@ -117,7 +117,7 @@ export class ContractsService {
   }
 
 
-   
+
   changeStatus(id: number, rf_code: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/${this.routeName}/change_status`,
       JSON.stringify({ id: id, rfid: rf_code }), {
@@ -126,5 +126,5 @@ export class ContractsService {
         })
       });
   }
-  
+
 }

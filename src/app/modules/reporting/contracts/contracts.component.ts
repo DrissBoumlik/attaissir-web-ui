@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import CustomStore from 'devextreme/data/custom_store';
-import {ReportingService} from '../services/reporting-service.service';
-import {Helper} from '../../../shared/classes/helper';
-import {DxDataGridComponent} from 'devextreme-angular';
+import { ReportingService } from '../services/reporting-service.service';
+import { Helper } from '../../../shared/classes/helper';
+import { DxDataGridComponent } from 'devextreme-angular';
 
 declare const require: any;
 const $ = require('jquery');
@@ -23,7 +23,7 @@ export class ContractsComponent implements OnInit {
   @ViewChild('ReportingContracts') ReportingContracts: DxDataGridComponent;
 
   constructor(private reportingService: ReportingService,
-              private toaster: ToastrService) {
+    private toaster: ToastrService) {
     this.helper = Helper;
     this.cinSet = new Set([]);
   }

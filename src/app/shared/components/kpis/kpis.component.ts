@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FamilyService} from '../../services/family-service.service';
-import {DxVectorMapComponent} from 'devextreme-angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FamilyService } from '../../services/family-service.service';
+import { DxVectorMapComponent } from 'devextreme-angular';
 import DataSource from 'devextreme/data/data_source';
 
 @Component({

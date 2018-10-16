@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, Injector, LOCALE_ID, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ThemeComponent } from './theme/theme.component';
+import { createCustomElement } from '@angular/elements';
 import { LayoutModule } from './theme/layouts/layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ThemeRoutingModule } from './theme/theme-routing.module';
@@ -39,6 +40,7 @@ import { DemandesModule } from './modules/demandes/demandes.module';
 import { UsersModule } from './modules/users/users.module';
 import { CardGeneratorModule } from './modules/card-generator/card-generator.module';
 import { PermissionGuard } from './shared/directives/guard.directive';
+import { ParcelInfoComponent } from './shared/components/parcel-info/parcel-info.component';
 
 @NgModule({
   declarations: [
@@ -91,20 +93,21 @@ import { PermissionGuard } from './shared/directives/guard.directive';
     DxTemplateModule,
     DxCheckBoxModule
   ],
-  providers: [{
-    provide: LOCALE_ID,
-    useValue: 'fr'
-  },
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'fr'
+    },
     ScriptLoaderService,
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  },
-  {
-    provide: ErrorHandler,
-    useClass: SiamErrorHandler
-  },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: SiamErrorHandler
+    },
     PermissionGuard
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

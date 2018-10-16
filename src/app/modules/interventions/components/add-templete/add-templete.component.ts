@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {InterventionService} from '../../services/intervention.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { InterventionService } from '../../services/intervention.service';
 import CustomStore from 'devextreme/data/custom_store';
-import {DxTreeListComponent} from 'devextreme-angular';
-import {Helper} from '../../../../shared/classes/helper';
-import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
+import { DxTreeListComponent } from 'devextreme-angular';
+import { Helper } from '../../../../shared/classes/helper';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({

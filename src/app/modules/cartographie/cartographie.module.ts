@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CartographieRoutingModule } from './cartographie-routing.module';
 import { SuiviComponent } from './suivi/suivi.component';
-import {SharedModule} from '../../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [

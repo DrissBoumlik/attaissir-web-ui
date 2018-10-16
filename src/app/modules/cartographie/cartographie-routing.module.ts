@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {DefaultComponent} from '../../theme/pages/default/default.component';
-import {PermissionGuard} from '../../shared/directives/guard.directive';
-import {SuiviComponent} from './suivi/suivi.component';
+import { DefaultComponent } from '../../theme/pages/default/default.component';
+import { PermissionGuard } from '../../shared/directives/guard.directive';
+import { SuiviComponent } from './suivi/suivi.component';
 
 const routes: Routes = [{
   path: '',
@@ -11,7 +11,7 @@ const routes: Routes = [{
       path: 'suivi',
       component: SuiviComponent,
       canActivate: [PermissionGuard],
-      data: {permission: ['agreement.contracts.grid']}
+      data: { permission: ['agreement.contracts.grid'] }
     }
   ]
 }];
