@@ -1057,7 +1057,9 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
 .grid-container-vector {
   display: grid;
   position: relative;
+  /*
   height: 100%;
+  */
   grid-template-columns: 0.8fr 1.2fr;
   grid-template-rows: 1fr;
   grid-gap: 1px 1px;
@@ -1069,22 +1071,18 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
 }
 
 .SIGAAKPIS::-webkit-scrollbar {
-  width: 12px;
+  width: 6px;
 }
 
 .SIGAAKPIS::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(25, 97, 175, 0);
-  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(117, 119, 121, 0);
+  border-radius: 5px;
 }
 
 .SIGAAKPIS::-webkit-scrollbar-thumb {
   border-radius: 0px;
-  -webkit-box-shadow: inset 0 0 6px rgba(25, 97, 175, 0.6);
-  background: #00a7e7;
-  background: -moz-radial-gradient(circle, #49a6e3, #358fd2, #2478c1, #1961af, #144b9b);
-  background: -webkit-radial-gradient(circle, #49a6e3, #358fd2, #2478c1, #1961af, #144b9b);
-  background: radial-gradient(circle, #49a6e3, #358fd2, #2478c1, #1961af, #144b9b);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00a7e7', endColorstr='#104ba0', GradientType=1);
+  -webkit-box-shadow: inset 0 0 6px rgba(154, 156, 158, 0.6);
+  background:  rgb(48, 51, 58);
 }
 
 .VAECTOR-MAP {
@@ -1996,7 +1994,20 @@ table.ui.fixed.table > tbody > tr > td:nth-child(2):after {
 }
 
 .box {
-  background: linear-gradient(#3e4d73, #0a2a84);
+  background: #20232A;
+  background: -moz-linear-gradient(top,  #20232A 0%,#353A44 100%);
+  background: -webkit-linear-gradient(top,  #20232A 0%,#353A44 100%);
+  background: linear-gradient(to bottom,  #20232A 0%,#353A44 100%);
+  -webkit-animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  background-color:#fff;
+  -webkit-box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.75);
+  background: #00a7e7;
+  background: -moz-linear-gradient(-45deg,  #00a7e7 0%, rgba(16, 75, 160, 0.69) 100%);
+  background: -webkit-linear-gradient(-45deg,  #00a7e7 0%,rgba(16, 75, 160, 0.69) 100%);
+  background: linear-gradient(135deg,  #00a7e7 0%, rgba(16, 75, 160, 0.69) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00a7e7', endColorstr='#104ba0',GradientType=1 );
   margin: 15px auto 0;
   border-radius: 5px;
   width: 300px;
