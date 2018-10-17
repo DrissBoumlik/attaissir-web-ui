@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FamilyService} from '../../services/family-service.service';
-import {DxVectorMapComponent} from 'devextreme-angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FamilyService } from '../../services/family-service.service';
+import { DxVectorMapComponent } from 'devextreme-angular';
 import DataSource from 'devextreme/data/data_source';
 
 @Component({
@@ -56,8 +56,6 @@ export class KpisComponent implements OnInit {
       + '</div>\n' +
       '      <div class="stats__caption"> (Ha) contractée</div>\n' +
       '      <div class="stats__change">\n' +
-      '        <div class="stats__value stats__value--positive">+6 (Ha)</div>\n' +
-      '        <div class="stats__period">Aujourd\'Hui</div>\n' +
       '      </div>\n' +
       '    </div>\n' +
       '\n' +
@@ -67,8 +65,6 @@ export class KpisComponent implements OnInit {
       + '</div>\n' +
       '      <div class="stats__caption"> (Ha) programmée</div>\n' +
       '      <div class="stats__change">\n' +
-      '        <div class="stats__value stats__value--positive">+6 (Ha)</div>\n' +
-      '        <div class="stats__period">Aujourd\'Hui</div>\n' +
       '      </div>\n' +
       '    </div>\n' +
       '\n' +
@@ -78,8 +74,6 @@ export class KpisComponent implements OnInit {
       + '</div>\n' +
       '      <div class="stats__caption">agrégés</div>\n' +
       '      <div class="stats__change">\n' +
-      '        <div class="stats__value">+78</div>\n' +
-      '        <div class="stats__period">Aujourd\'Hui</div>\n' +
       '      </div>\n' +
       '    </div>\n' +
       '\n' +

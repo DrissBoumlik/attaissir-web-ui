@@ -8,9 +8,9 @@ describe('CdaSigaaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CdaSigaaComponent ]
+      declarations: [CdaSigaaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

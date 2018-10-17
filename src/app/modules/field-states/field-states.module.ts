@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FieldStatesRoutingModule } from './field-states-routing.module';
 import { ListComponent } from './list/list.component';
-import {DxDataGridModule} from 'devextreme-angular';
+import { DxDataGridModule } from 'devextreme-angular';
 
 @NgModule({
   imports: [

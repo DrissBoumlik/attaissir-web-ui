@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ParcelsService} from '../../services/parcels.service';
+import { Component, OnInit } from '@angular/core';
+import { ParcelsService } from '../../services/parcels.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
 import 'devextreme/integration/jquery';
-import {Router} from '@angular/router';
-import {Helper} from '../../../../shared/classes/helper';
+import { Router } from '@angular/router';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-list',
@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
   helper: any;
 
   constructor(public parcelsServices: ParcelsService,
-              private router: Router) {
+    private router: Router) {
     this.parcels = {};
     this.helper = Helper;
   }

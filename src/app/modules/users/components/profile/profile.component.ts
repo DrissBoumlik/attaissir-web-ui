@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
     private userService: UsersService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr : ToastrService
+    private toastr: ToastrService
   ) {
     this.user = {};
     this.userInfo = {};
@@ -62,17 +62,17 @@ export class ProfileComponent implements OnInit {
           result => {
             console.log(result);
 
-         this.toastr.success(result.message);
-         this.router.navigate(['/']);
+            this.toastr.success(result.message);
+            this.router.navigate(['/']);
           },
           error => {
             this.toastr.error(error.error.message)
-           // this.errors = error;
+            // this.errors = error;
           }
         );
 
 
-        
+
 
       }
     };

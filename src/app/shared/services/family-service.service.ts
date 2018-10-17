@@ -42,4 +42,6 @@ export class FamilyService {
     return this.http.get(`${environment.apiUrl}/zones/kpis/cda/${id}`);
   }
 
+ 
+
 }

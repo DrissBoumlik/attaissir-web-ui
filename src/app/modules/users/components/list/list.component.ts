@@ -15,17 +15,12 @@ export class ListComponent implements OnInit {
   dataSource: any = {};
   helper: any;
 
-  constructor(public usersSerivces: UsersService, private router: Router ,private toastr : ToastrService) {
+  constructor(public usersSerivces: UsersService, private router: Router, private toastr: ToastrService) {
     this.helper = Helper;
   }
 
   ngOnInit() {
-    // this.usersSerivces.getUsers().subscribe((data: any) => {
-    //   this.dataSource = data.data;
-    //   console.log(data.data);
-    // }, err => {
-
-    // });
+   
 
     this.dataSource.store = new custom_store({
       load: (loadOptions: any) => {
@@ -38,7 +33,7 @@ export class ListComponent implements OnInit {
           .catch(error => {
             throw error;
           });
-      } ,
+      },
       remove: (event: any) => {
         return this.usersSerivces.deleteUser(event.id)
           .toPromise()

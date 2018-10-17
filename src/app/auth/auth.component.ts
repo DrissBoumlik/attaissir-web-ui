@@ -7,13 +7,13 @@ import {
   ViewContainerRef,
   ViewEncapsulation
 } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ScriptLoaderService} from '../_services/script-loader.service';
-import {Helpers} from '../helpers';
-import {ToastrService} from 'ngx-toastr';
-import {AlertService, AuthenticationService, UserService} from './_services';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ScriptLoaderService } from '../_services/script-loader.service';
+import { Helpers } from '../helpers';
+import { ToastrService } from 'ngx-toastr';
+import { AlertService, AuthenticationService, UserService } from './_services';
 import * as CryptoJS from 'crypto-js';
-import {AlertComponent} from './_directives/alert.component';
+import { AlertComponent } from './_directives/alert.component';
 
 declare let $: any;
 declare let mUtil: any;
@@ -32,21 +32,21 @@ export class AuthComponent implements OnInit, AfterViewInit {
   errorMessage: string;
 
   @ViewChild('alertSignin',
-    {read: ViewContainerRef}) alertSignin: ViewContainerRef;
+    { read: ViewContainerRef }) alertSignin: ViewContainerRef;
   @ViewChild('alertSignup',
-    {read: ViewContainerRef}) alertSignup: ViewContainerRef;
+    { read: ViewContainerRef }) alertSignup: ViewContainerRef;
   @ViewChild('alertForgotPass',
-    {read: ViewContainerRef}) alertForgotPass: ViewContainerRef;
+    { read: ViewContainerRef }) alertForgotPass: ViewContainerRef;
   @ViewChild('video') video: ElementRef;
 
   constructor(private _router: Router,
-              private _script: ScriptLoaderService,
-              private _userService: UserService,
-              private _route: ActivatedRoute,
-              private _authService: AuthenticationService,
-              private _alertService: AlertService,
-              private cfr: ComponentFactoryResolver,
-              private toastr: ToastrService) {
+    private _script: ScriptLoaderService,
+    private _userService: UserService,
+    private _route: ActivatedRoute,
+    private _authService: AuthenticationService,
+    private _alertService: AlertService,
+    private cfr: ComponentFactoryResolver,
+    private toastr: ToastrService) {
 
   }
 
@@ -65,9 +65,9 @@ export class AuthComponent implements OnInit, AfterViewInit {
     this._script.loadScripts('body', [
       'assets/vendors/base/vendors.bundle.js',
       'assets/demo/demo12/base/scripts.bundle.js'], true).then(() => {
-      Helpers.setLoading(false);
-      this.handleSignInFormSubmit();
-    });
+        Helpers.setLoading(false);
+        this.handleSignInFormSubmit();
+      });
     // Set page height
     //document.getElementById('m_login').style.height = (screen.height - 118) + 'px';
     // m-login--signin
@@ -112,47 +112,47 @@ export class AuthComponent implements OnInit, AfterViewInit {
     this._authService.myPermission().subscribe(response => {
 
 
-        const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(response.data.permissions), 'Gra61884546585_55');
-        localStorage.setItem('permissions', ciphertext);
+      const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(response.data.permissions), 'Gra61884546585_55');
+      localStorage.setItem('permissions', ciphertext);
 
 
-        //      localStorage.setItem('permissions', response.data.permissions);
-      },
+      //      localStorage.setItem('permissions', response.data.permissions);
+    },
       error => {
         //  location.reload();
       });
   }
 
-   displaySignUpForm() {
-      const login = document.getElementById('m_login');
-      mUtil.removeClass(login, 'm-login--forget-password');
-      mUtil.removeClass(login, 'm-login--signin');
+  displaySignUpForm() {
+    const login = document.getElementById('m_login');
+    mUtil.removeClass(login, 'm-login--forget-password');
+    mUtil.removeClass(login, 'm-login--signin');
 
-      mUtil.addClass(login, 'm-login--signup');
-      mUtil.animateClass(login.getElementsByClassName('m-login__signup')[0], 'flipInX animated');
-    }
+    mUtil.addClass(login, 'm-login--signup');
+    mUtil.animateClass(login.getElementsByClassName('m-login__signup')[0], 'flipInX animated');
+  }
 
   displaySignInForm() {
-      const login = document.getElementById('m_login');
-      mUtil.removeClass(login, 'm-login--forget-password');
-      mUtil.removeClass(login, 'm-login--signup');
-      try {
-        $('form').data('validator').resetForm();
-      } catch (e) {
-      }
-
-      mUtil.addClass(login, 'm-login--signin');
-      mUtil.animateClass(login.getElementsByClassName('m-login__signin')[0], 'flipInX animated');
+    const login = document.getElementById('m_login');
+    mUtil.removeClass(login, 'm-login--forget-password');
+    mUtil.removeClass(login, 'm-login--signup');
+    try {
+      $('form').data('validator').resetForm();
+    } catch (e) {
     }
+
+    mUtil.addClass(login, 'm-login--signin');
+    mUtil.animateClass(login.getElementsByClassName('m-login__signin')[0], 'flipInX animated');
+  }
 
   displayForgetPasswordForm() {
-      const login = document.getElementById('m_login');
-      mUtil.removeClass(login, 'm-login--signin');
-      mUtil.removeClass(login, 'm-login--signup');
+    const login = document.getElementById('m_login');
+    mUtil.removeClass(login, 'm-login--signin');
+    mUtil.removeClass(login, 'm-login--signup');
 
-      mUtil.addClass(login, 'm-login--forget-password');
-      mUtil.animateClass(login.getElementsByClassName('m-login__forget-password')[0], 'flipInX animated');
-    }
+    mUtil.addClass(login, 'm-login--forget-password');
+    mUtil.animateClass(login.getElementsByClassName('m-login__forget-password')[0], 'flipInX animated');
+  }
 
 
   signup() {
@@ -194,7 +194,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
 
   showAlert(target) {
-     this[target].clear();
+    this[target].clear();
     const factory = this.cfr.resolveComponentFactory(AlertComponent);
     const ref = this[target].createComponent(factory);
     ref.changeDetectorRef.detectChanges();
@@ -222,7 +222,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    $('.toggle-password').click(function () {
+    $('.toggle-password').click(function() {
 
       $(this).toggleClass('fa-eye fa-eye-slash');
       const input = $($(this).attr('toggle'));

@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ScriptLoaderService} from '../../../../_services/script-loader.service';
-import {ThirdsService} from '../../../../modules/thirds/services/thirds.service';
+import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ScriptLoaderService } from '../../../../_services/script-loader.service';
+import { ThirdsService } from '../../../../modules/thirds/services/thirds.service';
 
 
 @Component({
@@ -14,13 +14,32 @@ export class IndexComponent implements OnInit, AfterViewInit {
   tenants: any = [];
   tenant: any = [];
   tenant_name: any = [];
+  date: any;
 
   constructor(private _script: ScriptLoaderService,
-              private thirdsService: ThirdsService) {
+    private thirdsService: ThirdsService) {
 
+      const event = new Date( Date.now());
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      this.date = event.toLocaleDateString('fr-FR', options);
   }
 
   ngOnInit() {
+
+    const urlParams = [];
+    window.location.search.replace('?', '').split('&').forEach(function (e, i) {
+      const p = e.split('=');
+      urlParams[p[0]] = p[1];
+    });
+
+    // We have all the params now -> you can access it by name
+    console.log(urlParams['loaded']);
+
+    if (urlParams['loaded']) {} else {
+
+      const win = (window as any);
+      win.location.search = '?loaded=1';
+    }
 
 
     const data = JSON.parse(localStorage.getItem('currentUser'));
@@ -107,7 +126,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
           request.open('POST', url);
           request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
           request.responseType = 'json';
-          request.onload = (function () {
+          request.onload = (function() {
             if (this.status >= 200 && this.status < 300) {
               resolve(request.response);
             } else {
@@ -117,7 +136,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
               });
             }
           });
-          request.onerror = (function () {
+          request.onerror = (function() {
             reject({
               status: this.status,
               statusText: request.statusText

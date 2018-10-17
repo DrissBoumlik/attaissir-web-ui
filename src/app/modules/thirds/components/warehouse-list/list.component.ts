@@ -63,14 +63,14 @@ export class ListComponent implements OnInit {
     this.router.events.subscribe(
       (event) => {
         if (event instanceof NavigationEnd) {
-           this.reloadRoute();
-       }
- 
+          this.reloadRoute();
+        }
+
       }
     );
 
 
-    
+
 
 
   }
@@ -120,29 +120,29 @@ export class ListComponent implements OnInit {
   }
 
 
-  reloadRoute(){
- 
-   
+  reloadRoute() {
+
+
     this.route.params.subscribe(
       params => {
 
-        if(params.name != null ) {
+        if (params.name != null) {
           this.warehouses = {};
-        this.warehouses.store = new CustomStore({
-          load: (loadOptions: any) => {
-            Helper.addContainFilter(loadOptions, 'third_party_full_name', params.name);
-            return this.WarehouseService.getAllDx(loadOptions)
-              .toPromise()
-              .then(response => {
-                const json = response;
-                return json;
-              })
-              .catch(error => {
-                throw error;
-              });
-          }
-        });
-      }
+          this.warehouses.store = new CustomStore({
+            load: (loadOptions: any) => {
+              Helper.addContainFilter(loadOptions, 'third_party_full_name', params.name);
+              return this.WarehouseService.getAllDx(loadOptions)
+                .toPromise()
+                .then(response => {
+                  const json = response;
+                  return json;
+                })
+                .catch(error => {
+                  throw error;
+                });
+            }
+          });
+        }
 
       }
     );

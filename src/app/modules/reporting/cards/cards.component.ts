@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import CustomStore from 'devextreme/data/custom_store';
-import {ReportingService} from '../services/reporting-service.service';
-import {Helper} from '../../../shared/classes/helper';
+import { ReportingService } from '../services/reporting-service.service';
+import { Helper } from '../../../shared/classes/helper';
 
 @Component({
   selector: 'app-cards',
@@ -14,7 +14,7 @@ export class CardsComponent implements OnInit {
   helper: any;
 
   constructor(private reportingService: ReportingService,
-              private toaster: ToastrService) {
+    private toaster: ToastrService) {
     this.helper = Helper;
   }
 

@@ -119,33 +119,33 @@ export class ShowComponent implements OnInit {
 
 
   print() {
- 
-        let  w=window.open();  
-        w.document.write('<!DOCTYPE html>');
-        w.document.write('<html>');
-        w.document.write('<head>');
 
-        w.document.write('<link rel="stylesheet" href="/assets/app/css/print.css" type="text/css" />');
-        w.document.write('</head>');
-        w.document.write('<body>');
-        w.document.write($('#t1').html());
+    let w = window.open();
+    w.document.write('<!DOCTYPE html>');
+    w.document.write('<html>');
+    w.document.write('<head>');
 
-        w.document.write('</body>');
-        w.document.write('</html>');
+    w.document.write('<link rel="stylesheet" href="/assets/app/css/print.css" type="text/css" />');
+    w.document.write('</head>');
+    w.document.write('<body>');
+    w.document.write($('#t1').html());
 
-      setTimeout(() => {
-          w.print();
-      }, 3000);
+    w.document.write('</body>');
+    w.document.write('</html>');
 
-
-      setTimeout(() => {
-          w.close();
-      }, 5000);
+    setTimeout(() => {
+      w.print();
+    }, 3000);
 
 
- 
-        return true;
-     }
+    setTimeout(() => {
+      w.close();
+    }, 5000);
+
+
+
+    return true;
+  }
 
 
 
@@ -166,45 +166,45 @@ export class ShowComponent implements OnInit {
 
       setTimeout(() => {
 
-      this.rf_code = this.rfid.nativeElement.value;
-      this.rfid.nativeElement.value = '';
-      this.focusout.nativeElement.focus();
+        this.rf_code = this.rfid.nativeElement.value;
+        this.rfid.nativeElement.value = '';
+        this.focusout.nativeElement.focus();
 
 
-      if(this.rf_code != ''){
+        if (this.rf_code != '') {
 
-        this.rf_code= this.rf_code.replace(/à/g,"0");
-        this.rf_code= this.rf_code.replace(/&/g,"1");
-        this.rf_code= this.rf_code.replace(/é/g,"2");
-        this.rf_code= this.rf_code.replace('"',"3");
-        this.rf_code= this.rf_code.replace("'","4");
-        this.rf_code= this.rf_code.replace("(","5");
-        this.rf_code= this.rf_code.replace("-","6");
-        this.rf_code= this.rf_code.replace(/è/g,"7");
-        this.rf_code= this.rf_code.replace("_" ,"8");
-        this.rf_code= this.rf_code.replace(/ç/g,"9");
- 
-       console.log(this.rf_code);
+          this.rf_code = this.rf_code.replace(/à/g, "0");
+          this.rf_code = this.rf_code.replace(/&/g, "1");
+          this.rf_code = this.rf_code.replace(/é/g, "2");
+          this.rf_code = this.rf_code.replace('"', "3");
+          this.rf_code = this.rf_code.replace("'", "4");
+          this.rf_code = this.rf_code.replace("(", "5");
+          this.rf_code = this.rf_code.replace("-", "6");
+          this.rf_code = this.rf_code.replace(/è/g, "7");
+          this.rf_code = this.rf_code.replace("_", "8");
+          this.rf_code = this.rf_code.replace(/ç/g, "9");
 
-      this.mouvementsService.changeStatus(this.mouvement.id,this.rf_code)
-          .toPromise()
-          .then(response => {
+          console.log(this.rf_code);
 
-
-            this.mouvement.state = 'inprogress';
-            this.toastr.success(response.data)
-            return response;
-          })
-          .catch(error => {
-            this.toastr.error(error.error.message)
-            throw error;
-          });
-      
- 
-      }
+          this.mouvementsService.changeStatus(this.mouvement.id, this.rf_code)
+            .toPromise()
+            .then(response => {
 
 
-      this.popupRfidVisible = false;
+              this.mouvement.state = 'inprogress';
+              this.toastr.success(response.data)
+              return response;
+            })
+            .catch(error => {
+              this.toastr.error(error.error.message)
+              throw error;
+            });
+
+
+        }
+
+
+        this.popupRfidVisible = false;
 
       }, 1000);
 
@@ -213,7 +213,7 @@ export class ShowComponent implements OnInit {
   }
 
 
-  
+
   Scan() {
     console.log('ok');
     this.popupRfidVisible = true;

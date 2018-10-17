@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {PreconisationsIntrantsService} from '../../service/preconisations-intrants.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {RightHolderService} from '../../../contracts/services/right-holder.service';
-import {Helper} from "../../../../shared/classes/helper";
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { PreconisationsIntrantsService } from '../../service/preconisations-intrants.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { RightHolderService } from '../../../contracts/services/right-holder.service';
+import { Helper } from "../../../../shared/classes/helper";
 
 @Component({
   selector: 'app-show',
@@ -47,9 +47,9 @@ export class ShowComponent implements OnInit, AfterViewInit {
   // -------------------------------------------------------------------------
 
   constructor(private elementRef: ElementRef, private preconisationsIntrantsService: PreconisationsIntrantsService,
-              private rightHolderService: RightHolderService,
-              private router: Router,
-              private toastr: ToastrService, private route: ActivatedRoute) {
+    private rightHolderService: RightHolderService,
+    private router: Router,
+    private toastr: ToastrService, private route: ActivatedRoute) {
 
     this.helper = Helper;
 
@@ -351,7 +351,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
     w.document.write($('#t1').html());
     w.document.write('</body>');
     w.document.write('</html>');
-//w.print();
+    //w.print();
 
 
     setTimeout(() => {
@@ -360,13 +360,13 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
 
 
-      setTimeout(() => {
-          w.close();
-      }, 5000);
+    setTimeout(() => {
+      w.close();
+    }, 5000);
 
     return true;
 
-//w.close();
+    //w.close();
 
     // window.print();
 
@@ -439,28 +439,28 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
       setTimeout(() => {
 
-      this.rf_code2 = this.rfid2.nativeElement.value;
-      this.rfid2.nativeElement.value = '';
-      this.focusout2.nativeElement.focus();
+        this.rf_code2 = this.rfid2.nativeElement.value;
+        this.rfid2.nativeElement.value = '';
+        this.focusout2.nativeElement.focus();
 
 
-      if(this.rf_code2 != ''){
+        if (this.rf_code2 != '') {
 
-        this.rf_code2= this.rf_code2.replace(/à/g,"0");
-        this.rf_code2= this.rf_code2.replace(/&/g,"1");
-        this.rf_code2= this.rf_code2.replace(/é/g,"2");
-        this.rf_code2= this.rf_code2.replace('"',"3");
-        this.rf_code2= this.rf_code2.replace("'","4");
-        this.rf_code2= this.rf_code2.replace("(","5");
-        this.rf_code2= this.rf_code2.replace("-","6");
-        this.rf_code2= this.rf_code2.replace(/è/g,"7");
-        this.rf_code2= this.rf_code2.replace("_" ,"8");
-        this.rf_code2= this.rf_code2.replace(/ç/g,"9");
+          this.rf_code2 = this.rf_code2.replace(/à/g, "0");
+          this.rf_code2 = this.rf_code2.replace(/&/g, "1");
+          this.rf_code2 = this.rf_code2.replace(/é/g, "2");
+          this.rf_code2 = this.rf_code2.replace('"', "3");
+          this.rf_code2 = this.rf_code2.replace("'", "4");
+          this.rf_code2 = this.rf_code2.replace("(", "5");
+          this.rf_code2 = this.rf_code2.replace("-", "6");
+          this.rf_code2 = this.rf_code2.replace(/è/g, "7");
+          this.rf_code2 = this.rf_code2.replace("_", "8");
+          this.rf_code2 = this.rf_code2.replace(/ç/g, "9");
 
-        console.log('test rfid : ' + this.rf_code);
+          console.log('test rfid : ' + this.rf_code);
 
 
-     this.preconisationsIntrantsService.changeStatus(this.preconisation.id, this.rf_code2)
+          this.preconisationsIntrantsService.changeStatus(this.preconisation.id, this.rf_code2)
             .subscribe(response => {
               this.preconisation.state = 'inprogress';
               this.toastr.success(response.data)
@@ -471,10 +471,10 @@ export class ShowComponent implements OnInit, AfterViewInit {
               this.toastr.error(error.error.message)
             });
 
-      }
+        }
 
 
-      this.popup2RfidVisible = false;
+        this.popup2RfidVisible = false;
 
       }, 1000);
 
@@ -483,7 +483,7 @@ export class ShowComponent implements OnInit, AfterViewInit {
   }
 
 
-  
+
   Scan() {
     console.log('ok');
     this.popup2RfidVisible = true;

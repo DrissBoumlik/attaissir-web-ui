@@ -1,7 +1,7 @@
 <div class="siam-dashboard-intro">
   <div class="grid-container">
     <div class="map">
-      <div style="height: 600px;"
+      <div style="height: 100%; width: 100%;"
            leaflet
            [leafletOptions]="options"
            [leafletLayersControl]="layersControl"
@@ -10,20 +10,24 @@
       </div>
     </div>
     <div class="CDAs">
-      <dx-list
-        #list
-        [dataSource]="cdas"
-        [height]="600"
-        [searchEnabled]="true"
-        selectionMode="single"
-        valueExpr="id"
-        searchExpr="name"
-        (onSelectionChanged)="onSelectionChanged($event)"
-        searchMode="contains">
-        <div *dxTemplate="let data of 'item'">
-          <app-cda-sigaa [cda]="{name: data.name, polygon: data.polygon}"></app-cda-sigaa>
-        </div>
-      </dx-list>
+      <ul class="menu" >
+        <li title="Menu"  ><a  (click)="show('Menu')" class="home" >Menu</a></li>
+        <!--<li title="liste des cda" *ngIf="!showCdas" ><a (click)="show('cdas')" class="about">CDAs</a></li>-->
+      </ul>
+     <dx-list
+      #list
+      [dataSource]="cdas"
+      [searchEnabled]="true"
+      selectionMode="single"
+      valueExpr="id"
+      [visible]="showCdas"
+      searchExpr="name"
+      (onSelectionChanged)="onSelectionChanged($event)"
+      searchMode="contains">
+      <div *dxTemplate="let data of 'item'">
+        <app-cda-sigaa [cda]="{name: data.name, polygon: data.polygon}"></app-cda-sigaa>
+      </div>
+    </dx-list>
     </div>
   </div>
 </div>

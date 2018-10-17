@@ -70,9 +70,9 @@ export class ListComponent implements OnInit {
     this.router.events.subscribe(
       (event) => {
         if (event instanceof NavigationEnd) {
-           this.reloadRoute();
-       }
- 
+          this.reloadRoute();
+        }
+
       }
     );
 
@@ -131,31 +131,31 @@ export class ListComponent implements OnInit {
   }
 
 
-  reloadRoute(){
- 
+  reloadRoute() {
+
     this.route.params.subscribe(
       params => {
         console.log(params);
 
-        if(params.name != null ) {
+        if (params.name != null) {
 
           this.third_parties = {};
-        this.third_parties.store = new CustomStore({
-          load: (loadOptions: any) => {
-            Helper.addFilter(loadOptions, 'ts_type', this.thirdType);
-            Helper.addContainFilter(loadOptions, 'full_name', params.name);
-            return this.tierService.getThirdsDx(this.thirdType,loadOptions)
-              .toPromise()
-              .then(response => {
-                const json = response;
-                return json;
-              })
-              .catch(error => {
-                throw error;
-              });
-          }
-        });
-      }
+          this.third_parties.store = new CustomStore({
+            load: (loadOptions: any) => {
+              Helper.addFilter(loadOptions, 'ts_type', this.thirdType);
+              Helper.addContainFilter(loadOptions, 'full_name', params.name);
+              return this.tierService.getThirdsDx(this.thirdType, loadOptions)
+                .toPromise()
+                .then(response => {
+                  const json = response;
+                  return json;
+                })
+                .catch(error => {
+                  throw error;
+                });
+            }
+          });
+        }
 
       }
     );

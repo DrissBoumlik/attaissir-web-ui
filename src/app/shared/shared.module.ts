@@ -8,7 +8,7 @@ import {
   DxDataGridModule,
   DxDateBoxModule, DxFileUploaderModule,
   DxFormModule,
-  DxListModule,
+  DxListModule, DxMenuModule,
   DxNumberBoxModule,
   DxPopupModule,
   DxSelectBoxModule,
@@ -26,9 +26,9 @@ import { RoleDirective } from './directives/role.directive';
 import { ParcelGridComponent } from './components/parcel-grid/parcel-grid.component';
 import { PermissionDirective } from './directives/permission.directive';
 import { LeafLetHomeComponent } from './leaflet/maps/home/home.component';
-import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { KpisComponent } from './components/kpis/kpis.component';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { CdaSigaaComponent } from './components/cda-sigaa/cda-sigaa.component';
 import { ParcelInfoComponent } from './components/parcel-info/parcel-info.component';
 
@@ -51,6 +51,7 @@ import { ParcelInfoComponent } from './components/parcel-info/parcel-info.compon
     DxSelectBoxModule,
     DxVectorMapModule,
     DxBoxModule,
+    DxMenuModule,
     LeafletModule.forRoot()
   ],
   exports: [
@@ -79,6 +80,7 @@ import { ParcelInfoComponent } from './components/parcel-info/parcel-info.compon
     PermissionDirective,
     LeafLetHomeComponent,
     KpisComponent,
+    DxMenuModule,
     DxBoxModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

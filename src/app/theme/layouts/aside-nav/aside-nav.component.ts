@@ -40,11 +40,11 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         name: 'Incidents',
         permission: ['distributionCenter.stocks.grid'],
         icon: 'fa flaticon-clipboard',
-        url: 'Liste des incidents',
+        url: '/incidents/liste',
         queryParams: { magazin: this.tenantId },
         description: 'Incidents et état de la culture',
         subMenu: [
-         /* { icon: 'fa fa-archive', name: 'Mon stock', url: '/stock/situation', permission: ['distributionCenter.stocks.grid'], },*/
+          /* { icon: 'fa fa-archive', name: 'Mon stock', url: '/stock/situation', permission: ['distributionCenter.stocks.grid'], },*/
           { icon: 'fa flaticon-clipboard', name: 'Liste des incidents', url: '/incidents/liste', permission: ['preconization.interventions.store'], },
           { icon: 'fa flaticon-clipboard', name: 'Etat de la culture', url: '/fieldstates/liste', permission: ['preconization.interventions.store'], }
         ],
@@ -170,6 +170,15 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         icon: 'flaticon-graphic-1',
         url: '/reporting/contracts',
         description: 'Reporting',
+        disabled: 'false'
+      }
+      ,
+      {
+        name: 'Suivi cultural',
+        permission: ['agreement.contracts.grid'],
+        icon: 'flaticon-map-location',
+        url: '/carte/suivi',
+        description: 'Suivi cultural',
         disabled: 'false'
       }
     ];

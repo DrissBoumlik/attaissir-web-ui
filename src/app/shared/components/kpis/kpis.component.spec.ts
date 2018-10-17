@@ -8,9 +8,9 @@ describe('KpisComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KpisComponent ]
+      declarations: [KpisComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

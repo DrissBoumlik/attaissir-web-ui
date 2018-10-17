@@ -3,7 +3,7 @@ import { Incident } from '../../../../shared/classes/Incident';
 import { ToastrService } from 'ngx-toastr';
 import { IncidentService } from '../../services/incident.service';
 import CustomStore from 'devextreme/data/custom_store';
-import {Helper} from '../../../../shared/classes/helper';
+import { Helper } from '../../../../shared/classes/helper';
 
 declare const require: any;
 const $ = require('jquery');
@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
 
   constructor(private incidentService: IncidentService,
     private toaster: ToastrService) {
-   this.helper =  Helper;
+    this.helper = Helper;
   }
 
   ngOnInit() {

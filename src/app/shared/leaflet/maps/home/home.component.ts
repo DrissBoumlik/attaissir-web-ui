@@ -1,8 +1,16 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import * as L from 'leaflet';
 import {GeoJSON, latLng, Layer, LeafletEvent, Map, polygon, tileLayer} from 'leaflet';
 import {ZonesService} from '../../../../modules/contracts/services/zones.service';
 import {CarteService} from '../../../../modules/cartographie/carte.service';
+import '../../../../../../node_modules/leaflet.fullscreen/Control.FullScreen.js';
 
+declare module 'leaflet' {
+  namespace control {
+    function fullscreen(v: any);
+  }
+}
 
 @Component({
   selector: 'app-home-leaflet',
@@ -14,6 +22,7 @@ export class LeafLetHomeComponent implements OnInit {
   cdas: any = {};
   carte: Map;
   layer: Layer;
+  loadingVisible = true;
   options = {
     layers: [
       tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
@@ -33,15 +42,31 @@ export class LeafLetHomeComponent implements OnInit {
         maxZoom: 18,
         attribution: 'Leaflet, openstreetmap.'
       }),
-
-      'Esri': tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 18,
-        attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS,' +
-        ' AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+      'HERE hybridDay': tileLayer('https://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/' +
+        '{mapID}/hybrid.day/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
+        attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+        subdomains: '1234',
+        mapID: 'newest',
+        app_id: 'LFDFxuH7piXnFpMEhCfS',
+        app_code: 'wgD39fkWKD3SNkEBLx_0LQ',
+        base: 'aerial',
+        maxZoom: 20,
+        type: 'maptile',
+        language: 'eng',
+        format: 'png8',
+        size: '256',
+        keepBuffer: 10
       }),
+      'Esri': tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+          maxZoom: 18,
+          attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX,' +
+          ' GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        })
     },
     overlays: {
-      'Big Square': polygon([[46.8, -121.55], [46.9, -121.55], [46.9, -121.7], [46.8, -121.7]]),
+      'Big Square':
+        polygon([[46.8, -121.55], [46.9, -121.55], [46.9, -121.7], [46.8, -121.7]]),
     }
   };
   /*layers = [
@@ -79,16 +104,23 @@ export class LeafLetHomeComponent implements OnInit {
   ];*/
 
   style = {
-    color: '#136700',
-    fillColor: '#136700',
-    opacity: 1
+    color: '#1a5a10',
+    fillColor: '#33a114',
+    fillOpacity: 1
   };
 
+  style_incident = {
+    color: '#68090a',
+    fillColor: '#ca1214',
+    fillOpacity: 1
+  };
   ilot_info: any;
   show_parcel_info = false;
+  showCdas = true;
 
   constructor(private zonesService: ZonesService,
-              private ilotService: CarteService) {
+              private ilotService: CarteService,
+              private router: Router) {
     this.layer = new Layer();
   }
 
@@ -101,6 +133,24 @@ export class LeafLetHomeComponent implements OnInit {
 
   onMapReady = (map: Map) => {
     this.carte = map;
+    // --------------------------------------------------------------------------------------------------------------- //
+    L.control.fullscreen({
+      position: 'topleft', // change the position of the button can be topleft, topright, bottomright or bottomleft, defaut topleft
+      title: 'Plein écran', // change the title of the button, default Full Screen
+      titleCancel: 'Quitter le mode plein écran', // change the title of the button when fullscreen is on, default Exit Full Screen
+      content: null, // change the content of the button, can be HTML, default null
+      forceSeparateButton: true, // force seperate button to detach from zoom buttons, default false
+      forcePseudoFullscreen: false, // force use of pseudo full screen even if full screen API is available, default false
+      fullscreenElement: false // Dom element to render in full screen, false by default, fallback to map._container
+    }).addTo(map);
+    map.on('enterFullscreen', () => map.invalidateSize());
+    map.on('exitFullscreen', () => map.invalidateSize());
+    // --------------------------------------------------------------------------------------------------------------- //
+    map.addEventListener('move', (e) => {
+      this.show_parcel_info = false;
+    });
+    // --------------------------------------------------------------------------------------------------------------- //
+    // --------------------------------------------------------------------------------------------------------------- //
     this.ilotService.getIlotByZone(null).subscribe(
       (res: any) => {
         res.data = res.data.map(il => {
@@ -110,18 +160,25 @@ export class LeafLetHomeComponent implements OnInit {
         });
         console.log(res.data);
         const polygons = new GeoJSON(res.data, {
-          style: () => this.style
+          style: (geom) => {
+            if (geom.properties.has_incident) {
+              return this.style_incident;
+            }
+            return this.style;
+          }
         }).on('click', (ev: LeafletEvent) => {
           const e: any = ev;
           const layer = e.layer.feature.properties;
           this.ilot_info = {
             name: layer.p_name,
-            contracted_surface: layer.p_name,
-            id: layer.p_name,
+            contracted_surface: layer.contracted_surface[0].surface,
+            id: layer.id,
             cda: layer.cda_name,
+            parcel_surface: layer.parcel_surface,
+            ilot_surface: layer.ilot_surface,
             zone: layer.zone_name,
             ag_name: layer.ag_name,
-            ag_tel: layer.cda_name,
+            ag_tel: layer.ag_tel,
             prestataire: layer.prestataire,
             semoir: layer.semoir,
             date_semis: layer.date_semis,
@@ -132,6 +189,7 @@ export class LeafLetHomeComponent implements OnInit {
         });
 
         map.addLayer(polygons);
+        this.loadingVisible = false;
         /*res.data.forEach(ilot => {
           const geom = JSON.parse(ilot.da);
           console.log(geom);
@@ -141,6 +199,7 @@ export class LeafLetHomeComponent implements OnInit {
         });*/
       }
     );
+    // --------------------------------------------------------------------------------------------------------------- //
   }
 
   onSelectionChanged = (e: any) => {
@@ -162,4 +221,9 @@ export class LeafLetHomeComponent implements OnInit {
       // popup.setContent('Parcelle: ' + '<h2>' + layer.feature.properties.name + '</h2>');
       return popup;
     })*/
+
+  show = (name: string) => {
+    this.router.navigate(['/']);
+    /*this.showCdas = name === 'cdas';*/
+  }
 }

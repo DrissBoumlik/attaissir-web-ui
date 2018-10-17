@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Helper} from '../../classes/helper';
-import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
-import {DxDataGridComponent} from 'devextreme-angular';
-import {ToDoService} from '../../services/to-do.service';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Helper } from '../../classes/helper';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { DxDataGridComponent } from 'devextreme-angular';
+import { ToDoService } from '../../services/to-do.service';
 
 @Component({
   selector: 'app-parcels-list',
@@ -21,8 +21,8 @@ export class ParcelsListComponent implements OnInit {
   validerDisabled = true;
 
   constructor(private router: Router,
-              private todoService: ToDoService,
-              private toastr: ToastrService) {
+    private todoService: ToDoService,
+    private toastr: ToastrService) {
     this.helper = Helper;
   }
 

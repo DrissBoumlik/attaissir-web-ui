@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import {Helper} from '../../../../shared/classes/helper';
-import {isNull} from 'util';
-import {PreconisationsIntrantsService} from '../../service/preconisations-intrants.service';
+import { Helper } from '../../../../shared/classes/helper';
+import { isNull } from 'util';
+import { PreconisationsIntrantsService } from '../../service/preconisations-intrants.service';
 
 
 @Component({
@@ -38,11 +38,11 @@ export class DetailsComponent implements OnInit {
       }
     });
 
-   /* this.precoService.getListPreconisationsDetailKPIs().subscribe(
-      (res) => {
-        console.log(res);
-      }
-    );*/
+    /* this.precoService.getListPreconisationsDetailKPIs().subscribe(
+       (res) => {
+         console.log(res);
+       }
+     );*/
   }
 
 

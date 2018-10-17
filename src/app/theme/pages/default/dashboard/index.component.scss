@@ -13,27 +13,16 @@
   height: 150px;
   border-radius: 5px;
   padding: 2px;
-  background: #00a7e7;
-  background: -moz-radial-gradient(circle, #49a6e3, #358fd2, #2478c1, #1961af, #144b9b);
-  background: -webkit-radial-gradient(circle, #49a6e3, #358fd2, #2478c1, #1961af, #144b9b);
-  background: radial-gradient(circle, #49a6e3, #358fd2, #2478c1, #1961af, #144b9b);
+  background :#2D3543 ;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00a7e7', endColorstr='#104ba0', GradientType=1);
   border: 2px solid #00a7e7;
 }
 
 ::ng-deep .big-widget:hover  {
-  margin: 5px;
-  width: 100%;
-  height: 336px;
-  border-radius: 5px;
   border-color: #868A93;
-  padding: 2px;
   border-style: solid;
   border-width: thin;
-  background: #00a7e7;
-  background: -moz-radial-gradient(circle, #49a6e3, #358fd2, #2478c1, #1961af, #144b9b);
-  background: -webkit-radial-gradient(circle, #49a6e3, #358fd2, #2478c1, #1961af, #144b9b);
-  background: radial-gradient(circle, #49a6e3, #358fd2, #2478c1, #1961af, #144b9b);
+  background :#2D3543 ;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00a7e7', endColorstr='#104ba0', GradientType=1);
   border: 1px solid #00a7e7;
 }
@@ -82,6 +71,78 @@
 ::ng-deep #gauge {
   height: 140px;
   width: 100%;
+}
+
+
+
+#search input {
+  outline: none;
+}
+#search input{
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	font-family: inherit;
+	font-size: 100%;
+}
+#search input::-webkit-search-decoration,
+#search input::-webkit-search-cancel-button {
+	display: none; 
+}
+
+
+#search input {
+	background: #262F3D url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+ //	padding: 9px 10px 9px 32px;
+  padding :6px 9px 9px 6px;
+	width: 55px;
+  border: solid 1px #868A93;
+
+	-webkit-border-radius: 10em;
+	-moz-border-radius: 10em;
+	border-radius: 10em;
+	
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
+}
+#search input:focus {
+	width: 130px;
+	background-color: #989da3;	
+	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+	box-shadow: 0 0 5px rgba(109,207,246,.5);
+}
+
+
+#search input:-moz-placeholder {
+	color: #262F3D;
+}
+#search input::-webkit-input-placeholder {
+	color: #262F3D;
+}
+
+/* Demo 2 */
+#search input {
+	width: 15px;
+	padding-left: 10px;
+	color: transparent;
+	cursor: pointer;
+}
+#search input:hover {
+	background-color: #262F3D;
+}
+#search input:focus {
+	width: 130px;
+	padding-left: 32px;
+  color : #fff;
+	background-color: #262F3D;
+	cursor: auto;
+}
+#search input:-moz-placeholder {
+	color: transparent;
+}
+#search input::-webkit-input-placeholder {
+	color: transparent;
 }
 
 

@@ -98,7 +98,7 @@ export class EditComponent implements OnInit, OnDestroy {
 
         this.httpSubscription = this.userService.getUser(params.id).subscribe(
           (response: any) => {
-             this.userId = response.data.id;
+            this.userId = response.data.id;
             this.user.email = response.data.email;
             this.user.rfid = response.data.rfid;
             this.user.name = response.data.name;
@@ -423,12 +423,12 @@ export class EditComponent implements OnInit, OnDestroy {
 
 
 
-  
+
 
 
   SearchByRfid() {
 
-    this.rf_code  = '';
+    this.rf_code = '';
 
     this.popup.nativeElement.addEventListener('click', () => {
       this.rfid.nativeElement.focus();
@@ -440,50 +440,50 @@ export class EditComponent implements OnInit, OnDestroy {
 
       setTimeout(() => {
 
-      this.rf_code = this.rfid.nativeElement.value;
-      this.rfid.nativeElement.value = '';
-      this.focusout.nativeElement.focus();
+        this.rf_code = this.rfid.nativeElement.value;
+        this.rfid.nativeElement.value = '';
+        this.focusout.nativeElement.focus();
 
 
-      if(this.rf_code != ''){
+        if (this.rf_code != '') {
 
-        this.rf_code= this.rf_code.replace(/à/g,"0");
-        this.rf_code= this.rf_code.replace(/&/g,"1");
-        this.rf_code= this.rf_code.replace(/é/g,"2");
-        this.rf_code= this.rf_code.replace('"',"3");
-        this.rf_code= this.rf_code.replace("'","4");
-        this.rf_code= this.rf_code.replace("(","5");
-        this.rf_code= this.rf_code.replace("-","6");
-        this.rf_code= this.rf_code.replace(/è/g,"7");
-        this.rf_code= this.rf_code.replace("_" ,"8");
-        this.rf_code= this.rf_code.replace(/ç/g,"9");
+          this.rf_code = this.rf_code.replace(/à/g, "0");
+          this.rf_code = this.rf_code.replace(/&/g, "1");
+          this.rf_code = this.rf_code.replace(/é/g, "2");
+          this.rf_code = this.rf_code.replace('"', "3");
+          this.rf_code = this.rf_code.replace("'", "4");
+          this.rf_code = this.rf_code.replace("(", "5");
+          this.rf_code = this.rf_code.replace("-", "6");
+          this.rf_code = this.rf_code.replace(/è/g, "7");
+          this.rf_code = this.rf_code.replace("_", "8");
+          this.rf_code = this.rf_code.replace(/ç/g, "9");
 
-        console.log(this.rf_code);
+          console.log(this.rf_code);
 
-        this.user.rfid = this.rf_code;
-//this.preconisations = {};
-/*
-let  code =  this.rf_code;
-       this.preconisations.store = new CustomStore({
-      load: (loadOptions: any) => {
-        loadOptions.rfid  = code;
-        return this.preconisationsIntrantsService.getListeAvancesDx(loadOptions)
-          .toPromise()
-          .then(response => {
+          this.user.rfid = this.rf_code;
+          //this.preconisations = {};
+          /*
+          let  code =  this.rf_code;
+                 this.preconisations.store = new CustomStore({
+                load: (loadOptions: any) => {
+                  loadOptions.rfid  = code;
+                  return this.preconisationsIntrantsService.getListeAvancesDx(loadOptions)
+                    .toPromise()
+                    .then(response => {
+          
+                      return response;
+                    })
+                    .catch(error => {
+                      throw error;
+                    });
+                }
+              });
+          */
 
-            return response;
-          })
-          .catch(error => {
-            throw error;
-          });
-      }
-    });
-*/
-
-      }
+        }
 
 
-      this.popupRfidVisible = false;
+        this.popupRfidVisible = false;
 
       }, 1000);
 
@@ -492,7 +492,7 @@ let  code =  this.rf_code;
   }
 
 
-  
+
   Scan() {
     console.log('ok');
     this.popupRfidVisible = true;

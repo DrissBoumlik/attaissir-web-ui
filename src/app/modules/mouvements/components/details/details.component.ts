@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import {Helper} from '../../../../shared/classes/helper';
-import {isNull} from 'util';
-import {MouvementsService} from '../../service/mouvements.service';
+import { Helper } from '../../../../shared/classes/helper';
+import { isNull } from 'util';
+import { MouvementsService } from '../../service/mouvements.service';
 
 @Component({
   selector: 'app-details',
