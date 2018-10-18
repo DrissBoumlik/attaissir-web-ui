@@ -92,5 +92,18 @@ export class WidgetService {
 
   }
 
+
+
+
+  addFilterToAll(item:any): Observable<any>  {
+
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/add_filter_to_all`, JSON.stringify(item), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+
+  }
+
   
 }

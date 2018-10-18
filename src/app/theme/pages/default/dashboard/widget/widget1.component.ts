@@ -65,11 +65,14 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
      color : #fff;
  }
  
+
  .text {
-     text-align: center;
-     font-weight: bold;
-     color: #868A93;
- }
+    text-align: center;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 22px;
+    margin-top: -15px;
+}
  
  
  ::ng-deep #chart {
@@ -126,10 +129,14 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
           
           <div class="row">
                   <div class="col">
-                      <p class="nbr"> 
-                      {{ nbr }} 
-                      </p>	
-                      <p class="text"> {{sub_title}}</p>
+                       
+                      
+                      
+<div id="count">
+<div class="num nbr">{{ nbr }}</div>
+</div>
+
+                       <p class="text"> {{sub_title}}</p>
                       </div>
           </div>
  </div>
@@ -167,6 +174,38 @@ export class Widget1Component {
 
   InfoBtn() {
     this.info.emit(1);
+  }
+
+
+
+  ngAfterViewInit(){
+
+    
+    $(document).ready(function() {
+
+        var counter = function($this) {
+            let maxNum:number = Math.abs(parseInt($this.text()));
+          let i:number = 0;
+          let repeat:number = maxNum / 50;
+      
+          setInterval(function() {
+      
+            $this.text((i += repeat).toFixed(0));
+      
+            if (i > maxNum) {
+                let j:number = maxNum;
+              $this.text(parseInt((maxNum).toFixed(0) ));
+              return;
+            }
+      
+          }, 40);
+        }
+      
+        $("#count .num").each(function(index, element) {
+          counter($(element));
+        });
+      
+      });
   }
 
 

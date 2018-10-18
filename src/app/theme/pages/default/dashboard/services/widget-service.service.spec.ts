@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { WidgetServiceService } from './widget-service.service';
+import { WidgetService } from './widget-service.service';
 
 describe('WidgetServiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [WidgetServiceService]
+      providers: [WidgetService]
     });
   });
 
-  it('should be created', inject([WidgetServiceService], (service: WidgetServiceService) => {
+  it('should be created', inject([WidgetService], (service: WidgetService) => {
     expect(service).toBeTruthy();
   }));
 });

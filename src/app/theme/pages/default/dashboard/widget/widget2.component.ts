@@ -129,11 +129,15 @@ import { DragulaService } from 'ng2-dragula';
 
           </div>
           
-          <div  >
+          <div>
                   <div>
-                      <p class="nbr">{{nbr1}}/{{nbr1}}</p>	
-                      <p class="text"> {{sub_title}}</p>
-                      </div>
+                                     
+<div id="count">
+<div class="num nbr" style=" margin-top: -20px; margin-left: -30px;">{{ nbr1 }}  {{sub_title}}</div>  
+  <div style="    text-align: center; color: #fff; margin-top: -6px;">/</div>
+ <div class="num nbr" style="margin-top: -16px; margin-right: -20px;">{{ nbr1 }}  {{sub_title}}</div>
+</div>
+                       </div>
           </div>
 </div>
 
@@ -171,6 +175,37 @@ export class Widget2Component {
     this.info.emit(1);
   }
 
+
+
+  ngAfterViewInit(){
+
+    
+    $(document).ready(function() {
+
+        var counter = function($this) {
+            let maxNum:number = Math.abs(parseInt($this.text()));
+          let i:number = 0;
+          let repeat:number = maxNum / 50;
+      
+          setInterval(function() {
+      
+            $this.text((i += repeat).toFixed(0));
+      
+            if (i > maxNum) {
+                let j:number = maxNum;
+              $this.text(parseInt((maxNum).toFixed(0) ));
+              return;
+            }
+      
+          }, 40);
+        }
+      
+        $("#count .num").each(function(index, element) {
+          counter($(element));
+        });
+      
+      });
+  }
 
 }
 

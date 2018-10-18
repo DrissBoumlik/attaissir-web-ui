@@ -2,9 +2,9 @@
 
  
 <div class="container">
-
 	
 			
+
 
   <div class="row">
 
@@ -119,28 +119,8 @@
       </div>
     </div>
   </div>
-  <!--
-          <div class='container' dragula="PERSON" id="left" [(dragulaModel)]="left">
-                  <div *ngFor="let person of left">{{person | json}}</div>
-              </div>
-              <div class='container' dragula="PERSON" id="right" [(dragulaModel)]="right">
-                  <div *ngFor="let person of right">{{person | json}}</div>
-              </div>
-
-              <h3><code>ng2-dragula</code></h3>
-
-  these are some basics to get you started -- modify as you see fit.
-
-  <div class="flex">
-    <div class="container" dragula="VAMPIRES" [(dragulaModel)]="vamps">
-      <div class="vamp" *ngFor="let vamp of vamps">{{ vamp.name }}</div>
-    </div>
-
-    <div class="container" dragula="VAMPIRES" [(dragulaModel)]="vamps2">
-      <div class="vamp" *ngFor="let vamp of vamps2">{{ vamp.name }}</div>
-    </div>
-  </div>
-  !-->
+  
+  
 
   <dx-popup
     class="popup"
@@ -356,7 +336,7 @@
   <dx-popup
     class="popup"
     [width]="580"
-    [height]="300"
+    [height]="350"
     [showTitle]="true"
     title="Filtre"
     [dragEnabled]="false"
@@ -418,9 +398,26 @@
                     <dxi-item dataField="end_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }" >
                       <dxo-label text="Date de fin "></dxo-label>
                     </dxi-item>
-     
+      
                 </dxi-item>
-                
+
+
+            
+               <dxi-item itemType="group"  i18n-caption>
+  <!--
+                <dxi-item>
+                             <div class="dx-field-value">
+                                <dx-switch dataField="add_filter"  (onOptionChanged)="test($event)" [offText]="'OFF'" [onText]="'ON'" [value]="true"></dx-switch>
+                            </div>                       
+              </dxi-item> 
+-->
+
+
+              <dxi-item dataField="filtre_all" editorType="dxSwitch"  [editorOptions]="{ offText: 'No', onText: 'Oui'}" >
+                <dxo-label text="Ajouter le filtre dans tout les widgets"></dxo-label>
+              </dxi-item>
+
+            </dxi-item>  
 
 
        <dxi-item itemType="group"  i18n-caption>

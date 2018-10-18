@@ -46,7 +46,6 @@ const routes: Routes = [
     DxTextBoxModule,
 
 
-
     DxTextAreaModule,
     DxSwitchModule,
     DxValidatorModule,

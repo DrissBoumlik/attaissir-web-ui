@@ -129,7 +129,8 @@ private getElementIndex(el: any) {
 
       data.forEach((it) => {
 
-        this.widgets.push({ id: it.id , title: it.title, params: it.params , type: it.type, align: it.align , filter: it.filter ,updated_at : it.updated_at })
+
+        this.widgets.push({ id: it.id , title: it.title, params: it.params , type: it.type, align: it.align , filter: it.filter , sub_title : it.sub_title , updated_at : it.updated_at })
       });
 
        
@@ -274,6 +275,7 @@ private getElementIndex(el: any) {
       type: 'success',
       useSubmitBehavior: true,
       onClick: (e) => {
+        console.log(this.filter);
        // console.log(this.widget);
   
        this.widgetService.changeWidgetFilter(this.filter,this.selectedWidget_id).subscribe((data: any) => {
@@ -318,13 +320,11 @@ private getElementIndex(el: any) {
       type: 'success',
       useSubmitBehavior: true,
       onClick: (e) => {
-      
         
         this.widgetService.createWidget(this.new_widget).subscribe((data: any) => {
 
-            console.log(data);
-
-            this.widgets.unshift({ id :data.id , title: data.title, params: data.params, type: data.type, align: data.align , filter: data.filter, updated_at: data.updated_at })
+       
+        this.widgets.unshift({ id :data.id , title: data.title, params: data.params, type: data.type, align: data.align , filter: data.filter, updated_at: data.updated_at })
               
          
            this.popupVisible = false;
@@ -470,6 +470,12 @@ private getElementIndex(el: any) {
 
   cancelPopup(){
     this.cancelPopVisible = false;
+  }
+
+ filterAll:any;
+  test(event){
+
+   console.log(event.value);
   }
 
 }
