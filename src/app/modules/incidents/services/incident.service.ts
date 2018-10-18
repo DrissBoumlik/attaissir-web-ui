@@ -27,6 +27,14 @@ export class IncidentService {
     });
   }
 
+  getTodosDx(params: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/todos/grid`, JSON.stringify(params), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   getFieldStatesDx(params: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/fieldstates/grid`, JSON.stringify(params), {
       headers: new HttpHeaders({
