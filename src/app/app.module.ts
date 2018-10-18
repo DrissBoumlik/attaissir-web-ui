@@ -41,6 +41,7 @@ import { UsersModule } from './modules/users/users.module';
 import { CardGeneratorModule } from './modules/card-generator/card-generator.module';
 import { PermissionGuard } from './shared/directives/guard.directive';
 import { ParcelInfoComponent } from './shared/components/parcel-info/parcel-info.component';
+import { TodosComponent } from './modules/incidents/components/todos/todos.component';
 
 @NgModule({
   declarations: [
