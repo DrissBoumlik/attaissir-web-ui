@@ -1,7 +1,5 @@
-
-
- 
 <div class="container">
+<<<<<<< HEAD
 	
 			
 
@@ -16,6 +14,11 @@
 
 
       <div class="row" style="margin-bottom: 10px;">
+=======
+<div class="row">
+<div class="col">
+<div class="row" style="margin-bottom: 10px;">
+>>>>>>> ea34f558549f567845b40a47eaa4fe501bae735d
         <div class="col">
 
             <form id="search">
@@ -39,7 +42,7 @@
           <div class="wrapper">
 
             <div class="container">
- 
+
               <div class="row">
                 <div class="col-6">
 
@@ -101,7 +104,7 @@
                 <div dragula="DRAGULA_FACTS2" style="width: 100%;	height: 100%;">
 
 
-               
+
 
 
                   <div *ngFor="let item of widgets | filter: search.value">
@@ -192,7 +195,7 @@
   </dx-popup>
 
 
-  
+
   <dx-popup
     class="popup"
     [width]="580"
@@ -208,13 +211,13 @@
       <div class="gilsser">
 
 
-        
-        
+
+
 
 
 
         <div class="row">
-         
+
 
           <div class="col-4">
             <div class="row">
@@ -264,7 +267,7 @@
               </div>
             </div>
           </div>
- 
+
           <div class="col-4">
             <div class="row">
               <label class="col-12">
@@ -284,7 +287,7 @@
           <div class="col-4">
             <div class="row">
               <label class="col-12">
-                Date de début 
+                Date de début
               </label>
               <div class="col-12">
 
@@ -299,7 +302,7 @@
           <div class="col-4">
             <div class="row">
               <label class="col-12">
-                Date de fin 
+                Date de fin
               </label>
               <div class="col-12">
 
@@ -312,7 +315,7 @@
             </div>
           </div>
 
-         
+
         </div>
 
 
@@ -348,7 +351,7 @@
       <div class="gilsser">
 
 
-				
+
 					<form>
 							<dx-form id="form"
 											 [formData]="filter"
@@ -356,16 +359,16 @@
 											 [showColonAfterLabel]="true"
 											 [showValidationSummary]="true"
 											 labelLocation="top">
-		
-		
+
+
 								<dxi-item itemType="group" [colCount]="3" i18n-caption>
-		
+
 									<dxi-item dataField="ste" editorType="dxSelectBox" [editorOptions]="companiesOptions">
 										<dxo-label
 											text="Societé" i18n-text>
 										</dxo-label>
                   </dxi-item>
-                  
+
 
 
                   <dxi-item dataField="structure" editorType="dxSelectBox" [editorOptions]="divisionOptions">
@@ -373,8 +376,8 @@
 											text="Division" i18n-text>
 										</dxo-label>
                   </dxi-item>
-                  
-		
+
+
 									<dxi-item dataField="cda" editorType="dxSelectBox" [editorOptions]="cdaOptions">
 											<dxo-label
 												text="Cda" i18n-text>
@@ -387,9 +390,9 @@
 												text="Zone" i18n-text>
 											</dxo-label>
                     </dxi-item>
-                    
-    
-                    
+
+
+
                     <dxi-item dataField="start_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }" >
                       <dxo-label text="Date de début "></dxo-label>
                     </dxi-item>
@@ -398,6 +401,7 @@
                     <dxi-item dataField="end_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }" >
                       <dxo-label text="Date de fin "></dxo-label>
                     </dxi-item>
+<<<<<<< HEAD
       
                 </dxi-item>
 
@@ -418,6 +422,11 @@
               </dxi-item>
 
             </dxi-item>  
+=======
+
+                </dxi-item>
+
+>>>>>>> ea34f558549f567845b40a47eaa4fe501bae735d
 
 
        <dxi-item itemType="group"  i18n-caption>
@@ -427,13 +436,13 @@
                 alignment="right"
                 [buttonOptions]="buttonOptions">
               </dxi-item>
-              
+
           <!--    <dxi-item
                 itemType="button"
                 alignment="left"
                 [buttonOptions]="buttonOptions">
               </dxi-item> !-->
-    
+
          </dxi-item>
 
 

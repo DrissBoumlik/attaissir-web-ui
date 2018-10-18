@@ -8,9 +8,9 @@ describe('SuiviComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SuiviComponent ]
+      declarations: [SuiviComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

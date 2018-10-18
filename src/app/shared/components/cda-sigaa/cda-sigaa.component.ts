@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-cda-sigaa',
@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class CdaSigaaComponent implements OnInit {
 
-  @Input('cda') cda: {name: string, polygon: string};
+  @Input('cda') cda: { name: string, polygon: string };
 
   constructor() { }
 

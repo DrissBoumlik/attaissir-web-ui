@@ -1,7 +1,7 @@
 import { isArray, isNull } from 'util';
 import { load } from '@angular/core/src/render3/instructions';
 import * as CryptoJS from 'crypto-js';
-import {Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 export class Helper {
   /**

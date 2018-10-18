@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Injector} from '@angular/core';
+import {ParcelInfoComponent} from './shared/components/parcel-info/parcel-info.component';
+import {createCustomElement} from '@angular/elements';
 
 
 @Component({

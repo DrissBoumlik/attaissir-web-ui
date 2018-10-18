@@ -14,17 +14,32 @@ export class IndexComponent implements OnInit, AfterViewInit {
   tenants: any = [];
   tenant: any = [];
   tenant_name: any = [];
-  date:any;
+  date: any;
 
   constructor(private _script: ScriptLoaderService,
     private thirdsService: ThirdsService) {
 
-      let event = new Date( Date.now());
-      let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const event = new Date( Date.now());
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       this.date = event.toLocaleDateString('fr-FR', options);
   }
 
   ngOnInit() {
+
+    const urlParams = [];
+    window.location.search.replace('?', '').split('&').forEach(function (e, i) {
+      const p = e.split('=');
+      urlParams[p[0]] = p[1];
+    });
+
+    // We have all the params now -> you can access it by name
+    console.log(urlParams['loaded']);
+
+    if (urlParams['loaded']) {} else {
+
+      const win = (window as any);
+      win.location.search = '?loaded=1';
+    }
 
 
     const data = JSON.parse(localStorage.getItem('currentUser'));
