@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Router} from '@angular/router';
-import {DynamicService} from '../../../services/dynamic.service';
+import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
+import { DynamicService } from '../../../services/dynamic.service';
 
 declare let mLayout: any;
 
@@ -40,7 +40,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         permission: ['distributionCenter.stocks.grid'],
         icon: 'fa flaticon-clipboard',
         url: '/incidents/liste',
-        queryParams: {magazin: this.tenantId},
+        queryParams: { magazin: this.tenantId },
         description: 'Incidents et état de la culture',
         subMenu: [
           /* { icon: 'fa fa-archive', name: 'Mon stock', url: '/stock/situation', permission: ['distributionCenter.stocks.grid'], },*/
@@ -212,7 +212,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/cartes/liste',
         description: 'Cartes',
         subMenu: [
-          {icon: 'flaticon-tabs', name: 'Cartes', url: '/cartes/liste', permission: ['agreement.cards.index']},
+          { icon: 'flaticon-tabs', name: 'Cartes', url: '/cartes/liste', permission: ['agreement.cards.index'] },
           {
             icon: 'flaticon-list',
             name: 'Générateur de cartes',
@@ -229,8 +229,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         url: '/roles/liste',
         description: 'Gestion des roles',
         subMenu: [
-          {icon: 'flaticon-plus', name: 'Nouveau role', url: '/roles/ajouter', permission: ['user.roles.store']},
-          {icon: 'flaticon-list', name: 'Liste des roles', url: '/roles/liste', permission: ['user.roles.grid']},
+          { icon: 'flaticon-plus', name: 'Nouveau role', url: '/roles/ajouter', permission: ['user.roles.store'] },
+          { icon: 'flaticon-list', name: 'Liste des roles', url: '/roles/liste', permission: ['user.roles.grid'] },
 
         ],
         disabled: 'false'

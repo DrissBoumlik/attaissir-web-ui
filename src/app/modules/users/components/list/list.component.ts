@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+
 
     this.dataSource.store = new custom_store({
       load: (loadOptions: any) => {

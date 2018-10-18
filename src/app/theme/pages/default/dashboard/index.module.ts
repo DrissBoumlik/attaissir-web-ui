@@ -6,15 +6,17 @@ import { DefaultComponent } from '../default.component';
 import { SharedModule } from '../../../../shared/shared.module';
 
 import { DragulaModule } from 'ng2-dragula';
-import { DxTextBoxModule, DxSelectBoxModule, DxTemplateModule, DxPopupModule,
+import {
+  DxTextBoxModule, DxSelectBoxModule, DxTemplateModule, DxPopupModule,
   DxButtonModule, DxLoadPanelModule, DxValidationSummaryModule, DxValidatorModule,
-  DxSwitchModule, DxTextAreaModule, DxChartModule, DxLinearGaugeModule, DxProgressBarModule } from 'devextreme-angular';
+  DxSwitchModule, DxTextAreaModule, DxChartModule, DxLinearGaugeModule, DxProgressBarModule
+} from 'devextreme-angular';
 import { Widget1Component } from './widget/widget1.component';
 import { Widget2Component } from './widget/widget2.component';
 import { Widget3Component } from './widget/widget3.component';
 import { Widget4Component } from './widget/widget4.component';
 import { IndexComponent } from '../index/index.component';
-import {IndexDashComponent} from './index.component';
+import { IndexDashComponent } from './index.component';
 import { SearchPipe } from './search.pipe.component';
 
 

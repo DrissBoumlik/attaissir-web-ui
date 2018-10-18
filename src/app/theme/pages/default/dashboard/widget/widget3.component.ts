@@ -182,7 +182,7 @@ import { DragulaService } from 'ng2-dragula';
 
 export class Widget3Component {
 
- 
+
   @Input() id: String;
   @Input() title: String;
   @Input() startValue: number;
@@ -216,7 +216,7 @@ export class Widget3Component {
 
   format(value) {
     return 'Loading: ' + value * 100 + '%';
-}
+  }
 
 }
 

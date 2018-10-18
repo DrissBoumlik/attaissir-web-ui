@@ -19,15 +19,15 @@ export class IndexComponent implements OnInit, AfterViewInit {
   constructor(private _script: ScriptLoaderService,
     private thirdsService: ThirdsService) {
 
-      const event = new Date( Date.now());
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      this.date = event.toLocaleDateString('fr-FR', options);
+    const event = new Date(Date.now());
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    this.date = event.toLocaleDateString('fr-FR', options);
   }
 
   ngOnInit() {
 
     const urlParams = [];
-    window.location.search.replace('?', '').split('&').forEach(function (e, i) {
+    window.location.search.replace('?', '').split('&').forEach(function(e, i) {
       const p = e.split('=');
       urlParams[p[0]] = p[1];
     });
@@ -35,7 +35,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     // We have all the params now -> you can access it by name
     console.log(urlParams['loaded']);
 
-    if (urlParams['loaded']) {} else {
+    if (urlParams['loaded']) { } else {
 
       const win = (window as any);
       win.location.search = '?loaded=1';

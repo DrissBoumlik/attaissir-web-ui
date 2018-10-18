@@ -144,7 +144,7 @@ import { DragulaService } from 'ng2-dragula';
 
 export class Widget2Component {
 
-  
+
   @Input() id: String;
   @Input() title: String;
   @Input() nbr1: number;

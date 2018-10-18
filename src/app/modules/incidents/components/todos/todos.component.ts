@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import {IncidentService} from '../../services/incident.service';
+import { IncidentService } from '../../services/incident.service';
 
 @Component({
   selector: 'app-todos',

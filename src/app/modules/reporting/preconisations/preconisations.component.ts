@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {PreconisationsIntrantsService} from '../../preconisations-intrants/service/preconisations-intrants.service';
+import { Component, OnInit } from '@angular/core';
+import { PreconisationsIntrantsService } from '../../preconisations-intrants/service/preconisations-intrants.service';
 import CustomStore from 'devextreme/data/custom_store';
-import {Helper} from '../../../shared/classes/helper';
-import {isNull} from 'util';
+import { Helper } from '../../../shared/classes/helper';
+import { isNull } from 'util';
 
 @Component({
   selector: 'app-preconisations',

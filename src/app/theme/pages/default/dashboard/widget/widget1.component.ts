@@ -5,10 +5,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'widget1',
   styles: [`
- 
 
 
-  
+    
  .ScrollStyle
  {
      height: 470px;
@@ -151,13 +150,14 @@ export class Widget1Component {
   @Input() sub_title: String;
 
   @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
+  @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
+
 
   closeBtn() {
     this.close.emit(1);
   }
 
 
-  @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
 
   ConfigBtn() {
     this.config.emit(this.id);
