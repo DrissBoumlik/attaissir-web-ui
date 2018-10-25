@@ -7,9 +7,9 @@ import { DragulaService } from 'ng2-dragula';
 @Component({
   selector: 'widget4',
   styles: [`
- 
- 
- 
+
+
+
 
  .ScrollStyle
  {
@@ -17,7 +17,7 @@ import { DragulaService } from 'ng2-dragula';
      width: 100%;
      overflow-y: scroll;
  }
- 
+
  .widget {
      margin : 5px;
      width: 100%;
@@ -31,7 +31,7 @@ import { DragulaService } from 'ng2-dragula';
           margin-bottom: 30px;
 
  }
- 
+
  .big-widget{
     width: 100%;
     height: 100%;
@@ -44,7 +44,7 @@ import { DragulaService } from 'ng2-dragula';
     margin-bottom: 20px;
     padding: 10px;
  }
- 
+
   .title {
      color:#868A93;
      font-weight: bold;
@@ -59,7 +59,7 @@ import { DragulaService } from 'ng2-dragula';
      word-wrap: break-word;
      overflow: hidden;
  }
- 
+
  .nbr {
      font-size: 50px;
      text-align: center;
@@ -68,30 +68,30 @@ import { DragulaService } from 'ng2-dragula';
      color : #fff;
 
  }
- 
+
  .text {
      text-align: center;
      font-weight: bold;
      color: #868A93;
  }
- 
- 
+
+
  ::ng-deep #chart {
      height: 210px;
      width: 100%;
  }
- 
+
  ::ng-deep #big-chart {
      height: 250px;
      width: 100%;
  }
- 
+
  ::ng-deep #gauge {
      height: 140px;
      width: 100%;
  }
- 
- 
+
+
 .title a {
     color:#868A93;
 }
@@ -99,14 +99,14 @@ import { DragulaService } from 'ng2-dragula';
  .title a:hover{
     text-decoration: none;
 }
- 
- 
- 
- 
+
+
+
+
  `],
   template: `
-   
-  
+
+
   <div class="big-widget">
 
   <div class="row">
@@ -114,14 +114,14 @@ import { DragulaService } from 'ng2-dragula';
           <span  class="title">  <a href="#"  (click)="InfoBtn()">	{{title}} </a> </span>
           </div>
               <div class="col-3">
-                  
+
                       <a href="#" (click)="closeBtn()" class="pull-right">
                               <i class="fa fa-times" style="margin: 3px; color:#868A93; font-size: 12px;" aria-hidden="true"></i>
                       </a>
                       <a href="#" (click)="ConfigBtn()"  class="pull-right" >
                       <i class="fa  fa-filter"  style="margin: 3px;color:#868A93; font-size: 12px;" aria-hidden="true"></i>
                   </a>
-                  
+
                    <!--   <a href="#"  (click)="InfoBtn()" class="pull-right">
                               <i class="fa  fa-info-circle" style="margin: 3px;color:#868A93; font-size: 12px;" aria-hidden="true"></i>
                           </a> !-->
@@ -129,10 +129,10 @@ import { DragulaService } from 'ng2-dragula';
                   </div>
 
           </div>
-          
+
           <div class="row">
                   <div class="col">
-                      
+
                   <dx-chart
                   id="chart"
                   [dataSource]="table"
@@ -154,10 +154,10 @@ import { DragulaService } from 'ng2-dragula';
                    <dxo-legend [visible]="false"></dxo-legend>
               </dx-chart>
 
-                  
+
 
 												<!--			<dx-chart
-																
+
                                                             id="big-chart"
                                                             [dataSource]="table"
                                                     >

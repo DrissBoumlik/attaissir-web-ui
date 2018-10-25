@@ -7,9 +7,9 @@ import { DragulaService } from 'ng2-dragula';
 @Component({
   selector: 'widget2',
   styles: [`
- 
- 
- 
+
+
+
 
  .ScrollStyle
  {
@@ -17,7 +17,7 @@ import { DragulaService } from 'ng2-dragula';
      width: 100%;
      overflow-y: scroll;
  }
- 
+
  .widget {
      margin : 5px;
      width: 100%;
@@ -27,11 +27,11 @@ import { DragulaService } from 'ng2-dragula';
      padding: 2px;
      border-style: solid;
      border-width: thin;
-     
+
      margin-bottom: 30px;
 
  }
- 
+
  .big-widget{
      margin : 5px;
      width: 100%;
@@ -42,7 +42,7 @@ import { DragulaService } from 'ng2-dragula';
      border-style: solid;
      border-width: thin;
  }
- 
+
   .title {
      color:#868A93;
      font-weight: bold;
@@ -57,40 +57,52 @@ import { DragulaService } from 'ng2-dragula';
      word-wrap: break-word;
      overflow: hidden;
     }
- 
+
  .nbr {
-    
+
     font-size: 16px;
     text-align: center;
     padding-top: 10px;
     font-weight: bold;
     color: #fff;
+    font-family: 'Poppins', sans-serif;
+
  }
- 
- .text {
+
+ .text1 {
      text-align: center;
      font-weight: bold;
-     color: #868A93;
+     color: #ffffff;
+     font-size: 16px;
+     margin-top: -15px;
+   }
+
+ .text2 {
+   text-align: center;
+   font-weight: bold;
+   color: #ffffff;
+   font-size: 16px;
+   margin-top: -15px;
  }
- 
- 
+
+
  ::ng-deep #chart {
      height: 110px;
      width: 200px;
  }
- 
+
  ::ng-deep #big-chart {
      height: 310px;
      width: 100%;
  }
- 
+
  ::ng-deep #gauge {
      height: 140px;
      width: 100%;
  }
- 
- 
- 
+
+
+
 .title a {
     color:#868A93;
 }
@@ -98,13 +110,18 @@ import { DragulaService } from 'ng2-dragula';
  .title a:hover{
     text-decoration: none;
 }
- 
- 
- 
+
+ #count {
+   text-align: center;
+   margin-top: 12px;
+
+ }
+
+
  `],
   template: `
-   
-  
+
+
 
   <div class="widget">
 
@@ -113,14 +130,14 @@ import { DragulaService } from 'ng2-dragula';
           <span  class="title">  <a href="#"  (click)="InfoBtn()">	{{title}} </a> </span>
               </div>
               <div class="col-2">
-                  
+
                       <a href="#" (click)="closeBtn()" class="pull-right">
                               <i class="fa fa-times" style="margin: 3px; color:#868A93; font-size: 12px;" aria-hidden="true"></i>
                       </a>
                       <a href="#" (click)="ConfigBtn()"  class="pull-right" >
                       <i class="fa  fa-filter"  style="margin: 3px;color:#868A93; font-size: 12px;" aria-hidden="true"></i>
                   </a>
-                  
+
                   <!--       <a href="#"  (click)="InfoBtn()" class="pull-right">
                               <i class="fa  fa-info-circle" style="margin: 3px;color:#868A93; font-size: 12px;" aria-hidden="true"></i>
                           </a> !-->
@@ -128,12 +145,16 @@ import { DragulaService } from 'ng2-dragula';
                   </div>
 
           </div>
-          
-          <div  >
+
+          <div>
                   <div>
-                      <p class="nbr">{{nbr1}}/{{nbr1}}</p>	
-                      <p class="text"> {{sub_title}}</p>
-                      </div>
+
+<div id="count">
+<span class="num nbr" > {{ nbr1 }}  </span> <span class="text1"> {{sub_title}} </span>
+  <span style="  font-weight: bold; color: #fff;"> / </span>
+ <span class="num nbr" >{{ nbr1 }} </span> <span class="text2"> {{sub_title}} </span>
+</div>
+                       </div>
           </div>
 </div>
 
@@ -172,10 +193,38 @@ export class Widget2Component {
   }
 
 
+
+  ngAfterViewInit() {
+
+
+    $(document).ready(function() {
+
+        const counter = function($this) {
+            const maxNum: number = Math.abs(parseInt($this.text()));
+          let i = 0;
+          const repeat: number = maxNum / 50;
+
+          setInterval(function() {
+
+            $this.text((i += repeat).toFixed(0));
+
+            if (i > maxNum) {
+                const j: number = maxNum;
+              $this.text(parseInt((maxNum).toFixed(0) ));
+              return;
+            }
+
+          }, 40);
+        };
+
+        $('#count .num').each(function(index, element) {
+          counter($(element));
+        });
+
+      });
+  }
+
 }
-
-
-
 
 
 
