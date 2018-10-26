@@ -2,7 +2,8 @@
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <a  [appPermissionHidden]="['distributionCenter.stocks.update']" class="siam-header-btn-new" routerLink="/mouvements/ajouter" title="Ajouter contrat"><i
+      <a [appPermissionHidden]="['distributionCenter.stocks.update']" class="siam-header-btn-new"
+         routerLink="/mouvements/ajouter" title="Ajouter contrat"><i
         class="fa fa-plus"></i></a>
       <h2>Liste détaillée des mouvements</h2>
     </div>
@@ -30,7 +31,7 @@
         <dxo-header-filter [visible]="true"></dxo-header-filter>
 
         <dxo-group-panel [visible]="true"></dxo-group-panel>
-        <dxo-scrolling  [showScrollbar]="'always'"></dxo-scrolling>
+        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
         <dxo-editing
           mode="popup"
           [useIcons]="true"
@@ -52,19 +53,22 @@
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxi-column dataField="so_date" format="dd-MM-yyyy"  dataType="date de mouvement" [allowFiltering]="false" caption="Date"></dxi-column>
-        <dxi-column dataField="so_type" caption="Type"  [calculateGroupValue]="helper.groupedMouvementValue" cellTemplate="typeTemplate"></dxi-column>
-        <dxi-column dataField="so_bon_number" caption="N° Bon de livraison fournisseur" cellTemplate="bon_nbrTemplate"></dxi-column>
-        <dxi-column dataField="so_state" caption="Etat"  [allowFiltering]="false" cellTemplate="statusTemplate"></dxi-column>
+        <dxi-column dataField="so_date" format="dd-MM-yyyy" dataType="date de mouvement" [allowFiltering]="false"
+                    caption="Date"></dxi-column>
+        <dxi-column dataField="so_type" caption="Type" cellTemplate="typeTemplate"></dxi-column>
+        <dxi-column dataField="so_bon_number" caption="N° Bon de livraison fournisseur"
+                    cellTemplate="bon_nbrTemplate"></dxi-column>
+        <dxi-column dataField="so_state" caption="Etat" [allowFiltering]="false"
+                    cellTemplate="statusTemplate"></dxi-column>
         <dxi-column dataField="ar_name" caption="Article"></dxi-column>
-        <dxi-column dataField="soa_quantity" caption="Quantité"></dxi-column>
+        <dxi-column dataField="soa_quantity" dataType="number" caption="Quantité"></dxi-column>
         <dxi-column dataField="ar_code" caption="Code article"></dxi-column>
         <dxi-column dataField="ar_unit" caption="Unité"></dxi-column>
         <dxi-column dataField="ar_variety" caption="Varieté"></dxi-column>
-        <dxi-column dataField="ar_value" caption="Valeur"></dxi-column>
+        <dxi-column dataField="ar_value" dataType="number" caption="Valeur"></dxi-column>
         <dxi-column dataField="arc_name" caption="Groupe d'article"></dxi-column>
         <dxi-column dataField="arc_doe" caption="Code groupe article"></dxi-column>
-        <dxi-column dataField="emetteur.name" caption="Emetteur"></dxi-column>
+        <dxi-column dataField="emetteur.name"  caption="Emetteur"></dxi-column>
         <dxi-column dataField="emetteur.address" caption="Adresse emetteur"></dxi-column>
         <dxi-column dataField="emetteur.tel" caption="Tél emetteur"></dxi-column>
         <dxi-column dataField="emetteur.email" caption="Adresse mail emetteur"></dxi-column>
@@ -88,12 +92,13 @@
         </div>
 
         <div *dxTemplate="let data of 'consulterTemplate'">
-          <a  routerLink="/mouvements/afficher/{{data.value}}" routerLinkActive="active"><i style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
-                                                                                            class="fa fa-info-circle fa-5x"></i></a>
+          <a routerLink="/mouvements/afficher/{{data.value}}" routerLinkActive="active"><i
+            style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+            class="fa fa-info-circle fa-5x"></i></a>
         </div>
 
         <div *dxTemplate="let data of 'typeTemplate'">
-          {{ helper.orderType(data.value).toUpperCase() }}
+          {{ orderType(data.value).toUpperCase() }}
         </div>
 
         <div *dxTemplate="let data of 'emetterTemplate'">
@@ -103,7 +108,7 @@
 
         <div *dxTemplate="let data of 'recepteurTemplate'">
           <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center;   color:  #0b9c8f;"
-                                         class="fa fa-chevron-down fa-5x"></i> &nbsp;  {{data.value}}</a>
+                                         class="fa fa-chevron-down fa-5x"></i> &nbsp; {{data.value}}</a>
         </div>
 
       </dx-data-grid>

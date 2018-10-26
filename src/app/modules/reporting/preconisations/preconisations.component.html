@@ -53,7 +53,7 @@
   <dxi-column [visible]="false" dataField="z_code" caption="Code zone"></dxi-column>
   <dxi-column  dataField="p_name" caption="Parcelle"></dxi-column>
   <dxi-column [visible]="false" dataField="p_code_ormva" caption="Code ORMVA"></dxi-column>
-  <dxi-column  dataField="request_surface_work" caption="Superficie(Ha)"></dxi-column>
+  <dxi-column  dataField="request_surface_work" dataType="number" caption="Superficie(Ha)"></dxi-column>
   <dxi-column  dataField="tp_full_name" caption="Nom complet (agrégé)"></dxi-column>
   <dxi-column  dataField="tp_full_name_ar" caption="Nom complet(AR) (agrégé)"></dxi-column>
   <dxi-column  dataField="tp_cin" caption="CIN (agrégé)"></dxi-column>
@@ -80,12 +80,12 @@
   <dxi-column [visible]="false" dataField="ar_code" caption="Code article"></dxi-column>
   <dxi-column [visible]="false" dataField="ar_unit" caption="Unité"></dxi-column>
   <dxi-column [visible]="false" dataField="ar_variety" caption="Vartieté"></dxi-column>
-  <dxi-column [visible]="false" dataField="ar_value" caption="Valeur"></dxi-column>
+  <dxi-column [visible]="false" dataType="number" dataField="ar_value" caption="Valeur"></dxi-column>
   <dxi-column  dataField="arcp_name" caption="Famille"></dxi-column>
   <dxi-column [visible]="false" dataField="arcp_code" caption="Code famille"></dxi-column>
   <dxi-column  dataField="arc_name" caption="Sous famille"></dxi-column>
   <dxi-column [visible]="false" dataField="arc_code" caption="Code sous-famille"></dxi-column>
-  <dxi-column  dataField="soa_quantity"  datatype="Number" caption="Quantité"></dxi-column>
+  <dxi-column  dataField="soa_quantity"  datatype="number" caption="Quantité"></dxi-column>
   <dxi-column [visible]="false" dataField="fournisseur_full_name" caption="Nom Complet (Fournisseur)"></dxi-column>
   <dxi-column [visible]="false" dataField="fournisseur_code" caption="Code (Fournisseur)"></dxi-column>
   <dxi-column [visible]="false" dataField="fournisseur_rc" caption="RC (Fournisseur)"></dxi-column>
@@ -102,17 +102,17 @@
   <dxi-column [visible]="false" dataField="a_code" caption="Code (Contrat)"></dxi-column>
   <dxi-column [visible]="false" dataField="a_application_date" caption="Date d'application (Contrat)"></dxi-column>
   <dxi-column [visible]="false" dataField="a_type" caption="Type (Contrat)"></dxi-column>
-  <dxi-column [visible]="false" dataField="a_contracted_surface" caption="Superficie contractée (Ha)(Contrat)"></dxi-column>
-  <dxi-column [visible]="false" dataField="a_compaign_surface" caption="Superficie de la campagne (Ha)(Contrat)"></dxi-column>
+  <dxi-column [visible]="false" dataField="a_contracted_surface" datatype="number" caption="Superficie contractée (Ha)(Contrat)"></dxi-column>
+  <dxi-column [visible]="false" dataField="a_compaign_surface" datatype="number" caption="Superficie de la campagne (Ha)(Contrat)"></dxi-column>
   <dxi-column [visible]="false" dataField="cmp_description" caption="Campagne"></dxi-column>
-  <dxi-column [visible]="false" dataField="cmp_estimated_surface" caption="Superficie estimée (Ha)(Campagne)"></dxi-column>
-  <dxi-column [visible]="false" dataField="cmp_estimated_tonnage" caption="Tonnage estimé (Campagne)"></dxi-column>
+  <dxi-column [visible]="false" dataField="cmp_estimated_surface" datatype="number" caption="Superficie estimée (Ha)(Campagne)"></dxi-column>
+  <dxi-column [visible]="false" dataField="cmp_estimated_tonnage" datatype="number" caption="Tonnage estimé (Campagne)"></dxi-column>
   <!--<dxi-column dataField="so_type" caption="Type"  [calculateGroupValue]="helper.groupedMouvementValue" cellTemplate="typeTemplate"></dxi-column>
   <dxi-column dataField="so_bon_number" caption="N° Bon de livraison fournisseur" cellTemplate="bon_nbrTemplate"></dxi-column>
   <dxi-column dataField="so_state" caption="Etat"  [allowFiltering]="false" cellTemplate="statusTemplate"></dxi-column>
   <dxi-column dataField="ar_name" caption="Article"></dxi-column>
   <dxi-column dataField="soa_quantity" caption="Quantité"></dxi-column>
-  <dxi-column dataField="ar_code" caption="Code article"></dxi-column>
+  <dxi-column dataField="ar_code" caption="Code article"></dxi-column>datatype="number"
   <dxi-column dataField="ar_unit" caption="Unité"></dxi-column>
   <dxi-column dataField="ar_variety" caption="Varieté"></dxi-column>
   <dxi-column dataField="ar_value" caption="Valeur"></dxi-column>

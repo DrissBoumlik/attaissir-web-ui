@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MouvementsService } from '../../mouvements/service/mouvements.service';
-import { Helper } from '../../../shared/classes/helper';
+import {Component, OnInit} from '@angular/core';
+import {MouvementsService} from '../../mouvements/service/mouvements.service';
+import {Helper} from '../../../shared/classes/helper';
 import CustomStore from 'devextreme/data/custom_store';
-import { isNull } from 'util';
+import {isNull} from 'util';
 
 @Component({
   selector: 'app-mouvements',
@@ -31,6 +31,8 @@ export class MouvementsComponent implements OnInit {
             const res = [];
             response.data.map(
               (mv: any) => {
+                mv.so_type = this.orderType(mv.so_type, mv.tsd_full_name);
+                mv.so_state = Helper.getStatusValue(mv.so_state);
                 mv.emetteur = {
                   id: mv.ss_id ? mv.ss_id : mv.tsd_id,
                   name: mv.ss_name ? mv.ss_name : mv.tsd_full_name,
@@ -64,20 +66,43 @@ export class MouvementsComponent implements OnInit {
 
   }
 
-
   getStatusColor(value: string): string {
     if (isNull(value)) {
       return 'm-badge m-badge--primary m-badge--wide';
     }
-    if (value.toLowerCase() === 'done') {
+    if (value.toLowerCase() === 'validé') {
       return 'm-badge m-badge--success m-badge--wide';
-    } else if (value.toLowerCase() === 'inprogress') {
+    } else if (value.toLowerCase() === 'en cours') {
       return 'm-badge m-badge--info m-badge--wide';
-    } else if (value.toLowerCase() === 'canceled') {
+    } else if (value.toLowerCase() === 'annulé') {
       return 'm-badge m-badge--danger m-badge--wide';
     } else {
       return 'm-badge m-badge--primary m-badge--wide';
     }
+  }
+
+
+  orderType = (type: string, tp: string): string => {
+    if (type === 'transfer') {
+      return 'transfert';
+    } else if (type === 'delivery') {
+      return 'LIVRAISON';
+    } else if (type === 'return') {
+      return tp ? 'Retour Agriculteur' : 'Retour Fournisseur';
+    } else if (type === 'receive') {
+      return 'Réception des intrants';
+    }
+    return type;
+  }
+
+  calculateFilterExpression(filterValue, selectedFilterOperation) {
+    const column = this as any;
+    const filterExpression = [
+      [column.dataField, 'contains', filterValue],
+      'or',
+      ['emetteur.name1', 'contains', filterValue]
+    ];
+    return filterExpression;
   }
 
 }

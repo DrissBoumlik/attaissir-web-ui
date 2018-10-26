@@ -109,7 +109,7 @@
             <li class="m-menu__item " routerLinkActive="m-menu__item--active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 aria-haspopup="true" *ngFor="let subMenuItem of menuItem.subMenu" [appPermissionHidden]="subMenuItem.permission" >
-              <a [routerLink]="subMenuItem.url" class="m-menu__link" >
+              <a [routerLink]="[subMenuItem.url]" [queryParams]="subMenuItem.queryParams" class="m-menu__link" >
                 <span class="m-menu__item-here"></span>
                 <i [ngClass]="'m-menu__link-icon ' + subMenuItem.icon"></i>
                 <span class="m-menu__link-text" i18n="">
