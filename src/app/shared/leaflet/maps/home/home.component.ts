@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as L from 'leaflet';
-import {GeoJSON, latLng, Layer, LeafletEvent, Map, polygon, tileLayer} from 'leaflet';
-import {ZonesService} from '../../../../modules/contracts/services/zones.service';
-import {CarteService} from '../../../../modules/cartographie/carte.service';
+import { GeoJSON, latLng, Layer, LeafletEvent, Map, polygon, tileLayer } from 'leaflet';
+import { ZonesService } from '../../../../modules/contracts/services/zones.service';
+import { CarteService } from '../../../../modules/cartographie/carte.service';
 import '../../../../../../node_modules/leaflet.fullscreen/Control.FullScreen.js';
 
 declare module 'leaflet' {
@@ -30,7 +30,7 @@ export class LeafLetHomeComponent implements OnInit {
           maxZoom: 17,
           className: 'leaflet-top leaflet-left',
           attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS,' +
-          ' AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            ' AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         })
     ],
     zoom: 16,
@@ -44,24 +44,24 @@ export class LeafLetHomeComponent implements OnInit {
       }),
       'HERE hybridDay': tileLayer('https://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/' +
         '{mapID}/hybrid.day/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
-        attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-        subdomains: '1234',
-        mapID: 'newest',
-        app_id: 'LFDFxuH7piXnFpMEhCfS',
-        app_code: 'wgD39fkWKD3SNkEBLx_0LQ',
-        base: 'aerial',
-        maxZoom: 20,
-        type: 'maptile',
-        language: 'eng',
-        format: 'png8',
-        size: '256',
-        keepBuffer: 10
-      }),
+          attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+          subdomains: '1234',
+          mapID: 'newest',
+          app_id: 'LFDFxuH7piXnFpMEhCfS',
+          app_code: 'wgD39fkWKD3SNkEBLx_0LQ',
+          base: 'aerial',
+          maxZoom: 20,
+          type: 'maptile',
+          language: 'eng',
+          format: 'png8',
+          size: '256',
+          keepBuffer: 10
+        }),
       'Esri': tileLayer(
         'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 18,
           attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX,' +
-          ' GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            ' GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         })
     },
     overlays: {
@@ -119,8 +119,8 @@ export class LeafLetHomeComponent implements OnInit {
   showCdas = true;
 
   constructor(private zonesService: ZonesService,
-              private ilotService: CarteService,
-              private router: Router) {
+    private ilotService: CarteService,
+    private router: Router) {
     this.layer = new Layer();
   }
 

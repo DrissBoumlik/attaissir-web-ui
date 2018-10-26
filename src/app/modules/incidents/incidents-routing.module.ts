@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './components/list/list.component';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { PermissionGuard } from '../../shared/directives/guard.directive';
-import {TodosComponent} from './components/todos/todos.component';
+import { TodosComponent } from './components/todos/todos.component';
 
 const routes: Routes = [{
   path: 'incidents',

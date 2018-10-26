@@ -1,3 +1,4 @@
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 
@@ -5,17 +6,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'widget1',
   styles: [`
- 
 
 
-  
+
+
  .ScrollStyle
  {
      height: 470px;
      width: 100%;
      overflow-y: scroll;
  }
- 
+
  .widget {
      margin : 5px;
      width: 100%;
@@ -28,7 +29,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
      margin-bottom: 30px;
 
  }
- 
+
  .big-widget{
      margin : 5px;
      width: 100%;
@@ -39,13 +40,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
      border-style: solid;
      border-width: thin;
  }
- 
+
   .title {
      color:#868A93;
      font-weight: bold;
      padding-left: 5px;
      font-size: 0.9vw;
-     
+
      white-space: nowrap;
      overflow: hidden;
      text-overflow: ellipsis;
@@ -56,32 +57,37 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
      overflow: hidden;
 
     }
- 
+
  .nbr {
      font-size: 2vw;
      text-align: center;
      padding-top: 3px;
-     font-weight: bold;
+
      color : #fff;
+     font-family: 'Poppins', sans-serif;
+
  }
- 
+
+
  .text {
-     text-align: center;
-     font-weight: bold;
-     color: #868A93;
- }
- 
- 
+    text-align: center;
+   font-weight: bold;
+    color: #ffffff;
+    font-size: 22px;
+    margin-top: -15px;
+}
+
+
  ::ng-deep #chart {
      height: 110px;
      width: 200px;
  }
- 
+
  ::ng-deep #big-chart {
      height: 310px;
      width: 100%;
  }
- 
+
  ::ng-deep #gauge {
      height: 140px;
      width: 100%;
@@ -95,12 +101,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
  .title a:hover{
     text-decoration: none;
 }
- 
- 
+
+    #count {
+      text-align: center;
+    }
+
  `],
   template: `
-   
-  
+
+
   <div class="widget">
 
   <div class="row">
@@ -108,14 +117,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
               <span  class="title">  <a href="#"  (click)="InfoBtn()">	{{title}} </a> </span>
               </div>
               <div class="col-2">
-                  
+
                       <a href="#" (click)="closeBtn()" class="pull-right">
                               <i class="fa fa-times" style="margin: 3px; color:#868A93; font-size: 12px;" aria-hidden="true"></i>
                       </a>
                       <a href="#" (click)="ConfigBtn()"  class="pull-right" >
                       <i class="fa  fa-filter"  style="margin: 3px;color:#868A93; font-size: 12px;" aria-hidden="true"></i>
                   </a>
-                  
+
                   <!--    <a href="#"  (click)="InfoBtn()" class="pull-right">
                               <i class="fa  fa-info-circle" style="margin: 3px;color:#868A93; font-size: 12px;" aria-hidden="true"></i>
                           </a> !-->
@@ -123,13 +132,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
                   </div>
 
           </div>
-          
+
           <div class="row">
                   <div class="col">
-                      <p class="nbr"> 
-                      {{ nbr }} 
-                      </p>	
-                      <p class="text"> {{sub_title}}</p>
+
+
+
+<div id="count">
+<span class="num nbr">{{ nbr }}</span> <span class="text"> {{sub_title}}</span>
+</div>
+
+                       
                       </div>
           </div>
  </div>
@@ -170,10 +183,39 @@ export class Widget1Component {
   }
 
 
+
+  ngAfterViewInit() {
+
+
+    $(document).ready(function() {
+
+        const counter = function($this) {
+            const maxNum: number = Math.abs(parseInt($this.text()));
+          let i = 0;
+          const repeat: number = maxNum / 50;
+
+          setInterval(function() {
+
+            $this.text((i += repeat).toFixed(0));
+
+            if (i > maxNum) {
+                const j: number = maxNum;
+              $this.text(parseInt((maxNum).toFixed(0) ));
+              return;
+            }
+
+          }, 40);
+        };
+
+        $('#count .num').each(function(index, element) {
+          counter($(element));
+        });
+
+      });
+  }
+
+
 }
-
-
-
 
 
 
