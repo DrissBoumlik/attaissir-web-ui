@@ -1,4 +1,3 @@
-
 import { NgModule, Component, enableProdMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DragulaService } from 'ng2-dragula';
@@ -21,37 +20,37 @@ export class IndexDashComponent   {
   subs = new Subscription();
 
 
-  buttonOptions:any;
-  cancelOptions:any;
-  newWidgetButtonOptions:any;
+  buttonOptions: any;
+  cancelOptions: any;
+  newWidgetButtonOptions: any;
   popupVisible = false;
   widgetOptions = {};
-  valueChangeEvents: any[];
   widgets: any;
-  widgets_right :any;
-  widgets_left :any;
   widget: any;
-  new_widget:any;
+  new_widget: any;
   popupConfigVisible = false;
   popupInfoVisible = false;
-  selectedWidget:any;
-  filter:any;
-  selectedWidget_id:any;
+  selectedWidget: any;
+  filter: any;
+  selectedWidget_id: any;
 
-  companiesOptions:any;
+  companiesOptions: any;
 
-  divisionOptions:any;
-  cdaOptions:any;
+  divisionOptions: any;
+  cdaOptions: any;
 
-  zoneOptions:any;
+  zoneOptions: any;
+
+  cancelPopVisible: any;
+  deletedItem: any;
 
 
   constructor(private widgetService : WidgetService , private toastrService: ToastrService
-    ,private dragulaService: DragulaService
+    , private dragulaService: DragulaService
     ) {
     this.new_widget = {};
     this.widget = {};
-    
+
     this.filter = {};
     this.widgets = [];
     this.cdaOptions = {};
@@ -64,16 +63,16 @@ export class IndexDashComponent   {
       console.log(el.id);
 
       let align;
-      if(target.id =='right'){
+      if (target.id == 'right') {
         align = 'left';
-      }else if(target.id =='left'){
+      } else if (target.id == 'left' ) {
         align = 'right';
       }
 
-      this.widgetService.changePositionWidget({id : el.id, position : this.getElementIndex(el) ,align : align}).subscribe((data: any) => {
+      this.widgetService.changePositionWidget({id : el.id, position : this.getElementIndex(el) , align : align}).subscribe((data: any) => {
 
       }, err => {
-  
+
       }); 
 
       /*
@@ -112,7 +111,7 @@ private getElementIndex(el: any) {
 
   addWidget(event) {
 
-    //this.widgets.push({title : this.widget.title , type : this.widget.type})
+    // this.widgets.push({title : this.widget.title , type : this.widget.type})
   }
 
   doSomething2(event) {
@@ -129,7 +128,8 @@ private getElementIndex(el: any) {
 
       data.forEach((it) => {
 
-        this.widgets.push({ id: it.id , title: it.title, params: it.params , type: it.type, align: it.align , filter: it.filter ,updated_at : it.updated_at })
+
+        this.widgets.push({ id: it.id , title: it.title, params: it.params , type: it.type, align: it.align , filter: it.filter , sub_title : it.sub_title , updated_at : it.updated_at })
       });
 
        
@@ -145,8 +145,8 @@ private getElementIndex(el: any) {
         let dateB = new Date(b.updated_at);
         
 
-        if (posA = posB && dateA <  dateB){ console.log('dt1'); return -1;}
-        if (posA = posB && dateA >  dateB ){ console.log('dt2'); return 1;}
+        if (posA = posB && dateA <  dateB) { console.log('dt1'); return -1; }
+        if (posA = posB && dateA >  dateB ) { console.log('dt2'); return 1; }
         
         return 0;
       });
@@ -160,12 +160,10 @@ private getElementIndex(el: any) {
    
         let dateA = new Date(a.updated_at);
         let dateB = new Date(b.updated_at);
-        
-        console.log(dateA);
-        console.log(dateB);
 
-        if (posA == posB && dateA > dateB ){ console.log('dt1'); return -1;}
-        if (posA == posB && dateA < dateB ){ console.log('dt2'); return 1;}
+
+        if (posA == posB && dateA > dateB ) {  return -1; }
+        if (posA == posB && dateA < dateB ) {  return 1; }
         
         return 0;
       });
@@ -227,11 +225,11 @@ private getElementIndex(el: any) {
                    this.cdaOptions = {};
                    this.zoneOptions = {};
                    this.widgetService.getCdasList(e1.selectedItem.id).subscribe(
-                     (res: any) => {
+                     (_res: any) => {
                        this.cdaOptions = {
                          displayExpr: 'name',
                          valueExpr: 'id',
-                         items:  res,
+                         items:  _res,
                          searchEnabled: true,
                          onSelectionChanged: (e2) => {
                             
@@ -256,7 +254,6 @@ private getElementIndex(el: any) {
                      }
                    );
 
-
                 }
               };
             }
@@ -274,6 +271,7 @@ private getElementIndex(el: any) {
       type: 'success',
       useSubmitBehavior: true,
       onClick: (e) => {
+        console.log(this.filter);
        // console.log(this.widget);
   
        this.widgetService.changeWidgetFilter(this.filter,this.selectedWidget_id).subscribe((data: any) => {
@@ -281,7 +279,7 @@ private getElementIndex(el: any) {
        // this.toastrService.success(data.message);
 
          this.widgets.forEach(it => {
-           if( this.widget == it){
+           if ( this.widget == it) {
             it.params = data.params;
             it.filter = data.filter;
            }
@@ -318,13 +316,11 @@ private getElementIndex(el: any) {
       type: 'success',
       useSubmitBehavior: true,
       onClick: (e) => {
-      
         
         this.widgetService.createWidget(this.new_widget).subscribe((data: any) => {
 
-            console.log(data);
-
-            this.widgets.unshift({ id :data.id , title: data.title, params: data.params, type: data.type, align: data.align , filter: data.filter, updated_at: data.updated_at })
+       
+        this.widgets.unshift({ id : data.id , title: data.title, params: data.params, type: data.type, align: data.align , filter: data.filter, updated_at: data.updated_at });
               
          
            this.popupVisible = false;
@@ -349,8 +345,8 @@ private getElementIndex(el: any) {
  
 
 
-  _filter : any;
-  filter_title:any;
+  _filter: any;
+  filter_title: any;
   info(item) {
     this._filter = item.filter;
     this.filter_title = item.title;
@@ -446,9 +442,8 @@ private getElementIndex(el: any) {
 
  
 
-  cancelPopVisible:any;
-  deletedItem :any;
-  close(item){
+
+  close(item) {
     this.cancelPopVisible = true;
     this.deletedItem = item;
   }
@@ -458,22 +453,22 @@ private getElementIndex(el: any) {
 
     this.widgetService.deleteWidget(this.deletedItem.id).subscribe((data: any) => {
       const index = this.widgets.indexOf(this.deletedItem);
-      this.widgets.splice(index, 1); 
-      this.toastrService.success(data.message);  
+      this.widgets.splice(index, 1);
+      this.toastrService.success(data.message);
       this.cancelPopVisible = false;
-   
-    });
-    
-    
-  }
-   
 
-  cancelPopup(){
+    });
+
+
+  }
+
+
+  cancelPopup() {
     this.cancelPopVisible = false;
   }
 
-}
 
+}
 
 
 

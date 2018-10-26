@@ -119,9 +119,23 @@ import { DragulaService } from 'ng2-dragula';
     border: 1px solid #383a3b;
     background-color: #495056;
 }
- 
 
-.title a {
+
+ ::ng-deep .dx-trackbar-container  {
+   border: 1px solid #000;
+ }
+
+ ::ng-deep  .dx-progressbar-container {
+   border: 1px solid #ffffff;
+ }
+
+ ::ng-deep .dx-progressbar-range {
+    border: 1px solid #ffffff;
+   background-color: #495056;
+ }
+
+
+ .title a {
     color:#868A93;
 }
 
@@ -160,18 +174,25 @@ import { DragulaService } from 'ng2-dragula';
           <div class="row">
                   <div class="col">
                       
-                  <dx-progress-bar #progressBar style="margin-top: 50px;
-                   margin-left: 7px;"
-                  id="progress-bar-status"
-                   width="90%"
-                  [class.complete]="progressBar.value == maxValue"
-                  [min]="0"
-                  [max]="maxValue"
-                  [statusFormat]="format"
-                  [value]="maxValue - seconds">
-              </dx-progress-bar>
+               
 
-                      </div>
+
+<div style="margin-top: 16px; display: block; margin-left: auto; margin-right: auto; width: 90%;">
+                    <dx-progress-bar #progressBar
+                                     id="progress-bar-status"
+                                     width="90%"
+                                     [min]="0"
+                                     [max]="max"
+                                     [showStatus]="false"
+                                     [value]="val">
+                    </dx-progress-bar>
+</div> 
+                   
+                  <div style="text-align: center; color: #c7c7c7;font-weight: bold;">
+                  {{val}} {{sub_title}} / {{max}} {{sub_title}}
+                  </div>
+
+                  </div>
           </div>
  </div>
 
@@ -182,12 +203,11 @@ import { DragulaService } from 'ng2-dragula';
 
 export class Widget3Component {
 
- 
   @Input() id: String;
   @Input() title: String;
-  @Input() startValue: number;
-  @Input() endValue: number;
-  @Input() tickInterval: number;
+  @Input() val: number;
+  @Input() max: number;
+  @Input() sub_title: String;
 
 
   inProgress = false;
@@ -214,9 +234,7 @@ export class Widget3Component {
     this.info.emit(1);
   }
 
-  format(value) {
-    return 'Loading: ' + value * 100 + '%';
-}
+
 
 }
 
