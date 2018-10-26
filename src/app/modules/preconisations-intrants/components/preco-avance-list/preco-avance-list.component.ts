@@ -1,11 +1,10 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { Helper } from '../../../../shared/classes/helper';
-import { isNull } from "util";
-import { ActivatedRoute, Router } from '@angular/router';
-import { PreconisationsIntrantsService } from '../../service/preconisations-intrants.service';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Helper} from '../../../../shared/classes/helper';
+import {ActivatedRoute} from '@angular/router';
+import {PreconisationsIntrantsService} from '../../service/preconisations-intrants.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
-import { DxDataGridComponent } from 'devextreme-angular';
+import {DxDataGridComponent} from 'devextreme-angular';
 
 @Component({
   selector: 'app-preco-avance-list',
@@ -22,6 +21,8 @@ export class PrecoAvanceListComponent implements OnInit {
   popupRfidVisible = false;
   rf_code = null;
 
+  is_for_pres: any;
+
   @ViewChild('rfid') rfid: ElementRef;
   @ViewChild('focusout') focusout: ElementRef;
   @ViewChild('popup') popup: ElementRef;
@@ -35,28 +36,30 @@ export class PrecoAvanceListComponent implements OnInit {
 
   ngOnInit() {
 
-
-    this.preconisations.store = new CustomStore({
-      load: (loadOptions: any) => {
-        loadOptions.rfid = 0;
-        return this.preconisationsIntrantsService.getListeAvancesDx(loadOptions)
-          .toPromise()
-          .then(response => {
-            const res = {};
-            console.log(response);
-            response.data.forEach(rs => {
-              rs.state = this.helper.getStatusValue(rs.state);
-              rs.rib = rs.rib ? `${rs.bank_code}${rs.rib}${rs.bank_rib_key}` : '';
-            });
-            console.log(response);
-            return response;
-          })
-          .catch(error => {
-            throw error;
-          });
-      }
-    });
-
+    this.route.queryParams.subscribe(
+      (qps: any) => {
+        this.is_for_pres = JSON.parse(qps.prestataires);
+        const qp = this.is_for_pres ? '?prestataires=true' : '';
+        this.preconisations.store = new CustomStore({
+          load: (loadOptions: any) => {
+            loadOptions.rfid = 0;
+            return this.preconisationsIntrantsService.getListeAvancesDx(loadOptions, qp)
+              .toPromise()
+              .then(response => {
+                console.log(response);
+                response.data.forEach(rs => {
+                  rs.state = this.helper.getStatusValue(rs.state);
+                  rs.rib = rs.rib ? `${rs.bank_code}${rs.rib}${rs.bank_rib_key}` : '';
+                });
+                console.log(response);
+                return response;
+              })
+              .catch(error => {
+                throw error;
+              });
+          }
+        });
+      });
   }
 
 
@@ -79,22 +82,22 @@ export class PrecoAvanceListComponent implements OnInit {
         this.focusout.nativeElement.focus();
 
 
-        if (this.rf_code != '') {
+        if (this.rf_code !== '') {
 
-          this.rf_code = this.rf_code.replace(/à/g, "0");
-          this.rf_code = this.rf_code.replace(/&/g, "1");
-          this.rf_code = this.rf_code.replace(/é/g, "2");
-          this.rf_code = this.rf_code.replace('"', "3");
-          this.rf_code = this.rf_code.replace("'", "4");
-          this.rf_code = this.rf_code.replace("(", "5");
-          this.rf_code = this.rf_code.replace("-", "6");
-          this.rf_code = this.rf_code.replace(/è/g, "7");
-          this.rf_code = this.rf_code.replace("_", "8");
-          this.rf_code = this.rf_code.replace(/ç/g, "9");
+          this.rf_code = this.rf_code.replace(/à/g, '0');
+          this.rf_code = this.rf_code.replace(/&/g, '1');
+          this.rf_code = this.rf_code.replace(/é/g, '2');
+          this.rf_code = this.rf_code.replace('"', '3');
+          this.rf_code = this.rf_code.replace('\'', '4');
+          this.rf_code = this.rf_code.replace('(', '5');
+          this.rf_code = this.rf_code.replace('-', '6');
+          this.rf_code = this.rf_code.replace(/è/g, '7');
+          this.rf_code = this.rf_code.replace('_', '8');
+          this.rf_code = this.rf_code.replace(/ç/g, '9');
 
           this.preconisations = {};
 
-          let code = this.rf_code;
+          const code = this.rf_code;
           this.preconisations.store = new CustomStore({
             load: (loadOptions: any) => {
               loadOptions.rfid = code;

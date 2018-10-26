@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ArticlesService } from '../../../articles/services/articles.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ArticlesService} from '../../../articles/services/articles.service';
 import 'rxjs/add/operator/toPromise';
-import { InterventionService } from '../../services/intervention.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { DxDataGridComponent } from 'devextreme-angular';
-import { NewComponent } from '../new/new.component';
-import { DxiItemComponent } from 'devextreme-angular/ui/nested/item-dxi';
-import { ToastrService } from 'ngx-toastr';
-import { WarehouseService } from '../../../warehouse/service/warehose.service';
-import { Helper } from '../../../../shared/classes/helper';
+import {InterventionService} from '../../services/intervention.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {DxDataGridComponent} from 'devextreme-angular';
+import {NewComponent} from '../new/new.component';
+import {DxiItemComponent} from 'devextreme-angular/ui/nested/item-dxi';
+import {ToastrService} from 'ngx-toastr';
+import {WarehouseService} from '../../../warehouse/service/warehose.service';
+import {Helper} from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-add',
@@ -128,14 +128,18 @@ export class AddComponent implements OnInit {
 
   /*--------------------Constructor-----------------------*/
   helper: any;
+  global_type = {
+    parcel: true,
+    dc: true
+  };
 
   constructor(public articleService: ArticlesService,
-    public interventionService: InterventionService,
-    private wareHouseService: WarehouseService,
-    private route: ActivatedRoute,
-    private thirdsService: ThirdsService,
-    private toastr: ToastrService,
-    private router: Router) {
+              public interventionService: InterventionService,
+              private wareHouseService: WarehouseService,
+              private route: ActivatedRoute,
+              private thirdsService: ThirdsService,
+              private toastr: ToastrService,
+              private router: Router) {
     this.helper = Helper;
   }
 
@@ -181,7 +185,8 @@ export class AddComponent implements OnInit {
                   this.products = [];
                   this.selectedItems = [];
                   if (this.selectedTemplate) {
-                    this.interventionService.getTemplateData(this.interventions.warehouse, this.interventions.surface_to_work, this.selectedTemplate.id)
+                    this.interventionService.getTemplateData(this.interventions.warehouse,
+                      this.interventions.surface_to_work, this.selectedTemplate.id)
                       .subscribe(
                         (templateData: any) => {
                           console.log(templateData);
@@ -192,9 +197,9 @@ export class AddComponent implements OnInit {
                           if (sm) {
                             sm.forEach((semence: any) => {
                               this.semences.push({
-                                'category': { category_name: semence.category },
-                                'sub_category': { sub_category_name: semence.sub_category },
-                                'article': { id: semence.id, name: semence.article_name },
+                                'category': {category_name: semence.category},
+                                'sub_category': {sub_category_name: semence.sub_category},
+                                'article': {id: semence.id, name: semence.article_name},
                                 'quantity': semence.quantity
                               });
                             });
@@ -202,9 +207,9 @@ export class AddComponent implements OnInit {
                           if (pd) {
                             pd.forEach((product: any) => {
                               this.products.push({
-                                'category': { category_name: product.category },
-                                'sub_category': { sub_category_name: product.sub_category },
-                                'article': { id: product.id, name: product.article_name },
+                                'category': {category_name: product.category},
+                                'sub_category': {sub_category_name: product.sub_category},
+                                'article': {id: product.id, name: product.article_name},
                                 'quantity': product.quantity
                               });
                             });
@@ -371,14 +376,19 @@ export class AddComponent implements OnInit {
         this.interventionService.getInterventionCustomFields(qps.sub_family_id)
           .subscribe(
             (res: any) => {
-              this.custom_fields = res.data ? res.data : [];
+              this.global_type = {
+                parcel: JSON.parse(res.data.params.parcel),
+                dc: JSON.parse(res.data.params.dc)
+              };
+              console.log(this.global_type);
+              this.custom_fields = res.data.fields ? res.data.fields : [];
               this.custom_fields.forEach((cf: any) => {
                 const dxCustomField = {
                   dataField: cf.name,
                   label: cf.label,
                   required: cf.required,
                   editorType: this.DX_TEXT_BOX,
-                  editorOptions: { placeholder: cf.label },
+                  editorOptions: {placeholder: cf.label},
                   colspan: 3,
                 };
                 switch (cf.type) {
@@ -408,8 +418,6 @@ export class AddComponent implements OnInit {
           );
       }
     );
-
-
     /*--------------------------------------------------------*/
     this.semenceCategoryOptions = {
       displayExpr: 'category_name',
@@ -484,7 +492,7 @@ export class AddComponent implements OnInit {
                       this.APQuantity = this.interventions.surface_to_work * (+this.SelectedAPArticle.dose);
                       this.APQuantityOptions = {
                         format: '#0.## ' + this.SelectedAPArticle.unit.toString(),
-                        disabled: this.SelectedAPArticle.code !== 'GAV00003',
+                        disabled: this.SelectedAPArticle.code !== 'GAF001',
                         value: this.interventions.surface_to_work * (+this.SelectedAPArticle.dose),
                         onValueChanged: (cc) => {
                           this.APQuantity = cc.value;
@@ -734,7 +742,7 @@ export class AddComponent implements OnInit {
         /*--------------------------------------------------------*/
         if (this.data.services.length || this.data.semence.length || this.data.products.length) {
           if (((!this.productsGrid && !this.data.services.length && this.semenceGrid) &&
-            this.semenceGrid.instance.getVisibleRows().length === 0)
+              this.semenceGrid.instance.getVisibleRows().length === 0)
             || ((!this.semenceGrid && !this.data.services.length && this.productsGrid) &&
               this.productsGrid.instance.getVisibleRows().length === 0)
             || ((!this.semenceGrid && !this.productsGrid && this.selectedItems) && this.selectedItems.length === 0)) {
@@ -812,7 +820,7 @@ export class AddComponent implements OnInit {
 
         this.selectedItems.forEach(
           st => {
-            data.service_articles.push({ article_id: st.id, quantity: 1 });
+            data.service_articles.push({article_id: st.id, quantity: 1});
           }
         );
         if (this.interventions.isSaveAsModel
@@ -821,10 +829,10 @@ export class AddComponent implements OnInit {
           return -1;
         }
         /*--------------------------------------------------------*/
-        if (!data.logical_parcel_id
+        if (this.global_type.parcel && (!data.logical_parcel_id
           || !data.date
           || data.surface_to_work === null
-          || (!data.warehouse_id && (this.data.semence.length || this.data.products.length))) {
+          || (!data.warehouse_id && (this.data.semence.length || this.data.products.length)))) {
           NewComponent.notifyMe('Veuillez remplir tous les champs obligatoires.');
           return -1;
         }
