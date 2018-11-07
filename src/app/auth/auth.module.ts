@@ -13,7 +13,14 @@ import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 import { fakeBackendProvider } from './_helpers';
-import { DxButtonModule, DxLoadIndicatorModule } from 'devextreme-angular';
+import {
+  DxAutocompleteModule,
+  DxButtonModule,
+  DxCheckBoxModule, DxFormModule,
+  DxLoadIndicatorModule, DxLoadPanelModule,
+  DxNumberBoxModule,
+  DxSelectBoxModule
+} from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -27,7 +34,13 @@ import { DxButtonModule, DxLoadIndicatorModule } from 'devextreme-angular';
     HttpModule,
     AuthRoutingModule,
     DxLoadIndicatorModule,
-    DxButtonModule
+    DxButtonModule,
+    DxCheckBoxModule,
+    DxSelectBoxModule,
+    DxNumberBoxModule,
+    DxAutocompleteModule,
+    DxFormModule,
+    DxLoadPanelModule
   ],
   providers: [
     AuthGuard,
