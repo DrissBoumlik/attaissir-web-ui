@@ -1,10 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Helper} from '../../../../shared/classes/helper';
-import {ActivatedRoute} from '@angular/router';
-import {PreconisationsIntrantsService} from '../../service/preconisations-intrants.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Helper } from '../../../../shared/classes/helper';
+import { ActivatedRoute } from '@angular/router';
+import { PreconisationsIntrantsService } from '../../service/preconisations-intrants.service';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
-import {DxDataGridComponent} from 'devextreme-angular';
+import { DxDataGridComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'app-preco-avance-list',
@@ -38,7 +38,7 @@ export class PrecoAvanceListComponent implements OnInit {
 
     this.route.queryParams.subscribe(
       (qps: any) => {
-        this.is_for_pres = JSON.parse(qps.prestataires);
+        this.is_for_pres = qps.prestataires ? JSON.parse(qps.prestataires) : null;
         const qp = this.is_for_pres ? '?prestataires=true' : '';
         this.preconisations.store = new CustomStore({
           load: (loadOptions: any) => {
