@@ -45,7 +45,6 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "src/assets/test.js",
               "node_modules/dragula/dist/dragula.js",
               {
                 "input": "node_modules/document-register-element/build/document-register-element.js"

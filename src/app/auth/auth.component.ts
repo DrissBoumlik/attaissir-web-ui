@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AlertService, AuthenticationService, UserService } from './_services';
 import * as CryptoJS from 'crypto-js';
 import { AlertComponent } from './_directives/alert.component';
+import {Helper} from '../shared/classes/helper';
 
 declare let $: any;
 declare let mUtil: any;
@@ -30,6 +31,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
   loading = false;
   returnUrl: string;
   errorMessage: string;
+  loadingVisible = false;
 
   @ViewChild('alertSignin',
     { read: ViewContainerRef }) alertSignin: ViewContainerRef;
@@ -52,9 +54,9 @@ export class AuthComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
-    window.addEventListener('click', () => {
+   /* window.addEventListener('click', () => {
       this.video.nativeElement.play();
-    });
+    });*/
 
     this.model.remember = true;
 
@@ -69,15 +71,17 @@ export class AuthComponent implements OnInit, AfterViewInit {
         this.handleSignInFormSubmit();
       });
     // Set page height
-    //document.getElementById('m_login').style.height = (screen.height - 118) + 'px';
+    // document.getElementById('m_login').style.height = (screen.height - 118) + 'px';
     // m-login--signin
   }
 
 
   signin() {
     this.loading = true;
+    this.loadingVisible = true;
     this._authService.login(this.model.email, this.model.password).subscribe(
       data => {
+        this.loadingVisible = false;
         if (data) {
           const currentUser: any = JSON.stringify(data);
           localStorage.setItem('currentUser', currentUser);
@@ -100,6 +104,8 @@ export class AuthComponent implements OnInit, AfterViewInit {
 
       },
       error => {
+        this.loadingVisible = false;
+        this.toastr.error('Email ou mot de passe incorrect!');
         this.showAlert('alertSignin');
         if (error.error) {
           this.errorMessage = 'Email ou mot de passe incorrect!';

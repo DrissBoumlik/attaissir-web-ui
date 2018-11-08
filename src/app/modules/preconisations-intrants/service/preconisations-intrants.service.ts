@@ -117,8 +117,8 @@ export class PreconisationsIntrantsService {
 
 
 
-  getListeAvancesDx(params?: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/interventionlist/ap/grid`, JSON.stringify(params), {
+  getListeAvancesDx(params?: any, queryParams?: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/interventionlist/ap/grid${queryParams}`, JSON.stringify(params), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

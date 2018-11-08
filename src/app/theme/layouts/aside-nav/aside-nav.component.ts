@@ -197,6 +197,15 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
             permission: ['preconization.interventions.avance_prime']
           },
           {
+            icon: 'flaticon-list',
+            name: 'Liste des  avances et primes (préstataires)',
+            url: '/preconisations-intrants/avance-prest',
+            queryParams: {
+              prestataires: true
+            },
+            permission: ['preconization.interventions.avance_prime']
+          },
+          {
             icon: 'flaticon-file-1',
             name: 'Préconisation en mass',
             url: '/interventions/appliquer-template-parcelle',

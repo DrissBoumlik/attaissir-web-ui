@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Avance et primes</h2>
+      <h2>Avance et primes {{ this.is_for_pres ? ' (préstataires)' : ''}}</h2>
     </div>
   </div>
 </div>
@@ -69,20 +69,19 @@
                     [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
         <dxi-column dataType="Number" sortOrder="desc" dataField="id" caption="Réf"></dxi-column>
         <dxi-column dataType="Date" dataField="date" caption="Date d'octroi"></dxi-column>
-        <dxi-column  dataField="division" caption="Division"></dxi-column>
-        <dxi-column dataField="cda" caption="CDA"></dxi-column>
-        <dxi-column dataField="zone" caption="Zone"></dxi-column>
-        <dxi-column dataField="secteur" caption="Secteur"></dxi-column>
-        <dxi-column dataField="parcel" caption="Parcelle"></dxi-column>
-        <dxi-column dataField="parcel" caption="Code ORMVA"></dxi-column>
-        <dxi-column dataField="surface" caption="Superficie (ha)"></dxi-column>
-        <dxi-column dataField="montant" caption="Montant" cellTemplate="montantTemplate"></dxi-column>
-        <dxi-column dataField="full_name" caption="Nom d'agriculteur"></dxi-column>
-        <dxi-column dataField="code" caption="Code agriculter"></dxi-column>
-        <dxi-column dataField="cin" caption="C.I.N d'agriculter"></dxi-column>
-        <dxi-column dataField="rib" caption="RIB d'agriculter"></dxi-column>
+        <dxi-column [visible]="!this.is_for_pres" dataField="division" caption="Division"></dxi-column>
+        <dxi-column [visible]="!this.is_for_pres" dataField="cda" caption="CDA"></dxi-column>
+        <dxi-column [visible]="!this.is_for_pres" dataField="zone" caption="Zone"></dxi-column>
+        <dxi-column [visible]="!this.is_for_pres" dataField="secteur" caption="Secteur"></dxi-column>
+        <dxi-column [visible]="!this.is_for_pres" dataField="parcel" caption="Parcelle"></dxi-column>
+        <dxi-column [visible]="!this.is_for_pres" dataField="parcel" caption="Code ORMVA"></dxi-column>
+        <dxi-column [visible]="!this.is_for_pres" dataType="number" dataField="surface" caption="Superficie (ha)"></dxi-column>
+        <dxi-column [visible]="!this.is_for_pres" dataType="number" dataField="montant" caption="Montant" cellTemplate="montantTemplate"></dxi-column>
+        <dxi-column dataField="full_name" [caption]="this.is_for_pres ? 'Nom fournisseur' : 'Nom agriculteur'"></dxi-column>
+        <dxi-column dataField="code" [caption]="this.is_for_pres ? 'Code fournisseur' : 'Code agriculteur'"></dxi-column>
+        <dxi-column dataField="cin" [caption]="this.is_for_pres ? 'C.I.N fournisseur' : 'C.I.N agriculteur'"></dxi-column>
+        <dxi-column dataField="rib" [caption]="this.is_for_pres ? 'R.I.B fournisseur' : 'RIB agriculteurr'"></dxi-column>
         <dxi-column dataField="state" [allowSorting]="false" caption="Etat" cellTemplate="statusTemplate"></dxi-column>
-
 
         <div *dxTemplate="let data of 'montantTemplate'">
           {{ data.value}} DH

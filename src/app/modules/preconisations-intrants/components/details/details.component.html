@@ -73,7 +73,7 @@
         <dxi-column [visible]="false" dataField="z_code" caption="Code zone"></dxi-column>
         <dxi-column  dataField="p_name" caption="Parcelle"></dxi-column>
         <dxi-column [visible]="false" dataField="p_code_ormva" caption="Code ORMVA"></dxi-column>
-        <dxi-column  dataField="request_surface_work" caption="Superficie(Ha)"></dxi-column>
+        <dxi-column  dataType="number" dataField="request_surface_work" caption="Superficie(Ha)"></dxi-column>
         <dxi-column  dataField="tp_full_name" caption="Nom complet (agrégé)"></dxi-column>
         <dxi-column  dataField="tp_full_name_ar" caption="Nom complet(AR) (agrégé)"></dxi-column>
         <dxi-column  dataField="tp_cin" caption="CIN (agrégé)"></dxi-column>
@@ -98,14 +98,14 @@
         <dxi-column  dataField="tp_rib" caption="RIB (agrégé)"></dxi-column>
         <dxi-column  dataField="ar_name" caption="Article"></dxi-column>
         <dxi-column [visible]="false" dataField="ar_code" caption="Code article"></dxi-column>
-        <dxi-column [visible]="false" dataField="ar_unit" caption="Unité"></dxi-column>
+        <dxi-column [visible]="false" dataField="ar_unit" dataType="number" caption="Unité"></dxi-column>
         <dxi-column [visible]="false" dataField="ar_variety" caption="Vartieté"></dxi-column>
-        <dxi-column [visible]="false" dataField="ar_value" caption="Valeur"></dxi-column>
+        <dxi-column [visible]="false" dataField="ar_value" dataType="number" caption="Valeur"></dxi-column>
         <dxi-column  dataField="arcp_name" caption="Famille"></dxi-column>
         <dxi-column [visible]="false" dataField="arcp_code" caption="Code famille"></dxi-column>
         <dxi-column  dataField="arc_name" caption="Sous famille"></dxi-column>
         <dxi-column [visible]="false" dataField="arc_code" caption="Code sous-famille"></dxi-column>
-        <dxi-column  dataField="soa_quantity" caption="Quantité"></dxi-column>
+        <dxi-column  dataField="soa_quantity" dataType="number" caption="Quantité"></dxi-column>
         <dxi-column [visible]="false" dataField="fournisseur_full_name" caption="Nom Complet (Fournisseur)"></dxi-column>
         <dxi-column [visible]="false" dataField="fournisseur_code" caption="Code (Fournisseur)"></dxi-column>
         <dxi-column [visible]="false" dataField="fournisseur_rc" caption="RC (Fournisseur)"></dxi-column>

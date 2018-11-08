@@ -31,6 +31,7 @@ export class DetailsComponent implements OnInit {
             const res = [];
             response.data.map(
               (mv: any) => {
+                mv.so_type = this.orderType(mv.so_type, mv.tsd_full_name);
                 mv.emetteur = {
                   id: mv.ss_id ? mv.ss_id : mv.tsd_id,
                   name: mv.ss_name ? mv.ss_name : mv.tsd_full_name,
@@ -101,6 +102,20 @@ export class DetailsComponent implements OnInit {
     }
   }
 
+    orderType = (type: string, tp: string): string => {
+    if (type === 'transfer') {
+      return 'transfert';
+    } else if (type === 'delivery') {
+      return 'LIVRAISON';
+    } else if (type === 'return') {
+      console.log('type', type);
+      console.log('tp', tp);
+      return tp ? 'Retour Agriculteur' : 'Retour Fournisseur';
+    } else if (type === 'receive') {
+      return 'Réception des intrants';
+    }
+    return type;
+  }
 
   gotoShow(event) {
 
