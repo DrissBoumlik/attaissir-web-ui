@@ -44,7 +44,7 @@ export class WidgetService {
   getDivisionList(id: any): Observable<any[]> {
     return this.http.get<any[]>(`${environment.apiUrl}/${this.routeName}/divisions/${id}`);
   }
- 
+
 
   getCdasList(id: any): Observable<any[]> {
     return this.http.get<any[]>(`${environment.apiUrl}/${this.routeName}/cdas/${id}`);
@@ -53,6 +53,13 @@ export class WidgetService {
   getZonesList(id: any): Observable<any[]> {
     return this.http.get<any[]>(`${environment.apiUrl}/${this.routeName}/zones/${id}`);
   }
+
+
+  getCdList(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/${this.routeName}/cd`);
+  }
+
+
 
 
   

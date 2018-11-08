@@ -2,6 +2,7 @@
 import { NgModule, Component, enableProdMode, Input, Output, EventEmitter } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DragulaService } from 'ng2-dragula';
+declare var $: any;
 
 
 @Component({
@@ -152,7 +153,11 @@ import { DragulaService } from 'ng2-dragula';
 
   <div class="row">
           <div class="col-10">
-          <span  class="title">  <a href="#"  (click)="InfoBtn()">	{{title}} </a> </span>
+          <span  class="title">  <a href="#"  (click)="InfoBtn()"
+                                    data-toggle="tooltip" title="{{title}}"
+                                    (mouseenter)="toggleDefault()"
+                                    (mouseleave)="toggleDefault()"
+          >	{{title}} </a> </span>
           </div>
               <div class="col-2">
                   
@@ -209,6 +214,11 @@ export class Widget3Component {
   @Input() max: number;
   @Input() sub_title: String;
 
+  defaultVisible = false;
+  toggleDefault() {
+    this.defaultVisible = !this.defaultVisible;
+  }
+
 
   inProgress = false;
   seconds = 10;
@@ -235,6 +245,18 @@ export class Widget3Component {
   }
 
 
+  ngAfterViewInit() {
+
+    $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+
+  }
+
+
+  count(nbr) {
+
+  }
 
 }
 

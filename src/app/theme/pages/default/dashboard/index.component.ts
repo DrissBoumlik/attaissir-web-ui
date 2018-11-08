@@ -1,12 +1,14 @@
-import { NgModule, Component, enableProdMode } from '@angular/core';
+import {NgModule, Component, enableProdMode, ViewChild} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DragulaService } from 'ng2-dragula';
 import { WidgetService } from './services/widget-service.service';
 import { Helper } from '../../../../shared/classes/helper';
-import CustomStore from "devextreme/data/custom_store";
-import DataSource from "devextreme/data/data_source";
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import {Widget2Component} from './widget/widget2.component';
+import {Widget1Component} from './widget/widget1.component';
+import {Widget3Component} from './widget/widget3.component';
+import {Widget4Component} from './widget/widget4.component';
 
 
 @Component({
@@ -16,6 +18,12 @@ import { Subscription } from 'rxjs';
 
 })
 export class IndexDashComponent   {
+
+  @ViewChild(Widget1Component) child1: Widget1Component;
+  @ViewChild(Widget2Component) child2: Widget2Component;
+  @ViewChild(Widget3Component) child3: Widget3Component;
+  @ViewChild(Widget4Component) child4: Widget4Component;
+
 
   subs = new Subscription();
 
@@ -40,6 +48,7 @@ export class IndexDashComponent   {
   cdaOptions: any;
 
   zoneOptions: any;
+  cdOptions: any;
 
   cancelPopVisible: any;
   deletedItem: any;
@@ -55,6 +64,7 @@ export class IndexDashComponent   {
     this.widgets = [];
     this.cdaOptions = {};
     this.zoneOptions = {};
+    this.cdOptions = {};
     this.cancelPopVisible = false;
     this.subs.add(dragulaService.drop('DRAGULA_FACTS')
     .subscribe(({ el, target, source, sibling }) => {
@@ -87,10 +97,27 @@ export class IndexDashComponent   {
 
     })
   );
-  
 
 
-    
+
+
+
+    this.widgetService.getCdList().subscribe(
+      (res: any) => {
+        this.cdOptions = {
+          displayExpr: 'name',
+          valueExpr: 'id',
+          items:  res,
+          searchEnabled: true,
+          onSelectionChanged: (e3) => {
+            console.log(e3);
+          }
+        };
+      }
+    );
+
+
+
 
   }
 
@@ -184,6 +211,7 @@ private getElementIndex(el: any) {
         searchEnabled: true,
         onSelectionChanged: (e) => {
           this.selectedWidget = e.selectedItem;
+           console.log('tt3');
            console.log(e.selectedItem);
            this.new_widget.title = e.selectedItem.name;
            this.new_widget.type = e.selectedItem.id;
@@ -274,14 +302,28 @@ private getElementIndex(el: any) {
         console.log(this.filter);
        // console.log(this.widget);
   
-       this.widgetService.changeWidgetFilter(this.filter,this.selectedWidget_id).subscribe((data: any) => {
+       this.widgetService.changeWidgetFilter(this.filter, this.selectedWidget_id).subscribe((data: any) => {
 
        // this.toastrService.success(data.message);
 
+
+
          this.widgets.forEach(it => {
-           if ( this.widget == it) {
+           if ( this.widget === it) {
+
             it.params = data.params;
             it.filter = data.filter;
+
+            if (it.type === 1) {
+              this.child1.count(data.params.nbr1);
+            } else if (it.type === 2) {
+             // this.child2.count(data.params.nbr1);
+            } else if (it.type === 3) {
+              this.child3.count(data.params.nbr1);
+            } else if (it.type === 4) {
+                this.child4.count(data.params.nbr1);
+              }
+
            }
          });
 
@@ -296,7 +338,6 @@ private getElementIndex(el: any) {
       });
 
 
-       console.log(this.selectedWidget);
       }
     };
 
@@ -321,8 +362,8 @@ private getElementIndex(el: any) {
 
        
         this.widgets.unshift({ id : data.id , title: data.title, params: data.params, type: data.type, align: data.align , filter: data.filter, updated_at: data.updated_at });
-              
-         
+
+
            this.popupVisible = false;
            this.new_widget = {};
 
@@ -348,6 +389,8 @@ private getElementIndex(el: any) {
   _filter: any;
   filter_title: any;
   info(item) {
+    this.selectedWidget_id = item.id;
+
     this._filter = item.filter;
     this.filter_title = item.title;
     console.log(item);
@@ -357,9 +400,12 @@ private getElementIndex(el: any) {
 
   }
 
-  
-  config(item) {
 
+
+  config(item) {
+    this.selectedWidget_id = item.id;
+
+    console.log(this.selectedWidget_id);
     this.filter = {};
     this.widget  = item;
 
@@ -434,7 +480,6 @@ private getElementIndex(el: any) {
     
      this.filter = filter;*/
     this.popupConfigVisible = true;
-    this.selectedWidget_id = item.id;
 
   }
 
