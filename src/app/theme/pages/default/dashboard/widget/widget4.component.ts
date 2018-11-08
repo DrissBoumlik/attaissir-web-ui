@@ -2,6 +2,7 @@
 import { NgModule, Component, enableProdMode, Input, Output, EventEmitter } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DragulaService } from 'ng2-dragula';
+declare var $: any;
 
 
 @Component({
@@ -111,7 +112,11 @@ import { DragulaService } from 'ng2-dragula';
 
   <div class="row">
           <div class="col-9">
-          <span  class="title">  <a href="#"  (click)="InfoBtn()">	{{title}} </a> </span>
+          <span  class="title">  <a href="#"  (click)="InfoBtn()"
+                                    data-toggle="tooltip" title="{{title}}"
+                                    (mouseenter)="toggleDefault()"
+                                    (mouseleave)="toggleDefault()"
+          >	{{title}} </a> </span>
           </div>
               <div class="col-3">
 
@@ -189,6 +194,12 @@ export class Widget4Component {
   @Input() sub_title: String;
 
 
+  defaultVisible = false;
+  toggleDefault() {
+    this.defaultVisible = !this.defaultVisible;
+  }
+
+
   @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
 
   closeBtn() {
@@ -206,6 +217,20 @@ export class Widget4Component {
 
   InfoBtn() {
     this.info.emit(1);
+  }
+
+
+
+  ngAfterViewInit() {
+
+    $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+
+  }
+
+  count(nbr) {
+
   }
 
 }
