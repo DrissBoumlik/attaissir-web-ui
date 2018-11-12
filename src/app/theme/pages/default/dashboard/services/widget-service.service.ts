@@ -59,7 +59,9 @@ export class WidgetService {
     return this.http.get<any[]>(`${environment.apiUrl}/${this.routeName}/cd`);
   }
 
-
+  getFamilleList(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/${this.routeName}/famille`);
+  }
 
 
   

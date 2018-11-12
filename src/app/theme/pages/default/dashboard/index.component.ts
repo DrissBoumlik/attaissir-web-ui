@@ -17,7 +17,7 @@ import {Widget4Component} from './widget/widget4.component';
   styleUrls: ['./index.component.scss'],
 
 })
-export class IndexDashComponent   {
+export class IndexDashComponent {
 
   @ViewChild(Widget1Component) child1: Widget1Component;
   @ViewChild(Widget2Component) child2: Widget2Component;
@@ -54,7 +54,7 @@ export class IndexDashComponent   {
   deletedItem: any;
 
 
-  constructor(private widgetService : WidgetService , private toastrService: ToastrService
+  constructor(private widgetService: WidgetService , private toastrService: ToastrService
     , private dragulaService: DragulaService
     ) {
     this.new_widget = {};
@@ -129,8 +129,6 @@ private getElementIndex(el: any) {
 
  
 
-  ngAfterViewInit() {
-  }
 
   showWidgetPopup() {
     this.popupVisible = true;
@@ -211,8 +209,6 @@ private getElementIndex(el: any) {
         searchEnabled: true,
         onSelectionChanged: (e) => {
           this.selectedWidget = e.selectedItem;
-           console.log('tt3');
-           console.log(e.selectedItem);
            this.new_widget.title = e.selectedItem.name;
            this.new_widget.type = e.selectedItem.id;
 
@@ -248,7 +244,6 @@ private getElementIndex(el: any) {
                 items:  res,
                 searchEnabled: true,
                 onSelectionChanged: (e1) => {
-                   console.log(e);
 
                    this.cdaOptions = {};
                    this.zoneOptions = {};
@@ -271,7 +266,7 @@ private getElementIndex(el: any) {
                                 items:  res2,
                                 searchEnabled: true,
                                 onSelectionChanged: (e3) => {
-                                   console.log(e3);
+
                                 }
                               };
                             }
@@ -299,8 +294,7 @@ private getElementIndex(el: any) {
       type: 'success',
       useSubmitBehavior: true,
       onClick: (e) => {
-        console.log(this.filter);
-       // console.log(this.widget);
+
   
        this.widgetService.changeWidgetFilter(this.filter, this.selectedWidget_id).subscribe((data: any) => {
 
@@ -376,7 +370,7 @@ private getElementIndex(el: any) {
 
     
 
-    };
+    }
 
   
 
@@ -393,9 +387,8 @@ private getElementIndex(el: any) {
 
     this._filter = item.filter;
     this.filter_title = item.title;
-    console.log(item);
-   // this._filter.title = item.title;
-    console.log(this._filter);
+
+
     this.popupInfoVisible = true;
 
   }
@@ -405,7 +398,6 @@ private getElementIndex(el: any) {
   config(item) {
     this.selectedWidget_id = item.id;
 
-    console.log(this.selectedWidget_id);
     this.filter = {};
     this.widget  = item;
 
@@ -511,6 +503,7 @@ private getElementIndex(el: any) {
   cancelPopup() {
     this.cancelPopVisible = false;
   }
+
 
 
 }

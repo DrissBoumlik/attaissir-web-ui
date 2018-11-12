@@ -20,6 +20,9 @@ import { IndexComponent } from '../index/index.component';
 import {IndexDashComponent} from './index.component';
 import { SearchPipe } from './search.pipe.component';
 import {Widget5Component} from './widget/widget5.component';
+import {CounterUpModule} from 'angular4-counter-up';
+import {Widget6Component} from './widget/widget6.component';
+import {Widget7Component} from './widget/widget7.component';
 
 
 
@@ -43,7 +46,6 @@ const routes: Routes = [
     CommonModule, RouterModule.forChild(routes), LayoutModule, SharedModule,
 
 
-
     DxSelectBoxModule,
     DxTemplateModule,
     DxPopupModule,
@@ -51,6 +53,11 @@ const routes: Routes = [
     DxLoadPanelModule,
     DxTextBoxModule,
 
+
+    CounterUpModule.forRoot({
+      delay: 1,
+      time: 1
+    }) ,
 
     DxTextAreaModule,
     DxSwitchModule,
@@ -76,7 +83,9 @@ const routes: Routes = [
     Widget2Component,
     Widget3Component,
     Widget4Component,
-    Widget5Component
+    Widget5Component,
+    Widget6Component,
+    Widget7Component
   ]
 })
 export class DashboardModule {

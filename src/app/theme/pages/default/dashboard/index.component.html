@@ -17,6 +17,8 @@
             <h5 class="pull-right" style="color:#989da3;">
               <i class="fa fa-plus" aria-hidden="true"></i>
               AJOUTER UN WIDGET
+
+
             </h5>
           </a>
         </div>
@@ -50,6 +52,12 @@
                       <widget3 id="{{item.id}}" title="{{item.title}}" [val]="item.params.nbr1" [max]="item.params.nbr2"
                                 (close)="close(item)" (config)="config(item)" sub_title="{{item.sub_title}}"
                                (info)="info(item)" *ngIf="item.type==2 && item.align == 'left'"></widget3>
+
+
+                      <widget6   id="{{item.id}}"  title="{{item.title}}"  [obj]="item.params.obj"
+                                 (close)="close(item)" (config)="config(item)" (info)="info(item)"
+                                 *ngIf="item.type==6 && item.align == 'left' "></widget6>
+
                     </div>
 
 
@@ -75,6 +83,10 @@
                       <widget3 id="{{item.id}}" title="{{item.title}}" [val]="item.params.nbr1" [max]="item.params.nbr2"
                                 (close)="close(item)" (config)="config(item)"
                                (info)="info(item)" *ngIf="item.type==3 && item.align == 'right'"></widget3>
+
+                      <widget6   id="{{item.id}}"  title="{{item.title}}"  [obj]="item.params.obj"
+                               (close)="close(item)" (config)="config(item)" (info)="info(item)"
+                               *ngIf="item.type==6 && item.align == 'right' "></widget6>
 
                     </div>
 
@@ -103,7 +115,7 @@
                 <div dragula="DRAGULA_FACTS2" style="width: 100%;	height: 100%;">
 
                    <div *ngFor="let item of widgets | filter: search.value">
-                    <widget4 id="{{item.id}}" title="{{item.title}}" [table]="item.params.table" *ngIf="item.type==4"
+                    <widget4 id="{{item.id}}" title="{{item.title}}" [table]="item.params" *ngIf="item.type==4"
                     (config)="config(item)" (info)="info(item)"  (close)="close(item)"></widget4>
 
 
@@ -343,6 +355,26 @@
           </div>
 
 
+
+          <div class="col-4" *ngIf="selectedWidget_id == 'qtyTotalesDistribueesParFamille'">
+            <div class="row">
+              <label class="col-12">
+                Centre de distribution
+              </label>
+              <div class="col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                  {{_filter.cd}}
+                  <span *ngIf="_filter.cd == null"> Pas de données </span>
+
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+
+
           <div class="col-4" *ngIf="selectedWidget_id == 'GrapheContratsValidesParJoursCampagne'">
             <div class="row">
               <label class="col-12">
@@ -470,9 +502,10 @@
 -->
 
 
-              <dxi-item dataField="filtre_all" editorType="dxSwitch"  [editorOptions]="{ offText: 'No', onText: 'Oui'}" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'" >
+           <!--   <dxi-item dataField="filtre_all" editorType="dxSwitch"  [editorOptions]="{ offText: 'No', onText: 'Oui'}" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'" >
                 <dxo-label text="Ajouter le filtre dans tout les widgets"></dxo-label>
               </dxi-item>
+              !-->
 
 
 
