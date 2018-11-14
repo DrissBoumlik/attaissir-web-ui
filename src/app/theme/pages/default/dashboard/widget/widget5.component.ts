@@ -149,7 +149,15 @@ declare var $: any;
 
 
                     <dx-chart id="chart" [dataSource]="table"  >
-                      <dxi-series argumentField="day" valueField="value" type="bar" color="#fff"></dxi-series>
+
+
+                      <dxo-tooltip
+                        [enabled]="true"
+                        [shared]="true"
+                        [customizeTooltip]="customizeTooltip">
+                      </dxo-tooltip>
+                      
+                      <dxi-series argumentField="day" valueField="value" type="bar" color="#5ec6ff"></dxi-series>
                       <dxi-value-axis [min]="0" [maxValueMargin]="0.01">
                       </dxi-value-axis>
                       <dxo-legend [visible]="false"></dxo-legend>
@@ -189,6 +197,9 @@ export class Widget5Component {
   @Input() title: String;
   @Input() table: any[];
   @Input() sub_title: String;
+  @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
+  @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
+  @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
 
 
   defaultVisible = false;
@@ -197,20 +208,17 @@ export class Widget5Component {
   }
 
 
-  @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
 
   closeBtn() {
     this.close.emit(1);
   }
 
 
-  @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
 
   ConfigBtn() {
     this.config.emit(this.id);
   }
 
-  @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
 
   InfoBtn() {
     this.info.emit(1);
@@ -340,6 +348,13 @@ export class Widget5Component {
   }
 
 
+
+  customizeTooltip = (info: any) => {
+    console.log(info);
+    return {
+      html: "<p><b>"+info.value+"</b></p>"
+    };
+  }
 
 }
 
