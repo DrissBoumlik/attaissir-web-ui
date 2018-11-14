@@ -10,8 +10,6 @@ declare var $: any;
   styles: [`
 
 
-
-
     .ScrollStyle {
       height: 470px;
       width: 100%;

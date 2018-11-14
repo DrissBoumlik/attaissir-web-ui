@@ -43,6 +43,7 @@ import { PermissionGuard } from './shared/directives/guard.directive';
 import { ParcelInfoComponent } from './shared/components/parcel-info/parcel-info.component';
 import { TodosComponent } from './modules/incidents/components/todos/todos.component';
 import {CounterUpModule} from 'angular4-counter-up';
+import {ActivityModule} from './modules/activity/activity.module';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import {CounterUpModule} from 'angular4-counter-up';
     CardsModule,
     DemandesModule,
     ArticlesModule,
+    ActivityModule,
     SharedModule,
     MouvementsModule,
     CardGeneratorModule,
