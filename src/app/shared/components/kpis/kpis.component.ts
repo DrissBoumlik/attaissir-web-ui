@@ -61,7 +61,7 @@ export class KpisComponent implements OnInit {
       '\n' +
       '    <div class="stats">\n' +
       '      <div class="stats__amount">'
-      + (arg.attribute('kpis')[0].sup_programmed ? arg.attribute('kpis')[0].sup_programmed : 0)
+      + (arg.attribute('custom_fields').programmed_surface ? arg.attribute('custom_fields').programmed_surface : 0)
       + '</div>\n' +
       '      <div class="stats__caption"> (Ha) programmée</div>\n' +
       '      <div class="stats__change">\n' +
