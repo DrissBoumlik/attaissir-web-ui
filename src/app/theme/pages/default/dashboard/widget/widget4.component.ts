@@ -62,7 +62,7 @@ declare var $: any;
  .nbr {
      font-size: 50px;
      text-align: center;
-    padding-top: 3px;
+     padding-top: 3px;
      font-weight: bold;
      color : #fff;
 
@@ -144,6 +144,7 @@ declare var $: any;
                       <dxi-series valueField="Kg" name="Kg"></dxi-series>
                       <dxi-series valueField="L" name="L"></dxi-series>
                       <dxi-series valueField="U" name="U"></dxi-series>
+                      <dxi-series valueField="q" name="Q"></dxi-series>
                       <dxo-common-series-settings
                         argumentField="name"
                         type="bar"

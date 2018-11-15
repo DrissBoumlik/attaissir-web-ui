@@ -266,6 +266,22 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
         ],
         disabled: 'false'
+      },
+      {
+        name: 'Journal d\'activités',
+        permission: ['user.users.index'],
+        icon: 'fa fa-clock-o',
+        url: '/activity/index',
+        description: 'Journal d\'activités',
+        subMenu: [
+          {
+            icon: 'fa fa-clock-o',
+            name: 'Journal d\'activités',
+            url: '/activity/index',
+            permission: ['user.users.store']
+          }
+        ],
+        disabled: 'false'
       }
       ,
       {

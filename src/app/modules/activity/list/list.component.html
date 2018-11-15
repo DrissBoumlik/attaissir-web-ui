@@ -33,6 +33,7 @@
         <dxo-editing
           mode="row"
           [useIcons]="true"
+
           [allowUpdating]="false"
           [allowDeleting]="true">
         </dxo-editing>
@@ -62,9 +63,9 @@
         <dxo-group-panel [visible]="true"></dxo-group-panel>
         <dxo-grouping #expand [autoExpandAll]="false"></dxo-grouping>
 
-        <dxi-column dataField="user_name" caption="Utilisateur" i18n-caption>
+        <dxi-column dataField="user_name" caption="Utilisateur" cellTemplate="userTemplate"  i18n-caption>
         </dxi-column>
-        <dxi-column dataField="action" caption="Action" i18n-caption>
+        <dxi-column dataField="action" caption="Action"  cellTemplate="actionTemplate"  i18n-caption>
         </dxi-column>
         <dxi-column dataField="item" datatype="number" caption="Item" i18n-caption>
         </dxi-column>
@@ -72,8 +73,25 @@
         </dxi-column>
         <dxi-column dataField="ip" caption="IP"  allowColumnResizing="true">
         </dxi-column>
-        <dxi-column dataField="date" caption="Date" i18n-caption>
+        <dxi-column dataField="date" caption="Date" cellTemplate="dateTemplate" i18n-caption>
         </dxi-column>
+
+
+        <div *dxTemplate="let data of 'userTemplate'">
+          <i class="fa fa-user" aria-hidden="true"></i>  {{ data.value }}
+        </div>
+
+
+        <div *dxTemplate="let data of 'dateTemplate'">
+          <i class="fa fa-clock-o" aria-hidden="true"></i> {{ data.value }}
+        </div>
+
+
+
+        <div *dxTemplate="let data of 'actionTemplate'">
+          {{ data.value }}
+        </div>
+
 
       </dx-data-grid>
 

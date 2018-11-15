@@ -36,14 +36,14 @@ export class ActivityService {
    * @returns {Observable<any>}
    */
   delete(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${this.routeName}` + id, {
+    return this.http.delete(`${environment.apiUrl}/${this.routeName}/` + id, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     });
   }
 
-  
+
 
 
 

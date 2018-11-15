@@ -47,17 +47,21 @@ export class ListComponent implements OnInit {
         return this.activityService.getActivitiesDx(loadOptions)
           .toPromise()
           .then(response => {
-
-            return response.data;
+           const res =  response;
+            res.totalCount =  10;
+            return res;
           })
           .catch(error => {
             throw error;
           });
       },
       remove: (event: any) => {
+        console.log('test1');
+
         return this.activityService.delete(event.id)
           .toPromise()
           .then(response => {
+
             this.toastr.success('Le contrat a été supprimé avec succès');
           })
           .catch(error => {
@@ -70,7 +74,7 @@ export class ListComponent implements OnInit {
 
 
 
-
+/*
 
 
     this.activityService.getActivitiesDx(null)
@@ -80,6 +84,8 @@ export class ListComponent implements OnInit {
         console.log(json);
         this.activities = json;
       });
+
+      */
 
   }
 
