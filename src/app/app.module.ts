@@ -44,6 +44,7 @@ import { ParcelInfoComponent } from './shared/components/parcel-info/parcel-info
 import { TodosComponent } from './modules/incidents/components/todos/todos.component';
 import {CounterUpModule} from 'angular4-counter-up';
 import {ActivityModule} from './modules/activity/activity.module';
+import {ImportModule} from './modules/import/import.module';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import {ActivityModule} from './modules/activity/activity.module';
     DemandesModule,
     ArticlesModule,
     ActivityModule,
+    ImportModule,
     SharedModule,
     MouvementsModule,
     CardGeneratorModule,

@@ -282,6 +282,22 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           }
         ],
         disabled: 'false'
+      },
+      {
+        name: 'Import',
+        permission: ['user.users.index'],
+        icon: 'fa fa-upload',
+        url: '/import/index',
+        description: 'Import',
+        subMenu: [
+          {
+            icon: 'fa fa-upload',
+            name: 'Import',
+            url: '/import/index',
+            permission: ['user.users.store']
+          }
+        ],
+        disabled: 'false'
       }
       ,
       {
