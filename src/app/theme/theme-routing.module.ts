@@ -36,6 +36,10 @@ const routes: Routes = [
       },
       {
         path: '',
+        loadChildren: '../modules/arrachage/arrachage.module#ArrachageModule'
+      },
+      {
+        path: '',
         loadChildren: '../modules/incidents/incidents.module#IncidentsModule'
       },
       {

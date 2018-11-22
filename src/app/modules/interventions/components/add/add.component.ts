@@ -52,6 +52,8 @@ export class AddComponent implements OnInit {
   SelectedSemenceSubCategory: any;
   SelectedSemenceArticle: any = {};
   SemenceQuantity: any;
+  /*--------------------Camion List options-----------------------*/
+  CLOptions: any;
   /*-------------------------------------------*/
   productsCategoryOptions: any;
   productsSubCategoryOptions: any;
@@ -107,10 +109,12 @@ export class AddComponent implements OnInit {
   /*-----------------CONSTANTS--------------------------*/
   DB_NUMBER_BOX = 'number';
   DB_CHECK_BOX = 'checkbox';
+  DB_SELECT_BOX = 'select';
   /*-----------------CONSTANTS--------------------------*/
   DX_TEXT_BOX = 'dxTextBox';
   DX_NUMBER_BOX = 'dxNumberBox';
   DX_CHECK_BOX = 'dxCheckBox';
+  DX_SELECT_BOX = 'dxSelectBox';
   /*-----------------CONSTANTS--------------------------*/
   SEMENCE_TYPE = 'SEME';
   PRODUCT_TYPE = 'product';
@@ -130,7 +134,9 @@ export class AddComponent implements OnInit {
   helper: any;
   global_type = {
     parcel: true,
-    dc: true
+    dc: true,
+    camion: false,
+    proposition: true,
   };
 
   constructor(public articleService: ArticlesService,
@@ -282,10 +288,16 @@ export class AddComponent implements OnInit {
                         .subscribe((ars: any) => {
                           ars.data.forEach(
                             (ar: any) => {
-                              this.prestations.push({
-                                id: ar.id,
-                                text: ar.name,
+                              let check_if_exist = false;
+                              check_if_exist = this.prestations.find((pp: any) => {
+                                return pp.id === ar.id;
                               });
+                              if (!check_if_exist) {
+                                this.prestations.push({
+                                  id: ar.id,
+                                  text: ar.name,
+                                });
+                              }
                             }
                           );
                         });
@@ -373,12 +385,16 @@ export class AddComponent implements OnInit {
           }
         );
         /*-------------------------------------------------------------------------*/
+
+        /*-------------------------------------------------------------------------*/
         this.interventionService.getInterventionCustomFields(qps.sub_family_id)
           .subscribe(
             (res: any) => {
               this.global_type = {
-                parcel: JSON.parse(res.data.params.parcel),
-                dc: JSON.parse(res.data.params.dc)
+                parcel:  res.data.params.parcel ?  JSON.parse(res.data.params.parcel) : this.global_type.parcel,
+                dc: res.data.params.dc ?   JSON.parse(res.data.params.dc) : this.global_type.dc,
+                camion:  res.data.params.camion ?  JSON.parse(res.data.params.camion) : this.global_type.camion,
+                proposition:  res.data.params.proposition ?  JSON.parse(res.data.params.proposition) : this.global_type.proposition,
               };
               console.log(this.global_type);
               this.custom_fields = res.data.fields ? res.data.fields : [];
@@ -388,7 +404,14 @@ export class AddComponent implements OnInit {
                   label: cf.label,
                   required: cf.required,
                   editorType: this.DX_TEXT_BOX,
-                  editorOptions: {placeholder: cf.label},
+                  editorOptions: {
+                    placeholder: cf.label,
+                    displayExpr: 'label',
+                    valueExpr: 'id',
+                    items: null,
+                    searchEnabled: true,
+                    searchMode: 'contains',
+                  },
                   colspan: 3,
                 };
                 switch (cf.type) {
@@ -400,6 +423,24 @@ export class AddComponent implements OnInit {
                   case (this.DB_CHECK_BOX): {
                     dxCustomField.editorType = this.DX_CHECK_BOX;
                     dxCustomField.colspan = 1;
+                    break;
+                  }
+                  case (this.DB_SELECT_BOX): {
+                    dxCustomField.editorType = this.DX_SELECT_BOX;
+                    dxCustomField.colspan = 1;
+                    if (this.global_type.camion){
+                      this.interventionService.getCamionsList().subscribe(
+                        (list: any) => {
+                          dxCustomField.editorOptions = {
+                            placeholder: cf.label,
+                            displayExpr: 'ridelle_code',
+                            valueExpr: 'id',
+                            items: list,
+                            searchEnabled: true,
+                            searchMode: 'contains',
+                          };
+                        });
+                    }
                     break;
                   }
                 }
@@ -554,6 +595,9 @@ export class AddComponent implements OnInit {
       valueExpr: 'category_id',
       items: this.data.products,
       searchEnabled: true,
+      value: this.data.products[0],
+      selectedItem: this.data.products[0],
+      deferRendering: false,
       searchMode: 'contains',
       onSelectionChanged: (event) => {
         console.log(event);
@@ -742,7 +786,7 @@ export class AddComponent implements OnInit {
         /*--------------------------------------------------------*/
         if (this.data.services.length || this.data.semence.length || this.data.products.length) {
           if (((!this.productsGrid && !this.data.services.length && this.semenceGrid) &&
-              this.semenceGrid.instance.getVisibleRows().length === 0)
+            this.semenceGrid.instance.getVisibleRows().length === 0)
             || ((!this.semenceGrid && !this.data.services.length && this.productsGrid) &&
               this.productsGrid.instance.getVisibleRows().length === 0)
             || ((!this.semenceGrid && !this.productsGrid && this.selectedItems) && this.selectedItems.length === 0)) {
@@ -832,7 +876,7 @@ export class AddComponent implements OnInit {
         if (this.global_type.parcel && (!data.logical_parcel_id
           || !data.date
           || data.surface_to_work === null
-          || (!data.warehouse_id && (this.data.semence.length || this.data.products.length)))) {
+          || (!data.warehouse_id && this.global_type.dc))) {
           NewComponent.notifyMe('Veuillez remplir tous les champs obligatoires.');
           return -1;
         }

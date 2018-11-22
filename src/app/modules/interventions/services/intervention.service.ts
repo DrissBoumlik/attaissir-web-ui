@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Rx';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
 
 
 @Injectable({
@@ -147,8 +147,19 @@ export class InterventionService {
     return this.http.get(`${environment.apiUrl}/interventionrequests/third-parties/${cin}`);
   }
 
+  /**
+   *
+   * @param zone_id
+   */
   getCDAByZone(zone_id: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}/cdabyzone/${zone_id}`);
+  }
+
+  /**
+   *
+   */
+  getCamionsList(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/camions/list`);
   }
 }
 
