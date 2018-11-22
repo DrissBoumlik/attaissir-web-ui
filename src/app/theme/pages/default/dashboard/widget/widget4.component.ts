@@ -2,6 +2,7 @@
 import { NgModule, Component, enableProdMode, Input, Output, EventEmitter } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DragulaService } from 'ng2-dragula';
+declare var $: any;
 
 
 @Component({
@@ -27,8 +28,7 @@ import { DragulaService } from 'ng2-dragula';
      padding: 2px;
      border-style: solid;
      border-width: thin;
-
-          margin-bottom: 30px;
+     margin-bottom: 30px;
 
  }
 
@@ -37,7 +37,6 @@ import { DragulaService } from 'ng2-dragula';
     height: 100%;
     border-radius: 5px;
     border-color: #868A93;
-    padding: px;
     border-style: solid;
     border-width: thin;
     margin-top: 10px;
@@ -63,7 +62,7 @@ import { DragulaService } from 'ng2-dragula';
  .nbr {
      font-size: 50px;
      text-align: center;
-    padding-top: 3px;
+     padding-top: 3px;
      font-weight: bold;
      color : #fff;
 
@@ -111,7 +110,11 @@ import { DragulaService } from 'ng2-dragula';
 
   <div class="row">
           <div class="col-9">
-          <span  class="title">  <a href="#"  (click)="InfoBtn()">	{{title}} </a> </span>
+          <span  class="title">  <a href="#"  (click)="InfoBtn()"
+                                    data-toggle="tooltip" title="{{title}}"
+                                    (mouseenter)="toggleDefault()"
+                                    (mouseleave)="toggleDefault()"
+          >	{{title}} </a> </span>
           </div>
               <div class="col-3">
 
@@ -129,31 +132,37 @@ import { DragulaService } from 'ng2-dragula';
                   </div>
 
           </div>
+    
 
-          <div class="row">
+    
+    <div class="row">
                   <div class="col">
 
-                  <dx-chart
-                  id="chart"
-                  [dataSource]="table"
-                  [rotated]="true"
-              >
-                  <dxi-series
-                      color="#9C9EA0"
-                      type="bar"
-                      argumentField="arg"
-                      valueField="val"
-                  >
-                      <dxo-label [visible]="true" backgroundColor="#5B5E61"></dxo-label>
-                  </dxi-series>
-                  <dxo-argument-axis>
-                   </dxo-argument-axis>
-                  <dxi-value-axis>
-                      <dxo-label [visible]="false"></dxo-label>
-                  </dxi-value-axis>
-                   <dxo-legend [visible]="false"></dxo-legend>
-              </dx-chart>
-
+                    <dx-chart
+                      id="chart"
+                      [dataSource]="table">
+                      <dxi-series valueField="Kg" name="Kg"></dxi-series>
+                      <dxi-series valueField="L" name="L"></dxi-series>
+                      <dxi-series valueField="U" name="U"></dxi-series>
+                      <dxi-series valueField="q" name="Q"></dxi-series>
+                      <dxo-common-series-settings
+                        argumentField="name"
+                        type="bar"
+                        hoverMode="allArgumentPoints"
+                        selectionMode="allArgumentPoints">
+                        <dxo-label
+                          [visible]="true"
+                          [format]="{
+                type: 'fixedPoint',
+                precision: '0'
+            }">
+                        </dxo-label>
+                      </dxo-common-series-settings>
+                      <dxo-legend
+                        verticalAlignment="bottom"
+                        horizontalAlignment="center">
+                      </dxo-legend>
+                    </dx-chart>
 
 
 												<!--			<dx-chart
@@ -189,6 +198,12 @@ export class Widget4Component {
   @Input() sub_title: String;
 
 
+  defaultVisible = false;
+  toggleDefault() {
+    this.defaultVisible = !this.defaultVisible;
+  }
+
+
   @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
 
   closeBtn() {
@@ -206,6 +221,24 @@ export class Widget4Component {
 
   InfoBtn() {
     this.info.emit(1);
+  }
+
+
+
+
+  ngAfterViewInit() {
+
+
+    console.log(this.table);
+
+    $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+
+  }
+
+  count(nbr) {
+
   }
 
 }

@@ -126,6 +126,7 @@ export class ShowComponent implements OnInit {
     w.document.write('<head>');
 
     w.document.write('<link rel="stylesheet" href="/assets/app/css/print.css" type="text/css" />');
+    w.document.write('<meta name="google" value="notranslate">');
     w.document.write('</head>');
     w.document.write('<body>');
     w.document.write($('#t1').html());

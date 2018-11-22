@@ -499,4 +499,54 @@ export class ShowComponent implements OnInit, AfterViewInit {
 
 
 
+
+
+
+  print2() {
+
+
+    let w = window.open('', 'PRINT', 'height=400,width=600');
+
+
+    w.document.write('<!DOCTYPE html>');
+
+    w.document.write('<html>');
+    w.document.write('<head>');
+
+
+    w.document.write('<link rel="stylesheet" href="/assets/app/css/print.css" type="text/css" />');
+
+
+    w.document.write('</head>');
+    w.document.write('<body>');
+    w.document.write($('#t2').html());
+    w.document.write('</body>');
+    w.document.write('</html>');
+    //w.print();
+
+
+    setTimeout(() => {
+      w.print();
+    }, 3000);
+
+
+
+    setTimeout(() => {
+      w.close();
+    }, 5000);
+
+    return true;
+
+    //w.close();
+
+    // window.print();
+
+
+  }
+
+
+
+
+
+
 }

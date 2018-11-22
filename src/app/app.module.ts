@@ -42,6 +42,9 @@ import { CardGeneratorModule } from './modules/card-generator/card-generator.mod
 import { PermissionGuard } from './shared/directives/guard.directive';
 import { ParcelInfoComponent } from './shared/components/parcel-info/parcel-info.component';
 import { TodosComponent } from './modules/incidents/components/todos/todos.component';
+import {CounterUpModule} from 'angular4-counter-up';
+import {ActivityModule} from './modules/activity/activity.module';
+import {ImportModule} from './modules/import/import.module';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,8 @@ import { TodosComponent } from './modules/incidents/components/todos/todos.compo
   imports: [
     LayoutModule,
     BrowserModule,
+
+
 
     AppRoutingModule,
     ThemeRoutingModule,
@@ -79,6 +84,8 @@ import { TodosComponent } from './modules/incidents/components/todos/todos.compo
     CardsModule,
     DemandesModule,
     ArticlesModule,
+    ActivityModule,
+    ImportModule,
     SharedModule,
     MouvementsModule,
     CardGeneratorModule,

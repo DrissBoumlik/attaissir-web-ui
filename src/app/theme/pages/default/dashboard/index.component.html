@@ -17,6 +17,8 @@
             <h5 class="pull-right" style="color:#989da3;">
               <i class="fa fa-plus" aria-hidden="true"></i>
               AJOUTER UN WIDGET
+
+
             </h5>
           </a>
         </div>
@@ -26,7 +28,7 @@
         <div>
           <div class="wrapper">
 
-            <div class="container">
+            <div class="container-fluid">
 
               <div class="row">
                 <div class="col-6">
@@ -44,12 +46,18 @@
                       <widget1 id="{{item.id}}" title="{{item.title}}" nbr="{{ item.params.nbr1 }}" sub_title="{{item.sub_title}}"
                                (close)="close(item)" (config)="config(item)" (info)="info(item)"
                                *ngIf="item.type==1 && item.align == 'left' "></widget1>
-                      <widget2 id="{{item.id}}" title="{{item.title}}" nbr1="{{item.params.nbr1}}" nbr2="{{item.params.nbr2}}"
+                      <widget2 id="{{item.id}}" title="{{item.title}}" [nbr1]="item.params.nbr1" [nbr2]="item.params.nbr2"
                                sub_title="{{item.sub_title}}" (close)="close(item)" (config)="config(item)"
                                (info)="info(item)" *ngIf="item.type==3 && item.align == 'left'"></widget2>
                       <widget3 id="{{item.id}}" title="{{item.title}}" [val]="item.params.nbr1" [max]="item.params.nbr2"
                                 (close)="close(item)" (config)="config(item)" sub_title="{{item.sub_title}}"
                                (info)="info(item)" *ngIf="item.type==2 && item.align == 'left'"></widget3>
+
+
+                      <widget6   id="{{item.id}}"  title="{{item.title}}"  [obj]="item.params.obj"
+                                 (close)="close(item)" (config)="config(item)" (info)="info(item)"
+                                 *ngIf="item.type==6 && item.align == 'left' "></widget6>
+
                     </div>
 
 
@@ -57,6 +65,9 @@
 
 
                 </div>
+
+
+
                 <div class="col-6">
 
                   <div dragula="DRAGULA_FACTS" style="width: 100%;	height: 100%;"      id="left">
@@ -66,12 +77,16 @@
                       <widget1 [attr.item-id]="4" id="{{item.id}}"  title="{{item.title}}"  nbr="{{ item.params.nbr1 }}"  sub_title="{{item.sub_title}}"
                                (close)="close(item)" (config)="config(item)" (info)="info(item)"
                                *ngIf="item.type==1 && item.align == 'right' "></widget1>
-                      <widget2 id="{{item.id}}" title="{{item.title}}" nbr1="{{item.params.nbr1}}" nbr2="{{item.params.nbr2}}"
+                      <widget2 id="{{item.id}}" title="{{item.title}}" [nbr1]="item.params.nbr1" [nbr2]="item.params.nbr2"
                                sub_title="{{item.sub_title}}" (close)="close(item)" (config)="config(item)"
                                (info)="info(item)" *ngIf="item.type==2 && item.align == 'right'"></widget2>
-                      <widget3 id="{{item.id}}" title="{{item.title}}" val="{{item.params.nbr1}}" max="{{item.params.nbr2}}"
+                      <widget3 id="{{item.id}}" title="{{item.title}}" [val]="item.params.nbr1" [max]="item.params.nbr2"
                                 (close)="close(item)" (config)="config(item)"
                                (info)="info(item)" *ngIf="item.type==3 && item.align == 'right'"></widget3>
+
+                      <widget6   id="{{item.id}}"  title="{{item.title}}"  [obj]="item.params.obj"
+                               (close)="close(item)" (config)="config(item)" (info)="info(item)"
+                               *ngIf="item.type==6 && item.align == 'right' "></widget6>
 
                     </div>
 
@@ -80,26 +95,40 @@
 
 
                 </div>
+
+
+
+
+
               </div>
             </div>
 
 
+            <div class="container-fluid">
+
+
+
             <div class="row">
-              <div class="col">
+
+
+              <div class="col-12">
                 <div dragula="DRAGULA_FACTS2" style="width: 100%;	height: 100%;">
 
-
-
-
-
-                  <div *ngFor="let item of widgets | filter: search.value">
-                    <widget4 id="{{item.id}}" title="{{item.title}}" [table]="item.params.table" *ngIf="item.type==4"
+                   <div *ngFor="let item of widgets | filter: search.value">
+                    <widget4 id="{{item.id}}" title="{{item.title}}" [table]="item.params" *ngIf="item.type==4"
                     (config)="config(item)" (info)="info(item)"  (close)="close(item)"></widget4>
+
+
+                     <widget5 id="{{item.id}}" title="{{item.title}}" [table]="item.params.table" *ngIf="item.type==5"
+                              (config)="config(item)" (info)="info(item)"  (close)="close(item)"></widget5>
                   </div>
                 </div>
 
               </div>
-            </div>
+
+
+              </div>
+         </div>
 
 
           </div>
@@ -183,7 +212,7 @@
   <dx-popup
     class="popup"
     [width]="580"
-    [height]="300"
+    [height]="320"
     [showTitle]="true"
     [title]="filter_title"
     [dragEnabled]="false"
@@ -203,7 +232,7 @@
         <div class="row">
 
 
-          <div class="col-4">
+          <div class="col-4" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
             <div class="row">
               <label class="col-12">
                 Societé
@@ -212,7 +241,7 @@
 
                 <p class="siam-form-input-value siam-form-input-value-nodata">
                   {{_filter.company}}
-                  <span *ngIf="_filter.structure == null"> Pas de données </span>
+                  <span *ngIf="_filter.company == null"> Pas de données </span>
                 </p>
 
               </div>
@@ -220,7 +249,7 @@
           </div>
 
 
-          <div class="col-4">
+          <div class="col-4" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
             <div class="row">
               <label class="col-12">
                 Division
@@ -238,7 +267,7 @@
           </div>
 
 
-          <div class="col-4">
+          <div class="col-4" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
             <div class="row">
               <label class="col-12">
                 Cda
@@ -247,7 +276,7 @@
 
                 <p class="siam-form-input-value siam-form-input-value-nodata">
                   {{_filter.cda}}
-                  <span *ngIf="_filter.structure == null"> Pas de données </span>
+                  <span *ngIf="_filter.cda == null"> Pas de données </span>
 
                 </p>
 
@@ -255,7 +284,7 @@
             </div>
           </div>
 
-          <div class="col-4">
+          <div class="col-4" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
             <div class="row">
               <label class="col-12">
                 Zone
@@ -264,7 +293,7 @@
 
                 <p class="siam-form-input-value siam-form-input-value-nodata">
                   {{_filter.zone}}
-                  <span *ngIf="_filter.structure == null"> Pas de données </span>
+                  <span *ngIf="_filter.zone == null"> Pas de données </span>
 
                 </p>
               </div>
@@ -272,7 +301,7 @@
 
           </div>
 
-          <div class="col-4">
+          <div class="col-4" *ngIf="selectedWidget_id != 'GrapheContratsValidesParJoursCampagne'" >
             <div class="row">
               <label class="col-12">
                 Date de début
@@ -281,14 +310,14 @@
 
                 <p class="siam-form-input-value siam-form-input-value-nodata">
                   {{_filter.start_date}}
-                  <span *ngIf="_filter.structure == null"> Pas de données </span>
+                  <span *ngIf="_filter.start_date == null"> Pas de données </span>
 
                 </p>
               </div>
             </div>
 
           </div>
-          <div class="col-4">
+          <div class="col-4" *ngIf="selectedWidget_id != 'GrapheContratsValidesParJoursCampagne'" >
             <div class="row">
               <label class="col-12">
                 Date de fin
@@ -297,7 +326,65 @@
 
                 <p class="siam-form-input-value siam-form-input-value-nodata">
                   {{_filter.end_date}}
-                  <span *ngIf="_filter.structure == null"> Pas de données </span>
+                  <span *ngIf="_filter.end_date == null"> Pas de données </span>
+
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-4" *ngIf="selectedWidget_id == 'graphQtyFamillesIntrantsDistribueesParCd'">
+            <div class="row">
+              <label class="col-12">
+                Centre de distribution
+              </label>
+              <div class="col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                  {{_filter.cd}}
+                  <span *ngIf="_filter.cd == null"> Pas de données </span>
+
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-4" *ngIf="selectedWidget_id == 'qtyTotalesDistribueesParFamille'">
+            <div class="row">
+              <label class="col-12">
+                Centre de distribution
+              </label>
+              <div class="col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                  {{_filter.cd}}
+                  <span *ngIf="_filter.cd == null"> Pas de données </span>
+
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-4" *ngIf="selectedWidget_id == 'GrapheContratsValidesParJoursCampagne'">
+            <div class="row">
+              <label class="col-12">
+                Mois
+              </label>
+              <div class="col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                  {{_filter.month}}
+                  <span *ngIf="_filter.month == null"> Pas de données </span>
 
                 </p>
 
@@ -329,7 +416,7 @@
   <dx-popup
     class="popup"
     [width]="580"
-    [height]="350"
+    [height]="360"
     [showTitle]="true"
     title="Filtre"
     [dragEnabled]="false"
@@ -353,7 +440,7 @@
 
 								<dxi-item itemType="group" [colCount]="3" i18n-caption>
 
-									<dxi-item dataField="ste" editorType="dxSelectBox" [editorOptions]="companiesOptions">
+									<dxi-item dataField="ste" editorType="dxSelectBox" [editorOptions]="companiesOptions" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
 										<dxo-label
 											text="Societé" i18n-text>
 										</dxo-label>
@@ -361,21 +448,21 @@
 
 
 
-                  <dxi-item dataField="structure" editorType="dxSelectBox" [editorOptions]="divisionOptions">
+                  <dxi-item dataField="structure" editorType="dxSelectBox" [editorOptions]="divisionOptions" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
 										<dxo-label
 											text="Division" i18n-text>
 										</dxo-label>
                   </dxi-item>
 
 
-									<dxi-item dataField="cda" editorType="dxSelectBox" [editorOptions]="cdaOptions">
+									<dxi-item dataField="cda" editorType="dxSelectBox" [editorOptions]="cdaOptions" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
 											<dxo-label
 												text="Cda" i18n-text>
 											</dxo-label>
 										</dxi-item>
 
 
-                    <dxi-item dataField="zone" editorType="dxSelectBox" [editorOptions]="zoneOptions">
+                    <dxi-item dataField="zone" editorType="dxSelectBox" [editorOptions]="zoneOptions" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
 											<dxo-label
 												text="Zone" i18n-text>
 											</dxo-label>
@@ -383,21 +470,29 @@
 
 
 
-                    <dxi-item dataField="start_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }" >
+                    <dxi-item dataField="start_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }"  *ngIf="selectedWidget_id != 'GrapheContratsValidesParJoursCampagne'" >
                       <dxo-label text="Date de début "></dxo-label>
                     </dxi-item>
 
 
-                    <dxi-item dataField="end_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }" >
+                    <dxi-item dataField="end_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }"   *ngIf="selectedWidget_id != 'GrapheContratsValidesParJoursCampagne'">
                       <dxo-label text="Date de fin "></dxo-label>
                     </dxi-item>
 
+
+
+                  <dxi-item dataField="month" editorType="dxDateBox" [editorOptions]="{ pickerType:'rollers' , displayFormat: 'MM/yyyy'}"  *ngIf="selectedWidget_id == 'GrapheContratsValidesParJoursCampagne'">
+                    <dxo-label
+                      text="Mois" i18n-text>
+                    </dxo-label>
+                  </dxi-item>
       
                 </dxi-item>
 
 
+
             
-               <dxi-item itemType="group"  i18n-caption>
+               <dxi-item itemType="group" [colCount]="2" i18n-caption>
   <!--
                 <dxi-item>
                              <div class="dx-field-value">
@@ -407,9 +502,20 @@
 -->
 
 
-              <dxi-item dataField="filtre_all" editorType="dxSwitch"  [editorOptions]="{ offText: 'No', onText: 'Oui'}" >
+           <!--   <dxi-item dataField="filtre_all" editorType="dxSwitch"  [editorOptions]="{ offText: 'No', onText: 'Oui'}" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'" >
                 <dxo-label text="Ajouter le filtre dans tout les widgets"></dxo-label>
               </dxi-item>
+              !-->
+
+
+
+                 <dxi-item dataField="cd" editorType="dxSelectBox" [editorOptions]="cdOptions"  *ngIf="selectedWidget_id == 'graphQtyFamillesIntrantsDistribueesParCd'">
+                   <dxo-label
+                     text="Centre de distribution" i18n-text>
+                   </dxo-label>
+                 </dxi-item>
+
+
 
             </dxi-item>  
 

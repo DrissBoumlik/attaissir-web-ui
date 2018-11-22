@@ -97,6 +97,14 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: '../modules/card-generator/card-generator.module#CardGeneratorModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/activity/activity.module#ActivityModule'
+      },
+      {
+        path: '',
+        loadChildren: '../modules/import/import.module#ImportModule'
       }
       ,
       {

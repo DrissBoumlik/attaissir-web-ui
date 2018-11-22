@@ -6,7 +6,7 @@ declare var $: any
 
 
 @Component({
-  selector: 'widget1',
+  selector: 'widget6',
   styles: [`
 
 
@@ -46,7 +46,7 @@ declare var $: any
       color: #868A93;
       font-weight: bold;
       padding-left: 5px;
-      font-size: 0.9vw;
+      font-size: 15px;
 
       white-space: nowrap;
       overflow: hidden;
@@ -60,7 +60,7 @@ declare var $: any
     }
 
     .nbr {
-      font-size: 2vw;
+      font-size: 15px;
       text-align: center;
       padding-top: 3px;
 
@@ -73,8 +73,7 @@ declare var $: any
       text-align: center;
       font-weight: bold;
       color: #ffffff;
-      font-size: 22px;
-      margin-top: -15px;
+      font-size: 15px;
     }
 
     ::ng-deep #chart {
@@ -163,13 +162,19 @@ declare var $: any
 <div id="count">
 
   
-  <!-- <span class="num nbr">{{ nbr }}</span> !-->
+  <!-- <span class="num nbr">{{ nbr }}</span> 
 
 
   <span class="nbr" counter-up offset="50" delay="100" time="10" number="{{nbr}}" >0</span>
-
+!-->
   
-  <span class="text"> {{sub_title}}</span>
+  <div *ngFor="let item of obj">
+
+    <span class="nbr" counter-up offset="90" delay="100" time="10" number="{{item.sum}}" >0</span>
+
+    <span class="text"> {{item.unit}}</span>
+  </div>
+  
 
 
 </div>
@@ -204,7 +209,7 @@ declare var $: any
 
 
 
-export class Widget1Component {
+export class Widget6Component {
 
 
   @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
@@ -213,8 +218,7 @@ export class Widget1Component {
 
   @Input() id: String;
   @Input() title: String;
-  @Input() nbr: String;
-  @Input() sub_title: String;
+  @Input() obj: String;
 
 
 
@@ -244,47 +248,16 @@ export class Widget1Component {
 
 
 
-  ngAfterViewInit() {
-
-
-    $(document).ready(function() {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
-
-    $(document).ready(function() {
-
-      const counter = function($this) {
-        const maxNum: number = Math.abs(parseInt($this.text()));
-        let i = 0;
-        const repeat: number = maxNum / 50;
-
-        setInterval(function() {
-
-          $this.text((i += repeat).toFixed(0));
-
-          if (i > maxNum) {
-            const j: number = maxNum;
-            $this.text(parseInt((maxNum).toFixed(0)));
-            return;
-          }
-
-        }, 40);
-      };
-
-      $('#count .num').each(function(index, element) {
-        counter($(element));
-      });
-
-    });
-  }
-
-
   count(nbr) {
 
   }
 
+  ngAfterViewInit() {
+    console.log(this.obj);
+  }
 
-}
+
+  }
 
 
 

@@ -2,6 +2,7 @@
 import { NgModule, Component, enableProdMode, Input, Output, EventEmitter } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DragulaService } from 'ng2-dragula';
+declare var $: any;
 
 
 @Component({
@@ -60,7 +61,7 @@ import { DragulaService } from 'ng2-dragula';
 
  .nbr {
 
-    font-size: 16px;
+    font-size: 18px;
     text-align: center;
     padding-top: 10px;
     font-weight: bold;
@@ -117,6 +118,11 @@ import { DragulaService } from 'ng2-dragula';
 
  }
 
+ #_count{
+   margin-top: 12px;
+   text-align: center;
+ }
+
 
  `],
   template: `
@@ -127,7 +133,11 @@ import { DragulaService } from 'ng2-dragula';
 
   <div class="row">
           <div class="col-10">
-          <span  class="title">  <a href="#"  (click)="InfoBtn()">	{{title}} </a> </span>
+          <span  class="title">  <a href="#"  (click)="InfoBtn()"
+                                    data-toggle="tooltip" title="{{title}}"
+                                    (mouseenter)="toggleDefault()"
+                                    (mouseleave)="toggleDefault()"
+          >	{{title}} </a> </span>
               </div>
               <div class="col-2">
 
@@ -136,7 +146,7 @@ import { DragulaService } from 'ng2-dragula';
                       </a>
                       <a href="#" (click)="ConfigBtn()"  class="pull-right" >
                       <i class="fa  fa-filter"  style="margin: 3px;color:#868A93; font-size: 12px;" aria-hidden="true"></i>
-                  </a>
+                      </a>
 
                   <!--       <a href="#"  (click)="InfoBtn()" class="pull-right">
                               <i class="fa  fa-info-circle" style="margin: 3px;color:#868A93; font-size: 12px;" aria-hidden="true"></i>
@@ -149,10 +159,13 @@ import { DragulaService } from 'ng2-dragula';
           <div>
                   <div>
 
-<div id="count">
-<span class="num nbr" > {{ nbr1 }}  </span> <span class="text1"> {{sub_title}} </span>
+<div id="_count">
+
+  <span class=" num nbr timer count-title count-number" attr.data-to="{{nbr1}}" data-speed="1500"></span>
+  <span class="text1"> {{sub_title}} </span>
   <span style="  font-weight: bold; color: #fff;"> / </span>
- <span class="num nbr" >{{ nbr1 }} </span> <span class="text2"> {{sub_title}} </span>
+  <span class=" num nbr timer count-title count-number" attr.data-to="{{nbr2}}" data-speed="1500"></span>
+  <span class="text2"> {{sub_title}} </span>
 </div>
                        </div>
           </div>
@@ -171,6 +184,12 @@ export class Widget2Component {
   @Input() nbr1: number;
   @Input() nbr2: number;
   @Input() sub_title: String;
+
+
+  defaultVisible = false;
+  toggleDefault() {
+    this.defaultVisible = !this.defaultVisible;
+  }
 
 
   @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
@@ -198,31 +217,128 @@ export class Widget2Component {
 
 
     $(document).ready(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
 
-      const counter = function($this) {
-        const maxNum: number = Math.abs(parseInt($this.text()));
-        let i = 0;
-        const repeat: number = maxNum / 50;
+    this.count(this.nbr1);
 
-        setInterval(function() {
 
-          $this.text((i += repeat).toFixed(0));
 
-          if (i > maxNum) {
-            const j: number = maxNum;
-            $this.text(parseInt((maxNum).toFixed(0)));
-            return;
+  }
+
+
+
+  count(nbr) {
+
+
+    (function ($: any) {
+      $.fn.countTo = function (options) {
+        options = options || {};
+
+        return $(this).each(function () {
+          // set options for current element
+          const settings = $.extend({}, $.fn.countTo.defaults, {
+            from:            $(this).data('from'),
+            to:              nbr,
+            speed:           $(this).data('speed'),
+            refreshInterval: $(this).data('refresh-interval'),
+            decimals:        $(this).data('decimals')
+          }, options);
+
+          // how many times to update the value, and how much to increment the value on each update
+          const loops = Math.ceil(settings.speed / settings.refreshInterval),
+            increment = (settings.to - settings.from) / loops;
+
+          // references & variables that will change with each update
+          let self = this,
+            $self = $(this),
+            loopCount = 0,
+            value = settings.from,
+            data = $self.data('countTo') || {};
+
+          $self.data('countTo', data);
+
+          // if an existing interval can be found, clear it first
+          if (data.interval) {
+            clearInterval(data.interval);
+          }
+          data.interval = setInterval(updateTimer, settings.refreshInterval);
+
+          // initialize the element with the starting value
+          render(value);
+
+          function updateTimer() {
+            value += increment;
+            loopCount++;
+
+            render(value);
+
+            if (typeof(settings.onUpdate) == 'function') {
+              settings.onUpdate.call(self, value);
+            }
+
+            if (loopCount >= loops) {
+              // remove the interval
+              $self.removeData('countTo');
+              clearInterval(data.interval);
+              value = settings.to;
+
+              if (typeof(settings.onComplete) == 'function') {
+                settings.onComplete.call(self, value);
+              }
+            }
           }
 
-        }, 40);
+          function render(value) {
+            var formattedValue = settings.formatter.call(self, value, settings);
+            $self.html(formattedValue);
+          }
+        });
       };
 
-      $('#count .num').each(function(index, element) {
-        counter($(element));
+      $.fn.countTo.defaults = {
+        from: 0,               // the number the element should start at
+        to: 0,                 // the number the element should end at
+        speed: 1000,           // how long it should take to count between the target numbers
+        refreshInterval: 100,  // how often the element should be updated
+        decimals: 0,           // the number of decimal places to show
+        formatter: formatter,  // handler for formatting the value before rendering
+        onUpdate: null,        // callback method for every time the element is updated
+        onComplete: null       // callback method for when the element finishes updating
+      };
+
+      function formatter(value, settings) {
+        return value.toFixed(settings.decimals);
+      }
+    }(jQuery));
+
+    jQuery(function ($) {
+      // custom formatting example
+      $('.count-number').data('countToOptions', {
+        formatter: function (value, options) {
+          return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+        }
       });
 
+      // start all the timers
+      $('.timer').each(count);
+
+      function count(options) {
+        const $this: any = $(this);
+        options = $.extend({}, options || {}, $this.data('countToOptions') || {});
+        $this.countTo(options);
+      }
     });
+
+
+
+
+
+
+
   }
+
+
 
 }
 

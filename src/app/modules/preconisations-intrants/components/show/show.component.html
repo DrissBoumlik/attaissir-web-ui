@@ -475,6 +475,8 @@
     <div class="dx-field-value">
       <dx-button width="180"  icon="fa fa-paper-plane"  *ngIf="helper.permissionMethod(['preconization.interventions.deliverPreconization'])"  text="LIVRER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'"  type="success" (onClick)="showDeliverPopup()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
 
+      <dx-button width="130" icon="fa fa-print"   (onClick)="print2()" text="IMP2" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp;
+      &nbsp;
       <dx-button width="130" icon="fa fa-print"  *ngIf="preconisation.state == 'done'"   (onClick)="print()" text="IMPRIMER" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp; &nbsp;
       <dx-button width="130" icon="fa fa-exchange"  *ngIf="helper.permissionMethod(['distributionCenter.stocks.returnOperation'])" [disabled]="preconisation.state !== 'done'" text="RETOUR" type="default" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active" [disabled]="preconisation.state == 'delivered'" style="margin-left: 20px; margin-right: 20px;"  ></dx-button> &nbsp; &nbsp;
       <dx-button width="130" icon="fa fa-trash"     *ngIf="helper.permissionMethod(['preconization.interventions.cancelPreconization'])"  text="ANNULER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'" type="danger" (onClick)="showDeletePopup()"  ></dx-button> &nbsp; &nbsp;
@@ -546,7 +548,7 @@
 
 
         <div style="text-align : right;  margin-bottom: 5px;">
-            <div>Date : {{this.preconisation.date }}</div>
+            <div>La Date : {{this.preconisation.date }}</div>
         </div>
 
         <div style="text-align : right; margin-bottom: 10px;">
@@ -636,11 +638,133 @@
 
 
 
+  <div style="display:none;">
+
+    <div id="t2">
+      <div id="receipt-wrapper"   >
+        <div class="receipt-block">
+          <div class="receipt-head">
+            <div>BON DE CHARGEMENT</div>
+          </div>
+
+
+
+          <div style="text-align : center;  margin-bottom: 5px;">
+            <div>Usine : 34</div>
+          </div>
+
+
+          <div style="text-align : center; margin-bottom: 5px;">
+            <div>N° {{this.preconisation.id}}</div>
+
+          </div>
+
+
+          <div style="text-align : center;">
+            <img src="http://api.attaissir.graviton.ma/codebare/2222222"  style="width: 120px; height: 50px;"/>
+          </div>
 
 
 
 
 
- 
+
+          <div class="receipt-info">
+            <div class="receipt-item">
+              <div class="receipt-item-lbl">CDA</div>
+              <div class="receipt-item-price">{{this.preconisation.cda}}</div>
+            </div>
+            <div class="receipt-item">
+              <div class="receipt-item-lbl">ZONE</div>
+              <div class="receipt-item-price">{{this.preconisation.zone }}</div>
+            </div>
+            <div class="receipt-item">
+              <div class="receipt-item-lbl">PARCELLE</div>
+              <div class="receipt-item-price">{{this.preconisation.parcel}}</div>
+            </div>
+
+          </div>
+
+
+        <div class="receipt-info">
+
+          <div style="text-align : right;  margin-bottom: 5px;">
+            <div>La Date : {{this.preconisation.date }}</div>
+          </div>
+
+          <div style="text-align : right; margin-bottom: 10px;">
+            <div>{{this.preconisation.campaign}}</div>
+          </div>
+
+
+
+
+          <div class="receipt-items"  style="text-align : center; ">
+
+
+
+            <div  style="text-align : center !important; ">
+              <div class="receipt-item-lbl" style="text-align : center; ">Ridelle</div>
+            </div>
+
+            <div style="text-align : center !important; ">
+
+              <div class="receipt-item-price" style="text-align : center; "> 4444</div>
+            </div>
+
+          </div>
+
+            <div class="receipt-items"  style="text-align : center; ">
+
+
+            <div style="text-align : center !important; ">
+              <div class="receipt-item-lbl" style="text-align : center; ">Numero Mineralogique</div>
+            </div>
+
+            <div style="text-align : center !important; ">
+
+              <div class="receipt-item-price" style="text-align : center; "> 4444</div>
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+
+
+       <div class="receipt-info">
+
+          <div class="signature">
+            <div>**  **</div>
+
+            <div>*  *</div>
+
+            <div>** MERCI **</div>
+
+            <div>*****</div>
+            <div>***</div>
+
+          </div>
+       </div>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
 
 
