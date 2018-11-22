@@ -189,29 +189,29 @@ export class Widget1Component {
 
     $(document).ready(function() {
 
-        const counter = function($this) {
-            const maxNum: number = Math.abs(parseInt($this.text()));
-          let i = 0;
-          const repeat: number = maxNum / 50;
+      const counter = function($this) {
+        const maxNum: number = Math.abs(parseInt($this.text()));
+        let i = 0;
+        const repeat: number = maxNum / 50;
 
-          setInterval(function() {
+        setInterval(function() {
 
-            $this.text((i += repeat).toFixed(0));
+          $this.text((i += repeat).toFixed(0));
 
-            if (i > maxNum) {
-                const j: number = maxNum;
-              $this.text(parseInt((maxNum).toFixed(0) ));
-              return;
-            }
+          if (i > maxNum) {
+            const j: number = maxNum;
+            $this.text(parseInt((maxNum).toFixed(0)));
+            return;
+          }
 
-          }, 40);
-        };
+        }, 40);
+      };
 
-        $('#count .num').each(function(index, element) {
-          counter($(element));
-        });
-
+      $('#count .num').each(function(index, element) {
+        counter($(element));
       });
+
+    });
   }
 
 
