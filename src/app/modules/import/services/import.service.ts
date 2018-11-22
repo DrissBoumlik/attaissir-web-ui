@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Article} from '../../../shared/classes/article';
 import {environment} from '../../../../environments/environment';
@@ -28,7 +28,13 @@ export class ImportService {
     const formData: FormData = new FormData();
     formData.append('csv', file, file.name);
     formData.append('type', type);
-    return this.http.post(`${environment.apiUrl}/${this.routeName}/upload`, formData);
+
+
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/upload`, formData, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
 
