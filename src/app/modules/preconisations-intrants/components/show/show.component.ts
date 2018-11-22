@@ -3,7 +3,7 @@ import { PreconisationsIntrantsService } from '../../service/preconisations-intr
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RightHolderService } from '../../../contracts/services/right-holder.service';
-import { Helper } from "../../../../shared/classes/helper";
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-show',

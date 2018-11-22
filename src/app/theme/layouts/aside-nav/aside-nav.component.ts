@@ -58,7 +58,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           },
           {
             icon: 'fa flaticon-computer',
-            name: 'Liste des parcelles étiquetées ',
+            name: 'Traitement phyto',
             url: '/incidents/todos',
             permission: ['parcel.diagnose.activate'],
           }
@@ -180,7 +180,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
           {
             icon: 'flaticon-plus',
-            name: 'Préconisation individuelle',
+            name: 'Intervention individuelle',
             url: '/interventions/selectionner',
             permission: ['preconization.interventions.store']
           },
@@ -207,10 +207,22 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           },
           {
             icon: 'flaticon-file-1',
-            name: 'Préconisation en mass',
-            url: '/interventions/appliquer-template-parcelle',
-            permission: ['preconization.articletemplates.store']
+            name: 'Echantillonnage',
+            url: '/arrachage/echantillons',
+            permission: ['preconization.interventions.store']
           },
+          {
+            icon: 'flaticon-file-1',
+            name: 'Liste des affectations des camions',
+            url: '/arrachage/chargements',
+            permission: ['preconization.interventions.store']
+          },
+          {
+            icon: 'flaticon-list',
+            name: 'Convocations d\'arrachage',
+            url: '/arrachage/convocations',
+            permission: ['preconization.interventions.store']
+          }
         ],
         disabled: 'false'
       },

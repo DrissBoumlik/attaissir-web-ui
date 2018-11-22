@@ -1,0 +1,82 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" routerLink="/"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+      <h2>Convocations d'arrachage</h2>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body m-portlet__body--no-padding">
+      <dx-data-grid
+        id="fieldStatesGrid"
+        [dataSource]="convocations"
+        [columnHidingEnabled]="false"
+        align="center"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        noDataText="Aucune convocation disponible"
+        [rowAlternationEnabled]="true"
+        KeyExpr="id">
+
+        <dxi-column [allowHeaderFiltering]="true" [alignment]="'center'" cellTemplate="printTemplate" dataType="text" dataField="id" caption="Imprimer" [visible]="true"></dxi-column>
+        <dxi-column [allowHeaderFiltering]="true" [alignment]="'center'" dataType="number" dataField="id" caption="Réf" [visible]="true"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="cda" caption="CDA"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="zone" caption="Zone"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="parcel_name" caption="Parcelle"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="surface_work" caption="Superficie (Ha)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="date"
+                    caption="Date de convocation"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text"  dataField="tp_full_name"
+                    caption="Nom (Agrègè)"></dxi-column>
+        <dxi-column [alignment]="'center'" datatype="Text" dataField="tp_cin"
+                    caption="CIN (Agrègè)"></dxi-column>
+        <dxi-column [alignment]="'center'" datatype="number" dataField="costum_fields.nb_days"
+                    caption="Nombre de jours"></dxi-column>
+
+        <dxi-column [alignment]="'center'" dataType="number" dataField="tonnage"
+                    caption="Tonnage/Jour"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" cellTemplate="state" dataField="state" caption="Etat"></dxi-column>
+
+
+        <dxo-selection mode="multiple"></dxo-selection>
+        <dxo-scrolling mode="standard" [showScrollbar]="'always'"></dxo-scrolling>
+        <dxo-sorting mode="multiple"></dxo-sorting>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-filter-row
+          [visible]="true" [applyFilter]="true"></dxo-filter-row>
+        <dxo-pager
+          [allowedPageSizes]="[5, 8, 15, 30]"
+          [showInfo]="true"
+          [showNavigationButtons]="true"
+          [showPageSizeSelector]="true"
+          [visible]="true">
+        </dxo-pager>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+        <dxo-search-panel [visible]="true"></dxo-search-panel>
+        <dxo-group-panel [visible]="true"
+                         emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
+        <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+        <dxo-export [enabled]="true" fileName="convocations_arrachage" [allowExportSelectedData]="true"></dxo-export>
+        <div *dxTemplate="let data of 'state'">
+          <span [ngClass]="getStatusColor(data.value)">
+              {{ data.value }}
+          </span>
+        </div>
+        <div *dxTemplate="let data of 'printTemplate'">
+            <dx-button
+              class="send"
+              icon="fa fa-cloud-download"
+              text="Imprimer"
+              (onClick)="downloadDocument(data.value)">
+            </dx-button>
+          </div>
+      </dx-data-grid>
+    </div>
+  </div>
+</div>
+

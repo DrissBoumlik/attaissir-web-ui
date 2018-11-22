@@ -102,7 +102,7 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-    orderType = (type: string, tp: string): string => {
+  orderType = (type: string, tp: string): string => {
     if (type === 'transfer') {
       return 'transfert';
     } else if (type === 'delivery') {
