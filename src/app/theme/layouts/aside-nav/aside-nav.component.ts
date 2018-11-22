@@ -58,7 +58,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
           },
           {
             icon: 'fa flaticon-computer',
-            name: 'Liste des parcelles étiquetées ',
+            name: 'Traitement phyto',
             url: '/incidents/todos',
             permission: ['parcel.diagnose.activate'],
           }
