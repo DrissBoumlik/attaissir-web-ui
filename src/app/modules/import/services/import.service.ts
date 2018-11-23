@@ -32,7 +32,8 @@ export class ImportService {
 
     return this.http.post(`${environment.apiUrl}/${this.routeName}/upload`, formData, {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Accept': 'application/json'
+       // 'Content-Type': 'application/json'
       })
     });
   }
