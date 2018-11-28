@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ArrachageService} from '../../services/arrachage.service';
-import {ToastrService} from 'ngx-toastr';
-import {Helper} from '../../../../shared/classes/helper';
+import { ArrachageService } from '../../services/arrachage.service';
+import { ToastrService } from 'ngx-toastr';
+import { Helper } from '../../../../shared/classes/helper';
 import CustomStore from 'devextreme/data/custom_store';
 
 @Component({
@@ -16,7 +16,7 @@ export class ChargementAffectationListComponent implements OnInit {
   selectedRow: any = {};
 
   constructor(private arrachageService: ArrachageService,
-              private toaster: ToastrService) {
+    private toaster: ToastrService) {
     this.helper = Helper;
   }
 
@@ -36,16 +36,16 @@ export class ChargementAffectationListComponent implements OnInit {
   }
 
   printBn(idChargement) {
-      this.arrachageService.getChargementById(idChargement)
-        .subscribe(
-          (res) => {
-            this.selectedRow = res.data;
-            setTimeout(() => {
-              this.printBon();
-            }, 1000);
-          },
-          (err) => {}
-        );
+    this.arrachageService.getChargementById(idChargement)
+      .subscribe(
+        (res) => {
+          this.selectedRow = res.data;
+          setTimeout(() => {
+            this.printBon();
+          }, 1000);
+        },
+        (err) => { }
+      );
   }
 
   printBon = () => {

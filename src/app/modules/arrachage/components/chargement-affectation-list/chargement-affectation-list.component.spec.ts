@@ -8,9 +8,9 @@ describe('ChargementAffectationListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChargementAffectationListComponent ]
+      declarations: [ChargementAffectationListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
