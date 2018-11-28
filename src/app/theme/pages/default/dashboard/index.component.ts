@@ -153,6 +153,12 @@ private getElementIndex(el: any) {
 
       data.forEach((it) => {
 
+        if (  it.params.nbr1 == null ) {
+          it.params.nbr1 = 0;
+        }
+        if (  it.params.nbr2 == null ) {
+          it.params.nbr2 = 0;
+        }
 
         this.widgets.push({ id: it.id , title: it.title, params: it.params , type: it.type, align: it.align , filter: it.filter , sub_title : it.sub_title , updated_at : it.updated_at })
       });
@@ -308,15 +314,7 @@ private getElementIndex(el: any) {
             it.params = data.params;
             it.filter = data.filter;
 
-            if (it.type === 1) {
-              this.child1.count(data.params.nbr1);
-            } else if (it.type === 2) {
-             // this.child2.count(data.params.nbr1);
-            } else if (it.type === 3) {
-              this.child3.count(data.params.nbr1);
-            } else if (it.type === 4) {
-                this.child4.count(data.params.nbr1);
-              }
+
 
            }
          });
@@ -355,7 +353,7 @@ private getElementIndex(el: any) {
         this.widgetService.createWidget(this.new_widget).subscribe((data: any) => {
 
        
-        this.widgets.unshift({ id : data.id , title: data.title, params: data.params, type: data.type, align: data.align , filter: data.filter, updated_at: data.updated_at });
+        this.widgets.unshift({ id : data.id , title: data.title, params: data.params, type: data.type, align: data.align , filter: data.filter, sub_title: data.sub_title, updated_at: data.updated_at });
 
 
            this.popupVisible = false;

@@ -8,10 +8,7 @@ declare var $: any
 @Component({
   selector: 'widget1',
   styles: [`
-
-
-
-
+ 
     .ScrollStyle {
       height: 470px;
       width: 100%;
@@ -104,31 +101,10 @@ declare var $: any
       text-align: center;
     }
 
-
-    
-    
-    /*
-    
-    ::ng-deep .tooltip.bs-tooltip-bottom .tooltip-inner {
-      background: #fff !important;
-    }
-
-    ::ng-deep .tooltip .arrow:before {
-      border-bottom-color: #fff !important;
-      border-top-color: #fff !important;
-    }
-
-    ::ng-deep .tooltip-inner {
-      background-color: #fff !important;
-      color: #000;
-      font-family: 'Poppins', sans-serif;
-
-    }
-
-*/
+ 
   `],
   template: `
-
+ 
 
   <div class="widget"     >
 
@@ -163,11 +139,12 @@ declare var $: any
 <div id="count">
 
   
-  <!-- <span class="num nbr">{{ nbr }}</span> !-->
 
-
-  <span class="nbr" counter-up offset="50" delay="100" time="10" number="{{nbr}}" >0</span>
-
+   <span class="num nbr">{{ nbr }}</span>
+  <!--
+     <span *ngIf="_nbr == 0" class="nbr" counter-up offset="50" delay="100" time="10" [number]="nbr" (complete)="log($event)" >0</span>
+    <span *ngIf="_nbr != 0" class="nbr"   >{{_nbr}}</span>
+   !-->
   
   <span class="text"> {{sub_title}}</span>
 
@@ -178,26 +155,7 @@ declare var $: any
           </div>
  </div>
 
-
-
-
-
-
-
-
- <!--
-  <dx-tooltip
-    target="#{{id}}"
-    position="top"
-
-    [(visible)]="defaultVisible">
-    <div *dxTemplate="let data = data of 'content'">
-      ExcelRemote IR {{id}}
-    </div>
-  </dx-tooltip>
-  !-->
-
-
+ 
  `,
 
 })
@@ -213,7 +171,8 @@ export class Widget1Component {
 
   @Input() id: String;
   @Input() title: String;
-  @Input() nbr: String;
+  @Input() nbr: number;
+  @Input() _nbr = 0;
   @Input() sub_title: String;
 
 
@@ -237,54 +196,17 @@ export class Widget1Component {
 
 
 
-
   InfoBtn() {
     this.info.emit(1);
   }
 
 
-
-  ngAfterViewInit() {
-
-
-    $(document).ready(function() {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
-
-    $(document).ready(function() {
-
-      const counter = function($this) {
-        const maxNum: number = Math.abs(parseInt($this.text()));
-        let i = 0;
-        const repeat: number = maxNum / 50;
-
-        setInterval(function() {
-
-          $this.text((i += repeat).toFixed(0));
-
-          if (i > maxNum) {
-            const j: number = maxNum;
-            $this.text(parseInt((maxNum).toFixed(0)));
-            return;
-          }
-
-        }, 40);
-      };
-
-      $('#count .num').each(function(index, element) {
-        counter($(element));
-      });
-
-    });
-  }
-
-
-  count(nbr) {
-
+  log(event) {
+    console.log('event');
+    console.log(this.nbr);
+    this._nbr = this.nbr;
   }
 
 
 }
-
-
 

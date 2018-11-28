@@ -248,13 +248,9 @@ export class Widget6Component {
 
 
 
-  count(nbr) {
-
-  }
 
   ngAfterViewInit() {
-    console.log(this.obj);
-  }
+   }
 
 
   }

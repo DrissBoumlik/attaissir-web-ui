@@ -234,9 +234,6 @@ export class Widget7Component {
 
   }
 
-  count(nbr) {
-
-  }
 
 }
 
