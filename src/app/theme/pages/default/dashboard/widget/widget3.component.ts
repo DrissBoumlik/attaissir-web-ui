@@ -206,6 +206,7 @@ export class Widget3Component {
   @Input() id: String;
   @Input() title: String;
   @Input() val: number;
+  @Input() val2: number;
   @Input() max: number;
   @Input() sub_title: String;
   @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
@@ -250,10 +251,6 @@ export class Widget3Component {
   }
 
 
-
-  count(nbr) {
-
-  }
 
 }
 
