@@ -252,66 +252,13 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         subMenu: [
           { icon: 'flaticon-plus', name: 'Nouveau role', url: '/roles/ajouter', permission: ['user.roles.store'] },
           { icon: 'flaticon-list', name: 'Liste des roles', url: '/roles/liste', permission: ['user.roles.grid'] },
+          { icon: 'fa fa-users', name: 'Liste des utilisateurs', url: '/utilisateurs/liste', permission: ['user.users.index'] },
+          { icon: 'fa fa-clock-o', name: 'Journal d\'activités', url: '/activity/index', permission: ['user.users.index'] },
+          { icon: 'fa fa-upload', name: 'Import', url: '/import/index', permission: ['user.users.index'] },
 
         ],
         disabled: 'false'
       },
-      {
-        name: 'Utilisateurs',
-        permission: ['user.users.index'],
-        icon: 'fa fa-users',
-        url: '/utilisateurs/liste',
-        description: 'Gestion des roles',
-        subMenu: [
-          {
-            icon: 'flaticon-plus',
-            name: 'Nouvel utilisateur',
-            url: '/utilisateurs/ajouter',
-            permission: ['user.users.store']
-          },
-          {
-            icon: 'flaticon-list',
-            name: 'Liste des utilisateurs',
-            url: '/utilisateurs/liste',
-            permission: ['user.users.index']
-          },
-
-        ],
-        disabled: 'false'
-      },
-      {
-        name: 'Journal d\'activités',
-        permission: ['user.users.index'],
-        icon: 'fa fa-clock-o',
-        url: '/activity/index',
-        description: 'Journal d\'activités',
-        subMenu: [
-          {
-            icon: 'fa fa-clock-o',
-            name: 'Journal d\'activités',
-            url: '/activity/index',
-            permission: ['user.users.store']
-          }
-        ],
-        disabled: 'false'
-      },
-      {
-        name: 'Import',
-        permission: ['user.users.index'],
-        icon: 'fa fa-upload',
-        url: '/import/index',
-        description: 'Import',
-        subMenu: [
-          {
-            icon: 'fa fa-upload',
-            name: 'Import',
-            url: '/import/index',
-            permission: ['user.users.store']
-          }
-        ],
-        disabled: 'false'
-      }
-      ,
       {
         name: 'Reporting',
         permission: ['preconization.interventions.grid'],
