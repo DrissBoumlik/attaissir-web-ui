@@ -8,9 +8,9 @@ describe('ConvoationListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConvoationListComponent ]
+      declarations: [ConvoationListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -8,9 +8,9 @@ describe('EchantillonnageListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EchantillonnageListComponent ]
+      declarations: [EchantillonnageListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AlertService, AuthenticationService, UserService } from './_services';
 import * as CryptoJS from 'crypto-js';
 import { AlertComponent } from './_directives/alert.component';
-import {Helper} from '../shared/classes/helper';
+import { Helper } from '../shared/classes/helper';
 
 declare let $: any;
 declare let mUtil: any;
@@ -54,9 +54,9 @@ export class AuthComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
-   /* window.addEventListener('click', () => {
-      this.video.nativeElement.play();
-    });*/
+    /* window.addEventListener('click', () => {
+       this.video.nativeElement.play();
+     });*/
 
     this.model.remember = true;
 

@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {Helper} from '../../../../shared/classes/helper';
+=======
+import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { Helper } from '../../../../shared/classes/helper';
+>>>>>>> eb1dd42bb78a4d2f7b7e35472b3d6939ba113fa8
 import CustomStore from 'devextreme/data/custom_store';
-import {ArrachageService} from '../../services/arrachage.service';
-import {isNull} from 'util';
+import { ArrachageService } from '../../services/arrachage.service';
+import { isNull } from 'util';
 
 @Component({
   selector: 'app-convoation-list',
@@ -25,7 +31,7 @@ export class ConvoationListComponent implements OnInit {
 
 
   constructor(private arrachageService: ArrachageService,
-              private toaster: ToastrService) {
+    private toaster: ToastrService) {
     this.helper = Helper;
   }
 
@@ -52,7 +58,7 @@ export class ConvoationListComponent implements OnInit {
       return 'm-badge m-badge--warning m-badge--wide';
     } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'convoqué'.toLowerCase()) {
       return 'm-badge m-badge--success m-badge--wide';
-    }  else {
+    } else {
       return 'm-badge m-badge--primary m-badge--wide';
     }
   }

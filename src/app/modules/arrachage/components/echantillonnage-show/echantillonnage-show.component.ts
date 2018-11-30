@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {ArrachageService} from '../../services/arrachage.service';
-import {Helper} from '../../../../shared/classes/helper';
-import {NewComponent} from '../../../interventions/components/new/new.component';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ArrachageService } from '../../services/arrachage.service';
+import { Helper } from '../../../../shared/classes/helper';
+import { NewComponent } from '../../../interventions/components/new/new.component';
 
 @Component({
   selector: 'app-echantillonnage-show',
@@ -33,9 +33,9 @@ export class EchantillonnageShowComponent implements OnInit {
   DX_SELECT_BOX = 'dxSelectBox';
 
   constructor(private router: Router,
-              private toastr: ToastrService,
-              private route: ActivatedRoute,
-              private arrachageService: ArrachageService) {
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
+    private arrachageService: ArrachageService) {
     this.helper = Helper;
   }
 
