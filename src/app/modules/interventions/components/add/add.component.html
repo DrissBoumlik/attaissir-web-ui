@@ -40,7 +40,7 @@
                 </dxo-label>
               </dxi-item>
 
-              <dxi-item itemType="group" [colCount]="10" [visible]="global_type.parcel">
+              <dxi-item itemType="group" [colCount]="10" *ngIf="global_type.parcel">
                 <dxi-item dataField="logical_parcel" editorType="dxSelectBox" [colSpan]="9" [editorOptions]="parcelOptions" #logicalParcel>
                   <dxo-label
                     text="Parcelle">
@@ -54,19 +54,19 @@
 
               </dxi-item>
 
-              <dxi-item dataField="contracted_surface" [visible]="global_type.parcel" [disabled]="true" editorType="dxNumberBox">
+              <dxi-item dataField="contracted_surface" *ngIf="global_type.parcel" [disabled]="true" editorType="dxNumberBox">
                 <dxo-label
                   text="Superficie contractée">
                 </dxo-label>
               </dxi-item>
 
-              <dxi-item dataField="actual_surface" [visible]="global_type.parcel" [disabled]="true" editorType="dxNumberBox">
+              <dxi-item dataField="actual_surface" *ngIf="global_type.parcel" [disabled]="true" editorType="dxNumberBox">
                 <dxo-label
                   text="Superficie réelle">
                 </dxo-label>
               </dxi-item>
 
-              <dxi-item dataField="remaining_surface" [visible]="global_type.parcel" [visible]="false" [disabled]="true" editorType="dxNumberBox">
+              <dxi-item dataField="remaining_surface" *ngIf="global_type.parcel" [visible]="false" [disabled]="true" editorType="dxNumberBox">
                 <dxo-label
                   text="Superficie restante">
                 </dxo-label>
@@ -74,8 +74,8 @@
 
             </dxi-item>
 
-            <dxi-item itemType="group" [visible]="global_type.parcel" [colCount]="1">
-              <dxi-item dataField="scheduled_date" [visible]="true" editorType="dxDateBox"
+            <dxi-item itemType="group" *ngIf="global_type.parcel" [colCount]="1">
+              <dxi-item dataField="scheduled_date" *ngIf="true" editorType="dxDateBox"
                         [editorOptions]="{value: today, min: today}">
                 <dxo-label
                   text="Date prévue">

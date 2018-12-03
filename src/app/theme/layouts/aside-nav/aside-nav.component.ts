@@ -223,6 +223,13 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
             url: '/arrachage/convocations',
             permission: ['preconization.interventions.store']
           }
+          ,
+          {
+            icon: 'flaticon-clipboard',
+            name: 'Encodage',
+            url: '/arrachage/encodage/liste',
+            permission: ['preconization.interventions.store']
+          }
         ],
         disabled: 'false'
       },

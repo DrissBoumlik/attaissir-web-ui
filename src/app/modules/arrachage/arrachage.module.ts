@@ -8,6 +8,7 @@ import { EchantillonnageListComponent } from './components/echantillonnage-list/
 import { EchantillonnageShowComponent } from './components/echantillonnage-show/echantillonnage-show.component';
 import { FormsModule } from '@angular/forms';
 import { ChargementAffectationListComponent } from './components/chargement-affectation-list/chargement-affectation-list.component';
+import { EncodageLisComponent } from './components/encodage-lis/encodage-lis.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { ChargementAffectationListComponent } from './components/chargement-affe
     FormsModule,
     DxLoadPanelModule
   ],
-  declarations: [ConvoationListComponent, EchantillonnageListComponent, EchantillonnageShowComponent, ChargementAffectationListComponent]
+  declarations: [ConvoationListComponent, EchantillonnageListComponent, EchantillonnageShowComponent, ChargementAffectationListComponent, EncodageLisComponent]
 })
 export class ArrachageModule { }
