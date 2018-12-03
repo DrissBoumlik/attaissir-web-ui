@@ -10,6 +10,30 @@
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body m-portlet__body--no-padding">
+
+
+
+
+
+      <div class="m-portlet__head">
+        <div class="m-portlet__head-tools">
+          <div class="buttons">
+
+            <dx-button
+              width="300"
+              icon="fa fa-barcode"
+              class="d-none d-sm-block pull-right"
+              style="font-weight: bold"
+              [type]="'success'"
+              text="Recherche avec lecteur code barre"
+              (onClick)="Scan()">
+            </dx-button>
+
+
+          </div>
+        </div>
+      </div>
+
       <dx-data-grid
         id="fieldStatesGrid"
         [dataSource]="echantillons"
@@ -80,3 +104,45 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+<div  name="popup" id="popup" #popup>
+
+<dx-popup
+  class="popup"
+  [width]="420"
+  [height]="220"
+  [showTitle]="false"
+  [dragEnabled]="false"
+  (onShown)="SearchBycodebarre()"
+  [closeOnOutsideClick]="true"
+  [(visible)]="popupcodebarreVisible"
+
+>
+  <div *dxTemplate="let data of 'content'">
+
+     <div   class="cardWrap">
+      <div class="_card cardLeft">
+        <h1>Scanner le code barre  </h1>
+        <img id="img_code" src="http://www.c-3usa.com/barcode_scanner.gif"  />
+      </div>
+      <div class="_card cardRight">
+         <div class="number">
+          <h3><i class="fa fa-search" id="search_icon" aria-hidden="true" ></i></h3>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</dx-popup>
+</div>
+
+<input type="text" name="codebarre" style="width: 0; height: 0;border: none;"  #codebarre>
+<input class="rfid-input" type="text"   name="focusout" style="width: 0; height: 0;border: none;"  #focusout>
+
+
