@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {Helper} from '../../../../shared/classes/helper';
-=======
-import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Helper } from '../../../../shared/classes/helper';
->>>>>>> eb1dd42bb78a4d2f7b7e35472b3d6939ba113fa8
 import CustomStore from 'devextreme/data/custom_store';
 import { ArrachageService } from '../../services/arrachage.service';
 import { isNull } from 'util';
