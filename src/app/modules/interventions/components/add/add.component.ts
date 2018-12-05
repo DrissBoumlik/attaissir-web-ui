@@ -724,7 +724,7 @@ export class AddComponent implements OnInit {
               const desired_quantity = parseFloat(this.SemenceQuantity);
               const pr_quantity = parseFloat(res.data.quantity);
               const plf_quan = limit - pr_quantity;
-              if (desired_quantity > plf_quan) {
+              if (desired_quantity > plf_quan && limit !== 0) {
                 NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
                 return -1;
               }

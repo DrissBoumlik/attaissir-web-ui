@@ -27,7 +27,7 @@
 
   <!--</div>-->
   <!-- BEGIN: Brand -->
-  <div class="m-stack__item m-brand  m-brand--skin-dark" >
+  <div class="m-stack__item m-brand  m-brand--skin-dark">
     <div class="m-stack m-stack--ver m-stack--general">
       <div class="m-stack__item m-stack__item--middle m-stack__item--center m-brand__logo" style="z-index: 99999999;">
         <a routerLink="/index" class="m-brand__logo-wrapper">
@@ -87,13 +87,14 @@
         class="m-menu__item m-menu__item--wd  m-menu__item--submenu {{menuItem.disabled == 'true' ? 'm-menu__item-disabled' : ''}}"
         aria-haspopup="true" routerLinkActive="m-menu__item--open"
         routerLinkActiveOptions="{ exact: true }" m-menu-submenu-toggle="hover" m-menu-link-redirect="1"
-        aria-haspopup="true" *ngFor="let menuItem of mainMenu"  [appPermissionHidden]="menuItem.permission">
+        aria-haspopup="true" *ngFor="let menuItem of mainMenu" [appPermissionHidden]="menuItem.permission">
 
-        <a   href="javascript:;" class="m-menu__link m-menu__toggle" [routerLink]="[menuItem.url]" [queryParams]="menuItem?.queryParams" >
+        <a href="javascript:;" class="m-menu__link m-menu__toggle" [routerLink]="[menuItem.url]"
+           [queryParams]="menuItem?.queryParams">
 
 
           <i class="m-menu__link-icon {{ menuItem.icon }}"></i>
-          <span  class="m-menu__link-text" i18n="">
+          <span class="m-menu__link-text" i18n="">
 										{{ menuItem.name }}
 									</span>
           <span class="m-menu__link-description" i18n="">
@@ -108,8 +109,9 @@
           <ul class="m-menu__subnav">
             <li class="m-menu__item " routerLinkActive="m-menu__item--active"
                 [routerLinkActiveOptions]="{ exact: true }"
-                aria-haspopup="true" *ngFor="let subMenuItem of menuItem.subMenu" [appPermissionHidden]="subMenuItem.permission" >
-              <a [routerLink]="[subMenuItem.url]" [queryParams]="subMenuItem.queryParams" class="m-menu__link" >
+                aria-haspopup="true" *ngFor="let subMenuItem of menuItem.subMenu"
+                [appPermissionHidden]="subMenuItem.permission">
+              <a [routerLink]="[subMenuItem.url]" [queryParams]="subMenuItem.queryParams" class="m-menu__link">
                 <span class="m-menu__item-here"></span>
                 <i [ngClass]="'m-menu__link-icon ' + subMenuItem.icon"></i>
                 <span class="m-menu__link-text" i18n="">
