@@ -69,4 +69,12 @@ export class ArticlesService {
       })
     });
   }
+
+  checkPlafonnement(third_party_id: number, articleId: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/articles/checkLimit`, { third_party_id, articleId: articleId.id }, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
 }

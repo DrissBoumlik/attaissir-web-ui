@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ArticlesService } from '../../../articles/services/articles.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ArticlesService} from '../../../articles/services/articles.service';
 import 'rxjs/add/operator/toPromise';
-import { InterventionService } from '../../services/intervention.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ThirdsService } from '../../../thirds/services/thirds.service';
-import { DxDataGridComponent } from 'devextreme-angular';
-import { NewComponent } from '../new/new.component';
-import { DxiItemComponent } from 'devextreme-angular/ui/nested/item-dxi';
-import { ToastrService } from 'ngx-toastr';
-import { WarehouseService } from '../../../warehouse/service/warehose.service';
-import { Helper } from '../../../../shared/classes/helper';
+import {InterventionService} from '../../services/intervention.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ThirdsService} from '../../../thirds/services/thirds.service';
+import {DxDataGridComponent} from 'devextreme-angular';
+import {NewComponent} from '../new/new.component';
+import {DxiItemComponent} from 'devextreme-angular/ui/nested/item-dxi';
+import {ToastrService} from 'ngx-toastr';
+import {WarehouseService} from '../../../warehouse/service/warehose.service';
+import {Helper} from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-add',
@@ -27,6 +27,7 @@ export class AddComponent implements OnInit {
   addProduct: any;
   addAP: any;
   addBTR: any;
+  addEquipment: any;
   /*-------------------------------------------*/
   parcelOptions: any;
   stwOptions: any;
@@ -43,6 +44,7 @@ export class AddComponent implements OnInit {
   products: any = [];
   apis: any = [];
   btrs: any = [];
+  equipments: any = [];
   saveAsModel = false;
   /*-------------------------------------------*/
   semenceCategoryOptions: any;
@@ -81,10 +83,20 @@ export class AddComponent implements OnInit {
   BTRQuantity: any;
   BTRQuantityOptions;
   /*-------------------------------------------*/
+  EquipmentCategoryOptions: any;
+  EquipmentSubCategoryOptions: any;
+  EquipmentArticleOptions: any;
+  SelectedEquipmentsCategory: any;
+  SelectedEquipmentSubCategory: any;
+  SelectedEquipmentArticle: any = {};
+  EquipmentQuantity: any;
+  EquipmentQuantityOptions;
+  /*-------------------------------------------*/
   @ViewChild('semenceGrid') semenceGrid: DxDataGridComponent;
   @ViewChild('productsGrid') productsGrid: DxDataGridComponent;
   @ViewChild('apiGrid') apiGrid: DxDataGridComponent;
   @ViewChild('btrGrid') btrGrid: DxDataGridComponent;
+  @ViewChild('equipmentGrid') equipmentGrid: DxDataGridComponent;
   /*-------------------------------------------*/
   @ViewChild('choixSemence') choixSemence: DxiItemComponent;
   @ViewChild('choixProducts') choixProducts: DxiItemComponent;
@@ -97,6 +109,7 @@ export class AddComponent implements OnInit {
     services: [],
     api: [],
     btr: [],
+    equipments: [],
     autre: []
   };
   /*-------------------------------------------*/
@@ -120,6 +133,7 @@ export class AddComponent implements OnInit {
   PRODUCT_TYPE = 'product';
   SERVICE_TYPE = 'service';
   BTR_TYPE = 'BTR';
+  EQUIPMENT_TYPE = 'EQMA';
   AVANCES_ET_PRIMES_TYPE = 'API';
 
   /*--------------------Popups-----------------------*/
@@ -129,7 +143,6 @@ export class AddComponent implements OnInit {
   templates: any[] = [];
   templateEditorOptions: any;
   selectedTemplate: any;
-
   /*--------------------Constructor-----------------------*/
   helper: any;
   global_type = {
@@ -140,12 +153,12 @@ export class AddComponent implements OnInit {
   };
 
   constructor(public articleService: ArticlesService,
-    public interventionService: InterventionService,
-    private wareHouseService: WarehouseService,
-    private route: ActivatedRoute,
-    private thirdsService: ThirdsService,
-    private toastr: ToastrService,
-    private router: Router) {
+              public interventionService: InterventionService,
+              private wareHouseService: WarehouseService,
+              private route: ActivatedRoute,
+              private thirdsService: ThirdsService,
+              private toastr: ToastrService,
+              private router: Router) {
     this.helper = Helper;
   }
 
@@ -203,9 +216,9 @@ export class AddComponent implements OnInit {
                           if (sm) {
                             sm.forEach((semence: any) => {
                               this.semences.push({
-                                'category': { category_name: semence.category },
-                                'sub_category': { sub_category_name: semence.sub_category },
-                                'article': { id: semence.id, name: semence.article_name },
+                                'category': {category_name: semence.category},
+                                'sub_category': {sub_category_name: semence.sub_category},
+                                'article': {id: semence.id, name: semence.article_name},
                                 'quantity': semence.quantity
                               });
                             });
@@ -213,9 +226,9 @@ export class AddComponent implements OnInit {
                           if (pd) {
                             pd.forEach((product: any) => {
                               this.products.push({
-                                'category': { category_name: product.category },
-                                'sub_category': { sub_category_name: product.sub_category },
-                                'article': { id: product.id, name: product.article_name },
+                                'category': {category_name: product.category},
+                                'sub_category': {sub_category_name: product.sub_category},
+                                'article': {id: product.id, name: product.article_name},
                                 'quantity': product.quantity
                               });
                             });
@@ -277,6 +290,9 @@ export class AddComponent implements OnInit {
                     }
                     if (type.name === this.AVANCES_ET_PRIMES_TYPE) {
                       this.data.api.push(ctg);
+                    }
+                    if (type.name === this.EQUIPMENT_TYPE) {
+                      this.data.equipments.push(ctg);
                     }
                     if (type.name === this.BTR_TYPE) {
                       this.data.btr.push(ctg);
@@ -590,6 +606,49 @@ export class AddComponent implements OnInit {
         };
       },
     };
+    this.EquipmentCategoryOptions = {
+      displayExpr: 'category_name',
+      valueExpr: 'category_id',
+      items: this.data.equipments,
+      searchEnabled: true,
+      searchMode: 'contains',
+      onSelectionChanged: (event) => {
+        this.SelectedEquipmentsCategory = event.selectedItem;
+        this.EquipmentSubCategoryOptions = {
+          displayExpr: 'sub_category_name',
+          valueExpr: 'sub_category_id',
+          items: this.data.equipments[0].sub_categories,
+          searchEnabled: true,
+          searchMode: 'contains',
+          onSelectionChanged: (e) => {
+            this.SelectedEquipmentSubCategory = e.selectedItem;
+            this.articleService.getArticlesByFamily(e.selectedItem.sub_category_id)
+              .subscribe(
+                (articles: any) => {
+                  this.EquipmentArticleOptions = {
+                    displayExpr: 'name',
+                    valueExpr: 'id',
+                    items: articles.data,
+                    searchEnabled: true,
+                    searchMode: 'contains',
+                    onSelectionChanged: (ev) => {
+                      this.SelectedEquipmentArticle = ev.selectedItem;
+                      this.EquipmentQuantity = this.interventions.surface_to_work * (+this.SelectedEquipmentArticle.dose);
+                      this.EquipmentQuantityOptions = {
+                        format: '#0.## ' + this.SelectedEquipmentArticle.unit.toString(),
+                        value: this.interventions.surface_to_work * (+this.SelectedEquipmentArticle.dose),
+                        onValueChanged: (cc) => {
+                          this.EquipmentQuantity = cc.value;
+                        }
+                      };
+                    }
+                  };
+                }
+              );
+          },
+        };
+      },
+    };
     this.productsCategoryOptions = {
       displayExpr: 'category_name',
       valueExpr: 'category_id',
@@ -643,6 +702,10 @@ export class AddComponent implements OnInit {
       type: 'default',
       useSubmitBehavior: false,
       onClick: () => {
+        if (this.global_type.parcel && !this.interventions.logical_parcel) {
+          NewComponent.notifyMe('Merci de sélectionner une parcelle');
+          return -1;
+        }
         if (!this.SelectedSemenceCategory
           || !this.SelectedSemenceSubCategory
           || !this.SelectedSemenceArticle
@@ -650,27 +713,47 @@ export class AddComponent implements OnInit {
           NewComponent.notifyMe('Veuillez remplir tous les champs');
           return -1;
         }
-        try {
-          this.semenceGrid.instance.getVisibleRows().forEach((row: any) => {
-            if (row.data.article.name === this.SelectedSemenceArticle.name
-              && row.data.category.category_name === this.SelectedSemenceCategory.category_name
-              && row.data.sub_category.sub_category_name === this.SelectedSemenceSubCategory.sub_category_name
-              && row.data.quantity === this.SemenceQuantity) {
-              const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
-              NewComponent.notifyMe(msg);
-              throw new Error(msg);
-            }
-          });
-        } catch (e) {
+        this.loadingVisible = true;
+        this.articleService
+          .checkPlafonnement(this.third.id, this.SelectedSemenceArticle)
+          .subscribe(
+            (res: any) => {
+              this.loadingVisible = false;
+              const stw = parseFloat(this.interventions.surface_to_work);
+              const limit = parseFloat(res.data.limit.dose) * res.data.limit.plf * stw;
+              const desired_quantity = parseFloat(this.SemenceQuantity);
+              const pr_quantity = parseFloat(res.data.quantity);
+              const plf_quan = limit - pr_quantity;
+              if (desired_quantity > plf_quan && limit !== 0) {
+                NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
+                return -1;
+              }
 
-          throw e;
-        }
-        this.semences.push({
-          'category': this.SelectedSemenceCategory,
-          'sub_category': this.SelectedSemenceSubCategory,
-          'article': this.SelectedSemenceArticle,
-          'quantity': this.SemenceQuantity
-        });
+              try {
+                this.semenceGrid.instance.getVisibleRows().forEach((row: any) => {
+                  if (row.data.article.name === this.SelectedSemenceArticle.name
+                    && row.data.category.category_name === this.SelectedSemenceCategory.category_name
+                    && row.data.sub_category.sub_category_name === this.SelectedSemenceSubCategory.sub_category_name
+                    && row.data.quantity === this.SemenceQuantity) {
+                    const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
+                    NewComponent.notifyMe(msg);
+                    throw new Error(msg);
+                  }
+                });
+              } catch (e) {
+                throw e;
+              }
+              this.semences.push({
+                'category': this.SelectedSemenceCategory,
+                'sub_category': this.SelectedSemenceSubCategory,
+                'article': this.SelectedSemenceArticle,
+                'quantity': this.SemenceQuantity
+              });
+            }, (err: any) => {
+              this.loadingVisible = false;
+              console.log(err);
+            }
+          );
       }
     };
     this.addAP = {
@@ -678,6 +761,10 @@ export class AddComponent implements OnInit {
       type: 'default',
       useSubmitBehavior: false,
       onClick: () => {
+        if (this.global_type.parcel && !this.interventions.logical_parcel) {
+          NewComponent.notifyMe('Merci de sélectionner une parcelle');
+          return -1;
+        }
         if (!this.SelectedAPsCategory
           || !this.SelectedAPSubCategory
           || !this.SelectedAPArticle
@@ -685,26 +772,45 @@ export class AddComponent implements OnInit {
           NewComponent.notifyMe('Veuillez remplir tous les champs');
           return -1;
         }
-        try {
-          this.apiGrid.instance.getVisibleRows().forEach((row: any) => {
-            if (row.data.article.name === this.SelectedAPArticle.name
-              && row.data.category.category_name === this.SelectedAPsCategory.category_name
-              && row.data.sub_category.sub_category_name === this.SelectedAPSubCategory.sub_category_name
-              && row.data.quantity === this.APQuantity) {
-              const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
-              NewComponent.notifyMe(msg);
-              throw new Error(msg);
-            }
-          });
-        } catch (e) {
-          throw e;
-        }
-        this.apis.push({
-          'category': this.SelectedAPsCategory,
-          'sub_category': this.SelectedAPSubCategory,
-          'article': this.SelectedAPArticle,
-          'quantity': this.APQuantity
-        });
+        this.loadingVisible = true;
+        this.articleService
+          .checkPlafonnement(this.third.id, this.SelectedAPArticle)
+          .subscribe(
+            (res: any) => {
+              this.loadingVisible = false;
+              const stw = parseFloat(this.interventions.surface_to_work);
+              const limit = parseFloat(res.data.limit.dose) * res.data.limit.plf * stw;
+              const desired_quantity = parseFloat(this.APQuantity);
+              const pr_quantity = parseFloat(res.data.quantity);
+              const plf_quan = limit - pr_quantity;
+              if (desired_quantity > plf_quan) {
+                NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
+                return -1;
+              }
+              try {
+                this.apiGrid.instance.getVisibleRows().forEach((row: any) => {
+                  if (row.data.article.name === this.SelectedAPArticle.name
+                    && row.data.category.category_name === this.SelectedAPsCategory.category_name
+                    && row.data.sub_category.sub_category_name === this.SelectedAPSubCategory.sub_category_name
+                    && row.data.quantity === this.APQuantity) {
+                    const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
+                    NewComponent.notifyMe(msg);
+                    throw new Error(msg);
+                  }
+                });
+              } catch (e) {
+                throw e;
+              }
+              this.apis.push({
+                'category': this.SelectedAPsCategory,
+                'sub_category': this.SelectedAPSubCategory,
+                'article': this.SelectedAPArticle,
+                'quantity': this.APQuantity
+              });
+            }, (err: any) => {
+              this.loadingVisible = false;
+              console.log(err);
+            });
       }
     };
     this.addBTR = {
@@ -712,6 +818,10 @@ export class AddComponent implements OnInit {
       type: 'default',
       useSubmitBehavior: false,
       onClick: () => {
+        if (this.global_type.parcel && !this.interventions.logical_parcel) {
+          NewComponent.notifyMe('Merci de sélectionner une parcelle');
+          return -1;
+        }
         if (!this.SelectedBTRsCategory
           || !this.SelectedBTRSubCategory
           || !this.SelectedBTRArticle
@@ -719,26 +829,45 @@ export class AddComponent implements OnInit {
           NewComponent.notifyMe('Veuillez remplir tous les champs');
           return -1;
         }
-        try {
-          this.btrGrid.instance.getVisibleRows().forEach((row: any) => {
-            if (row.data.article.name === this.SelectedBTRArticle.name
-              && row.data.category.category_name === this.SelectedBTRsCategory.category_name
-              && row.data.sub_category.sub_category_name === this.SelectedBTRSubCategory.sub_category_name
-              && row.data.quantity === this.BTRQuantity) {
-              const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
-              NewComponent.notifyMe(msg);
-              throw new Error(msg);
-            }
-          });
-        } catch (e) {
-          throw e;
-        }
-        this.btrs.push({
-          'category': this.SelectedBTRsCategory,
-          'sub_category': this.SelectedBTRSubCategory,
-          'article': this.SelectedBTRArticle,
-          'quantity': this.BTRQuantity
-        });
+        this.loadingVisible = true;
+        this.articleService
+          .checkPlafonnement(this.third.id, this.SelectedBTRArticle)
+          .subscribe(
+            (res: any) => {
+              this.loadingVisible = false;
+              const stw = parseFloat(this.interventions.surface_to_work);
+              const limit = parseFloat(res.data.limit.dose) * res.data.limit.plf * stw;
+              const desired_quantity = parseFloat(this.BTRQuantity);
+              const pr_quantity = parseFloat(res.data.quantity);
+              const plf_quan = limit - pr_quantity;
+              if (desired_quantity > plf_quan) {
+                NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
+                return -1;
+              }
+              try {
+                this.btrGrid.instance.getVisibleRows().forEach((row: any) => {
+                  if (row.data.article.name === this.SelectedBTRArticle.name
+                    && row.data.category.category_name === this.SelectedBTRsCategory.category_name
+                    && row.data.sub_category.sub_category_name === this.SelectedBTRSubCategory.sub_category_name
+                    && row.data.quantity === this.BTRQuantity) {
+                    const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
+                    NewComponent.notifyMe(msg);
+                    throw new Error(msg);
+                  }
+                });
+              } catch (e) {
+                throw e;
+              }
+              this.btrs.push({
+                'category': this.SelectedBTRsCategory,
+                'sub_category': this.SelectedBTRSubCategory,
+                'article': this.SelectedBTRArticle,
+                'quantity': this.BTRQuantity
+              });
+            }, (err: any) => {
+              this.loadingVisible = false;
+              console.log(err);
+            });
       }
     };
     this.addProduct = {
@@ -746,6 +875,10 @@ export class AddComponent implements OnInit {
       type: 'default',
       useSubmitBehavior: false,
       onClick: () => {
+        if (this.global_type.parcel && !this.interventions.logical_parcel) {
+          NewComponent.notifyMe('Merci de sélectionner une parcelle');
+          return -1;
+        }
         if (!this.SelectedProductsCategory
           || !this.SelectedProductsSubCategory
           || !this.SelectedProductsArticle
@@ -753,27 +886,104 @@ export class AddComponent implements OnInit {
           NewComponent.notifyMe('Veuillez remplir tous les champs');
           return -1;
         }
-        try {
-          this.productsGrid.instance.getVisibleRows().forEach((row: any) => {
-            if (row.data.article.name === this.SelectedProductsArticle.name
-              && row.data.category.category_name === this.SelectedProductsCategory.category_name
-              && row.data.sub_category.sub_category_name === this.SelectedProductsSubCategory.sub_category_name
-              && row.data.quantity === this.productsQuantity) {
-              const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
-              NewComponent.notifyMe(msg);
-              throw new Error(msg);
-            }
-          });
-        } catch (e) {
-          throw e;
-        }
+        this.loadingVisible = true;
+        this.articleService
+          .checkPlafonnement(this.third.id, this.SelectedProductsArticle)
+          .subscribe(
+            (res: any) => {
+              this.loadingVisible = false;
+              const stw = parseFloat(this.interventions.surface_to_work);
+              const limit = parseFloat(res.data.limit.dose) * res.data.limit.plf * stw;
+              const desired_quantity = parseFloat(this.productsQuantity);
+              const pr_quantity = parseFloat(res.data.quantity);
+              const plf_quan = limit - pr_quantity;
+              if (desired_quantity > plf_quan) {
+                NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
+                return -1;
+              }
+              try {
+                this.productsGrid.instance.getVisibleRows().forEach((row: any) => {
+                  if (row.data.article.name === this.SelectedProductsArticle.name
+                    && row.data.category.category_name === this.SelectedProductsCategory.category_name
+                    && row.data.sub_category.sub_category_name === this.SelectedProductsSubCategory.sub_category_name
+                    && row.data.quantity === this.productsQuantity) {
+                    const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
+                    NewComponent.notifyMe(msg);
+                    throw new Error(msg);
+                  }
+                });
+              } catch (e) {
+                throw e;
+              }
 
-        this.products.push({
-          'category': this.SelectedProductsCategory,
-          'sub_category': this.SelectedProductsSubCategory,
-          'article': this.SelectedProductsArticle,
-          'quantity': this.productsQuantity
-        });
+              this.products.push({
+                'category': this.SelectedProductsCategory,
+                'sub_category': this.SelectedProductsSubCategory,
+                'article': this.SelectedProductsArticle,
+                'quantity': this.productsQuantity
+              });
+            }, (err: any) => {
+              this.loadingVisible = false;
+              console.log(err);
+            });
+      }
+    };
+    this.addEquipment = {
+      text: 'AJOUTER',
+      type: 'default',
+      useSubmitBehavior: false,
+      onClick: () => {
+        if (this.global_type.parcel && !this.interventions.logical_parcel) {
+          NewComponent.notifyMe('Merci de sélectionner une parcelle');
+          return -1;
+        }
+        if (!this.SelectedEquipmentsCategory
+          || !this.SelectedEquipmentSubCategory
+          || !this.SelectedEquipmentArticle
+          || !this.EquipmentQuantity) {
+          NewComponent.notifyMe('Veuillez remplir tous les champs');
+          return -1;
+        }
+        this.loadingVisible = true;
+        this.articleService
+          .checkPlafonnement(this.third.id, this.SelectedEquipmentArticle)
+          .subscribe(
+            (res: any) => {
+              this.loadingVisible = false;
+              const stw = parseFloat(this.interventions.surface_to_work);
+              const limit = parseFloat(res.data.limit.dose) * res.data.limit.plf * stw;
+              const desired_quantity = parseFloat(this.EquipmentQuantity);
+              const pr_quantity = parseFloat(res.data.quantity);
+              const plf_quan = limit - pr_quantity;
+              if (desired_quantity > plf_quan) {
+                NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
+                return -1;
+              }
+              try {
+                this.equipmentGrid.instance.getVisibleRows().forEach((row: any) => {
+                  if (row.data.article.name === this.SelectedEquipmentArticle.name
+                    && row.data.category.category_name === this.SelectedEquipmentsCategory.category_name
+                    && row.data.sub_category.sub_category_name === this.SelectedEquipmentSubCategory.sub_category_name
+                    && row.data.quantity === this.EquipmentQuantity) {
+                    const msg = 'Vous avez déjà sélectionné un article de la même famille et la même quantité.';
+                    NewComponent.notifyMe(msg);
+                    throw new Error(msg);
+                  }
+                });
+              } catch (e) {
+                throw e;
+              }
+
+              this.equipments.push({
+                'category': this.SelectedEquipmentsCategory,
+                'sub_category': this.SelectedEquipmentSubCategory,
+                'article': this.SelectedEquipmentArticle,
+                'quantity': this.EquipmentQuantity
+              });
+            }, (err: any) => {
+              this.loadingVisible = false;
+              console.log(err);
+            });
       }
     };
     /*--------------------------------------------------------*/
@@ -864,7 +1074,7 @@ export class AddComponent implements OnInit {
 
         this.selectedItems.forEach(
           st => {
-            data.service_articles.push({ article_id: st.id, quantity: 1 });
+            data.service_articles.push({article_id: st.id, quantity: 1});
           }
         );
         if (this.interventions.isSaveAsModel
@@ -956,13 +1166,11 @@ export class AddComponent implements OnInit {
     };
     /*--------------------------------------------------------*/
   }
-
   /*-------------------------------------------*/
   selectLogicalParcel(e: any) {
     this.parcelOptions.value = e.id;
     this.logicalParcel.editorOptions = this.parcelOptions;
     this.parcelGridPopup = false;
   }
-
   /*-------------------------------------------*/
 }
