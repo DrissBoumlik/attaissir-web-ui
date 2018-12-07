@@ -34,7 +34,7 @@ export class ListComponent implements OnInit {
         return this.incidentService.getFieldStatesDx(loadOptions)
           .toPromise()
           .then(response => {
-            console.log(response);
+          //  console.log(response);
             const json = response;
             return json;
           })

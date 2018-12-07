@@ -90,7 +90,9 @@ export class IndexComponent implements OnInit {
         d.resolve();
         this.toaster.success('Le document a été téléchargé avec succès.');
       }, error => {
-        d.reject('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
+        this.toaster.error('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
+
+      //  d.reject('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
       });
 
 
@@ -98,11 +100,8 @@ export class IndexComponent implements OnInit {
   }
 
 
-
+/*
   onAddDOC(e: any) {
-
-    console.log(this.import);
-
 
     const d = new $.Deferred();
     const newDoc = {
@@ -126,6 +125,7 @@ export class IndexComponent implements OnInit {
 
     e.cancel = d.promise();
   }
+  */
 
 
 }
