@@ -39,9 +39,11 @@
                 message="veuillez saisir une adresse email valide">
               </dxi-validation-rule>
             </dxi-item>
-     
+
+
+
             <dxi-item dataField="_password"
-                      [editorOptions]="{ mode: 'password' }">
+                      [editorOptions]="{ mode: 'password'}">
               <dxo-label
                 text="Mot de passe">
               </dxo-label>
@@ -125,7 +127,7 @@
               <dxi-column *ngIf="roleIsCentreDistribution"
                           dataField="warehouses"
                           cellTemplate="cellTemplate2"
-                          caption="Magasin" 
+                          caption="Magasin"
                           alignment="center"></dxi-column>
               <div *dxTemplate="let data of 'cellTemplate2'">
 
@@ -152,12 +154,12 @@
 
               <dxi-column dataField="id"
                           cellTemplate="cellTemplate"
-                          caption="" 
+                          caption=""
                           alignment="center"></dxi-column>
               <div *dxTemplate="let data of 'cellTemplate'">
                 <a (click)="showStructureZones(data)"
                    style="cursor:pointer; text-align: left;color: black">
-                 
+
                    <span class="d-block d-sm-none">
                       <i class="flaticon-add"></i> </span>
 
@@ -239,7 +241,7 @@
 </div>
 
 
- 
+
 
 <div name="popup" id="popup" #popup>
     <dx-popup
@@ -255,7 +257,7 @@
       (window:keypress)="doSomething($event)"
     >
       <div *dxTemplate="let data of 'content'">
-  
+
         <div class="gilsser">
           <h1>GLISSER LA CARTE</h1>
           <p>Faire glisser la carte sur le lecteur de carte pour lancer la recherche</p>
@@ -269,14 +271,14 @@
             </div>
           </div>
         </div>
-  
+
       </div>
     </dx-popup>
-  
+
   </div>
 
 
 
-  
+
   <input type="text" name="rfid" style="width: 0; height: 0;border: none;" #rfid>
   <input class="rfid-input" type="text" name="focusout" style="width: 0; height: 0;border: none;" #focusout>

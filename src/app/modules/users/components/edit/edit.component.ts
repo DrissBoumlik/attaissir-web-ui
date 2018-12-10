@@ -49,7 +49,6 @@ export class EditComponent implements OnInit, OnDestroy {
 
 
 
-
     /**
      * get roles
      */
@@ -102,6 +101,8 @@ export class EditComponent implements OnInit, OnDestroy {
             this.user.email = response.data.email;
             this.user.rfid = response.data.rfid;
             this.user.name = response.data.name;
+            this.user._password = null;
+
             this.userRole = response.data.role[0];
             this.user.role_id = response.data.role[0];
             if (response.data.role[0] === 'cd') {

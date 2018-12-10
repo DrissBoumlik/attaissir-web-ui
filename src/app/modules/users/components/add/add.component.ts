@@ -220,7 +220,7 @@ export class AddComponent implements OnInit {
   //       name: this.user.name,
   //       password: this.user.password,
   //       role_id: this.user.role_id,
-  //       structure_id: structure_id,
+  //       structure_id: structure_id ,
   //       zone_id: zone_id
   //     };
   //     this.userService.saveUser(data).subscribe(
@@ -402,7 +402,7 @@ export class AddComponent implements OnInit {
           console.log(this.rf_code);
 
           this.user.rfid = this.rf_code;
-          //this.preconisations = {};
+          // this.preconisations = {};
           /*
           let  code =  this.rf_code;
                  this.preconisations.store = new CustomStore({
