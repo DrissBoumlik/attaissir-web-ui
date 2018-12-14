@@ -227,8 +227,6 @@ export class Widget5Component {
 
 
   ngAfterViewInit() {
-    console.log(this.table);
- //  this.temperaturesData = this.table;
 
     $(document).ready(function () {
       $('[data-toggle="tooltip"]').tooltip();
@@ -350,7 +348,6 @@ export class Widget5Component {
 
 
   customizeTooltip = (info: any) => {
-    console.log(info);
     return {
       html: "<p><b>"+info.value+"</b></p>"
     };

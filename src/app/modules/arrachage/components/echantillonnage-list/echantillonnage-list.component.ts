@@ -1,3 +1,4 @@
+
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ArrachageService} from '../../services/arrachage.service';
 import {ToastrService} from 'ngx-toastr';

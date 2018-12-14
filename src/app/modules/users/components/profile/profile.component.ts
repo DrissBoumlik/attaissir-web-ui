@@ -66,7 +66,7 @@ export class ProfileComponent implements OnInit {
             this.router.navigate(['/']);
           },
           error => {
-            this.toastr.error(error.error.message)
+            this.toastr.error(error.error.message);
             // this.errors = error;
           }
         );

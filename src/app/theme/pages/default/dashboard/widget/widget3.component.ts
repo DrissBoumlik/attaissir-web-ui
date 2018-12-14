@@ -135,6 +135,13 @@ declare var $: any;
     .title a:hover {
       text-decoration: none;
     }
+    
+    .pourcentage {
+      text-align: center;
+      color: #fff; 
+      font-weight: bold;
+      font-size: 20px;
+    }
 
 
   `],
@@ -174,9 +181,9 @@ declare var $: any;
                
 
 
-<div style="margin-top: 2px; display: block; margin-left: auto; margin-right: auto; width: 90%;">
+<div style="margin-top: -6px; display: block; margin-left: auto; margin-right: auto; width: 90%;">
   
-  <div style="text-align: center; color: #fff; font-weight: bold "> {{ ((val/max) * 100).toFixed(2)}} %</div>
+  <div class="pourcentage" > {{ ((val/max) * 100).toFixed(2)}} %</div>
                     <dx-progress-bar #progressBar
                                      id="progress-bar-status"
                                      width="90%"

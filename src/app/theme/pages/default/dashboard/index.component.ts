@@ -54,6 +54,11 @@ export class IndexDashComponent {
   deletedItem: any;
 
 
+  monthOptions: any;
+  yearOptions: any;
+  this_month ;
+  this_year ;
+
   constructor(private widgetService: WidgetService , private toastrService: ToastrService
     , private dragulaService: DragulaService
     ) {
@@ -68,9 +73,7 @@ export class IndexDashComponent {
     this.cancelPopVisible = false;
     this.subs.add(dragulaService.drop('DRAGULA_FACTS')
     .subscribe(({ el, target, source, sibling }) => {
-      console.log(target.id);
-      console.log( this.getElementIndex(el));
-      console.log(el.id);
+
 
       let align;
       if (target.id == 'right') {
@@ -85,15 +88,7 @@ export class IndexDashComponent {
 
       }); 
 
-      /*
-      console.log('dropModel:');
-      console.log(el);
-      console.log(source);
-      console.log(target);
-      console.log(sourceModel);
-      console.log(targetModel);
-*/
-      
+
 
     })
   );
@@ -115,6 +110,40 @@ export class IndexDashComponent {
         };
       }
     );
+
+
+
+    const d = new Date();
+    this.this_month = d.getMonth() + 1 ;
+
+    this.this_year = d.getFullYear();
+
+
+
+    this.monthOptions = {
+      displayExpr: 'name',
+      valueExpr: 'id',
+      items:  [
+        {id: 1 , name : 'Janvier'}, {id: 2 , name : 'Février'}, {id: 3 , name : 'Mars'}, {id: 4 , name : 'Avril'}, {id: 5 , name : 'Mai'}, { id: 6 , name : 'Juin'}, {id: 7 , name : 'Juillet'},
+        {id: 8 , name : 'Août'}, {id: 9 , name : 'Septembre'}, {id: 10 , name : 'Octobre'}, {id: 11 , name : 'Novembre'}, { id: 12 , name : 'Décembre'}],
+      searchEnabled: true,
+      onSelectionChanged: (e3) => {
+        console.log(e3);
+      }
+    };
+
+
+    this.yearOptions = {
+      displayExpr: 'name',
+      valueExpr: 'id',
+      items:  [
+        {id: 2017 , name : '2017'}, {id: 2018 , name : '2018'}, {id: 2019 , name : '2019'}, {id: 2020 , name : '2020'}, {id: 2021 , name : '2021'}, { id: 2022 , name : '2022'}, {id: 2023 , name : '2023'},
+        {id: 2024 , name : '2024'}, {id: 2025 , name : '2025'}, {id: 2026 , name : '2026'}, {id: 2027 , name : '2027'}, { id: 2028 , name : '2028'}, { id: 2029 , name : '2029'}, { id: 2030 , name : '2030'}],
+      searchEnabled: true,
+      onSelectionChanged: (e3) => {
+        console.log(e3);
+      }
+    };
 
 
 
@@ -149,7 +178,6 @@ private getElementIndex(el: any) {
 
     this.widgetService.getAll(1).subscribe((data: any) => {
 
-      console.log(data);
 
       data.forEach((it) => {
 
@@ -176,8 +204,8 @@ private getElementIndex(el: any) {
         let dateB = new Date(b.updated_at);
         
 
-        if (posA = posB && dateA <  dateB) { console.log('dt1'); return -1; }
-        if (posA = posB && dateA >  dateB ) { console.log('dt2'); return 1; }
+        if (posA = posB && dateA <  dateB) {  return -1; }
+        if (posA = posB && dateA >  dateB ) {  return 1; }
         
         return 0;
       });

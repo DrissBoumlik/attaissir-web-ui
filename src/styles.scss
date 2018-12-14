@@ -1060,7 +1060,9 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
   /*
   height: 100%;
   */
-  grid-template-columns: 0.8fr 1.2fr;
+ // grid-template-columns: 0.8fr 1.2fr;
+  grid-template-columns: 1fr 1fr;
+
   grid-template-rows: 1fr;
   grid-gap: 1px 1px;
   grid-template-areas: "SIGAAKPIS VAECTOR-MAP";
@@ -1476,6 +1478,12 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
 .m-menu__link .m-menu__link-bullet > span {
   vertical-align: middle;
   display: inline-block;
+}
+
+.m-menu__nav--dropdown-submenu-arrow{
+
+    height: 100vh;
+  //  overflow: scroll;
 }
 
 .dx-datagrid-rowsview .dx-select-checkboxes-hidden .dx-select-checkbox {
@@ -2136,3 +2144,19 @@ body {
   font-weight: bold;
   box-shadow: 0 1px 3px rgba(0,0,0,0)  !important;
 }
+
+
+/*
+#m_ver_menu{
+  height: 100vh;
+  overflow: scroll;
+}
+
+
+
+.m-menu__submenu {
+  z-index: 10000;
+}
+
+*/
+
