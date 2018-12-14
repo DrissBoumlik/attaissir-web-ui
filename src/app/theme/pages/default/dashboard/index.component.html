@@ -393,6 +393,10 @@
           </div>
 
 
+
+
+
+
         </div>
 
 
@@ -481,12 +485,23 @@
 
 
 
-                  <dxi-item dataField="month" editorType="dxDateBox" [editorOptions]="{ pickerType:'rollers' , displayFormat: 'MM/yyyy'}"  *ngIf="selectedWidget_id == 'GrapheContratsValidesParJoursCampagne'">
+
+                  <dxi-item dataField="mois" editorType="dxSelectBox" [editorOptions]="monthOptions"  *ngIf="selectedWidget_id == 'GrapheContratsValidesParJoursCampagne'">
                     <dxo-label
                       text="Mois" i18n-text>
                     </dxo-label>
                   </dxi-item>
-      
+
+
+                  <dxi-item dataField="annee" editorType="dxSelectBox" [editorOptions]="yearOptions"  *ngIf="selectedWidget_id == 'GrapheContratsValidesParJoursCampagne'">
+                    <dxo-label
+                      text="Année" i18n-text>
+                    </dxo-label>
+                  </dxi-item>
+
+
+
+
                 </dxi-item>
 
 

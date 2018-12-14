@@ -201,11 +201,10 @@
 
 
               <dx-tree-view
-
                 keyExpr="Tree_id"
                 id="selection-treeview"
                 [items]="choosingStructures[rowIndex].cdas"
-                [width]="320"
+                width="auto"
                 showCheckBoxesMode="normal"
                 selectedExpr="isSelected"
                 (onItemSelectionChanged)="selectionChanged($event)"

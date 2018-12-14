@@ -7,7 +7,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class SearchPipe implements PipeTransform {
   transform(value: any, args?: any): any {
-    console.log('it');
 
     if (!value) return null;
     if (!args) return value;
@@ -19,8 +18,7 @@ export class SearchPipe implements PipeTransform {
       });*/
 
     return value.filter(it => {
-      console.log(it);
-      return it.title.toLowerCase().includes(args);
+       return it.title.toLowerCase().includes(args);
     });
   }
 

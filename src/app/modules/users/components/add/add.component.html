@@ -40,7 +40,7 @@
               </dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="password"
-                      [editorOptions]="{ mode: 'password' }">
+                      [editorOptions]="{ mode: 'password' , value : null }">
               <dxo-label
                 text="Mot de passe">
               </dxo-label>
@@ -197,9 +197,7 @@
 
 
         <div class="pop-up-wrapper" >
-          <div class="pop-up-body" style="overflow: scroll">
-
-
+          <div class="pop-up-body" style="overflow: scroll;">
 
 
             <dx-tree-view
@@ -207,7 +205,7 @@
               keyExpr="Tree_id"
               id="selection-treeview"
               [items]="choosingStructures[rowIndex].cdas"
-              [width]="320"
+              width="auto"
               showCheckBoxesMode="normal"
               selectedExpr="isSelected"
               (onItemSelectionChanged)="selectionChanged($event)"

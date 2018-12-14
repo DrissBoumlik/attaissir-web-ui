@@ -321,8 +321,19 @@ export class AddComponent implements OnInit {
     /**
      * get roles
      */
+
+    this.user.password = null;
+    this.user.email = null;
+
+
+
+
     this.userService.getRoles().subscribe(
       (response: any) => {
+
+        this.user.password = null;
+        this.user.email = null;
+
         this.listOfRoles = response.data;
         this.roleSelectOptions = {
           items: this.listOfRoles,
@@ -343,6 +354,12 @@ export class AddComponent implements OnInit {
         console.log(err);
       }
     );
+
+
+
+
+
+
 
     /**
      * get structures
@@ -399,7 +416,6 @@ export class AddComponent implements OnInit {
           this.rf_code = this.rf_code.replace("_", "8");
           this.rf_code = this.rf_code.replace(/ç/g, "9");
 
-          console.log(this.rf_code);
 
           this.user.rfid = this.rf_code;
           // this.preconisations = {};
@@ -435,7 +451,6 @@ export class AddComponent implements OnInit {
 
 
   Scan() {
-    console.log('ok');
     this.popupRfidVisible = true;
   }
 
