@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Article} from '../../../shared/classes/article';
-import {environment} from '../../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Article } from '../../../shared/classes/article';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ export class ImportService {
     return this.http.post(`${environment.apiUrl}/${this.routeName}/upload`, formData, {
       headers: new HttpHeaders({
         'Accept': 'application/json'
-       // 'Content-Type': 'application/json'
+        // 'Content-Type': 'application/json'
       })
     });
   }

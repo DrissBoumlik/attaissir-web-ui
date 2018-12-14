@@ -1,15 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ArticlesService} from '../../../articles/services/articles.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ArticlesService } from '../../../articles/services/articles.service';
 import 'rxjs/add/operator/toPromise';
-import {InterventionService} from '../../services/intervention.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ThirdsService} from '../../../thirds/services/thirds.service';
-import {DxDataGridComponent} from 'devextreme-angular';
-import {NewComponent} from '../new/new.component';
-import {DxiItemComponent} from 'devextreme-angular/ui/nested/item-dxi';
-import {ToastrService} from 'ngx-toastr';
-import {WarehouseService} from '../../../warehouse/service/warehose.service';
-import {Helper} from '../../../../shared/classes/helper';
+import { InterventionService } from '../../services/intervention.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ThirdsService } from '../../../thirds/services/thirds.service';
+import { DxDataGridComponent } from 'devextreme-angular';
+import { NewComponent } from '../new/new.component';
+import { DxiItemComponent } from 'devextreme-angular/ui/nested/item-dxi';
+import { ToastrService } from 'ngx-toastr';
+import { WarehouseService } from '../../../warehouse/service/warehose.service';
+import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
   selector: 'app-add',
@@ -18,9 +18,6 @@ import {Helper} from '../../../../shared/classes/helper';
 })
 export class AddComponent implements OnInit {
 
-  /*-------------------SUGGEST BTNS------------------------*/
-  suggestPR: any;
-  suggestSemence: any;
   /*-------------------------------------------*/
   buttonsave: any;
   buttoncancel: any;
@@ -156,12 +153,12 @@ export class AddComponent implements OnInit {
   };
 
   constructor(public articleService: ArticlesService,
-              public interventionService: InterventionService,
-              private wareHouseService: WarehouseService,
-              private route: ActivatedRoute,
-              private thirdsService: ThirdsService,
-              private toastr: ToastrService,
-              private router: Router) {
+    public interventionService: InterventionService,
+    private wareHouseService: WarehouseService,
+    private route: ActivatedRoute,
+    private thirdsService: ThirdsService,
+    private toastr: ToastrService,
+    private router: Router) {
     this.helper = Helper;
   }
 
@@ -219,9 +216,9 @@ export class AddComponent implements OnInit {
                           if (sm) {
                             sm.forEach((semence: any) => {
                               this.semences.push({
-                                'category': {category_name: semence.category},
-                                'sub_category': {sub_category_name: semence.sub_category},
-                                'article': {id: semence.id, name: semence.article_name},
+                                'category': { category_name: semence.category },
+                                'sub_category': { sub_category_name: semence.sub_category },
+                                'article': { id: semence.id, name: semence.article_name },
                                 'quantity': semence.quantity
                               });
                             });
@@ -229,9 +226,9 @@ export class AddComponent implements OnInit {
                           if (pd) {
                             pd.forEach((product: any) => {
                               this.products.push({
-                                'category': {category_name: product.category},
-                                'sub_category': {sub_category_name: product.sub_category},
-                                'article': {id: product.id, name: product.article_name},
+                                'category': { category_name: product.category },
+                                'sub_category': { sub_category_name: product.sub_category },
+                                'article': { id: product.id, name: product.article_name },
                                 'quantity': product.quantity
                               });
                             });
@@ -447,8 +444,7 @@ export class AddComponent implements OnInit {
                   case (this.DB_SELECT_BOX): {
                     dxCustomField.editorType = this.DX_SELECT_BOX;
                     dxCustomField.colspan = 1;
-                    if(this.global_type.camion)
-                    {
+                    if (this.global_type.camion) {
                       this.interventionService.getCamionsList().subscribe(
                         (list: any) => {
                           dxCustomField.editorOptions = {
@@ -553,7 +549,7 @@ export class AddComponent implements OnInit {
                       this.APQuantity = this.interventions.surface_to_work * (+this.SelectedAPArticle.dose);
                       this.APQuantityOptions = {
                         format: '#0.## ' + this.SelectedAPArticle.unit.toString(),
-                        // disabled: this.SelectedAPArticle.code !== 'GAF001',
+                        disabled: this.SelectedAPArticle.code !== 'GAF001',
                         value: this.interventions.surface_to_work * (+this.SelectedAPArticle.dose),
                         onValueChanged: (cc) => {
                           this.APQuantity = cc.value;
@@ -728,7 +724,7 @@ export class AddComponent implements OnInit {
               const desired_quantity = parseFloat(this.SemenceQuantity);
               const pr_quantity = parseFloat(res.data.quantity);
               const plf_quan = limit - pr_quantity;
-              if (desired_quantity > plf_quan && res.data.limit.plf) {
+              if (desired_quantity > plf_quan && limit !== 0) {
                 NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
                 return -1;
               }
@@ -901,7 +897,7 @@ export class AddComponent implements OnInit {
               const desired_quantity = parseFloat(this.productsQuantity);
               const pr_quantity = parseFloat(res.data.quantity);
               const plf_quan = limit - pr_quantity;
-              if (desired_quantity > plf_quan && res.data.limit.plf) {
+              if (desired_quantity > plf_quan) {
                 NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
                 return -1;
               }
@@ -959,7 +955,7 @@ export class AddComponent implements OnInit {
               const desired_quantity = parseFloat(this.EquipmentQuantity);
               const pr_quantity = parseFloat(res.data.quantity);
               const plf_quan = limit - pr_quantity;
-              if (desired_quantity > plf_quan && res.data.limit.plf) {
+              if (desired_quantity > plf_quan) {
                 NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
                 return -1;
               }
@@ -1078,7 +1074,7 @@ export class AddComponent implements OnInit {
 
         this.selectedItems.forEach(
           st => {
-            data.service_articles.push({article_id: st.id, quantity: 1});
+            data.service_articles.push({ article_id: st.id, quantity: 1 });
           }
         );
         if (this.interventions.isSaveAsModel
@@ -1168,108 +1164,13 @@ export class AddComponent implements OnInit {
         this.saveAsModel = !this.saveAsModel;
       }
     };
-    /*------------------------SUGGEST BUTTONS--------------------------------*/
-    this.suggestPR = {
-      text: 'PROPOSER',
-      type: 'danger',
-      useSubmitBehavior: false,
-      onClick: () => {
-        if (this.global_type.parcel && !this.interventions.logical_parcel) {
-          NewComponent.notifyMe('Merci de sélectionner une parcelle');
-          return -1;
-        }
-        if (this.global_type.dc && !this.interventions.warehouse) {
-          NewComponent.notifyMe('Merci de sélectionner un centre de distribution');
-          return -1;
-        }
-        if (!this.interventions.surface_to_work) {
-          NewComponent.notifyMe('Veuillez entrer la superficie à travailler ');
-          return -1;
-        }
-        if (!this.SelectedProductsCategory
-          || !this.SelectedProductsSubCategory
-          || !this.SelectedProductsArticle) {
-          NewComponent.notifyMe('Veuillez remplir tous les champs');
-          return -1;
-        }
-        this.interventionService.suggestPreco(this.interventions.warehouse,
-          this.SelectedProductsArticle,
-          this.interventions.surface_to_work
-        ).subscribe(
-          (res: any) => {
-            if (!res.data.articles.product.length) {
-              NewComponent.notifyMe('Stock insuffisant ');
-
-            } else {
-              res.data.articles.product.forEach((product: any) => {
-                this.SelectedProductsArticle = product.article;
-                this.SelectedProductsCategory = {category_name: product.category.name};
-                this.SelectedProductsSubCategory = {sub_category_name: product.sub_category.name};
-                this.productsQuantity = product.quantity;
-                this.addProduct.onClick();
-              });
-            }
-          }, (err) => {
-            NewComponent.notifyMe(err.message);
-          }
-        );
-      }
-    };
-    this.suggestSemence = {
-      text: 'PROPOSER',
-      type: 'danger',
-      useSubmitBehavior: false,
-      onClick: () => {
-        if (this.global_type.parcel && !this.interventions.logical_parcel) {
-          NewComponent.notifyMe('Merci de sélectionner une parcelle');
-          return -1;
-        }
-        if (this.global_type.dc && !this.interventions.warehouse) {
-          NewComponent.notifyMe('Merci de sélectionner un centre de distribution');
-          return -1;
-        }
-        if (!this.interventions.surface_to_work) {
-          NewComponent.notifyMe('Veuillez entrer la superficie à travailler ');
-          return -1;
-        }
-        if (!this.SelectedSemenceCategory
-          || !this.SelectedSemenceSubCategory
-          || !this.SelectedSemenceArticle) {
-          NewComponent.notifyMe('Veuillez remplir tous les champs');
-          return -1;
-        }
-        this.interventionService.suggestPreco(this.interventions.warehouse,
-          this.SelectedSemenceArticle,
-          this.interventions.surface_to_work
-        ).subscribe(
-          (res: any) => {
-            if (!res.data.articles.semences.length) {
-              NewComponent.notifyMe('Stock insuffisant ');
-
-            } else {
-              res.data.articles.semences.forEach((product: any) => {
-                this.SelectedSemenceArticle = product.article;
-                this.SelectedSemenceCategory = {category_name: product.category.name};
-                this.SelectedSemenceSubCategory = {sub_category_name: product.sub_category.name};
-                this.SemenceQuantity = product.quantity;
-                this.addSemance.onClick();
-              });
-            }
-          }, (err) => {
-            NewComponent.notifyMe('Stock insuffisant ');
-          }
-        );
-      }
-    };
-    /*------------------------SUGGEST BUTTONS--------------------------------*/
+    /*--------------------------------------------------------*/
   }
-
   /*-------------------------------------------*/
   selectLogicalParcel(e: any) {
     this.parcelOptions.value = e.id;
     this.logicalParcel.editorOptions = this.parcelOptions;
     this.parcelGridPopup = false;
   }
-
   /*-------------------------------------------*/
 }

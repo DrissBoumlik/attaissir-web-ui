@@ -8,9 +8,9 @@ describe('EncodageLisComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EncodageLisComponent ]
+      declarations: [EncodageLisComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

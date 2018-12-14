@@ -231,7 +231,7 @@ export class Widget4Component {
 
     console.log(this.table);
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('[data-toggle="tooltip"]').tooltip();
     });
 

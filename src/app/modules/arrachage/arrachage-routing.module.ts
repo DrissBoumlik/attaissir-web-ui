@@ -6,7 +6,7 @@ import { ConvoationListComponent } from './components/convoation-list/convoation
 import { EchantillonnageListComponent } from './components/echantillonnage-list/echantillonnage-list.component';
 import { EchantillonnageShowComponent } from './components/echantillonnage-show/echantillonnage-show.component';
 import { ChargementAffectationListComponent } from './components/chargement-affectation-list/chargement-affectation-list.component';
-import {EncodageLisComponent} from './components/encodage-lis/encodage-lis.component';
+import { EncodageLisComponent } from './components/encodage-lis/encodage-lis.component';
 
 const routes: Routes = [{
   path: 'arrachage',

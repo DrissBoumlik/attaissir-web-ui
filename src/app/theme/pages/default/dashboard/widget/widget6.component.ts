@@ -250,10 +250,10 @@ export class Widget6Component {
 
 
   ngAfterViewInit() {
-   }
-
-
   }
+
+
+}
 
 
 
