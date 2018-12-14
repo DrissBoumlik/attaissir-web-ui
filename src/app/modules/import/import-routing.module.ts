@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { PermissionGuard } from '../../shared/directives/guard.directive';
-import {IndexComponent} from './index/index.component';
+import { IndexComponent } from './index/index.component';
 
 const routes: Routes = [{
   path: 'import',

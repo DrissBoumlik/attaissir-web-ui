@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {IndexComponent} from './index/index.component';
-import {ImportRoutingModule} from './import-routing.module';
+import { IndexComponent } from './index/index.component';
+import { ImportRoutingModule } from './import-routing.module';
 import {
   DxButtonModule, DxCheckBoxModule, DxFileUploaderModule,
   DxLoadPanelModule,
@@ -10,7 +10,7 @@ import {
   DxTemplateModule,
   DxTextAreaModule, DxTextBoxModule, DxValidationSummaryModule, DxValidatorModule
 } from 'devextreme-angular';
-import {SharedModule} from '../../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [

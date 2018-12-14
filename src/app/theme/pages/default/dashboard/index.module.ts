@@ -17,12 +17,12 @@ import { Widget2Component } from './widget/widget2.component';
 import { Widget3Component } from './widget/widget3.component';
 import { Widget4Component } from './widget/widget4.component';
 import { IndexComponent } from '../index/index.component';
-import {IndexDashComponent} from './index.component';
+import { IndexDashComponent } from './index.component';
 import { SearchPipe } from './search.pipe.component';
-import {Widget5Component} from './widget/widget5.component';
-import {CounterUpModule} from 'angular4-counter-up';
-import {Widget6Component} from './widget/widget6.component';
-import {Widget7Component} from './widget/widget7.component';
+import { Widget5Component } from './widget/widget5.component';
+import { CounterUpModule } from 'angular4-counter-up';
+import { Widget6Component } from './widget/widget6.component';
+import { Widget7Component } from './widget/widget7.component';
 
 
 
@@ -57,7 +57,7 @@ const routes: Routes = [
     CounterUpModule.forRoot({
       delay: 1,
       time: 1
-    }) ,
+    }),
 
     DxTextAreaModule,
     DxSwitchModule,
@@ -70,7 +70,7 @@ const routes: Routes = [
 
     DxProgressBarModule,
     DxTooltipModule,
-     DragulaModule.forRoot()
+    DragulaModule.forRoot()
 
   ],
   exports: [
