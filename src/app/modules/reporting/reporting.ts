@@ -9,8 +9,8 @@ import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router'
 export class ReportingComponent implements OnInit {
 
   reports = [
-    { code: 511, title: 'Situation des contrats', url: 'contracts' },
-    { code: 512, title: 'Etat de contractualisation par CDA', url: 'contracts/cda' },
+    { code: 511, title: 'Situation des parcelles', url: 'contracts' },
+    // { code: 512, title: 'Etat de contractualisation par CDA', url: 'contracts/cda' },
     { code: 515, title: 'Liste des agriculteurs et cartes par site', url: 'cards' },
     { code: 611, title: 'Liste détaillée des préconisations', url: 'preconisations' },
     { code: 612, title: 'Liste détaillée des mouvements', url: 'mouvements' },
