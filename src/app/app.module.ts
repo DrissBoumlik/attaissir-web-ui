@@ -42,9 +42,9 @@ import { CardGeneratorModule } from './modules/card-generator/card-generator.mod
 import { PermissionGuard } from './shared/directives/guard.directive';
 import { ParcelInfoComponent } from './shared/components/parcel-info/parcel-info.component';
 import { TodosComponent } from './modules/incidents/components/todos/todos.component';
-import {CounterUpModule} from 'angular4-counter-up';
-import {ActivityModule} from './modules/activity/activity.module';
-import {ImportModule} from './modules/import/import.module';
+import { CounterUpModule } from 'angular4-counter-up';
+import { ActivityModule } from './modules/activity/activity.module';
+import { ImportModule } from './modules/import/import.module';
 
 @NgModule({
   declarations: [

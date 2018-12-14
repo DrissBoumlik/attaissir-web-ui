@@ -33,7 +33,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
     });
 
     // We have all the params now -> you can access it by name
-    console.log(urlParams['loaded']);
 
     if (urlParams['loaded']) { } else {
 
@@ -175,11 +174,13 @@ export class IndexComponent implements OnInit, AfterViewInit {
         });
     }
 
+
+    /*
     getWeatherData().then((res) => {
       const mainCond = res['weather'][0].main.toLowerCase();
       updateLocation(res['name']);
       updateTemperature(Math.round(res['main'].temp));
-    });
+    }); */
 
     function updateLocation(location) {
       const place = document.getElementById('w-city');

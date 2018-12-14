@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import {ImportService} from '../services/import.service';
-import {ToastrService} from 'ngx-toastr';
+import { ImportService } from '../services/import.service';
+import { ToastrService } from 'ngx-toastr';
 
 declare const require: any;
 const $ = require('jquery');
@@ -23,7 +23,7 @@ export class IndexComponent implements OnInit {
 
 
   constructor(private importService: ImportService,
-              private toaster: ToastrService ) { }
+    private toaster: ToastrService) { }
 
   ngOnInit() {
 
@@ -33,7 +33,7 @@ export class IndexComponent implements OnInit {
     this.buttonsave = {
       text: 'IMPORTER',
       type: 'success',
-      icon : 'upload',
+      icon: 'upload',
       useSubmitBehavior: true,
       onClick: () => {
 
@@ -90,7 +90,9 @@ export class IndexComponent implements OnInit {
         d.resolve();
         this.toaster.success('Le document a été téléchargé avec succès.');
       }, error => {
-        d.reject('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
+        this.toaster.error('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
+
+        //  d.reject('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
       });
 
 
@@ -98,34 +100,32 @@ export class IndexComponent implements OnInit {
   }
 
 
-
-  onAddDOC(e: any) {
-
-    console.log(this.import);
-
-
-    const d = new $.Deferred();
-    const newDoc = {
-      type: this.import.type,
-      file: this.filePath[0]
-    };
-    e.cancel = true;
-
-
-    this.importService.upload(newDoc.file, newDoc.type).subscribe(
-      res => {
-        d.resolve();
-        e.cancel = true;
-        this.toaster.success('Le document a été téléchargé avec succès.');
-      }, error => {
-        d.reject('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
-      });
-
-
-
-
-    e.cancel = d.promise();
-  }
+  /*
+    onAddDOC(e: any) {
+  
+      const d = new $.Deferred();
+      const newDoc = {
+        type: this.import.type,
+        file: this.filePath[0]
+      };
+      e.cancel = true;
+  
+  
+      this.importService.upload(newDoc.file, newDoc.type).subscribe(
+        res => {
+          d.resolve();
+          e.cancel = true;
+          this.toaster.success('Le document a été téléchargé avec succès.');
+        }, error => {
+          d.reject('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
+        });
+  
+  
+  
+  
+      e.cancel = d.promise();
+    }
+    */
 
 
 }

@@ -228,7 +228,7 @@ export class Widget7Component {
 
   ngAfterViewInit() {
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('[data-toggle="tooltip"]').tooltip();
     });
 

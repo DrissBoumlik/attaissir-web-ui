@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from '../../theme/pages/default/default.component';
-import {ListComponent} from './list/list.component';
-import {IndexComponent} from '../card-generator/components/index/index.component';
+import { ListComponent } from './list/list.component';
+import { IndexComponent } from '../card-generator/components/index/index.component';
 
 
 

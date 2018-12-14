@@ -132,7 +132,7 @@
                 [showValidationSummary]="true"
                 labelLocation="top"
                 #Form3>
-                <dxi-item itemType="group"    *ngIf="data.semence.length" [colCount]="5" caption="Choix de la semence" #choixSemence>
+                <dxi-item itemType="group"    *ngIf="data.semence.length" [colCount]="6" caption="Choix de la semence" #choixSemence>
 
                   <dxi-item dataField="semance_famille" editorType="dxSelectBox" [editorOptions]="semenceCategoryOptions" >
                     <dxo-label
@@ -168,7 +168,13 @@
                     [buttonOptions]="addSemance">
                   </dxi-item>
 
-                  <dxi-item [colSpan]="5" *ngIf="data.semence.length">
+                  <dxi-item
+                    itemType="button"
+                    alignment="left"
+                    [buttonOptions]="suggestSemence">
+                  </dxi-item>
+
+                  <dxi-item [colSpan]="6" *ngIf="data.semence.length">
                     <dx-data-grid
                       #semenceGrid
                       id="semenceGrid"
@@ -220,7 +226,7 @@
                 [showValidationSummary]="true"
                 labelLocation="top"
                 #Form4>
-                <dxi-item itemType="group"  *ngIf="data.products.length" [colCount]="5" caption="Choix des produits" #choixProducts>
+                <dxi-item itemType="group"  *ngIf="data.products.length" [colCount]="6" caption="Choix des produits" #choixProducts>
 
                   <dxi-item dataField="prod_famille" editorType="dxSelectBox"  [editorOptions]="productsCategoryOptions">
                     <dxo-label
@@ -254,8 +260,13 @@
                     [buttonOptions]="addProduct">
                   </dxi-item>
 
+                  <dxi-item
+                    itemType="button"
+                    alignment="left"
+                    [buttonOptions]="suggestPR">
+                  </dxi-item>
 
-                  <dxi-item [colSpan]="5" *ngIf="data.products.length" >
+                  <dxi-item [colSpan]="6" *ngIf="data.products.length" >
 
                     <dx-data-grid
 

@@ -9,7 +9,7 @@ import { environment } from '../../../../../../environments/environment';
 })
 export class WidgetService {
 
-  
+
   private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
   private options = {
     headers: this.headers
@@ -64,10 +64,10 @@ export class WidgetService {
   }
 
 
-  
-  changeWidgetFilter(item: any, id: any): Observable<any>  {
 
-    return this.http.post(`${environment.apiUrl}/${this.routeName}/filter/${id}`, JSON.stringify({filter : item }), {
+  changeWidgetFilter(item: any, id: any): Observable<any> {
+
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/filter/${id}`, JSON.stringify({ filter: item }), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -76,7 +76,7 @@ export class WidgetService {
   }
 
 
-  createWidget(item: any): Observable<any>  {
+  createWidget(item: any): Observable<any> {
 
     return this.http.post(`${environment.apiUrl}/${this.routeName}/new`, JSON.stringify(item), {
       headers: new HttpHeaders({
@@ -90,9 +90,9 @@ export class WidgetService {
   deleteWidget(id: any): Observable<any> {
     return this.http.delete<any[]>(`${environment.apiUrl}/${this.routeName}/${id}`);
   }
-  
 
-  changePositionWidget(item: any): Observable<any>  {
+
+  changePositionWidget(item: any): Observable<any> {
 
     return this.http.post(`${environment.apiUrl}/${this.routeName}/position`, JSON.stringify(item), {
       headers: new HttpHeaders({
@@ -105,7 +105,7 @@ export class WidgetService {
 
 
 
-  addFilterToAll(item: any): Observable<any>  {
+  addFilterToAll(item: any): Observable<any> {
 
     return this.http.post(`${environment.apiUrl}/${this.routeName}/add_filter_to_all`, JSON.stringify(item), {
       headers: new HttpHeaders({
