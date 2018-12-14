@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Rx';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
 
 
 @Injectable({
@@ -160,6 +160,18 @@ export class InterventionService {
    */
   getCamionsList(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/camions/list`);
+  }
+
+  suggestPreco(warehouse: any, SelectedProductsArticle: any, surface_to_work: any): Observable<any[]> {
+    return this.http.post<any[]>(`${environment.apiUrl}/suggest/preconization`, {
+      warehouse_id: warehouse,
+      article_id: SelectedProductsArticle.id,
+      stw: surface_to_work
+    }, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 }
 

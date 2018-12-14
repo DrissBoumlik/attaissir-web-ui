@@ -5,10 +5,8 @@
       <h2>Liste des centres de distribution</h2>
 
 
-
-
-
-      <a class="siam-header-btn-new" routerLink="/jeunepromoteurs/ajouter" title="Ajouter conseille" [appPermissionHidden]="['thirdParty.third-parties.store']"><i
+      <a class="siam-header-btn-new" routerLink="/jeunepromoteurs/ajouter" title="Ajouter conseille"
+         [appPermissionHidden]="['thirdParty.third-parties.store']"><i
         class="fa fa-plus"></i></a>
     </div>
   </div>
@@ -60,14 +58,18 @@
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxi-column caption="" [width]="75" [allowSorting]="false" [visible]="helper.permissionMethod(['thirdParty.third-parties.grid'])"  [allowFiltering]="false"  [allowSorting]="false" cellTemplate="caTemplate"></dxi-column>
-        <dxi-column dataField="id" caption="Consulter Stock" [width]="133" [allowSorting]="false"  [alignment]="'left'" [allowFiltering]="false"  [allowSorting]="false" cellTemplate="stockTemplate"></dxi-column>
+        <dxi-column caption="" [width]="75" [allowSorting]="false"
+                    [visible]="helper.permissionMethod(['thirdParty.third-parties.grid'])" [allowFiltering]="false"
+                    [allowSorting]="false" cellTemplate="caTemplate"></dxi-column>
+        <dxi-column dataField="id" caption="Consulter Stock" [width]="133" [allowSorting]="false" [alignment]="'left'"
+                    [allowFiltering]="false" [allowSorting]="false" cellTemplate="stockTemplate"></dxi-column>
         <dxi-column dataField="third_party_code" caption="Code"></dxi-column>
-        <dxi-column dataField="zone_name" caption="CDA" [width]="200"  cellTemplate="zoneTemplate"></dxi-column>
+        <dxi-column dataField="third_party_company_name" caption="Raison sociale"
+                    cellTemplate="userTemplate"></dxi-column>
+        <dxi-column dataField="third_party_full_name" caption="Jeune promoteur"
+                    cellTemplate="userTemplate"></dxi-column>
         <dxi-column dataField="third_party_cin" caption="CIN" i18n-caption>
         </dxi-column>
-        <dxi-column dataField="third_party_full_name" caption="Jeune promoteur" cellTemplate="userTemplate"></dxi-column>
-        <dxi-column dataField="third_party_company_name" caption="Raison sociale"  cellTemplate="userTemplate"></dxi-column>
         <dxi-column dataField="warehouse_email" caption="Adresse e-mail"></dxi-column>
         <dxi-column dataField="tel" caption="N° Téléphone"></dxi-column>
         <dxi-column dataField="third_party_patent_number" caption="Numéro de patente" i18n-caption>
@@ -86,7 +88,8 @@
         </dxi-column>
 
         <div *dxTemplate="let data of 'caTemplate'">
-          <a  (click)="helper.gotoShow('jeunepromoteurs', data.data.third_party_id, router, toastr)"><i style="align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
+          <a (click)="helper.gotoShow('jeunepromoteurs', data.data.third_party_id, router, toastr)"><i
+            style="align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
         </div>
         <div *dxTemplate="let data of 'zoneTemplate'">
           <span class="badge badge-info">{{ data.data.zone_name}}</span>
@@ -94,11 +97,14 @@
 
         <div *dxTemplate="let data of 'stockTemplate'">
 
-          <a (click)="warehouse_nav(data.value)" style="align-content: center; cursor: pointer"><i style="font-size: 100%; align-content: center; cursor: pointer; color : #000;" class="fa fa fa-archive fa-5x"></i> {{ data.data.name }}</a>
+          <a (click)="warehouse_nav(data.value)" style="align-content: center; cursor: pointer"><i
+            style="font-size: 100%; align-content: center; cursor: pointer; color : #000;"
+            class="fa fa fa-archive fa-5x"></i> {{ data.data.name }}</a>
         </div>
 
         <div *dxTemplate="let data of 'userTemplate'">
-          <a class="siam-link" (click)="helper.gotoShow('jeunepromoteurs', data.data.third_party_id, router, toastr)">{{ data.value }}</a>
+          <a class="siam-link" (click)="helper.gotoShow('jeunepromoteurs', data.data.third_party_id, router, toastr)">{{
+            data.value }}</a>
         </div>
 
       </dx-data-grid>

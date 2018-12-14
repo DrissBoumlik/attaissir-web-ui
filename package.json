@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
+ "build-prod": "bash ./ng.sh build --prod --aot --env=prod", 
+   "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "npm run tsformat",
     "tsformat": "tsfmt -r"

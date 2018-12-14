@@ -8,8 +8,7 @@
 </div>
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body">
-
+    <div class="m-portlet__body m-portlet__body--no-padding">
       <div *ngIf="step == 0" class="slide-right">
         <div class="m-portlet__head" *ngFor="let type of types" style="padding: 2%;">
           <div class="m-portlet__head-title">
@@ -20,21 +19,21 @@
           </div>
 
           <div class="container">
-              <div class="row">
+            <div class="row">
 
-          <form>
-            <dx-form id="form">
-              <dxi-item itemType="group" [colCount]="4">
-                <dxi-item *ngFor="let family of type.families">
-                  <button type="button" (click)="selectFamily(type.type_id, family.family_id)" style="width: 18vw"
-                          class="btn btn-success float-right">{{ family.family_name }}
-                  </button>
-                </dxi-item>
-              </dxi-item>
-            </dx-form>
-          </form>
+              <form>
+                <dx-form id="form">
+                  <dxi-item itemType="group" [colCount]="4">
+                    <dxi-item *ngFor="let family of type.families">
+                      <button type="button" (click)="selectFamily(type.type_id, family.family_id)" style="width: 18vw"
+                              class="btn btn-success float-right">{{ family.family_name }}
+                      </button>
+                    </dxi-item>
+                  </dxi-item>
+                </dx-form>
+              </form>
+            </div>
           </div>
-        </div>
 
 
         </div>
@@ -42,30 +41,31 @@
 
       <div *ngIf="step == 1" class="slide-right">
 
-          <div class="container">
-              <div class="row">
-        <div class="m-portlet__head" style="padding: 2%;">
-          <button type="button" (click)="goBack()" class="btn btn-primary float-right" style="margin-right: 5%;">Etape
-            presedente
-          </button>
-          <div class="m-portlet__head-title">
-            <h3 class="m-portlet__head-text">
-              {{ family.family_name }}
-            </h3>
-            <hr>
+        <div class="container">
+          <div class="row">
+            <div class="m-portlet__head" style="padding: 2%;">
+              <button type="button" (click)="goBack()" class="btn btn-primary float-right" style="margin-right: 5%;">
+                Etape
+                presedente
+              </button>
+              <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">
+                  {{ family.family_name }}
+                </h3>
+                <hr>
+              </div>
+              <dx-form id="form2">
+                <dxi-item itemType="group" [colCount]="4">
+                  <dxi-item *ngFor="let sub_family of family.sub_families">
+                    <button type="button" (click)="selectSubFamily(sub_family.sub_family_id)" style="width: 18vw"
+                            class="btn btn-success float-right">{{ sub_family.sub_family_name }}
+                    </button>
+                  </dxi-item>
+                </dxi-item>
+              </dx-form>
+            </div>
           </div>
-          <dx-form id="form2">
-            <dxi-item itemType="group" [colCount]="4">
-              <dxi-item *ngFor="let sub_family of family.sub_families">
-                <button type="button" (click)="selectSubFamily(sub_family.sub_family_id)" style="width: 18vw"
-                        class="btn btn-success float-right">{{ sub_family.sub_family_name }}
-                </button>
-              </dxi-item>
-            </dxi-item>
-          </dx-form>
         </div>
-        </div>
-      </div>
 
       </div>
 
@@ -88,7 +88,6 @@
         [shading]="true"
         [closeOnOutsideClick]="false">
       </dx-load-panel>
-
     </div>
   </div>
 </div>
