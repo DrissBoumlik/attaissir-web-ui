@@ -549,7 +549,7 @@ export class AddComponent implements OnInit {
                       this.APQuantity = this.interventions.surface_to_work * (+this.SelectedAPArticle.dose);
                       this.APQuantityOptions = {
                         format: '#0.## ' + this.SelectedAPArticle.unit.toString(),
-                        disabled: this.SelectedAPArticle.code !== 'GAF001',
+                        //disabled: this.SelectedAPArticle.code !== 'GAF001',
                         value: this.interventions.surface_to_work * (+this.SelectedAPArticle.dose),
                         onValueChanged: (cc) => {
                           this.APQuantity = cc.value;
