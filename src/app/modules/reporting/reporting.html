@@ -5,22 +5,36 @@
       <dx-box
         direction="row"
         width="100%">
-        <dxi-item
-          class="rect demo-dark"
-          [ratio]="2">
-          <h2>{{ selectedItem.title }}</h2>
-        </dxi-item>
-        <dxi-item
-          class="rect demo-light"
-          [ratio]="3"
-          align="end">
-          <dx-select-box #company
-                         displayExpr="title"
-                         valueExpr="code"
-                         (onValueChanged)="onSelectionChanged($event)"
-                         [dataSource]="reports"
-                         [value]="selectedItem.code"></dx-select-box>
-        </dxi-item>
+
+
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <dxi-item
+                class="rect demo-dark"
+                [ratio]="1">
+                <h2>{{ selectedItem.title }}</h2>
+              </dxi-item>
+            </div>
+            <div class="col">
+              <dxi-item
+                class="rect demo-light"
+                [ratio]="1"
+                align="end">
+                <dx-select-box #company
+                               displayExpr="title"
+                               valueExpr="code"
+                               (onValueChanged)="onSelectionChanged($event)"
+                               [dataSource]="reports"
+                               [value]="selectedItem.code"></dx-select-box>
+              </dxi-item>
+            </div>
+          </div>
+         </div>
+
+
+
+
       </dx-box>
     </div>
   </div>

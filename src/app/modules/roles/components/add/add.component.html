@@ -7,7 +7,7 @@
   </div>
 </div>
 <div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " style="overflow: auto;white-space: nowrap;">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " >
     <div class="m-portlet__body">
       <form style="margin-top: 20px"
             (submit)="onFormSubmit($event)" >
@@ -17,6 +17,7 @@
                  [showColonAfterLabel]="true"
                  [showValidationSummary]="true"
                  validationGroup="customerData">
+
 
           <dxi-item itemType="group" caption="Role">
             <dxi-item
@@ -30,6 +31,9 @@
               </dxi-validation-rule>
             </dxi-item>
           </dxi-item>
+
+
+          <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " style="overflow: auto;white-space: nowrap;">
 
           <dxi-item itemType="group" caption="Choix des permissions">
             <div>
@@ -64,6 +68,8 @@
               </div>
             </div>
           </dxi-item>
+
+          </div>
 
           <dxi-item
             itemType="button"

@@ -263,7 +263,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
       },
       {
         name: 'Reporting',
-        permission: ['preconization.interventions.grid'],
+        permission: ['base.reporting.show'],
         icon: 'flaticon-graphic-1',
         url: '/reporting/contracts',
         description: '',
