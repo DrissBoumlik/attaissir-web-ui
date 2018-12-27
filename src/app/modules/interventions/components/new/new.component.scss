@@ -35,3 +35,28 @@
   }
 }
 
+
+._btn {
+  width: 18vw;
+}
+
+@media only screen and (max-width: 600px){
+
+._btn {
+    width: 100% !important;
+  }
+
+  .m-portlet__body {
+  //  margin-left: 10px;
+  }
+
+}
+
+
+@media only screen and (max-width: 600px){
+
+.m-portlet .m-portlet__head .m-portlet__head-tools {
+  text-align: left;
+}
+}
+

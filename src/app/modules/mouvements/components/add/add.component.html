@@ -96,7 +96,12 @@
           <dxi-item itemType="group" caption="Détails">
 
             <dx-data-grid id="CampaignGridContainer"
+
+                          showBorders="true"
+                          [columnHidingEnabled]="true"
+                          [allowColumnResizing]="true"
                           [allowColumnReordering]="true"
+
                           [dataSource]="products"
                           [showColumnLines]="true"
                           [showRowLines]="true"
@@ -105,6 +110,12 @@
                           style="padding-top: 2vh"
                           [columnAutoWidth]="true"
                           [noDataText]="'Aucan article n\'est ajouter!'">
+
+
+
+
+
+
               <dxi-column dataField="famille_id" [calculateDisplayValue]="'category'" caption="Famille"></dxi-column>
               <dxi-column dataField="sub_famille_id" [calculateDisplayValue]="'subCategory'" caption="Sous famille"></dxi-column>
               <dxi-column dataField="article_id" [calculateDisplayValue]="'article'" caption="Article"></dxi-column>

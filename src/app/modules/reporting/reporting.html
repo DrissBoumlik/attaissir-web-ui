@@ -9,26 +9,27 @@
 
         <div class="container">
           <div class="row">
-            <div class="col">
-              <dxi-item
-                class="rect demo-dark"
-                [ratio]="1">
-                <h2>{{ selectedItem.title }}</h2>
-              </dxi-item>
-            </div>
-            <div class="col">
-              <dxi-item
-                class="rect demo-light"
-                [ratio]="1"
-                align="end">
-                <dx-select-box #company
-                               displayExpr="title"
-                               valueExpr="code"
-                               (onValueChanged)="onSelectionChanged($event)"
-                               [dataSource]="reports"
-                               [value]="selectedItem.code"></dx-select-box>
-              </dxi-item>
-            </div>
+
+            <dxi-item
+              class="rect demo-dark"
+              [ratio]="1">
+              <h2>{{ selectedItem.title }}</h2>
+            </dxi-item>
+            <br/>
+
+            <dxi-item
+              class="rect demo-light"
+              [ratio]="1"
+              align="end">
+              <dx-select-box #company
+                             displayExpr="title"
+                             valueExpr="code"
+                             (onValueChanged)="onSelectionChanged($event)"
+                             [dataSource]="reports"
+                             [value]="selectedItem.code"></dx-select-box>
+            </dxi-item>
+
+
           </div>
          </div>
 

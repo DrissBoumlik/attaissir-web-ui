@@ -429,7 +429,7 @@
       <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
       <dxi-column dataField="id" [width]="100"  caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
       <dxi-column dataField="category" caption="Famille"></dxi-column>
-     <dxi-column dataField="sub_category" caption="Sous Famille"></dxi-column>
+      <dxi-column dataField="sub_category" caption="Sous Famille"></dxi-column>
       <dxi-column dataField="name" caption="Article"></dxi-column>
       <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
       <dxi-column dataField="quantity_retour1" caption="Quantité retour"  cellTemplate="ToOrder"></dxi-column>
@@ -467,21 +467,18 @@
                  text="VALIDER"
                  (onClick)="RetourValiderPopup()">
       </dx-button>
-
     </div>
-
   </div>
 </dx-popup>
 
 !-->
 <div class="dx-fieldset"  style="margin-top: 0px;">
-  <div class="dx-field" style="   margin: 0 auto;
-    display: block;">
+  <div class="dx-field btn_mob" >
     <div class="dx-field-value">
-      <dx-button width="135"  icon="fa fa-paper-plane"  *ngIf="helper.permissionMethod(['preconization.interventions.deliverPreconization'])"  text="LIVRER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'"  type="success" (onClick)="showDeliverPopup()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
-      <dx-button width="135"  icon="fa fa-print"  *ngIf="preconisation.state == 'done'"   (onClick)="print()" text="IMPRIMER" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button>
-      <dx-button width="135"  icon="fa fa-exchange"  *ngIf="helper.permissionMethod(['distributionCenter.stocks.returnOperation'])" [disabled]="preconisation.state !== 'done'" text="RETOUR" type="default" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active" [disabled]="preconisation.state == 'delivered'" style="margin-left: 20px; margin-right: 20px;"></dx-button>
-      <dx-button width="135"  icon="fa fa-trash"     *ngIf="helper.permissionMethod(['preconization.interventions.cancelPreconization'])"  text="ANNULER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'" type="danger" (onClick)="showDeletePopup()"  ></dx-button>
+      <dx-button width="135"  icon="fa fa-paper-plane"  *ngIf="helper.permissionMethod(['preconization.interventions.deliverPreconization'])"  style="margin: 5px;" text="LIVRER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'"  type="success" (onClick)="showDeliverPopup()"   ></dx-button>
+      <dx-button width="135"  class="d-none d-sm-block " icon="fa fa-print"  *ngIf="preconisation.state == 'done'"   (onClick)="print()" text="IMPRIMER" type="primary"   style="margin: 5px;" ></dx-button>
+      <dx-button width="135"  icon="fa fa-exchange"  *ngIf="helper.permissionMethod(['distributionCenter.stocks.returnOperation'])"            style="margin: 5px;" [disabled]="preconisation.state !== 'done'" text="RETOUR" type="default" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active" [disabled]="preconisation.state == 'delivered'"  ></dx-button>
+      <dx-button width="135"  icon="fa fa-trash"     *ngIf="helper.permissionMethod(['preconization.interventions.cancelPreconization'])"      style="margin: 5px;" text="ANNULER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'" type="danger" (onClick)="showDeletePopup()"  ></dx-button>
     </div>
   </div>
 </div>
@@ -499,7 +496,7 @@
       [width]="580"
       [height]="400"
       [showTitle]="true"
-      title="Confirmation "
+      [title]="'Confirmation'"
       [dragEnabled]="false"
       (onShown)="SearchByRfid()"
       [closeOnOutsideClick]="true"

@@ -25,8 +25,8 @@
                 <dx-form id="form">
                   <dxi-item itemType="group" [colCount]="4">
                     <dxi-item *ngFor="let family of type.families">
-                      <button type="button" (click)="selectFamily(type.type_id, family.family_id)" style="width: 18vw"
-                              class="btn btn-success float-right">{{ family.family_name }}
+                      <button type="button" (click)="selectFamily(type.type_id, family.family_id)"
+                              class="btn btn-success float-right _btn">{{ family.family_name }}
                       </button>
                     </dxi-item>
                   </dxi-item>
@@ -44,25 +44,38 @@
         <div class="container">
           <div class="row">
             <div class="m-portlet__head" style="padding: 2%;">
-              <button type="button" (click)="goBack()" class="btn btn-primary float-right" style="margin-right: 5%;">
-                Etape
-                presedente
-              </button>
+
+
+
+
               <div class="m-portlet__head-title">
                 <h3 class="m-portlet__head-text">
+                  <button type="button" (click)="goBack()" class="btn btn-primary  " style="margin-right: 5%;">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                  </button>
                   {{ family.family_name }}
                 </h3>
                 <hr>
               </div>
+
+
+
+              <div class="container">
+                <div class="row">
+
               <dx-form id="form2">
                 <dxi-item itemType="group" [colCount]="4">
                   <dxi-item *ngFor="let sub_family of family.sub_families">
-                    <button type="button" (click)="selectSubFamily(sub_family.sub_family_id)" style="width: 18vw"
-                            class="btn btn-success float-right">{{ sub_family.sub_family_name }}
+                    <button type="button" (click)="selectSubFamily(sub_family.sub_family_id)"
+                            class="btn btn-success float-right _btn">{{ sub_family.sub_family_name }}
                     </button>
                   </dxi-item>
                 </dxi-item>
               </dx-form>
+
+                </div>
+                </div>
+
             </div>
           </div>
         </div>
@@ -70,13 +83,17 @@
       </div>
 
       <div *ngIf="step == 2" class="slide-right">
-        <app-rfid-card-reader (outData)="readRFID($event)" (goBack)="goBack()"></app-rfid-card-reader>
+
+
+
+        <app-rfid-card-reader  (outData)="readRFID($event)" (goBack)="goBack()"></app-rfid-card-reader>
         <div class="m-portlet__head">
-          <div class="m-portlet__head-tools">
+          <div >
             <dx-button icon="fa fa-check" (onClick)="validate()" [text]="'Valider'" type="success"></dx-button>
           </div>
         </div>
-      </div>
+       </div>
+
 
       <dx-load-panel
         #loadPanel

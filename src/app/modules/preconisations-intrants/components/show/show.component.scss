@@ -108,3 +108,18 @@
     background: #11fd19;
   }
 }
+
+
+
+
+@media only screen and (max-width: 600px) {
+
+  .btn_mob {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 230px;
+  }
+}
+
+
