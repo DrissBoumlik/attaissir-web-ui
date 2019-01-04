@@ -193,6 +193,7 @@ export class WizardComponent implements OnInit {
                   valueExpr: 'zone_id',
                   searchEnabled: true,
                   onInitialized: (e) => {
+                    console.log(200);
                     if (e.selectedItem) {
                       this.zoneService.getZonesByCDA(e.selectedItem.zone_id).subscribe(zone => {
                         this.zones = this.helper.dataFormatter(zone, false);
@@ -212,6 +213,7 @@ export class WizardComponent implements OnInit {
                   },
                   onSelectionChanged: (e) => {
                     // Zone
+                    console.log(200);
                     if (e.selectedItem) {
                       this.zoneService.getZonesByCDA(e.selectedItem.zone_id).subscribe(zone => {
                         this.zones = this.helper.dataFormatter(zone, false);
@@ -255,7 +257,9 @@ export class WizardComponent implements OnInit {
         searchEnabled: true,
         onSelectionChanged: (e) => {
           // Zone
+          console.log(201);
           if (e.selectedItem) {
+            console.log(e);
             this.zoneService.getZonesByCDA(e.selectedItem.zone_id).subscribe(zone => {
               this.zones = this.helper.dataFormatter(zone, false);
               this.zoneEditorOptions = {

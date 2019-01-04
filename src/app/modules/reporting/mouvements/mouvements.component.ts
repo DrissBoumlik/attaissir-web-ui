@@ -31,7 +31,7 @@ export class MouvementsComponent implements OnInit {
             const res = [];
             response.data.map(
               (mv: any) => {
-                mv.so_type = this.orderType(mv.so_type, mv.tsd_full_name);
+                mv.so_type = this.orderType(mv.so_type, mv.stock_type);
                 mv.so_state = Helper.getStatusValue(mv.so_state);
                 mv.emetteur = {
                   id: mv.ss_id ? mv.ss_id : mv.tsd_id,
@@ -46,11 +46,11 @@ export class MouvementsComponent implements OnInit {
                   tva_code: mv.tsd_tva_code ? mv.tsd_tva_code : '',
                 };
                 mv.recepteur = {
-                  id: mv.sd_id ? mv.sd_id : mv.sd_id,
-                  name: mv.sd_name ? mv.sd_name : mv.sd_name,
-                  address: mv.sd_address ? mv.sd_address : mv.sd_address,
-                  tel: mv.sd_tel ? mv.sd_tel : mv.sd_tel,
-                  email: mv.sd_email ? mv.sd_email : mv.sd_email
+                  id: mv.sd_id ? mv.sd_id : mv.tsd_id,
+                  name: mv.sd_name ? mv.sd_name : mv.tsd_full_name,
+                  address: mv.sd_address ? mv.sd_address : mv.tsd_address,
+                  tel: mv.sd_tel ? mv.sd_tel : mv.tsd_tel1,
+                  email: mv.sd_email ? mv.sd_email : mv.tsd_email
                 };
                 return mv;
               }
@@ -88,7 +88,7 @@ export class MouvementsComponent implements OnInit {
     } else if (type === 'delivery') {
       return 'LIVRAISON';
     } else if (type === 'return') {
-      return tp ? 'Retour Agriculteur' : 'Retour Fournisseur';
+      return tp !== 'return_f' ? 'Retour Agriculteur' : 'Retour Fournisseur';
     } else if (type === 'receive') {
       return 'Réception des intrants';
     }
