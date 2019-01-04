@@ -2,6 +2,7 @@ import { Component, OnInit, Output, ViewEncapsulation, AfterViewInit } from '@an
 import { Helpers } from '../../../helpers';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
+import {Helper} from '../../../shared/classes/helper';
 
 declare let mLayout: any;
 @Component({
@@ -17,11 +18,15 @@ export class HeaderNavComponent implements OnInit, AfterViewInit {
   tenant: string;
   mainMenu: any;
 
+  helper: any;
+
   constructor(
     private router: Router
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.currentUser = this.currentUser.data;
+    this.helper = Helper;
+
   }
   ngOnInit() {
     const data = JSON.parse(localStorage.getItem('currentUser'));
@@ -35,6 +40,24 @@ export class HeaderNavComponent implements OnInit, AfterViewInit {
 
     this.mainMenu = [
 
+      {
+        name: 'Tableau de bord',
+        permission: ['base.reporting.show'],
+        icon: ' flaticon-line-graph',
+
+        subMenu: [
+          {
+            icon: 'flaticon-list',
+            name: 'Tableau de bord',
+            url: '/index',
+            permission: ['none']
+          }
+        ],
+
+        url: '/reporting/contracts',
+        description: '',
+        disabled: 'false'
+      },
 
       {
         name: 'Contractualisation',
@@ -124,6 +147,16 @@ export class HeaderNavComponent implements OnInit, AfterViewInit {
         icon: 'flaticon-user',
         url: '/jeunepromoteurs/liste',
         description: '',
+
+        subMenu: [
+          {
+            icon: 'flaticon-list',
+            name: 'Centres de distribution',
+            url: '/jeunepromoteurs/liste',
+            permission: ['distributionCenter.warehouses.grid']
+          }
+        ],
+
         /*subMenu: [
           {
             icon: 'flaticon-list',
@@ -270,28 +303,37 @@ export class HeaderNavComponent implements OnInit, AfterViewInit {
         name: 'Reporting',
         permission: ['base.reporting.show'],
         icon: 'flaticon-graphic-1',
+
+        subMenu: [
+          {
+            icon: 'flaticon-list',
+            name: 'Reporting',
+            url: '/reporting/contracts',
+            permission: ['base.reporting.show']
+          }
+        ],
+
         url: '/reporting/contracts',
         description: '',
         disabled: 'false'
       },
 
 
-
     ];
 
 
 
-
-
-
-
-
-
-
-
   }
+
   ngAfterViewInit() {
     mLayout.initHeader();
+
+    $('.navbar-nav>li>div>a').on('click', function(){
+     // $('.navbar-collapse').collapse('hide');
+      (<any>$('.navbar-collapse')).collapse('hide');
+
+    });
+
   }
 
   showMenu = (): void => {
@@ -328,6 +370,10 @@ export class HeaderNavComponent implements OnInit, AfterViewInit {
     }
 
   }
+
+
+
+
 
 
 

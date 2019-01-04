@@ -65,6 +65,30 @@ declare var $: any
       font-family: 'Poppins', sans-serif;
 
     }
+    
+    
+
+    
+    
+
+    @media only screen and (max-width: 600px) {
+      
+      .nbr  {
+        font-size: 16px;
+      }
+      
+      .title {
+        font-size: 12px;
+
+      }
+
+      .title  a{
+        font-size: 12px;
+
+      }
+    }
+
+    
 
     .text {
       text-align: center;

@@ -65,6 +65,15 @@ declare var $: any;
 
     }
 
+
+    @media only screen and (max-width: 600px) {
+
+      .nbr  {
+        font-size: 16px;
+      }
+    }
+    
+
     .text {
       text-align: center;
       font-weight: bold;
@@ -144,6 +153,29 @@ declare var $: any;
     }
 
 
+
+
+    @media only screen and (max-width: 600px) {
+
+      .nbr  {
+        font-size: 16px;
+      }
+
+      .title {
+        font-size: 12px;
+
+      }
+
+      .title  a{
+        font-size: 12px;
+
+      }
+      
+      .nbr2  {
+        font-size: 12px;
+      }
+    }
+
   `],
   template: `
    
@@ -195,7 +227,7 @@ declare var $: any;
                     </dx-progress-bar>
 </div> 
                    
-                  <div style="text-align: center; color: #c7c7c7;font-weight: bold;">
+                  <div  class="nbr2" style="text-align: center; color: #c7c7c7;font-weight: bold;">
                   {{val}} {{sub_title}} / {{max}} {{sub_title}}
                   </div>
 

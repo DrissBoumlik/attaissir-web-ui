@@ -6,7 +6,7 @@
 
         <div class="col">
 
-            <form id="search">
+            <form id="search" class="d-none d-sm-block">
                 <input type="text" placeholder="Search" #search>
               </form>
 
@@ -14,12 +14,24 @@
         </div>
         <div class="col">
           <a href="#" (click)="showWidgetPopup()">
-            <h5 class="pull-right" style="color:#989da3;">
+
+
+            <h5 class="pull-right d-none d-sm-block" style="color:#989da3;">
               <i class="fa fa-plus" aria-hidden="true"></i>
               AJOUTER UN WIDGET
-
-
             </h5>
+
+
+
+
+         <h5 class="pull-right d-block d-sm-none" style="color:#989da3; ">
+            <i style=" border-style: solid; border-radius: 50%; padding: 10px; border-width: 1px; padding-right: 12px; padding-left: 12px;" class="fa fa-plus" aria-hidden="true"></i>
+        </h5>
+
+
+
+
+
           </a>
         </div>
       </div>
@@ -141,8 +153,7 @@
 
   <dx-popup
     class="popup"
-    [width]="580"
-    [height]="300"
+     [height]="300"
     [showTitle]="true"
     title="AJOUTER UN WIDGET "
     [dragEnabled]="false"
@@ -211,7 +222,7 @@
 
   <dx-popup
     class="popup"
-    [width]="580"
+
     [height]="320"
     [showTitle]="true"
     [title]="filter_title"
@@ -419,8 +430,7 @@
 
   <dx-popup
     class="popup"
-    [width]="580"
-    [height]="360"
+     [height]="360"
     [showTitle]="true"
     title="Filtre"
     [dragEnabled]="false"
@@ -561,8 +571,7 @@
 
 <dx-popup
 class="popup"
-[width]="350"
-[height]="150"
+ [height]="150"
 [showTitle]="true"
 title="Confirmation "
 [dragEnabled]="false"

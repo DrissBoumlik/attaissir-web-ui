@@ -1059,19 +1059,42 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
   }
 }
 
-.grid-container-vector {
-  display: grid;
-  position: relative;
-  /*
-  height: 100%;
-  */
- // grid-template-columns: 0.8fr 1.2fr;
-  grid-template-columns: 1fr 1fr;
 
-  grid-template-rows: 1fr;
-  grid-gap: 1px 1px;
-  grid-template-areas: "SIGAAKPIS VAECTOR-MAP";
+
+@media only screen and (max-width: 600px) {
+
+
+
+  .grid-container-vector {
+     position: relative;
+   width: 100%;
+  }
+
+
 }
+
+ @media only screen and (min-width: 600px) {
+
+
+   .grid-container-vector {
+     display: grid;
+     position: relative;
+     /*
+     height: 100%;
+     */
+     // grid-template-columns: 0.8fr 1.2fr;
+     grid-template-columns: 1fr 1fr;
+
+     grid-template-rows: 1fr;
+     grid-gap: 1px 1px;
+     grid-template-areas: "SIGAAKPIS VAECTOR-MAP";
+   }
+
+
+ }
+
+
+
 
 .SIGAAKPIS {
   grid-area: SIGAAKPIS;

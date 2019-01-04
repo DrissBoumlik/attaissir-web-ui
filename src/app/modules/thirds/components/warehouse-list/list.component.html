@@ -95,14 +95,14 @@
           <span class="badge badge-info">{{ data.data.zone_name}}</span>
         </div>
 
-        <div *dxTemplate="let data of 'stockTemplate'">
+        <div *dxTemplate="let data of 'stockTemplate'" style="text-align: center;">
 
           <a (click)="warehouse_nav(data.value)" style="align-content: center; cursor: pointer"><i
             style="font-size: 100%; align-content: center; cursor: pointer; color : #000;"
             class="fa fa fa-archive fa-5x"></i> {{ data.data.name }}</a>
         </div>
 
-        <div *dxTemplate="let data of 'userTemplate'">
+        <div *dxTemplate="let data of 'userTemplate'" style="text-align: center;">
           <a class="siam-link" (click)="helper.gotoShow('jeunepromoteurs', data.data.third_party_id, router, toastr)">{{
             data.value }}</a>
         </div>

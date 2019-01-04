@@ -59,9 +59,9 @@
         <dxi-column dataField="warehouse_name" caption="Commander"></dxi-column>
         <dxi-column dataField="third_party_full_name" caption="Fournisseur"></dxi-column>
 
-        <div *dxTemplate="let data of 'caTemplate'">
+        <div *dxTemplate="let data of 'caTemplate'" style="text-align: center;">
           <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; cursor: pointer"
-                                         class="fa fa-info-circle fa-5x"></i></a>
+                                         class="fa fa-info-circle "></i></a>
         </div>
 
       </dx-data-grid>

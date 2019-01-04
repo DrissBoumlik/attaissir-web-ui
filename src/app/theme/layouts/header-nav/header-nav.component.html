@@ -20,7 +20,8 @@
         <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general float-left">
           <div class=" m-stack__item m-stack__item--middle m-stack__item--fit">
             <a href="javascript:;" id="m_aside_left_minimize_toggle"
-               class="siam-sidebar-tom-nav__link-iconggler float-left">
+               class="siam-sidebar-toggler float-left">
+
               <span></span>
             </a>
             <div class="siam-search-form-header">
@@ -260,7 +261,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto"  *ngFor="let menuItem of mainMenu">
+      <ul class="navbar-nav ml-auto"  *ngFor="let menuItem of mainMenu" >
 
 
 
@@ -283,17 +284,17 @@
 
 
 
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown"  *ngIf="helper.permissionMethod(menuItem.permission)" >
 
 
 
-          <a style="color: #ffffff" class="nav-link " [routerLink]="[menuItem.url]" [queryParams]="menuItem?.queryParams"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a  style="color: #ffffff" class="nav-link"  href="#"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="{{ menuItem.icon }}"></i> &nbsp; &nbsp; {{menuItem.name}}
           </a>
 
 
           <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #2c3846;"   *ngIf="menuItem.subMenu">
-            <a *ngFor="let subMenuItem of menuItem.subMenu"    [routerLink]="[subMenuItem.url]" [queryParams]="subMenuItem.queryParams"   class="dropdown-item" href="#"  style="color: #ffffff" > <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
+            <a *ngFor="let subMenuItem of menuItem.subMenu"        [routerLink]="[subMenuItem.url]" [queryParams]="subMenuItem.queryParams"   class="dropdown-item" href="#"  style="color: #ffffff" > <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
               {{ subMenuItem.name }}</a>
 
           </div>

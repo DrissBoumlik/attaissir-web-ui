@@ -70,6 +70,14 @@ declare var $: any;
 
  }
 
+
+ @media only screen and (max-width: 600px) {
+
+   .nbr  {
+     font-size: 16px;
+   }
+ }
+
  .text {
      text-align: center;
      font-weight: bold;
@@ -102,7 +110,22 @@ declare var $: any;
 }
 
 
+ @media only screen and (max-width: 600px) {
 
+   .nbr  {
+     font-size: 16px;
+   }
+
+   .title {
+     font-size: 12px;
+
+   }
+
+   .title  a{
+     font-size: 12px;
+
+   }
+ }
 
  `],
   template: `
