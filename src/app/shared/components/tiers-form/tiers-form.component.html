@@ -6,7 +6,7 @@
              [showColonAfterLabel]="true"
              [showValidationSummary]="true"
              labelLocation="top"
-             validationGroup="{{ tierData }}">
+             validationGroup="{{ tierData }}" style="padding-top: 20px !important; ;">
 
       <!--<dxi-item itemType="group" [colCount]="3" caption="Type d'agrégé" i18n-caption>
 
@@ -30,7 +30,7 @@
         </dxi-item>
 
       </dxi-item>-->
-      <dxi-item dataField="morale" editorType="dxSwitch" *ngIf="!morale && isAggregated" [editorOptions]="{
+      <dxi-item  dataField="morale" editorType="dxSwitch" *ngIf="!morale && isAggregated" [editorOptions]="{
       onText: 'Oui',
       offText: 'Non'
     }" (change)="onMoraleChanged($event)">

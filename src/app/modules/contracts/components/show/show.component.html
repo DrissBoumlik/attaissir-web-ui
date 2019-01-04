@@ -10,7 +10,7 @@
     
       
       </h2>
-      <a class="siam-header-btn-new" href="javascript::void(0)" (click)="downloadContract()"><i
+      <a class="siam-header-btn-new d-none d-sm-block " href="javascript::void(0)" (click)="downloadContract()" ><i
         class="fa fa-print"></i></a>
     </div>
   </div>
@@ -24,35 +24,36 @@
         <div class="col-xl-12 col-lg-12">
 
 
-
             <div class="row">
                 <div class="col-12">
-                    <h3 class="m-form__section" style="padding-top: 30px;">
-                        Informations générales
-        
-                        <span class="siam-form-input-value _status_inprogress" *ngIf="contract?.status == 'inprogress'">
+
+
+                  <h3 class="m-form__section" style="padding-top: 11px;">
+                    Informations générales
+
+                    <span class="d-none d-sm-block" >
+
+                        <span class="siam-form-input-value _status_inprogress "  *ngIf="contract?.status == 'inprogress'">
                         <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
                       </span>
-        
-        
+
+
                         <span class="siam-form-input-value _status_done" *ngIf="contract?.status == 'actif'">
                         <i class="fa  fa-check" aria-hidden="true"></i> VALIDÉ
                       </span>
-        
-                        <span class="siam-form-input-value _status_cancled" *ngIf="contract?.status == 'canceled'">
+
+                        <span class="siam-form-input-value _status_cancled " *ngIf="contract?.status == 'canceled'">
                         <i class="fa  fa-times" aria-hidden="true"></i> ANNULÉ
                       </span>
                       <span [appPermissionHidden]="['agreement.contracts.change_status']"  style="font-size: 12px; padding-left: 12px; cursor: pointer;" *ngIf="contract?.status === 'actif'"   > <a (click)="Scan()"> <i class="fa fa-refresh" aria-hidden="true"></i> <span style="text-decoration: underline;"> En cours </span> </a> </span>
-                    </h3>
-                  
+
+                   </span>
+                  </h3>
+
+
                   <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
                 </div>
               </div>
-
-
-
-           
-
 
 
 
@@ -187,7 +188,7 @@
                             <div class="col-6">
                               <div [ngClass]="helper.getStatusColor(contract?.status_value)"
                                    role="alert"
-                                   style="width: 100%; margin-top: 10%">
+                                   style="margin-top: 10%">
                                 {{ contract?.status_value }}
                               </div>
                             </div>
@@ -436,19 +437,20 @@
             <div class="tab-pane" id="parcelles">
               <button class="btn btn-success" *ngIf="false" (click)="createLogicalParcel($event)" [disabled]="!selectedItems"><i class="fa fa-plus"></i> Crée une parcelle logique</button>
               <hr>
-              <dx-data-grid id="ParcelsGridContainer"
-                            [allowColumnReordering]="true"
-                            [dataSource]="parcels"
-                            [columnHidingEnabled]="false"
-                            [allowColumnResizing]="false"
-                            [showBorders]="true"
-                            (onRowPrepared)="initSelectionRows($event)"
-                            (onEditingStart)="createLogicalParcel($event.data.id)"
-                            [rowAlternationEnabled]="true"
-                            style="padding-top: 2vh"
-                            [columnAutoWidth]="true"
-                            [masterDetail]="{ enabled: true, template: 'detail' }"
-                            [noDataText]="'Le contrat ne dispose pas de parcels'">
+
+
+
+                <dx-data-grid
+                  id="ParcelsGridContainer"
+                  [dataSource]="parcels"
+                  [columnAutoWidth]="true"
+                  [columnHidingEnabled]="true"
+                  [allowColumnResizing]="false"
+                  [allowColumnReordering]="true"
+                  [columnAutoWidth]="true"
+                  [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+                  [masterDetail]="{ enabled: false, template: 'detail' }"
+                >
 
                 <dxo-export [enabled]="true" fileName="contrats" [allowExportSelectedData]="true" [formats]="['PNG', 'PDF', 'JPEG', 'SVG', 'GIF']"></dxo-export>
                 <dxi-column dataField="name" caption="Nom"></dxi-column>
@@ -671,7 +673,6 @@
                     <dxo-popup
                       title="Ajouter ou modifier"
                       [showTitle]="true"
-                      [width]="700"
                       [height]="345"
                       [position]="{ my: 'center', at: 'center'}">
                     </dxo-popup>
@@ -778,7 +779,6 @@
                     <dxo-popup
                       title="Ajouter ou modifier"
                       [showTitle]="true"
-                      [width]="700"
                       [height]="345"
                       [position]="{ my: 'center', at: 'center'}">
                     </dxo-popup>

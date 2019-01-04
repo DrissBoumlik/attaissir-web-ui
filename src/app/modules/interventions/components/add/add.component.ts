@@ -153,12 +153,12 @@ export class AddComponent implements OnInit {
   };
 
   constructor(public articleService: ArticlesService,
-    public interventionService: InterventionService,
-    private wareHouseService: WarehouseService,
-    private route: ActivatedRoute,
-    private thirdsService: ThirdsService,
-    private toastr: ToastrService,
-    private router: Router) {
+              public interventionService: InterventionService,
+              private wareHouseService: WarehouseService,
+              private route: ActivatedRoute,
+              private thirdsService: ThirdsService,
+              private toastr: ToastrService,
+              private router: Router) {
     this.helper = Helper;
   }
 

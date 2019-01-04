@@ -33,6 +33,8 @@ export class AuthComponent implements OnInit, AfterViewInit {
   errorMessage: string;
   loadingVisible = false;
 
+  roleSelectOptions = {}
+
   @ViewChild('alertSignin',
     { read: ViewContainerRef }) alertSignin: ViewContainerRef;
   @ViewChild('alertSignup',

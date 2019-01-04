@@ -9,10 +9,10 @@
       </h2>
     </div>
 
-
   </div>
 </div>
-<div class="m-content" style="padding-bottom: 10px;">
+
+<div class="m-content" style="padding-bottom: 10px !important;">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
 
@@ -23,25 +23,30 @@
         <div class="tab-pane active" id="m_user_profile_tab_1">
           <div class="m-form m-form--fit">
             <div class="m-portlet__body">
-              <div class="row">
+              <div class="row ">
                 <div class="col-12">
                   
                     <h3 class="m-form__section">
                         Informations générales
-    
-                        <span class="siam-form-input-value _status_inprogress" *ngIf="preconisation.state == 'inprogress'">
+
+                   <span class="d-none d-sm-block" >
+
+                        <span class="siam-form-input-value _status_inprogress " *ngIf="preconisation.state == 'inprogress'">
                         <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
                       </span>
     
     
-                        <span class="siam-form-input-value _status_done" *ngIf="preconisation.state == 'done'">
+                        <span class="siam-form-input-value _status_done   " *ngIf="preconisation.state == 'done'">
                         <i class="fa  fa-check" aria-hidden="true"></i> VALIDÉ
                       </span>
     
-                        <span class="siam-form-input-value _status_cancled" *ngIf="preconisation.state == 'canceled'">
+                        <span class="siam-form-input-value _status_cancled " *ngIf="preconisation.state == 'canceled'">
                         <i class="fa  fa-times" aria-hidden="true"></i> ANNULÉ
                       </span>
                       <span   [appPermissionHidden]="['preconization.interventions.change_status']" style="font-size: 12px; padding-left: 12px; cursor: pointer;" *ngIf="preconisation.state === 'done'"   > <a (click)="Scan()"> <i class="fa fa-refresh" aria-hidden="true"></i> <span style="text-decoration: underline;"> En cours </span> </a> </span>
+
+                   </span>
+
                     </h3>
                   <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
                 </div>
@@ -178,7 +183,7 @@
 
 
 
-<div class="m-content" style="padding-bottom: 10px;">
+<div class="m-content" style="padding-bottom: 10px !important;">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
 
@@ -368,7 +373,6 @@
 
 <dx-popup
   class="popup"
-  [width]="750"
   [height]="550"
   [showTitle]="true"
   title="Liste des ayants droit"
@@ -425,7 +429,7 @@
       <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
       <dxi-column dataField="id" [width]="100"  caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
       <dxi-column dataField="category" caption="Famille"></dxi-column>
-     <dxi-column dataField="sub_category" caption="Sous Famille"></dxi-column>
+      <dxi-column dataField="sub_category" caption="Sous Famille"></dxi-column>
       <dxi-column dataField="name" caption="Article"></dxi-column>
       <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
       <dxi-column dataField="quantity_retour1" caption="Quantité retour"  cellTemplate="ToOrder"></dxi-column>
@@ -463,22 +467,18 @@
                  text="VALIDER"
                  (onClick)="RetourValiderPopup()">
       </dx-button>
-
     </div>
-
   </div>
 </dx-popup>
 
 !-->
-<div class="dx-fieldset">
-  <div class="dx-field">
+<div class="dx-fieldset"  style="margin-top: 0px;">
+  <div class="dx-field btn_mob" >
     <div class="dx-field-value">
-      <dx-button width="180"  icon="fa fa-paper-plane"  *ngIf="helper.permissionMethod(['preconization.interventions.deliverPreconization'])"  text="LIVRER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'"  type="success" (onClick)="showDeliverPopup()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
-
-      &nbsp;
-      <dx-button width="130" icon="fa fa-print"  *ngIf="preconisation.state == 'done'"   (onClick)="print()" text="IMPRIMER" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp; &nbsp;
-      <dx-button width="130" icon="fa fa-exchange"  *ngIf="helper.permissionMethod(['distributionCenter.stocks.returnOperation'])" [disabled]="preconisation.state !== 'done'" text="RETOUR" type="default" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active" [disabled]="preconisation.state == 'delivered'" style="margin-left: 20px; margin-right: 20px;"  ></dx-button> &nbsp; &nbsp;
-      <dx-button width="130" icon="fa fa-trash"     *ngIf="helper.permissionMethod(['preconization.interventions.cancelPreconization'])"  text="ANNULER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'" type="danger" (onClick)="showDeletePopup()"  ></dx-button> &nbsp; &nbsp;
+      <dx-button width="135"  icon="fa fa-paper-plane"  *ngIf="helper.permissionMethod(['preconization.interventions.deliverPreconization'])"  style="margin: 5px;" text="LIVRER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'"  type="success" (onClick)="showDeliverPopup()"   ></dx-button>
+      <dx-button width="135"  class="d-none d-sm-block " icon="fa fa-print"  *ngIf="preconisation.state == 'done'"   (onClick)="print()" text="IMPRIMER" type="primary"   style="margin: 5px;" ></dx-button>
+      <dx-button width="135"  icon="fa fa-exchange"  *ngIf="helper.permissionMethod(['distributionCenter.stocks.returnOperation'])"            style="margin: 5px;" [disabled]="preconisation.state !== 'done'" text="RETOUR" type="default" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active" [disabled]="preconisation.state == 'delivered'"  ></dx-button>
+      <dx-button width="135"  icon="fa fa-trash"     *ngIf="helper.permissionMethod(['preconization.interventions.cancelPreconization'])"      style="margin: 5px;" text="ANNULER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'" type="danger" (onClick)="showDeletePopup()"  ></dx-button>
     </div>
   </div>
 </div>
@@ -496,7 +496,7 @@
       [width]="580"
       [height]="400"
       [showTitle]="true"
-      title="Confirmation "
+      [title]="'Confirmation'"
       [dragEnabled]="false"
       (onShown)="SearchByRfid()"
       [closeOnOutsideClick]="true"

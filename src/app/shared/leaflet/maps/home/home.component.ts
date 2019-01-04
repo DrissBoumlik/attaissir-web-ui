@@ -144,9 +144,7 @@ export class LeafLetHomeComponent implements OnInit {
       latlngs.push({lat: map.getBounds().getNorth(), lng: map.getCenter().lng}); // top center
       latlngs.push(map.getBounds().getNorthWest()); // top left
       latlngs.push({lat: map.getCenter().lat, lng: map.getBounds().getWest()}); // center left
-
       const ss = polygon(latlngs).toGeoJSON();
-
       console.log(JSON.stringify(ss.geometry));
       this.ilotService.getIlotByZone({geom: ss.geometry}).subscribe(
         (res: any) => {

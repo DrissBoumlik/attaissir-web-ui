@@ -120,7 +120,7 @@
 
 
                      <widget5 id="{{item.id}}" title="{{item.title}}" [table]="item.params.table" *ngIf="item.type==5"
-                              (config)="config(item)" (info)="info(item)"  (close)="close(item)"></widget5>
+                              [filter]="item.filter"    (config)="config(item)" (info)="info(item)"  (close)="close(item)"></widget5>
                   </div>
                 </div>
 

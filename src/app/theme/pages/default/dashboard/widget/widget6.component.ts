@@ -170,8 +170,8 @@ declare var $: any
   
   <div *ngFor="let item of obj">
 
-    <span class="nbr" counter-up offset="90" delay="100" time="10" number="{{item.sum}}" >0</span>
-
+    <span class="num nbr">{{ item.sum }}</span>
+    
     <span class="text"> {{item.unit}}</span>
   </div>
   

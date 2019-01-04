@@ -2,7 +2,13 @@
 
 <header id="m_header" class="m-grid__item m-header" m-minimize-offset="200" m-minimize-mobile-offset="200"
         appunwraptag="">
-  <div class="m-container m-container--fluid m-container--full-height">
+
+
+
+
+
+
+  <div class="m-container m-container--fluid m-container--full-height   d-none d-lg-block">
     <div class="m-stack m-stack--ver m-stack--desktop">
 
       <div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
@@ -14,7 +20,7 @@
         <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general float-left">
           <div class=" m-stack__item m-stack__item--middle m-stack__item--fit">
             <a href="javascript:;" id="m_aside_left_minimize_toggle"
-               class="siam-sidebar-toggler float-left">
+               class="siam-sidebar-tom-nav__link-iconggler float-left">
               <span></span>
             </a>
             <div class="siam-search-form-header">
@@ -41,11 +47,11 @@
       <label for="type-users" (click)="searchBtn('agre',search.value)">
           <i class="fa flaticon-users" aria-hidden="true"></i>
 
-        
+
         <span>Agrégés</span>
       </label>
     </div>
-    
+
     <div>
       <input name="type" type="radio" value="type-posts" id="type-posts">
       <label for="type-posts"  (click)="searchBtn('contrat',search.value)">
@@ -189,5 +195,127 @@
       </div>
     </div>
   </div>
+
+
+
+
+  <!-- Navbar burger on large screens -->
+  <nav class="navbar navbar-light bg-light  d-block d-lg-none " style="
+    background-color: #232f3e !important;
+    color: #fff;
+">
+    <a class="navbar-brand" href="#" style="color: #fff; font-weight: 400;">
+
+      <img alt="" src="./assets/images/symbol_cosumar.png"  style="width: 43px; height: 20px; margin-top: -10px;" >
+      &nbsp; {{ currentUser.name }}</a>
+
+
+<!--
+    <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general">
+      <div class="m-stack__item m-topbar__nav-wrapper">
+
+        <ul class="m-topbar__nav m-nav m-nav--inline">
+          <li
+            class="m-nav__item m-topbar__user-profile  m-dropdown m-dropdown--medium m-dropdown--arrow  m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
+            m-dropdown-toggle="click">
+            <a href="#" (click)="showMenu()" (blur)="hideMenu()" class="m-nav__link m-dropdown__toggle">
+                  <span class="m-nav__link-icon">
+                    <i class="flaticon-apps"></i>
+                  </span>
+            </a>
+            <div style="z-index: 1000;" class="m-dropdown__wrapper" *ngIf="displayMenu">
+              <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+              <div class="m-dropdown__inner">
+                <div class="m-dropdown__body">
+                  <div class="m-dropdown__content">
+                    <ul class="m-nav m-nav--skin-light">
+
+                      <li class="m-nav__section m-nav__section--first">
+                        <span class="m-nav__section-text">Division</span>
+                      </li>
+                      <li class="m-nav__item" *ngFor="let t of tenants; let i = index">
+                        <a href="/" class="m-nav__link">
+                          <i
+                            class="m-menu__link-bullet m-menu__link-bullet--dot {{t.division_id == tenant ? 'active' : ''}}"><span></span></i>
+                          <span class="m-nav__link-text" (click)="changeTenant(t.division_id)">
+																{{ t.division }}
+															</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      </div>
+!-->
+
+    <button class="navbar-toggler  pull-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="fa fa-bars" style="
+    color: white;
+    font-size: 22px;"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto"  *ngFor="let menuItem of mainMenu">
+
+
+
+<!--
+
+        <li class="nav-item dropdown" *ngFor="let t of tenants; let i = index">
+          <a href="/" class="m-nav__link">
+            <i
+              class="m-menu__link-bullet m-menu__link-bullet--dot {{t.division_id == tenant ? 'active' : ''}}"><span></span></i>
+            <span class="m-nav__link-text" (click)="changeTenant(t.division_id)">
+																{{ t.division }}
+															</span>
+          </a>
+        </li>
+!-->
+
+
+
+
+
+
+
+        <li class="nav-item dropdown">
+
+
+
+          <a style="color: #ffffff" class="nav-link " [routerLink]="[menuItem.url]" [queryParams]="menuItem?.queryParams"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="{{ menuItem.icon }}"></i> &nbsp; &nbsp; {{menuItem.name}}
+          </a>
+
+
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #2c3846;"   *ngIf="menuItem.subMenu">
+            <a *ngFor="let subMenuItem of menuItem.subMenu"    [routerLink]="[subMenuItem.url]" [queryParams]="subMenuItem.queryParams"   class="dropdown-item" href="#"  style="color: #ffffff" > <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
+              {{ subMenuItem.name }}</a>
+
+          </div>
+
+        </li>
+
+      </ul>
+
+
+      <hr style="background-color: #4c4c4c;"/>
+
+      <a routerLink="/logout" class="m-nav__link m-dropdown__toggle">
+                            <span class="m-nav__link-icon" style="color :#fff;">
+                              <i class="flaticon-logout"></i> Se déconnecter
+                            </span>
+      </a>
+
+
+    </div>
+  </nav>
+
+
+
 </header>
 <!-- END: Header -->

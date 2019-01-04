@@ -3,8 +3,8 @@
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/"><i class="fa fa-angle-left"></i> Tableau de bord</a>
       <h2>Fiche {{ (thirdType === 'young_promoter') ? 'centre de distribution' : title.toLowerCase() }} ({{ (thirdType === 'young_promoter') ? third?.company_name.toUpperCase() : third?.full_name.toUpperCase() }})</h2>
-      <a class="siam-header-btn-new" routerLink="/{{ goTo }}/modifier/{{ third?.id }}" title="Modifier l'agrégé"><i
-        class="fa fa-edit"></i></a>
+      <br/>  <a class="siam-header-btn-new" routerLink="/{{ goTo }}/modifier/{{ third?.id }}" title="Modifier l'agrégé"><i
+        class="fa fa-edit"></i></a> <br/>
     </div>
 
   </div>
@@ -337,15 +337,20 @@
             <div class="tab-pane" id="m_user_profile_tab_2">
               <dx-data-grid
                 id="ContractsgridContainer"
-                [allowColumnReordering]="true"
                 [dataSource]="contracts"
-                [showColumnLines]="true"
-                [showRowLines]="true"
-                [showBorders]="true"
-                [allowColumnResizing]="true"
-                [columnHidingEnabled]="false"
-                [rowAlternationEnabled]="true"
+
+
+
                 [columnAutoWidth]="true"
+                [columnHidingEnabled]="true"
+                [allowColumnResizing]="false"
+                [allowColumnReordering]="true"
+                [columnAutoWidth]="true"
+
+
+                style="padding-top: 2vh"
+
+
                 [noDataText]="'L\'agrégé ne dispose pas de contrats'"
                 keyExpr="id">
 
@@ -387,20 +392,34 @@
             </div>
             <div class="tab-pane" id="m_user_profile_tab_3">
               <dx-data-grid
-                id="gridContainer"
-                [allowColumnReordering]="true"
-                [dataSource]="bank_accounts"
-                (onRowRemoving)="onRemoveBA($event)"
+                 (onRowRemoving)="onRemoveBA($event)"
                 (onRowUpdating)="onUpdateBA($event)"
                 (onEditingStart)="onStartUpdate($event)"
+
+                id="gridContainer"
+                [dataSource]="bank_accounts"
+
+                [allowColumnReordering]="true"
                 [showColumnLines]="true"
                 [showRowLines]="true"
                 [showBorders]="true"
-                (onRowInserting)="onAddBA($event)"
                 [rowAlternationEnabled]="true"
                 [columnAutoWidth]="true"
+
+
+
+                 [columnHidingEnabled]="true"
+                 [allowColumnResizing]="false"
+
+
                 style="padding-top: 2vh"
-                [noDataText]="'L\'agrégé ne dispose pas de compte bancaire'">
+
+                [noDataText]="'L\'agrégé ne dispose pas de compte bancaire'"
+
+                 (onRowInserting)="onAddBA($event)"
+
+
+              >
 
                 <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
                 <dxi-column dataField="bank_name" caption="Dénomination">
@@ -484,7 +503,6 @@
                   <dxo-popup
                     title="Ajouter ou modifier"
                     [showTitle]="true"
-                    [width]="700"
                     [height]="345"
                     [position]="{ my: 'center', at: 'center'}">
                   </dxo-popup>
@@ -497,14 +515,16 @@
             <div class="tab-pane" id="m_user_profile_tab_5">
               <dx-data-grid
                 id="CardsgridContainer"
-                [allowColumnReordering]="true"
                 [dataSource]="cards"
+
+                [allowColumnReordering]="true"
                 [showColumnLines]="true"
                 [showRowLines]="true"
                 [showBorders]="true"
                 [rowAlternationEnabled]="true"
-                style="padding-top: 2vh"
                 [columnAutoWidth]="true"
+                style="padding-top: 2vh"
+
                 [noDataText]="'L\'agrégé ne dispose pas de carte agriculteur'"
                 keyExpr="id">
 

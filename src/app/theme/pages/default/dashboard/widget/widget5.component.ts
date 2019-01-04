@@ -116,7 +116,7 @@ declare var $: any;
                                     data-toggle="tooltip" title="{{title}}"
                                     (mouseenter)="toggleDefault()"
                                     (mouseleave)="toggleDefault()"
-          >	{{title}} </a> </span>
+          >	{{title}}  {{filter['month'] }}</a> </span>
           </div>
               <div class="col-3">
 
@@ -196,6 +196,7 @@ export class Widget5Component {
   @Input() id: String;
   @Input() title: String;
   @Input() table: any[];
+  @Input() filter: any[];
   @Input() sub_title: String;
   @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
   @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
@@ -232,6 +233,8 @@ export class Widget5Component {
       $('[data-toggle="tooltip"]').tooltip();
     });
 
+
+    console.log(this.filter);
   }
 
   count(nbr) {

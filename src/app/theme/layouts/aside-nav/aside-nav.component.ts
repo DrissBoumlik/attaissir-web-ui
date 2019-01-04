@@ -31,7 +31,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
     this.mainMenu = [
 
       {
-        name: 'Contrats',
+        name: 'Contractualisation',
         permission: ['agreement.contracts.grid'],
         icon: 'flaticon-file',
         url: '/contrats/liste',
@@ -66,7 +66,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
           {
             icon: 'flaticon-users',
-            name: 'Agrégés',
+            name: 'Liste des agrégé',
             url: '/tiers/liste',
             permission: ['agreement.parcels.grid'],
           }
@@ -130,7 +130,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         disabled: 'false'
       },
       {
-        name: 'SYNTHÉSE DE STOCK',
+        name: 'SYNTHÈSE DE STOCK',
         icon: 'flaticon-open-box',
         permission: ['distributionCenter.stocks.grid'],
         url: '/stock/situation',
@@ -177,13 +177,13 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         subMenu: [
           {
             icon: 'flaticon-list-1',
-            name: 'Liste des  avances et primes',
+            name: 'Avances et primes (agriculteur)',
             url: '/preconisations-intrants/avance-primes',
             permission: ['preconization.interventions.avance_prime']
           },
           {
             icon: 'flaticon-list',
-            name: 'Liste des  avances et primes (préstataires)',
+            name: 'Avances et primes (préstataires)',
             url: '/preconisations-intrants/avance-prest',
             queryParams: {
               prestataires: true
@@ -234,7 +234,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
 
 
-      {
+      /*{
         name: 'GESTION DE LA RECOLTE',
         icon: 'flaticon-tabs',
         permission: ['preconization.interventions.store'],
@@ -260,7 +260,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
             permission: ['preconization.interventions.store']
           }
         ]
-      },
+      },*/
       {
         name: 'Reporting',
         permission: ['reporting.contracts.grid'],
