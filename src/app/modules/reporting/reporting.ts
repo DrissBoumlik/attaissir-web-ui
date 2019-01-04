@@ -23,6 +23,15 @@ export class ReportingComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.router.url.includes('mouvements')) {
+      this.selectedItem = this.reports[3];
+    } else if (this.router.url.includes('preconisations')) {
+      this.selectedItem = this.reports[2];
+
+    } else if (this.router.url.includes('cards')) {
+      this.selectedItem = this.reports[1];
+
+    }
   }
 
   onSelectionChanged(e) {
