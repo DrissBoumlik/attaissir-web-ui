@@ -153,12 +153,12 @@ export class AddComponent implements OnInit {
   };
 
   constructor(public articleService: ArticlesService,
-    public interventionService: InterventionService,
-    private wareHouseService: WarehouseService,
-    private route: ActivatedRoute,
-    private thirdsService: ThirdsService,
-    private toastr: ToastrService,
-    private router: Router) {
+              public interventionService: InterventionService,
+              private wareHouseService: WarehouseService,
+              private route: ActivatedRoute,
+              private thirdsService: ThirdsService,
+              private toastr: ToastrService,
+              private router: Router) {
     this.helper = Helper;
   }
 
@@ -549,7 +549,7 @@ export class AddComponent implements OnInit {
                       this.APQuantity = this.interventions.surface_to_work * (+this.SelectedAPArticle.dose);
                       this.APQuantityOptions = {
                         format: '#0.## ' + this.SelectedAPArticle.unit.toString(),
-                        //disabled: this.SelectedAPArticle.code !== 'GAF001',
+                        // disabled: this.SelectedAPArticle.code !== 'GAF001',
                         value: this.interventions.surface_to_work * (+this.SelectedAPArticle.dose),
                         onValueChanged: (cc) => {
                           this.APQuantity = cc.value;
@@ -715,16 +715,17 @@ export class AddComponent implements OnInit {
         }
         this.loadingVisible = true;
         this.articleService
-          .checkPlafonnement(this.third.id, this.SelectedSemenceArticle)
+          .checkPlafonnement(this.third.id, this.SelectedSemenceArticle, this.SemenceQuantity, this.interventions.logical_parcel)
           .subscribe(
             (res: any) => {
               this.loadingVisible = false;
-              const stw = parseFloat(this.interventions.surface_to_work);
+              const check = res.data.check;
+              /*const stw = parseFloat(this.interventions.surface_to_work);
               const limit = parseFloat(res.data.limit.dose) * res.data.limit.plf * stw;
               const desired_quantity = parseFloat(this.SemenceQuantity);
               const pr_quantity = parseFloat(res.data.quantity);
-              const plf_quan = limit - pr_quantity;
-              if (desired_quantity > plf_quan && limit !== 0) {
+              const plf_quan = limit - pr_quantity;*/
+              if (!check) {
                 NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
                 return -1;
               }
@@ -774,16 +775,17 @@ export class AddComponent implements OnInit {
         }
         this.loadingVisible = true;
         this.articleService
-          .checkPlafonnement(this.third.id, this.SelectedAPArticle)
+          .checkPlafonnement(this.third.id, this.SelectedSemenceArticle, this.APQuantity, this.interventions.logical_parcel)
           .subscribe(
             (res: any) => {
               this.loadingVisible = false;
-              const stw = parseFloat(this.interventions.surface_to_work);
+              const check = res.data.check;
+              /*const stw = parseFloat(this.interventions.surface_to_work);
               const limit = parseFloat(res.data.limit.dose) * res.data.limit.plf * stw;
               const desired_quantity = parseFloat(this.APQuantity);
               const pr_quantity = parseFloat(res.data.quantity);
-              const plf_quan = limit - pr_quantity;
-              if (desired_quantity > plf_quan) {
+              const plf_quan = limit - pr_quantity;*/
+              if (!check) {
                 NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
                 return -1;
               }
@@ -831,16 +833,17 @@ export class AddComponent implements OnInit {
         }
         this.loadingVisible = true;
         this.articleService
-          .checkPlafonnement(this.third.id, this.SelectedBTRArticle)
+          .checkPlafonnement(this.third.id, this.SelectedSemenceArticle, this.BTRQuantity, this.interventions.logical_parcel)
           .subscribe(
             (res: any) => {
               this.loadingVisible = false;
-              const stw = parseFloat(this.interventions.surface_to_work);
+              const check = res.data.check;
+              /*const stw = parseFloat(this.interventions.surface_to_work);
               const limit = parseFloat(res.data.limit.dose) * res.data.limit.plf * stw;
               const desired_quantity = parseFloat(this.BTRQuantity);
               const pr_quantity = parseFloat(res.data.quantity);
-              const plf_quan = limit - pr_quantity;
-              if (desired_quantity > plf_quan) {
+              const plf_quan = limit - pr_quantity;*/
+              if (!check) {
                 NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
                 return -1;
               }
@@ -888,16 +891,17 @@ export class AddComponent implements OnInit {
         }
         this.loadingVisible = true;
         this.articleService
-          .checkPlafonnement(this.third.id, this.SelectedProductsArticle)
+          .checkPlafonnement(this.third.id, this.SelectedSemenceArticle, this.productsQuantity, this.interventions.logical_parcel)
           .subscribe(
             (res: any) => {
               this.loadingVisible = false;
-              const stw = parseFloat(this.interventions.surface_to_work);
+              /*const stw = parseFloat(this.interventions.surface_to_work);
               const limit = parseFloat(res.data.limit.dose) * res.data.limit.plf * stw;
               const desired_quantity = parseFloat(this.productsQuantity);
               const pr_quantity = parseFloat(res.data.quantity);
-              const plf_quan = limit - pr_quantity;
-              if (desired_quantity > plf_quan) {
+              const plf_quan = limit - pr_quantity;*/
+              const check = res.data.check;
+              if (!check) {
                 NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
                 return -1;
               }
@@ -946,16 +950,17 @@ export class AddComponent implements OnInit {
         }
         this.loadingVisible = true;
         this.articleService
-          .checkPlafonnement(this.third.id, this.SelectedEquipmentArticle)
+          .checkPlafonnement(this.third.id, this.SelectedSemenceArticle, this.EquipmentQuantity, this.interventions.logical_parcel)
           .subscribe(
             (res: any) => {
               this.loadingVisible = false;
-              const stw = parseFloat(this.interventions.surface_to_work);
+              /*const stw = parseFloat(this.interventions.surface_to_work);
               const limit = parseFloat(res.data.limit.dose) * res.data.limit.plf * stw;
               const desired_quantity = parseFloat(this.EquipmentQuantity);
               const pr_quantity = parseFloat(res.data.quantity);
-              const plf_quan = limit - pr_quantity;
-              if (desired_quantity > plf_quan) {
+              const plf_quan = limit - pr_quantity;*/
+              const check = res.data.check;
+              if (!check) {
                 NewComponent.notifyMe('Vous avez dépassé la quantité allouée pour cet article, veuillez réviser la quantité demandée ou bien contactez la DSI.', 'warning', 3000);
                 return -1;
               }

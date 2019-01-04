@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import { Helper } from '../../../../shared/classes/helper';
-import { isNull } from 'util';
-import { MouvementsService } from '../../service/mouvements.service';
+import {Helper} from '../../../../shared/classes/helper';
+import {isNull} from 'util';
+import {MouvementsService} from '../../service/mouvements.service';
 
 @Component({
   selector: 'app-list',
@@ -20,15 +20,21 @@ export class ListComponent implements OnInit {
   }
 
 
-
   ngOnInit() {
     this.mouvements.store = new CustomStore({
       load: (loadOptions: any) => {
         return this.mouvementsService.getListeDemandesDx(loadOptions)
           .toPromise()
           .then(response => {
+            console.log(response);
 
             response.data.forEach((it) => {
+              if (it.type === 'receive') {
+                it.type = 'réception';
+              }
+              if (it.type === 'return') {
+                it.type = 'retour fournisseur';
+              }
               if (it.to_warehouse_name != null) {
                 it.recepteur = it.to_warehouse_name;
               } else if (it.to_third_name != null) {
@@ -41,7 +47,6 @@ export class ListComponent implements OnInit {
                 it.emetter = it.from_warehouse_name;
               }
             });
-
             const json = response;
             return json;
           })
@@ -52,8 +57,7 @@ export class ListComponent implements OnInit {
     });
 
 
-
-    Helper.permissionMethod(['none'])
+    Helper.permissionMethod(['none']);
     {
       console.log('ok');
 

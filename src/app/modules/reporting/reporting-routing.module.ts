@@ -20,32 +20,32 @@ const routes: Routes = [{
           path: 'contracts',
           component: ContractsComponent,
           canActivate: [PermissionGuard],
-          data: { permission: ['agreement.contracts.grid'] }
+          data: { permission: ['reporting.contracts.grid'] }
         },
         {
           path: 'contracts/cda',
           component: ContractsComponent,
           canActivate: [PermissionGuard],
-          data: { permission: ['agreement.contracts.grid'] }
+          data: { permission: ['reporting.contracts.grid'] }
         },
         {
           path: 'cards',
           component: CardsComponent,
           canActivate: [PermissionGuard],
-          data: { permission: ['agreement.contracts.grid'] }
+          data: { permission: ['reporting.cards.grid'] }
         }
         ,
         {
           path: 'preconisations',
           component: PreconisationsComponent,
           canActivate: [PermissionGuard],
-          data: { permission: ['agreement.contracts.grid'] }
+          data: { permission: ['reporting.preconisations.grid'] }
         },
         {
           path: 'mouvements',
           component: MouvementsComponent,
           canActivate: [PermissionGuard],
-          data: { permission: ['agreement.contracts.grid'] }
+          data: { permission: ['reporting.mouvements.grid'] }
         }
       ]
     }

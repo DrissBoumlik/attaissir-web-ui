@@ -296,9 +296,9 @@ export class Helper {
       return 'transfert';
     } else if (value === 'delivery') {
       return 'LIVRAISON';
-    } else if (value === 'return') {
+    } else if (value === 'return' || value === 'retour fournisseur') {
       return 'Retour Fournisseur';
-    } else if (value === 'receive') {
+    } else if (value === 'receive' || value === 'réception') {
       return 'Réception des intrants';
     }
     return value;

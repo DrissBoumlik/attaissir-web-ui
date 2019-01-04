@@ -196,7 +196,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
       {
         name: 'SUIVI CULTURAL',
-        permission: ['distributionCenter.stocks.grid'],
+        permission: ['preconization.interventions.store'],
         icon: 'fa flaticon-clipboard',
         url: '/incidents/liste',
         queryParams: { magazin: this.tenantId },
@@ -234,7 +234,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
 
 
-      {
+      /*{
         name: 'GESTION DE LA RECOLTE',
         icon: 'flaticon-tabs',
         permission: ['preconization.interventions.store'],
@@ -260,10 +260,10 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
             permission: ['preconization.interventions.store']
           }
         ]
-      },
+      },*/
       {
         name: 'Reporting',
-        permission: ['base.reporting.show'],
+        permission: ['reporting.contracts.grid'],
         icon: 'flaticon-graphic-1',
         url: '/reporting/contracts',
         description: '',
