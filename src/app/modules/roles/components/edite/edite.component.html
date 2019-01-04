@@ -1,5 +1,5 @@
 <div class="m-content">
-    <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " style="overflow: auto;white-space: nowrap;">
+    <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " >
       <div class="m-portlet__body">
         <form style="margin-top: 20px"
               (submit)="onFormSubmit($event)" >
@@ -21,7 +21,10 @@
                 </dxi-validation-rule>
               </dxi-item>
             </dxi-item> -->
-  
+
+
+            <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded " style="overflow: auto;white-space: nowrap;">
+
             <dxi-item itemType="group" caption="Choix des permissions">
               <div>
                 <div class="col-12">
@@ -55,6 +58,8 @@
                 </div>
               </div>
             </dxi-item>
+
+            </div>
   
             <dxi-item
               itemType="button"
@@ -66,4 +71,3 @@
       </div>
     </div>
   </div>
-  

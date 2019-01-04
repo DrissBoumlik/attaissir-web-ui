@@ -137,4 +137,50 @@ App
   .search-option2 div input:checked + label span::after {
     border-top-color: #5b9dd3;
   }
-  
+
+
+
+
+
+
+
+/*
+
+@media only screen and (max-width: 600px) {
+
+  .m-topbar {
+    height:  0px !important;
+      width:  auto !important;
+    position: inherit;
+
+      background-color: transparent;
+      box-shadow: none;
+  }
+
+
+}
+*/
+
+
+
+
+.navbar {
+  padding: 1rem 1rem !important;
+}
+
+
+.dropdown-menu {
+  border: 0;
+  box-shadow: none;
+  background-color: #f8f9fa;
+}
+
+@media only screen and (max-width: 600px) {
+
+.m-page--fluid .m-header, .m-page--wide .m-header {
+    background-color: #000000 !important;
+}
+}
+
+
+

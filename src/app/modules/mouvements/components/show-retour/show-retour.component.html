@@ -9,7 +9,7 @@
 
   </div>
 </div>
-<div class="m-content" style="padding-bottom: 10px;">
+<div class="m-content" style="padding-bottom: 10px !important;">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
 
@@ -117,7 +117,7 @@
 
 
 
-<div class="m-content" style="padding-bottom: 10px;">
+<div class="m-content" style="padding-bottom: 10px !important;">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body">
 
@@ -136,11 +136,22 @@
               </div>
 
 
+
               <dx-data-grid
-                id="gridContainer3"
-                [selectionFilter]="false"
+                #dataGrid
+                id="gridContainer"
                 [dataSource]="articles"
-              >
+                showBorders="true"
+                [columnHidingEnabled]="true"
+                [allowColumnResizing]="true"
+                [allowColumnReordering]="true"
+                [selectionFilter]="false"
+
+                [(selectedRowKeys)]="selectedItems"
+                [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+                KeyExpr="id">
+
+
                 <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
                 <dxi-column dataField="id" [width]="100"  caption="" [allowSorting]="false"  [allowFiltering]="false"  cellTemplate="removeTemplate" [allowSorting]="false"></dxi-column>
                 <dxi-column dataField="category" caption="Famille"></dxi-column>

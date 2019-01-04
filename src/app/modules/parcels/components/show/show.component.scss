@@ -404,3 +404,26 @@ Remove or comment-out the code block below to see how the browser will fall-back
         }
     }
 }
+
+
+
+ ._map {
+
+   width : 390px;
+   height : 250px;
+ }
+
+
+ @media only screen and (max-width: 600px) {
+
+   ._map {
+     width: auto;
+     height: 250px;
+   }
+
+
+   .profile-stats {
+     width: 300px;
+   }
+
+ }
