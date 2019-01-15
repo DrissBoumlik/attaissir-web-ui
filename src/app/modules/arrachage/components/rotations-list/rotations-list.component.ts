@@ -127,10 +127,10 @@ export class RotationsListComponent implements OnInit {
 
   validateAssignment() {
     this.arrachageService.proposeAssignment(this.returnedCamion.ridelle_code, true).subscribe((res) => {
+      this.assignPopUpVisible = false;
       this.toaster.success(`La parcelle  ${res.rotation.p_name} a été affectée avec succès `, 'Success', {
         positionClass: 'toast-top-center'
       });
-      this.assignPopUpVisible = false;
     }, err => {
       this.toaster.warning(err.error.message, err.error.data, {
         positionClass: 'toast-top-center'
