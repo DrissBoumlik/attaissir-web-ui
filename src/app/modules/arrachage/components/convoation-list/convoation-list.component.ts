@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Helper } from '../../../../shared/classes/helper';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
+import {Helper} from '../../../../shared/classes/helper';
 import CustomStore from 'devextreme/data/custom_store';
-import { ArrachageService } from '../../services/arrachage.service';
-import { isNull } from 'util';
+import {ArrachageService} from '../../services/arrachage.service';
+import {isNull} from 'util';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-convoation-list',
@@ -13,20 +14,42 @@ import { isNull } from 'util';
 export class ConvoationListComponent implements OnInit {
 
   convocations: any = {};
+  rotation: any = {};
+  submitButtonOptions: any = {};
+  currentConvocation: any = {};
+  TypeCamionEditorOptions: any = {};
+  camionTypes: any = {};
   helper: any;
-
-
-  popupcodebarreVisible = false;
-  _code = null;
-  @ViewChild('codebarre') codebarre: ElementRef;
-  @ViewChild('focusout') focusout: ElementRef;
-  @ViewChild('popup') popup: ElementRef;
-
+  today: Date;
+  tomorrow: Date;
+  popupVisible = false;
 
 
   constructor(private arrachageService: ArrachageService,
-    private toaster: ToastrService) {
+              private toaster: ToastrService) {
     this.helper = Helper;
+    this.today = new Date();
+    this.tomorrow = new Date();
+    this.tomorrow.setDate(this.today.getDate() + 1);
+    this.submitButtonOptions = {
+      text: 'Valider et envoyer',
+      type: 'success',
+      icon: 'check',
+      useSubmitBehavior: true,
+      onClick: ($ev) => {
+        this.arrachageService.genrateRotations({
+          idConvocation: this.currentConvocation.data.ir_id,
+          nbr_camions: this.rotation.nbr_camion,
+          type_camion_id: this.rotation.type_camion
+        }).subscribe((res) => {
+          this.popupVisible = false;
+          console.log(this.currentConvocation.btn);
+          this.currentConvocation.btn.disabled = true;
+        }, error1 => {
+
+        });
+      }
+    };
   }
 
   ngOnInit() {
@@ -42,6 +65,17 @@ export class ConvoationListComponent implements OnInit {
           });
       }
     });
+    this.arrachageService.getCamionTypes().subscribe(
+      (camions: any) => {
+        this.camionTypes = camions;
+        this.TypeCamionEditorOptions = {
+          label: 'Type de camions',
+          items: this.camionTypes,
+          displayExpr: 'ridelle_code',
+          valueExpr: 'id',
+          searchEnabled: true,
+        };
+      });
   }
 
   getStatusColor(value: string): string {
@@ -57,84 +91,32 @@ export class ConvoationListComponent implements OnInit {
     }
   }
 
-  downloadDocument(idConvocation: number) {
-    this.arrachageService.printConvocation(idConvocation);
+  downloadDocument(idMotif: number) {
+    this.arrachageService.downloadMotif(idMotif).subscribe(
+      (res: any) => {
+        window.open(res.data.file);
+      }, error1 => {
+        console.log(error1);
+      }
+    );
   }
 
 
-
-
-  Scan() {
-    this.popupcodebarreVisible = true;
+  generate(ev: any, data: any, btn: any): void {
+    this.popupVisible = true;
+    this.currentConvocation = {
+      data: data.data,
+      btn: btn
+    };
   }
 
 
-  SearchBycodebarre() {
+  getDatedifference = (dateValue: string) => {
+    const date = new Date(dateValue);
+    return date.getDate() === this.tomorrow.getDate();
 
+  };
 
-    this.popup.nativeElement.addEventListener('click', () => {
-      this.codebarre.nativeElement.focus();
-    });
-
-    this.codebarre.nativeElement.focus();
-
-    this.codebarre.nativeElement.addEventListener('input', () => {
-
-      setTimeout(() => {
-
-        console.log('codebarre');
-
-        this._code = this.codebarre.nativeElement.value;
-        this.codebarre.nativeElement.value = '';
-        this.focusout.nativeElement.focus();
-
-
-        if (this._code != '') {
-
-          this._code = this._code.replace(/à/g, "0");
-          this._code = this._code.replace(/&/g, "1");
-          this._code = this._code.replace(/é/g, "2");
-          this._code = this._code.replace('"', "3");
-          this._code = this._code.replace("'", "4");
-          this._code = this._code.replace("(", "5");
-          this._code = this._code.replace("-", "6");
-          this._code = this._code.replace(/è/g, "7");
-          this._code = this._code.replace("_", "8");
-          this._code = this._code.replace(/ç/g, "9");
-
-          this.convocations = {};
-          console.log('tt');
-          let code = this._code;
-          this.convocations.store = new CustomStore({
-            load: (loadOptions: any) => {
-              loadOptions.codebarre = code;
-              loadOptions.filter = ['code_barre', '=', code];
-              return this.arrachageService.getConvocationsDx(loadOptions)
-                .toPromise()
-                .then(response => {
-                  console.log(response);
-                  return response;
-                })
-                .catch(error => {
-                  throw error;
-                });
-            }
-          });
-
-
-
-        }
-
-
-        this.popupcodebarreVisible = false;
-
-      }, 1000);
-
-
-    });
-
-
-  }
-
-
+  clearDataOnShow = () => {
+  };
 }

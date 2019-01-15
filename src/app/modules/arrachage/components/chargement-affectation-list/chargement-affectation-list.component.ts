@@ -3,6 +3,7 @@ import { ArrachageService } from '../../services/arrachage.service';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from '../../../../shared/classes/helper';
 import CustomStore from 'devextreme/data/custom_store';
+import {isNull} from "util";
 
 @Component({
   selector: 'app-chargement-affectation-list',
@@ -16,7 +17,7 @@ export class ChargementAffectationListComponent implements OnInit {
   selectedRow: any = {};
 
   constructor(private arrachageService: ArrachageService,
-    private toaster: ToastrService) {
+              private toaster: ToastrService) {
     this.helper = Helper;
   }
 
@@ -35,43 +36,30 @@ export class ChargementAffectationListComponent implements OnInit {
     });
   }
 
-  printBn(idChargement) {
-    this.arrachageService.getChargementById(idChargement)
-      .subscribe(
-        (res) => {
-          this.selectedRow = res.data;
-          setTimeout(() => {
-            this.printBon();
-          }, 1000);
-        },
-        (err) => { }
-      );
+  getStatusColor(value: string): string {
+    if (isNull(value)) {
+      return 'm-badge m-badge--primary m-badge--wide';
+    }
+    if (value.toLowerCase() === 'done'.toLowerCase() || value.toLowerCase() === 'validé'.toLowerCase()) {
+      return 'm-badge m-badge--success m-badge--wide';
+    } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'En cours'.toLowerCase()) {
+      return 'm-badge m-badge--primary m-badge--wide';
+    } else {
+      return 'm-badge m-badge--primary m-badge--wide';
+    }
   }
 
-  printBon = () => {
-    const w = window.open('', 'PRINT', 'height=400,width=600');
-
-    w.document.write('<!DOCTYPE html>');
-
-    w.document.write('<html>');
-    w.document.write('<head>');
-
-    w.document.write('<link rel="stylesheet" href="/assets/app/css/print.css" type="text/css" />');
-
-    w.document.write('</head>');
-    w.document.write('<body>');
-    w.document.write($('#t2').html());
-    w.document.write('</body>');
-    w.document.write('</html>');
-
-    setTimeout(() => {
-      w.print();
-    }, 3000);
-
-    setTimeout(() => {
-      w.close();
-    }, 5000);
-
-    return true;
+  getStatut = (value: string): string => {
+    if (value === 'inprogress') {
+      return 'ENCOURS';
+    } else if (value === 'done') {
+      return 'VALIDÉ';
+    } else if (value === 'canceled') {
+      return 'ANNULÉ';
+    }
+    return '';
   }
 }
+
+
+

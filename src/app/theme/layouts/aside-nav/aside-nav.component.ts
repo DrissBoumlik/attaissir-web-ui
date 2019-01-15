@@ -231,10 +231,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         ],
         disabled: 'false'
       },
-
-
-
-      /*{
+      {
         name: 'GESTION DE LA RECOLTE',
         icon: 'flaticon-tabs',
         permission: ['preconization.interventions.store'],
@@ -243,14 +240,8 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
         subMenu: [
           {
             icon: 'flaticon-list',
-            name: 'Echantillonnage',
-            url: '/arrachage/echantillons',
-            permission: ['preconization.interventions.store']
-          },
-          {
-            icon: 'flaticon-list-1',
-            name: 'Liste des affectations des camions',
-            url: '/arrachage/chargements',
+            name: 'Ordre d\'arrachage',
+            url: '/arrachage/ordre',
             permission: ['preconization.interventions.store']
           },
           {
@@ -258,9 +249,29 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
             name: 'Convocations d\'arrachage',
             url: '/arrachage/convocations',
             permission: ['preconization.interventions.store']
+          },
+         /* {
+            icon: 'flaticon-list',
+            name: 'Echantillonnage',
+            url: '/arrachage/echantillons',
+            permission: ['preconization.interventions.store']
+          },*/
+
+
+          {
+            icon: 'flaticon-infinity',
+            name: 'Rotations de récolte',
+            url: '/arrachage/convocations/generated',
+            permission: ['preconization.interventions.store']
+          },
+          {
+            icon: 'flaticon-list-1',
+            name: 'Liste des affectations des camions',
+            url: '/arrachage/chargements',
+            permission: ['preconization.interventions.store']
           }
         ]
-      },*/
+      },
       {
         name: 'Reporting',
         permission: ['reporting.contracts.grid'],
