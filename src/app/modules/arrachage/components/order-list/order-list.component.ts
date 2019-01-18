@@ -1,12 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Helper} from '../../../../shared/classes/helper';
 import CustomStore from 'devextreme/data/custom_store';
 import {ArrachageService} from '../../services/arrachage.service';
-import {DxDataGridComponent} from 'devextreme-angular';
-import {load} from '@angular/core/src/render3/instructions';
+import {DxChartComponent, DxDataGridComponent} from 'devextreme-angular';
 import {HarvestConvocation} from '../../classes/HarvestConvocation';
 import {ToastrService} from 'ngx-toastr';
-import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-order-list',
@@ -15,6 +13,8 @@ import notify from 'devextreme/ui/notify';
 })
 export class OrderListComponent implements OnInit {
 
+  chartVisible = true;
+  chartLoadingIndicator = false;
   helper: any;
   popupVisible = false;
   loadingVisible = false;
@@ -26,16 +26,24 @@ export class OrderListComponent implements OnInit {
   motif: any = {};
   parcels: any = {};
   today: Date;
+  configDaysFromNow: Date;
   tomorrow: Date;
   currentRow: HarvestConvocation;
   data: HarvestConvocation[] = [];
+  chartData: any = [];
+  chartOriginalSize: any;
+
+  @ViewChild('chartContainer') chartContainer: ElementRef;
   @ViewChild('dataGrid') dataGrid: DxDataGridComponent;
+  @ViewChild('chart') chart: DxChartComponent;
+  harvest_dates: any[] = [];
 
   constructor(private arrachageService: ArrachageService,
               private toaster: ToastrService) {
     this.helper = Helper;
     this.today = new Date();
     this.tomorrow = new Date();
+    this.configDaysFromNow = new Date();
     this.tomorrow.setDate(this.today.getDate() + 1);
     this.submitButtonOptions = {
       text: 'Valider et envoyer',
@@ -74,7 +82,23 @@ export class OrderListComponent implements OnInit {
     };
   }
 
+  customizePoint = (arg: any) => {
+    return {color: '#3adb64', hoverStyle: {color: '#75ffae'}};
+  };
+
+  customizeLabel = (e: any) => {
+    return e.valueText + ' tonne';
+  };
+
   ngOnInit() {
+    this.arrachageService.getStructureConfig().subscribe(
+      (res: any) => {
+        console.log(JSON.parse(res.data));
+        this.configDaysFromNow.setDate(this.today.getDate() + +JSON.parse(res.data).day_to_harvest);
+        this.harvest_dates.push(this.configDaysFromNow);
+        this.updateChartData();
+      }
+    );
     this.parcels.store = new CustomStore({
       load: (loadOptions: any) => {
         return this.arrachageService.getOrderedParcels(loadOptions)
@@ -93,6 +117,10 @@ export class OrderListComponent implements OnInit {
   }
 
   valuechange(e: any, data: any, value: any): void {
+    if (data.column.dataField === 'start_date' || data.column.dataField === 'end_date') {
+      this.harvest_dates.push(value);
+      this.updateChartData();
+    }
     const found = this.data.find(con => {
       return con.parcel_id === data.data.p_id;
     });
@@ -101,9 +129,9 @@ export class OrderListComponent implements OnInit {
     } else {
       const newHC = new HarvestConvocation();
       newHC.parcel_id = data.data.p_id;
-      newHC.start_date = this.tomorrow;
+      newHC.start_date = this.configDaysFromNow;
       newHC.sup_semi = this.dataGrid.instance.getKeyByRowIndex(data.rowIndex).sup_semi;
-      newHC.end_date = this.tomorrow;
+      newHC.end_date = this.configDaysFromNow;
       newHC.parcel_name = data.data.p_name;
       newHC.p_harvest_order = data.data.p_harvest_order;
       newHC.third_party_id = data.data.tp_id;
@@ -127,12 +155,20 @@ export class OrderListComponent implements OnInit {
       });
       return;
     }
+
+    if ( found.start_date > found.end_date) {
+      this.toaster.info('La date de début d\'arrachage doit être inférieure ou égale à la date de fin', 'Date', {
+        positionClass: 'toast-top-center'
+      });
+      return;
+    }
     this.arrachageService.convocate(found).subscribe(
       (res: any) => {
         this.toaster.success(`La parcelle  ${data.data.p_name} a été convocée avec succès `, 'Success', {
           positionClass: 'toast-top-center'
         });
         btn.disabled = true;
+        this.updateChartData();
       },
       (err: any) => {
         if (err.error.code === 901) {
@@ -157,4 +193,37 @@ export class OrderListComponent implements OnInit {
     this.motif.motif = [];
   }
 
+  toggleChart() {
+    const container: HTMLDivElement = this.chartContainer.nativeElement;
+/*    if (container.hidden) {
+      container.classList.add('slide-out-right');
+    }*/
+    container.hidden = !container.hidden;
+    /*this.chartOriginalSize = this.chartOriginalSize ? this.chartOriginalSize : this.chart.size;
+    console.log(this.chart.size);
+    console.log(1111);
+    this.chartVisible = !this.chartVisible;
+    if (this.chartVisible) {
+      this.chart.size = this.chartOriginalSize;
+      return;
+    }
+    this.chart.size = {
+      height: 0,
+      width: 0
+    };*/
+  }
+
+  updateChartData = () => {
+    this.chartLoadingIndicator = true;
+    const maxDate = new Date(Math.max.apply(null, this.harvest_dates));
+    const minDate = new Date(Math.min.apply(null, this.harvest_dates));
+    maxDate.setDate(maxDate.getDate() - 1);
+    minDate.setDate(minDate.getDate() - 1);
+    this.arrachageService.getChartData(minDate, maxDate)
+      .subscribe(
+        (cData: any) => {
+          this.chartLoadingIndicator = false;
+          this.chartData = cData.data;
+        });
+  };
 }

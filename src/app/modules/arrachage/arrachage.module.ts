@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ArrachageRoutingModule } from './arrachage-routing.module';
 import { ConvoationListComponent } from './components/convoation-list/convoation-list.component';
 import {
-  DxButtonModule,
+  DxBoxModule,
+  DxButtonModule, DxChartModule,
   DxDataGridModule,
   DxDateBoxModule, DxFileUploaderModule,
   DxFormModule, DxListModule,
@@ -35,6 +36,8 @@ import { RotationsListComponent } from './components/rotations-list/rotations-li
     DxFileUploaderModule,
     DxListModule,
     DxScrollViewModule,
+    DxChartModule,
+    DxBoxModule,
     DxLoadPanelModule
   ],
   declarations: [ConvoationListComponent, EchantillonnageListComponent, EchantillonnageShowComponent, ChargementAffectationListComponent, EncodageLisComponent, OrderListComponent, RotationsListComponent]

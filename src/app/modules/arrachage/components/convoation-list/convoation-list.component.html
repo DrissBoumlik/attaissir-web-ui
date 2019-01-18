@@ -6,7 +6,38 @@
     </div>
   </div>
 </div>
-
+<ul class="m-nav-sticky" style="margin-top: 30px; background-color: rgba(0,0,0,0); box-shadow: rgba(0,0,0,0) !important;">
+  <dx-button (onClick)="toggleChart()" icon="back" [disabled]="false">
+  </dx-button>
+</ul>
+<div class="m-content" style="padding-bottom: 0 !important;">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body m-portlet__body--no-padding">
+      <div class="m-portlet__head">
+        <div class="m-portlet__head-tools">
+          <div #chartContainer class="slide-in-right">
+            <dx-chart #chart id="chart" [dataSource]="chartData" title="Tonnage generé / Jour"
+                      [palette]="'Material'">
+              <dxo-loading-indicator [show]="chartLoadingIndicator" text="Chargement"></dxo-loading-indicator>
+              <dxi-series argumentField="date"  argumentType="datetime"  valueField="sum" type="bar">
+                <dxo-label [customizeText]="customizeLabel" [visible]="true"   [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
+              </dxi-series>
+              <dxi-series argumentField="date" color="rgb(235, 53, 115)" argumentType="datetime" valueField="quota" type="spline">
+                <dxo-tooltip
+                  [enabled]="true"
+                  location="edge">
+                </dxo-tooltip>
+                <dxo-label [visible]="false" [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
+              </dxi-series>
+              <dxo-legend [visible]="false"></dxo-legend>
+              <dxo-export [enabled]="true"></dxo-export>
+            </dx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="m-content">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body m-portlet__body--no-padding">
@@ -51,15 +82,15 @@
                     caption="Superficie convoquée (Ha)"></dxi-column>
         <dxi-column [alignment]="'center'" dataType="Text" dataField="irt_name"
                     caption="Type"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="date" dataField="ir_date_con"
+        <dxi-column [alignment]="'center'" dataType="date" format="dd/MM/yyyy" dataField="ir_date_con"
                     caption="Date de convocation"></dxi-column>
         <dxi-column [alignment]="'center'" dataType="number" dataField="ir_daily_quota"
                     caption="Tonnage/Jour"></dxi-column>
 
-        <dxi-column [alignment]="'center'" datatype="date" dataField="ir_start_date"
+        <dxi-column [alignment]="'center'"  datatype="date" dataField="ir_start_date"
                     caption="Date de debut d'arrachage"></dxi-column>
 
-        <dxi-column [alignment]="'center'" datatype="date" dataField="ir_end_date"
+        <dxi-column [alignment]="'center'"  datatype="date" dataField="ir_end_date"
                     caption="Date prévu de fin d'arrachage"></dxi-column>
 
         <dxi-column
@@ -69,7 +100,7 @@
         </dxi-column>
 
         <div *dxTemplate="let data of 'generate_template'">
-          <dx-button [type]="'success'" [text]="getDatedifference(data.value)  ? 'générer et valider' : 'Re-générer'" (onClick)="generate($event, data, convBtn)"
+          <dx-button [type]="getDatedifference(data.value)  ? 'success' : 'default'" [text]="getDatedifference(data.value)  ? 'Valider et générer' : 'Générer'" (onClick)="generate($event, data, convBtn)"
                      #convBtn></dx-button>
         </div>
 
@@ -157,8 +188,15 @@
     </div>
   </div>
 </div>
-
-
-
+<dx-load-panel
+  #loadPanel
+  shadingColor="rgba(0,0,0,0.4)"
+  [position]="{ of: 'me' }"
+  [(visible)]="loadingVisible"
+  [showIndicator]="true"
+  [showPane]="true"
+  [shading]="true"
+  [closeOnOutsideClick]="false">
+</dx-load-panel>
 
 

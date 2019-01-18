@@ -6,13 +6,41 @@
     </div>
   </div>
 </div>
-<div class="m-content">
+<ul class="m-nav-sticky" style="margin-top: 30px; background-color: rgba(0,0,0,0); box-shadow: rgba(0,0,0,0) !important;">
+  <dx-button (onClick)="toggleChart()" icon="back" [disabled]="false">
+  </dx-button>
+</ul>
+<div class="m-content" style="padding-bottom: 0 !important;">
   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
     <div class="m-portlet__body m-portlet__body--no-padding">
       <div class="m-portlet__head">
         <div class="m-portlet__head-tools">
+          <div #chartContainer class="slide-in-right">
+            <dx-chart #chart id="chart" [dataSource]="chartData" title="Tonnage convoqué / Jour"
+                      [palette]="'Soft Pastel'">
+              <dxo-loading-indicator [show]="chartLoadingIndicator" text="Chargement"></dxo-loading-indicator>
+              <dxi-series argumentField="date"  argumentType="datetime"  valueField="sum" type="bar">
+                <dxo-label [customizeText]="customizeLabel" [visible]="true"  [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
+              </dxi-series>
+              <dxi-series argumentField="date" color="rgb(235, 53, 115)" argumentType="datetime" valueField="quota" type="spline">
+                <dxo-tooltip
+                  [enabled]="true"
+                  location="edge">
+                </dxo-tooltip>
+                <dxo-label [visible]="false" [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
+              </dxi-series>
+              <dxo-legend [visible]="false"></dxo-legend>
+              <dxo-export [enabled]="true"></dxo-export>
+            </dx-chart>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body m-portlet__body--no-padding">
       <dx-data-grid
         #dataGrid
         id="dataGrid"
@@ -61,10 +89,6 @@
         <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
 
-        <dxi-column dataField="p+id" [width]="40" caption=""
-                    [visible]="helper.permissionMethod(['preconization.interventions.show'])" [allowSorting]="false"
-                    [allowFiltering]="false"
-                    cellTemplate="consulterTemplate"></dxi-column>
         <dxi-column dataField="cda_name" caption="CDA"></dxi-column>
         <dxi-column dataField="z_name" caption="Zone"></dxi-column>
         <dxi-column dataField="p_name" caption="Nom de la parcelle"></dxi-column>
@@ -80,7 +104,8 @@
                     [visible]="false"></dxi-column>
         <dxi-column dataType="number" [visible]="false" dataField="p_annuel_surface" dataType="number"
                     caption="Superficie annuel" format="#,## (ha)"></dxi-column>
-        <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false"  caption="Convocation" [alignment]="'center'" [cssClass]="{backGroundColor: 'red'}">
+        <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Convocation"
+                    [alignment]="'center'" [cssClass]="{backGroundColor: 'red'}">
           <dxi-column
             caption="Superficie à travailler (Ha)"
             dataField="sup_semi"
@@ -88,7 +113,7 @@
             cellTemplate="number_template">
           </dxi-column>
           <dxi-column
-            caption="Quota (tonnage) / jour"
+            caption="tonnage / jour"
             dataField="daily_quota"
             cellTemplate="number_template">
           </dxi-column>
@@ -130,7 +155,7 @@
         <div *dxTemplate="let data of 'date_template'">
           <dx-date-box
             #dxDt
-            [value]="tomorrow"
+            [value]="configDaysFromNow"
             [min]="tomorrow"
             (onValueChanged)="valuechange($event, data, dxDt.value)"
             type="date">
@@ -190,7 +215,8 @@
                           [editorOptions]="{ height: 100, width: 350 }"></dxi-item>
               </dxi-item>
               <dxi-item itemType="group">
-                <dxi-item dataField="motif" editorType="dxFileUploader"  [editorOptions]="{value: filePath, uploadMode: 'useForm'}">
+                <dxi-item dataField="motif" editorType="dxFileUploader"
+                          [editorOptions]="{value: filePath, uploadMode: 'useForm'}">
                 </dxi-item>
               </dxi-item>
               <dxi-item itemType="group">
@@ -208,3 +234,13 @@
     </div>
   </div>
 </div>
+<dx-load-panel
+  #loadPanel
+  shadingColor="rgba(0,0,0,0.4)"
+  [position]="{ of: 'me' }"
+  [(visible)]="loadingVisible"
+  [showIndicator]="true"
+  [showPane]="true"
+  [shading]="true"
+  [closeOnOutsideClick]="false">
+</dx-load-panel>

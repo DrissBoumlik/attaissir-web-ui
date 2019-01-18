@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center">
     <div class="siam-page-header">
       <a class="siam-header-back-btn" routerLink="/"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Rotations de récolte ( de ce jour ).</h2>
+      <h2>Rotations de récolte.</h2>
     </div>
   </div>
 </div>
@@ -87,7 +87,7 @@
                     caption="CIN (Agrègè)"></dxi-column>
         <dxi-column [alignment]="'center'" dataType="Text" dataField="p_annuel_surface"
                     caption="Superficie annuelle (Ha)"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="Text" dataField="sup_semi"
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="sup_semis"
                     caption="Superficie semis (Ha)"></dxi-column>
         <dxi-column [alignment]="'center'" dataType="Text" dataField="ir_sup_con"
                     caption="Superficie convoquée (Ha)"></dxi-column>
@@ -97,6 +97,12 @@
                     caption="Date de convocation"></dxi-column>
         <dxi-column [alignment]="'center'" dataType="number" dataField="ir_daily_quota"
                     caption="Tonnage/Jour"></dxi-column>
+
+        <dxi-column [alignment]="'center'" dataType="number" dataField="rotation_count"
+                    caption="Nombre de rotations"></dxi-column>
+
+        <dxi-column [alignment]="'center'" dataType="number" dataField="camion_count"
+                    caption="Nombre de camions"></dxi-column>
 
         <dxi-column [alignment]="'center'" datatype="date" dataField="ir_start_date"
                     caption="Date de debut d'arrachage"></dxi-column>
@@ -129,7 +135,6 @@
                 [showBorders]="true"
                 [columnAutoWidth]="true">
                 <dxi-column caption="Numéro de rotation" cellTemplate="indexTemplate"></dxi-column>
-                <dxi-column dataField="costum_fields.nbr_camions" caption="Nombre de camions"></dxi-column>
                 <dxi-column dataField="state" caption="Etat" cellTemplate="stateTemplate"></dxi-column>
                 <dxi-column dataField="id" caption="" cellTemplate="cancelTemplate"></dxi-column>
                 <div *dxTemplate="let data of 'stateTemplate'">

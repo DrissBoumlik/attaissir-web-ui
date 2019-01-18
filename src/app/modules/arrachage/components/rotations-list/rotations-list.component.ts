@@ -22,6 +22,7 @@ export class RotationsListComponent implements OnInit {
   popupVisible = false;
   assignPopUpVisible = false;
   helper: Helper;
+  today: any;
   returnedCamion: any = {};
   returnedRotation: any = {};
   validateAssignmentGrid = false;
@@ -30,6 +31,7 @@ export class RotationsListComponent implements OnInit {
   constructor(private arrachageService: ArrachageService,
               private toaster: ToastrService) {
     this.helper = Helper;
+    this.today = Date.now();
     this.submitButtonOptions = {
       text: 'Consulter',
       type: 'default',

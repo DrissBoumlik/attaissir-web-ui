@@ -120,7 +120,10 @@ export class ArrachageService {
   }
 
   proposeAssignment(codeRidelle: any, validated: boolean = false): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/${this.routeName}/rotation/assign`, JSON.stringify({codeRidelle: codeRidelle, validated: validated}), {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/rotation/assign`, JSON.stringify({
+      codeRidelle: codeRidelle,
+      validated: validated
+    }), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -129,5 +132,32 @@ export class ArrachageService {
 
   cancelRotation(idRotation: any): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/${this.routeName}/rotations/${idRotation}`);
+  }
+
+
+  getStructureConfig(): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/structure/config`, null);
+  }
+
+  getChartData(start_date: Date, end_date: Date): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/convocations/report`, JSON.stringify({
+      start_date: start_date,
+      end_date: end_date
+    }), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getGeneratedTonnageChartData(start_date: Date, end_date: Date): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/${this.routeName}/tonnage/generated`, JSON.stringify({
+      start_date: start_date,
+      end_date: end_date
+    }), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 }

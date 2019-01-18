@@ -34,7 +34,7 @@ export class ImportService {
       headers: new HttpHeaders({
         'Accept': 'application/json'
         // 'Content-Type': 'application/json'
-      })
+      }), responseType: 'text'
     });
   }
 

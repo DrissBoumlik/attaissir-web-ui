@@ -88,8 +88,12 @@ export class IndexComponent implements OnInit {
     this.importService.upload(newDoc.file, newDoc.type).subscribe(
       res => {
         d.resolve();
+        const blob = new Blob([res], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
         this.toaster.success('Le document a été téléchargé avec succès.');
       }, error => {
+        console.log(error);
         this.toaster.error('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
 
         //  d.reject('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
