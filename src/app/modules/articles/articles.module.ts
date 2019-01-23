@@ -7,12 +7,12 @@ import { SharedModule } from '../../shared/shared.module';
 import { ShowComponent } from './components/show/show.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    CommonModule,
-    ArticlesRoutingModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [ListComponent, ShowComponent]
+    imports: [
+        SharedModule,
+        CommonModule,
+        ArticlesRoutingModule
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    declarations: [ListComponent, ShowComponent]
 })
 export class ArticlesModule { }

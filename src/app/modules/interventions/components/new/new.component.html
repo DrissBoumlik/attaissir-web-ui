@@ -1,101 +1,89 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Nouvelle préconisation</h2>
-    </div>
-  </div>
-</div>
-<div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body m-portlet__body--no-padding">
-      <div *ngIf="step == 0" class="slide-right">
-        <div class="m-portlet__head" *ngFor="let type of types" style="padding: 2%;">
-          <div class="m-portlet__head-title">
-            <h3 class="m-portlet__head-text">
-              {{ type.type_name }}
-            </h3>
-            <hr>
-          </div>
+<h1>Nouvelle préconisation</h1>
+<hr>
 
-          <div class="container">
-            <div class="row">
-
-              <form>
-                <dx-form id="form">
-                  <dxi-item itemType="group" [colCount]="4">
-                    <dxi-item *ngFor="let family of type.families">
-                      <button type="button" (click)="selectFamily(type.type_id, family.family_id)"
-                              class="btn btn-success float-right _btn">{{ family.family_name }}
-                      </button>
-                    </dxi-item>
-                  </dxi-item>
-                </dx-form>
-              </form>
+<div class="clr-row">
+    <div class="clr-col">
+        <div *ngIf="step == 0">
+            <div *ngFor="let type of types">
+                <div class="clr-col">
+                    <h3>{{type.type_name}} </h3>
+                </div>
+                <div class="clr-col">
+                    <hr>
+                </div>
+                <div class="clr-row">
+                    <form>
+                        <dx-form id="form" [screenByWidth]="screen">
+                            <dxi-item itemType="group" [colCountByScreen]="colCountByScreen">
+                                <dxi-item *ngFor="let family of type.families">
+                                    <div class="clr-col">
+                                        <button type="button" (click)="selectFamily(type.type_id, family.family_id)"
+                                                class="btn btn-success  _btn">{{ family.family_name }}
+                                        </button>
+                                    </div>
+                                </dxi-item>
+                            </dxi-item>
+                        </dx-form>
+                    </form>
+                </div>
             </div>
-          </div>
-
-
         </div>
-      </div>
 
-      <div *ngIf="step == 1" class="slide-right">
-
-        <div class="container">
-          <div class="row">
-            <div class="m-portlet__head" style="padding: 2%;">
-
-
-
-
-              <div class="m-portlet__head-title">
-                <h3 class="m-portlet__head-text">
-                  <button type="button" (click)="goBack()" class="btn btn-primary  " style="margin-right: 5%;">
-                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                  </button>
-                  {{ family.family_name }}
-                </h3>
-                <hr>
-              </div>
-
-
-
-              <div class="container">
-                <div class="row">
-
-              <dx-form id="form2">
-                <dxi-item itemType="group" [colCount]="4">
-                  <dxi-item *ngFor="let sub_family of family.sub_families">
-                    <button type="button" (click)="selectSubFamily(sub_family.sub_family_id)"
-                            class="btn btn-success float-right _btn">{{ sub_family.sub_family_name }}
+        <div *ngIf="step == 1">
+            <div class="clr-row">
+                <div class="clr-col clr-align-items-start">
+                    <h3> {{ family.family_name }}</h3>
+                </div>
+                <div class="clr-co clr-align-items-end">
+                    <button type="button" (click)="goBack()" class="btn btn-primary  "
+                            style="margin-right: 5%;">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     </button>
-                  </dxi-item>
-                </dxi-item>
-              </dx-form>
-
                 </div>
-                </div>
-
             </div>
-          </div>
+            <div class="clr-col">
+                <hr>
+            </div>
+            <div class="clr-row">
+                <form>
+                    <dx-form id="form2" [screenByWidth]="screen">
+                        <dxi-item itemType="group" [colCountByScreen]="colCountByScreen">
+                            <dxi-item *ngFor="let sub_family of family.sub_families">
+                                <div class="clr-col">
+                                    <button type="button" (click)="selectSubFamily(sub_family.sub_family_id)"
+                                            class="btn btn-success _btn">{{
+                                        sub_family.sub_family_name }}
+                                    </button>
+                                </div>
+                            </dxi-item>
+                        </dxi-item>
+                    </dx-form>
+                </form>
+            </div>
         </div>
 
-      </div>
 
-      <div *ngIf="step == 2" class="slide-right">
-
-
-
-        <app-rfid-card-reader  (outData)="readRFID($event)" (goBack)="goBack()"></app-rfid-card-reader>
-        <div class="m-portlet__head">
-          <div >
-            <dx-button icon="fa fa-check" (onClick)="validate()" [text]="'Valider'" type="success"></dx-button>
-          </div>
+        <div *ngIf="step == 2">
+           <div class="clr-row">
+               <div class="clr-col">
+                   <app-rfid-card-reader (outData)="readRFID($event)" (goBack)="goBack()"></app-rfid-card-reader>
+               </div>
+           </div>
+            <div class="clr-row">
+                <div class="clr-col clr-align-items-end">
+                    <dx-button icon="fa fa-check" (onClick)="validate()" [text]="'Valider'" type="success"></dx-button>
+                </div>
+            </div>
+            <!-- <div class="m-portlet__head">
+                 <div>
+                     <dx-button icon="fa fa-check" (onClick)="validate()" [text]="'Valider'" type="success"></dx-button>
+                 </div>
+             </div>-->
         </div>
-       </div>
+    </div>
+</div>
 
-
-      <dx-load-panel
+<dx-load-panel
         #loadPanel
         shadingColor="rgba(0,0,0,0.5)"
         [position]="{my: 'center'}"
@@ -104,7 +92,8 @@
         [showPane]="true"
         [shading]="true"
         [closeOnOutsideClick]="false">
-      </dx-load-panel>
-    </div>
-  </div>
-</div>
+</dx-load-panel>
+
+
+
+

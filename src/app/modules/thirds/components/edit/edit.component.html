@@ -1,69 +1,53 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Modification des informations de {{ tier.full_name?.toUpperCase() }}</h2>
+<h1>Modification des informations de {{ tier.full_name?.toUpperCase() }}</h1>
+<hr>
+<app-tiers-form  [isEdit]="true" [isAggregated]="isAggregated" [id]="id" [readOnly]="false" [tier]="tier" [thirdTypeName]="thirdTypeName" (submit)="onFormSubmit($event)"></app-tiers-form>
+<app-warehouse-form [isEdit]="isEditWarehouse" [readOnly]="false" [warehouse]="warehouse"  (submit)="onFormSubmitWarehouse($event)" *ngIf="!isAggregated"></app-warehouse-form>
+<hr>
+<dx-data-grid *ngIf="!isAggregated"
+              id="gridContainer"
+              [dataSource]="warehouses"
+              showBorders="true"
+              [columnHidingEnabled]="true"
+              [allowColumnResizing]="false"
+              [allowColumnReordering]="true"
+              [selectedRowKeys]="[]"
+              (onRowClick)="selectWarehouse($event)"
+              (onRowRemoving)="onRemoveWarehouse($event.data.id)"
+              [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+              KeyExpr="id">
 
-    </div>
+  <dxo-export [enabled]="true" fileName="magasin" [allowExportSelectedData]="true"></dxo-export>
 
-  </div>
-</div>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
 
-<div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body">
-      <app-tiers-form  [isEdit]="true" [isAggregated]="isAggregated" [id]="id" [readOnly]="false" [tier]="tier" [thirdTypeName]="thirdTypeName" (submit)="onFormSubmit($event)"></app-tiers-form>
-      <app-warehouse-form [isEdit]="isEditWarehouse" [readOnly]="false" [warehouse]="warehouse"  (submit)="onFormSubmitWarehouse($event)" *ngIf="!isAggregated"></app-warehouse-form>
-
-      <hr>
-      <dx-data-grid *ngIf="!isAggregated"
-        id="gridContainer"
-        [dataSource]="warehouses"
-        showBorders="true"
-        [columnHidingEnabled]="true"
-        [allowColumnResizing]="false"
-        [allowColumnReordering]="true"
-        [selectedRowKeys]="[]"
-        (onRowClick)="selectWarehouse($event)"
-        (onRowRemoving)="onRemoveWarehouse($event.data.id)"
-        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
-        KeyExpr="id">
-
-        <dxo-export [enabled]="true" fileName="magasin" [allowExportSelectedData]="true"></dxo-export>
-
-        <dxo-filter-row [visible]="true"></dxo-filter-row>
-        <dxo-header-filter [visible]="true"></dxo-header-filter>
-
-        <dxo-group-panel [visible]="true"></dxo-group-panel>
-        <dxo-scrolling mode="virtual"></dxo-scrolling>
-        <dxo-editing
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-scrolling mode="virtual"></dxo-scrolling>
+  <dxo-editing
           mode="popup"
           [useIcons]="true"
           [allowDeleting]="true"
           [allowUpdating]="false"
-        >
-        </dxo-editing>
-        <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
-        <dxo-selection mode="single"></dxo-selection>
-        <dxo-header-filter [visible]="true"></dxo-header-filter>
+  >
+  </dxo-editing>
+  <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+  <dxo-selection mode="single"></dxo-selection>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
 
-        <dxo-pager
+  <dxo-pager
           [allowedPageSizes]="[5, 8, 15, 30]"
           [showInfo]="true"
           [showNavigationButtons]="true"
           [showPageSizeSelector]="true"
           [visible]="true">
-        </dxo-pager>
-        <dxo-paging [pageSize]="10"></dxo-paging>
-        <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+  </dxo-pager>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxi-column dataField="name" caption="Name"></dxi-column>
-        <dxi-column dataField="convention_ref" caption="Référence Convention"></dxi-column>
-        <dxi-column dataField="address" caption="Adress"></dxi-column>
-        <dxi-column dataField="city" caption="Ville"></dxi-column>
-        <dxi-column dataField="zip_code" caption="Code postale"></dxi-column>
-        <dxi-column dataField="tel" caption="N° Téléphone"></dxi-column>
-      </dx-data-grid>
-    </div>
-  </div>
-</div>
+  <dxi-column dataField="name" caption="Name"></dxi-column>
+  <dxi-column dataField="convention_ref" caption="Référence Convention"></dxi-column>
+  <dxi-column dataField="address" caption="Adress"></dxi-column>
+  <dxi-column dataField="city" caption="Ville"></dxi-column>
+  <dxi-column dataField="zip_code" caption="Code postale"></dxi-column>
+  <dxi-column dataField="tel" caption="N° Téléphone"></dxi-column>
+</dx-data-grid>

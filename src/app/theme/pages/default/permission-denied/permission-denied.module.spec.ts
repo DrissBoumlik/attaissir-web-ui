@@ -1,13 +1,13 @@
 import { PermissionDeniedModule } from './permission-denied.module';
 
 describe('PermissionDeniedModule', () => {
-  let permissionDeniedModule: PermissionDeniedModule;
+    let permissionDeniedModule: PermissionDeniedModule;
 
-  beforeEach(() => {
-    permissionDeniedModule = new PermissionDeniedModule();
-  });
+    beforeEach(() => {
+        permissionDeniedModule = new PermissionDeniedModule();
+    });
 
-  it('should create an instance', () => {
-    expect(permissionDeniedModule).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(permissionDeniedModule).toBeTruthy();
+    });
 });

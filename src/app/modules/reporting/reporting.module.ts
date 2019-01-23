@@ -10,13 +10,13 @@ import { CardsComponent } from './cards/cards.component';
 import { MouvementsComponent } from './mouvements/mouvements.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReportingRoutingModule,
-    DxDataGridModule,
-    DxBoxModule,
-    DxSelectBoxModule
-  ],
-  declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent]
+    imports: [
+        CommonModule,
+        ReportingRoutingModule,
+        DxDataGridModule,
+        DxBoxModule,
+        DxSelectBoxModule
+    ],
+    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent]
 })
 export class ReportingModule { }

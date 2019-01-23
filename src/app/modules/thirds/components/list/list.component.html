@@ -1,30 +1,15 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-    <div class="siam-page-header">
-
-      <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-
-      <h2>Liste des {{ (thirdType === 'young_promoter') ? 'centres de distribution' : title.toLowerCase() }}</h2>
-      <!--<a class="siam-header-btn-new" routerLink="/tiers/ajouter"><i class="fa fa-plus"></i></a>-->
-    </div>
-
-  </div>
-</div>
-
-<div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body m-portlet__body--no-padding">
-  <dx-data-grid
-    id="gridContainer"
-    [dataSource]="third_parties"
-    [columnHidingEnabled]="false"
-    [allowColumnResizing]="false"
-    [columnAutoWidth]="true"
-    [filterValue]="[]"
-    [allowColumnReordering]="true"
-    [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
-    (onEditingStart)="onStartEdit($event.data.id)"
-    (onRowRemoving)="onRemoveThird($event.data.id)"
+<h1>Liste des {{ (thirdType === 'young_promoter') ? 'centres de distribution' : title.toLowerCase() }}</h1>
+<dx-data-grid
+        id="gridContainer"
+        [dataSource]="third_parties"
+        [columnHidingEnabled]="false"
+        [allowColumnResizing]="false"
+        [columnAutoWidth]="true"
+        [filterValue]="[]"
+        [allowColumnReordering]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        (onEditingStart)="onStartEdit($event.data.id)"
+        (onRowRemoving)="onRemoveThird($event.data.id)"
 >
 
     <!--<dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>-->
@@ -37,16 +22,16 @@
                (onClick)="deleteRecords()">
     </dx-button>
     <dxo-remote-operations
-      [sorting]="true"
-      [paging]="true"
-      [filtering]="true">
+            [sorting]="true"
+            [paging]="true"
+            [filtering]="true">
     </dxo-remote-operations>
 
     <dxo-editing
-      mode="row"
-      [useIcons]="true"
-      [allowUpdating]="helper.permissionMethod(['thirdParty.third-parties.update'])"
-      [allowDeleting]="false">
+            mode="row"
+            [useIcons]="true"
+            [allowUpdating]="helper.permissionMethod(['thirdParty.third-parties.update'])"
+            [allowDeleting]="false">
     </dxo-editing>
     <dxo-selection mode="multiple"></dxo-selection>
     <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
@@ -54,18 +39,18 @@
     <dxo-sorting mode="multiple"></dxo-sorting>
 
     <dxo-filter-row
-      [visible]="true" [applyFilter]="applyFilter"></dxo-filter-row>
+            [visible]="true" [applyFilter]="applyFilter"></dxo-filter-row>
 
 
     <dxo-header-filter [visible]="true"></dxo-header-filter>
     <dxo-export [enabled]="true" fileName="Tiers" [allowExportSelectedData]="true"></dxo-export>
 
     <dxo-pager
-      [allowedPageSizes]="[5, 8, 15, 30]"
-      [showInfo]="true"
-      [showNavigationButtons]="true"
-      [showPageSizeSelector]="true"
-      [visible]="true">
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
     </dxo-pager>
     <dxo-paging [pageSize]="10"></dxo-paging>
 
@@ -76,13 +61,16 @@
     <dxo-group-panel [visible]="true"></dxo-group-panel>
     <dxo-grouping #expand [autoExpandAll]="false"></dxo-grouping>
 
-    <dxi-column dataField="" [allowSorting]="false" [visible]="helper.permissionMethod(['thirdParty.third-parties.show'])" cellTemplate="cellTemplate"  caption="" width="50px"   allowColumnResizing="true" >
+    <dxi-column dataField="" [allowSorting]="false"
+                [visible]="helper.permissionMethod(['thirdParty.third-parties.show'])" cellTemplate="cellTemplate"
+                caption="" width="50px" allowColumnResizing="true">
     </dxi-column>
     <dxi-column dataField="code" caption="Code" i18n-caption>
     </dxi-column>
     <dxi-column dataField="code" caption="CDA" *ngIf="thirdType !== 'aggregated'" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="company_name" allowHiding="true" *ngIf="thirdType !== 'aggregated'"  hidden="hidden" caption="Raison sociale" >
+    <dxi-column dataField="company_name" allowHiding="true" *ngIf="thirdType !== 'aggregated'" hidden="hidden"
+                caption="Raison sociale">
     </dxi-column>
     <dxi-column dataField="full_name" caption="Nom complet" *ngIf="thirdType === 'aggregated'" i18n-caption>
     </dxi-column>
@@ -98,7 +86,7 @@
     </dxi-column>
     <dxi-column dataField="address" caption="Adresse" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="full_name" [caption]="title"  *ngIf="thirdType !== 'aggregated'" i18n-caption>
+    <dxi-column dataField="full_name" [caption]="title" *ngIf="thirdType !== 'aggregated'" i18n-caption>
     </dxi-column>
     <dxi-column dataField="cin" caption="CIN" i18n-caption>
     </dxi-column>
@@ -119,27 +107,27 @@
     </dxi-column>
     <div *dxTemplate="let data of 'cellCard'">
       <i class="fa fa-id_card fa-5x" *ngIf=""></i>
-    </div>--> 
+    </div>-->
 
-    <dxi-column dataField="sexe" cellTemplate="cellTemplate1" caption="Genre" *ngIf="thirdType === 'aggregated'"  allowColumnResizing="true">
+    <dxi-column dataField="sexe" cellTemplate="cellTemplate1" caption="Genre" *ngIf="thirdType === 'aggregated'"
+                allowColumnResizing="true">
     </dxi-column>
     <div *dxTemplate="let data of 'cellTemplate1'">
-      <i style="font-size: 150%; align-content: center; cursor: pointer" class="fa {{ getGender(data.data) }} fa-5x"></i>
+        <i style="font-size: 150%; align-content: center; cursor: pointer"
+           class="fa {{ getGender(data.data) }} fa-5x"></i>
     </div>
-    <dxi-column dataField="civil_status" caption="Situation" [allowFiltering]="false" *ngIf="thirdType === 'aggregated'" i18n-caption>
+    <dxi-column dataField="civil_status" caption="Situation" [allowFiltering]="false" *ngIf="thirdType === 'aggregated'"
+                i18n-caption>
     </dxi-column>
     <dxi-column dataField="children_number" caption="Nombre d'enfants" *ngIf="thirdType === 'aggregated'" i18n-caption>
     </dxi-column>
     <dxi-column dataField="city" caption="Ville" i18n-caption>
     </dxi-column>
-    <dxi-column dataField="code_as400" caption="Ancien code" *ngIf="thirdType === 'aggregated'"  i18n-caption>
+    <dxi-column dataField="code_as400" caption="Ancien code" *ngIf="thirdType === 'aggregated'" i18n-caption>
     </dxi-column>
-    <div *dxTemplate="let data of 'cellTemplate'" >
-      
-      <a (click)="helper.gotoShow(goTo, data.data.id, router, toastr)"  ><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
+    <div *dxTemplate="let data of 'cellTemplate'">
+
+        <a (click)="helper.gotoShow(goTo, data.data.id, router, toastr)"><i
+                style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
     </div>
-    </dx-data-grid>
-    
-    </div>
-  </div>
-</div>
+</dx-data-grid>

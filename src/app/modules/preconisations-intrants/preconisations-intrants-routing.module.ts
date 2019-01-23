@@ -8,59 +8,58 @@ import { PrecoAvanceListComponent } from './components/preco-avance-list/preco-a
 import { DetailsComponent } from './components/details/details.component';
 
 const routes: Routes = [
-  {
-    path: 'preconisations-intrants',
-    component: DefaultComponent,
-    children: [
-      {
-        path: '',
-        component: ListComponent,
-        canActivate: [PermissionGuard],
-        data: { permission: ['preconization.interventions.grid'] }
-      },
-      {
-        path: 'liste',
-        component: ListComponent,
-        canActivate: [PermissionGuard],
-        data: { permission: ['preconization.interventions.grid'] }
-      },
-      {
-        path: 'liste/details',
-        component: DetailsComponent,
-        canActivate: [PermissionGuard],
-        data: { permission: ['preconization.interventions.grid'] }
-      },
-      {
-        path: 'liste/:cin',
-        component: ListComponent,
-        canActivate: [PermissionGuard],
-        data: { permission: ['preconization.articletemplates.show'] }
-      },
-      {
-        path: 'afficher/:id',
-        component: ShowComponent,
-        canActivate: [PermissionGuard],
-        data: { permission: ['preconization.articletemplates.show'] }
-      },
-      {
-        path: 'avance-primes',
-        component: PrecoAvanceListComponent,
-        canActivate: [PermissionGuard],
-        data: { permission: ['preconization.interventions.avance_prime'] }
-      },
-      {
-        path: 'avance-prest',
-        component: PrecoAvanceListComponent,
-        canActivate: [PermissionGuard],
-        data: { permission: ['preconization.interventions.avance_prime'] }
-      }
-    ]
-  },
+    {
+        path: 'preconisations-intrants',
+        children: [
+            {
+                path: '',
+                component: ListComponent,
+                canActivate: [PermissionGuard],
+                data: { permission: ['preconization.interventions.grid'] }
+            },
+            {
+                path: 'liste',
+                component: ListComponent,
+                canActivate: [PermissionGuard],
+                data: { permission: ['preconization.interventions.grid'] }
+            },
+            {
+                path: 'liste/details',
+                component: DetailsComponent,
+                canActivate: [PermissionGuard],
+                data: { permission: ['preconization.interventions.grid'] }
+            },
+            {
+                path: 'liste/:cin',
+                component: ListComponent,
+                canActivate: [PermissionGuard],
+                data: { permission: ['preconization.articletemplates.show'] }
+            },
+            {
+                path: 'afficher/:id',
+                component: ShowComponent,
+                canActivate: [PermissionGuard],
+                data: { permission: ['preconization.articletemplates.show'] }
+            },
+            {
+                path: 'avance-primes',
+                component: PrecoAvanceListComponent,
+                canActivate: [PermissionGuard],
+                data: { permission: ['preconization.interventions.avance_prime'] }
+            },
+            {
+                path: 'avance-prest',
+                component: PrecoAvanceListComponent,
+                canActivate: [PermissionGuard],
+                data: { permission: ['preconization.interventions.avance_prime'] }
+            }
+        ]
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class PreconisationsIntrantsRoutingModule {
 }

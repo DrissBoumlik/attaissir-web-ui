@@ -5,45 +5,45 @@ import 'rxjs/add/operator/toPromise';
 import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+    selector: 'app-list',
+    templateUrl: './list.component.html',
+    styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
 
-  list_des_demandes: any;
-  helper: any;
-  constructor(public DemandesService: DemandesService) {
-    this.helper = Helper;
-    this.list_des_demandes = {};
-  }
+    list_des_demandes: any;
+    helper: any;
+    constructor(public DemandesService: DemandesService) {
+        this.helper = Helper;
+        this.list_des_demandes = {};
+    }
 
-  ngOnInit() {
-    this.list_des_demandes.store = new CustomStore({
-      load: (loadOptions: any) => {
-        loadOptions['requireTotalCount'] = true;
-        return this.DemandesService.getListeDemandesDx(loadOptions)
-          .toPromise()
-          .then(response => {
-            console.log(response);
-            const json = response;
-            return json;
-          })
-          .catch(error => {
-            throw error;
-          });
-      }
-    });
-  }
+    ngOnInit() {
+        this.list_des_demandes.store = new CustomStore({
+            load: (loadOptions: any) => {
+                loadOptions['requireTotalCount'] = true;
+                return this.DemandesService.getListeDemandesDx(loadOptions)
+                    .toPromise()
+                    .then(response => {
+                        console.log(response);
+                        const json = response;
+                        return json;
+                    })
+                    .catch(error => {
+                        throw error;
+                    });
+            }
+        });
+    }
 
 
 
-  gotoShow() {
+    gotoShow() {
 
-  }
+    }
 
-  getStatusColor() {
+    getStatusColor() {
 
-  }
+    }
 
 }

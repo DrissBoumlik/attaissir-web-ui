@@ -6,8 +6,8 @@ declare var $: any;
 
 
 @Component({
-  selector: 'widget4',
-  styles: [`
+    selector: 'widget4',
+    styles: [`
 
 
 
@@ -130,7 +130,7 @@ declare var $: any;
 
 
  `],
-  template: `
+    template: `
 
 
   <div class="big-widget">
@@ -219,54 +219,54 @@ declare var $: any;
 export class Widget4Component {
 
 
-  @Input() id: String;
-  @Input() title: String;
-  @Input() table: any[];
-  @Input() sub_title: String;
+    @Input() id: String;
+    @Input() title: String;
+    @Input() table: any[];
+    @Input() sub_title: String;
 
 
-  defaultVisible = false;
-  toggleDefault() {
-    this.defaultVisible = !this.defaultVisible;
-  }
+    defaultVisible = false;
+    toggleDefault() {
+        this.defaultVisible = !this.defaultVisible;
+    }
 
 
-  @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
+    @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
 
-  closeBtn() {
-    this.close.emit(1);
-  }
-
-
-  @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
-
-  ConfigBtn() {
-    this.config.emit(this.id);
-  }
-
-  @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
-
-  InfoBtn() {
-    this.info.emit(1);
-  }
+    closeBtn() {
+        this.close.emit(1);
+    }
 
 
+    @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
+
+    ConfigBtn() {
+        this.config.emit(this.id);
+    }
+
+    @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
+
+    InfoBtn() {
+        this.info.emit(1);
+    }
 
 
-  ngAfterViewInit() {
 
 
-    console.log(this.table);
+    ngAfterViewInit() {
 
-    $(document).ready(function() {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
 
-  }
+        console.log(this.table);
 
-  count(nbr) {
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
 
-  }
+    }
+
+    count(nbr) {
+
+    }
 
 }
 

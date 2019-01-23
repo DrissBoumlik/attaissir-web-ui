@@ -6,8 +6,8 @@ declare var $: any;
 
 
 @Component({
-  selector: 'widget2',
-  styles: [`
+    selector: 'widget2',
+    styles: [`
 
 
 
@@ -152,7 +152,7 @@ declare var $: any;
 
 
  `],
-  template: `
+    template: `
 
 
 
@@ -208,37 +208,37 @@ declare var $: any;
 export class Widget2Component {
 
 
-  @Input() id: String;
-  @Input() title: String;
-  @Input() nbr1: number;
-  @Input() nbr2: number;
-  @Input() sub_title: String;
+    @Input() id: String;
+    @Input() title: String;
+    @Input() nbr1: number;
+    @Input() nbr2: number;
+    @Input() sub_title: String;
 
 
-  defaultVisible = false;
-  toggleDefault() {
-    this.defaultVisible = !this.defaultVisible;
-  }
+    defaultVisible = false;
+    toggleDefault() {
+        this.defaultVisible = !this.defaultVisible;
+    }
 
 
-  @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
+    @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
 
-  closeBtn() {
-    this.close.emit(1);
-  }
+    closeBtn() {
+        this.close.emit(1);
+    }
 
 
-  @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
+    @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
 
-  ConfigBtn() {
-    this.config.emit(1);
-  }
+    ConfigBtn() {
+        this.config.emit(1);
+    }
 
-  @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
+    @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
 
-  InfoBtn() {
-    this.info.emit(1);
-  }
+    InfoBtn() {
+        this.info.emit(1);
+    }
 
 
 

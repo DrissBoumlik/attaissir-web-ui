@@ -9,30 +9,30 @@ import { EditComponent } from './components/edit/edit.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ListCurrentComponent } from './components/list-current/list-current.component';
 import {
-  DxFileUploaderModule, DxSelectBoxModule, DxTemplateModule, DxTextAreaModule,
-  DxTextBoxModule
+    DxFileUploaderModule, DxSelectBoxModule, DxTemplateModule, DxTextAreaModule,
+    DxTextBoxModule
 } from 'devextreme-angular';
 
 
 @NgModule({
-  imports: [
-    SharedModule,
-    CommonModule,
-    ContractsRoutingModule,
-    DxSelectBoxModule,
-    DxFileUploaderModule,
-    DxTextAreaModule,
-    DxTemplateModule,
-    DxTextBoxModule
-  ],
-  declarations: [
-    ListComponent,
-    ListCurrentComponent,
-    ShowComponent,
-    AddComponent,
-    EditComponent,
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    imports: [
+        SharedModule,
+        CommonModule,
+        ContractsRoutingModule,
+        DxSelectBoxModule,
+        DxFileUploaderModule,
+        DxTextAreaModule,
+        DxTemplateModule,
+        DxTextBoxModule
+    ],
+    declarations: [
+        ListComponent,
+        ListCurrentComponent,
+        ShowComponent,
+        AddComponent,
+        EditComponent,
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ContractsModule {
 }

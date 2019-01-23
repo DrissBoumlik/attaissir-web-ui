@@ -1,47 +1,30 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" routerLink="/"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Ordre d'arrachage</h2>
-    </div>
-  </div>
-</div>
-<ul class="m-nav-sticky" style="margin-top: 30px; background-color: rgba(0,0,0,0); box-shadow: rgba(0,0,0,0) !important;">
-  <dx-button (onClick)="toggleChart()" icon="back" [disabled]="false">
-  </dx-button>
+<h1>Ordre d'arrachage</h1>
+<hr>
+<ul class="m-nav-sticky"
+    style="margin-top: 30px; background-color: rgba(0,0,0,0); box-shadow: rgba(0,0,0,0) !important;">
+    <dx-button (onClick)="toggleChart()" icon="back" [disabled]="false">
+    </dx-button>
 </ul>
-<div class="m-content" style="padding-bottom: 0 !important;">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body m-portlet__body--no-padding">
-      <div class="m-portlet__head">
-        <div class="m-portlet__head-tools">
-          <div #chartContainer class="slide-in-right">
-            <dx-chart #chart id="chart" [dataSource]="chartData" title="Tonnage convoqué / Jour"
-                      [palette]="'Soft Pastel'">
-              <dxo-loading-indicator [show]="chartLoadingIndicator" text="Chargement"></dxo-loading-indicator>
-              <dxi-series argumentField="date"  argumentType="datetime"  valueField="sum" type="bar">
-                <dxo-label [customizeText]="customizeLabel" [visible]="true"  [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
-              </dxi-series>
-              <dxi-series argumentField="date" color="rgb(235, 53, 115)" argumentType="datetime" valueField="quota" type="spline">
-                <dxo-tooltip
-                  [enabled]="true"
-                  location="edge">
-                </dxo-tooltip>
-                <dxo-label [visible]="false" [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
-              </dxi-series>
-              <dxo-legend [visible]="false"></dxo-legend>
-              <dxo-export [enabled]="true"></dxo-export>
-            </dx-chart>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div #chartContainer>
+    <dx-chart #chart id="chart" [dataSource]="chartData" title="Tonnage convoqué / Jour"
+              [palette]="'Soft Pastel'">
+        <dxo-loading-indicator [show]="chartLoadingIndicator" text="Chargement"></dxo-loading-indicator>
+        <dxi-series argumentField="date" argumentType="datetime" valueField="sum" type="bar">
+            <dxo-label [customizeText]="customizeLabel" [visible]="true" [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
+        </dxi-series>
+        <dxi-series argumentField="date" color="rgb(235, 53, 115)" argumentType="datetime" valueField="quota"
+                    type="spline">
+            <dxo-tooltip
+                    [enabled]="true"
+                    location="edge">
+            </dxo-tooltip>
+            <dxo-label [visible]="false" [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
+        </dxi-series>
+        <dxo-legend [visible]="false"></dxo-legend>
+        <dxo-export [enabled]="true"></dxo-export>
+    </dx-chart>
 </div>
-<div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body m-portlet__body--no-padding">
-      <dx-data-grid
+<dx-data-grid
         #dataGrid
         id="dataGrid"
         [dataSource]="parcels"
@@ -50,197 +33,194 @@
         [allowColumnReordering]="true"
         [columnAutoWidth]="true"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
-      >
-        <dxo-remote-operations
-          [sorting]="true"
-          [paging]="true">
-        </dxo-remote-operations>
+>
+    <dxo-remote-operations
+            [sorting]="true"
+            [paging]="true">
+    </dxo-remote-operations>
 
-        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
-        <dxo-editing
-          mode="row"
-          [useIcons]="true"
-          [allowUpdating]="false"
-          [allowDeleting]="false">
-        </dxo-editing>
-        <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+    <dxo-editing
+            mode="row"
+            [useIcons]="true"
+            [allowUpdating]="false"
+            [allowDeleting]="false">
+    </dxo-editing>
+    <dxo-selection mode="multiple"></dxo-selection>
 
-        <dxo-sorting mode="multiple"></dxo-sorting>
-        <dxo-filter-row
-          [visible]="true" [applyFilter]="true"></dxo-filter-row>
+    <dxo-sorting mode="multiple"></dxo-sorting>
+    <dxo-filter-row
+            [visible]="true" [applyFilter]="true"></dxo-filter-row>
 
-        <dxo-header-filter [visible]="true"></dxo-header-filter>
-        <dxo-export [enabled]="true" fileName="Parcels" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-export [enabled]="true" fileName="Parcels" [allowExportSelectedData]="true"></dxo-export>
 
-        <dxo-pager
-          [allowedPageSizes]="[5, 8, 15, 30]"
-          [showInfo]="true"
-          [showNavigationButtons]="true"
-          [showPageSizeSelector]="true"
-          [visible]="true">
-        </dxo-pager>
-        <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+    </dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
 
-        <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxo-search-panel [visible]="false"></dxo-search-panel>
+    <dxo-search-panel [visible]="false"></dxo-search-panel>
 
-        <dxo-group-panel [visible]="true"></dxo-group-panel>
-        <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
 
-        <dxi-column dataField="cda_name" caption="CDA"></dxi-column>
-        <dxi-column dataField="z_name" caption="Zone"></dxi-column>
-        <dxi-column dataField="p_name" caption="Nom de la parcelle"></dxi-column>
-        <dxi-column dataField="p_harvest_order" caption="Ordre"></dxi-column>
-        <dxi-column dataField="tp_code" [visible]="false" caption="Code Agrégé" cellTemplate="userTemplate"
-                    [visible]="helper.permissionMethod(['thirdParty.third-parties.show'])" width="150px"></dxi-column>
-        <dxi-column dataField="tp_cin" caption="CIN"></dxi-column>
-        <dxi-column dataField="tp_full_name" [visible]="false" caption="Nom complet"
-                    style="color: #6d7fcc; align-content: center; cursor: pointer"></dxi-column>
-        <dxi-column dataField="a_code" [visible]="false" caption="Réf. Contrat" cellTemplate="contractTemplate"
-                    [visible]="helper.permissionMethod(['agreement.contracts.grid'])" width="150px"></dxi-column>
-        <dxi-column dataField="a_application_date" [visible]="false" dataType="date" caption="Date d'application"
-                    [visible]="false"></dxi-column>
-        <dxi-column dataType="number" [visible]="false" dataField="p_annuel_surface" dataType="number"
-                    caption="Superficie annuel" format="#,## (ha)"></dxi-column>
-        <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Convocation"
-                    [alignment]="'center'" [cssClass]="{backGroundColor: 'red'}">
-          <dxi-column
-            caption="Superficie à travailler (Ha)"
-            dataField="sup_semi"
-            format="#,## (Ha)"
-            cellTemplate="number_template">
-          </dxi-column>
-          <dxi-column
-            caption="tonnage / jour"
-            dataField="daily_quota"
-            cellTemplate="number_template">
-          </dxi-column>
-          <dxi-column
-            caption="Date de début"
-            dataField="start_date"
-            cellTemplate="date_template">
-          </dxi-column>
-          <dxi-column
-            caption="Date de fin"
-            dataField="end_date"
-            cellTemplate="date_template">
-          </dxi-column>
-          <dxi-column
-            caption="Arrachage mecanique"
-            dataField="is_mechanical"
-            cellTemplate="type_template">
-          </dxi-column>
-          <dxi-column
-            caption=""
-            cellTemplate="validate_template">
-          </dxi-column>
+    <dxi-column dataField="cda_name" caption="CDA"></dxi-column>
+    <dxi-column dataField="z_name" caption="Zone"></dxi-column>
+    <dxi-column dataField="p_name" caption="Nom de la parcelle"></dxi-column>
+    <dxi-column dataField="p_harvest_order" caption="Ordre"></dxi-column>
+    <dxi-column dataField="tp_code" [visible]="false" caption="Code Agrégé" cellTemplate="userTemplate"
+                [visible]="helper.permissionMethod(['thirdParty.third-parties.show'])" width="150px"></dxi-column>
+    <dxi-column dataField="tp_cin" caption="CIN"></dxi-column>
+    <dxi-column dataField="tp_full_name" [visible]="false" caption="Nom complet"
+                style="color: #6d7fcc; align-content: center; cursor: pointer"></dxi-column>
+    <dxi-column dataField="a_code" [visible]="false" caption="Réf. Contrat" cellTemplate="contractTemplate"
+                [visible]="helper.permissionMethod(['agreement.contracts.grid'])" width="150px"></dxi-column>
+    <dxi-column dataField="a_application_date" [visible]="false" dataType="date" caption="Date d'application"
+                [visible]="false"></dxi-column>
+    <dxi-column dataType="number" [visible]="false" dataField="p_annuel_surface" dataType="number"
+                caption="Superficie annuel" format="#,## (ha)"></dxi-column>
+    <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Convocation"
+                [alignment]="'center'" [cssClass]="{backGroundColor: 'red'}">
+        <dxi-column
+                caption="Superficie à travailler (Ha)"
+                dataField="sup_semi"
+                format="#,## (Ha)"
+                cellTemplate="number_template">
         </dxi-column>
-        <!-- --------------------------------------------------->
-        <div *dxTemplate="let data of 'validate_template'">
-          <dx-button [type]="'success'" [text]="'Convoquer'" (onClick)="convocate($event, data, convBtn)"
-                     #convBtn></dx-button>
-        </div>
-        <!-- --------------------------------------------------->
-        <div *dxTemplate="let data of 'number_template'">
-          <dx-number-box #dxNb
-                         [min]="0"
-                         [value]="data.value"
-                         [max]="data.value"
-                         [showSpinButtons]="true"
-                         [showClearButton]="true"
-                         (onValueChanged)="valuechange($event, data, dxNb.value)"></dx-number-box>
-        </div>
-        <div *dxTemplate="let data of 'date_template'">
-          <dx-date-box
-            #dxDt
-            [value]="configDaysFromNow"
-            [min]="tomorrow"
-            (onValueChanged)="valuechange($event, data, dxDt.value)"
-            type="date">
-          </dx-date-box>
-        </div>
-        <div *dxTemplate="let data of 'type_template'">
-          <dx-switch
-            #dxTp
-            [value]="false"
-            [onText]="'Oui'"
-            [offText]="'No'"
-            (onValueChanged)="valuechange($event, data, dxTp.value)">
-          </dx-switch>
-        </div>
-        <!-- --------------------------------------------------->
-        <div *dxTemplate="let data of 'contractStatusTemplate'">
+        <dxi-column
+                caption="tonnage / jour"
+                dataField="daily_quota"
+                cellTemplate="number_template">
+        </dxi-column>
+        <dxi-column
+                caption="Date de début"
+                dataField="start_date"
+                cellTemplate="date_template">
+        </dxi-column>
+        <dxi-column
+                caption="Date de fin"
+                dataField="end_date"
+                cellTemplate="date_template">
+        </dxi-column>
+        <dxi-column
+                caption="Arrachage mecanique"
+                dataField="is_mechanical"
+                cellTemplate="type_template">
+        </dxi-column>
+        <dxi-column
+                caption=""
+                cellTemplate="validate_template">
+        </dxi-column>
+    </dxi-column>
+    <!-- --------------------------------------------------->
+    <div *dxTemplate="let data of 'validate_template'">
+        <dx-button [type]="'success'" [text]="'Convoquer'" (onClick)="convocate($event, data, convBtn)"
+                   #convBtn></dx-button>
+    </div>
+    <!-- --------------------------------------------------->
+    <div *dxTemplate="let data of 'number_template'">
+        <dx-number-box #dxNb
+                       [min]="0"
+                       [value]="data.value"
+                       [max]="data.value"
+                       [showSpinButtons]="true"
+                       [showClearButton]="true"
+                       (onValueChanged)="valuechange($event, data, dxNb.value)"></dx-number-box>
+    </div>
+    <div *dxTemplate="let data of 'date_template'">
+        <dx-date-box
+                #dxDt
+                [value]="configDaysFromNow"
+                [min]="tomorrow"
+                (onValueChanged)="valuechange($event, data, dxDt.value)"
+                type="date">
+        </dx-date-box>
+    </div>
+    <div *dxTemplate="let data of 'type_template'">
+        <dx-switch
+                #dxTp
+                [value]="false"
+                [onText]="'Oui'"
+                [offText]="'No'"
+                (onValueChanged)="valuechange($event, data, dxTp.value)">
+        </dx-switch>
+    </div>
+    <!-- --------------------------------------------------->
+    <div *dxTemplate="let data of 'contractStatusTemplate'">
           <span [ngClass]="helper.getStatusColor(data.value)">
               {{ data.value }}
           </span>
-        </div>
-        <div *dxTemplate="let data of 'contractTemplate'">
-          <a style="color: #6d7fcc; align-content: center; cursor: pointer"
-             (click)="helper.gotoShow('contrats', data.data.contract_id, router, toastr)">{{ data.value
+    </div>
+    <div *dxTemplate="let data of 'contractTemplate'">
+        <a style="color: #6d7fcc; align-content: center; cursor: pointer"
+           (click)="helper.gotoShow('contrats', data.data.contract_id, router, toastr)">{{ data.value
             }}</a>
-        </div>
-        <div *dxTemplate="let data of 'consulterTemplate'">
-          <a (click)="helper.gotoShow('parcelles', data.data.id, router, toastr)"><i
-            style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
-            class="fa fa-info-circle fa-5x"></i></a>
-        </div>
-        <div *dxTemplate="let data of 'userTemplate'">
-          <a class="siam-link" (click)="helper.gotoShow('tiers', data.data.third_party_id, router, toastr)">{{
+    </div>
+    <div *dxTemplate="let data of 'consulterTemplate'">
+        <a (click)="helper.gotoShow('parcelles', data.data.id, router, toastr)"><i
+                style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+                class="fa fa-info-circle fa-5x"></i></a>
+    </div>
+    <div *dxTemplate="let data of 'userTemplate'">
+        <a class="siam-link" (click)="helper.gotoShow('tiers', data.data.third_party_id, router, toastr)">{{
             data.value }}</a>
-        </div>
+    </div>
 
-      </dx-data-grid>
-      <dx-popup
+</dx-data-grid>
+<dx-popup
         class="popup"
-        [width]="500"
-        [height]="550"
+        [width]="'auto'"
+        [fullScreen]="false"
         [showTitle]="true"
         [title]="error.data"
         [dragEnabled]="false"
         (onShown)="clearDataOnShow()"
         [closeOnOutsideClick]="true"
         [(visible)]="popupVisible">
-        <div *dxTemplate="let data of 'content'">
-          <dx-form id="form"
-                   [formData]="motif">
+    <div *dxTemplate="let data of 'content'">
+        <dx-form id="form"
+                 [formData]="motif">
             <dxi-item itemType="group" cssClass="first-group" [colCount]="1">
-              <dxi-item itemType="group">
-                <dxi-item dataField="message" [editorOptions]="{readOnly: true, height: 100, width: 350}"
-                          editorType="dxTextArea"></dxi-item>
-              </dxi-item>
-              <dxi-item itemType="group">
-                <dxi-item dataField="description" editorType="dxTextArea"
-                          [editorOptions]="{ height: 100, width: 350 }"></dxi-item>
-              </dxi-item>
-              <dxi-item itemType="group">
-                <dxi-item dataField="motif" editorType="dxFileUploader"
-                          [editorOptions]="{value: filePath, uploadMode: 'useForm'}">
+                <dxi-item itemType="group">
+                    <dxi-item dataField="message" [editorOptions]="{readOnly: true, height: 100}"
+                              editorType="dxTextArea"></dxi-item>
                 </dxi-item>
-              </dxi-item>
-              <dxi-item itemType="group">
-                <dxi-item
-                  itemType="button"
-                  horizontalAlignment="right"
-                  verticalAlignment="bottom"
-                  [buttonOptions]="submitButtonOptions">
+                <dxi-item itemType="group">
+                    <dxi-item dataField="description" editorType="dxTextArea"
+                              [editorOptions]="{ height: 100}"></dxi-item>
                 </dxi-item>
-              </dxi-item>
+                <dxi-item itemType="group">
+                    <dxi-item dataField="motif" editorType="dxFileUploader"
+                              [editorOptions]="{value: filePath, uploadMode: 'useForm'}">
+                    </dxi-item>
+                </dxi-item>
+                <dxi-item itemType="group">
+                    <dxi-item
+                            itemType="button"
+                            horizontalAlignment="right"
+                            verticalAlignment="bottom"
+                            [buttonOptions]="submitButtonOptions">
+                    </dxi-item>
+                </dxi-item>
             </dxi-item>
-          </dx-form>
-        </div>
-      </dx-popup>
+        </dx-form>
     </div>
-  </div>
-</div>
+</dx-popup>
 <dx-load-panel
-  #loadPanel
-  shadingColor="rgba(0,0,0,0.4)"
-  [position]="{ of: 'me' }"
-  [(visible)]="loadingVisible"
-  [showIndicator]="true"
-  [showPane]="true"
-  [shading]="true"
-  [closeOnOutsideClick]="false">
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [position]="{ of: 'me' }"
+        [(visible)]="loadingVisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
 </dx-load-panel>

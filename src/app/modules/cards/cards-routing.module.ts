@@ -5,15 +5,14 @@ import { DefaultComponent } from '../../theme/pages/default/default.component';
 import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 const routes: Routes = [{
-  path: 'cartes',
-  component: DefaultComponent,
-  children: [
-    { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.cards.index'] } }
-  ]
+    path: 'cartes',
+    children: [
+        { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['agreement.cards.index'] } }
+    ]
 }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class CardsRoutingModule { }

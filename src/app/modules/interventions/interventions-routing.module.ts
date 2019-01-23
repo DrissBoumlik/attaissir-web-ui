@@ -11,49 +11,48 @@ import { AddTempleteComponent } from './components/add-templete/add-templete.com
 import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 const routes: Routes = [{
-  path: 'interventions',
-  component: DefaultComponent,
-  children: [
-    {
-      path: 'selectionner',
-      component: NewComponent,
-      canActivate: [PermissionGuard],
-      data: { permission: ['preconization.interventions.store'] }
-    },
-    {
-      path: 'ajouter',
-      component: AddComponent,
-      canActivate: [PermissionGuard],
-      data: { permission: ['preconization.interventions.store'] }
-    },
-    {
-      path: 'template/ajouter',
-      component: AddTempleteComponent,
-      canActivate: [PermissionGuard],
-      data: { permission: ['preconization.interventions.store'] }
-    },
-    {
-      path: 'modifier/:id',
-      component: EditComponent,
-      canActivate: [PermissionGuard],
-      data: { permission: ['preconization.articletemplates.grid'] }
-    },
-    {
-      path: 'list',
-      component: ListComponent,
-      canActivate: [PermissionGuard],
-      data: { permission: ['preconization.articletemplates.grid'] }
-    },
-    {
-      path: 'appliquer-template-parcelle', component: AddTempleteComponent,
-      canActivate: [PermissionGuard], data: { permission: ['preconization.articletemplates.store'] }
-    }
-  ]
+    path: 'interventions',
+    children: [
+        {
+            path: 'selectionner',
+            component: NewComponent,
+            canActivate: [PermissionGuard],
+            data: { permission: ['preconization.interventions.store'] }
+        },
+        {
+            path: 'ajouter',
+            component: AddComponent,
+            canActivate: [PermissionGuard],
+            data: { permission: ['preconization.interventions.store'] }
+        },
+        {
+            path: 'template/ajouter',
+            component: AddTempleteComponent,
+            canActivate: [PermissionGuard],
+            data: { permission: ['preconization.interventions.store'] }
+        },
+        {
+            path: 'modifier/:id',
+            component: EditComponent,
+            canActivate: [PermissionGuard],
+            data: { permission: ['preconization.articletemplates.grid'] }
+        },
+        {
+            path: 'list',
+            component: ListComponent,
+            canActivate: [PermissionGuard],
+            data: { permission: ['preconization.articletemplates.grid'] }
+        },
+        {
+            path: 'appliquer-template-parcelle', component: AddTempleteComponent,
+            canActivate: [PermissionGuard], data: { permission: ['preconization.articletemplates.store'] }
+        }
+    ]
 }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 
 export class InterventionsRoutingModule {

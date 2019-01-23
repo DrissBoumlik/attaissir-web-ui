@@ -6,71 +6,71 @@ import DevExpress from '../../../../../../node_modules/devextreme/bundles/dx.all
 import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+    selector: 'app-list',
+    templateUrl: './list.component.html',
+    styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
 
-  dataSource: any = {};
+    dataSource: any = {};
 
-  helper: any;
+    helper: any;
 
-  constructor(public service: InterventionService,
-    public router: Router) {
-    this.helper = Helper;
-  }
+    constructor(public service: InterventionService,
+        public router: Router) {
+        this.helper = Helper;
+    }
 
-  ngOnInit() {
-    this.service.getInterventions().subscribe(
-      (data: any) => {
-        console.log(data);
-        this.dataSource = data.data;
-      }, err => { }
-    );
-    // this.service.getInterventions().subscribe((data: any) => {
-    //   this.dataSource = data.data;
-    // }, err => {
+    ngOnInit() {
+        this.service.getInterventions().subscribe(
+            (data: any) => {
+                console.log(data);
+                this.dataSource = data.data;
+            }, err => { }
+        );
+        // this.service.getInterventions().subscribe((data: any) => {
+        //   this.dataSource = data.data;
+        // }, err => {
 
-    // });
+        // });
 
-    // this.dataSource.store = new custom_store({
-    //   load: (loadOptions: any) => {
-    //     return this.service.getInterventionsDx(loadOptions)
-    //       .toPromise()
-    //       .then(response => {
-    //         const json = response;
-    //         return json;
-    //       })
-    //       .catch(error => {
-    //         throw error;
-    //       });
-    //   }
-    // });
+        // this.dataSource.store = new custom_store({
+        //   load: (loadOptions: any) => {
+        //     return this.service.getInterventionsDx(loadOptions)
+        //       .toPromise()
+        //       .then(response => {
+        //         const json = response;
+        //         return json;
+        //       })
+        //       .catch(error => {
+        //         throw error;
+        //       });
+        //   }
+        // });
 
-    this.dataSource.store = new custom_store({
-      load: (loadOptions: any) => {
-        return this.service.getInterventionsDx(loadOptions)
-          .toPromise()
-          .then(response => {
-            const json = response;
-            return json;
-          })
-          .catch(error => {
-            throw error;
-          });
-      }
-    });
+        this.dataSource.store = new custom_store({
+            load: (loadOptions: any) => {
+                return this.service.getInterventionsDx(loadOptions)
+                    .toPromise()
+                    .then(response => {
+                        const json = response;
+                        return json;
+                    })
+                    .catch(error => {
+                        throw error;
+                    });
+            }
+        });
 
-  }
+    }
 
-  onStartEdit = (e) => {
-    this.router.navigate([`/interventions/modifier/${e}`]).catch(
-      err => {
-        throw err; // this.toastr.error(err.error.message);
-      }
-    );
-  }
+    onStartEdit = (e) => {
+        this.router.navigate([`/interventions/modifier/${e}`]).catch(
+            err => {
+                throw err; // this.toastr.error(err.error.message);
+            }
+        );
+    }
 
 
 }

@@ -1,13 +1,13 @@
 import { RolesModule } from './roles.module';
 
 describe('RolesModule', () => {
-  let rolesModule: RolesModule;
+    let rolesModule: RolesModule;
 
-  beforeEach(() => {
-    rolesModule = new RolesModule();
-  });
+    beforeEach(() => {
+        rolesModule = new RolesModule();
+    });
 
-  it('should create an instance', () => {
-    expect(rolesModule).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(rolesModule).toBeTruthy();
+    });
 });

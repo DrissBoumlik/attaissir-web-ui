@@ -6,8 +6,8 @@ declare var $: any;
 
 
 @Component({
-  selector: 'widget3',
-  styles: [`
+    selector: 'widget3',
+    styles: [`
 
 
     .ScrollStyle {
@@ -177,7 +177,7 @@ declare var $: any;
     }
 
   `],
-  template: `
+    template: `
    
   
   <div class="widget">
@@ -242,52 +242,52 @@ declare var $: any;
 
 export class Widget3Component {
 
-  @Input() id: String;
-  @Input() title: String;
-  @Input() val: number;
-  @Input() val2: number;
-  @Input() max: number;
-  @Input() sub_title: String;
-  @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
-  @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
-  @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
+    @Input() id: String;
+    @Input() title: String;
+    @Input() val: number;
+    @Input() val2: number;
+    @Input() max: number;
+    @Input() sub_title: String;
+    @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
+    @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
+    @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
 
 
-  defaultVisible = false;
-  toggleDefault() {
-    this.defaultVisible = !this.defaultVisible;
-  }
+    defaultVisible = false;
+    toggleDefault() {
+        this.defaultVisible = !this.defaultVisible;
+    }
 
 
-  inProgress = false;
-  seconds = 10;
-  maxValue = 50;
-  intervalId: number;
+    inProgress = false;
+    seconds = 10;
+    maxValue = 50;
+    intervalId: number;
 
 
-  closeBtn() {
-    this.close.emit(1);
-  }
+    closeBtn() {
+        this.close.emit(1);
+    }
 
 
 
-  ConfigBtn() {
-    this.config.emit(this.id);
-  }
+    ConfigBtn() {
+        this.config.emit(this.id);
+    }
 
 
-  InfoBtn() {
-    this.info.emit(1);
-  }
+    InfoBtn() {
+        this.info.emit(1);
+    }
 
 
-  ngAfterViewInit() {
+    ngAfterViewInit() {
 
-    $(document).ready(function() {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
 
-  }
+    }
 
 
 

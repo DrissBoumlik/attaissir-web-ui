@@ -1,15 +1,3 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Modifier un magasin</h2>
-    </div>
-  </div>
-</div>
-<div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body">
-      <app-warehouse-form [isEdit]="true" [readOnly]="false" [warehouse]="warehouse" (submit)="onFormSubmit($event)"></app-warehouse-form>
-    </div>
-  </div>
-</div>
+<h1>Modifier un magasin</h1>
+<hr>
+<app-warehouse-form [isEdit]="true" [readOnly]="false" [warehouse]="warehouse" (submit)="onFormSubmit($event)"></app-warehouse-form>

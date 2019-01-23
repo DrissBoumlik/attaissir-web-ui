@@ -6,11 +6,11 @@ import { ListComponent } from './list/list.component';
 import { DxDataGridModule } from 'devextreme-angular';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FieldStatesRoutingModule,
-    DxDataGridModule
-  ],
-  declarations: [ListComponent]
+    imports: [
+        CommonModule,
+        FieldStatesRoutingModule,
+        DxDataGridModule
+    ],
+    declarations: [ListComponent]
 })
 export class FieldStatesModule { }

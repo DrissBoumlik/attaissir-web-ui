@@ -6,8 +6,8 @@ declare var $: any
 
 
 @Component({
-  selector: 'widget6',
-  styles: [`
+    selector: 'widget6',
+    styles: [`
 
 
 
@@ -152,7 +152,7 @@ declare var $: any
       }
     }
   `],
-  template: `
+    template: `
 
 
   <div class="widget"     >
@@ -238,45 +238,45 @@ declare var $: any
 export class Widget6Component {
 
 
-  @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
-  @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
-  @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
+    @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
+    @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
+    @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
 
-  @Input() id: String;
-  @Input() title: String;
-  @Input() obj: String;
-
-
-
-  defaultVisible = false;
-  toggleDefault() {
-    this.defaultVisible = !this.defaultVisible;
-  }
+    @Input() id: String;
+    @Input() title: String;
+    @Input() obj: String;
 
 
 
-  closeBtn() {
-    this.close.emit(1);
-  }
+    defaultVisible = false;
+    toggleDefault() {
+        this.defaultVisible = !this.defaultVisible;
+    }
 
 
 
-  ConfigBtn() {
-    this.config.emit(this.id);
-  }
+    closeBtn() {
+        this.close.emit(1);
+    }
 
 
 
-
-  InfoBtn() {
-    this.info.emit(1);
-  }
+    ConfigBtn() {
+        this.config.emit(this.id);
+    }
 
 
 
 
-  ngAfterViewInit() {
-  }
+    InfoBtn() {
+        this.info.emit(1);
+    }
+
+
+
+
+    ngAfterViewInit() {
+    }
 
 
 }

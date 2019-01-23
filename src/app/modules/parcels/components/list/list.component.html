@@ -1,23 +1,3 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-    <div class="siam-page-header">
-
-      <a class="siam-header-back-btn" routerLink="/tiers/liste"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-
-      <h2>Liste des parcelles</h2>
-    </div>
-
-  </div>
-</div>
-
-<div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body m-portlet__body--no-padding">
-
-      <app-parcels-list [data]="parcels"
-                        (onEditingStart)="onStartEdit($event.data.id)"
-                        (onRowRemoving)="onRemoveParcel($event.data.id)"></app-parcels-list>
-
-    </div>
-  </div>
-</div>
+<app-parcels-list [data]="parcels"
+                  (onEditingStart)="onStartEdit($event.data.id)"
+                  (onRowRemoving)="onRemoveParcel($event.data.id)"></app-parcels-list>

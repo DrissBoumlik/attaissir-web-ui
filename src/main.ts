@@ -7,7 +7,7 @@ import frMessages from 'node_modules/devextreme/localization/messages/fr.json';
 
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 
 loadMessages(frMessages);
@@ -16,4 +16,4 @@ locale('fr');
 sessionStorage.setItem('locale', 'fr');
 
 platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.log(err));
+    .catch(err => console.log(err));

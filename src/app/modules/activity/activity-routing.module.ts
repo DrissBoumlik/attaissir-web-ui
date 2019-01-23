@@ -8,15 +8,14 @@ import { IndexComponent } from '../card-generator/components/index/index.compone
 
 
 const routes: Routes = [{
-  path: 'activity',
-  component: DefaultComponent,
-  children: [
-    { path: 'index', component: ListComponent }
-  ]
+    path: 'activity',
+    children: [
+        { path: 'index', component: ListComponent }
+    ]
 }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class ActivityRoutingModule { }

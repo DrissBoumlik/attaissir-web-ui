@@ -14,45 +14,49 @@ import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 import { fakeBackendProvider } from './_helpers';
 import {
-  DxAutocompleteModule,
-  DxButtonModule,
-  DxCheckBoxModule, DxFormModule,
-  DxLoadIndicatorModule, DxLoadPanelModule,
-  DxNumberBoxModule,
-  DxSelectBoxModule
+    DxAutocompleteModule,
+    DxButtonModule,
+    DxCheckBoxModule, DxFormModule,
+    DxLoadIndicatorModule, DxLoadPanelModule,
+    DxNumberBoxModule, DxResponsiveBoxModule, DxScrollViewModule,
+    DxSelectBoxModule
 } from 'devextreme-angular';
+import { ClarityModule } from '@clr/angular';
 
 @NgModule({
-  declarations: [
-    AuthComponent,
-    AlertComponent,
-    LogoutComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    HttpModule,
-    AuthRoutingModule,
-    DxLoadIndicatorModule,
-    DxButtonModule,
-    DxCheckBoxModule,
-    DxSelectBoxModule,
-    DxNumberBoxModule,
-    DxAutocompleteModule,
-    DxFormModule,
-    DxLoadPanelModule
-  ],
-  providers: [
-    AuthGuard,
-    AlertService,
-    AuthenticationService,
-    UserService,
-    // api backend simulation
-    fakeBackendProvider,
-    MockBackend,
-    BaseRequestOptions,
-  ],
-  entryComponents: [AlertComponent],
+    declarations: [
+        AuthComponent,
+        AlertComponent,
+        LogoutComponent,
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        HttpModule,
+        AuthRoutingModule,
+        DxLoadIndicatorModule,
+        DxButtonModule,
+        DxCheckBoxModule,
+        DxSelectBoxModule,
+        DxNumberBoxModule,
+        DxScrollViewModule,
+        DxAutocompleteModule,
+        DxFormModule,
+        ClarityModule,
+        DxResponsiveBoxModule,
+        DxLoadPanelModule
+    ],
+    providers: [
+        AuthGuard,
+        AlertService,
+        AuthenticationService,
+        UserService,
+        // api backend simulation
+        fakeBackendProvider,
+        MockBackend,
+        BaseRequestOptions,
+    ],
+    entryComponents: [AlertComponent],
 })
 
 export class AuthModule {

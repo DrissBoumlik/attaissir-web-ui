@@ -16,34 +16,34 @@ import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
-  declarations: [
-    HeaderNavComponent,
-    DefaultComponent,
-    AsideNavComponent,
-    FooterComponent,
-    QuickSidebarComponent,
-    ScrollTopComponent,
-    TooltipsComponent,
-    HrefPreventDefaultDirective,
-    UnwrapTagDirective,
-    SubHeaderComponent,
-  ],
-  exports: [
-    HeaderNavComponent,
-    DefaultComponent,
-    AsideNavComponent,
-    FooterComponent,
-    QuickSidebarComponent,
-    ScrollTopComponent,
-    TooltipsComponent,
-    HrefPreventDefaultDirective,
-  ],
-  imports: [
-    SharedModule,
-    CommonModule,
-    RouterModule,
-    AvatarModule.forRoot()
-  ]
+    declarations: [
+        HeaderNavComponent,
+        DefaultComponent,
+        AsideNavComponent,
+        FooterComponent,
+        QuickSidebarComponent,
+        ScrollTopComponent,
+        TooltipsComponent,
+        HrefPreventDefaultDirective,
+        UnwrapTagDirective,
+        SubHeaderComponent,
+    ],
+    exports: [
+        HeaderNavComponent,
+        DefaultComponent,
+        AsideNavComponent,
+        FooterComponent,
+        QuickSidebarComponent,
+        ScrollTopComponent,
+        TooltipsComponent,
+        HrefPreventDefaultDirective,
+    ],
+    imports: [
+        SharedModule,
+        CommonModule,
+        RouterModule,
+        AvatarModule.forRoot()
+    ]
 })
 export class LayoutModule {
 }

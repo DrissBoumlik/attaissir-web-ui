@@ -1,60 +1,51 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { DefaultComponent } from '../../theme/pages/default/default.component';
-import { PermissionGuard } from '../../shared/directives/guard.directive';
-import { ContractsComponent } from './contracts/contracts.component';
-import { ReportingComponent } from './reporting';
-import { PreconisationsComponent } from './preconisations/preconisations.component';
-import { CardsComponent } from './cards/cards.component';
-import { MouvementsComponent } from './mouvements/mouvements.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {DefaultComponent} from '../../theme/pages/default/default.component';
+import {PermissionGuard} from '../../shared/directives/guard.directive';
+import {ContractsComponent} from './contracts/contracts.component';
+import {ReportingComponent} from './reporting';
+import {PreconisationsComponent} from './preconisations/preconisations.component';
+import {CardsComponent} from './cards/cards.component';
+import {MouvementsComponent} from './mouvements/mouvements.component';
 
 const routes: Routes = [{
-  path: 'reporting',
-  component: DefaultComponent,
-  children: [
-    {
-      path: '',
-      component: ReportingComponent,
-      children: [
+    path: 'reporting',
+    component: ReportingComponent,
+    children: [
         {
-          path: 'contracts',
-          component: ContractsComponent,
-          canActivate: [PermissionGuard],
-          data: { permission: ['reporting.contracts.grid'] }
+            path: 'contracts',
+            component: ContractsComponent,
+            data: {permission: ['none']}
         },
         {
-          path: 'contracts/cda',
-          component: ContractsComponent,
-          canActivate: [PermissionGuard],
-          data: { permission: ['reporting.contracts.grid'] }
+            path: 'contracts/cda',
+            component: ContractsComponent,
+            canActivate: [PermissionGuard],
+            data: {permission: ['none']}
         },
         {
-          path: 'cards',
-          component: CardsComponent,
-          canActivate: [PermissionGuard],
-          data: { permission: ['reporting.cards.grid'] }
+            path: 'cards',
+            component: CardsComponent,
+            canActivate: [PermissionGuard],
+            data: {permission: ['none']}
         }
         ,
         {
-          path: 'preconisations',
-          component: PreconisationsComponent,
-          canActivate: [PermissionGuard],
-          data: { permission: ['reporting.preconisations.grid'] }
+            path: 'preconisations',
+            component: PreconisationsComponent,
+            canActivate: [PermissionGuard],
+            data: {permission: ['none']}
         },
         {
-          path: 'mouvements',
-          component: MouvementsComponent,
-          canActivate: [PermissionGuard],
-          data: { permission: ['reporting.mouvements.grid'] }
+            path: 'mouvements',
+            component: MouvementsComponent,
         }
-      ]
-    }
-  ]
+    ]
 }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class ReportingRoutingModule {
 }

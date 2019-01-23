@@ -1,766 +1,622 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2> Fiche  Préconisation d'intrans N°  {{preconisation.id}}
-
-
-      </h2>
+<div class="clr-row">
+    <div class="clr-col">
+        <h1> Fiche Préconisation d'intrans N° {{preconisation.id}}</h1>
     </div>
-
-  </div>
-</div>
-
-<div class="m-content" style="padding-bottom: 10px !important;">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body">
-
-
-
-
-      <div class="tab-content" >
-        <div class="tab-pane active" id="m_user_profile_tab_1">
-          <div class="m-form m-form--fit">
-            <div class="m-portlet__body">
-              <div class="row ">
-                <div class="col-12">
-                  
-                    <h3 class="m-form__section">
-                        Informations générales
-
-                   <span class="d-none d-sm-block" >
-
-                        <span class="siam-form-input-value _status_inprogress " *ngIf="preconisation.state == 'inprogress'">
+    <div class="clr-col-1 clr-align-content-end">
+            <span class="label label-info"
+                  *ngIf="preconisation.state == 'inprogress'">
                         <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
                       </span>
-    
-    
-                        <span class="siam-form-input-value _status_done   " *ngIf="preconisation.state == 'done'">
+
+
+        <span class="label label-success" *ngIf="preconisation.state == 'done'">
                         <i class="fa  fa-check" aria-hidden="true"></i> VALIDÉ
                       </span>
-    
-                        <span class="siam-form-input-value _status_cancled " *ngIf="preconisation.state == 'canceled'">
+
+        <span class="label label-danger" *ngIf="preconisation.state == 'canceled'">
                         <i class="fa  fa-times" aria-hidden="true"></i> ANNULÉ
                       </span>
-                      <span   [appPermissionHidden]="['preconization.interventions.change_status']" style="font-size: 12px; padding-left: 12px; cursor: pointer;" *ngIf="preconisation.state === 'done'"   > <a (click)="Scan()"> <i class="fa fa-refresh" aria-hidden="true"></i> <span style="text-decoration: underline;"> En cours </span> </a> </span>
+        <span [appPermissionHidden]="['preconization.interventions.change_status']"
+              style="font-size: 12px; padding-left: 12px; cursor: pointer;"
+              *ngIf="preconisation.state === 'done'"> <a (click)="Scan()"> <i class="fa fa-refresh"
+                                                                              aria-hidden="true"></i> <span
+                style="text-decoration: underline;"> En cours </span> </a> </span>
 
-                   </span>
+    </div>
+</div>
+<hr>
+<div class="clr-row">
+    <div class="clr-col">
+        <h2 class="m-form__section">
+            Informations générales
+        </h2>
+        <hr>
+    </div>
+</div>
+<div class="clr-row">
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Référence
+            </label>
+            <div class="clr-col-12">
 
-                    </h3>
-                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-                </div>
-              </div>
-
-
-              <div class="row">
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Référence
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-                        {{preconisation.id}}
-                       </p>
-
-                    </div>
-                  </div>
-
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      CDA
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-                        {{preconisation.cda}}
-
-                      </p>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Zone
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-                        {{preconisation.zone}}
-
-                      </p>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Parcelle
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-                        {{preconisation.parcel}}
-
-                      </p>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Nom d'agriculteur
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-
-                        {{preconisation.third_party_name}}
-
-                      </p>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      C.I.N d'agriculter
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-
-                        {{preconisation.third_party_cin}}
-
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Date de commande
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-
-                        {{preconisation.date}}
-
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-
-              </div>
-
-              <div class="row">
-                <dx-button width="330" icon="fa fa-lock" (onClick)="showAyantsDroitPopup()"  text="LA LISTE DES AYANTS DROIT" type="primary"  style="margin-left: 20px; margin-right: 20px;" ></dx-button> &nbsp; &nbsp;
-
-              </div>
-
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                    {{preconisation.id}}
+                </p>
 
             </div>
-          </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                CDA
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                    {{preconisation.cda}}
+
+                </p>
+            </div>
         </div>
 
-      </div>
-
     </div>
-  </div>
-</div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Zone
+            </label>
+            <div class="clr-col-12">
 
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                    {{preconisation.zone}}
 
-
-<div class="m-content" style="padding-bottom: 10px !important;">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body">
-
-
-      <div class="tab-content">
-        <div class="tab-pane active" id="m_user_profile_tab_2">
-          <div class="m-form m-form--fit">
-            <div class="m-portlet__body">
-              <div class="row">
-                <div class="col-12">
-                  <h3 class="m-form__section">
-                    Liste des produits
-                  </h3>
-                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-                </div>
-              </div>
-
-
-              <dx-data-grid
-                #dataGrid
-                id="gridContainer"
-                [dataSource]="articles"
-                showBorders="true"
-                [columnHidingEnabled]="true"
-                [allowColumnResizing]="false"
-                [allowColumnReordering]="true"
-                [(selectedRowKeys)]="selectedItems"
-                [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
-                KeyExpr="id">
-
-                <dxo-export [enabled]="true" fileName="magasin" [allowExportSelectedData]="true"></dxo-export>
-
-                <dxo-filter-row [visible]="true"></dxo-filter-row>
-                <dxo-header-filter [visible]="true"></dxo-header-filter>
-
-                <dxo-group-panel [visible]="true"></dxo-group-panel>
-                <dxo-scrolling mode="virtual"></dxo-scrolling>
-                <dxo-editing
-                  mode="popup"
-                  [useIcons]="true"
-                  [allowDeleting]="false"
-                  [allowUpdating]="false">
-                </dxo-editing>
-                <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
-                <dxo-selection mode="multiple"></dxo-selection>
-                <dxo-header-filter [visible]="true"></dxo-header-filter>
-
-
-                <dxo-pager
-                  [allowedPageSizes]="[5, 8, 15, 30]"
-                  [showInfo]="true"
-                  [showNavigationButtons]="true"
-                  [showPageSizeSelector]="true"
-                  [visible]="true">
-                </dxo-pager>
-                <dxo-paging [pageSize]="10"></dxo-paging>
-                <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
-
-                <dxi-column dataField="id" [width]="100" [visible]="false" caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
-                <dxi-column dataField="category" caption="Famille"></dxi-column>
-                <dxi-column dataField="sub_category" caption="Sous Famille"></dxi-column>
-                <dxi-column dataField="article_name" caption="Article"></dxi-column>
-                <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
-
-              </dx-data-grid>
-
+                </p>
 
             </div>
-          </div>
         </div>
-
-      </div>
-
     </div>
-  </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Parcelle
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                    {{preconisation.parcel}}
+
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Nom d'agriculteur
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                    {{preconisation.third_party_name}}
+
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                C.I.N d'agriculter
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                    {{preconisation.third_party_cin}}
+
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Date de commande
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                    {{preconisation.date}}
+
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                LISTE DES AYANTS DROIT
+            </label>
+            <div class="clr-col-12">
+                <dx-button icon="fa fa-lock" (onClick)="showAyantsDroitPopup()"
+                           text="LISTE DES AYANTS DROIT" type="primary"
+                           style="margin-left: 20px; margin-right: 20px;"></dx-button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clr-row">
+    <div class="clr-col">
+        <h2 class="m-form__section">
+            Liste des articles
+        </h2>
+        <hr>
+    </div>
+</div>
+<dx-data-grid
+        #dataGrid
+        id="gridContainer"
+        [dataSource]="articles"
+        showBorders="true"
+        [columnHidingEnabled]="true"
+        [allowColumnResizing]="false"
+        [allowColumnReordering]="true"
+        [(selectedRowKeys)]="selectedItems"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        KeyExpr="id">
+
+    <dxo-export [enabled]="true" fileName="magasin"
+                [allowExportSelectedData]="true"></dxo-export>
+
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-scrolling mode="virtual"></dxo-scrolling>
+    <dxo-editing
+            mode="popup"
+            [useIcons]="true"
+            [allowDeleting]="false"
+            [allowUpdating]="false">
+    </dxo-editing>
+    <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+    <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+
+    <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+    </dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+    <dxi-column dataField="id" [width]="100" [visible]="false" caption=""
+                [allowSorting]="false" [allowFiltering]="false"
+                [allowSorting]="false"></dxi-column>
+    <dxi-column dataField="category" caption="Famille"></dxi-column>
+    <dxi-column dataField="sub_category" caption="Sous Famille"></dxi-column>
+    <dxi-column dataField="article_name" caption="Article"></dxi-column>
+    <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
+
+</dx-data-grid>
+<div class="clr-row clr-align-items-end">
+    <div class="clr-col-12 clr-justify-content-end">
+        <dx-button icon="fa fa-paper-plane"
+                   *ngIf="helper.permissionMethod(['preconization.interventions.deliverPreconization'])"
+                   style="margin: 5px;" text="LIVRER"
+                   [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'"
+                   type="success" (onClick)="showDeliverPopup()"></dx-button>
+        <dx-button  icon="fa fa-print"
+                   *ngIf="preconisation.state == 'done'" (onClick)="print()" text="IMPRIMER" type="primary"
+                   style="margin: 5px;"></dx-button>
+        <dx-button icon="fa fa-exchange"
+                   *ngIf="helper.permissionMethod(['distributionCenter.stocks.returnOperation'])"
+                   style="margin: 5px;" [disabled]="preconisation.state !== 'done'" text="RETOUR" type="default"
+                   routerLink="/mouvements/retour/{{id}}" routerLinkActive="active"
+                   [disabled]="preconisation.state == 'delivered'"></dx-button>
+        <dx-button icon="fa fa-trash"
+                   *ngIf="helper.permissionMethod(['preconization.interventions.cancelPreconization'])"
+                   style="margin: 5px;" text="ANNULER"
+                   [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'" type="danger"
+                   (onClick)="showDeletePopup()"></dx-button>
+    </div>
 </div>
 
-
-
 <dx-popup
-  #popup
-  class="popup"
-  [width]="580"
-  [height]="400"
-  [showTitle]="true"
-  title="Confirmation "
-  [dragEnabled]="false"
-  [closeOnOutsideClick]="true"
-  [(visible)]="popupDeliverVisible"
-  (window:keypress)="doSomething($event)"
+        #popup
+        class="popup"
+        [width]="580"
+        [height]="400"
+        [showTitle]="true"
+        title="Confirmation "
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupDeliverVisible"
+        (window:keypress)="doSomething($event)"
 
 >
-  <div *dxTemplate="let data of 'content'">
+    <div *dxTemplate="let data of 'content'">
 
-    <div  *ngIf="evnt1" style="text-align: center;">
-      <h1>GLISSER LA CARTE</h1>
-      <p>Faire glisser la carte sur le lecteur de carte </p>
-      <div class="glisser-carte-agriculteur">
-        <div class="credit-card">
-          <div class="rfid-tripe"></div>
+        <div *ngIf="evnt1" style="text-align: center;">
+            <h1>GLISSER LA CARTE</h1>
+            <p>Faire glisser la carte sur le lecteur de carte </p>
+            <div class="glisser-carte-agriculteur">
+                <div class="credit-card">
+                    <div class="rfid-tripe"></div>
+                </div>
+                <div class="swiper-top"></div>
+                <div class="swiper-bottom">
+                    <div class="light-indicator"></div>
+                </div>
+            </div>
         </div>
-        <div class="swiper-top"></div>
-        <div class="swiper-bottom">
-          <div class="light-indicator"></div>
+
+        <div *ngIf="!evnt1">
+            <p>
+                Tapez le code PIN.
+            </p>
+            <br/>
+
+            <dxi-item itemType="group" [colCount]="2">
+                <dxi-item>
+                    <div class="dx-field-value">
+                        <dx-text-box placeholder="****" valueChangeEvent="keyup"
+                                     (onValueChanged)="pinTextBox($event)"></dx-text-box>
+                    </div>
+                </dxi-item>
+
+                <dxi-item>
+                    <dx-button class="button-info" text="Glisser la carte" icon="fa fa-id-card-o"
+                               (onClick)="changeLivrerPopup()"></dx-button>
+                </dxi-item>
+
+            </dxi-item>
         </div>
-      </div>
-    </div>
 
-    <div *ngIf="!evnt1">
-      <p>
-        Tapez le code PIN.
-      </p>
-      <br/>
+        <br/>
 
-    <dxi-item itemType="group" [colCount]="2">
-      <dxi-item>
-        <div class="dx-field-value">
-          <dx-text-box placeholder="****" valueChangeEvent="keyup" (onValueChanged)="pinTextBox($event)" ></dx-text-box>
+        <div class="pull-right">
+
+            <dx-button
+                    class="button-info"
+                    text="Fermer"
+                    width="100"
+                    (onClick)="cancelPopup()">
+            </dx-button>
+
+            <dx-button *ngIf="!evnt1" width="120" icon="fa fa-paper-plane" text="LIVRER" type="success"
+                       (onClick)="Deliver()" style="margin-left: 10px; margin-right: 10px;"></dx-button>
+
+
         </div>
-      </dxi-item>
-
-      <dxi-item>
-        <dx-button class="button-info" text="Glisser la carte"   icon="fa fa-id-card-o" (onClick)="changeLivrerPopup()"> </dx-button>
-      </dxi-item>
-
-    </dxi-item>
-    </div>
-
-       <br/>
-
-    <div  class="pull-right">
-
-      <dx-button
-                 class="button-info"
-                 text="Fermer"
-                 width="100"
-                 (onClick)="cancelPopup()">
-      </dx-button>
-
-      <dx-button *ngIf="!evnt1" width="120"  icon="fa fa-paper-plane"  text="LIVRER" type="success" (onClick)="Deliver()"  style="margin-left: 10px; margin-right: 10px;"  ></dx-button>
 
 
     </div>
-
-
-  </div>
 </dx-popup>
-
-
 <dx-popup
-  class="popup"
-  [width]="350"
-  [height]="150"
-  [showTitle]="true"
-  title="Confirmation "
-  [dragEnabled]="false"
-  [closeOnOutsideClick]="true"
-  [(visible)]="cancelPopVisible"
+        class="popup"
+        [width]="350"
+        [height]="150"
+        [showTitle]="true"
+        title="Confirmation "
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="cancelPopVisible"
 >
-  <div *dxTemplate="let data of 'content'">
-    <p>
-      Voulez-vous vraiment annuler cet élement ?
-    </p>
+    <div *dxTemplate="let data of 'content'">
 
-    <div  class="pull-right">
+        <div class="pull-right">
 
-      <dx-button class="pull-left"
-                 width="80"
-                 type="danger"
-                 text="Oui"
-                 (onClick)="delete()">
-      </dx-button>
-      &nbsp;
-      &nbsp;
+            <dx-button class="pull-left"
+                       width="80"
+                       type="danger"
+                       text="Oui"
+                       (onClick)="delete()">
+            </dx-button>
+            &nbsp;
 
-      <dx-button class="pull-right"
-                 class="button-info"
-                 width="80"
-                 text="No"
-                 (onClick)="cancelPopup()">
-      </dx-button>
+            <dx-button class="pull-right"
+                       class="button-info"
+                       width="80"
+                       text="No"
+                       (onClick)="cancelPopup()">
+            </dx-button>
+        </div>
+
     </div>
-
-  </div>
 </dx-popup>
-
-
 <dx-popup
-  class="popup"
-  [height]="550"
-  [showTitle]="true"
-  title="Liste des ayants droit"
-  [dragEnabled]="false"
-  [closeOnOutsideClick]="true"
-  [(visible)]="popupAyantDroitVisible"
+        class="popup"
+        [height]="550"
+        [showTitle]="true"
+        title="Liste des ayants droit"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupAyantDroitVisible"
 >
 
-  <div *dxTemplate="let data of 'content'">
+    <div *dxTemplate="let data of 'content'">
 
-    <dx-data-grid
-      id="gridContainer2"
-      [dataSource]="ayants_droits">
-      <dxi-column dataField="cin" caption="CIN"></dxi-column>
-      <dxi-column dataField="full_name" caption="NOM COMPLET" ></dxi-column>
-      <dxi-column dataField="description" caption="DESCRIPTION"></dxi-column>
-    </dx-data-grid>
+        <dx-data-grid
+                id="gridContainer2"
+                [dataSource]="ayants_droits">
+            <dxi-column dataField="cin" caption="CIN"></dxi-column>
+            <dxi-column dataField="full_name" caption="NOM COMPLET"></dxi-column>
+            <dxi-column dataField="description" caption="DESCRIPTION"></dxi-column>
+        </dx-data-grid>
 
-    <div style="position: absolute; bottom: 0;right: 0; margin-bottom: 15px; margin-right: 15px;">
+        <div style="position: absolute; bottom: 0;right: 0; margin-bottom: 15px; margin-right: 15px;">
 
 
-      <dx-button class="pull-right"
-                 class="button-info"
-                 width="120"
-                 text="Fermer"
-                 (onClick)="cancelAyantDroitPopup()">
-      </dx-button>
+            <dx-button class="pull-right"
+                       class="button-info"
+                       width="120"
+                       text="Fermer"
+                       (onClick)="cancelAyantDroitPopup()">
+            </dx-button>
+        </div>
+
     </div>
-
-  </div>
 </dx-popup>
-
-<!--
-
-// Old popup
-
-<dx-popup
-  class="popup"
-  [width]="950"
-  [height]="550"
-  [showTitle]="true"
-  title="Retour"
-  [dragEnabled]="false"
-  [closeOnOutsideClick]="true"
-  [(visible)]="retourPopVisible"
->
-  <div *dxTemplate="let data of 'content'">
-
-    <dx-data-grid
-      id="gridContainer3"
-      [selectionFilter]="false"
-      [dataSource]="articles"
-    >
-      <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
-      <dxi-column dataField="id" [width]="100"  caption="" [allowSorting]="false"  [allowFiltering]="false"  [allowSorting]="false"></dxi-column>
-      <dxi-column dataField="category" caption="Famille"></dxi-column>
-      <dxi-column dataField="sub_category" caption="Sous Famille"></dxi-column>
-      <dxi-column dataField="name" caption="Article"></dxi-column>
-      <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
-      <dxi-column dataField="quantity_retour1" caption="Quantité retour"  cellTemplate="ToOrder"></dxi-column>
-
-      <div *dxTemplate="let data of 'ToOrder'">
-        <dx-number-box #dxNb
-                       dataField="data.value"
-                       [min]="0"
-                       [value]="0"
-                       [showSpinButtons]="true"
-                       [showClearButton]="true"
-                       (onValueChanged)="valuechange($event, data, dxNb.value)" ></dx-number-box>
-      </div>
-
-
-
-      <div *dxTemplate="let data of 'removeTemplate'">
-        <a  (click)="removeRetourItem(data.value)" ><i style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;" class="fa fa-times fa-5x"></i></a>
-      </div>
-    </dx-data-grid>
-
-    <div   style="position: absolute; bottom: 0;right: 0; margin-bottom: 15px; margin-right: 15px;">
-
-      <dx-button class="pull-right" style="margin-right: 10px;"
-                 class="button-info"
-                 width="120"
-                 text="Fermer"
-                 (onClick)="cancelRetourPopup()">
-      </dx-button>
-
-      <dx-button
-                 [disabled]="!retour_valider_enabled"
-                 class="button-info"
-                 width="120"
-                 text="VALIDER"
-                 (onClick)="RetourValiderPopup()">
-      </dx-button>
-    </div>
-  </div>
-</dx-popup>
-
-!-->
-<div class="dx-fieldset"  style="margin-top: 0px;">
-  <div class="dx-field btn_mob" >
-    <div class="dx-field-value">
-      <dx-button width="135"  icon="fa fa-paper-plane"  *ngIf="helper.permissionMethod(['preconization.interventions.deliverPreconization'])"  style="margin: 5px;" text="LIVRER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'"  type="success" (onClick)="showDeliverPopup()"   ></dx-button>
-      <dx-button width="135"  class="d-none d-sm-block " icon="fa fa-print"  *ngIf="preconisation.state == 'done'"   (onClick)="print()" text="IMPRIMER" type="primary"   style="margin: 5px;" ></dx-button>
-      <dx-button width="135"  icon="fa fa-exchange"  *ngIf="helper.permissionMethod(['distributionCenter.stocks.returnOperation'])"            style="margin: 5px;" [disabled]="preconisation.state !== 'done'" text="RETOUR" type="default" routerLink="/mouvements/retour/{{id}}" routerLinkActive="active" [disabled]="preconisation.state == 'delivered'"  ></dx-button>
-      <dx-button width="135"  icon="fa fa-trash"     *ngIf="helper.permissionMethod(['preconization.interventions.cancelPreconization'])"      style="margin: 5px;" text="ANNULER" [disabled]="preconisation.state == 'done' || preconisation.state == 'canceled'" type="danger" (onClick)="showDeletePopup()"  ></dx-button>
-    </div>
-  </div>
-</div>
-
-
-
-<input type="text" name="rfid" style="width: 0; height: 0;border: none;"  #rfid>
-<input class="rfid-input" type="text"   name="focusout" style="width: 0; height: 0;border: none;"  #focusout>
- 
-
-  
+<input type="text" name="rfid" style="width: 0; height: 0;border: none;" #rfid>
+<input class="rfid-input" type="text" name="focusout" style="width: 0; height: 0;border: none;" #focusout>
 <div name="popup" id="popup2" #popup2>
     <dx-popup
-      class="popup"
-      [width]="580"
-      [height]="400"
-      [showTitle]="true"
-      [title]="'Confirmation'"
-      [dragEnabled]="false"
-      (onShown)="SearchByRfid()"
-      [closeOnOutsideClick]="true"
-      [(visible)]="popup2RfidVisible"
-      (window:keypress)="doSomething2($event)"
+            class="popup"
+            [width]="580"
+            [height]="400"
+            [showTitle]="true"
+            [title]="'Confirmation'"
+            [dragEnabled]="false"
+            (onShown)="SearchByRfid()"
+            [closeOnOutsideClick]="true"
+            [(visible)]="popup2RfidVisible"
+            (window:keypress)="doSomething2($event)"
     >
-      <div *dxTemplate="let data of 'content'">
-  
-        <div class="gilsser">
-          <h1>GLISSER LA CARTE</h1>
-          <p>Faire glisser la carte sur le lecteur de carte changer le status</p>
-          <div class="glisser-carte-agriculteur">
-            <div class="credit-card">
-              <div class="rfid-tripe"></div>
+        <div *dxTemplate="let data of 'content'">
+
+            <div class="gilsser">
+                <h1>GLISSER LA CARTE</h1>
+                <p>Faire glisser la carte sur le lecteur de carte changer le status</p>
+                <div class="glisser-carte-agriculteur">
+                    <div class="credit-card">
+                        <div class="rfid-tripe"></div>
+                    </div>
+                    <div class="swiper-top"></div>
+                    <div class="swiper-bottom">
+                        <div class="light-indicator"></div>
+                    </div>
+                </div>
             </div>
-            <div class="swiper-top"></div>
-            <div class="swiper-bottom">
-              <div class="light-indicator"></div>
-            </div>
-          </div>
+
         </div>
-  
-      </div>
     </dx-popup>
-  
-  </div>
 
-
-  <input type="text" name="rfid2" style="width: 0; height: 0;border: none;" #rfid2>
-  <input class="rfid-input" type="text" name="focusout2" style="width: 0; height: 0;border: none;" #focusout2>
-  
-
-
-
+</div>
+<input type="text" name="rfid2" style="width: 0; height: 0;border: none;" #rfid2>
+<input class="rfid-input" type="text" name="focusout2" style="width: 0; height: 0;border: none;" #focusout2>
 <div style="display:none;">
+    <div id="t1">
+        <div id="receipt-wrapper">
+            <div class="receipt-block">
+                <div class="receipt-head">
+                    <div>BON DE LIVRAISON</div>
+                </div>
 
-<div id="t1">
-<div id="receipt-wrapper"   >
-    <div class="receipt-block">
-        <div class="receipt-head">
-            <div>BON DE LIVRAISON</div>
+                <div style="text-align : center; margin-bottom: 10px;">
+                    <div>N° {{this.preconisation.id}}</div>
+
+                </div>
+
+
+                <div style="text-align : right;  margin-bottom: 5px;">
+                    <div>La Date : {{this.preconisation.date }}</div>
+                </div>
+
+                <div style="text-align : right; margin-bottom: 10px;">
+                    <div>{{this.preconisation.campaign}}</div>
+                </div>
+
+
+                <div class="receipt-info">
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl">CDA</div>
+                        <div class="receipt-item-price">{{this.preconisation.cda}}</div>
+                    </div>
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl">ZONE</div>
+                        <div class="receipt-item-price">{{this.preconisation.zone }}</div>
+                    </div>
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl">PARCELLE</div>
+                        <div class="receipt-item-price">{{this.preconisation.parcel}}</div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="receipt-info">
+
+                    <div style="text-align : center;">
+                        <div>NOM COMPLET</div>
+                        <br/>
+                        <div>{{this.preconisation.third_party_name}}</div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="receipt-info">
+
+                    <div style="text-align : center;">
+                        <div> Centre de distribution</div>
+                        <br/>
+                        <div>{{this.preconisation.source_name}}</div>
+                    </div>
+
+
+                </div>
+
+                <div class="receipt-items" *ngFor="let article of articles; let i = index">
+
+
+                    <div class="receipt-item receipt-name">
+                        <div class="receipt-item-lbl">{{article.category}}</div>
+                    </div>
+
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl">- {{article.article_name}}</div>
+
+                        <div class="receipt-item-price"> {{article.quantity}} {{article.unit}}</div>
+                    </div>
+
+                </div>
+
+
+                <div class="signature">
+                    <div>** **</div>
+
+                    <div>* *</div>
+
+                    <div>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>
+
+                    <div>** MERCI **</div>
+
+                    <div>*****</div>
+                    <div>***</div>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div style="text-align : center; margin-bottom: 10px;">
-            <div>N° {{this.preconisation.id}}</div>
 
-        </div>
+    </div>
+    <div style="display:none;">
 
-
-        <div style="text-align : right;  margin-bottom: 5px;">
-            <div>La Date : {{this.preconisation.date }}</div>
-        </div>
-
-        <div style="text-align : right; margin-bottom: 10px;">
-            <div>{{this.preconisation.campaign}}</div>
-        </div>
- 
- 
- 
-          <div class="receipt-info">
-            <div class="receipt-item">
-                <div class="receipt-item-lbl">CDA</div>
-                <div class="receipt-item-price">{{this.preconisation.cda}}</div>
-            </div>
-            <div class="receipt-item">
-                <div class="receipt-item-lbl">ZONE</div>
-                <div class="receipt-item-price">{{this.preconisation.zone }}</div>
-            </div>
-            <div class="receipt-item">
-                <div class="receipt-item-lbl">PARCELLE</div>
-                <div class="receipt-item-price">{{this.preconisation.parcel}}</div>
-            </div>
-
-            
-
-         </div>
-         
-
-         <div class="receipt-info">
-
-            <div style="text-align : center;">
-                <div>NOM COMPLET </div><br/>
-                <div>{{this.preconisation.third_party_name}}</div>
-
-            </div>
-
-            </div>
+        <div id="t2">
+            <div id="receipt-wrapper">
+                <div class="receipt-block">
+                    <div class="receipt-head">
+                        <div>BON DE CHARGEMENT</div>
+                    </div>
 
 
-         <div class="receipt-info">
+                    <div style="text-align : center;  margin-bottom: 5px;">
+                        <div>Usine : 34</div>
+                    </div>
 
-            <div style="text-align : center;">
-              <div> Centre de distribution </div><br/>
-              <div>{{this.preconisation.source_name}}</div>
-          </div>
- 
-       
-        </div>
 
-        <div class="receipt-items"   *ngFor="let article of articles; let i = index"> 
-          
- 
+                    <div style="text-align : center; margin-bottom: 5px;">
+                        <div>N° {{this.preconisation.id}}</div>
 
-            <div class="receipt-item receipt-name">
-                <div class="receipt-item-lbl">{{article.category}}</div>
-            </div>
- 
+                    </div>
+
+
+                    <div style="text-align : center;">
+                        <img src="http://api.attaissir.graviton.ma/codebare/2222222"
+                             style="width: 120px; height: 50px;"/>
+                    </div>
+
+
+                    <div class="receipt-info">
                         <div class="receipt-item">
-                            <div class="receipt-item-lbl">- {{article.article_name}}</div>
-                            
-                            <div class="receipt-item-price"> {{article.quantity}}  {{article.unit}}</div>
-                       </div>
-               
-        </div>
- 
- 
-        <div class="signature">
-            <div>**  **</div>
+                            <div class="receipt-item-lbl">CDA</div>
+                            <div class="receipt-item-price">{{this.preconisation.cda}}</div>
+                        </div>
+                        <div class="receipt-item">
+                            <div class="receipt-item-lbl">ZONE</div>
+                            <div class="receipt-item-price">{{this.preconisation.zone }}</div>
+                        </div>
+                        <div class="receipt-item">
+                            <div class="receipt-item-lbl">PARCELLE</div>
+                            <div class="receipt-item-price">{{this.preconisation.parcel}}</div>
+                        </div>
 
-            <div>*  *</div>
-
-            <div>-------------------------</div>
-
-            <div>** MERCI **</div>
-
-            <div>*****</div>
-            <div>***</div>
-
-        </div>
-      
-    </div>
-
-    </div>
+                    </div>
 
 
-  </div>
+                    <div class="receipt-info">
+
+                        <div style="text-align : right;  margin-bottom: 5px;">
+                            <div>La Date : {{this.preconisation.date }}</div>
+                        </div>
+
+                        <div style="text-align : right; margin-bottom: 10px;">
+                            <div>{{this.preconisation.campaign}}</div>
+                        </div>
 
 
+                        <div class="receipt-items" style="text-align : center; ">
 
 
-  <div style="display:none;">
+                            <div style="text-align : center !important; ">
+                                <div class="receipt-item-lbl" style="text-align : center; ">Ridelle</div>
+                            </div>
 
-    <div id="t2">
-      <div id="receipt-wrapper"   >
-        <div class="receipt-block">
-          <div class="receipt-head">
-            <div>BON DE CHARGEMENT</div>
-          </div>
+                            <div style="text-align : center !important; ">
 
+                                <div class="receipt-item-price" style="text-align : center; "> 4444</div>
+                            </div>
 
+                        </div>
 
-          <div style="text-align : center;  margin-bottom: 5px;">
-            <div>Usine : 34</div>
-          </div>
+                        <div class="receipt-items" style="text-align : center; ">
 
 
-          <div style="text-align : center; margin-bottom: 5px;">
-            <div>N° {{this.preconisation.id}}</div>
+                            <div style="text-align : center !important; ">
+                                <div class="receipt-item-lbl" style="text-align : center; ">Numero Mineralogique
+                                </div>
+                            </div>
 
-          </div>
+                            <div style="text-align : center !important; ">
 
+                                <div class="receipt-item-price" style="text-align : center; "> 4444</div>
+                            </div>
 
-          <div style="text-align : center;">
-            <img src="http://api.attaissir.graviton.ma/codebare/2222222"  style="width: 120px; height: 50px;"/>
-          </div>
-
-
-
-
+                        </div>
 
 
-          <div class="receipt-info">
-            <div class="receipt-item">
-              <div class="receipt-item-lbl">CDA</div>
-              <div class="receipt-item-price">{{this.preconisation.cda}}</div>
+                    </div>
+
+
+                    <div class="receipt-info">
+
+                        <div class="signature">
+                            <div>** **</div>
+
+                            <div>* *</div>
+
+                            <div>** MERCI **</div>
+
+                            <div>*****</div>
+                            <div>***</div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
             </div>
-            <div class="receipt-item">
-              <div class="receipt-item-lbl">ZONE</div>
-              <div class="receipt-item-price">{{this.preconisation.zone }}</div>
-            </div>
-            <div class="receipt-item">
-              <div class="receipt-item-lbl">PARCELLE</div>
-              <div class="receipt-item-price">{{this.preconisation.parcel}}</div>
-            </div>
-
-          </div>
-
-
-        <div class="receipt-info">
-
-          <div style="text-align : right;  margin-bottom: 5px;">
-            <div>La Date : {{this.preconisation.date }}</div>
-          </div>
-
-          <div style="text-align : right; margin-bottom: 10px;">
-            <div>{{this.preconisation.campaign}}</div>
-          </div>
-
-
-
-
-          <div class="receipt-items"  style="text-align : center; ">
-
-
-
-            <div  style="text-align : center !important; ">
-              <div class="receipt-item-lbl" style="text-align : center; ">Ridelle</div>
-            </div>
-
-            <div style="text-align : center !important; ">
-
-              <div class="receipt-item-price" style="text-align : center; "> 4444</div>
-            </div>
-
-          </div>
-
-            <div class="receipt-items"  style="text-align : center; ">
-
-
-            <div style="text-align : center !important; ">
-              <div class="receipt-item-lbl" style="text-align : center; ">Numero Mineralogique</div>
-            </div>
-
-            <div style="text-align : center !important; ">
-
-              <div class="receipt-item-price" style="text-align : center; "> 4444</div>
-            </div>
-
-          </div>
-
 
 
         </div>
-
-
-
-       <div class="receipt-info">
-
-          <div class="signature">
-            <div>**  **</div>
-
-            <div>*  *</div>
-
-            <div>** MERCI **</div>
-
-            <div>*****</div>
-            <div>***</div>
-
-          </div>
-       </div>
-
-
-        </div>
-
-      </div>
 
 
     </div>
-
-
-
-
-
-
-
-
-
+</div>

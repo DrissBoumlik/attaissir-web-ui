@@ -9,63 +9,63 @@ import { WarehouseService } from '../../service/warehose.service';
 import { Warehouse } from '../../../../shared/classes/warehouse';
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+    selector: 'app-edit',
+    templateUrl: './edit.component.html',
+    styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
 
-  id: number;
-  helper: any;
+    id: number;
+    helper: any;
 
-  constructor(public route: ActivatedRoute,
-    private location: Location,
-    public warehouse: Warehouse,
-    private router: Router,
-    public warehouseService: WarehouseService,
-    private toastr: ToastrService) {
-    this.helper = Helper;
-  }
-
-
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
-      if (this.id) {
-        this.warehouseService.getWarehouse(this.id, true)
-          .subscribe(data => {
-            console.log(data);
-            this.warehouse = this.helper.dataFormatter(data, false);
-
-          }, error1 => {
-            this.toastr.warning('Magasin non trouvé.');
-            this.location.back();
-          });
-      } else {
-        this.toastr.warning('ID non fourni.');
-        this.location.back();
-      }
-    });
-  }
+    constructor(public route: ActivatedRoute,
+        private location: Location,
+        public warehouse: Warehouse,
+        private router: Router,
+        public warehouseService: WarehouseService,
+        private toastr: ToastrService) {
+        this.helper = Helper;
+    }
 
 
+    ngOnInit() {
+        this.route.params.subscribe(params => {
+            this.id = params['id'];
+            if (this.id) {
+                this.warehouseService.getWarehouse(this.id, true)
+                    .subscribe(data => {
+                        console.log(data);
+                        this.warehouse = this.helper.dataFormatter(data, false);
 
-  /**
-   * Submiting form data
-   * @param e Event
-   */
-  onFormSubmit = function(e) {
-    console.log('tttt1');
-    this.warehouseService.editWarehouse(this.warehouse).subscribe(data => {
-      this.toastr.success(
-        `${this.warehouse.name.toUpperCase()} informations modifiées avec succès`
-      );
-    }, err => {
-      throw err;
-      // this.toastr.error(err.error.message);
-    });
+                    }, error1 => {
+                        this.toastr.warning('Magasin non trouvé.');
+                        this.location.back();
+                    });
+            } else {
+                this.toastr.warning('ID non fourni.');
+                this.location.back();
+            }
+        });
+    }
 
-    e.preventDefault();
-  };
+
+
+    /**
+     * Submiting form data
+     * @param e Event
+     */
+    onFormSubmit = function(e) {
+        console.log('tttt1');
+        this.warehouseService.editWarehouse(this.warehouse).subscribe(data => {
+            this.toastr.success(
+                `${this.warehouse.name.toUpperCase()} informations modifiées avec succès`
+            );
+        }, err => {
+            throw err;
+            // this.toastr.error(err.error.message);
+        });
+
+        e.preventDefault();
+    };
 
 }

@@ -86,7 +86,7 @@
     <div *ngIf="!data.value">Contrat</div>
   </div>
   <div *dxTemplate="let data of 'contractListTemplate'">
-          <span [ngClass]="helper.getStatusColor(data.value)">
+          <span [ngClass]="helper.getContractStatusClass(data.value)">
               {{ data.value }}
           </span>
   </div>

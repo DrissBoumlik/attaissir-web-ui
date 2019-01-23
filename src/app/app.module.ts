@@ -15,16 +15,16 @@ import { FormsModule } from '@angular/forms';
 import { TokenInterceptor } from './shared/interceptors/token.interceptors';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
-  DxCheckBoxModule,
-  DxDataGridModule,
-  DxFileUploaderModule,
-  DxLookupModule,
-  DxPivotGridModule,
-  DxPopupModule,
-  DxRadioGroupModule,
-  DxSelectBoxModule,
-  DxSwitchModule,
-  DxTemplateModule
+    DxCheckBoxModule,
+    DxDataGridModule,
+    DxFileUploaderModule,
+    DxLookupModule,
+    DxPivotGridModule,
+    DxPopupModule,
+    DxRadioGroupModule,
+    DxSelectBoxModule,
+    DxSwitchModule,
+    DxTemplateModule
 } from 'devextreme-angular';
 
 import { SiamErrorHandler } from './shared/classes/siam-error-handler';
@@ -40,86 +40,85 @@ import { DemandesModule } from './modules/demandes/demandes.module';
 import { UsersModule } from './modules/users/users.module';
 import { CardGeneratorModule } from './modules/card-generator/card-generator.module';
 import { PermissionGuard } from './shared/directives/guard.directive';
-import { ParcelInfoComponent } from './shared/components/parcel-info/parcel-info.component';
-import { TodosComponent } from './modules/incidents/components/todos/todos.component';
-import { CounterUpModule } from 'angular4-counter-up';
 import { ActivityModule } from './modules/activity/activity.module';
 import { ImportModule } from './modules/import/import.module';
+import { ClarityModule } from '@clr/angular';
 
 @NgModule({
-  declarations: [
-    ThemeComponent,
-    AppComponent
-  ],
-  imports: [
-    LayoutModule,
-    BrowserModule,
+    declarations: [
+        ThemeComponent,
+        AppComponent
+    ],
+    imports: [
+        LayoutModule,
+        BrowserModule,
 
 
 
-    AppRoutingModule,
-    ThemeRoutingModule,
+        AppRoutingModule,
+        ThemeRoutingModule,
 
-    FormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
 
-    DxTemplateModule,
-    DxDataGridModule,
-    DxPopupModule,
-    DxLookupModule,
-    DxFileUploaderModule,
-    DxSelectBoxModule,
-    DxSwitchModule,
-    DxRadioGroupModule,
-    ToastrModule.forRoot(),
-    DxPivotGridModule,
+        DxTemplateModule,
+        DxDataGridModule,
+        DxPopupModule,
+        DxLookupModule,
+        DxFileUploaderModule,
+        DxSelectBoxModule,
+        DxSwitchModule,
+        DxRadioGroupModule,
+        ToastrModule.forRoot(),
+        DxPivotGridModule,
 
-    NgbModule.forRoot(),
-    InterventionsModule,
-    AuthModule,
-    ThirdsModule,
-    ContractsModule,
-    ParcelsModule,
-    CardsModule,
-    DemandesModule,
-    ArticlesModule,
-    ActivityModule,
-    ImportModule,
-    SharedModule,
-    MouvementsModule,
-    CardGeneratorModule,
-    UsersModule
-  ],
-  exports: [
-    DxDataGridModule,
-    DxPopupModule,
-    DxFileUploaderModule,
-    DxSelectBoxModule,
-    FormsModule,
-    DxPivotGridModule,
-    DxTemplateModule,
-    DxCheckBoxModule
-  ],
-  providers: [
-    {
-      provide: LOCALE_ID,
-      useValue: 'fr'
-    },
-    ScriptLoaderService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
-    {
-      provide: ErrorHandler,
-      useClass: SiamErrorHandler
-    },
-    PermissionGuard
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  bootstrap: [AppComponent]
+        NgbModule.forRoot(),
+        InterventionsModule,
+        AuthModule,
+        ThirdsModule,
+        ContractsModule,
+        ParcelsModule,
+        CardsModule,
+        DemandesModule,
+        ArticlesModule,
+        ActivityModule,
+        ImportModule,
+        SharedModule,
+        MouvementsModule,
+        CardGeneratorModule,
+        UsersModule,
+        ClarityModule
+    ],
+    exports: [
+        DxDataGridModule,
+        DxPopupModule,
+        DxFileUploaderModule,
+        DxSelectBoxModule,
+        FormsModule,
+        DxPivotGridModule,
+        DxTemplateModule,
+        DxCheckBoxModule
+    ],
+    providers: [
+        {
+            provide: LOCALE_ID,
+            useValue: 'fr'
+        },
+        ScriptLoaderService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        },
+        {
+            provide: ErrorHandler,
+            useClass: SiamErrorHandler
+        },
+        PermissionGuard
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    bootstrap: [AppComponent]
 })
 
 export class AppModule {

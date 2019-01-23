@@ -132,7 +132,7 @@
   <dxi-column dataField="recepteur.tel" caption="Tél récepteur"></dxi-column>
   <dxi-column dataField="recepteur.email" caption="Adresse mail récepteur"></dxi-column>-->
   <div *dxTemplate="let data of 'statusTemplate'">
-      <span [ngClass]="getStatusColor(data.value)">
+      <span [ngClass]="helper.getContractStatusClass(data.value)">
                   {{ data.value }}
       </span>
   </div>

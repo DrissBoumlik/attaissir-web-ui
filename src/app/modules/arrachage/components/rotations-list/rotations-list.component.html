@@ -1,31 +1,18 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" routerLink="/"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Rotations de récolte.</h2>
+<h1>Rotations de récolte.</h1>
+<hr>
+<div class="clr-row clr-align-items-end">
+    <div class="clr-col clr-align-self-end">
+        <dx-button
+                class="d-none d-sm-block pull-right"
+                icon="fa fa-credit-card-alt"
+                style="font-weight: bold"
+                [type]="'success'"
+                text="Affecter par code de ridelle"
+                (onClick)="assignByRC()">
+        </dx-button>
     </div>
-  </div>
 </div>
-
-<div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body m-portlet__body--no-padding">
-      <div class="m-portlet__head">
-        <div class="m-portlet__head-tools">
-          <div class="buttons">
-            <dx-button
-              class="d-none d-sm-block pull-right"
-              icon="fa fa-credit-card-alt"
-              style="font-weight: bold"
-              [type]="'success'"
-              text="Affecter par code de ridelle"
-              (onClick)="assignByRC()">
-            </dx-button>
-          </div>
-        </div>
-      </div>
-
-      <dx-data-grid
+<dx-data-grid
         #dataGrid
         id="dataGrid"
         [dataSource]="parcels"
@@ -33,91 +20,91 @@
         [allowColumnResizing]="false"
         [allowColumnReordering]="true"
         [columnAutoWidth]="true"
-      >
-        <dxo-remote-operations
-          [sorting]="false"
-          [paging]="false">
-        </dxo-remote-operations>
+>
+    <dxo-remote-operations
+            [sorting]="false"
+            [paging]="false">
+    </dxo-remote-operations>
 
-        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
-        <dxo-editing
-          mode="row"
-          [useIcons]="true"
-          [allowUpdating]="false"
-          [allowDeleting]="false">
-        </dxo-editing>
-        <dxo-selection mode="multiple" [deferred]="true"></dxo-selection>
+    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+    <dxo-editing
+            mode="row"
+            [useIcons]="true"
+            [allowUpdating]="false"
+            [allowDeleting]="false">
+    </dxo-editing>
+    <dxo-selection mode="multiple" [deferred]="true"></dxo-selection>
 
-        <dxo-sorting mode="multiple"></dxo-sorting>
-        <dxo-filter-row
-          [visible]="true" [applyFilter]="true"></dxo-filter-row>
+    <dxo-sorting mode="multiple"></dxo-sorting>
+    <dxo-filter-row
+            [visible]="true" [applyFilter]="true"></dxo-filter-row>
 
-        <dxo-header-filter [visible]="true"></dxo-header-filter>
-        <dxo-export [enabled]="true" fileName="Parcels" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-export [enabled]="true" fileName="Parcels" [allowExportSelectedData]="true"></dxo-export>
 
-        <dxo-pager
-          [allowedPageSizes]="[5, 8, 15, 30]"
-          [showInfo]="true"
-          [showNavigationButtons]="true"
-          [showPageSizeSelector]="true"
-          [visible]="true">
-        </dxo-pager>
-        <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+    </dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
 
-        <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <dxo-search-panel [visible]="false"></dxo-search-panel>
+    <dxo-search-panel [visible]="false"></dxo-search-panel>
 
-        <dxo-group-panel [visible]="true"></dxo-group-panel>
-        <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
 
-        <dxi-column dataField="ir_id" [width]="40" caption="" [allowSorting]="false" [allowFiltering]="false"
-                    cellTemplate="consulterTemplate"></dxi-column>
-        <dxi-column [allowHeaderFiltering]="true" [alignment]="'center'" dataType="number" dataField="ir_id"
-                    caption="Réf"
-                    [visible]="true"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="Text" dataField="cda_name" caption="CDA"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="Text" dataField="z_name" caption="Zone"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="Text" dataField="p_name" caption="Parcelle"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="Text" dataField="p_harvest_order" caption="Ordre"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="Text" dataField="tp_full_name" [visible]="false"
-                    caption="Nom (Agrègè)"></dxi-column>
-        <dxi-column [alignment]="'center'" datatype="Text" dataField="tp_cin"
-                    caption="CIN (Agrègè)"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="Text" dataField="p_annuel_surface"
-                    caption="Superficie annuelle (Ha)"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="Text" dataField="sup_semis"
-                    caption="Superficie semis (Ha)"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="Text" dataField="ir_sup_con"
-                    caption="Superficie convoquée (Ha)"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="Text" dataField="irt_name"
-                    caption="Type"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="date" dataField="ir_date_con"
-                    caption="Date de convocation"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="number" dataField="ir_daily_quota"
-                    caption="Tonnage/Jour"></dxi-column>
+    <dxi-column dataField="ir_id" [width]="40" caption="" [allowSorting]="false" [allowFiltering]="false"
+                cellTemplate="consulterTemplate"></dxi-column>
+    <dxi-column [allowHeaderFiltering]="true" [alignment]="'center'" dataType="number" dataField="ir_id"
+                caption="Réf"
+                [visible]="true"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="Text" dataField="cda_name" caption="CDA"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="Text" dataField="z_name" caption="Zone"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="Text" dataField="p_name" caption="Parcelle"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="Text" dataField="p_harvest_order" caption="Ordre"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="Text" dataField="tp_full_name" [visible]="false"
+                caption="Nom (Agrègè)"></dxi-column>
+    <dxi-column [alignment]="'center'" datatype="Text" dataField="tp_cin"
+                caption="CIN (Agrègè)"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="Text" dataField="p_annuel_surface"
+                caption="Superficie annuelle (Ha)"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="Text" dataField="sup_semis"
+                caption="Superficie semis (Ha)"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="Text" dataField="ir_sup_con"
+                caption="Superficie convoquée (Ha)"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="Text" dataField="irt_name"
+                caption="Type"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="date" dataField="ir_date_con"
+                caption="Date de convocation"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="number" dataField="ir_daily_quota"
+                caption="Tonnage/Jour"></dxi-column>
 
-        <dxi-column [alignment]="'center'" dataType="number" dataField="rotation_count"
-                    caption="Nombre de rotations"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="number" dataField="rotation_count"
+                caption="Nombre de rotations"></dxi-column>
 
-        <dxi-column [alignment]="'center'" dataType="number" dataField="camion_count"
-                    caption="Nombre de camions"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="number" dataField="camion_count"
+                caption="Nombre max de camions autorisé"></dxi-column>
 
-        <dxi-column [alignment]="'center'" datatype="date" dataField="ir_start_date"
-                    caption="Date de debut d'arrachage"></dxi-column>
+    <dxi-column [alignment]="'center'" datatype="date" dataField="ir_start_date"
+                caption="Date de debut d'arrachage"></dxi-column>
 
-        <dxi-column [alignment]="'center'" datatype="date" dataField="ir_end_date"
-                    caption="Date prévu de fin d'arrachage"></dxi-column>
+    <dxi-column [alignment]="'center'" datatype="date" dataField="ir_end_date"
+                caption="Date prévue de fin d'arrachage"></dxi-column>
 
-        <div *dxTemplate="let data of 'consulterTemplate'">
-          <i (click)="showRotations(data.value)"
-             style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
-             class="fa fa-info-circle fa-5x"></i>
-        </div>
+    <div *dxTemplate="let data of 'consulterTemplate'">
+        <i (click)="showRotations(data.value)"
+           style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+           class="fa fa-info-circle fa-5x"></i>
+    </div>
 
-      </dx-data-grid>
-      <dx-popup
+</dx-data-grid>
+<dx-popup
         class="popup"
         [width]="650"
         [showTitle]="true"
@@ -125,36 +112,36 @@
         [dragEnabled]="false"
         [closeOnOutsideClick]="true"
         [(visible)]="popupVisible">
-        <div *dxTemplate="let data of 'content'">
-          <dx-scroll-view
-            [width]="600"
-            direction="both">
+    <div *dxTemplate="let data of 'content'">
+        <dx-scroll-view
+                [width]="600"
+                direction="both">
             <div id="content">
-              <dx-data-grid
-                [dataSource]="selectedConvocation"
-                [showBorders]="true"
-                [columnAutoWidth]="true">
-                <dxi-column caption="Numéro de rotation" cellTemplate="indexTemplate"></dxi-column>
-                <dxi-column dataField="state" caption="Etat" cellTemplate="stateTemplate"></dxi-column>
-                <dxi-column dataField="id" caption="" cellTemplate="cancelTemplate"></dxi-column>
-                <div *dxTemplate="let data of 'stateTemplate'">
-                 <span [ngClass]="getStatusColor(data.value)">
+                <dx-data-grid
+                        [dataSource]="selectedConvocation"
+                        [showBorders]="true"
+                        [columnAutoWidth]="true">
+                    <dxi-column caption="Numéro de rotation" cellTemplate="indexTemplate"></dxi-column>
+                    <dxi-column dataField="state" caption="Etat" cellTemplate="stateTemplate"></dxi-column>
+                    <dxi-column dataField="id" caption="" cellTemplate="cancelTemplate"></dxi-column>
+                    <div *dxTemplate="let data of 'stateTemplate'">
+                 <span [ngClass]="helper.getContractStatusClass(getStatut(data.value))">
                      {{ getStatut(data.value) }}
                 </span>
-                </div>
-                <div *dxTemplate="let data of 'indexTemplate'">
-                  {{+data.rowIndex + 1}}
-                </div>
-                <div *dxTemplate="let data of 'cancelTemplate'">
-                  <dx-button [type]="'danger'" [text]="'Annuler'" (onClick)="cancel(data, cancelBtn)"
-                             #cancelBtn></dx-button>
-                </div>
-              </dx-data-grid>
+                    </div>
+                    <div *dxTemplate="let data of 'indexTemplate'">
+                        {{+data.rowIndex + 1}}
+                    </div>
+                    <div *dxTemplate="let data of 'cancelTemplate'">
+                        <dx-button [type]="'danger'" [text]="'Annuler'" (onClick)="cancel(data, cancelBtn)"
+                                   #cancelBtn></dx-button>
+                    </div>
+                </dx-data-grid>
             </div>
-          </dx-scroll-view>
-        </div>
-      </dx-popup>
-      <dx-popup
+        </dx-scroll-view>
+    </div>
+</dx-popup>
+<dx-popup
         class="popup"
         [showTitle]="true"
         [title]="'Affectation par code ridelle'"
@@ -162,61 +149,59 @@
         [closeOnOutsideClick]="true"
         (onShown)="clearAssignmentData()"
         [(visible)]="assignPopUpVisible">
-        <div *dxTemplate="let data of 'content'">
-          <dx-form id="form"
-                   [formData]="ridelle">
+    <div *dxTemplate="let data of 'content'">
+        <dx-form id="form"
+                 [formData]="ridelle">
             <dxi-item itemType="group" cssClass="first-group" [colCount]="1">
-              <dxi-item itemType="group">
-                <dxi-item dataField="code" editorType="dxTextBox">
-                  <dxo-label text="Code ridelle"></dxo-label>
-                  <dxi-validation-rule type="required"></dxi-validation-rule>
+                <dxi-item itemType="group">
+                    <dxi-item dataField="code" editorType="dxTextBox">
+                        <dxo-label text="Code ridelle"></dxo-label>
+                        <dxi-validation-rule type="required"></dxi-validation-rule>
+                    </dxi-item>
                 </dxi-item>
-              </dxi-item>
-              <dxi-item itemType="group">
-                <dxi-item
-                  itemType="button"
-                  horizontalAlignment="right"
-                  verticalAlignment="bottom"
-                  [buttonOptions]="submitButtonOptions">
+                <dxi-item itemType="group">
+                    <dxi-item
+                            itemType="button"
+                            horizontalAlignment="right"
+                            verticalAlignment="bottom"
+                            [buttonOptions]="submitButtonOptions">
+                    </dxi-item>
                 </dxi-item>
-              </dxi-item>
             </dxi-item>
-          </dx-form>
-          <br>
-          <dx-data-grid
-            [dataSource]="dataSource"
-            [visible]="returnedRotation"
-            [showBorders]="true"
-            [columnAutoWidth]="true">
+        </dx-form>
+        <br>
+        <dx-data-grid
+                [dataSource]="dataSource"
+                [visible]="returnedRotation"
+                [showBorders]="true"
+                [columnAutoWidth]="true">
             <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Camion"
                         [alignment]="'center'">
-              <dxi-column dataField="returnedCamion.ridelle_code" caption="Code Ridelle"></dxi-column>
-              <dxi-column dataField="returnedCamion.taille" caption="Taille"></dxi-column>
-              <dxi-column dataField="returnedCamion.immatricule_number" caption="Immatricule"></dxi-column>
-              <dxi-column dataField="returnedCamion.ptc" caption="PTC"></dxi-column>
+                <dxi-column dataField="returnedCamion.ridelle_code" caption="Code Ridelle"></dxi-column>
+                <dxi-column dataField="returnedCamion.taille" caption="Taille"></dxi-column>
+                <dxi-column dataField="returnedCamion.immatricule_number" caption="Immatricule"></dxi-column>
+                <dxi-column dataField="returnedCamion.ptc" caption="PTC"></dxi-column>
             </dxi-column>
             <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Rotation"
                         [alignment]="'center'">
-              <dxi-column dataField="returnedRotation.cda_name" caption="CDA"></dxi-column>
-              <dxi-column dataField="returnedRotation.z_name" caption="Zone"></dxi-column>
-              <dxi-column dataField="returnedRotation.p_name" caption="Nom de la parcelle"></dxi-column>
-              <dxi-column dataField="returnedRotation.p_harvest_order" caption="Ordre"></dxi-column>
-              <dxi-column dataField="returnedRotation.tp_cin" caption="CIN"></dxi-column>
-              <dxi-column dataField="returnedRotation.tp_full_name" [visible]="true" caption="Nom complet"
-                          style="color: #6d7fcc; align-content: center; cursor: pointer"></dxi-column>
+                <dxi-column dataField="returnedRotation.cda_name" caption="CDA"></dxi-column>
+                <dxi-column dataField="returnedRotation.z_name" caption="Zone"></dxi-column>
+                <dxi-column dataField="returnedRotation.p_name" caption="Nom de la parcelle"></dxi-column>
+                <dxi-column dataField="returnedRotation.p_harvest_order" caption="Ordre"></dxi-column>
+                <dxi-column dataField="returnedRotation.tp_cin" caption="CIN"></dxi-column>
+                <dxi-column dataField="returnedRotation.tp_full_name" [visible]="true" caption="Nom complet"
+                            style="color: #6d7fcc; align-content: center; cursor: pointer"></dxi-column>
             </dxi-column>
-          </dx-data-grid>
-          <br>
-          <dx-button
-            text="Valider"
-            type="success"
-            [visible]="returnedRotation"
-            class="mybutton"
-            (onClick)="validateAssignment()"
-            icon="check"></dx-button>
-        </div>
-      </dx-popup>
-
+        </dx-data-grid>
+        <br>
+        <dx-button
+                text="Valider"
+                type="success"
+                [visible]="returnedRotation"
+                class="mybutton"
+                (onClick)="validateAssignment()"
+                icon="check"></dx-button>
     </div>
-  </div>
-</div>
+</dx-popup>
+
+

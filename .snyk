@@ -1,9 +1,0 @@
-# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.12.0
-# ignores vulnerabilities until expiry date; change duration by modifying expiry date
-ignore:
-  'npm:braces:20180219':
-    - ag-grid-angular > @angular/compiler-cli > chokidar > anymatch > micromatch > braces:
-        reason: None given
-        expires: '2018-06-15T16:13:00.549Z'
-patch: {}

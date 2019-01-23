@@ -1,19 +1,9 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" routerLink="/contrats/liste"><i class="fa fa-angle-left"></i> Contrats</a>
-      <h2>Nouveau contrat</h2>
-    </div>
+<h1>Nouveau contrat</h1>
+<hr>
+<div class="clr-row">
+  <div class="clr-col">
+    <app-wizard [isEdit]="false" [campaigns]="campaigns"
+                [contract]="contract" [step2]="step2" [currentThird]="currentThird" [groundsList]="groundsList"
+                [structure]="structure"></app-wizard>
   </div>
-</div>
-
-<div class="m-content">
-    <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-      <div class="m-portlet__body">
-      <app-wizard [isEdit]="false" [campaigns]="campaigns"
-              [contract]="contract" [step2]="step2" [currentThird]="currentThird" [groundsList]="groundsList"
-              [structure]="structure"></app-wizard>
-    </div>
-  </div>
-
 </div>

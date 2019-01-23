@@ -4,25 +4,25 @@ import { Observable } from 'rxjs/Rx';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CarteService {
 
-  routeName = 'ilots';
+    routeName = 'ilots';
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  /**
-   *
-   * @param params
-   * @returns {Observable<any>}
-   */
-  getIlotByZone(params: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(params), {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
-  }
+    /**
+     *
+     * @param params
+     * @returns {Observable<any>}
+     */
+    getIlotByZone(params: any): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}`, JSON.stringify(params), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
 }

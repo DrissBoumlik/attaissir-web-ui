@@ -1,18 +1,210 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2> Echantillonage N° {{echantillonage.id }}</h2>
+<h1> Echantillonage N° {{echantillonage.id }}</h1>
+<hr>
+<div class="clr-row">
+    <div class="clr-col">
+        <h2 class="m-form__section">
+            Informations générales
+        </h2>
+        <hr>
     </div>
-  </div>
 </div>
-<div class="m-content" style="padding-bottom: 0px !important;">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+<div class="clr-row">
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Référence
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                    {{echantillonage.id}}
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                CDA
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                    {{echantillonage.cda}}
+
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Zone
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                    {{echantillonage.zone}}
+
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Parcelle
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                    {{echantillonage.parcel_name}}
+
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Nom d'agriculteur
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                    {{echantillonage.full_name}}
+
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                C.I.N d'agriculter
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                    {{echantillonage.cin}}
+
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Date prévue
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                    {{echantillonage.date}}
+
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Peuplement
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                    {{echantillonage_custom_fields.peuplement}}
+
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Poids feuille
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                    {{echantillonage_custom_fields.poids_feuille}}
+
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Nombre de racines
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                    {{echantillonage_custom_fields.nbr}}
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clr-row">
+    <div class="clr-col">
+        <h2 class="m-form__section">
+            Résultat de l'analyse
+        </h2>
+        <hr>
+    </div>
+</div>
+<form>
+    <dx-form id="form2"
+             [formData]="analyse_data"
+             [readOnly]="false"
+             [showColonAfterLabel]="true"
+             [showValidationSummary]="true"
+             labelLocation="top"
+             #Form2>
+        <dxi-item itemType="group" [colCount]="2">
+            <dxi-item *ngFor="let field of DX_custom_fields"
+                      [editorType]="field.editorType"
+                      [dataField]="field.dataField"
+                      [editorOptions]="{
+                                value: field.value
+                              }"
+                      itemType="simple"
+                      [colSpan]="field.colspan">
+                <dxo-label text="{{ field.label }}"></dxo-label>
+                <dxi-validation-rule
+                        message="Ce champs est obligatoire"
+                        type="required" *ngIf="field.required"
+                >
+                </dxi-validation-rule>
+            </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group" [colCount]="5">
+            <dxi-item itemType="simple" [colSpan]="3"></dxi-item>
+            <dxi-item itemType="button" [colSpan]="2" [buttonOptions]="buttonSave"></dxi-item>
+        </dxi-item>
+    </dx-form>
+</form>
+<!--<div class="m-content" style="padding-bottom: 0px !important;">
+  <div class="m-portlet m-portlet&#45;&#45;bordered-semi m-portlet&#45;&#45;full-height m-portlet&#45;&#45;rounded ">
     <div class="m-portlet__body">
       <div class="tab-content">
         <div class="tab-pane active" id="m_user_profile_tab_1">
-          <div class="m-form m-form--fit">
+          <div class="m-form m-form&#45;&#45;fit">
             <div class="m-portlet__body">
               <div class="row">
                 <div class="col-12">
@@ -20,7 +212,7 @@
                   <h3 class="m-form__section">
                     Informations générales
                   </h3>
-                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                  <div class="m-form__seperator m-form__seperator&#45;&#45;dashed m-form__seperator&#45;&#45;space-2x"></div>
                 </div>
               </div>
 
@@ -195,23 +387,21 @@
     </div>
   </div>
 </div>
-
-
 <div class="m-content" style="padding-bottom: 10px;">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+  <div class="m-portlet m-portlet&#45;&#45;bordered-semi m-portlet&#45;&#45;full-height m-portlet&#45;&#45;rounded ">
     <div class="m-portlet__body">
 
 
       <div class="tab-content">
         <div class="tab-pane active" id="m_user_profile_tab_2">
-          <div class="m-form m-form--fit">
+          <div class="m-form m-form&#45;&#45;fit">
             <div class="m-portlet__body">
               <div class="row">
                 <div class="col-12">
                   <h3 class="m-form__section">
                     Analyse
                   </h3>
-                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                  <div class="m-form__seperator m-form__seperator&#45;&#45;dashed m-form__seperator&#45;&#45;space-2x"></div>
                 </div>
               </div>
               <form>
@@ -251,15 +441,14 @@
       </div>
     </div>
   </div>
-</div>
-
+</div>-->
 <dx-load-panel
-  #loadPanel
-  shadingColor="rgba(0,0,0,0.4)"
-  [position]="{ of: 'center' }"
-  [(visible)]="loadingvisible"
-  [showIndicator]="true"
-  [showPane]="true"
-  [shading]="true"
-  [closeOnOutsideClick]="false">
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [position]="{ of: 'center' }"
+        [(visible)]="loadingvisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
 </dx-load-panel>

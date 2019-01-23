@@ -7,17 +7,16 @@ import { EditeComponent } from './components/edite/edite.component';
 import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 const routes: Routes = [{
-  path: 'roles',
-  component: DefaultComponent,
-  children: [
-    { path: 'ajouter', component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['user.roles.store'] } },
-    { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['user.roles.grid'] } },
-    { path: 'modifier/:id', component: EditeComponent, canActivate: [PermissionGuard], data: { permission: ['user.roles.update'] } }
-  ]
+    path: 'roles',
+    children: [
+        { path: 'ajouter', component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['user.roles.store'] } },
+        { path: 'liste', component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['user.roles.grid'] } },
+        { path: 'modifier/:id', component: EditeComponent, canActivate: [PermissionGuard], data: { permission: ['user.roles.update'] } }
+    ]
 }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class RolesRoutingModule { }
