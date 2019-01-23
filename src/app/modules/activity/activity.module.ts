@@ -7,13 +7,13 @@ import { ListComponent } from './list/list.component';
 
 
 @NgModule({
-  imports: [
-    SharedModule,
-    CommonModule,
-    ActivityRoutingModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [ListComponent]
+    imports: [
+        SharedModule,
+        CommonModule,
+        ActivityRoutingModule
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    declarations: [ListComponent]
 })
 
 export class ActivityModule { }

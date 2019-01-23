@@ -6,8 +6,8 @@ declare var $: any
 
 
 @Component({
-  selector: 'widget1',
-  styles: [`
+    selector: 'widget1',
+    styles: [`
  
     .ScrollStyle {
       height: 470px;
@@ -127,7 +127,7 @@ declare var $: any
 
  
   `],
-  template: `
+    template: `
  
 
   <div class="widget"     >
@@ -189,47 +189,47 @@ declare var $: any
 export class Widget1Component {
 
 
-  @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
-  @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
-  @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
+    @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
+    @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
+    @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
 
-  @Input() id: String;
-  @Input() title: String;
-  @Input() nbr: number;
-  @Input() _nbr = 0;
-  @Input() sub_title: String;
-
-
-
-  defaultVisible = false;
-  toggleDefault() {
-    this.defaultVisible = !this.defaultVisible;
-  }
+    @Input() id: String;
+    @Input() title: String;
+    @Input() nbr: number;
+    @Input() _nbr = 0;
+    @Input() sub_title: String;
 
 
 
-  closeBtn() {
-    this.close.emit(1);
-  }
+    defaultVisible = false;
+    toggleDefault() {
+        this.defaultVisible = !this.defaultVisible;
+    }
 
 
 
-  ConfigBtn() {
-    this.config.emit(this.id);
-  }
+    closeBtn() {
+        this.close.emit(1);
+    }
 
 
 
-  InfoBtn() {
-    this.info.emit(1);
-  }
+    ConfigBtn() {
+        this.config.emit(this.id);
+    }
 
 
-  log(event) {
-    console.log('event');
-    console.log(this.nbr);
-    this._nbr = this.nbr;
-  }
+
+    InfoBtn() {
+        this.info.emit(1);
+    }
+
+
+    log(event) {
+        console.log('event');
+        console.log(this.nbr);
+        this._nbr = this.nbr;
+    }
 
 
 }

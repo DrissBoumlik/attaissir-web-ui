@@ -8,12 +8,12 @@ import { SharedModule } from '../../shared/shared.module';
 import { TodosComponent } from './components/todos/todos.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    CommonModule,
-    IncidentsRoutingModule,
-    DxLinearGaugeModule,
-  ],
-  declarations: [ListComponent, TodosComponent],
+    imports: [
+        SharedModule,
+        CommonModule,
+        IncidentsRoutingModule,
+        DxLinearGaugeModule,
+    ],
+    declarations: [ListComponent, TodosComponent],
 })
 export class IncidentsModule { }

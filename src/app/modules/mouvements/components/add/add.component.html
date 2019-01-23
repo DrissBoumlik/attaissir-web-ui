@@ -1,99 +1,89 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2 [appPermissionHidden]="['distributionCenter.orderarticles.store']" >Nouveau Mouvement</h2>
-    </div>
-  </div>
-</div>
-<div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body">
-
-      <form (submit)="AddMovement($event)">
-        <dx-form id="form"
-                 [formData]="stock_operation"
-                 [readOnly]="false"
-                 [showColonAfterLabel]="true"
-                 [showValidationSummary]="true"
-                 labelLocation="top"
-                 validationGroup="{{ stockData }}">
+<h1>Nouveau Mouvement</h1>
+<hr>
+<form (submit)="AddMovement($event)">
+    <dx-form id="form"
+             [formData]="stock_operation"
+             [readOnly]="false"
+             [showColonAfterLabel]="true"
+             [showValidationSummary]="true"
+             labelLocation="top"
+             validationGroup="{{ stockData }}">
 
 
-          <dxi-item itemType="group" caption="Informations Générales" [colCount]="2" i18n-caption>
+        <dxi-item itemType="group" caption="Informations Générales" [colCount]="2" i18n-caption>
 
             <dxi-item dataField="type" editorType="dxSelectBox" [editorOptions]="typeOptions">
-              <dxo-label
-                text="Type" i18n-text>
-              </dxo-label>
-              <dxi-validation-rule type="required" message="Type est obligatoire"
-                                   i18n-message></dxi-validation-rule>
+                <dxo-label
+                        text="Type" i18n-text>
+                </dxo-label>
+                <dxi-validation-rule type="required" message="Type est obligatoire"
+                                     i18n-message></dxi-validation-rule>
             </dxi-item>
 
             <dxi-item dataField="emetteur" editorType="dxSelectBox" [editorOptions]="emetteurOptions">
-              <dxi-validation-rule type="required" message="Émetteur est obligatoire"
-                                   i18n-message></dxi-validation-rule>
+                <dxi-validation-rule type="required" message="Émetteur est obligatoire"
+                                     i18n-message></dxi-validation-rule>
             </dxi-item>
 
             <dxi-item dataField="commande" editorType="dxSelectBox" [editorOptions]="commandeOptions">
-              <dxo-label
-                text="Commande" i18n-text>
-              </dxo-label>
+                <dxo-label
+                        text="Commande" i18n-text>
+                </dxo-label>
             </dxi-item>
 
             <dxi-item dataField="recepteur" editorType="dxSelectBox" [editorOptions]="recepteurOptions">
-              <dxo-label
-                text="Récepteur" i18n-text>
-              </dxo-label>
-              <dxi-validation-rule type="required" message="Récepteur est obligatoire"
-                                   i18n-message></dxi-validation-rule>
+                <dxo-label
+                        text="Récepteur" i18n-text>
+                </dxo-label>
+                <dxi-validation-rule type="required" message="Récepteur est obligatoire"
+                                     i18n-message></dxi-validation-rule>
             </dxi-item>
 
             <dxi-item dataField="bon">
-              <dxo-label
-                text="N° Bon de livraison fournisseur">
-              </dxo-label>
+                <dxo-label
+                        text="N° Bon de livraison fournisseur">
+                </dxo-label>
             </dxi-item>
-          </dxi-item>
+        </dxi-item>
 
 
-          <dxi-item itemType="group" [colCount]="5" caption="Produits" i18n-caption>
+        <dxi-item itemType="group" [colCount]="5" caption="Produits" i18n-caption>
             <dxi-item dataField="famille" editorType="dxSelectBox" [editorOptions]="familleOptions">
-              <dxo-label
-                text="Famille" i18n-text>
-              </dxo-label>
-              <dxi-validation-rule type="required" message="Famille est obligatoire"
-                                   i18n-message></dxi-validation-rule>
+                <dxo-label
+                        text="Famille" i18n-text>
+                </dxo-label>
+                <dxi-validation-rule type="required" message="Famille est obligatoire"
+                                     i18n-message></dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="sub_famille" editorType="dxSelectBox" [editorOptions]="subFamilleOptions">
-              <dxo-label
-                text="Sous-Famille" i18n-text>
-              </dxo-label>
-              <dxi-validation-rule type="required" message="Sous-Famille est obligatoire"
-                                   i18n-message></dxi-validation-rule>
+                <dxo-label
+                        text="Sous-Famille" i18n-text>
+                </dxo-label>
+                <dxi-validation-rule type="required" message="Sous-Famille est obligatoire"
+                                     i18n-message></dxi-validation-rule>
             </dxi-item>
 
             <dxi-item dataField="article" editorType="dxSelectBox" [editorOptions]="articleOptions">
-              <dxo-label
-                text="Article" i18n-text>
-              </dxo-label>
-              <dxi-validation-rule type="required" message="Article est obligatoire"
-                                   i18n-message></dxi-validation-rule>
+                <dxo-label
+                        text="Article" i18n-text>
+                </dxo-label>
+                <dxi-validation-rule type="required" message="Article est obligatoire"
+                                     i18n-message></dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="quantity" editorType="dxNumberBox">
-              <dxo-label
-                text="Quantity">
-              </dxo-label>
+                <dxo-label
+                        text="Quantity">
+                </dxo-label>
             </dxi-item>
 
             <dxi-item
-              itemType="button"
-              alignment="left"
-              [buttonOptions]="addProduct">
+                    itemType="button"
+                    alignment="left"
+                    [buttonOptions]="addProduct">
             </dxi-item>
-          </dxi-item>
+        </dxi-item>
 
-          <dxi-item itemType="group" caption="Détails">
+        <dxi-item itemType="group" caption="Détails">
 
             <dx-data-grid id="CampaignGridContainer"
 
@@ -112,42 +102,36 @@
                           [noDataText]="'Aucan article n\'est ajouter!'">
 
 
-
-
-
-
-              <dxi-column dataField="famille_id" [calculateDisplayValue]="'category'" caption="Famille"></dxi-column>
-              <dxi-column dataField="sub_famille_id" [calculateDisplayValue]="'subCategory'" caption="Sous famille"></dxi-column>
-              <dxi-column dataField="article_id" [calculateDisplayValue]="'article'" caption="Article"></dxi-column>
-              <dxi-column dataField="quantity1" caption="Quantité globale"></dxi-column>
-              <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
-              <dxo-remote-operations
-                [sorting]="true"
-                [paging]="false">
-              </dxo-remote-operations>
-              <dxo-selection mode="none"></dxo-selection>
-              <dxo-editing
-                [useIcons]="true"
-                mode="row"
-                [allowUpdating]="false"
-                [allowDeleting]="true"
-                [allowAdding]="false">
-              </dxo-editing>
-              <dxo-pager
-                [showPageSizeSelector]="false"
-              ></dxo-pager>
+                <dxi-column dataField="famille_id" [calculateDisplayValue]="'category'" caption="Famille"></dxi-column>
+                <dxi-column dataField="sub_famille_id" [calculateDisplayValue]="'subCategory'"
+                            caption="Sous famille"></dxi-column>
+                <dxi-column dataField="article_id" [calculateDisplayValue]="'article'" caption="Article"></dxi-column>
+                <dxi-column dataField="quantity1" caption="Quantité globale"></dxi-column>
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxo-remote-operations
+                        [sorting]="true"
+                        [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-editing
+                        [useIcons]="true"
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                        [showPageSizeSelector]="false"
+                ></dxo-pager>
             </dx-data-grid>
 
-          </dxi-item>
+        </dxi-item>
 
 
-          <dxi-item
-            itemType="button"
-            alignment="left"
-            [buttonOptions]="buttonOptions">
-          </dxi-item>
-        </dx-form>
-      </form>
-    </div>
-  </div>
-</div>
+        <dxi-item
+                itemType="button"
+                alignment="left"
+                [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</form>

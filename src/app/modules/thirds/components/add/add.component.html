@@ -1,15 +1,5 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Ajouter un {{ title }}</h2>
-    </div>
-  </div>
-</div>
-<div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body">
-      <app-tiers-form [isEdit]="false" [readOnly]="false" [tier]="tier" [thirdTypeName]="title" [isAggregated]="isAggregated" [morale]="morale" (submit)="onFormSubmit($event)"></app-tiers-form>
-    </div>
-  </div>
-</div>
+<h1>Ajouter un {{ title }}</h1>
+<hr>
+<app-tiers-form [isEdit]="false" [readOnly]="false" [tier]="tier" [thirdTypeName]="title" [isAggregated]="isAggregated"
+                [morale]="morale" (submit)="onFormSubmit($event)"></app-tiers-form>
+

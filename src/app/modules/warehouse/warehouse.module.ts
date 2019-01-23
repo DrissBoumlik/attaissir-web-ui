@@ -10,17 +10,17 @@ import { WarehouseRoutingModule } from './warehouse-routing.module';
 import { ReplenishmentComponent } from './components/replenishment/replenishment.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    CommonModule,
-    WarehouseRoutingModule,
-    DxSelectBoxModule,
-    DxTextAreaModule,
-    DxDateBoxModule,
-    DxDataGridModule,
-    DxLoadIndicatorModule
-  ],
-  declarations: [AddComponent, EditComponent, ListComponent, ShowComponent, ReplenishmentComponent]
+    imports: [
+        SharedModule,
+        CommonModule,
+        WarehouseRoutingModule,
+        DxSelectBoxModule,
+        DxTextAreaModule,
+        DxDateBoxModule,
+        DxDataGridModule,
+        DxLoadIndicatorModule
+    ],
+    declarations: [AddComponent, EditComponent, ListComponent, ShowComponent, ReplenishmentComponent]
 })
 
 export class WarehouseModule { }

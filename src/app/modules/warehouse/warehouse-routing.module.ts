@@ -9,33 +9,32 @@ import { PermissionGuard } from '../../shared/directives/guard.directive';
 
 
 const routes: Routes = [
-  {
-    path: 'magasin',
-    component: DefaultComponent,
-    children: [
-      {
-        path: '',
-        component: ReplenishmentComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.grid'] }
-      },
-      {
-        path: 'modifier/:id',
-        component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.update'] }
-      },
-      {
-        path: 'afficher/:id',
-        component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.show'] }
-      },
-      {
-        path: 'reapprovisionnement',
-        component: ReplenishmentComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.grid'] }
-      }
-    ]
-  }
+    {
+        path: 'magasin',
+        children: [
+            {
+                path: '',
+                component: ReplenishmentComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.grid'] }
+            },
+            {
+                path: 'modifier/:id',
+                component: EditComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.update'] }
+            },
+            {
+                path: 'afficher/:id',
+                component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.show'] }
+            },
+            {
+                path: 'reapprovisionnement',
+                component: ReplenishmentComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.warehouses.grid'] }
+            }
+        ]
+    }
 ];
 
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class WarehouseRoutingModule { }

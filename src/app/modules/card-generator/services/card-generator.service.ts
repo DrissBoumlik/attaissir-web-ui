@@ -5,56 +5,56 @@ import { Observable } from 'rxjs';
 
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CardGeneratorService {
 
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
-  private options = {
-    headers: this.headers
-  };
+    private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
+    private options = {
+        headers: this.headers
+    };
 
-  routeName: string;
-  constructor(public http: HttpClient) {
-    this.routeName = 'cards';
-  }
-
-
-  /**
-   * Get a collection of Cards
-   * @returns {Observable<Card[]>}
-   */
+    routeName: string;
+    constructor(public http: HttpClient) {
+        this.routeName = 'cards';
+    }
 
 
-
-
-
-  getCards(params?: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/${this.routeName}/generator-list`, JSON.stringify(params), {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
-  }
+    /**
+     * Get a collection of Cards
+     * @returns {Observable<Card[]>}
+     */
 
 
 
 
-  export(params?: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/${this.routeName}/export`, JSON.stringify(params), {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
-  }
 
-  validate(params?: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/${this.routeName}/assign-rfid`, JSON.stringify({ "cards": params }), {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
-  }
+    getCards(params?: any): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/generator-list`, JSON.stringify(params), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
+
+
+
+    export(params?: any): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/export`, JSON.stringify(params), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
+    validate(params?: any): Observable<any> {
+        return this.http.put(`${environment.apiUrl}/${this.routeName}/assign-rfid`, JSON.stringify({ "cards": params }), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
 
 
 

@@ -7,38 +7,37 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class AuthenticationService {
 
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
-  private options = {
-    headers: this.headers
-  };
+    private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
+    private options = {
+        headers: this.headers
+    };
 
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  login(email: string, password: string) {
-    return this.http.post(`${environment.apiUrl}/login`, JSON.stringify({ email: email.toLowerCase(), password: password }), this.options);
-  }
+    login(email: string, password: string) {
+        return this.http.post(`${environment.apiUrl}/login`, JSON.stringify({ email: email.toLowerCase(), password: password }), this.options);
+    }
 
-  myPermission(): any {
-    return this.http.get(`${environment.apiUrl}/my-permissions`, this.options);
-  }
+    myPermission(): any {
+        return this.http.get(`${environment.apiUrl}/my-permissions`, this.options);
+    }
 
-  refresh = () => {
-    return this.http.get(`${environment.apiUrl}/refresh`);
-  };
+    refresh = () => {
+        return this.http.get(`${environment.apiUrl}/refresh`);
+    };
 
-  logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('token');
-  }
+    logout() {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
+    }
 
-  getToken = () => {
-    return localStorage.getItem('token');
-  };
+    getToken = () => {
+        return localStorage.getItem('token');
+    };
 
-  getTanent = () => {
-    return localStorage.getItem('tenantId');
-  };
+    getTanent = () => {
+        return localStorage.getItem('tenantId');
+    };
 }

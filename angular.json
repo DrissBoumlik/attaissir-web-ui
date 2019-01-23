@@ -33,7 +33,7 @@
               "node_modules/dragula/dist/dragula.css",
               "src/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css",
               "node_modules/devextreme/dist/css/dx.common.css",
-              "node_modules/devextreme/dist/css/dx.softblue.css",
+              "node_modules/devextreme/dist/css/dx.material.blue.light.css",
               "node_modules/font-awesome/css/font-awesome.min.css",
               "src/assets/vendors/base/flaticon.css",
               "node_modules/ngx-toastr/toastr.css",
@@ -41,14 +41,18 @@
               "src/assets/vendors/metronic/css/styles.css",
               "src/styles.scss",
               "node_modules/leaflet/dist/leaflet.css",
-              "node_modules/leaflet.fullscreen/Control.FullScreen.css"
+              "node_modules/leaflet.fullscreen/Control.FullScreen.css",
+              "node_modules/@clr/icons/clr-icons.min.css",
+              "node_modules/@clr/ui/clr-ui.min.css"
             ],
             "scripts": [
+              "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/dragula/dist/dragula.js",
               {
                 "input": "node_modules/document-register-element/build/document-register-element.js"
-              }
+              },
+              "node_modules/@clr/icons/clr-icons.min.js"
             ]
           },
           "configurations": {

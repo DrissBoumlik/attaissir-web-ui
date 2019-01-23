@@ -9,12 +9,12 @@ import { ShowRetourComponent } from './components/show-retour/show-retour.compon
 import { DetailsComponent } from './components/details/details.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    CommonModule,
-    MouvementsRoutingModule
-  ],
-  declarations: [ListComponent, AddComponent, ShowComponent, ShowRetourComponent, DetailsComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    imports: [
+        SharedModule,
+        CommonModule,
+        MouvementsRoutingModule
+    ],
+    declarations: [ListComponent, AddComponent, ShowComponent, ShowRetourComponent, DetailsComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MouvementsModule { }

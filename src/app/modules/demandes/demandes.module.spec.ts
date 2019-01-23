@@ -2,13 +2,13 @@ import { DemandesModule } from './demandes.module';
 
 
 describe('DemandesModule', () => {
-  let demandesModule: DemandesModule;
+    let demandesModule: DemandesModule;
 
-  beforeEach(() => {
-    demandesModule = new DemandesModule();
-  });
+    beforeEach(() => {
+        demandesModule = new DemandesModule();
+    });
 
-  it('should create an instance', () => {
-    expect(demandesModule).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(demandesModule).toBeTruthy();
+    });
 });

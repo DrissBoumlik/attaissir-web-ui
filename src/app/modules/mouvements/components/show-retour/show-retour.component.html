@@ -1,205 +1,147 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2> Nouveau Mouvement</h2>
+<h1> Nouveau Mouvement</h1>
+<hr>
+<div *ngIf="mouvement">
+    <div class="clr-row">
+        <div class="clr-col">
+            <h2 class="m-form__section">
+                Informations générales
+            </h2>
+            <hr>
+        </div>
     </div>
+    <div class="clr-row">
+        <div class="clr-col-4">
+            <div class="clr-row">
+                <label class="clr-col-12">
+                    Type
+                </label>
+                <div class="clr-col-12">
 
-
-  </div>
-</div>
-<div class="m-content" style="padding-bottom: 10px !important;">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body">
-
-
-
-
-      <div class="tab-content" *ngIf="mouvement">
-        <div class="tab-pane active" id="m_user_profile_tab_1">
-          <div class="m-form m-form--fit">
-            <div class="m-portlet__body">
-              <div class="row">
-                <div class="col-12">
-                  <h3 class="m-form__section">
-                    Informations générales
-                  </h3>
-                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Type
-                    </label>
-                    <div class="col-12">
-
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-                        Retour agriculteur
-                      </p>
-
-                    </div>
-                  </div>
+                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                        Retour agriculteur.
+                    </p>
 
                 </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      N° Bon
-                    </label>
-                    <div class="col-12">
+            </div>
+        </div>
+        <div class="clr-col-4">
+            <div class="clr-row">
+                <label class="clr-col-12">
+                    N° Bon
+                </label>
+                <div class="clr-col-12">
 
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
+                    <p class="siam-form-input-value siam-form-input-value-nodata">
                         {{mouvement.id}}
-                      </p>
-                    </div>
-                  </div>
 
+                    </p>
                 </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Date
-                    </label>
-                    <div class="col-12">
+            </div>
 
-                      <p class="siam-form-input-value siam-form-input-value-nodata">
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        </div>
+        <div class="clr-col-4">
+            <div class="clr-row">
+                <label class="clr-col-12">
+                    Date
+                </label>
+                <div class="clr-col-12">
+
+                    <p class="siam-form-input-value siam-form-input-value-nodata">
                         {{mouvement.date}}
-                      </p>
 
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Commande
-                    </label>
-                    <div class="col-12">
+                    </p>
 
-
-                    </div>
-                  </div>
                 </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Emetteur
-                    </label>
-                    <div class="col-12">
-                      {{mouvement.third_party_name}}
-                     </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <label class="col-12">
-                      Récepteur
-                    </label>
-                    <div class="col-12">
-                      {{mouvement.source_name}}
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
+        <div class="clr-col-4">
+            <div class="clr-row">
+                <label class="clr-col-12">
+                    Emetteur
+                </label>
+                <div class="clr-col-12">
 
-      </div>
+                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                        {{mouvement.third_party_name}}
 
-    </div>
-  </div>
-</div>
+                    </p>
 
-
-
-<div class="m-content" style="padding-bottom: 10px !important;">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body">
-
-
-      <div class="tab-content">
-        <div class="tab-pane active" id="m_user_profile_tab_2">
-          <div class="m-form m-form--fit">
-            <div class="m-portlet__body">
-              <div class="row">
-                <div class="col-12">
-                  <h3 class="m-form__section">
-                    Liste des produits
-                  </h3>
-                  <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
                 </div>
-              </div>
-
-
-
-              <dx-data-grid
-                #dataGrid
-                id="gridContainer"
-                [dataSource]="articles"
-                showBorders="true"
-                [columnHidingEnabled]="true"
-                [allowColumnResizing]="true"
-                [allowColumnReordering]="true"
-                [selectionFilter]="false"
-
-                [(selectedRowKeys)]="selectedItems"
-                [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
-                KeyExpr="id">
-
-
-                <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
-                <dxi-column dataField="id" [width]="100"  caption="" [allowSorting]="false"  [allowFiltering]="false"  cellTemplate="removeTemplate" [allowSorting]="false"></dxi-column>
-                <dxi-column dataField="category" caption="Famille"></dxi-column>
-                <dxi-column dataField="sub_category" caption="Sous Famille"></dxi-column>
-                <dxi-column dataField="article_name" caption="Article"></dxi-column>
-                <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
-                <dxi-column dataField="quantity_retour" caption="Quantité retour"  cellTemplate="ToOrder"></dxi-column>
-
-                <div *dxTemplate="let data of 'ToOrder'">
-                  <dx-number-box #dxNb
-                                 dataField="data.value"
-                                 [min]="0"
-                                 [max]="data.data.quantity"
-                                 [value]="0"
-                                 [showSpinButtons]="true"
-                                 [showClearButton]="true"
-                                 (onValueChanged)="valuechange($event, data, dxNb.value)" ></dx-number-box>
-                </div>
-
-
-
-
-                <div *dxTemplate="let data of 'removeTemplate'">
-                  <a  (click)="removeRetourItem(data.value)" ><i style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;" class="fa fa-times fa-5x"></i></a>
-                </div>
-
-              </dx-data-grid>
-
-
-
             </div>
-          </div>
         </div>
+        <div class="clr-col-4">
+            <div class="clr-row">
+                <label class="clr-col-12">
+                    Récepteur
+                </label>
+                <div class="clr-col-12">
 
-      </div>
+                    <p class="siam-form-input-value siam-form-input-value-nodata">
 
+                        {{mouvement.source_name}}
+
+                    </p>
+
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-
-
-
-<div class="dx-fieldset" >
-  <div class="dx-field">
-    <div class="dx-field-value">
-      <dx-button width="180"  [disabled]="!retour_valider_enabled" text="ENREGISTER" type="success"  style="margin-left: 20px; margin-right: 20px;" (onClick)="Deliver()"></dx-button>
-
+<div class="clr-row">
+    <div class="clr-col">
+        <h2 class="m-form__section">
+            Liste des articles
+        </h2>
+        <hr>
     </div>
-  </div>
+</div>
+<dx-data-grid
+        #dataGrid
+        id="gridContainer"
+        [dataSource]="articles"
+        showBorders="true"
+        [columnHidingEnabled]="true"
+        [allowColumnResizing]="true"
+        [allowColumnReordering]="true"
+        [selectionFilter]="false"
+
+        [(selectedRowKeys)]="selectedItems"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        KeyExpr="id">
+
+
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+    <dxi-column dataField="id" [width]="100" caption="" [allowSorting]="false" [allowFiltering]="false"
+                cellTemplate="removeTemplate" [allowSorting]="false"></dxi-column>
+    <dxi-column dataField="category" caption="Famille"></dxi-column>
+    <dxi-column dataField="sub_category" caption="Sous Famille"></dxi-column>
+    <dxi-column dataField="article_name" caption="Article"></dxi-column>
+    <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
+    <dxi-column dataField="quantity_retour" caption="Quantité retour" cellTemplate="ToOrder"></dxi-column>
+
+    <div *dxTemplate="let data of 'ToOrder'">
+        <dx-number-box #dxNb
+                       dataField="data.value"
+                       [min]="0"
+                       [max]="data.data.quantity"
+                       [value]="0"
+                       [showSpinButtons]="true"
+                       [showClearButton]="true"
+                       (onValueChanged)="valuechange($event, data, dxNb.value)"></dx-number-box>
+    </div>
+
+
+    <div *dxTemplate="let data of 'removeTemplate'">
+        <a (click)="removeRetourItem(data.value)"><i
+                style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+                class="fa fa-times fa-5x"></i></a>
+    </div>
+
+</dx-data-grid>
+<div class="clr-row clr-align-items-end">
+    <div class="clr-col-12 clr-justify-content-end" style="padding: .3rem">
+        <dx-button width="180" [disabled]="!retour_valider_enabled" text="ENREGISTER" type="success"
+                   style="margin-left: 20px; margin-right: 20px;" (onClick)="Deliver()"></dx-button>
+    </div>
 </div>
 

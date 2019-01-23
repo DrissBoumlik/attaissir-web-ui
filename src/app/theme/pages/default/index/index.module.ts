@@ -8,24 +8,23 @@ import { SharedModule } from '../../../../shared/shared.module';
 import { DashboardModule } from '../dashboard/index.module';
 
 const routes: Routes = [
-  {
-    'path': '',
-    'component': DefaultComponent,
-    'children': [
-      {
+    {
         'path': '',
-        'component': IndexComponent1
-      }
-    ]
-  }
+        'children': [
+            {
+                'path': '',
+                'component': IndexComponent1
+            }
+        ]
+    }
 ];
 @NgModule({
-  imports: [
-    CommonModule, RouterModule.forChild(routes), LayoutModule, SharedModule, DashboardModule
-  ], exports: [
-    RouterModule
-  ], declarations: [
-    IndexComponent1
-  ]
+    imports: [
+        CommonModule, RouterModule.forChild(routes), LayoutModule, SharedModule, DashboardModule
+    ], exports: [
+        RouterModule
+    ], declarations: [
+        IndexComponent1
+    ]
 })
 export class IndexModule { }

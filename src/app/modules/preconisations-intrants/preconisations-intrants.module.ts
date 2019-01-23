@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 import { ListComponent } from './components/list/list.component';
 import { PreconisationsIntrantsRoutingModule } from './preconisations-intrants-routing.module';
 import {
-  DxButtonModule,
-  DxDataGridModule,
-  DxDateBoxModule,
-  DxPopupModule,
-  DxSelectBoxModule,
-  DxNumberBoxModule,
-  DxTemplateModule,
-  DxTextAreaModule,
-  DxTextBoxModule, DxLinearGaugeModule
+    DxButtonModule,
+    DxDataGridModule,
+    DxDateBoxModule,
+    DxPopupModule,
+    DxSelectBoxModule,
+    DxNumberBoxModule,
+    DxTemplateModule,
+    DxTextAreaModule,
+    DxTextBoxModule, DxLinearGaugeModule
 } from 'devextreme-angular';
 import { ShowComponent } from './components/show/show.component';
 import { PrecoAvanceListComponent } from './components/preco-avance-list/preco-avance-list.component';
@@ -21,27 +21,27 @@ import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    DxSelectBoxModule,
-    DxTextAreaModule,
-    DxDateBoxModule,
-    DxDataGridModule,
-    DxNumberBoxModule,
-    DxButtonModule,
-    DxPopupModule,
-    DxButtonModule,
-    DxTemplateModule, DxTextBoxModule,
-    PreconisationsIntrantsRoutingModule,
-    DxLinearGaugeModule
-  ],
-  declarations: [
-    ListComponent,
-    ShowComponent,
-    PrecoAvanceListComponent,
-    DetailsComponent
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        DxSelectBoxModule,
+        DxTextAreaModule,
+        DxDateBoxModule,
+        DxDataGridModule,
+        DxNumberBoxModule,
+        DxButtonModule,
+        DxPopupModule,
+        DxButtonModule,
+        DxTemplateModule, DxTextBoxModule,
+        PreconisationsIntrantsRoutingModule,
+        DxLinearGaugeModule
+    ],
+    declarations: [
+        ListComponent,
+        ShowComponent,
+        PrecoAvanceListComponent,
+        DetailsComponent
+    ]
 })
 export class PreconisationsIntrantsModule { }
 

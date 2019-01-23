@@ -11,41 +11,40 @@ import { DetailsComponent } from './components/details/details.component';
 
 
 const routes: Routes = [
-  {
-    path: 'mouvements',
-    component: DefaultComponent,
-    children: [
-      {
-        path: '',
-        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] }
-      },
-      {
-        path: 'liste',
-        component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] }
-      },
-      {
-        path: 'liste/details',
-        component: DetailsComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] }
-      },
-      {
-        path: 'ajouter',
-        component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.update'] }
-      },
-      {
-        path: 'afficher/:id',
-        component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.update'] }
-      },
-      {
-        path: 'retour/:id',
-        component: ShowRetourComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.show'] }
-      }
-    ]
-  }
+    {
+        path: 'mouvements',
+        children: [
+            {
+                path: '',
+                component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] }
+            },
+            {
+                path: 'liste',
+                component: ListComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] }
+            },
+            {
+                path: 'liste/details',
+                component: DetailsComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.grid'] }
+            },
+            {
+                path: 'ajouter',
+                component: AddComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.update'] }
+            },
+            {
+                path: 'afficher/:id',
+                component: ShowComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.update'] }
+            },
+            {
+                path: 'retour/:id',
+                component: ShowRetourComponent, canActivate: [PermissionGuard], data: { permission: ['distributionCenter.stocks.show'] }
+            }
+        ]
+    }
 ];
 
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class MouvementsRoutingModule { }

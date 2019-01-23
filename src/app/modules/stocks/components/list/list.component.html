@@ -1,16 +1,6 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" routerLink="/"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <h2>Situation de stock</h2>
-    </div>
-  </div>
-</div>
-
-<div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body m-portlet__body--no-padding">
-      <dx-data-grid
+<h1>Situation de stock</h1>
+<hr>
+<dx-data-grid
         id="stockGrid"
         [dataSource]="stock"
         [columnHidingEnabled]="false"
@@ -20,60 +10,57 @@
         noDataText="Aucun article n'est disponible"
         KeyExpr="id"
         [rowAlternationEnabled]="true"
-      >
+>
 
-        <dxi-column dataField="warehouse_name" caption="Magasin" alignment="center"></dxi-column>
-        <dxi-column dataField="category_name" caption="Famille" alignment="center"></dxi-column>
-        <dxi-column dataField="sub_category_name" caption="Sous-famille" alignment="center"></dxi-column>
-        <dxi-column dataField="article_code" caption="Code" alignment="center"></dxi-column>
-        <dxi-column dataField="article_name" caption="Article" alignment="center"></dxi-column>
-        <dxi-column dataField="article_unit" caption="Unité" alignment="center"></dxi-column>
-        <dxi-column dataField="qr"  dataType="number"  caption="Quantité en stock" alignment="center"></dxi-column>
-        <dxi-column dataField="qres"  dataType="number" caption="Quantité réservée" alignment="center"></dxi-column>
-        <dxi-column dataField="ql"  dataType="number" caption="Quantité Reçu" alignment="center"></dxi-column>
-        <dxi-column dataField="qts"  dataType="number" caption="Quantité Transfert Sortie" alignment="center"></dxi-column>
-        <dxi-column dataField="qte" dataType="number"  caption="Quantité Transfert Entrée" alignment="center"></dxi-column>
-        <dxi-column dataField="qra"  dataType="number" caption="Quantité Retour Agriculteur" alignment="center"></dxi-column>
-        <dxi-column dataField="qrf"  dataType="number" caption="Quantité Retour Fournisseur" alignment="center"></dxi-column>
-        <dxi-column dataField="qs" dataType="number"  caption="Quantité servie" alignment="center"></dxi-column>
-        <dxi-column dataField="threshold"  dataType="number" caption="Seuil" alignment="center"></dxi-column>
+  <dxi-column dataField="warehouse_name" caption="Magasin" alignment="center"></dxi-column>
+  <dxi-column dataField="category_name" caption="Famille" alignment="center"></dxi-column>
+  <dxi-column dataField="sub_category_name" caption="Sous-famille" alignment="center"></dxi-column>
+  <dxi-column dataField="article_code" caption="Code" alignment="center"></dxi-column>
+  <dxi-column dataField="article_name" caption="Article" alignment="center"></dxi-column>
+  <dxi-column dataField="article_unit" caption="Unité" alignment="center"></dxi-column>
+  <dxi-column dataField="qr"  dataType="number"  caption="Quantité en stock" alignment="center"></dxi-column>
+  <dxi-column dataField="qres"  dataType="number" caption="Quantité réservée" alignment="center"></dxi-column>
+  <dxi-column dataField="ql"  dataType="number" caption="Quantité Reçu" alignment="center"></dxi-column>
+  <dxi-column dataField="qts"  dataType="number" caption="Quantité Transfert Sortie" alignment="center"></dxi-column>
+  <dxi-column dataField="qte" dataType="number"  caption="Quantité Transfert Entrée" alignment="center"></dxi-column>
+  <dxi-column dataField="qra"  dataType="number" caption="Quantité Retour Agriculteur" alignment="center"></dxi-column>
+  <dxi-column dataField="qrf"  dataType="number" caption="Quantité Retour Fournisseur" alignment="center"></dxi-column>
+  <dxi-column dataField="qs" dataType="number"  caption="Quantité servie" alignment="center"></dxi-column>
+  <dxi-column dataField="threshold"  dataType="number" caption="Seuil" alignment="center"></dxi-column>
 
-        <div *dxTemplate="let data of 'zoneTemplate'">
-          <span class="badge badge-info">{{ data.data.warehouse_zone_name}}</span>
-        </div>
-        <dxo-remote-operations
+  <div *dxTemplate="let data of 'zoneTemplate'">
+    <span class="badge badge-info">{{ data.data.warehouse_zone_name}}</span>
+  </div>
+  <dxo-remote-operations
           [sorting]="true"
           [paging]="true">
-        </dxo-remote-operations>
-        <dxo-filter-row
+  </dxo-remote-operations>
+  <dxo-filter-row
           [visible]="true" [applyFilter]="true"></dxo-filter-row>
-        <dxo-editing
+  <dxo-editing
           mode="popup"
           [useIcons]="true"
           [allowAdding]="false"
           [allowUpdating]="false"
           [allowDeleting]="false">
-        </dxo-editing>
-        <dxo-selection mode="multiple"></dxo-selection>
-        <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
-        <dxo-export [enabled]="true" fileName="situation_stock" [excelFilterEnabled]="true"
-                    [allowExportSelectedData]="true"></dxo-export>
-        <dxo-sorting mode="multiple"></dxo-sorting>
-        <dxo-header-filter [visible]="true"></dxo-header-filter>
-        <dxo-pager
+  </dxo-editing>
+  <dxo-selection mode="multiple"></dxo-selection>
+  <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+  <dxo-export [enabled]="true" fileName="situation_stock" [excelFilterEnabled]="true"
+              [allowExportSelectedData]="true"></dxo-export>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-pager
           [allowedPageSizes]="[5, 8, 15, 30]"
           [showInfo]="true"
           [showNavigationButtons]="true"
           [showPageSizeSelector]="true"
           [visible]="true">
-        </dxo-pager>
-        <dxo-paging [pageSize]="15"></dxo-paging>
-        <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
-        <dxo-search-panel [visible]="false"></dxo-search-panel>
-        <dxo-group-panel [visible]="true"
-                         emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
-        <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
-      </dx-data-grid>
-    </div>
-  </div>
-</div>
+  </dxo-pager>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+  <dxo-search-panel [visible]="false"></dxo-search-panel>
+  <dxo-group-panel [visible]="true"
+                   emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+</dx-data-grid>

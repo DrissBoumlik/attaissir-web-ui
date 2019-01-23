@@ -5,19 +5,19 @@ import { PermissionGuard } from '../../shared/directives/guard.directive';
 import { SuiviComponent } from './suivi/suivi.component';
 
 const routes: Routes = [{
-  path: '',
-  children: [
-    {
-      path: 'suivi',
-      component: SuiviComponent,
-      canActivate: [PermissionGuard],
-      data: { permission: ['agreement.contracts.grid'] }
-    }
-  ]
+    path: '',
+    children: [
+        {
+            path: 'suivi',
+            component: SuiviComponent,
+            canActivate: [PermissionGuard],
+            data: { permission: ['agreement.contracts.grid'] }
+        }
+    ]
 }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class CartographieRoutingModule { }

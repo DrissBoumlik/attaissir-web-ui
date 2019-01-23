@@ -1,606 +1,560 @@
-<div class="container">
-
 <div class="row">
-<div class="col">
-<div class="row" style="margin-bottom: 10px;">
+    <div class="col">
+        <div class="row" style="margin-bottom: 10px;">
 
-        <div class="col">
+            <div class="col"  style="padding-left: 1rem" >
+                <a href="#"(click)="showWidgetPopup()">
+                    <h5 class="d-none d-sm-block" style="color:#989da3;">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        AJOUTER UN WIDGET
+                    </h5>
 
-            <form id="search" class="d-none d-sm-block">
-                <input type="text" placeholder="Search" #search>
-              </form>
+                </a>
+                <!--<form id="search" class="d-none d-sm-block">
+                    <input type="text" placeholder="Search" #search>
+                </form>-->
 
-         <!-- <h4 style="color: #989da3;">STATISTIQUES GÉNÉRALE</h4> !-->
+                <!-- <h4 style="color: #989da3;">STATISTIQUES GÉNÉRALE</h4> !-->
+            </div>
+            <div class="col">
+            </div>
         </div>
-        <div class="col">
-          <a href="#" (click)="showWidgetPopup()">
+        <div class="ScrollStyle">
+            <div>
+                <div class="wrapper">
+
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-6">
 
 
-            <h5 class="pull-right d-none d-sm-block" style="color:#989da3;">
-              <i class="fa fa-plus" aria-hidden="true"></i>
-              AJOUTER UN WIDGET
-            </h5>
+                                <div dragula="DRAGULA_FACTS" style="width: 100%;	height: 100%;" id="right">
 
 
+                                    <div *ngFor="let item of widgets" id="{{item.id}}">
+
+                                        <widget1 id="{{item.id}}" title="{{item.title}}"
+                                                 nbr="{{ item.params.nbr1 }}" sub_title="{{item.sub_title}}"
+                                                 (close)="close(item)" (config)="config(item)" (info)="info(item)"
+                                                 *ngIf="item.type==1 && item.align == 'left' "></widget1>
+                                        <widget2 id="{{item.id}}" title="{{item.title}}" [nbr1]="item.params.nbr1"
+                                                 [nbr2]="item.params.nbr2"
+                                                 sub_title="{{item.sub_title}}" (close)="close(item)"
+                                                 (config)="config(item)"
+                                                 (info)="info(item)"
+                                                 *ngIf="item.type==3 && item.align == 'left'"></widget2>
+                                        <widget3 id="{{item.id}}" title="{{item.title}}" [val]="item.params.nbr1"
+                                                 [max]="item.params.nbr2"
+                                                 (close)="close(item)" (config)="config(item)"
+                                                 sub_title="{{item.sub_title}}"
+                                                 (info)="info(item)"
+                                                 *ngIf="item.type==2 && item.align == 'left'"></widget3>
 
 
-         <h5 class="pull-right d-block d-sm-none" style="color:#989da3; ">
-            <i style=" border-style: solid; border-radius: 50%; padding: 10px; border-width: 1px; padding-right: 12px; padding-left: 12px;" class="fa fa-plus" aria-hidden="true"></i>
-        </h5>
+                                        <widget6 id="{{item.id}}" title="{{item.title}}" [obj]="item.params.obj"
+                                                 (close)="close(item)" (config)="config(item)" (info)="info(item)"
+                                                 *ngIf="item.type==6 && item.align == 'left' "></widget6>
+
+                                    </div>
 
 
+                                </div>
 
 
-
-          </a>
-        </div>
-      </div>
-
-      <div class="ScrollStyle">
-        <div>
-          <div class="wrapper">
-
-            <div class="container-fluid">
-
-              <div class="row">
-                <div class="col-6">
+                            </div>
 
 
+                            <div class="col-6">
+
+                                <div dragula="DRAGULA_FACTS" style="width: 100%;	height: 100%;" id="left">
 
 
+                                    <div *ngFor="let item of widgets" id="{{item.id}}">
+                                        <widget1 [attr.item-id]="4" id="{{item.id}}" title="{{item.title}}"
+                                                 nbr="{{ item.params.nbr1 }}" sub_title="{{item.sub_title}}"
+                                                 (close)="close(item)" (config)="config(item)" (info)="info(item)"
+                                                 *ngIf="item.type==1 && item.align == 'right' "></widget1>
+                                        <widget2 id="{{item.id}}" title="{{item.title}}" [nbr1]="item.params.nbr1"
+                                                 [nbr2]="item.params.nbr2"
+                                                 sub_title="{{item.sub_title}}" (close)="close(item)"
+                                                 (config)="config(item)"
+                                                 (info)="info(item)"
+                                                 *ngIf="item.type==2 && item.align == 'right'"></widget2>
+                                        <widget3 id="{{item.id}}" title="{{item.title}}" [val]="item.params.nbr1"
+                                                 [max]="item.params.nbr2"
+                                                 (close)="close(item)" (config)="config(item)"
+                                                 (info)="info(item)"
+                                                 *ngIf="item.type==3 && item.align == 'right'"></widget3>
+
+                                        <widget6 id="{{item.id}}" title="{{item.title}}" [obj]="item.params.obj"
+                                                 (close)="close(item)" (config)="config(item)" (info)="info(item)"
+                                                 *ngIf="item.type==6 && item.align == 'right' "></widget6>
+
+                                    </div>
 
 
-                  <div dragula="DRAGULA_FACTS" style="width: 100%;	height: 100%;"    id="right">
+                                </div>
 
 
-                    <div *ngFor="let item of widgets  | filter: search.value" id="{{item.id}}">
-
-                      <widget1 id="{{item.id}}" title="{{item.title}}" nbr="{{ item.params.nbr1 }}" sub_title="{{item.sub_title}}"
-                               (close)="close(item)" (config)="config(item)" (info)="info(item)"
-                               *ngIf="item.type==1 && item.align == 'left' "></widget1>
-                      <widget2 id="{{item.id}}" title="{{item.title}}" [nbr1]="item.params.nbr1" [nbr2]="item.params.nbr2"
-                               sub_title="{{item.sub_title}}" (close)="close(item)" (config)="config(item)"
-                               (info)="info(item)" *ngIf="item.type==3 && item.align == 'left'"></widget2>
-                      <widget3 id="{{item.id}}" title="{{item.title}}" [val]="item.params.nbr1" [max]="item.params.nbr2"
-                                (close)="close(item)" (config)="config(item)" sub_title="{{item.sub_title}}"
-                               (info)="info(item)" *ngIf="item.type==2 && item.align == 'left'"></widget3>
+                            </div>
 
 
-                      <widget6   id="{{item.id}}"  title="{{item.title}}"  [obj]="item.params.obj"
-                                 (close)="close(item)" (config)="config(item)" (info)="info(item)"
-                                 *ngIf="item.type==6 && item.align == 'left' "></widget6>
-
+                        </div>
                     </div>
 
 
-                  </div>
+                    <div class="container-fluid">
 
 
-                </div>
+                        <div class="row">
 
 
+                            <div class="col-12">
+                                <div dragula="DRAGULA_FACTS2" style="width: 100%;	height: 100%;">
 
-                <div class="col-6">
+                                    <div *ngFor="let item of widgets">
+                                        <widget4 id="{{item.id}}" title="{{item.title}}" [table]="item.params"
+                                                 *ngIf="item.type==4"
+                                                 (config)="config(item)" (info)="info(item)"
+                                                 (close)="close(item)"></widget4>
 
-                  <div dragula="DRAGULA_FACTS" style="width: 100%;	height: 100%;"      id="left">
+
+                                        <widget5 id="{{item.id}}" title="{{item.title}}" [table]="item.params.table"
+                                                 *ngIf="item.type==5"
+                                                 [filter]="item.filter" (config)="config(item)" (info)="info(item)"
+                                                 (close)="close(item)"></widget5>
+                                    </div>
+                                </div>
+
+                            </div>
 
 
-                    <div *ngFor="let item of widgets | filter: search.value" id="{{item.id}}">
-                      <widget1 [attr.item-id]="4" id="{{item.id}}"  title="{{item.title}}"  nbr="{{ item.params.nbr1 }}"  sub_title="{{item.sub_title}}"
-                               (close)="close(item)" (config)="config(item)" (info)="info(item)"
-                               *ngIf="item.type==1 && item.align == 'right' "></widget1>
-                      <widget2 id="{{item.id}}" title="{{item.title}}" [nbr1]="item.params.nbr1" [nbr2]="item.params.nbr2"
-                               sub_title="{{item.sub_title}}" (close)="close(item)" (config)="config(item)"
-                               (info)="info(item)" *ngIf="item.type==2 && item.align == 'right'"></widget2>
-                      <widget3 id="{{item.id}}" title="{{item.title}}" [val]="item.params.nbr1" [max]="item.params.nbr2"
-                                (close)="close(item)" (config)="config(item)"
-                               (info)="info(item)" *ngIf="item.type==3 && item.align == 'right'"></widget3>
-
-                      <widget6   id="{{item.id}}"  title="{{item.title}}"  [obj]="item.params.obj"
-                               (close)="close(item)" (config)="config(item)" (info)="info(item)"
-                               *ngIf="item.type==6 && item.align == 'right' "></widget6>
-
+                        </div>
                     </div>
 
 
-                  </div>
-
-
                 </div>
-
-
-
-
-
-              </div>
             </div>
-
-
-            <div class="container-fluid">
-
-
-
-            <div class="row">
-
-
-              <div class="col-12">
-                <div dragula="DRAGULA_FACTS2" style="width: 100%;	height: 100%;">
-
-                   <div *ngFor="let item of widgets | filter: search.value">
-                    <widget4 id="{{item.id}}" title="{{item.title}}" [table]="item.params" *ngIf="item.type==4"
-                    (config)="config(item)" (info)="info(item)"  (close)="close(item)"></widget4>
-
-
-                     <widget5 id="{{item.id}}" title="{{item.title}}" [table]="item.params.table" *ngIf="item.type==5"
-                              [filter]="item.filter"    (config)="config(item)" (info)="info(item)"  (close)="close(item)"></widget5>
-                  </div>
-                </div>
-
-              </div>
-
-
-              </div>
-         </div>
-
-
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  
-  
-
-  <dx-popup
-    class="popup"
-     [height]="300"
-    [showTitle]="true"
-    title="AJOUTER UN WIDGET "
-    [dragEnabled]="false"
-    [closeOnOutsideClick]="true"
-    [(visible)]="popupVisible"
-  >
-    <div *dxTemplate="let data of 'content'">
-
-      <div>
-
-        <form>
-          <dx-form id="form"
-                   [formData]="new_widget"
-                   [readOnly]="false"
-                   [showColonAfterLabel]="true"
-                   [showValidationSummary]="true"
-                   labelLocation="top">
-
-
-            <dxi-item itemType="group" i18n-caption>
-
-              <dxi-item dataField="type" editorType="dxSelectBox" [editorOptions]="widgetOptions">
-                <dxo-label
-                  text="Type" i18n-text>
-                </dxo-label>
-                <dxi-validation-rule type="required" message="Type est obligatoire"
-                                     i18n-message></dxi-validation-rule>
-              </dxi-item>
-
-
-              <dxi-item dataField="title" editorType="dxTextBox">
-                <dxo-label
-                  text="Titre">
-                </dxo-label>
-              </dxi-item>
-
-
-              <dxi-item
-                itemType="button"
-                alignment="right"
-                [buttonOptions]="newWidgetButtonOptions">
-              </dxi-item>
-
-            </dxi-item>
-
-
-          </dx-form>
-        </form>
-
-
-        <div class="glisser-carte-agriculteur">
-          <div class="credit-card">
-            <div class="rfid-tripe"></div>
-          </div>
-          <div class="swiper-top"></div>
-          <div class="swiper-bottom">
-            <div class="light-indicator"></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </dx-popup>
-
-
-
-  <dx-popup
-    class="popup"
-
-    [height]="320"
-    [showTitle]="true"
-    [title]="filter_title"
-    [dragEnabled]="false"
-    [closeOnOutsideClick]="true"
-    [(visible)]="popupInfoVisible"
-  >
-    <div *dxTemplate="let data of 'content'">
-
-      <div class="gilsser">
-
-
-
-
-
-
-
-        <div class="row">
-
-
-          <div class="col-4" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
-            <div class="row">
-              <label class="col-12">
-                Societé
-              </label>
-              <div class="col-12">
-
-                <p class="siam-form-input-value siam-form-input-value-nodata">
-                  {{_filter.company}}
-                  <span *ngIf="_filter.company == null"> Pas de données </span>
-                </p>
-
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-4" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
-            <div class="row">
-              <label class="col-12">
-                Division
-              </label>
-              <div class="col-12">
-
-                <p class="siam-form-input-value siam-form-input-value-nodata">
-                  {{_filter.structure}}
-                  <span *ngIf="_filter.structure == null"> Pas de données </span>
-                </p>
-
-
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-4" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
-            <div class="row">
-              <label class="col-12">
-                Cda
-              </label>
-              <div class="col-12">
-
-                <p class="siam-form-input-value siam-form-input-value-nodata">
-                  {{_filter.cda}}
-                  <span *ngIf="_filter.cda == null"> Pas de données </span>
-
-                </p>
-
-              </div>
-            </div>
-          </div>
-
-          <div class="col-4" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
-            <div class="row">
-              <label class="col-12">
-                Zone
-              </label>
-              <div class="col-12">
-
-                <p class="siam-form-input-value siam-form-input-value-nodata">
-                  {{_filter.zone}}
-                  <span *ngIf="_filter.zone == null"> Pas de données </span>
-
-                </p>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-4" *ngIf="selectedWidget_id != 'GrapheContratsValidesParJoursCampagne'" >
-            <div class="row">
-              <label class="col-12">
-                Date de début
-              </label>
-              <div class="col-12">
-
-                <p class="siam-form-input-value siam-form-input-value-nodata">
-                  {{_filter.start_date}}
-                  <span *ngIf="_filter.start_date == null"> Pas de données </span>
-
-                </p>
-              </div>
-            </div>
-
-          </div>
-          <div class="col-4" *ngIf="selectedWidget_id != 'GrapheContratsValidesParJoursCampagne'" >
-            <div class="row">
-              <label class="col-12">
-                Date de fin
-              </label>
-              <div class="col-12">
-
-                <p class="siam-form-input-value siam-form-input-value-nodata">
-                  {{_filter.end_date}}
-                  <span *ngIf="_filter.end_date == null"> Pas de données </span>
-
-                </p>
-
-              </div>
-            </div>
-          </div>
-
-
-
-
-          <div class="col-4" *ngIf="selectedWidget_id == 'graphQtyFamillesIntrantsDistribueesParCd'">
-            <div class="row">
-              <label class="col-12">
-                Centre de distribution
-              </label>
-              <div class="col-12">
-
-                <p class="siam-form-input-value siam-form-input-value-nodata">
-                  {{_filter.cd}}
-                  <span *ngIf="_filter.cd == null"> Pas de données </span>
-
-                </p>
-
-              </div>
-            </div>
-          </div>
-
-
-
-          <div class="col-4" *ngIf="selectedWidget_id == 'qtyTotalesDistribueesParFamille'">
-            <div class="row">
-              <label class="col-12">
-                Centre de distribution
-              </label>
-              <div class="col-12">
-
-                <p class="siam-form-input-value siam-form-input-value-nodata">
-                  {{_filter.cd}}
-                  <span *ngIf="_filter.cd == null"> Pas de données </span>
-
-                </p>
-
-              </div>
-            </div>
-          </div>
-
-
-
-          <div class="col-4" *ngIf="selectedWidget_id == 'GrapheContratsValidesParJoursCampagne'">
-            <div class="row">
-              <label class="col-12">
-                Mois
-              </label>
-              <div class="col-12">
-
-                <p class="siam-form-input-value siam-form-input-value-nodata">
-                  {{_filter.month}}
-                  <span *ngIf="_filter.month == null"> Pas de données </span>
-
-                </p>
-
-              </div>
-            </div>
-          </div>
-
-
-
-
-
-
-        </div>
-
-
-
-
-        <div class="glisser-carte-agriculteur">
-          <div class="credit-card">
-            <div class="rfid-tripe"></div>
-          </div>
-          <div class="swiper-top"></div>
-          <div class="swiper-bottom">
-            <div class="light-indicator"></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </dx-popup>
-
-
-  <dx-popup
-    class="popup"
-     [height]="360"
-    [showTitle]="true"
-    title="Filtre"
-    [dragEnabled]="false"
-    [closeOnOutsideClick]="true"
-    [(visible)]="popupConfigVisible"
-  >
-    <div *dxTemplate="let data of 'content'">
-
-      <div class="gilsser">
-
-
-
-					<form>
-							<dx-form id="form"
-											 [formData]="filter"
-											 [readOnly]="false"
-											 [showColonAfterLabel]="true"
-											 [showValidationSummary]="true"
-											 labelLocation="top">
-
-
-								<dxi-item itemType="group" [colCount]="3" i18n-caption>
-
-									<dxi-item dataField="ste" editorType="dxSelectBox" [editorOptions]="companiesOptions" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
-										<dxo-label
-											text="Societé" i18n-text>
-										</dxo-label>
-                  </dxi-item>
-
-
-
-                  <dxi-item dataField="structure" editorType="dxSelectBox" [editorOptions]="divisionOptions" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
-										<dxo-label
-											text="Division" i18n-text>
-										</dxo-label>
-                  </dxi-item>
-
-
-									<dxi-item dataField="cda" editorType="dxSelectBox" [editorOptions]="cdaOptions" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
-											<dxo-label
-												text="Cda" i18n-text>
-											</dxo-label>
-										</dxi-item>
-
-
-                    <dxi-item dataField="zone" editorType="dxSelectBox" [editorOptions]="zoneOptions" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
-											<dxo-label
-												text="Zone" i18n-text>
-											</dxo-label>
-                    </dxi-item>
-
-
-
-                    <dxi-item dataField="start_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }"  *ngIf="selectedWidget_id != 'GrapheContratsValidesParJoursCampagne'" >
-                      <dxo-label text="Date de début "></dxo-label>
-                    </dxi-item>
-
-
-                    <dxi-item dataField="end_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }"   *ngIf="selectedWidget_id != 'GrapheContratsValidesParJoursCampagne'">
-                      <dxo-label text="Date de fin "></dxo-label>
-                    </dxi-item>
-
-
-
-
-                  <dxi-item dataField="mois" editorType="dxSelectBox" [editorOptions]="monthOptions"  *ngIf="selectedWidget_id == 'GrapheContratsValidesParJoursCampagne'">
-                    <dxo-label
-                      text="Mois" i18n-text>
-                    </dxo-label>
-                  </dxi-item>
-
-
-                  <dxi-item dataField="annee" editorType="dxSelectBox" [editorOptions]="yearOptions"  *ngIf="selectedWidget_id == 'GrapheContratsValidesParJoursCampagne'">
-                    <dxo-label
-                      text="Année" i18n-text>
-                    </dxo-label>
-                  </dxi-item>
-
-
-
-
-                </dxi-item>
-
-
-
-            
-               <dxi-item itemType="group" [colCount]="2" i18n-caption>
-  <!--
-                <dxi-item>
-                             <div class="dx-field-value">
-                                <dx-switch dataField="add_filter"  (onOptionChanged)="test($event)" [offText]="'OFF'" [onText]="'ON'" [value]="true"></dx-switch>
-                            </div>                       
-              </dxi-item> 
--->
-
-
-           <!--   <dxi-item dataField="filtre_all" editorType="dxSwitch"  [editorOptions]="{ offText: 'No', onText: 'Oui'}" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'" >
-                <dxo-label text="Ajouter le filtre dans tout les widgets"></dxo-label>
-              </dxi-item>
-              !-->
-
-
-
-                 <dxi-item dataField="cd" editorType="dxSelectBox" [editorOptions]="cdOptions"  *ngIf="selectedWidget_id == 'graphQtyFamillesIntrantsDistribueesParCd'">
-                   <dxo-label
-                     text="Centre de distribution" i18n-text>
-                   </dxo-label>
-                 </dxi-item>
-
-
-
-            </dxi-item>  
-
-
-
-       <dxi-item itemType="group"  i18n-caption>
-
-                <dxi-item
-                itemType="button"
-                alignment="right"
-                [buttonOptions]="buttonOptions">
-              </dxi-item>
-
-
-         </dxi-item>
-
-
-							</dx-form>
-						</form>
-      </div>
-
-    </div>
-  </dx-popup>
-
-
-
-
-
-<dx-popup
-class="popup"
- [height]="150"
-[showTitle]="true"
-title="Confirmation "
-[dragEnabled]="false"
-[closeOnOutsideClick]="true"
-[(visible)]="cancelPopVisible"
->
-<div *dxTemplate="let data of 'content'">
-  <p>
-    Voulez-vous vraiment supprimer cet widget ?
-  </p>
-
-  <div  class="pull-right">
-
-    <dx-button class="pull-left"
-               width="80"
-               type="danger"
-               text="Oui"
-               (onClick)="delete()">
-    </dx-button>
-    &nbsp;
-    &nbsp;
-
-    <dx-button class="pull-right"
-               class="button-info"
-               width="80"
-               text="No"
-               (onClick)="cancelPopup()">
-    </dx-button>
-  </div>
-
 </div>
+<dx-popup
+        class="popup"
+        [showTitle]="true"
+        title="AJOUTER UN WIDGET "
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupVisible"
+>
+    <div *dxTemplate="let data of 'content'">
+
+        <div>
+
+            <form>
+                <dx-form id="form"
+                         [formData]="new_widget"
+                         [readOnly]="false"
+                         [showColonAfterLabel]="true"
+                         [showValidationSummary]="true"
+                         labelLocation="top">
+
+
+                    <dxi-item itemType="group" i18n-caption>
+
+                        <dxi-item dataField="type" editorType="dxSelectBox" [editorOptions]="widgetOptions">
+                            <dxo-label
+                                    text="Type" i18n-text>
+                            </dxo-label>
+                            <dxi-validation-rule type="required" message="Type est obligatoire"
+                                                 i18n-message></dxi-validation-rule>
+                        </dxi-item>
+
+
+                        <dxi-item dataField="title" editorType="dxTextBox">
+                            <dxo-label
+                                    text="Titre">
+                            </dxo-label>
+                        </dxi-item>
+
+
+                        <dxi-item
+                                itemType="button"
+                                alignment="right"
+                                [buttonOptions]="newWidgetButtonOptions">
+                        </dxi-item>
+
+                    </dxi-item>
+
+
+                </dx-form>
+            </form>
+
+
+            <div class="glisser-carte-agriculteur">
+                <div class="credit-card">
+                    <div class="rfid-tripe"></div>
+                </div>
+                <div class="swiper-top"></div>
+                <div class="swiper-bottom">
+                    <div class="light-indicator"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [showTitle]="true"
+        [title]="filter_title"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupInfoVisible"
+>
+    <div *dxTemplate="let data of 'content'">
+
+        <div class="gilsser">
+
+
+            <div class="row">
+
+
+                <div class="col-4" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
+                    <div class="row">
+                        <label class="col-12">
+                            Societé
+                        </label>
+                        <div class="col-12">
+
+                            <p class="siam-form-input-value siam-form-input-value-nodata">
+                                {{_filter.company}}
+                                <span *ngIf="_filter.company == null"> Pas de données </span>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-4" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
+                    <div class="row">
+                        <label class="col-12">
+                            Division
+                        </label>
+                        <div class="col-12">
+
+                            <p class="siam-form-input-value siam-form-input-value-nodata">
+                                {{_filter.structure}}
+                                <span *ngIf="_filter.structure == null"> Pas de données </span>
+                            </p>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-4" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
+                    <div class="row">
+                        <label class="col-12">
+                            Cda
+                        </label>
+                        <div class="col-12">
+
+                            <p class="siam-form-input-value siam-form-input-value-nodata">
+                                {{_filter.cda}}
+                                <span *ngIf="_filter.cda == null"> Pas de données </span>
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
+                    <div class="row">
+                        <label class="col-12">
+                            Zone
+                        </label>
+                        <div class="col-12">
+
+                            <p class="siam-form-input-value siam-form-input-value-nodata">
+                                {{_filter.zone}}
+                                <span *ngIf="_filter.zone == null"> Pas de données </span>
+
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-4" *ngIf="selectedWidget_id != 'GrapheContratsValidesParJoursCampagne'">
+                    <div class="row">
+                        <label class="col-12">
+                            Date de début
+                        </label>
+                        <div class="col-12">
+
+                            <p class="siam-form-input-value siam-form-input-value-nodata">
+                                {{_filter.start_date}}
+                                <span *ngIf="_filter.start_date == null"> Pas de données </span>
+
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-4" *ngIf="selectedWidget_id != 'GrapheContratsValidesParJoursCampagne'">
+                    <div class="row">
+                        <label class="col-12">
+                            Date de fin
+                        </label>
+                        <div class="col-12">
+
+                            <p class="siam-form-input-value siam-form-input-value-nodata">
+                                {{_filter.end_date}}
+                                <span *ngIf="_filter.end_date == null"> Pas de données </span>
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-4" *ngIf="selectedWidget_id == 'graphQtyFamillesIntrantsDistribueesParCd'">
+                    <div class="row">
+                        <label class="col-12">
+                            Centre de distribution
+                        </label>
+                        <div class="col-12">
+
+                            <p class="siam-form-input-value siam-form-input-value-nodata">
+                                {{_filter.cd}}
+                                <span *ngIf="_filter.cd == null"> Pas de données </span>
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-4" *ngIf="selectedWidget_id == 'qtyTotalesDistribueesParFamille'">
+                    <div class="row">
+                        <label class="col-12">
+                            Centre de distribution
+                        </label>
+                        <div class="col-12">
+
+                            <p class="siam-form-input-value siam-form-input-value-nodata">
+                                {{_filter.cd}}
+                                <span *ngIf="_filter.cd == null"> Pas de données </span>
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-4" *ngIf="selectedWidget_id == 'GrapheContratsValidesParJoursCampagne'">
+                    <div class="row">
+                        <label class="col-12">
+                            Mois
+                        </label>
+                        <div class="col-12">
+
+                            <p class="siam-form-input-value siam-form-input-value-nodata">
+                                {{_filter.month}}
+                                <span *ngIf="_filter.month == null"> Pas de données </span>
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="glisser-carte-agriculteur">
+                <div class="credit-card">
+                    <div class="rfid-tripe"></div>
+                </div>
+                <div class="swiper-top"></div>
+                <div class="swiper-bottom">
+                    <div class="light-indicator"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [showTitle]="true"
+        title="Filtre"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupConfigVisible"
+>
+    <div *dxTemplate="let data of 'content'">
+
+        <div class="gilsser">
+
+
+            <form>
+                <dx-form id="form"
+                         [formData]="filter"
+                         [readOnly]="false"
+                         [showColonAfterLabel]="true"
+                         [showValidationSummary]="true"
+                         labelLocation="top">
+
+
+                    <dxi-item itemType="group" [colCount]="3" i18n-caption>
+
+                        <dxi-item dataField="ste" editorType="dxSelectBox" [editorOptions]="companiesOptions"
+                                  *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
+                            <dxo-label
+                                    text="Societé" i18n-text>
+                            </dxo-label>
+                        </dxi-item>
+
+
+                        <dxi-item dataField="structure" editorType="dxSelectBox" [editorOptions]="divisionOptions"
+                                  *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
+                            <dxo-label
+                                    text="Division" i18n-text>
+                            </dxo-label>
+                        </dxi-item>
+
+
+                        <dxi-item dataField="cda" editorType="dxSelectBox" [editorOptions]="cdaOptions"
+                                  *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
+                            <dxo-label
+                                    text="Cda" i18n-text>
+                            </dxo-label>
+                        </dxi-item>
+
+
+                        <dxi-item dataField="zone" editorType="dxSelectBox" [editorOptions]="zoneOptions"
+                                  *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'">
+                            <dxo-label
+                                    text="Zone" i18n-text>
+                            </dxo-label>
+                        </dxi-item>
+
+
+                        <dxi-item dataField="start_date" editorType="dxDateBox"
+                                  [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }"
+                                  *ngIf="selectedWidget_id != 'GrapheContratsValidesParJoursCampagne'">
+                            <dxo-label text="Date de début "></dxo-label>
+                        </dxi-item>
+
+
+                        <dxi-item dataField="end_date" editorType="dxDateBox"
+                                  [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }"
+                                  *ngIf="selectedWidget_id != 'GrapheContratsValidesParJoursCampagne'">
+                            <dxo-label text="Date de fin "></dxo-label>
+                        </dxi-item>
+
+
+                        <dxi-item dataField="mois" editorType="dxSelectBox" [editorOptions]="monthOptions"
+                                  *ngIf="selectedWidget_id == 'GrapheContratsValidesParJoursCampagne'">
+                            <dxo-label
+                                    text="Mois" i18n-text>
+                            </dxo-label>
+                        </dxi-item>
+
+
+                        <dxi-item dataField="annee" editorType="dxSelectBox" [editorOptions]="yearOptions"
+                                  *ngIf="selectedWidget_id == 'GrapheContratsValidesParJoursCampagne'">
+                            <dxo-label
+                                    text="Année" i18n-text>
+                            </dxo-label>
+                        </dxi-item>
+
+
+                    </dxi-item>
+
+
+                    <dxi-item itemType="group" [colCount]="2" i18n-caption>
+                        <!--
+                                      <dxi-item>
+                                                   <div class="dx-field-value">
+                                                      <dx-switch dataField="add_filter"  (onOptionChanged)="test($event)" [offText]="'OFF'" [onText]="'ON'" [value]="true"></dx-switch>
+                                                  </div>
+                                    </dxi-item>
+                      -->
+
+
+                        <!--   <dxi-item dataField="filtre_all" editorType="dxSwitch"  [editorOptions]="{ offText: 'No', onText: 'Oui'}" *ngIf="selectedWidget_id != 'graphQtyFamillesIntrantsDistribueesParCd'" >
+                             <dxo-label text="Ajouter le filtre dans tout les widgets"></dxo-label>
+                           </dxi-item>
+                           !-->
+
+
+                        <dxi-item dataField="cd" editorType="dxSelectBox" [editorOptions]="cdOptions"
+                                  *ngIf="selectedWidget_id == 'graphQtyFamillesIntrantsDistribueesParCd'">
+                            <dxo-label
+                                    text="Centre de distribution" i18n-text>
+                            </dxo-label>
+                        </dxi-item>
+
+
+                    </dxi-item>
+
+
+                    <dxi-item itemType="group" i18n-caption>
+
+                        <dxi-item
+                                itemType="button"
+                                alignment="right"
+                                [buttonOptions]="buttonOptions">
+                        </dxi-item>
+
+
+                    </dxi-item>
+
+
+                </dx-form>
+            </form>
+        </div>
+
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [height]="150"
+        [showTitle]="true"
+        title="Confirmation "
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="cancelPopVisible"
+>
+    <div *dxTemplate="let data of 'content'">
+        <div class="pull-right">
+
+            <dx-button class="pull-left"
+                       width="80"
+                       type="danger"
+                       text="Oui"
+                       (onClick)="delete()">
+            </dx-button>
+            &nbsp;
+            &nbsp;
+
+            <dx-button class="pull-right"
+                       class="button-info"
+                       width="80"
+                       text="No"
+                       (onClick)="cancelPopup()">
+            </dx-button>
+        </div>
+
+    </div>
 </dx-popup>

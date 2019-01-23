@@ -7,23 +7,23 @@ import { DemandesRoutingModule } from './demandes-routing.module';
 import { ShowComponent } from './components/show/show.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    CommonModule,
-    DemandesRoutingModule,
-    DxSelectBoxModule,
-    DxTextAreaModule,
-    DxDateBoxModule,
-    DxDataGridModule
-  ],
-  exports: [
-    SharedModule,
-    CommonModule,
-    DxSelectBoxModule,
-    DxTextAreaModule,
-    DxDateBoxModule,
-    DxDataGridModule
-  ],
-  declarations: [ListComponent, ShowComponent]
+    imports: [
+        SharedModule,
+        CommonModule,
+        DemandesRoutingModule,
+        DxSelectBoxModule,
+        DxTextAreaModule,
+        DxDateBoxModule,
+        DxDataGridModule
+    ],
+    exports: [
+        SharedModule,
+        CommonModule,
+        DxSelectBoxModule,
+        DxTextAreaModule,
+        DxDateBoxModule,
+        DxDataGridModule
+    ],
+    declarations: [ListComponent, ShowComponent]
 })
 export class DemandesModule { }

@@ -6,8 +6,8 @@ declare var $: any;
 
 
 @Component({
-  selector: 'widget5',
-  styles: [`
+    selector: 'widget5',
+    styles: [`
 
 
 
@@ -128,7 +128,7 @@ declare var $: any;
  }
 
  `],
-  template: `
+    template: `
 
 
   <div class="big-widget">
@@ -216,168 +216,168 @@ declare var $: any;
 export class Widget5Component {
 
 
-  @Input() id: String;
-  @Input() title: String;
-  @Input() table: any[];
-  @Input() filter: any[];
-  @Input() sub_title: String;
-  @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
-  @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
-  @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
+    @Input() id: String;
+    @Input() title: String;
+    @Input() table: any[];
+    @Input() filter: any[];
+    @Input() sub_title: String;
+    @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
+    @Output('config') config: EventEmitter<any> = new EventEmitter<any>();
+    @Output('info') info: EventEmitter<any> = new EventEmitter<any>();
 
 
-  defaultVisible = false;
-  toggleDefault() {
-    this.defaultVisible = !this.defaultVisible;
-  }
-
-
-
-  closeBtn() {
-    this.close.emit(1);
-  }
+    defaultVisible = false;
+    toggleDefault() {
+        this.defaultVisible = !this.defaultVisible;
+    }
 
 
 
-  ConfigBtn() {
-    this.config.emit(this.id);
-  }
-
-
-  InfoBtn() {
-    this.info.emit(1);
-  }
+    closeBtn() {
+        this.close.emit(1);
+    }
 
 
 
-  ngAfterViewInit() {
-
-    $(document).ready(function() {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
+    ConfigBtn() {
+        this.config.emit(this.id);
+    }
 
 
-    console.log(this.filter);
-  }
-
-  count(nbr) {
-
-  }
+    InfoBtn() {
+        this.info.emit(1);
+    }
 
 
 
+    ngAfterViewInit() {
+
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+
+        console.log(this.filter);
+    }
+
+    count(nbr) {
+
+    }
 
 
 
 
-  temperaturesData: any[];
-  temperaturesData1: any[];
-
-  constructor() {
-
-    this.temperaturesData1 =
-
-
-      [{
-        day: '1',
-        value: 57
-      }, {
-        day: '2',
-        value: 58
-      }, {
-        day: '3',
-        value: 57
-      }, {
-        day: '4',
-        value: 59
-      }, {
-        day: '5',
-        value: 63
-      }, {
-        day: '6',
-        value: 63
-      }, {
-        day: '7',
-        value: 63
-      }, {
-        day: '8',
-        value: 64
-      }, {
-        day: '9',
-        value: 64
-      }, {
-        day: '10',
-        value: 64
-      }, {
-        day: '11',
-        value: 69
-      }, {
-        day: '12',
-        value: 72
-      }, {
-        day: '13',
-        value: 75
-      }, {
-        day: '14',
-        value: 78
-      }, {
-        day: '15',
-        value: 76
-      }, {
-        day: '16',
-        value: 70
-      }, {
-        day: '17',
-        value: 65
-      }, {
-        day: '18',
-        value: 65
-      }, {
-        day: '19',
-        value: 68
-      }, {
-        day: '20',
-        value: 70
-      }, {
-        day: '21',
-        value: 73
-      }, {
-        day: '22',
-        value: 73
-      }, {
-        day: '23',
-        value: 75
-      }, {
-        day: '24',
-        value: 78
-      }, {
-        day: '25',
-        value: 76
-      }, {
-        day: '26',
-        value: 76
-      }, {
-        day: '27',
-        value: 80
-      }, {
-        day: '28',
-        value: 76
-      }, {
-        day: '29',
-        value: 75
-      }, {
-        day: '30',
-        value: 75
-      }];
-  }
 
 
 
-  customizeTooltip = (info: any) => {
-    return {
-      html: "<p><b>" + info.value + "</b></p>"
-    };
-  }
+    temperaturesData: any[];
+    temperaturesData1: any[];
+
+    constructor() {
+
+        this.temperaturesData1 =
+
+
+            [{
+                day: '1',
+                value: 57
+            }, {
+                day: '2',
+                value: 58
+            }, {
+                day: '3',
+                value: 57
+            }, {
+                day: '4',
+                value: 59
+            }, {
+                day: '5',
+                value: 63
+            }, {
+                day: '6',
+                value: 63
+            }, {
+                day: '7',
+                value: 63
+            }, {
+                day: '8',
+                value: 64
+            }, {
+                day: '9',
+                value: 64
+            }, {
+                day: '10',
+                value: 64
+            }, {
+                day: '11',
+                value: 69
+            }, {
+                day: '12',
+                value: 72
+            }, {
+                day: '13',
+                value: 75
+            }, {
+                day: '14',
+                value: 78
+            }, {
+                day: '15',
+                value: 76
+            }, {
+                day: '16',
+                value: 70
+            }, {
+                day: '17',
+                value: 65
+            }, {
+                day: '18',
+                value: 65
+            }, {
+                day: '19',
+                value: 68
+            }, {
+                day: '20',
+                value: 70
+            }, {
+                day: '21',
+                value: 73
+            }, {
+                day: '22',
+                value: 73
+            }, {
+                day: '23',
+                value: 75
+            }, {
+                day: '24',
+                value: 78
+            }, {
+                day: '25',
+                value: 76
+            }, {
+                day: '26',
+                value: 76
+            }, {
+                day: '27',
+                value: 80
+            }, {
+                day: '28',
+                value: 76
+            }, {
+                day: '29',
+                value: 75
+            }, {
+                day: '30',
+                value: 75
+            }];
+    }
+
+
+
+    customizeTooltip = (info: any) => {
+        return {
+            html: "<p><b>" + info.value + "</b></p>"
+        };
+    }
 
 }
 

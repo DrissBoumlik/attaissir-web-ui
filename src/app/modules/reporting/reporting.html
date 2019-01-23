@@ -1,50 +1,36 @@
-<div class="m-subheader" appunwraptag="">
-  <div class="d-flex align-items-center">
-    <div class="siam-page-header">
-      <a class="siam-header-back-btn" routerLink="/"><i class="fa fa-angle-left"></i> Tableau de bord</a>
-      <dx-box
+<dx-box
         direction="row"
         width="100%">
 
 
-        <div class="container">
-          <div class="row">
+  <div class="container">
+    <div class="row">
 
-            <dxi-item
+      <dxi-item
               class="rect demo-dark"
               [ratio]="1">
-              <h2>{{ selectedItem.title }}</h2>
-            </dxi-item>
-            <br/>
+        <h2>{{ selectedItem.title }}</h2>
+      </dxi-item>
+      <br/>
 
-            <dxi-item
+      <dxi-item
               class="rect demo-light"
               [ratio]="1"
               align="end">
-              <dx-select-box #company
-                             displayExpr="title"
-                             valueExpr="code"
-                             (onValueChanged)="onSelectionChanged($event)"
-                             [dataSource]="reports"
-                             [value]="selectedItem.code"></dx-select-box>
-            </dxi-item>
+        <dx-select-box #company
+                       displayExpr="title"
+                       valueExpr="code"
+                       (onValueChanged)="onSelectionChanged($event)"
+                       [dataSource]="reports"
+                       [value]="selectedItem.code"></dx-select-box>
+      </dxi-item>
 
 
-          </div>
-         </div>
-
-
-
-
-      </dx-box>
     </div>
   </div>
-</div>
 
-<div class="m-content">
-  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
-    <div class="m-portlet__body m-portlet__body--no-padding">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div>
+
+</dx-box>
+<hr>
+<router-outlet></router-outlet>
+

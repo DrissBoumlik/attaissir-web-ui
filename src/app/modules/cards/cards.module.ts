@@ -7,14 +7,14 @@ import { SharedModule } from '../../shared/shared.module';
 import { DxButtonModule, DxSelectBoxModule } from 'devextreme-angular';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    CommonModule,
-    CardsRoutingModule,
-    DxSelectBoxModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [
-    ListComponent]
+    imports: [
+        SharedModule,
+        CommonModule,
+        CardsRoutingModule,
+        DxSelectBoxModule
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    declarations: [
+        ListComponent]
 })
 export class CardsModule { }

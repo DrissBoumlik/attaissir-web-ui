@@ -1,13 +1,13 @@
 import { ReportingModule } from './reporting.module';
 
 describe('ReportingModule', () => {
-  let reportingModule: ReportingModule;
+    let reportingModule: ReportingModule;
 
-  beforeEach(() => {
-    reportingModule = new ReportingModule();
-  });
+    beforeEach(() => {
+        reportingModule = new ReportingModule();
+    });
 
-  it('should create an instance', () => {
-    expect(reportingModule).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(reportingModule).toBeTruthy();
+    });
 });
