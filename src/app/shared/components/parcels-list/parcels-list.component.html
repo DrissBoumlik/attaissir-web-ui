@@ -1,9 +1,9 @@
 <h1>Parcelles</h1>
-<div class="clr-row" [appPermissionHidden]="['parcel.diagnose.activate']">
-    <div class="clr-col">
-        <div>
+<hr>
+<div [appPermissionHidden]="['parcel.diagnose.activate']">
+    <div class="clr-row ">
+        <div class="clr-col-3">
             <dx-button
-                    class="d-none d-sm-block pull-right"
                     style="font-weight: bold; padding-right: 1px"
                     [type]="'success'"
                     text="Valider"
@@ -11,20 +11,15 @@
                     (onClick)="validate()">
             </dx-button>
         </div>
-    </div>
-    <div class="clr-col">
-        <div class="buttons">
+        <div class="clr-col-5">
             <dx-button
-                    class="d-none d-sm-block pull-right"
                     style="font-weight: bold; padding-right: 1px"
                     [type]="'success'"
                     text="sélectionner les parcelles à diagnostiquer"
                     (onClick)="selectTodoParcels()">
             </dx-button>
         </div>
-    </div>
-    <div class="clr-col">
-        <div class="buttons">
+        <div class="clr-col-4">
             <dx-number-box
                     [(value)]="todoValue"
                     [min]="1"

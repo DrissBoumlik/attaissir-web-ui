@@ -24,7 +24,7 @@ export class ThemeComponent implements OnInit {
     canRefresh: boolean;
     demoCollapsed = true;
     routes = [];
-    currentUser: any;
+    currentUser: any = {};
     tenants: any;
     tenant: number;
 
