@@ -194,8 +194,12 @@
                               editorType="dxTextArea"></dxi-item>
                 </dxi-item>
                 <dxi-item itemType="group">
-                    <dxi-item dataField="description" editorType="dxTextArea"
-                              [editorOptions]="{ height: 100}"></dxi-item>
+                    <dxi-item dataField="description" editorType="dxSelectBox"
+                              [editorOptions]="{
+                               items: vars,
+                               valueExpr: 'text',
+                               displayExpr: 'text'
+                               }"></dxi-item>
                 </dxi-item>
                 <dxi-item itemType="group">
                     <dxi-item dataField="motif" editorType="dxFileUploader"
@@ -224,3 +228,4 @@
         [shading]="true"
         [closeOnOutsideClick]="false">
 </dx-load-panel>
+

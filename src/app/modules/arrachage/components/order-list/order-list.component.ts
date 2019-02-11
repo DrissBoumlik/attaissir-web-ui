@@ -1,10 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Helper } from '../../../../shared/classes/helper';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Helper} from '../../../../shared/classes/helper';
 import CustomStore from 'devextreme/data/custom_store';
-import { ArrachageService } from '../../services/arrachage.service';
-import { DxChartComponent, DxDataGridComponent } from 'devextreme-angular';
-import { HarvestConvocation } from '../../classes/HarvestConvocation';
-import { ToastrService } from 'ngx-toastr';
+import {ArrachageService} from '../../services/arrachage.service';
+import {DxChartComponent, DxDataGridComponent} from 'devextreme-angular';
+import {HarvestConvocation} from '../../classes/HarvestConvocation';
+import {ToastrService} from 'ngx-toastr';
+import {catchError} from 'rxjs/operators';
 
 @Component({
     selector: 'app-order-list',
@@ -37,9 +38,10 @@ export class OrderListComponent implements OnInit {
     @ViewChild('dataGrid') dataGrid: DxDataGridComponent;
     @ViewChild('chart') chart: DxChartComponent;
     harvest_dates: any[] = [];
+    vars: any;
 
     constructor(private arrachageService: ArrachageService,
-        private toaster: ToastrService) {
+                private toaster: ToastrService) {
         this.helper = Helper;
         this.today = new Date();
         this.tomorrow = new Date();
@@ -84,7 +86,7 @@ export class OrderListComponent implements OnInit {
     }
 
     customizePoint = (arg: any) => {
-        return { color: '#3adb64', hoverStyle: { color: '#75ffae' } };
+        return {color: '#3adb64', hoverStyle: {color: '#75ffae'}};
     };
 
     customizeLabel = (e: any) => {
@@ -92,6 +94,12 @@ export class OrderListComponent implements OnInit {
     };
 
     ngOnInit() {
+
+        this.arrachageService.getHarvestVars()
+            .subscribe(
+                (res: any) => {
+                    this.vars = res.harvest_order_non_respect_options;
+                });
         this.arrachageService.getStructureConfig().subscribe(
             (res: any) => {
                 console.log(JSON.parse(res.data));
@@ -172,6 +180,7 @@ export class OrderListComponent implements OnInit {
                 this.updateChartData();
             },
             (err: any) => {
+                console.log(err);
                 if (err.error.code === 901) {
                     this.toaster.warning(err.error.message, err.error.data, {
                         positionClass: 'toast-top-center'

@@ -160,4 +160,8 @@ export class ArrachageService {
                 })
             });
     }
+
+    getHarvestVars(): Observable<any> {
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/vars`);
+    }
 }

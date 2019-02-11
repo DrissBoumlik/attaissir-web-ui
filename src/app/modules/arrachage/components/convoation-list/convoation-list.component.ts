@@ -1,10 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Helper } from '../../../../shared/classes/helper';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
+import {Helper} from '../../../../shared/classes/helper';
 import CustomStore from 'devextreme/data/custom_store';
-import { ArrachageService } from '../../services/arrachage.service';
-import { isNull } from 'util';
-import { environment } from '../../../../../environments/environment';
+import {ArrachageService} from '../../services/arrachage.service';
+import {isNull} from 'util';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
     selector: 'app-convoation-list',
@@ -28,9 +28,10 @@ export class ConvoationListComponent implements OnInit {
     chartData: any = {};
     chartLoadingIndicator: any = {};
     @ViewChild('chartContainer') chartContainer: ElementRef;
+    selectedRow: any = {};
 
     constructor(private arrachageService: ArrachageService,
-        private toaster: ToastrService) {
+                private toaster: ToastrService) {
         this.helper = Helper;
         this.today = new Date();
         this.tomorrow = new Date();
@@ -152,5 +153,10 @@ export class ConvoationListComponent implements OnInit {
               container.classList.add('slide-out-right');
             }*/
         container.hidden = !container.hidden;
+    }
+
+    printBn(data: any) {
+        this.selectedRow = data.data;
+        this.arrachageService.printConvocation(this.selectedRow.ir_id);
     }
 }
