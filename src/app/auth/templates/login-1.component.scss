@@ -1,0 +1,16 @@
+.login-wrapper {
+  background: url("../../../assets/images/droneshot.jpg");
+  background-size: cover;
+}
+
+.login-wrapper:before {
+  content: '';
+  overflow-y: hidden;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(31, 40, 57, 0.9);
+  background: linear-gradient(135deg, #1f2839 0%, rgba(32, 51, 65, 0.6) 100%);
+}

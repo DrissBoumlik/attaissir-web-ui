@@ -4,14 +4,14 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { WizardComponent } from './components/wizard/wizard.component';
 import {
     DxBoxModule,
-    DxButtonModule,
+    DxButtonModule, DxCircularGaugeModule, DxContextMenuModule,
     DxDataGridModule,
     DxDateBoxModule, DxFileUploaderModule,
-    DxFormModule,
-    DxListModule, DxMenuModule,
+    DxFormModule, DxLinearGaugeModule,
+    DxListModule, DxLoadPanelModule, DxMenuModule,
     DxNumberBoxModule,
     DxPopupModule,
-    DxSelectBoxModule,
+    DxSelectBoxModule, DxSliderModule, DxTabPanelModule,
     DxTemplateModule, DxTextAreaModule,
     DxTextBoxModule, DxVectorMapModule
 } from 'devextreme-angular';
@@ -28,9 +28,12 @@ import { PermissionDirective } from './directives/permission.directive';
 import { LeafLetHomeComponent } from './leaflet/maps/home/home.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { KpisComponent } from './components/kpis/kpis.component';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { CdaSigaaComponent } from './components/cda-sigaa/cda-sigaa.component';
 import { ParcelInfoComponent } from './components/parcel-info/parcel-info.component';
+import { ClarityModule } from '@clr/angular';
+import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
+import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster';
+import { MapWidgetInfoComponent } from './components/map-widget-info/map-widget-info.component';
 
 @NgModule({
     imports: [
@@ -45,14 +48,23 @@ import { ParcelInfoComponent } from './components/parcel-info/parcel-info.compon
         DxDateBoxModule,
         FormsModule,
         DxTextAreaModule,
+        DxTabPanelModule,
+        DxCircularGaugeModule,
+        DxLinearGaugeModule,
+        DxSliderModule,
         DxPopupModule,
         DxTemplateModule,
         DxFileUploaderModule,
         DxSelectBoxModule,
+        DxLoadPanelModule,
         DxVectorMapModule,
         DxBoxModule,
         DxMenuModule,
-        LeafletModule.forRoot()
+        DxContextMenuModule,
+        ClarityModule,
+        LeafletModule.forRoot(),
+        LeafletDrawModule.forRoot(),
+        LeafletMarkerClusterModule
     ],
     exports: [
         WizardComponent,
@@ -70,18 +82,25 @@ import { ParcelInfoComponent } from './components/parcel-info/parcel-info.compon
         DxNumberBoxModule,
         ConseilleComponent,
         DxDateBoxModule,
+        DxContextMenuModule,
+        DxLinearGaugeModule,
+        DxSliderModule,
         WarehouseComponent,
         DxPopupModule,
         DxTemplateModule,
+        DxTabPanelModule,
+        DxCircularGaugeModule,
         RfidCardReaderComponent,
         DxFileUploaderModule,
         ParcelGridComponent,
+        DxLoadPanelModule,
         ParcelsListComponent,
         PermissionDirective,
         LeafLetHomeComponent,
         KpisComponent,
         DxMenuModule,
-        DxBoxModule
+        ClarityModule,
+        DxBoxModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
@@ -98,7 +117,8 @@ import { ParcelInfoComponent } from './components/parcel-info/parcel-info.compon
         LeafLetHomeComponent,
         KpisComponent,
         CdaSigaaComponent,
-        ParcelInfoComponent
+        ParcelInfoComponent,
+        MapWidgetInfoComponent
     ]
 })
 export class SharedModule { }

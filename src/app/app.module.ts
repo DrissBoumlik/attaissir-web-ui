@@ -21,7 +21,7 @@ import {
     DxLookupModule,
     DxPivotGridModule,
     DxPopupModule,
-    DxRadioGroupModule,
+    DxRadioGroupModule, DxScrollViewModule,
     DxSelectBoxModule,
     DxSwitchModule,
     DxTemplateModule
@@ -43,6 +43,7 @@ import { PermissionGuard } from './shared/directives/guard.directive';
 import { ActivityModule } from './modules/activity/activity.module';
 import { ImportModule } from './modules/import/import.module';
 import { ClarityModule } from '@clr/angular';
+import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster';
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import { ClarityModule } from '@clr/angular';
 
         AppRoutingModule,
         ThemeRoutingModule,
+        DxScrollViewModule,
 
         FormsModule,
         BrowserAnimationsModule,
@@ -88,7 +90,8 @@ import { ClarityModule } from '@clr/angular';
         MouvementsModule,
         CardGeneratorModule,
         UsersModule,
-        ClarityModule
+        ClarityModule,
+        LeafletMarkerClusterModule.forRoot()
     ],
     exports: [
         DxDataGridModule,

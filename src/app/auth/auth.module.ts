@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BaseRequestOptions, HttpModule } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
 
 import { AuthRoutingModule } from './auth-routing.routing';
 import { AuthComponent } from './auth.component';
@@ -12,7 +10,6 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
-import { fakeBackendProvider } from './_helpers';
 import {
     DxAutocompleteModule,
     DxButtonModule,
@@ -22,6 +19,8 @@ import {
     DxSelectBoxModule
 } from 'devextreme-angular';
 import { ClarityModule } from '@clr/angular';
+import { HttpClientModule } from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
     declarations: [
@@ -50,11 +49,7 @@ import { ClarityModule } from '@clr/angular';
         AuthGuard,
         AlertService,
         AuthenticationService,
-        UserService,
-        // api backend simulation
-        fakeBackendProvider,
-        MockBackend,
-        BaseRequestOptions,
+        UserService
     ],
     entryComponents: [AlertComponent],
 })

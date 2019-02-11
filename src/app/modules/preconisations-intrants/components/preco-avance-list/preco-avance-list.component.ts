@@ -3,7 +3,7 @@ import { Helper } from '../../../../shared/classes/helper';
 import { ActivatedRoute } from '@angular/router';
 import { PreconisationsIntrantsService } from '../../service/preconisations-intrants.service';
 import CustomStore from 'devextreme/data/custom_store';
-import 'rxjs/add/operator/toPromise';
+
 import { DxDataGridComponent } from 'devextreme-angular';
 
 @Component({

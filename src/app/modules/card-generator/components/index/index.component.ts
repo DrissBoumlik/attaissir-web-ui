@@ -1,5 +1,5 @@
 import { CardGeneratorService } from "../../services/card-generator.service";
-import 'rxjs/add/operator/toPromise';
+
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Helper } from '../../../../shared/classes/helper';
 import { isNull } from "util";

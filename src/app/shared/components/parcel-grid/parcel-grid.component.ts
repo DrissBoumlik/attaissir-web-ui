@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DxDataGridComponent } from 'devextreme-angular';
 import { NewComponent } from '../../../modules/interventions/components/new/new.component';
-import {Helper} from '../../classes/helper';
+import { Helper } from '../../classes/helper';
 
 @Component({
     selector: 'app-parcel-grid',

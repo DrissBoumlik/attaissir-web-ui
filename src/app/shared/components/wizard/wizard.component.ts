@@ -1,3 +1,5 @@
+
+import { throttleTime } from 'rxjs/operators';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Contract } from '../../classes/contract';
@@ -527,7 +529,7 @@ export class WizardComponent implements OnInit {
         }
 
         if (this.isEdit && !this.contract.parent_id) {
-            this.contractService.editContract(this.contract).throttleTime(3000)
+            this.contractService.editContract(this.contract).pipe(throttleTime(3000))
                 .subscribe((contract: any) => {
                     contract = this.helper.dataFormatter(contract, false);
                     this.groundsList = this.groundsList.map((ground: any) => {
@@ -555,7 +557,7 @@ export class WizardComponent implements OnInit {
                     throw error1;
                 });
         } else {
-            this.contractService.addContract(this.contract).throttleTime(3000)
+            this.contractService.addContract(this.contract).pipe(throttleTime(3000))
                 .subscribe((contract: any) => {
                     contract = this.helper.dataFormatter(contract, false);
                     this.groundsList = this.groundsList.map((ground: any) => {

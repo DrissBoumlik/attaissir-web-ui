@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.prod';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -41,6 +41,18 @@ export class ReportingService {
 
     getVarsByZone(zone_id: number): Observable<any> {
         return this.http.post(`${environment.apiUrl}/${this.routeName}/vars`, JSON.stringify({ zone_id: zone_id }), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
+    /**
+     * @param params
+     * @returns {Observable<any>}
+     */
+    getIlosDx(params: any): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/ilots/grid`, JSON.stringify(params), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })

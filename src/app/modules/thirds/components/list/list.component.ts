@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ThirdsService } from '../../services/thirds.service';
 import { ToastrService } from 'ngx-toastr';
 import CustomStore from 'devextreme/data/custom_store';
-import 'rxjs/add/operator/toPromise';
+
 import { Location } from '@angular/common';
 import { Helper } from '../../../../shared/classes/helper';
 import { isArray } from 'util';

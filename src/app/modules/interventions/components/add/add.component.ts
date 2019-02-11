@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ArticlesService } from '../../../articles/services/articles.service';
-import 'rxjs/add/operator/toPromise';
+
 import { InterventionService } from '../../services/intervention.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ThirdsService } from '../../../thirds/services/thirds.service';

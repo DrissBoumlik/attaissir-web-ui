@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Helper } from '../../../../shared/classes/helper';
 import { MouvementsService } from '../../service/mouvements.service';
 import CustomStore from 'devextreme/data/custom_store';
-import 'rxjs/add/operator/toPromise';
+
 import { ThirdsService } from '../../../thirds/services/thirds.service';
 import { WarehouseService } from '../../../warehouse/service/warehose.service';
 import { ArticleCategiesService } from '../../../articles/services/article-categies.service';

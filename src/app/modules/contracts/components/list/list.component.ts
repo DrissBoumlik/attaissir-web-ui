@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import CustomStore from 'devextreme/data/custom_store';
-import 'rxjs/add/operator/toPromise';
+
 import 'devextreme/integration/jquery';
 import { ContractsService } from '../../services/contracts.service';
 import { ThirdsService } from '../../../thirds/services/thirds.service';

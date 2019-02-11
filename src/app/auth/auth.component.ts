@@ -4,11 +4,11 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ScriptLoaderService} from '../_services/script-loader.service';
-import {Helpers} from '../helpers';
-import {ToastrService} from 'ngx-toastr';
-import {AlertService, AuthenticationService, UserService} from './_services';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ScriptLoaderService } from '../_services/script-loader.service';
+import { Helpers } from '../helpers';
+import { ToastrService } from 'ngx-toastr';
+import { AlertService, AuthenticationService, UserService } from './_services';
 import * as CryptoJS from 'crypto-js';
 
 @Component({
@@ -25,13 +25,13 @@ export class AuthComponent implements OnInit {
     loadingVisible = false;
 
     constructor(private _router: Router,
-                private _script: ScriptLoaderService,
-                private _userService: UserService,
-                private _route: ActivatedRoute,
-                private _authService: AuthenticationService,
-                private _alertService: AlertService,
-                private cfr: ComponentFactoryResolver,
-                private toastr: ToastrService) {
+        private _script: ScriptLoaderService,
+        private _userService: UserService,
+        private _route: ActivatedRoute,
+        private _authService: AuthenticationService,
+        private _alertService: AlertService,
+        private cfr: ComponentFactoryResolver,
+        private toastr: ToastrService) {
 
     }
 
@@ -77,9 +77,9 @@ export class AuthComponent implements OnInit {
             });
 
         this._authService.myPermission().subscribe(response => {
-                const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(response.data.permissions), 'Gra61884546585_55');
-                localStorage.setItem('permissions', ciphertext);
-            },
+            const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(response.data.permissions), 'Gra61884546585_55');
+            localStorage.setItem('permissions', ciphertext);
+        },
             error => {
                 console.log(error);
             });

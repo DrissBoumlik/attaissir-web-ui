@@ -1,11 +1,14 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Router, NavigationStart, NavigationEnd} from '@angular/router';
-import {Helpers} from '../helpers';
-import {ScriptLoaderService} from '../_services/script-loader.service';
 
-import {ToastrService} from 'ngx-toastr';
-import {AuthenticationService} from '../auth/_services';
-import {Observable} from 'rxjs';
+import { fromEvent as observableFromEvent, Observable } from 'rxjs';
+
+import { throttleTime } from 'rxjs/operators';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { Helpers } from '../helpers';
+import { ScriptLoaderService } from '../_services/script-loader.service';
+
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../auth/_services';
 
 declare let mApp: any;
 declare let mUtil: any;
@@ -29,8 +32,8 @@ export class ThemeComponent implements OnInit {
     tenant: number;
 
     constructor(private _script: ScriptLoaderService,
-                private auth: AuthenticationService,
-                private _router: Router) {
+        private auth: AuthenticationService,
+        private _router: Router) {
         this.canRefresh = false;
         this.reset();
         this.initListener();
@@ -319,7 +322,7 @@ export class ThemeComponent implements OnInit {
     }
 
     initListener() {
-        Observable.fromEvent(document, 'click').throttleTime(600000)
+        observableFromEvent(document, 'click').pipe(throttleTime(600000))
             .subscribe(ev => {
                 if (this.auth.getToken()) {
                     this.reset();

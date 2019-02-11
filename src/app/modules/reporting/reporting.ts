@@ -13,6 +13,7 @@ export class ReportingComponent implements OnInit {
         { code: 515, title: 'Liste des agriculteurs et cartes par site', url: 'cards' },
         { code: 611, title: 'Liste détaillée des préconisations', url: 'preconisations' },
         { code: 612, title: 'Liste détaillée des mouvements', url: 'mouvements' },
+        { code: 711, title: 'Ilots créés', url: 'ilots' },
     ];
     selectedItem: any;
 
@@ -26,10 +27,10 @@ export class ReportingComponent implements OnInit {
             this.selectedItem = this.reports[3];
         } else if (this.router.url.includes('preconisations')) {
             this.selectedItem = this.reports[2];
-
         } else if (this.router.url.includes('cards')) {
             this.selectedItem = this.reports[1];
-
+        } else if (this.router.url.includes('ilots')) {
+            this.selectedItem = this.reports[4];
         }
     }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ParcelsService } from '../../services/parcels.service';
 import CustomStore from 'devextreme/data/custom_store';
-import 'rxjs/add/operator/toPromise';
+
 import 'devextreme/integration/jquery';
 import { Router } from '@angular/router';
 import { Helper } from '../../../../shared/classes/helper';

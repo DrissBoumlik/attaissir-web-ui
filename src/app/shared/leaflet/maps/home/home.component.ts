@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import * as L from 'leaflet';
-import { GeoJSON, latLng, Layer, LeafletEvent, Map, Polygon, polygon, tileLayer } from 'leaflet';
-import { ZonesService } from '../../../../modules/contracts/services/zones.service';
-import { CarteService } from '../../../../modules/cartographie/carte.service';
+import {GeoJSON, latLng, Layer, LeafletEvent, Map, Marker, Polygon, polygon, Polyline} from 'leaflet';
+import 'leaflet.markercluster';
+import {ZonesService} from '../../../../modules/contracts/services/zones.service';
+import {CarteService} from '../../../../modules/cartographie/carte.service';
 import '../../../../../../node_modules/leaflet.fullscreen/Control.FullScreen.js';
-import { Feature } from 'geojson';
+import {GpsService} from '../../../services/gps.service';
+import {LayersControl, NavLinkOptions} from '../../helpers/layersControl';
+import '../../services/MovingMarker';
+import {LineString, MultiLineString} from 'geojson';
+import * as geojson from 'geojson';
 
 declare module 'leaflet' {
     namespace control {
         function fullscreen(v: any);
+    }
+    namespace marker {
+        function slideTo(v: any, o: any);
     }
 }
 
@@ -19,84 +27,89 @@ declare module 'leaflet' {
     styleUrls: ['./home.component.scss']
 })
 export class LeafLetHomeComponent implements OnInit {
-
-    cdas: any = {};
-    carte: Map;
-    layer: Layer;
-    loadingVisible = true;
-    options = {
-        layers: [
-            tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    links = LayersControl.navLinks;
+    drawOptions = LayersControl.drawOptions;
+    markerClusterGroup: L.MarkerClusterGroup;
+    markerClusterData: any[] = [];
+    markerClusterOptions: L.MarkerClusterGroupOptions;
+    contextMenuOptions = [
+        {
+            text: 'Historique',
+            icon: 'dx-icon-clock',
+            'items': [
                 {
-                    maxZoom: 17,
-                    className: 'leaflet-top leaflet-left',
-                    attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS,' +
-                        ' AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-                })
-        ],
+                    text: 'Aujourd\'hui',
+                    code: 'TODAY'
+                },
+                {
+                    text: 'Hier',
+                    code: 'YESTERDAY'
+                },
+                {
+                    text: 'Cette semaine',
+                    code: 'WEEK'
+                },
+                {
+                    text: 'Ce mois',
+                    code: 'MONTH'
+                }
+            ],
+            action: (e: any) => {
+                console.log(e);
+            }
+        }
+    ];
+    /*----------------------Dates--------------------------*/
+    today = new Date();
+    /*----------------------Parcel map options--------------------------*/
+    parcelOptions = {
+        layers: LayersControl.ParcelLayersControl.baseLayers.Esri,
         zoom: 16,
         center: latLng(32.382843, -6.694198)
     };
-    layersControl = {
-        baseLayers: {
-            'Open Street Map': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 18,
-                attribution: 'Leaflet, openstreetmap.'
-            }),
-            'HERE hybridDay': tileLayer('https://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/' +
-                '{mapID}/hybrid.day/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
-                    attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-                    subdomains: '1234',
-                    mapID: 'newest',
-                    app_id: 'LFDFxuH7piXnFpMEhCfS',
-                    app_code: 'wgD39fkWKD3SNkEBLx_0LQ',
-                    base: 'aerial',
-                    maxZoom: 20,
-                    type: 'maptile',
-                    language: 'eng',
-                    format: 'png8',
-                    size: '256',
-                    keepBuffer: 10
-                }),
-            'Esri': tileLayer(
-                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                    maxZoom: 18,
-                    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX,' +
-                        ' GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-                })
-        },
-        overlays: {
-            'Big Square':
-                polygon([[46.8, -121.55], [46.9, -121.55], [46.9, -121.7], [46.8, -121.7]]),
-        }
+    parcelLayersControl = LayersControl.ParcelLayersControl;
+    /*----------------------Camion map options--------------------------*/
+    camionOptions = {
+        layers: LayersControl.CamionLayersControl.baseLayers.CartoDB_DarkMatter,
+        zoom: 12,
+        center: latLng(32.382843, -6.694198)
     };
-
-
-    style = {
-        color: '#3d5222',
-        fillColor: '#33a114',
-        fillOpacity: 1
-    };
-
-    style_cane = {
-        color: '#524b05',
-        fillColor: '#a19b4f',
-        fillOpacity: 1
-    };
-
-    style_incident = {
-        color: '#68090a',
-        fillColor: '#ca1214',
-        fillOpacity: 1
-    };
-
+    camionLayersControl = LayersControl.CamionLayersControl;
+    /*----------------------Styles--------------------------*/
+    style = LayersControl.styles.style_main;
+    style_cane = LayersControl.styles.style_cane;
+    style_incident = LayersControl.styles.style_incident;
+    /*----------------------Data--------------------------*/
+    cdas: any = {};
+    trackers: any[] = [];
+    camionsCarte: Map;
+    parcelsCarte: Map;
+    layer: Layer;
+    loadingVisible = true;
     ilot_info: any;
     show_parcel_info = false;
     showCdas = true;
+    option = NavLinkOptions.CAMIONS;
+    optionHelper = NavLinkOptions;
+    currentPolyLine: Polyline<LineString | MultiLineString>;
 
+    /*----------------------CamionData--------------------------*/
+    camion_data: any;
+    show_camion_info = false;
+    currentHistoryData: {
+        polyLine: Polyline<geojson.LineString | geojson.MultiLineString>,
+        stops
+    } = {
+        polyLine: null,
+        stops: null
+    };
+    contextMenuCamionClicked: any;
+
+    /*----------------------Styles--------------------------*/
     constructor(private zonesService: ZonesService,
-        private ilotService: CarteService,
-        private router: Router) {
+                private ilotService: CarteService,
+                private gpsService: GpsService,
+                private router: Router) {
         this.layer = new Layer();
     }
 
@@ -109,44 +122,67 @@ export class LeafLetHomeComponent implements OnInit {
 
     // --------------------------------------------------------------------------------------------------------------- //
     onMapReady = (map: Map) => {
-        this.carte = map;
+        this.loadingVisible = false;
         // --------------------------------------------------------------------------------------------------------------- //
-        L.control.fullscreen({
-            position: 'topleft', // change the position of the button can be topleft, topright, bottomright or bottomleft, defaut topleft
-            title: 'Plein écran', // change the title of the button, default Full Screen
-            titleCancel: 'Quitter le mode plein écran', // change the title of the button when fullscreen is on, default Exit Full Screen
-            content: null, // change the content of the button, can be HTML, default null
-            forceSeparateButton: true, // force seperate button to detach from zoom buttons, default false
-            forcePseudoFullscreen: false, // force use of pseudo full screen even if full screen API is available, default false
-            fullscreenElement: false // Dom element to render in full screen, false by default, fallback to map._container
-        }).addTo(map);
+        LayersControl.fullScreen.addTo(map);
         map.on('enterFullscreen', () => map.invalidateSize());
         map.on('exitFullscreen', () => map.invalidateSize());
+        // --------------------------------------------------------------------------------------------------------------- //
+    };
+    // --------------------------------------------------------------------------------------------------------------- //
+    onSelectionChanged = (e: any) => {
+        this.parcelsCarte.flyTo(JSON.parse(e.addedItems[0].center));
+    };
+    // --------------------------------------------------------------------------------------------------------------- //
+    show = (name: string) => {
+        this.router.navigate(['/']);
+    };
+
+    // --------------------------------------------------------------------------------------------------------------- //
+    markerClusterReady(group: L.MarkerClusterGroup) {
+        this.markerClusterGroup = group;
+    }
+
+    // --------------------------------------------------------------------------------------------------------------- //
+    onOptionchanged(option) {
+        this.option = option.addedItems[0].UNIQUEXP;
+        setTimeout(() => {
+            this.camionsCarte.invalidateSize(true);
+        }, 100);
+        setTimeout(() => {
+            this.parcelsCarte.invalidateSize(true);
+        }, 100);
+    }
+
+    // --------------------------------------------------------------------------------------------------------------- //
+    initParcelMap(map: Map) {
+        this.onMapReady(map);
+        this.parcelsCarte = map;
+        setTimeout(() => {
+            map.invalidateSize(true);
+        }, 100);
         // --------------------------------------------------------------------------------------------------------------- //
         map.addEventListener('move', (e) => {
             this.show_parcel_info = false;
         });
+
+        map.on('draw:created', function (e: any) {
+            console.log(e);
+            // Do whatever else you need to. (save to db, add to map etc)
+            map.addLayer(e.layer);
+        });
         // --------------------------------------------------------------------------------------------------------------- //
         map.on('moveend', () => {
-            /*      map.eachLayer(ly => {
-                    ly.removeFrom(map);
-                  });*/
             if (map.getZoom() <= 12) {
                 return;
             }
-            const center = map.getBounds().getCenter();
-            const latlngs = [];
-            latlngs.push(map.getBounds().getSouthWest()); // bottom left
-            latlngs.push({ lat: map.getBounds().getSouth(), lng: center.lng }); // bottom center
-            latlngs.push(map.getBounds().getSouthEast()); // bottom right
-            latlngs.push({ lat: center.lat, lng: map.getBounds().getEast() }); // center right
-            latlngs.push(map.getBounds().getNorthEast()); // top right
-            latlngs.push({ lat: map.getBounds().getNorth(), lng: map.getCenter().lng }); // top center
-            latlngs.push(map.getBounds().getNorthWest()); // top left
-            latlngs.push({ lat: map.getCenter().lat, lng: map.getBounds().getWest() }); // center left
-            const ss = polygon(latlngs).toGeoJSON();
-            console.log(JSON.stringify(ss.geometry));
-            this.ilotService.getIlotByZone({ geom: ss.geometry }).subscribe(
+            map.eachLayer((layer: any) => {
+                if (!layer._url) {
+                    map.removeLayer(layer);
+                }
+            });
+            const bounds = polygon(LayersControl.getMapBound(map)).toGeoJSON();
+            this.ilotService.getIlotByZone({geom: bounds.geometry}).subscribe(
                 (res: any) => {
                     res.data = res.data.map(il => {
                         il.da = JSON.parse(il.da);
@@ -154,7 +190,7 @@ export class LeafLetHomeComponent implements OnInit {
                         return il.da;
                     });
                     new GeoJSON(res.data, {
-                        style: (geom) => {
+                        style: (geom: any) => {
                             if (geom.properties.has_incident) {
                                 return this.style_incident;
                             }
@@ -163,7 +199,7 @@ export class LeafLetHomeComponent implements OnInit {
                             }
                             return this.style;
                         },
-                        onEachFeature: (feature: Feature, layer: Layer) => {
+                        onEachFeature: (feature: any, layer: Layer) => {
                             if (map.getZoom() > 15) {
                                 layer.bindTooltip(feature.properties.p_name, {
                                     permanent: true,
@@ -175,7 +211,7 @@ export class LeafLetHomeComponent implements OnInit {
                     }).on('click', (ev: LeafletEvent) => {
                         const e: any = ev;
                         const layer = e.layer.feature.properties;
-                        this.ilot_info = this.getParcelInfo(layer);
+                        this.ilot_info = LayersControl.getParcelInfo(layer);
                         this.show_parcel_info = true;
                     }).addTo(map);
 
@@ -219,34 +255,24 @@ export class LeafLetHomeComponent implements OnInit {
             }
         });
         // --------------------------------------------------------------------------------------------------------------- //
-        const center_ = map.getBounds().getCenter();
-        const latlngs_ = [];
-        latlngs_.push(map.getBounds().getSouthWest()); // bottom left
-        latlngs_.push({ lat: map.getBounds().getSouth(), lng: center_.lng }); // bottom center_
-        latlngs_.push(map.getBounds().getSouthEast()); // bottom right
-        latlngs_.push({ lat: center_.lat, lng: map.getBounds().getEast() }); // center_ right
-        latlngs_.push(map.getBounds().getNorthEast()); // top right
-        latlngs_.push({ lat: map.getBounds().getNorth(), lng: map.getCenter().lng }); // top center_
-        latlngs_.push(map.getBounds().getNorthWest()); // top left
-        latlngs_.push({ lat: map.getCenter().lat, lng: map.getBounds().getWest() }); // center_ left
-
-        const ss = polygon(latlngs_).toGeoJSON();
-
-        this.ilotService.getIlotByZone({ geom: ss.geometry }).subscribe(
+        const ss = polygon(LayersControl.getMapBound(map)).toGeoJSON();
+        this.loadingVisible = true;
+        this.ilotService.getIlotByZone({geom: ss.geometry}).subscribe(
             (res: any) => {
+                this.loadingVisible = false;
                 res.data = res.data.map(il => {
                     il.da = JSON.parse(il.da);
                     il.da.geometry = JSON.parse(il.da.geometry);
                     return il.da;
                 });
                 new GeoJSON(res.data, {
-                    style: (geom) => {
+                    style: (geom: any) => {
                         if (geom.properties.has_incident) {
                             return this.style_incident;
                         }
                         return this.style;
                     },
-                    onEachFeature: (feature: Feature, layer: Layer) => {
+                    onEachFeature: (feature: any, layer: Layer) => {
                         if (map.getZoom() > 15) {
                             layer.bindTooltip(feature.properties.p_name, {
                                 permanent: true,
@@ -258,110 +284,123 @@ export class LeafLetHomeComponent implements OnInit {
                 }).on('click', (ev: LeafletEvent) => {
                     const e: any = ev;
                     const layer = e.layer.feature.properties;
-                    this.ilot_info = this.getParcelInfo(layer);
+                    this.ilot_info = LayersControl.getParcelInfo(layer);
                     this.show_parcel_info = true;
                 }).addTo(map);
-
-
-                // this.loadingVisible = false;
-                /*res.data.forEach(ilot => {
-                  const geom = JSON.parse(ilot.da);
-                  console.log(geom);
-                  console.log(this.map);
-                  const polygon = new Polygon(geom.coordinates, {color: '#06A214'});
-                  map.addLayer(polygon);
-                });*/
-                /*
-                * ,
-                  onEachFeature: (feature: Feature, layer: Layer) => {
-                    if (map.getZoom() > 15) {
-                      layer.bindTooltip(feature.properties.p_name, {
-                        permanent: true,
-                        direction: 'center',
-                        className: 'leaflet-tooltip1'
-                      });
-                    }
-                  }*/
             }
         );
-        /*this.ilotService.getIlotByZone({north: map.getBounds().getNorthEast(), south: map.getBounds().getSouthWest()}).subscribe(
-          (res: any) => {
-            res.data = res.data.map(il => {
-              il.da = JSON.parse(il.da);
-              il.da.geometry = JSON.parse(il.da.geometry);
-              return il.da;
-            });
-            new GeoJSON(res.data, {
-              style: (geom) => {
-                if (geom.properties.has_incident) {
-                  return this.style_incident;
-                }
-                return this.style;
-              },
-              onEachFeature: (feature: Feature, layer: Layer) => {
-                if (map.getZoom() > 15) {
-                  layer.bindTooltip(feature.properties.p_name, {
-                    permanent: true,
-                    direction: 'center',
-                    className: 'leaflet-tooltip1'
-                  });
-                }
-              }
-            }).on('click', (ev: LeafletEvent) => {
-              const e: any = ev;
-              const layer = e.layer.feature.properties;
-              this.ilot_info = this.getParcelInfo(layer);
-              this.show_parcel_info = true;
-            }).addTo(map);
-    
-    
-            // this.loadingVisible = false;
-            /!*res.data.forEach(ilot => {
-              const geom = JSON.parse(ilot.da);
-              console.log(geom);
-              console.log(this.map);
-              const polygon = new Polygon(geom.coordinates, {color: '#06A214'});
-              map.addLayer(polygon);
-            });*!/
-            /!*
-            * ,
-              onEachFeature: (feature: Feature, layer: Layer) => {
-                if (map.getZoom() > 15) {
-                  layer.bindTooltip(feature.properties.p_name, {
-                    permanent: true,
-                    direction: 'center',
-                    className: 'leaflet-tooltip1'
-                  });
-                }
-              }*!/
-          }
-        );*/
+    }
+
+    // --------------------------------------------------------------------------------------------------------------- //
+    initCamionMap(map: Map) {
+        this.onMapReady(map);
+        this.camionsCarte = map;
+        setTimeout(() => {
+            map.invalidateSize(true);
+        }, 100);
+
+        map.on('draw:created', (e: any) => {
+            // Do whatever else you need to. (save to db, add to map etc)
+            const layer: Polygon = e.layer;
+            console.log(layer);
+            map.addLayer(e.layer);
+            this.gpsService.addHarvestPolygon(layer.toGeoJSON())
+                .subscribe(
+                    (res: any) => {
+                        console.log(res);
+                    }
+                );
+        });
         // --------------------------------------------------------------------------------------------------------------- //
+        // --------------------------------------------------------------------------------------------------------------- //
+        this.loadingVisible = true;
+        this.gpsService.getTrackerList().subscribe((res: any) => {
+            this.trackers = res.data;
+            this.gpsService.getTrackersPosition(this.trackers.map(tracker => tracker.tracker_id)).subscribe(
+                (tracker_datas: any[]) => {
+                    this.loadingVisible = false;
+                    tracker_datas.forEach((tracker_data) => {
+                        const tracker = this.trackers.find((tr: any) => tr.tracker_id === tracker_data.id);
+                        tracker.data = tracker_data;
+                        const icon = L.icon({
+                            iconUrl: 'assets/images/truck.png'
+                        });
+                        const marker = L.marker(tracker.data.position.coordinates, {icon});
+                        tracker.marker = marker;
+                        this.markerClusterGroup.addLayers([marker]);
+                    });
+                });
+        });
+
+        setInterval(() => {
+            this.gpsService.getTrackersPosition(this.trackers.map(tracker => tracker.tracker_id)).subscribe(
+                (tracker_datas: any[]) => {
+                    tracker_datas.forEach((tracker_data) => {
+                        const tracker = this.trackers.find((tr: any) => tr.tracker_id === tracker_data.id);
+                        tracker.data = tracker_data;
+                        if (this.currentPolyLine && this.camion_data.id === tracker_data.id) {
+                            setTimeout(() => {
+                                this.currentPolyLine.addLatLng(tracker.data.position.coordinates);
+                            }, 9000);
+                        }
+                        if (this.camion_data && tracker_data.id === this.camion_data.id) {
+                            this.camion_data = tracker_data;
+                        }
+                        tracker.marker.slideTo(tracker.data.position.coordinates, {
+                                duration: 5000,
+                                keepAtCenter: false
+                            }
+                        );
+                    });
+                }
+            );
+        }, 5000);
+    }
+
+    // --------------------------------------------------------------------------------------------------------------- //
+
+    onCamionClicked(e: any) {
+        if (!e.itemData.data) {
+            return;
+        }
+        this.camion_data = e.itemData.data;
+        this.show_camion_info = true;
+        this.camionsCarte.flyTo(e.itemData.data.position.coordinates);
+        if (this.currentPolyLine) {
+            this.camionsCarte.removeLayer(this.currentPolyLine);
+        }
+        this.currentPolyLine = new Polyline([e.itemData.data.position.coordinates, e.itemData.data.position.coordinates]);
+        this.currentPolyLine.addTo(this.camionsCarte);
+    }
+
+    onContextMenuItemClick = (e: any) => {
+        console.log(e);
+        const tracker = this.contextMenuCamionClicked;
+        const codeAction = e.itemData.code;
+        this.drawTracketHistory(+tracker.id, codeAction);
     };
 
-    onSelectionChanged = (e: any) => {
-        this.carte.flyTo(JSON.parse(e.addedItems[0].center));
-    };
+    drawTracketHistory(tracker_id: Number, codeAction: string) {
+        this.loadingVisible = true;
+        this.gpsService.getTrackerHistory(tracker_id, codeAction)
+            .subscribe((res: any[]) => {
+                this.loadingVisible = false;
+                if (!res.length) {
+                    return;
+                }
+                if (this.currentHistoryData.polyLine) {
+                    this.camionsCarte.removeLayer(this.currentHistoryData.polyLine);
+                }
+                this.currentHistoryData.polyLine = new Polyline([res[0].position.coordinates, res[0].position.coordinates]);
+                this.camionsCarte.flyTo(res[0].position.coordinates);
+                res.forEach(point => {
+                    this.currentHistoryData.polyLine.addLatLng(point.position.coordinates);
+                });
+                this.camionsCarte.addLayer(this.currentHistoryData.polyLine);
+            });
+    }
 
-    show = (name: string) => {
-        this.router.navigate(['/']);
-    };
-
-    getParcelInfo = (layer: any) => {
-        return {
-            name: layer.p_name,
-            contracted_surface: layer.contracted_surface[0].surface,
-            id: layer.id,
-            cda: layer.cda_name,
-            parcel_surface: layer.parcel_surface,
-            ilot_surface: layer.ilot_surface,
-            zone: layer.zone_name,
-            ag_name: layer.ag_name,
-            ag_tel: layer.ag_tel,
-            prestataire: layer.prestataire,
-            semoir: layer.semoir,
-            date_semis: layer.date_semis,
-            advisors: layer.advisors,
-        };
-    };
+    onItemContextMenu(e: any) {
+        this.contextMenuCamionClicked = e.itemData;
+    }
 }

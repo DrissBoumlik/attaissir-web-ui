@@ -11,7 +11,7 @@ import { ReplenishmentComponent } from './components/replenishment/replenishment
 import { FormsModule } from '@angular/forms';
 import { BoardComponent } from './components/board/board.component';
 import { SharedModule } from '../../shared/shared.module';
-import {ClarityModule} from '@clr/angular';
+import { ClarityModule } from '@clr/angular';
 
 @NgModule({
     imports: [

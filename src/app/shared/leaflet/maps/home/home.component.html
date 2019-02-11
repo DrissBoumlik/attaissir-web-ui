@@ -1,34 +1,147 @@
 <div class="siam-dashboard-intro">
-  <div class="grid-container">
-    <div class="map">
-      <div style="height: 100%; width: 100%;"
-           leaflet
-           [leafletOptions]="options"
-           [leafletLayersControl]="layersControl"
-           (leafletMapReady)="onMapReady($event)"
-           #leaflet>
-      </div>
+    <div class="grid-container">
+        <div class="map-container">
+            <div class="map" [hidden]="option  !== optionHelper.PARCELS" style="height: 100%; width: 100%;">
+                <div style="height: 100%; width: 100%;"
+                     leaflet
+                     leafletDraw
+                     [leafletOptions]="parcelOptions"
+                     [leafletLayersControl]="parcelLayersControl"
+                     [leafletDrawOptions]="drawOptions"
+                     (leafletMapReady)="initParcelMap($event)"
+                     #parcelsMap>
+                </div>
+            </div>
+            <div class="map" [hidden]="option !== optionHelper.CAMIONS" style="height: 100%; width: 100%;">
+                <div style="height: 100%; width: 100%;"
+                     leaflet
+                     leafletDraw
+                     [leafletDrawOptions]="drawOptions"
+                     [leafletOptions]="camionOptions"
+                     [leafletLayersControl]="camionLayersControl"
+                     (leafletMapReady)="initCamionMap($event)"
+                     [leafletMarkerCluster]="markerClusterData"
+                     [leafletMarkerClusterOptions]="markerClusterOptions"
+                     (leafletMarkerClusterReady)="markerClusterReady($event)"
+                     #camionMap>
+                </div>
+            </div>
+            <app-map-widget-info [data]="camion_data" *ngIf="show_camion_info && optionHelper.CAMIONS === option"></app-map-widget-info>
+        </div>
+        <div class="CDAs" style="overflow: scroll">
+            <dx-tab-panel
+                    #tabPanel
+                    [dataSource]="links"
+                    [selectedIndex]="0"
+                    [loop]="false"
+                    (onSelectionChanged)="onOptionchanged($event)"
+                    [animationEnabled]="true"
+                    [swipeEnabled]="true">
+                <div *dxTemplate="let link of 'title'">
+                    <span> {{ link.name }}</span>
+                </div>
+                <div *dxTemplate="let link of 'item'">
+                    <dx-list
+                            #list
+                            *ngIf="link.id === 4"
+                            [dataSource]="cdas"
+                            [searchEnabled]="true"
+                            selectionMode="single"
+                            valueExpr="id"
+                            [visible]="showCdas"
+                            searchExpr="name"
+                            (onSelectionChanged)="onSelectionChanged($event)"
+                            searchMode="contains">
+                        <div *dxTemplate="let data of 'item'">
+                            <app-cda-sigaa [cda]="{name: data.name, polygon: data.polygon}"></app-cda-sigaa>
+                        </div>
+                    </dx-list>
+                    <dx-list
+                            #list
+                            *ngIf="link.id === 1"
+                            [dataSource]="trackers"
+                            [searchEnabled]="true"
+                            selectionMode="multiple"
+                            valueExpr="id"
+                            (onItemClick)="onCamionClicked($event)"
+                            (onItemContextMenu)="onItemContextMenu($event)"
+                            searchExpr="ridelle_code"
+                            searchMode="contains"
+                            [showSelectionControls]="true"
+                            [selectedItemKeys]="[]">
+                        <div *dxTemplate="let data of 'item'">
+                            <div id="item" [attr.datasrc]="data" class="cda_item" data-cda="503" data-id="5">
+                                <div class="cda_item_body" #div>
+                                    <div class="clr-row">
+                                        <div class="clr-col">
+                                            <span><img
+                                                    src="http://icons.iconarchive.com/icons/bartkowalski/1960-matchbox-cars/32/Refrigeration-Truck-icon.png"
+                                                    alt=""></span>
+                                        </div>
+                                        <div class="clr-col-6">
+                                            <h1>
+                                                <span style="display: block; margin: -9px;">{{ data.ridelle_code }}</span>
+                                                <span style="margin: -32px;display: block; font-size: 12px;">il y a environ 3 heures</span>
+                                            </h1>
+                                        </div>
+                                        <div class="clr-col">
+                                            <clr-icon [ngStyle]="{
+                                                        color: data?.data?.active  === true ? '#80ff7c' : '#ff4d4c'
+                                                      }" style="color: #82e1a5;"
+                                                      [attr.shape]="data?.data?.active  === true ? 'wifi' : 'no-wifi'"></clr-icon>
+                                        </div>
+                                        <div class="clr-col">
+                                            <clr-icon shape="cog" style="cursor: pointer;"></clr-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </dx-list>
+                </div>
+            </dx-tab-panel>
+            <dx-context-menu
+                    [dataSource]="contextMenuOptions"
+                    [width]="200"
+                    target="#item"
+                    (onItemClick)="onContextMenuItemClick($event)">
+                <div *dxTemplate="let e of 'item'">
+                    <div>
+                        <span [ngClass]="e.icon"></span>
+                        <span *ngIf="e.items" class="dx-icon-spinright"></span> {{e.text}}
+                    </div>
+                </div>
+            </dx-context-menu>
+            <!--<ul class="menu" >
+              <li title="Menu"  ><a  (click)="show('Menu')" class="home" >Menu</a></li>
+              &lt;!&ndash;<li title="liste des cda" *ngIf="!showCdas" ><a (click)="show('cdas')" class="about">CDAs</a></li>&ndash;&gt;
+            </ul>
+            <dx-list
+            #list
+            [dataSource]="cdas"
+            [searchEnabled]="true"
+            selectionMode="single"
+            valueExpr="id"
+            [visible]="showCdas"
+            searchExpr="name"
+            (onSelectionChanged)="onSelectionChanged($event)"
+            searchMode="contains">
+            <div *dxTemplate="let data of 'item'">
+              <app-cda-sigaa [cda]="{name: data.name, polygon: data.polygon}"></app-cda-sigaa>
+            </div>
+          </dx-list>-->
+        </div>
     </div>
-    <div class="CDAs">
-      <ul class="menu" >
-        <li title="Menu"  ><a  (click)="show('Menu')" class="home" >Menu</a></li>
-        <!--<li title="liste des cda" *ngIf="!showCdas" ><a (click)="show('cdas')" class="about">CDAs</a></li>-->
-      </ul>
-     <dx-list
-      #list
-      [dataSource]="cdas"
-      [searchEnabled]="true"
-      selectionMode="single"
-      valueExpr="id"
-      [visible]="showCdas"
-      searchExpr="name"
-      (onSelectionChanged)="onSelectionChanged($event)"
-      searchMode="contains">
-      <div *dxTemplate="let data of 'item'">
-        <app-cda-sigaa [cda]="{name: data.name, polygon: data.polygon}"></app-cda-sigaa>
-      </div>
-    </dx-list>
-    </div>
-  </div>
+    <app-parcel-info [ilot]="ilot_info" *ngIf="ilot_info && show_parcel_info"></app-parcel-info>
+    <dx-load-panel
+            #loadPanel
+            shadingColor="rgba(0,0,0,0.4)"
+            [position]="{ of: 'me' }"
+            style="z-index: 2000;"
+            [(visible)]="loadingVisible"
+            [showIndicator]="true"
+            [showPane]="true"
+            [shading]="true"
+            [closeOnOutsideClick]="false">
+    </dx-load-panel>
 </div>
-<app-parcel-info [ilot]="ilot_info" *ngIf="ilot_info && show_parcel_info"></app-parcel-info>

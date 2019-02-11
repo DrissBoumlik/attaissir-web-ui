@@ -1,7 +1,7 @@
 import { isArray, isNull } from 'util';
 import { load } from '@angular/core/src/render3/instructions';
 import * as CryptoJS from 'crypto-js';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 export class Helper {
     /**
@@ -88,16 +88,16 @@ export class Helper {
 
     public static getContractStatusClass(statusFr: string) {
         switch (statusFr.toUpperCase().trim()) {
-            case 'ENCOURS' : {
+            case 'ENCOURS': {
                 return 'label label-info';
             }
-            case 'ACTIF' : {
+            case 'ACTIF': {
                 return 'label label-success';
             }
-            case 'VALIDÉ' : {
+            case 'VALIDÉ': {
                 return 'label label-success';
             }
-            case 'ANNULÉ' : {
+            case 'ANNULÉ': {
                 return 'label label-danger';
             }
         }

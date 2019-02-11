@@ -1,3 +1,5 @@
+
+import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {
     HttpRequest,
@@ -6,9 +8,9 @@ import {
     HttpInterceptor, HttpResponse, HttpErrorResponse
 } from '@angular/common/http';
 import { AuthenticationService } from '../../auth/_services/authentication.service';
-import 'rxjs/add/operator/retry';
+
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
@@ -29,7 +31,7 @@ export class TokenInterceptor implements HttpInterceptor {
                 setHeaders: headers
             });
         }
-        return next.handle(request).catch((error, caught) => {
+        return next.handle(request).pipe(catchError((error, caught) => {
             if (error.status === 401) {
                 // logout users, redirect to login page
                 this.auth.logout();
@@ -41,7 +43,7 @@ export class TokenInterceptor implements HttpInterceptor {
             } else {
                 return Observable.throwError(error);
             }
-        });
+        }));
     }
 }
 

@@ -1,0 +1,64 @@
+<div class="field_infos" style="opacity: 0.9; z-index: 400;">
+    <div class="block_info">
+        <div class="field_infos_header">
+            <div class="p_info">
+                <span id="field_infos_id" [innerHtml]="data.name"></span>
+            </div>
+            <div class="p_surface">
+                <span id="field_infos_surface">{{data.speed}} KM/H</span>
+            </div>
+        </div>
+        <div class="clr-row">
+            <div class="clr-col">
+                <ul>
+                    <li><span></span></li>
+                    <li>Temps : <span id="field_infos_ref_zone">{{ data.dt_tracker }}</span></li>
+                    <li>Alimentation : <span id="field_infos_ref_zone">{{ data.params.Powv }} V </span></li>
+                    <li>Altitude : <span id="field_infos_ref_zone">{{ data.altitude }}  </span></li>
+                    <li>Angle : <span id="field_infos_ref_zone">{{ data.angle }}  </span></li>
+                    <li>Carte SIM : <span id="field_infos_ref_zone">{{ data.sim_number }}  </span></li>
+                </ul>
+            </div>
+            <div class="clr-col">
+                <ul>
+                    <li><span></span></li>
+                    <li>Contact : <span id="field_infos_ref_zone1">{{ data.dt_tracker }}</span></li>
+                    <li>Signal Gsm  : <span id="field_infos_ref_zone1">{{ data.params.gsm_lvl }} %</span></li>
+                    <li>Odomètre  : <span id="field_infos_ref_zone1">{{ data.odometer }} Km</span></li>
+                    <li>Position  : <span id="field_infos_ref_zone1">
+                        {{ data.position.coordinates[0] }}°,  {{ data.position.coordinates[1] }}°
+                    </span></li>
+                </ul>
+            </div>
+            <div class="clr-col" style="padding: 0">
+                <dx-circular-gauge
+                        [value]="data.speed"
+                >
+                    <dxo-size [height]="250"></dxo-size>
+                    <dxo-value-indicator
+                            type="twoColorNeedle"
+                            color="white"
+                            [secondFraction]="0.24"
+                            secondColor="#f05b41"
+                    >
+                    </dxo-value-indicator>
+                    <dxo-geometry
+                            [startAngle]="170"
+                            [endAngle]="370">
+                    </dxo-geometry>
+                    <dxo-range-container palette="Material">
+                        <dxi-range [startValue]="50" [endValue]="90"></dxi-range>
+                        <dxi-range [startValue]="90" [endValue]="130"></dxi-range>
+                        <dxi-range [startValue]="130" [endValue]="200"></dxi-range>
+                    </dxo-range-container>
+                    <dxo-scale
+                            [startValue]="0"
+                            [endValue]="200"
+                            [tickInterval]="20"
+                            [minorTickInterval]="10">
+                    </dxo-scale>
+                </dx-circular-gauge>
+            </div>
+        </div>
+    </div>
+</div>

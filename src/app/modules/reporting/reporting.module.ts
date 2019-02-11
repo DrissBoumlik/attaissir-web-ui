@@ -8,6 +8,7 @@ import { ReportingComponent } from './reporting';
 import { PreconisationsComponent } from './preconisations/preconisations.component';
 import { CardsComponent } from './cards/cards.component';
 import { MouvementsComponent } from './mouvements/mouvements.component';
+import { IlotsComponent } from './ilots/ilots.component';
 
 @NgModule({
     imports: [
@@ -17,6 +18,6 @@ import { MouvementsComponent } from './mouvements/mouvements.component';
         DxBoxModule,
         DxSelectBoxModule
     ],
-    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent]
+    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent]
 })
 export class ReportingModule { }

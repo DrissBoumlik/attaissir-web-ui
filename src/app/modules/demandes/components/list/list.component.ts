@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DemandesService } from '../../service/demandes.service';
 import CustomStore from 'devextreme/data/custom_store';
-import 'rxjs/add/operator/toPromise';
+
 import { Helper } from '../../../../shared/classes/helper';
 
 @Component({
