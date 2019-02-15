@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import * as L from 'leaflet';
-import {GeoJSON, latLng, Layer, LeafletEvent, Map, Marker, Polygon, polygon, Polyline} from 'leaflet';
+import {GeoJSON, latLng, Layer, LayerGroup, LeafletEvent, Map, Marker, Polygon, polygon, Polyline} from 'leaflet';
 import 'leaflet.markercluster';
 import {ZonesService} from '../../../../modules/contracts/services/zones.service';
 import {CarteService} from '../../../../modules/cartographie/carte.service';
@@ -28,6 +28,33 @@ declare module 'leaflet' {
 })
 export class LeafLetHomeComponent implements OnInit {
     links = LayersControl.navLinks;
+    trackers: any[] = [];
+    // -----------------------Custom History------------------------------
+    semisLayer: LayerGroup;
+    // -----------------------Custom History------------------------------
+    customHistory: any = {};
+    trackerEditorOptions = {
+        items: this.trackers,
+        valueExpr: 'id',
+        displayExpr: 'ridelle_code'
+    };
+    dateTimeEditorOption = {
+        pickerType: 'calendar',
+        type: 'datetime',
+        dataType: 'date'
+    };
+    customHistoryButtonEditorOption = {
+        text: 'Afficher',
+        type: 'normal',
+        useSubmitBehavior: true,
+        onClick: ($event) => {
+            this.drawTracketHistory(this.customHistory.tracer,
+                'CUSTOM',
+                this.customHistory.start_date,
+                this.customHistory.end_date);
+        }
+    };
+    // -----------------------Custom History------------------------------
     drawOptions = LayersControl.drawOptions;
     markerClusterGroup: L.MarkerClusterGroup;
     markerClusterData: any[] = [];
@@ -74,14 +101,15 @@ export class LeafLetHomeComponent implements OnInit {
         zoom: 12,
         center: latLng(32.382843, -6.694198)
     };
-    camionLayersControl = LayersControl.CamionLayersControl;
+    camionLayersControl: any = LayersControl.CamionLayersControl;
     /*----------------------Styles--------------------------*/
     style = LayersControl.styles.style_main;
     style_cane = LayersControl.styles.style_cane;
     style_incident = LayersControl.styles.style_incident;
+    style_harvest_cane = LayersControl.styles.style_harvest_cane;
+    style_harvest = LayersControl.styles.style_harvest;
     /*----------------------Data--------------------------*/
     cdas: any = {};
-    trackers: any[] = [];
     camionsCarte: Map;
     parcelsCarte: Map;
     layer: Layer;
@@ -104,6 +132,7 @@ export class LeafLetHomeComponent implements OnInit {
         stops: null
     };
     contextMenuCamionClicked: any;
+    harvestLayer: LayerGroup;
 
     /*----------------------Styles--------------------------*/
     constructor(private zonesService: ZonesService,
@@ -131,7 +160,7 @@ export class LeafLetHomeComponent implements OnInit {
     };
     // --------------------------------------------------------------------------------------------------------------- //
     onSelectionChanged = (e: any) => {
-        this.parcelsCarte.flyTo(JSON.parse(e.addedItems[0].center));
+        this.camionsCarte.flyTo(JSON.parse(e.addedItems[0].center));
     };
     // --------------------------------------------------------------------------------------------------------------- //
     show = (name: string) => {
@@ -293,11 +322,27 @@ export class LeafLetHomeComponent implements OnInit {
 
     // --------------------------------------------------------------------------------------------------------------- //
     initCamionMap(map: Map) {
+        // create an operational layer that is empty for now
+        this.semisLayer = L.layerGroup().addTo(map);
+        this.harvestLayer = L.layerGroup().addTo(map);
+
+        const layerControl = {
+            'Parcelles semées': this.semisLayer,
+            'Parcelles récoltées': this.harvestLayer// an option to show or hide the layer you created from geojson
+        };
+       this.camionLayersControl.overlays = layerControl;
+
         this.onMapReady(map);
         this.camionsCarte = map;
         setTimeout(() => {
             map.invalidateSize(true);
         }, 100);
+
+        map.addEventListener('move', (e) => {
+            this.show_parcel_info = false;
+            this.show_camion_info = false;
+
+        });
 
         map.on('draw:created', (e: any) => {
             // Do whatever else you need to. (save to db, add to map etc)
@@ -312,10 +357,111 @@ export class LeafLetHomeComponent implements OnInit {
                 );
         });
         // --------------------------------------------------------------------------------------------------------------- //
+        map.on('moveend', () => {
+            if (map.getZoom() <= 12) {
+                return;
+            }
+            map.eachLayer((layer: any) => {
+                if (layer.feature && layer.feature.properties) {
+                    map.removeLayer(layer);
+                }
+            });
+            const bounds = polygon(LayersControl.getMapBound(map)).toGeoJSON();
+            this.ilotService.getIlotByZone({geom: bounds.geometry}).subscribe(
+                (res: any) => {
+                    res.data = res.data.map(il => {
+                        il.da = JSON.parse(il.da);
+                        il.da.geometry = JSON.parse(il.da.geometry);
+                        return il.da;
+                    });
+                    const parcels = new GeoJSON(res.data, {
+                        style: (geom: any) => {
+
+                            if (geom.properties.has_incident) {
+                                return this.style_incident;
+                            }
+                            if (geom.properties.is_cane) {
+                                if (+geom.properties.type === 2) {
+                                    return this.style_harvest_cane;
+                                }
+                                return this.style_cane;
+                            }
+                            if (+geom.properties.type === 2) {
+                                return this.style_harvest;
+                            }
+                            return this.style;
+                        },
+                        onEachFeature: (feature: any, layer: Layer) => {
+                            if (map.getZoom() > 15) {
+                                layer.bindTooltip(feature.properties.p_name, {
+                                    permanent: true,
+                                    direction: 'center',
+                                    className: 'leaflet-tooltip1'
+                                });
+                            }
+                            if (+feature.properties.type === 1) {
+                                layer.addTo(this.semisLayer);
+                            }
+                            if (+feature.properties.type === 2) {
+                                layer.addTo(this.harvestLayer);
+                            }
+                        }
+                    }).on('click', (ev: LeafletEvent) => {
+                        const e: any = ev;
+                        const layer = e.layer.feature.properties;
+                        this.ilot_info = LayersControl.getParcelInfo(layer);
+                        this.show_parcel_info = true;
+                    });
+
+
+                    // this.loadingVisible = false;
+                    /*res.data.forEach(ilot => {
+                      const geom = JSON.parse(ilot.da);
+                      console.log(geom);
+                      console.log(this.map);
+                      const polygon = new Polygon(geom.coordinates, {color: '#06A214'});
+                      map.addLayer(polygon);
+                    });*/
+                    /*
+                    * ,
+                      onEachFeature: (feature: Feature, layer: Layer) => {
+                        if (map.getZoom() > 15) {
+                          layer.bindTooltip(feature.properties.p_name, {
+                            permanent: true,
+                            direction: 'center',
+                            className: 'leaflet-tooltip1'
+                          });
+                        }
+                      }*/
+                }
+            );
+        });
+
+        map.on('zoomend', (ev: LeafletEvent) => {
+            if (map.getZoom() < 15) {
+                map.eachLayer((layer: Layer) => {
+                    if (layer.getTooltip()) {
+                        layer.getTooltip().setOpacity(0);
+                    }
+                });
+            } else if (map.getZoom() > 15) {
+                map.eachLayer((layer: Layer) => {
+                    if (layer.getTooltip()) {
+                        layer.getTooltip().setOpacity(1);
+                    }
+                });
+            }
+        });
+
+        const ss = polygon(LayersControl.getMapBound(map)).toGeoJSON();
+        this.loadingVisible = true;
+
+        map.setZoom(map.getZoom() + 1);
         // --------------------------------------------------------------------------------------------------------------- //
         this.loadingVisible = true;
         this.gpsService.getTrackerList().subscribe((res: any) => {
             this.trackers = res.data;
+            this.trackerEditorOptions.items = res.data;
             this.gpsService.getTrackersPosition(this.trackers.map(tracker => tracker.tracker_id)).subscribe(
                 (tracker_datas: any[]) => {
                     this.loadingVisible = false;
@@ -339,9 +485,7 @@ export class LeafLetHomeComponent implements OnInit {
                         const tracker = this.trackers.find((tr: any) => tr.tracker_id === tracker_data.id);
                         tracker.data = tracker_data;
                         if (this.currentPolyLine && this.camion_data.id === tracker_data.id) {
-                            setTimeout(() => {
-                                this.currentPolyLine.addLatLng(tracker.data.position.coordinates);
-                            }, 9000);
+                            this.currentPolyLine.addLatLng(tracker.data.position.coordinates);
                         }
                         if (this.camion_data && tracker_data.id === this.camion_data.id) {
                             this.camion_data = tracker_data;
@@ -360,17 +504,17 @@ export class LeafLetHomeComponent implements OnInit {
     // --------------------------------------------------------------------------------------------------------------- //
 
     onCamionClicked(e: any) {
-        if (!e.itemData.data) {
+        this.show_camion_info = true;
+        if (!e.itemData.data || e.itemData.data === this.camion_data) {
             return;
         }
         this.camion_data = e.itemData.data;
-        this.show_camion_info = true;
-        this.camionsCarte.flyTo(e.itemData.data.position.coordinates);
         if (this.currentPolyLine) {
             this.camionsCarte.removeLayer(this.currentPolyLine);
         }
         this.currentPolyLine = new Polyline([e.itemData.data.position.coordinates, e.itemData.data.position.coordinates]);
         this.currentPolyLine.addTo(this.camionsCarte);
+        this.camionsCarte.flyTo(e.itemData.data.position.coordinates);
     }
 
     onContextMenuItemClick = (e: any) => {
@@ -380,9 +524,9 @@ export class LeafLetHomeComponent implements OnInit {
         this.drawTracketHistory(+tracker.id, codeAction);
     };
 
-    drawTracketHistory(tracker_id: Number, codeAction: string) {
+    drawTracketHistory(tracker_id: Number, codeAction: string, start_date = new Date(), end_date = new Date()) {
         this.loadingVisible = true;
-        this.gpsService.getTrackerHistory(tracker_id, codeAction)
+        this.gpsService.getTrackerHistory(tracker_id, codeAction, start_date, end_date)
             .subscribe((res: any[]) => {
                 this.loadingVisible = false;
                 if (!res.length) {

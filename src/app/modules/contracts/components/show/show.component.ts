@@ -63,7 +63,6 @@ export class ShowComponent implements OnInit {
     }
 
     ngOnInit() {
-
         this.route.params.subscribe(
             params => {
                 this.contractService.getContract(+params.id).subscribe(

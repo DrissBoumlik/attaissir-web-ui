@@ -5,8 +5,28 @@
 ::ng-deep .dx-searchbox .dx-icon-search:before {
   color: rgb(255, 255, 255);
 }
+
 ::ng-deep .dx-texteditor-container {
   position: initial;
+}
+
+::ng-deep .siam-dashboard-intro {
+  &:before {
+    background: -moz-linear-gradient(-45deg, rgba(31, 40, 57, 0.96) 0%, rgba(32, 51, 65, 0.6) 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(31, 40, 57, 0.6)), color-stop(100%, rgba(32, 51, 65, 1)));
+    background: -webkit-linear-gradient(-45deg, rgba(31, 40, 57, 0.96) 0%, rgba(32, 51, 65, 0.6) 100%);
+    background: -o-linear-gradient(-45deg, rgba(31, 40, 57, 0.96) 0%, rgba(32, 51, 65, 0.6) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(31, 40, 57, 0.96) 0%, rgba(32, 51, 65, 0.6) 100%);
+    background: linear-gradient(135deg, rgb(12, 13, 25) 0%, rgba(32, 51, 65, 0.6) 100%);
+  }
+}
+
+::ng-deep .dx-dropdowneditor-icon {
+  color: rgba(243, 243, 243, 0.54);
+}
+
+::ng-deep .dx-dropdowneditor-button-visible.dx-editor-standard .dx-texteditor-input {
+  color: white;
 }
 
 ::ng-deep .dx-texteditor.dx-editor-standard.dx-show-clear-button .dx-texteditor-input {
@@ -32,36 +52,39 @@
 .leaflet-ga {
   width: 100%;
   height: 100%;
-  position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
-
-
 
 .kenburns-top {
 
 }
 
 .custom-popup .leaflet-popup-content-wrapper {
-  background:#2c3e50;
-  color:#fff;
-  font-size:16px;
-  line-height:24px;
+  background: #2c3e50;
+  color: #fff;
+  font-size: 16px;
+  line-height: 24px;
   border-radius: 0px;
 }
+
 .custom-popup .leaflet-popup-content-wrapper a {
-  color:rgba(255,255,255,0.1);
+  color: rgba(255, 255, 255, 0.1);
 }
+
 .custom-popup .leaflet-popup-tip-container {
-  width:30px;
-  height:15px;
+  width: 30px;
+  height: 15px;
 }
+
 .custom-popup .leaflet-popup-tip {
   background: transparent;
   border: none;
   box-shadow: none;
 }
-
-
 
 .cda_item {
   float: right;
@@ -79,16 +102,18 @@
   position: relative;
   cursor: auto;
 }
+
 .cda_item.active {
   border: 1px solid #00a7e7;
 }
+
 .cda_item.active:after {
-  content:'';
-  width:10px;
-  height:10px;
-  position:absolute;
-  top:0;
-  left:0px;
+  content: '';
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 0;
+  left: 0px;
   width: 20px;
   height: 20px;
   border-bottom: solid 10px transparent;
@@ -98,19 +123,21 @@
 }
 
 .cda_item:hover,
-.home_window_header .left-menu>li>a:hover {
+.home_window_header .left-menu > li > a:hover {
   background: #00a7e7;
-  background: -moz-linear-gradient(-45deg,  #00a7e7 0%, #104ba0 100%);
-  background: -webkit-linear-gradient(-45deg,  #00a7e7 0%,#104ba0 100%);
-  background: linear-gradient(135deg,  #00a7e7 0%,#104ba0 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00a7e7', endColorstr='#104ba0',GradientType=1 );
+  background: -moz-linear-gradient(-45deg, #00a7e7 0%, #104ba0 100%);
+  background: -webkit-linear-gradient(-45deg, #00a7e7 0%, #104ba0 100%);
+  background: linear-gradient(135deg, #00a7e7 0%, #104ba0 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00a7e7', endColorstr='#104ba0', GradientType=1);
   border: 1px solid #00a7e7;
 }
+
 .cda_item:hover h1 {
-  color:#fff;
+  color: #fff;
 }
+
 .cda_item:hover i {
-  color:#fff;
+  color: #fff;
 }
 
 .cda_item h1 {
@@ -119,8 +146,7 @@
   margin-top: 0;
 }
 
-.cda_item_head
-{
+.cda_item_head {
   line-height: 20px;
 }
 
@@ -149,19 +175,21 @@
   padding: 5px;
   background: rgba(255, 244, 245, 0);
 }
-.menu li a{
-  display:block;
-  height:em;
-  width:5em;
-  text-indent:-500em;
-  line-height:5em;
-  text-align:center;
-  color:  #fff4f5;
+
+.menu li a {
+  display: block;
+  height: em;
+  width: 5em;
+  text-indent: -500em;
+  line-height: 5em;
+  text-align: center;
+  color: #fff4f5;
   background: rgba(86, 97, 255, 0);
   position: relative;
   border-bottom: 1px solid #ffe2e3;
   transition: background 0.3s ease-in-out;
 }
+
 .menu li a:before {
   font-family: FontAwesome;
   speak: none;
@@ -172,83 +200,95 @@
   width: 100%;
   height: 100%;
   font-size: 1.4em;
-  color:  #fff4f5;
+  color: #fff4f5;
 }
+
 .menu li a.search:before {
   content: "\f002";
 }
+
 .menu li a.archive:before {
   content: "\f187";
 }
+
 .menu li a.pencil:before {
   content: "\f040";
 }
+
 .menu li a.contact:before {
   content: "\f003";
 }
+
 .menu li a.about:before {
   content: "\f007";
 }
+
 .menu li a.home:before {
   content: "\f015";
 }
-.menu li a:hover{
+
+.menu li a:hover {
   background: rgba(86, 97, 255, 0.49);
   color: #fff;
 }
+
 .menu li.current a {
   background: rgba(86, 97, 255, 0.49);
   color: #fff;
 }
+
 .menu li a.active {
   background: rgba(86, 97, 255, 0.49);
   color: #fff;
 }
-.menu li a.active:after{
-  position:absolute;
-  left:5em;
-  top:0;
-  content:"";
+
+.menu li a.active:after {
+  position: absolute;
+  left: 5em;
+  top: 0;
+  content: "";
   color: #fff;
-  border:2.5em solid transparent;
-  border-left-color:rgba(86, 97, 255, 0.49);
+  border: 2.5em solid transparent;
+  border-left-color: rgba(86, 97, 255, 0.49);
   border-width: 2.5em 1em
 }
-.menu li{
-  position:relative;
+
+.menu li {
+  position: relative;
 }
-.menu li:after{
+
+.menu li:after {
   content: attr(title);
-  position:absolute;
-  left:5em;
-  top:0;
-  height:5em;
+  position: absolute;
+  left: 5em;
+  top: 0;
+  height: 5em;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  text-transform:uppercase;
-  background:rgba(86, 97, 255, 0.49);
-  padding:2em;
+  text-transform: uppercase;
+  background: rgba(86, 97, 255, 0.49);
+  padding: 2em;
   color: #fff;
   transition: all 0.3s ease-in-out;
-  visibility:hidden;
-  opacity:0;
+  visibility: hidden;
+  opacity: 0;
 }
-.menu li:hover:after{
-  visibility:visible;
-  opacity:1;
+
+.menu li:hover:after {
+  visibility: visible;
+  opacity: 1;
 }
-@media screen and (max-height: 34em){
-  .menu li{
-    font-size:70%;
+
+@media screen and (max-height: 34em) {
+  .menu li {
+    font-size: 70%;
   }
 }
 
 .dx-scrollable {
   height: 90%;
 }
-
-
 
 @media only screen and (max-width: 600px) {
 
@@ -257,8 +297,8 @@
   }
 
   .cda_item h1 {
-     font-size: 12px !important;
-   }
+    font-size: 12px !important;
+  }
 
 }
 

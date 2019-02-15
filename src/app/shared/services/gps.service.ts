@@ -34,13 +34,20 @@ export class GpsService {
         });
     }
 
+
     /**
      *
      * @param tracker_id
+     * @param codeAction
+     * @param start_date
+     * @param end_date
      */
-    getTrackerHistory(tracker_id: Number, codeAction: string) {
+    getTrackerHistory(tracker_id: Number, codeAction: string, start_date = new Date(), end_date = new Date()) {
         const params = new HttpParams()
-            .append('code', codeAction);
+            .append('code', codeAction)
+            .append('start_date', start_date.toUTCString())
+            .append('end_date', end_date.toUTCString());
+
         return this.http.get(`${environment.apiUrl}/${this.routeName}/history/${tracker_id}`, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'

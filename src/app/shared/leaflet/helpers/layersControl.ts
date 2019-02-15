@@ -3,7 +3,8 @@ import * as L from 'leaflet';
 
 export enum NavLinkOptions {
     PARCELS,
-    CAMIONS
+    CAMIONS,
+    HISTORY
 }
 
 
@@ -36,6 +37,9 @@ export class LayersControl {
                         ' GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
                 })
         },
+        overlays: {
+            'Semis': null
+        }
     };
     public static CamionLayersControl = {
         baseLayers: {
@@ -53,12 +57,42 @@ export class LayersControl {
                 format: 'png8',
                 size: '256',
                 keepBuffer: 10
-            })
+            }),
+            'Open Street Map': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: 'Leaflet, openstreetmap.'
+            }),
+            'HERE hybridDay': tileLayer('https://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/' +
+                '{mapID}/hybrid.day/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
+                attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+                subdomains: '1234',
+                mapID: 'newest',
+                app_id: 'LFDFxuH7piXnFpMEhCfS',
+                app_code: 'wgD39fkWKD3SNkEBLx_0LQ',
+                base: 'aerial',
+                maxZoom: 20,
+                type: 'maptile',
+                language: 'eng',
+                format: 'png8',
+                size: '256',
+                keepBuffer: 10
+            }),
+            'Esri': tileLayer(
+                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    maxZoom: 18,
+                    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX,' +
+                        ' GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                })
         }
     };
     public static drawOptions = {
         position: 'topleft',
         draw: {
+            circle: false,
+            polyline: false,
+            rectangle: false,
+            marker: false,
+            circlemarker: false,
             polygon: {
                 shapeOptions: {
                     color: '#307e3d',
@@ -77,12 +111,12 @@ export class LayersControl {
         }, {
             id: 2,
             name: 'Historique',
-            UNIQUEXP: 'HISTORIQUE'
-        }, {
+            UNIQUEXP: NavLinkOptions.HISTORY
+        }, /*{
             id: 3,
             name: 'Events',
             UNIQUEXP: 'EVENTS'
-        }, {
+        },*/ {
             id: 4,
             name: 'Parcelles',
             UNIQUEXP: NavLinkOptions.PARCELS
@@ -103,6 +137,16 @@ export class LayersControl {
             color: '#68090a',
             fillColor: '#ca1214',
             fillOpacity: 1
+        },
+        style_harvest: {
+            color: '#524924',
+            fillColor: '#b7ab2d',
+            fillOpacity: 1
+        },
+        style_harvest_cane: {
+            color: '#334452',
+            fillColor: '#475da1',
+            fillOpacity: .7
         }
     };
     public static fullScreen = L.control.fullscreen({
@@ -114,6 +158,7 @@ export class LayersControl {
         forcePseudoFullscreen: false, // force use of pseudo full screen even if full screen API is available, default false
         fullscreenElement: false // Dom element to render in full screen, false by default, fallback to map._container
     });
+
     public static getMapBound(map: Map) {
         const center_ = map.getBounds().getCenter();
         const latlngs_ = [];
@@ -127,6 +172,7 @@ export class LayersControl {
         latlngs_.push({lat: map.getCenter().lat, lng: map.getBounds().getWest()}); // center_ left
         return latlngs_;
     }
+
     public static getParcelInfo = (layer: any) => {
         return {
             name: layer.p_name,
@@ -143,5 +189,5 @@ export class LayersControl {
             date_semis: layer.date_semis,
             advisors: layer.advisors,
         };
-    }
+    };
 }

@@ -1,18 +1,8 @@
 <div class="siam-dashboard-intro">
     <div class="grid-container">
         <div class="map-container">
-            <div class="map" [hidden]="option  !== optionHelper.PARCELS" style="height: 100%; width: 100%;">
-                <div style="height: 100%; width: 100%;"
-                     leaflet
-                     leafletDraw
-                     [leafletOptions]="parcelOptions"
-                     [leafletLayersControl]="parcelLayersControl"
-                     [leafletDrawOptions]="drawOptions"
-                     (leafletMapReady)="initParcelMap($event)"
-                     #parcelsMap>
-                </div>
-            </div>
-            <div class="map" [hidden]="option !== optionHelper.CAMIONS" style="height: 100%; width: 100%;">
+            <div class="map" [hidden]="option !== optionHelper.CAMIONS && option !== optionHelper.HISTORY && option !== optionHelper.PARCELS"
+                 style="height: 100%; width: 100%;">
                 <div style="height: 100%; width: 100%;"
                      leaflet
                      leafletDraw
@@ -26,7 +16,8 @@
                      #camionMap>
                 </div>
             </div>
-            <app-map-widget-info [data]="camion_data" *ngIf="show_camion_info && optionHelper.CAMIONS === option"></app-map-widget-info>
+            <app-map-widget-info [data]="camion_data"
+                                 *ngIf="show_camion_info && optionHelper.CAMIONS === option"></app-map-widget-info>
         </div>
         <div class="CDAs" style="overflow: scroll">
             <dx-tab-panel
@@ -90,14 +81,34 @@
                                                       }" style="color: #82e1a5;"
                                                       [attr.shape]="data?.data?.active  === true ? 'wifi' : 'no-wifi'"></clr-icon>
                                         </div>
-                                        <div class="clr-col">
-                                            <clr-icon shape="cog" style="cursor: pointer;"></clr-icon>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </dx-list>
+                    <div style="padding: 10px" *ngIf="link.id === 2">
+                        <dx-form id="form"
+                                 *ngIf="link.id === 2"
+                                 [formData]="customHistory">
+                            <dxi-item dataField="tracer" editorType="dxSelectBox"
+                                      [editorOptions]="trackerEditorOptions">
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                                <dxo-label [text]="'Traceur'"></dxo-label>
+                            </dxi-item>
+                            <dxi-item dataField="start_date" editorType="dxDateBox"
+                                      [editorOptions]="dateTimeEditorOption">
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                                <dxo-label [text]="'Date de début'"></dxo-label>
+                            </dxi-item>
+                            <dxi-item dataField="end_date" editorType="dxDateBox"
+                                      [editorOptions]="dateTimeEditorOption">
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                                <dxo-label [text]="'Date de fin'"></dxo-label>
+                            </dxi-item>
+                            <dxi-item editorType="dxButton"
+                                      [editorOptions]="customHistoryButtonEditorOption"></dxi-item>
+                        </dx-form>
+                    </div>
                 </div>
             </dx-tab-panel>
             <dx-context-menu
