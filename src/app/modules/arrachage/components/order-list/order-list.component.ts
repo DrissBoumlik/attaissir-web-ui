@@ -171,8 +171,10 @@ export class OrderListComponent implements OnInit {
             });
             return;
         }
+        this.loadingVisible = true;
         this.arrachageService.convocate(found).subscribe(
             (res: any) => {
+                this.loadingVisible = false;
                 this.toaster.success(`La parcelle  ${data.data.p_name} a été convocée avec succès `, 'Success', {
                     positionClass: 'toast-top-center'
                 });
@@ -180,6 +182,7 @@ export class OrderListComponent implements OnInit {
                 this.updateChartData();
             },
             (err: any) => {
+                this.loadingVisible = false;
                 console.log(err);
                 if (err.error.code === 901) {
                     this.toaster.warning(err.error.message, err.error.data, {

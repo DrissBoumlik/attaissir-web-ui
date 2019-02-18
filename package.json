@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng serve --aot",
+    "start": "node --max_old_space_size=3096 node_modules/@angular/cli/bin/ng serve --aot",
     "build": "ng build",
     "test": "ng test",
     "build-prod": "bash ./ng.sh build --prod --aot --env=prod",

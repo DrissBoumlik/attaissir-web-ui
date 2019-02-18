@@ -1,4 +1,4 @@
-<h1>Rotations de récolte.</h1>
+<h1>Rotations de récolte | Encodage.</h1>
 <hr>
 <div class="clr-row clr-align-items-end">
     <div class="clr-col clr-align-self-end">
@@ -12,28 +12,24 @@
         </dx-button>
     </div>
 </div>
+
 <dx-data-grid
         #dataGrid
         id="dataGrid"
-        [dataSource]="parcels"
+        [dataSource]="rotations"
         [columnHidingEnabled]="false"
         [allowColumnResizing]="false"
+        (onEditingStart)="onEditingStart($event)"
         [allowColumnReordering]="true"
         [columnAutoWidth]="true"
->
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}">
     <dxo-remote-operations
-            [sorting]="false"
-            [paging]="false">
+            [sorting]="true"
+            [paging]="true">
     </dxo-remote-operations>
 
     <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
-    <dxo-editing
-            mode="row"
-            [useIcons]="true"
-            [allowUpdating]="false"
-            [allowDeleting]="false">
-    </dxo-editing>
-    <dxo-selection mode="multiple" [deferred]="true"></dxo-selection>
+    <dxo-selection mode="none" [deferred]="true"></dxo-selection>
 
     <dxo-sorting mode="multiple"></dxo-sorting>
     <dxo-filter-row
@@ -49,6 +45,17 @@
             [showPageSizeSelector]="true"
             [visible]="true">
     </dxo-pager>
+    <dxo-editing
+            mode="popup"
+            [allowUpdating]="false"
+            [allowDeleting]="false"
+            [allowAdding]="false">
+        <dxo-popup
+                title="Encodage manuel"
+                [showTitle]="true">
+        </dxo-popup>
+    </dxo-editing>
+
     <dxo-paging [pageSize]="10"></dxo-paging>
 
     <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
@@ -58,85 +65,298 @@
     <dxo-group-panel [visible]="true"></dxo-group-panel>
     <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
+    <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Rotation"
+                [alignment]="'center'">
 
-    <dxi-column dataField="ir_id" [width]="40" caption="" [allowSorting]="false" [allowFiltering]="false"
-                cellTemplate="consulterTemplate"></dxi-column>
-    <dxi-column [allowHeaderFiltering]="true" [alignment]="'center'" dataType="number" dataField="ir_id"
-                caption="Réf"
-                [visible]="true"></dxi-column>
-    <dxi-column [alignment]="'center'" dataType="Text" dataField="cda_name" caption="CDA"></dxi-column>
-    <dxi-column [alignment]="'center'" dataType="Text" dataField="z_name" caption="Zone"></dxi-column>
-    <dxi-column [alignment]="'center'" dataType="Text" dataField="p_name" caption="Parcelle"></dxi-column>
-    <dxi-column [alignment]="'center'" dataType="Text" dataField="p_harvest_order" caption="Ordre"></dxi-column>
-    <dxi-column [alignment]="'center'" dataType="Text" dataField="tp_full_name" [visible]="false"
-                caption="Nom (Agrègè)"></dxi-column>
-    <dxi-column [alignment]="'center'" datatype="Text" dataField="tp_cin"
-                caption="CIN (Agrègè)"></dxi-column>
-    <dxi-column [alignment]="'center'" dataType="Text" dataField="p_annuel_surface"
-                caption="Superficie annuelle (Ha)"></dxi-column>
-    <dxi-column [alignment]="'center'" dataType="Text" dataField="sup_semis"
-                caption="Superficie semis (Ha)"></dxi-column>
-    <dxi-column [alignment]="'center'" dataType="Text" dataField="ir_sup_con"
-                caption="Superficie convoquée (Ha)"></dxi-column>
-    <dxi-column [alignment]="'center'" dataType="Text" dataField="irt_name"
-                caption="Type"></dxi-column>
-    <dxi-column [alignment]="'center'" dataType="date" dataField="ir_date_con"
-                caption="Date de convocation"></dxi-column>
-    <dxi-column [alignment]="'center'" dataType="number" dataField="ir_daily_quota"
-                caption="Tonnage/Jour"></dxi-column>
+        <dxi-column dataField="rot_id" [formItem]="{visible: false}" [allowEditing]="false" [width]="40" caption=""
+                    [allowSorting]="false" [allowFiltering]="false"
+                    cellTemplate="consulterTemplate"></dxi-column>
+        <dxi-column [alignment]="'center'" [allowEditing]="false" dataType="Text" dataField="encoding_status"
+                    cellTemplate="statusTemplate"
+                    caption="État (encodage)"></dxi-column>
 
-    <dxi-column [alignment]="'center'" dataType="number" dataField="rotation_count"
-                caption="Nombre de rotations"></dxi-column>
+        <dxi-column [alignment]="'center'" [allowEditing]="false" dataType="Text" dataField="rot_status"
+                    cellTemplate="rotationStatusTemplate"
+                    caption="État (rotation)"></dxi-column>
 
-    <dxi-column [alignment]="'center'" dataType="number" dataField="camion_count"
-                caption="Nombre max de camions autorisé"></dxi-column>
+        <dxi-column [allowHeaderFiltering]="true" [allowEditing]="false" [alignment]="'center'" dataType="number"
+                    dataField="rot_id"
+                    caption="Réf"
+                    [visible]="true"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" [allowEditing]="false" dataField="cda_name"
+                    caption="CDA"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" [allowEditing]="false" dataField="z_name"
+                    caption="Zone"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" [allowEditing]="false" dataField="p_name" [groupIndex]="0"
+                    caption="Parcelle"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" [allowEditing]="false" dataField="p_harvest_order"
+                    caption="Ordre"
+                    [visible]="false"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" [allowEditing]="false" dataField="tp_full_name"
+                    [visible]="false"
+                    caption="Nom (Agrègè)"></dxi-column>
+        <dxi-column [alignment]="'center'" datatype="Text" [allowEditing]="false" dataField="tp_cin"
+                    caption="CIN (Agrègè)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" [allowEditing]="false" [visible]="false"
+                    dataField="p_annuel_surface"
+                    [visible]="false"
+                    caption="Superficie annuelle (Ha)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="sup_semis" [allowEditing]="false"
+                    caption="Superficie semis (Ha)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="ir_sup_con" [visible]="false"
+                    [allowEditing]="false"
+                    caption="Superficie convoquée (Ha)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="irt_name" [visible]="false" [allowEditing]="false"
+                    caption="Type"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="ir_date_con" [allowEditing]="false"
+                    caption="Date de convocation"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="number" dataField="ir_daily_quota" [allowEditing]="false"
+                    caption="Tonnage/Jour (Ha)"></dxi-column>
 
-    <dxi-column [alignment]="'center'" datatype="date" dataField="ir_start_date"
-                caption="Date de debut d'arrachage"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="number" dataField="camion_count" [visible]="false"
+                    [allowEditing]="false"
+                    caption="Nombre max de camions autorisé"></dxi-column>
 
-    <dxi-column [alignment]="'center'" datatype="date" dataField="ir_end_date"
-                caption="Date prévue de fin d'arrachage"></dxi-column>
+        <dxi-column [alignment]="'center'" datatype="date" dataField="ir_start_date" [allowEditing]="false"
+                    caption="Date de debut d'arrachage"></dxi-column>
+
+        <dxi-column [alignment]="'center'" datatype="date" dataField="ir_end_date" [allowEditing]="false"
+                    caption="Date prévue de fin d'arrachage"></dxi-column>
+    </dxi-column>
+
+    <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Camion"
+                [allowEditing]="false"
+                [alignment]="'center'">
+        <dxi-column dataField="truck_ridelle_code" caption="Code Ridelle" [allowEditing]="false"></dxi-column>
+        <dxi-column dataField="truck__immatricule_number" caption="Immatricule" [allowEditing]="false"></dxi-column>
+        <dxi-column dataField="truck__ptc" caption="PTC" [allowEditing]="false"></dxi-column>
+    </dxi-column>
+
+    <dxi-column [allowFiltering]="false" [visible]="false" [allowSorting]="false" [allowSearch]="false"
+                caption="Chargeuse"
+                [allowEditing]="false"
+                [alignment]="'center'">
+        <dxi-column dataField="loader_ridelle_code" caption="Code Ridelle" [visible]="false"
+                    [allowEditing]="false"></dxi-column>
+        <dxi-column dataField="loader_immatricule_number" caption="Immatricule" [visible]="false"
+                    [allowEditing]="false"></dxi-column>
+        <dxi-column dataField="loader_ptc" caption="PTC" [visible]="false" [allowEditing]="false"></dxi-column>
+    </dxi-column>
+
+    <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Résultat"
+                [alignment]="'center'">
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="code_encodage" [visible]="false"
+                    caption="Réf encodage"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="division_source" [visible]="false"
+                    caption="Division (source)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="division_reception" [visible]="false"
+                    caption="Division (destination)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="numero_bl" caption="Numéro BL"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="numero_bc" caption="Numéro BC"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" [visible]="false" dataField="bl_ref"
+                    caption="bl_ref"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="numero_entree"
+                    caption="Numéro d'entrée"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="date_entree" caption="Date d'entrée"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="heure_entree"
+                    caption="Heure d'entrée"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="numero_sortie"
+                    caption="Heure de sortie"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="date_sortie"
+                    caption="Date de sortie"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="ptc" caption="PTC" [visible]="false"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="pav" caption="PAV" [visible]="false"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" [visible]="false" dataField="charge"
+                    caption="charge"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="ridelle" caption="Code ridelle"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="flag_modif" [visible]="false"
+                    caption="flag_modif"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="numero_centre" [visible]="false"
+                    caption="Numéro de centre"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="brut" [visible]="false"
+                    caption="brut"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="net" [visible]="false" caption="net"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="tare" [visible]="false"
+                    caption="tare"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="date_tare" [visible]="false"
+                    caption="date_tare"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="heure_tare" [visible]="false"
+                    caption="heure_tare"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="richesse" caption="Richesse"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="contre" caption="Centre"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="poids_net" caption="Poids net"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="date_saccha" [visible]="false"
+                    caption="date_saccha"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="heure_saccha" [visible]="false"
+                    caption="heure_saccha"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="cin" [visible]="false" caption="CIM"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="immat" [visible]="false"
+                    caption="Immatriculation"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="numero_chrono" [visible]="false"
+                    caption="numero_chrono"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="fru" [visible]="false" caption="fru"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="glu" [visible]="false" caption="glu"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="az" [visible]="false" caption="az"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="k" [visible]="false" caption="k"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="na" [visible]="false" caption="na"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="pur" [visible]="false" caption="pur"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="sm" [visible]="false" caption="sm"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="se" [visible]="false" caption="se"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="rd" [visible]="false" caption="rd"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="date_purete" [visible]="false"
+                    caption="date_purete"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="fiche_envoye" [visible]="false"
+                    caption="fiche_envoye"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="date_envoi" [visible]="false"
+                    caption="date_envoi"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="nom_modif" [visible]="false"
+                    caption="nom_modif"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="date_modif" [visible]="false"
+                    caption="date_modif"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="index_modif" [visible]="false"
+                    caption="index_modif"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="heure_modif" [visible]="false"
+                    caption="heure_modif"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="type_bl" [visible]="false"
+                    caption="type_bl"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="date_bl" [visible]="false"
+                    caption="date_bl"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="categorie" [visible]="false"
+                    caption="Categorie"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="purete_envoyee" [visible]="false"
+                    caption="purete_envoyee"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="date_envoi_purete" [visible]="false"
+                    caption="date_envoi_purete"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="mecanique" [visible]="false"
+                    caption="mecanique"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="code_fournisseur_transport" [visible]="false"
+                    caption="Code fournisseur transport"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="code_fournisseur_chargement" [visible]="false"
+                    caption="Code fournisseur _hargement"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="livraison_finale_globale" [visible]="false"
+                    caption="livraison_finale_globale"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="date_prevu" [visible]="false"
+                    caption="Date prévu"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="annee_plantation" [visible]="false"
+                    caption="annee_plantation"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="secteur_parcelle" [visible]="false"
+                    caption="secteur_parcelle"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="etat_impurete" [visible]="false"
+                    caption="etat_impurete"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="etat_gateau" [visible]="false"
+                    caption="etat_gateau"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="etat_brix_pol" [visible]="false"
+                    caption="etat_brix_pol"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="poids_gateau" [visible]="false"
+                    caption="poids_gateau"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="brut_gateau" [visible]="false"
+                    caption="brut_gateau"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="fibre" [visible]="false"
+                    caption="fibre"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="brix" [visible]="false"
+                    caption="brix"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="l_pol" [visible]="false"
+                    caption="l_pol"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="pol" [visible]="false" caption="pol"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="purete" [visible]="false"
+                    caption="purete"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="srt_labo" [visible]="false"
+                    caption="srt_labo"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="srt_calc" [visible]="false"
+                    caption="srt_calc"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="net_impurete" [visible]="false"
+                    caption="net_impurete"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="machine" [visible]="false"
+                    caption="machine"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="mode_coupe" [visible]="false"
+                    caption="mode_coupe"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="n_richesse" [visible]="false"
+                    caption="n_richesse"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="n_srt" [visible]="false"
+                    caption="n_srt"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="canne_refoulee" [visible]="false"
+                    caption="canne_refoulee"></dxi-column>
+        <
+
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="canne_refoulee" [allowFiltering]="false"
+                    caption="" cellTemplate="deleteButtonTemplate"></dxi-column>
+    </dxi-column>
+
+
+    <div *dxTemplate="let data of 'deleteButtonTemplate'">
+        <dx-button type="danger" [disabled]="disableDeleteBtn(data)" [text]="'Annuler'"
+                   (onClick)="cancel(data,cancelBtn)" #cancelBtn>
+        </dx-button>
+    </div>
 
     <div *dxTemplate="let data of 'consulterTemplate'">
-        <i (click)="showRotations(data.value)"
+        <i *ngIf="data.data.status !== 'done'" (click)="showRotations(data)"
            style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
            class="fa fa-info-circle fa-5x"></i>
     </div>
 
+    <div *dxTemplate="let data of 'statusTemplate'">
+      <span [ngClass]="helper.getEncodageStatus(data).cssClass">
+           {{ helper.getEncodageStatus(data).text }}
+      </span>
+    </div>
+    <div *dxTemplate="let data of 'rotationStatusTemplate'">
+      <span [ngClass]="helper.getRotationEncodageStatus(data).cssClass">
+           {{ helper.getRotationEncodageStatus(data).text }}
+      </span>
+    </div>
+
 </dx-data-grid>
+
 <dx-popup
         class="popup"
-        [width]="650"
+        (onShowing)="loadVehicles($event)"
         [showTitle]="true"
-        [title]="'Rotations'"
+        [title]="'Affectation et encodage manuel '"
         [dragEnabled]="false"
         [closeOnOutsideClick]="true"
         [(visible)]="popupVisible">
     <div *dxTemplate="let data of 'content'">
         <dx-scroll-view
-                [width]="600"
                 direction="both">
             <div id="content">
-                <dx-data-grid
-                        [dataSource]="selectedConvocation"
-                        [showBorders]="true"
-                        [columnAutoWidth]="true">
-                    <dxi-column caption="Numéro de rotation" cellTemplate="indexTemplate"></dxi-column>
-                    <dxi-column dataField="state" caption="Etat" cellTemplate="stateTemplate"></dxi-column>
-                    <dxi-column dataField="id" caption="" cellTemplate="cancelTemplate"></dxi-column>
-                    <div *dxTemplate="let data of 'stateTemplate'">
-                 <span [ngClass]="helper.getContractStatusClass(getStatut(data.value))">
-                     {{ getStatut(data.value) }}
-                </span>
-                    </div>
-                    <div *dxTemplate="let data of 'indexTemplate'">
-                        {{+data.rowIndex + 1}}
-                    </div>
-                    <div *dxTemplate="let data of 'cancelTemplate'">
-                        <dx-button [type]="'danger'" [text]="'Annuler'" (onClick)="cancel(data, cancelBtn)"
-                                   #cancelBtn></dx-button>
-                    </div>
-                </dx-data-grid>
+                <form>
+                    <dx-form id="ms_form"
+                             [(formData)]="manual_assignment"
+                             #form>
+                        <dxi-item itemType="group" caption="Affectation" [colCount]="2">
+                            <dxi-item dataField="id_truck" [colCount]="1" editorType="dxSelectBox"
+                                      [editorOptions]="manualAssignmentEditorOptios">
+                                <dxo-label text="Camion"></dxo-label>
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                            </dxi-item>
+                            <dxi-item dataField="id_loader" [colCount]="1" editorType="dxSelectBox"
+                                      [editorOptions]="loaderManualAssignmentEditorOptios">
+                                <dxo-label text="Chargeuse"></dxo-label>
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                            </dxi-item>
+                        </dxi-item>
+
+                        <dxi-item itemType="group" caption="Encodage">
+                            <dxi-item dataField="encoding_status" editorType="dxSelectBox"
+                                      [editorOptions]="encodingStatusEditorOptions">
+                                <dxo-label text="État d'encodage"></dxo-label>
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                            </dxi-item>
+                        </dxi-item>
+
+                        <dxi-item itemType="group" caption="Dernière livraison déclarée">
+                            <dxi-item dataField="last_rotation" editorType="dxSwitch"
+                                      [editorOptions]="lastRotationEditorOptions">
+                                <dxo-label text="Confirmer la dernière livraison"></dxo-label>
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                            </dxi-item>
+                        </dxi-item>
+
+                        <dxi-item editorType="dxButton"
+                                  [editorOptions]="manualAssignmentSubmitButtonEditorOptios"></dxi-item>
+                    </dx-form>
+                </form>
             </div>
         </dx-scroll-view>
     </div>

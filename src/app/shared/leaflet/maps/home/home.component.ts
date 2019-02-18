@@ -97,7 +97,7 @@ export class LeafLetHomeComponent implements OnInit {
     parcelLayersControl = LayersControl.ParcelLayersControl;
     /*----------------------Camion map options--------------------------*/
     camionOptions = {
-        layers: LayersControl.CamionLayersControl.baseLayers.CartoDB_DarkMatter,
+        layers: LayersControl.CamionLayersControl.baseLayers.Esri,
         zoom: 12,
         center: latLng(32.382843, -6.694198)
     };
@@ -316,6 +316,9 @@ export class LeafLetHomeComponent implements OnInit {
                     this.ilot_info = LayersControl.getParcelInfo(layer);
                     this.show_parcel_info = true;
                 }).addTo(map);
+            }, (error: any) => {
+                console.log(error);
+                this.loadingVisible = false;
             }
         );
     }
@@ -330,7 +333,7 @@ export class LeafLetHomeComponent implements OnInit {
             'Parcelles semées': this.semisLayer,
             'Parcelles récoltées': this.harvestLayer// an option to show or hide the layer you created from geojson
         };
-       this.camionLayersControl.overlays = layerControl;
+        this.camionLayersControl.overlays = layerControl;
 
         this.onMapReady(map);
         this.camionsCarte = map;
@@ -475,6 +478,9 @@ export class LeafLetHomeComponent implements OnInit {
                         tracker.marker = marker;
                         this.markerClusterGroup.addLayers([marker]);
                     });
+                }, error1 => {
+                    console.log(error1);
+                    this.loadingVisible = false;
                 });
         });
 
@@ -504,7 +510,9 @@ export class LeafLetHomeComponent implements OnInit {
     // --------------------------------------------------------------------------------------------------------------- //
 
     onCamionClicked(e: any) {
-        this.show_camion_info = true;
+        if (e.itemData && e.itemData.data) {
+            this.show_camion_info = true;
+        }
         if (!e.itemData.data || e.itemData.data === this.camion_data) {
             return;
         }
@@ -541,6 +549,9 @@ export class LeafLetHomeComponent implements OnInit {
                     this.currentHistoryData.polyLine.addLatLng(point.position.coordinates);
                 });
                 this.camionsCarte.addLayer(this.currentHistoryData.polyLine);
+            }, (err: any) => {
+                this.loadingVisible = false;
+                console.log(err);
             });
     }
 

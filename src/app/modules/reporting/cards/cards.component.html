@@ -62,12 +62,12 @@
   <dxi-column dataField="rib" caption="RIB">
   </dxi-column>
   <div *dxTemplate="let data of 'statusTemplate'">
-      <span [ngClass]="helper.getStatusColor(data.value)">
+      <span [ngClass]="helper.getContractStatusClass(data.value)">
           {{ data.value }}
       </span>
   </div>
   <div *dxTemplate="let data of 'stateTemplate'">
-      <span [ngClass]="data.value ? 'm-badge m-badge--success m-badge--wide' : 'm-badge m-badge--danger m-badge--wide'">
+      <span [ngClass]="data.value ? 'label label-success' : 'label label-info'">
           {{ data.value ? 'imprimée le ' + data.value : 'en cours de fabrication' }}
       </span>
   </div>

@@ -1,7 +1,7 @@
-import { isArray, isNull } from 'util';
-import { load } from '@angular/core/src/render3/instructions';
+import {isArray, isNull} from 'util';
+import {load} from '@angular/core/src/render3/instructions';
 import * as CryptoJS from 'crypto-js';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 
 export class Helper {
     /**
@@ -25,7 +25,7 @@ export class Helper {
 
         params += `&requireTotalCount=1`;
         return params;
-    }
+    };
 
     /**
      * Map Array and return a Dx datasource
@@ -40,7 +40,7 @@ export class Helper {
                 ID: key
             };
         });
-    }
+    };
 
     public static addFilter = (loadOptions: any, name: string, value: string) => {
         if (!loadOptions.hasOwnProperty('filter')) {
@@ -54,9 +54,7 @@ export class Helper {
             loadOptions['filter'].push('and');
             loadOptions['filter'].push([name, '=', value]);
         }
-    }
-
-
+    };
 
 
     public static addContainFilter = (loadOptions: any, name: string, value: string) => {
@@ -71,7 +69,7 @@ export class Helper {
             loadOptions['filter'].push('and');
             loadOptions['filter'].push([name, 'contains', value]);
         }
-    }
+    };
 
     public static editFilter = (loadOptions: any, name: string, value: string) => {
         if (loadOptions.hasOwnProperty('filter')) {
@@ -84,15 +82,24 @@ export class Helper {
                 }
             }
         }
-    }
+    };
 
     public static getContractStatusClass(statusFr: string) {
         switch (statusFr.toUpperCase().trim()) {
             case 'ENCOURS': {
                 return 'label label-info';
             }
+            case 'ENFABRICATION': {
+                return 'label label-info';
+            }
             case 'ACTIF': {
                 return 'label label-success';
+            }
+            case 'ACTIVE': {
+                return 'label label-success';
+            }
+            case 'INACTIVE': {
+                return 'label label-warning';
             }
             case 'VALIDÉ': {
                 return 'label label-success';
@@ -104,32 +111,90 @@ export class Helper {
         return 'label label-info';
     }
 
+    public static getEncodageStatus(data) {
+        let status = {
+            text: 'En attente d\'encodage',
+            cssClass: 'label label-default'
+        };
+        if (data.data.encoding_status === 'awaiting') {
+            status = {
+                text: 'En attente d\'encodage',
+                cssClass: 'label label-default'
+            };
+        }
+        if (data.data.encoding_status === 'loading') {
+            status = {
+                text: 'Chargement',
+                cssClass: 'label label-warning'
+            };
+        }
+        if (data.data.encoding_status === 'loaded') {
+            status = {
+                text: 'Chargé',
+                cssClass: 'label label-success'
+            };
+        }
+        return status;
+    }
+
+    public static getRotationEncodageStatus(data) {
+        let status = {
+            text: 'En attente d\'affectation',
+            cssClass: 'label label-default'
+        };
+        if (data.data.id_truck) {
+            status = {
+                text: 'Affectée',
+                cssClass: 'label label-success'
+            };
+        }
+        if (data.data.last_rotation === 'true') {
+            status = {
+                text: 'Dernière livraison déclarée | En attente de confirmation',
+                cssClass: 'label label-warning'
+            };
+        }
+        if (data.data.last_rotation === 'confirmed') {
+            status = {
+                text: 'Dernière livraison confirmée',
+                cssClass: 'label label-warning'
+            };
+        }
+        if (data.data.rot_status === 'done') {
+            status = {
+                text: 'Usinage',
+                cssClass: 'label label-success'
+            };
+        }
+        return status;
+    }
+
     public static realObject = (spy) => {
-        Object.keys(spy).forEach(function(key) {
+        Object.keys(spy).forEach(function (key) {
             if (spy[key] === '') {
                 spy[key] = null;
             }
         });
         return spy;
-    }
+    };
 
     public static getStatut = (value: string): string => {
         if (value === 'inprogress') {
             return 'ENCOURS';
         } else if (value === 'done') {
             return 'VALIDÉ';
-        } else if (value === 'canceled') {
+        } else if (value === 'canceled' || value === 'lost') {
             return 'ANNULÉ';
         }
-        return '';
-    }
+        return value;
+    };
 
     public static articleType = (type) => {
         if (type === 'service') {
             return 'Service';
         }
         return 'Produit';
-    }
+    };
 
 
     /**
@@ -228,9 +293,9 @@ export class Helper {
             return 'products_supplier';
         }
         return 'aggregated';
-    }
+    };
 
-    /**   
+    /** 
      * get Third party type link
      * @param link
      * @returns {string}
@@ -248,7 +313,7 @@ export class Helper {
             return 'produits';
         }
         return 'tiers';
-    }
+    };
 
     /**
      * get Third party type name
@@ -269,7 +334,7 @@ export class Helper {
             return 'Fournisseur de produits';
         }
         return 'Agrégé';
-    }
+    };
 
     /**
      * Goto A Route
@@ -285,7 +350,7 @@ export class Helper {
                 toastr.error(err.error.message);
             }
         );
-    }
+    };
     /**
      * Change value to null if undefined or empty string
      * @param val
@@ -295,7 +360,7 @@ export class Helper {
             return null;
         }
         return val;
-    }
+    };
 
     /**
      * Format data depending of API
@@ -305,8 +370,7 @@ export class Helper {
      */
     public static dataFormatter = (dat: any, test: boolean) => {
         return (!test) ? dat['data'] : dat;
-    }
-
+    };
 
 
     public static orderType = (value: string): string => {
@@ -320,7 +384,7 @@ export class Helper {
             return 'Réception des intrants';
         }
         return value;
-    }
+    };
 
     public static makeParcel = (data) => {
         if (data.hasOwnProperty('name')) {
@@ -381,7 +445,7 @@ export class Helper {
             code_ormva: data.code_ormva,
             parcels: []
         };
-    }
+    };
 
 
     /**
@@ -399,13 +463,13 @@ export class Helper {
             return 'procuration';
         }
         return value;
-    }
+    };
 
     /*************** Custom Grid Grouping Value ***************/
 
     public static groupedMouvementValue = (e) => {
         return Helper.orderType(e.type).toUpperCase();
-    }
+    };
 
     /***************Premission methode ***************/
 
@@ -449,6 +513,6 @@ export class Helper {
         } else {
             return false;
         }
-    }
+    };
 
 }

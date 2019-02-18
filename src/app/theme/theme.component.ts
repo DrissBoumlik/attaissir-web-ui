@@ -20,6 +20,7 @@ import * as CryptoJS from 'crypto-js';
 @Component({
     selector: '.m-grid.m-grid--hor.m-grid--root.m-page',
     templateUrl: './theme.component.html',
+    styleUrls: ['./theme.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
 export class ThemeComponent implements OnInit {

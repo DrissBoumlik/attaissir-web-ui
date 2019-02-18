@@ -43,6 +43,12 @@ export class LayersControl {
     };
     public static CamionLayersControl = {
         baseLayers: {
+            'Esri': tileLayer(
+                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    maxZoom: 18,
+                    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX,' +
+                        ' GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                }),
             'CartoDB_DarkMatter': tileLayer('https://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/' +
                 '{mapID}/normal.night.grey/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}&style=wings', {
                 attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
@@ -76,13 +82,7 @@ export class LayersControl {
                 format: 'png8',
                 size: '256',
                 keepBuffer: 10
-            }),
-            'Esri': tileLayer(
-                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                    maxZoom: 18,
-                    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX,' +
-                        ' GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-                })
+            })
         }
     };
     public static drawOptions = {

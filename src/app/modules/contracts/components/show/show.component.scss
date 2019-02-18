@@ -15,6 +15,16 @@ input:read-only {
 }
 
 
+::ng-deep .nav {
+  display: inline-block;
+  overflow-y: scroll;
+}
+
+@media screen and (max-width: 768px) {
+  .h1 {
+    width: 40%;
+  } }
+
 
 
 

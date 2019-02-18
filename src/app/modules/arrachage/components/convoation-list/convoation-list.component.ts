@@ -88,7 +88,7 @@ export class ConvoationListComponent implements OnInit {
                 this.camionTypes = camions;
                 this.TypeCamionEditorOptions = {
                     label: 'Type de camions',
-                    items: this.camionTypes,
+                    items: camions,
                     displayExpr: 'taille',
                     valueExpr: 'id',
                     searchEnabled: true,

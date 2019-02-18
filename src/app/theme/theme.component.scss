@@ -1,0 +1,18 @@
+.header-title {
+  font-size: 26px;
+  line-height: 12px;
+  text-decoration: none;
+  font-weight: 500;
+  float: left;
+  margin: 21px 14px 5px 5px;
+  color: #eef0f0 !important;
+}
+
+::ng-deep .nav {
+  display: inline-block !important;
+  overflow-y: scroll !important;
+}
+
+@media screen and (max-width: 768px) {
+  .header-title {
+    display: none } }
