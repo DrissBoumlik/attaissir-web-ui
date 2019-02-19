@@ -1,7 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import * as L from 'leaflet';
-import {GeoJSON, latLng, Layer, LayerGroup, LeafletEvent, Map, Marker, Polygon, polygon, Polyline} from 'leaflet';
+import {
+    GeoJSON,
+    latLng,
+    Layer,
+    LayerGroup,
+    LeafletEvent,
+    Map,
+    Marker,
+    MarkerOptions,
+    Polygon,
+    polygon,
+    Polyline
+} from 'leaflet';
 import 'leaflet.markercluster';
 import {ZonesService} from '../../../../modules/contracts/services/zones.service';
 import {CarteService} from '../../../../modules/cartographie/carte.service';
@@ -477,10 +489,11 @@ export class LeafLetHomeComponent implements OnInit {
                             iconUrl: 'assets/images/truck_small_2.png',
                             iconSize: [20, 40], // size of the icon
                         });
-                        const marker = L.marker(tracker.data.position.coordinates, {
+                        const options: any = {
                             icon,
                             rotationAngle: 40
-                        });
+                        };
+                        const marker = L.marker(tracker.data.position.coordinates, options);
                         tracker.marker = marker;
                         this.markerClusterGroup.addLayers([marker]);
                     });
