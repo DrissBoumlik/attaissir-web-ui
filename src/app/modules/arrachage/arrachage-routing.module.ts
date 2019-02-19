@@ -9,6 +9,7 @@ import { ChargementAffectationListComponent } from './components/chargement-affe
 import { EncodageLisComponent } from './components/encodage-lis/encodage-lis.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { RotationsListComponent } from './components/rotations-list/rotations-list.component';
+import {TruckLineupComponent} from './components/truck-lineup/truck-lineup.component';
 
 const routes: Routes = [{
     path: 'arrachage',
@@ -19,7 +20,8 @@ const routes: Routes = [{
         { path: 'encodage/liste', component: EncodageLisComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
         { path: 'chargements', component: ChargementAffectationListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
         { path: 'echantillons', component: EchantillonnageListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
-        { path: 'echantillons/:id', component: EchantillonnageShowComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } }
+        { path: 'echantillons/:id', component: EchantillonnageShowComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
+        { path: 'truck/lineup', component: TruckLineupComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } }
     ]
 }];
 

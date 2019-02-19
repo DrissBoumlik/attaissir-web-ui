@@ -20,6 +20,7 @@ import { ChargementAffectationListComponent } from './components/chargement-affe
 import { EncodageLisComponent } from './components/encodage-lis/encodage-lis.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { RotationsListComponent } from './components/rotations-list/rotations-list.component';
+import { TruckLineupComponent } from './components/truck-lineup/truck-lineup.component';
 
 @NgModule({
     imports: [
@@ -40,6 +41,6 @@ import { RotationsListComponent } from './components/rotations-list/rotations-li
         DxBoxModule,
         DxLoadPanelModule
     ],
-    declarations: [ConvoationListComponent, EchantillonnageListComponent, EchantillonnageShowComponent, ChargementAffectationListComponent, EncodageLisComponent, OrderListComponent, RotationsListComponent]
+    declarations: [ConvoationListComponent, EchantillonnageListComponent, EchantillonnageShowComponent, ChargementAffectationListComponent, EncodageLisComponent, OrderListComponent, RotationsListComponent, TruckLineupComponent]
 })
 export class ArrachageModule { }

@@ -9,6 +9,7 @@ import '../../../../../../node_modules/leaflet.fullscreen/Control.FullScreen.js'
 import {GpsService} from '../../../services/gps.service';
 import {LayersControl, NavLinkOptions} from '../../helpers/layersControl';
 import '../../services/MovingMarker';
+import '../../services/rotatedMarker';
 import {LineString, MultiLineString} from 'geojson';
 import * as geojson from 'geojson';
 
@@ -175,12 +176,12 @@ export class LeafLetHomeComponent implements OnInit {
     // --------------------------------------------------------------------------------------------------------------- //
     onOptionchanged(option) {
         this.option = option.addedItems[0].UNIQUEXP;
-        setTimeout(() => {
+        /*setTimeout(() => {
             this.camionsCarte.invalidateSize(true);
         }, 100);
         setTimeout(() => {
             this.parcelsCarte.invalidateSize(true);
-        }, 100);
+        }, 100);*/
     }
 
     // --------------------------------------------------------------------------------------------------------------- //
@@ -196,7 +197,7 @@ export class LeafLetHomeComponent implements OnInit {
         });
 
         map.on('draw:created', function (e: any) {
-            console.log(e);
+
             // Do whatever else you need to. (save to db, add to map etc)
             map.addLayer(e.layer);
         });
@@ -352,6 +353,7 @@ export class LeafLetHomeComponent implements OnInit {
             const layer: Polygon = e.layer;
             console.log(layer);
             map.addLayer(e.layer);
+            console.log(JSON.stringify(e.layer.toGeoJSON()));
             this.gpsService.addHarvestPolygon(layer.toGeoJSON())
                 .subscribe(
                     (res: any) => {
@@ -472,9 +474,13 @@ export class LeafLetHomeComponent implements OnInit {
                         const tracker = this.trackers.find((tr: any) => tr.tracker_id === tracker_data.id);
                         tracker.data = tracker_data;
                         const icon = L.icon({
-                            iconUrl: 'assets/images/truck.png'
+                            iconUrl: 'assets/images/truck_small_2.png',
+                            iconSize: [20, 40], // size of the icon
                         });
-                        const marker = L.marker(tracker.data.position.coordinates, {icon});
+                        const marker = L.marker(tracker.data.position.coordinates, {
+                            icon,
+                            rotationAngle: 40
+                        });
                         tracker.marker = marker;
                         this.markerClusterGroup.addLayers([marker]);
                     });
@@ -496,6 +502,7 @@ export class LeafLetHomeComponent implements OnInit {
                         if (this.camion_data && tracker_data.id === this.camion_data.id) {
                             this.camion_data = tracker_data;
                         }
+                        tracker.marker.options.rotationAngle = tracker.data.angle;
                         tracker.marker.slideTo(tracker.data.position.coordinates, {
                                 duration: 5000,
                                 keepAtCenter: false

@@ -270,13 +270,13 @@ export class ThemeComponent implements OnInit {
                     },
                     {
                         icon: 'number-list',
-                        name: 'Ordre d\'arrachage',
+                        name: 'Ordre de récolte',
                         url: '/arrachage/ordre',
                         permission: ['preconization.interventions.store']
                     },
                     {
                         icon: 'envelope',
-                        name: 'Convocations d\'arrachage',
+                        name: 'Convocations de récoltes',
                         url: '/arrachage/convocations',
                         hasBadge: true,
                         permission: ['preconization.interventions.store']
@@ -289,8 +289,8 @@ export class ThemeComponent implements OnInit {
                     },
                     {
                         icon: 'truck',
-                        name: 'Liste des affectations des camions',
-                        url: '/arrachage/chargements',
+                        name: 'File d\'attente',
+                        url: '/arrachage/truck/lineup',
                         permission: ['preconization.interventions.store']
                     }
                 ]

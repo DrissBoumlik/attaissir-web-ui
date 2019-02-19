@@ -63,4 +63,8 @@ export class GpsService {
             })
         });
     }
+
+    getLineupData() {
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/trackers/lineup`);
+    }
 }
