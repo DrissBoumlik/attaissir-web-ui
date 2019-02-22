@@ -191,29 +191,28 @@ span.dx-field-item-required-mark {
 /*************/
 
 .m-aside-left-fixed .m-body .m-wrapper {
- //  margin-left: 255px;
+  //  margin-left: 255px;
 }
 
 .m-aside-left-fixed .m-aside-left {
   // position: fixed;
   top: 0;
- // z-index: 10000000;
+  // z-index: 10000000;
 }
 
 .m-aside-left--minimize.m-aside-left-fixed .m-body .m-wrapper {
- //  margin-left: 10px;
+  //  margin-left: 10px;
 }
 
 .m-aside-left-fixed .m-header {
- // left: 255px;
+  // left: 255px;
 }
 
 .m-aside-left--minimize.m-aside-left-fixed .m-header {
- // left: 80px;
+  // left: 80px;
 }
 
 /*************/
-
 
 body.m-content--skin-light2 {
   background-color: #eceff1;
@@ -1060,42 +1059,32 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
   }
 }
 
-
-
 @media only screen and (max-width: 600px) {
 
-
-
   .grid-container-vector {
-     position: relative;
-   width: 100%;
+    position: relative;
+    width: 100%;
   }
-
 
 }
 
- @media only screen and (min-width: 600px) {
+@media only screen and (min-width: 600px) {
 
+  .grid-container-vector {
+    display: grid;
+    position: relative;
+    /*
+    height: 100%;
+    */
+    // grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: 1fr 1fr;
 
-   .grid-container-vector {
-     display: grid;
-     position: relative;
-     /*
-     height: 100%;
-     */
-     // grid-template-columns: 0.8fr 1.2fr;
-     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 1px 1px;
+    grid-template-areas: "SIGAAKPIS VAECTOR-MAP";
+  }
 
-     grid-template-rows: 1fr;
-     grid-gap: 1px 1px;
-     grid-template-areas: "SIGAAKPIS VAECTOR-MAP";
-   }
-
-
- }
-
-
-
+}
 
 .SIGAAKPIS {
   grid-area: SIGAAKPIS;
@@ -1113,7 +1102,7 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
 .SIGAAKPIS::-webkit-scrollbar-thumb {
   border-radius: 0px;
   -webkit-box-shadow: inset 0 0 6px rgba(154, 156, 158, 0.6);
-  background:  rgb(48, 51, 58);
+  background: rgb(48, 51, 58);
 }
 
 .VAECTOR-MAP {
@@ -1337,10 +1326,7 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
   outline: 0 !important;
   transition: all .4s ease;
 
-
-
 }
-
 
 @media only screen and (max-width: 600px) {
 
@@ -1350,8 +1336,6 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
   }
 }
 
-
-
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (max-width: 600px) {
 
@@ -1360,15 +1344,12 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
 
-
-
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
 
 }
-
 
 .siam-sidebar-toggler span {
   display: block;
@@ -1541,9 +1522,9 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current {
   display: inline-block;
 }
 
-.m-menu__nav--dropdown-submenu-arrow{
+.m-menu__nav--dropdown-submenu-arrow {
 
-    height: 100vh;
+  height: 100vh;
   //  overflow: scroll;
 }
 
@@ -2063,19 +2044,19 @@ table.ui.fixed.table > tbody > tr > td:nth-child(2):after {
 
 .box {
   background: #20232A;
-  background: -moz-linear-gradient(top,  #20232A 0%,#353A44 100%);
-  background: -webkit-linear-gradient(top,  #20232A 0%,#353A44 100%);
-  background: linear-gradient(to bottom,  #20232A 0%,#353A44 100%);
+  background: -moz-linear-gradient(top, #20232A 0%, #353A44 100%);
+  background: -webkit-linear-gradient(top, #20232A 0%, #353A44 100%);
+  background: linear-gradient(to bottom, #20232A 0%, #353A44 100%);
   -webkit-animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  background-color:#fff;
-  -webkit-box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.75);
+  background-color: #fff;
+  -webkit-box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.75);
   background: #00a7e7;
-  background: -moz-linear-gradient(-45deg,  #00a7e7 0%, rgba(16, 75, 160, 0.69) 100%);
-  background: -webkit-linear-gradient(-45deg,  #00a7e7 0%,rgba(16, 75, 160, 0.69) 100%);
-  background: linear-gradient(135deg,  #00a7e7 0%, rgba(16, 75, 160, 0.69) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00a7e7', endColorstr='#104ba0',GradientType=1 );
+  background: -moz-linear-gradient(-45deg, #00a7e7 0%, rgba(16, 75, 160, 0.69) 100%);
+  background: -webkit-linear-gradient(-45deg, #00a7e7 0%, rgba(16, 75, 160, 0.69) 100%);
+  background: linear-gradient(135deg, #00a7e7 0%, rgba(16, 75, 160, 0.69) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00a7e7', endColorstr='#104ba0', GradientType=1);
   margin: 15px auto 0;
   border-radius: 5px;
   width: 300px;
@@ -2198,13 +2179,12 @@ body {
 }
 
 .leaflet-tooltip {
-  background-color: rgba(0,0,0,0) !important;
-  border: 0 solid #fff  !important;
-  color: #f7f7f7  !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  border: 0 solid #fff !important;
+  color: #f7f7f7 !important;
   font-weight: bold;
-  box-shadow: 0 1px 3px rgba(0,0,0,0)  !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0) !important;
 }
-
 
 /*
 #m_ver_menu{
@@ -2220,20 +2200,15 @@ body {
 
 */
 
- .m-brand__logo-wrapper {
-margin-top: 10px
- }
-
-
-.m-content {
-   padding-bottom: 100px !important;
+.m-brand__logo-wrapper {
+  margin-top: 10px
 }
 
-
-
+.m-content {
+  padding-bottom: 100px !important;
+}
 
 @media only screen and (max-width: 600px) {
-
 
 }
 
@@ -2241,3 +2216,35 @@ margin-top: 10px
   display: inline-block !important;
   overflow-y: scroll !important;
 }
+
+.main-container .content-container .sidenav {
+  overflow: scroll !important;
+}
+
+.header .header-nav .nav-link, header .header-nav .nav-link {
+  display: inherit !important;
+  opacity: 0.8 !important;
+}
+
+.main-container .content-container .clr-vertical-nav, .main-container .content-container .sidenav {
+}
+
+.by {
+  font-size: 13px !important;
+  color: rgba(255, 251, 255, 0.7) !important;
+}
+
+@media screen and (max-width: 768px) {
+  .by {
+    font-size: 13px !important;
+    color: #2c2d2e !important;
+
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-container.open-hamburger-menu .header .branding {
+    padding-left: 0 !important;
+  }
+}
+

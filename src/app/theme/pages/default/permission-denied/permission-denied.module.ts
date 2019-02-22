@@ -8,7 +8,6 @@ import { PermissionDeniedComponent } from './permission-denied.component';
 const routes: Routes = [
     {
         'path': '',
-        'component': DefaultComponent,
         'children': [
             {
                 'path': '',

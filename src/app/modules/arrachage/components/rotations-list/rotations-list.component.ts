@@ -6,6 +6,7 @@ import DataSource from 'devextreme/data/data_source';
 import {Helper} from '../../../../shared/classes/helper';
 import {isNull} from 'util';
 import {DxDataGridComponent} from 'devextreme-angular';
+import {ModelHasPermissionService} from '../../services/model-has-permission.service';
 
 @Component({
     selector: 'app-rotations-list',
@@ -253,4 +254,8 @@ export class RotationsListComponent implements OnInit {
             }
         };
     };
+
+    modeHaspermission(strings: string[]) {
+        return ModelHasPermissionService.modelHahPermission(strings);
+    }
 }

@@ -6,6 +6,7 @@ import {DxChartComponent, DxDataGridComponent} from 'devextreme-angular';
 import {HarvestConvocation} from '../../classes/HarvestConvocation';
 import {ToastrService} from 'ngx-toastr';
 import {catchError} from 'rxjs/operators';
+import {ModelHasPermissionService} from '../../services/model-has-permission.service';
 
 @Component({
     selector: 'app-order-list',
@@ -41,7 +42,8 @@ export class OrderListComponent implements OnInit {
     vars: any;
 
     constructor(private arrachageService: ArrachageService,
-                private toaster: ToastrService) {
+                private toaster: ToastrService,
+                private permService: ModelHasPermissionService) {
         this.helper = Helper;
         this.today = new Date();
         this.tomorrow = new Date();
@@ -239,4 +241,9 @@ export class OrderListComponent implements OnInit {
                     this.chartData = cData.data;
                 });
     };
+
+    modelHaspermission(store: string) {
+        console.log(ModelHasPermissionService.modelHahPermission([store]));
+        return ModelHasPermissionService.modelHahPermission([store]);
+    }
 }

@@ -272,26 +272,26 @@ export class ThemeComponent implements OnInit {
                         icon: 'number-list',
                         name: 'Ordre de récolte',
                         url: '/arrachage/ordre',
-                        permission: ['preconization.interventions.store']
+                        permission: ['convocations.order.view']
                     },
                     {
                         icon: 'envelope',
                         name: 'Convocations de récoltes',
                         url: '/arrachage/convocations',
                         hasBadge: true,
-                        permission: ['preconization.interventions.store']
+                        permission: ['convocations.generate.view']
                     },
                     {
                         icon: 'replay-one',
                         name: 'Rotations de récolte',
                         url: '/arrachage/convocations/generated',
-                        permission: ['preconization.interventions.store']
+                        permission: ['convocations.rotations.view']
                     },
                     {
                         icon: 'truck',
                         name: 'File d\'attente',
                         url: '/arrachage/truck/lineup',
-                        permission: ['preconization.interventions.store']
+                        permission: ['convocations.rotations.queue']
                     }
                 ]
             },

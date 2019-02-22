@@ -14,14 +14,14 @@ import {TruckLineupComponent} from './components/truck-lineup/truck-lineup.compo
 const routes: Routes = [{
     path: 'arrachage',
     children: [
-        { path: 'ordre', component: OrderListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
-        { path: 'convocations', component: ConvoationListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
-        { path: 'convocations/generated', component: RotationsListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
+        { path: 'ordre', component: OrderListComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.order.view'] } },
+        { path: 'convocations', component: ConvoationListComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.generate.view'] } },
+        { path: 'convocations/generated', component: RotationsListComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.rotations.view'] } },
         { path: 'encodage/liste', component: EncodageLisComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
         { path: 'chargements', component: ChargementAffectationListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
         { path: 'echantillons', component: EchantillonnageListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
         { path: 'echantillons/:id', component: EchantillonnageShowComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
-        { path: 'truck/lineup', component: TruckLineupComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } }
+        { path: 'truck/lineup', component: TruckLineupComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.rotations.queue'] } }
     ]
 }];
 

@@ -1,27 +1,27 @@
-<script src="../../../../siam618-web-ui/src/app/theme/layouts/aside-nav/aside-nav.component.ts"></script>
-<div class="main-container">
-    <header class="header header-2">
-        <div class="branding">
-            <a href="/" class="nav-link">
-                <img src="../../assets/images/symbol_cosumar.png" style="width: 60px" alt="ATTAISSIR">
-                <a  class="logo header-title" href="/">ATTAISSIR.<br>
-                    <span class="by" style="    font-size: 13px;
-    color: rgba(255,251,255,0.7);">Groupe COSUMAR</span>
-                </a>
-            </a>
-        </div>
-        <div class="header-actions">
-            <clr-dropdown>
-                <button class="nav-text" clrDropdownTrigger>
-                    {{ currentUser.name }}
-                    <clr-icon shape="caret down"></clr-icon>
-                </button>
-                <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                    <a href="/logout" clrDropdownItem>Déconnexion</a>
-                </clr-dropdown-menu>
-            </clr-dropdown>
-        </div>
-    </header>
+<clr-main-container>
+   <clr-header>
+       <div class="header-nav">
+           <div class="branding">
+               <a href="/" class="nav-link">
+                   <img src="../../assets/images/symbol_cosumar.png" style="width: 60px" alt="ATTAISSIR">
+                   <a  class="logo header-title" href="/">ATTAISSIR.<br>
+                       <span class="by">Groupe COSUMAR</span>
+                   </a>
+               </a>
+           </div>
+           <div class="header-actions">
+               <clr-dropdown>
+                   <button class="nav-text" clrDropdownTrigger>
+                       {{ currentUser.name }}
+                       <clr-icon shape="caret down"></clr-icon>
+                   </button>
+                   <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                       <a href="/logout" clrDropdownItem>Déconnexion</a>
+                   </clr-dropdown-menu>
+               </clr-dropdown>
+           </div>
+       </div>
+   </clr-header>
     <nav class="subnav">
         <ul class="nav">
             <li class="nav-item" *ngFor="let t of tenants">
@@ -34,35 +34,36 @@
         <div class="content-area">
             <router-outlet></router-outlet>
         </div>
-        <clr-vertical-nav [clrVerticalNavCollapsible]="true" [clrVerticalNavCollapsed]="demoCollapsed">
-            <div *ngFor="let route of routes">
-                <clr-vertical-nav-group
-                        *ngIf="route.subMenu"
-                        routerLinkActive="active"
-                        [appPermissionHidden]="route.permission">
-                    <a [routerLink]="route.url" hidden aria-hidden="true"></a>
-                    <clr-icon [attr.shape]="route.icon" clrVerticalNavIcon></clr-icon>
-                    {{ route.name }}
-                    <clr-vertical-nav-group-children *clrIfExpanded="true">
-                        <div *ngFor="let child of route.subMenu" [appPermissionHidden]="child.permission">
-                            <a clrVerticalNavLink
-                               [routerLink]="child.url"
-                               [queryParams]="child.queryParams"
-                               routerLinkActive="active">
-                                {{ child.name }}
-                                <clr-icon [attr.shape]="child.icon" [ngClass]="child.hasBadge ? 'has-badge' : ''"
-                                          clrVerticalNavIcon></clr-icon>
-                            </a>
-                        </div>
-                    </clr-vertical-nav-group-children>
-                </clr-vertical-nav-group>
-                <a clrVerticalNavLink [routerLink]="route.url" [appPermissionHidden]="route.permission"
-                   *ngIf="!route.subMenu" routerLinkActive="active">
-                    <clr-icon clrVerticalNavIcon [attr.shape]="route.icon"></clr-icon>
-                    {{ route.name }}
-                </a>
-            </div>
-        </clr-vertical-nav>
-
+        <nav class="sidenav" [clr-nav-level]="1">
+            <clr-vertical-nav [clrVerticalNavCollapsible]="true" [clrVerticalNavCollapsed]="demoCollapsed">
+                <div *ngFor="let route of routes">
+                    <clr-vertical-nav-group
+                            *ngIf="route.subMenu"
+                            routerLinkActive="active"
+                            [appPermissionHidden]="route.permission">
+                        <a [routerLink]="route.url" hidden aria-hidden="true"></a>
+                        <clr-icon [attr.shape]="route.icon" clrVerticalNavIcon></clr-icon>
+                        {{ route.name }}
+                        <clr-vertical-nav-group-children *clrIfExpanded="true">
+                            <div *ngFor="let child of route.subMenu" [appPermissionHidden]="child.permission">
+                                <a clrVerticalNavLink
+                                   [routerLink]="child.url"
+                                   [queryParams]="child.queryParams"
+                                   routerLinkActive="active">
+                                    {{ child.name }}
+                                    <clr-icon [attr.shape]="child.icon" [ngClass]="child.hasBadge ? 'has-badge' : ''"
+                                              clrVerticalNavIcon></clr-icon>
+                                </a>
+                            </div>
+                        </clr-vertical-nav-group-children>
+                    </clr-vertical-nav-group>
+                    <a clrVerticalNavLink [routerLink]="route.url" [appPermissionHidden]="route.permission"
+                       *ngIf="!route.subMenu" routerLinkActive="active">
+                        <clr-icon clrVerticalNavIcon [attr.shape]="route.icon"></clr-icon>
+                        {{ route.name }}
+                    </a>
+                </div>
+            </clr-vertical-nav>
+        </nav>
     </div>
-</div>
+</clr-main-container>

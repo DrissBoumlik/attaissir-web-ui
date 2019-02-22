@@ -87,7 +87,8 @@
                 [visible]="false"></dxi-column>
     <dxi-column dataType="number" [visible]="false" dataField="p_annuel_surface" dataType="number"
                 caption="Superficie annuel" format="#,## (ha)"></dxi-column>
-    <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Convocation"
+
+    <dxi-column [allowFiltering]="false" [visible]="modelHaspermission('convocations.order.store')" [allowSorting]="false" [allowSearch]="false" caption="Convocation"
                 [alignment]="'center'" [cssClass]="{backGroundColor: 'red'}">
         <dxi-column
                 caption="Superficie à travailler (Ha)"

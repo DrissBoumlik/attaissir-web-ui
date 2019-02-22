@@ -488,10 +488,11 @@ export class LeafLetHomeComponent implements OnInit {
                         const icon = L.icon({
                             iconUrl: 'assets/images/truck_small_2.png',
                             iconSize: [20, 40], // size of the icon
+                            iconAnchor: [10, 10]
                         });
                         const options: any = {
                             icon,
-                            rotationAngle: 40
+                            rotationAngle: 180
                         };
                         const marker = L.marker(tracker.data.position.coordinates, options);
                         tracker.marker = marker;
@@ -515,7 +516,7 @@ export class LeafLetHomeComponent implements OnInit {
                         if (this.camion_data && tracker_data.id === this.camion_data.id) {
                             this.camion_data = tracker_data;
                         }
-                        tracker.marker.options.rotationAngle = tracker.data.angle;
+                        tracker.marker.options.rotationAngle = tracker.data.angle + 100;
                         tracker.marker.slideTo(tracker.data.position.coordinates, {
                                 duration: 5000,
                                 keepAtCenter: false

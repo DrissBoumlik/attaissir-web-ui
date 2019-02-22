@@ -7,6 +7,8 @@
                 icon="fa fa-credit-card-alt"
                 style="font-weight: bold"
                 [type]="'success'"
+                [visible]="modeHaspermission(['convocations.rotations.manual_assign'])"
+                [disabled]="!modeHaspermission(['convocations.rotations.manual_assign'])"
                 text="Affecter par code de ridelle"
                 (onClick)="assignByRC()">
         </dx-button>
@@ -143,7 +145,7 @@
         <dxi-column dataField="loader_ptc" caption="PTC" [visible]="false" [allowEditing]="false"></dxi-column>
     </dxi-column>
 
-    <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Résultat"
+    <dxi-column [allowFiltering]="false" [allowSorting]="false" [visible]="modeHaspermission(['convocations.encoding.result'])" [allowSearch]="false" caption="Résultat"
                 [alignment]="'center'">
         <dxi-column [alignment]="'center'" dataType="Text" dataField="code_encodage" [visible]="false"
                     caption="Réf encodage"></dxi-column>
@@ -285,6 +287,7 @@
 
     <div *dxTemplate="let data of 'deleteButtonTemplate'">
         <dx-button type="danger" [disabled]="disableDeleteBtn(data)" [text]="'Annuler'"
+                   [visible]="modeHaspermission(['convocations.rotations.cancel'])"
                    (onClick)="cancel(data,cancelBtn)" #cancelBtn>
         </dx-button>
     </div>
@@ -324,7 +327,7 @@
                     <dx-form id="ms_form"
                              [(formData)]="manual_assignment"
                              #form>
-                        <dxi-item itemType="group" caption="Affectation" [colCount]="2">
+                        <dxi-item itemType="group" caption="Affectation" [colCount]="2" [visible]="modeHaspermission(['convocations.rotations.manual_assign'])">
                             <dxi-item dataField="id_truck" [colCount]="1" editorType="dxSelectBox"
                                       [editorOptions]="manualAssignmentEditorOptios">
                                 <dxo-label text="Camion"></dxo-label>
@@ -337,7 +340,7 @@
                             </dxi-item>
                         </dxi-item>
 
-                        <dxi-item itemType="group" caption="Encodage">
+                        <dxi-item itemType="group" caption="Encodage" [visible]="modeHaspermission(['convocations.rotations.manual_assign'])">
                             <dxi-item dataField="encoding_status" editorType="dxSelectBox"
                                       [editorOptions]="encodingStatusEditorOptions">
                                 <dxo-label text="État d'encodage"></dxo-label>
@@ -345,7 +348,7 @@
                             </dxi-item>
                         </dxi-item>
 
-                        <dxi-item itemType="group" caption="Dernière livraison déclarée">
+                        <dxi-item itemType="group" caption="Dernière livraison déclarée" [visible]="modeHaspermission(['convocations.encoding.last_rotation'])">
                             <dxi-item dataField="last_rotation" editorType="dxSwitch"
                                       [editorOptions]="lastRotationEditorOptions">
                                 <dxo-label text="Confirmer la dernière livraison"></dxo-label>
