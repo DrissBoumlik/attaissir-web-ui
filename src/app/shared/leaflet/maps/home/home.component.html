@@ -61,7 +61,9 @@
                             [showSelectionControls]="true"
                             [selectedItemKeys]="[]">
                         <div *dxTemplate="let data of 'item'">
-                            <div id="item" [attr.datasrc]="data" class="cda_item" data-cda="503" data-id="5">
+                            <div id="item" [attr.datasrc]="data" class="cda_item" data-cda="503" data-id="5"  [ngStyle]="{
+                                                        cursor: data?.data?.position  ? 'pointer' : 'not-allowed'
+                                                      }">
                                 <div class="cda_item_body" #div>
                                     <div class="clr-row">
                                         <div class="clr-col">
@@ -79,9 +81,9 @@
                                         </div>
                                         <div class="clr-col">
                                             <clr-icon [ngStyle]="{
-                                                        color: data?.data?.active  === true ? '#80ff7c' : '#ff4d4c'
-                                                      }" style="color: #82e1a5;"
-                                                      [attr.shape]="data?.data?.active  === true ? 'wifi' : 'no-wifi'"></clr-icon>
+                                                        color: data?.data?.position  ? '#80ff7c' : '#ff4d4c'
+                                                      }"
+                                                      [attr.shape]="data?.data?.position   ? 'wifi' : 'no-wifi'"></clr-icon>
                                         </div>
                                     </div>
                                 </div>

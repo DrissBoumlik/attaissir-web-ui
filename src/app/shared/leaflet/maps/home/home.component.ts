@@ -363,9 +363,9 @@ export class LeafLetHomeComponent implements OnInit {
         map.on('draw:created', (e: any) => {
             // Do whatever else you need to. (save to db, add to map etc)
             const layer: Polygon = e.layer;
-            console.log(layer);
+            // console.log(layer);
             map.addLayer(e.layer);
-            console.log(JSON.stringify(e.layer.toGeoJSON()));
+            // console.log(JSON.stringify(e.layer.toGeoJSON()));
             this.gpsService.addHarvestPolygon(layer.toGeoJSON())
                 .subscribe(
                     (res: any) => {
@@ -494,9 +494,11 @@ export class LeafLetHomeComponent implements OnInit {
                             icon,
                             rotationAngle: 180
                         };
-                        const marker = L.marker(tracker.data.position.coordinates, options);
-                        tracker.marker = marker;
-                        this.markerClusterGroup.addLayers([marker]);
+                       if (tracker.data.position) {
+                           const marker = L.marker(tracker.data.position.coordinates, options);
+                           tracker.marker = marker;
+                           this.markerClusterGroup.addLayers([marker]);
+                       }
                     });
                 }, error1 => {
                     console.log(error1);
@@ -516,12 +518,13 @@ export class LeafLetHomeComponent implements OnInit {
                         if (this.camion_data && tracker_data.id === this.camion_data.id) {
                             this.camion_data = tracker_data;
                         }
-                        tracker.marker.options.rotationAngle = tracker.data.angle + 100;
-                        tracker.marker.slideTo(tracker.data.position.coordinates, {
+                        if (tracker.marker && tracker.marker.options) {
+                            tracker.marker.options.rotationAngle = tracker.data.angle + 100;
+                            tracker.marker.slideTo(tracker.data.position.coordinates, {
                                 duration: 5000,
                                 keepAtCenter: false
-                            }
-                        );
+                            });
+                        }
                     });
                 }
             );
@@ -531,10 +534,10 @@ export class LeafLetHomeComponent implements OnInit {
     // --------------------------------------------------------------------------------------------------------------- //
 
     onCamionClicked(e: any) {
-        if (e.itemData && e.itemData.data) {
+        if (e.itemData && e.itemData.data && e.itemData.data.position) {
             this.show_camion_info = true;
         }
-        if (!e.itemData.data || e.itemData.data === this.camion_data) {
+        if (!e.itemData.data || e.itemData.data === this.camion_data || !e.itemData.data.position) {
             return;
         }
         this.camion_data = e.itemData.data;

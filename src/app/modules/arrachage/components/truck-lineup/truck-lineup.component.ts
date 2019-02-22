@@ -16,20 +16,30 @@ export class TruckLineupComponent implements OnInit {
 
     ngOnInit() {
         this.loadingVisible = true;
+        this.gpsService.getLineupData()
+            .subscribe(
+                (res: any) => {
+                    this.loadingVisible = false;
+                    this.encoded = res.data.encoded;
+                    this.not_encoded = res.data.not_encoded;
+                    this.last_rotation = res.data.last_rotation;
+                }, (err => {
+                    this.loadingVisible = false;
+                    throw err;
+                })
+            );
         setInterval(() => {
             this.gpsService.getLineupData()
                 .subscribe(
                     (res: any) => {
-                        this.loadingVisible = false;
                         this.encoded = res.data.encoded;
                         this.not_encoded = res.data.not_encoded;
                         this.last_rotation = res.data.last_rotation;
                     }, (err => {
-                        this.loadingVisible = false;
                         throw err;
                     })
                 );
-        }, 6000);
+        }, 180000);
     }
 
 
