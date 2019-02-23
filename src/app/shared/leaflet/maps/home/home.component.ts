@@ -32,6 +32,9 @@ declare module 'leaflet' {
     namespace marker {
         function slideTo(v: any, o: any);
     }
+    namespace Marker {
+        function bindLabel(v: any);
+    }
 }
 
 @Component({
@@ -61,7 +64,7 @@ export class LeafLetHomeComponent implements OnInit {
         type: 'normal',
         useSubmitBehavior: true,
         onClick: ($event) => {
-            this.drawTracketHistory(this.customHistory.tracer,
+            this.drawTrackerHistory(this.customHistory.tracer,
                 'CUSTOM',
                 this.customHistory.start_date,
                 this.customHistory.end_date);
@@ -72,42 +75,9 @@ export class LeafLetHomeComponent implements OnInit {
     markerClusterGroup: L.MarkerClusterGroup;
     markerClusterData: any[] = [];
     markerClusterOptions: L.MarkerClusterGroupOptions;
-    contextMenuOptions = [
-        {
-            text: 'Historique',
-            icon: 'dx-icon-clock',
-            'items': [
-                {
-                    text: 'Aujourd\'hui',
-                    code: 'TODAY'
-                },
-                {
-                    text: 'Hier',
-                    code: 'YESTERDAY'
-                },
-                {
-                    text: 'Cette semaine',
-                    code: 'WEEK'
-                },
-                {
-                    text: 'Ce mois',
-                    code: 'MONTH'
-                }
-            ],
-            action: (e: any) => {
-                console.log(e);
-            }
-        }
-    ];
+    contextMenuOptions = LayersControl.contextMenuOptions;
     /*----------------------Dates--------------------------*/
     today = new Date();
-    /*----------------------Parcel map options--------------------------*/
-    parcelOptions = {
-        layers: LayersControl.ParcelLayersControl.baseLayers.Esri,
-        zoom: 16,
-        center: latLng(32.382843, -6.694198)
-    };
-    parcelLayersControl = LayersControl.ParcelLayersControl;
     /*----------------------Camion map options--------------------------*/
     camionOptions = {
         layers: LayersControl.CamionLayersControl.baseLayers.Esri,
@@ -146,6 +116,7 @@ export class LeafLetHomeComponent implements OnInit {
     };
     contextMenuCamionClicked: any;
     harvestLayer: LayerGroup;
+    allowCreatePolygon: any = false;
 
     /*----------------------Styles--------------------------*/
     constructor(private zonesService: ZonesService,
@@ -170,15 +141,15 @@ export class LeafLetHomeComponent implements OnInit {
         map.on('enterFullscreen', () => map.invalidateSize());
         map.on('exitFullscreen', () => map.invalidateSize());
         // --------------------------------------------------------------------------------------------------------------- //
-    };
+    }
     // --------------------------------------------------------------------------------------------------------------- //
     onSelectionChanged = (e: any) => {
         this.camionsCarte.flyTo(JSON.parse(e.addedItems[0].center));
-    };
+    }
     // --------------------------------------------------------------------------------------------------------------- //
     show = (name: string) => {
         this.router.navigate(['/']);
-    };
+    }
 
     // --------------------------------------------------------------------------------------------------------------- //
     markerClusterReady(group: L.MarkerClusterGroup) {
@@ -188,12 +159,6 @@ export class LeafLetHomeComponent implements OnInit {
     // --------------------------------------------------------------------------------------------------------------- //
     onOptionchanged(option) {
         this.option = option.addedItems[0].UNIQUEXP;
-        /*setTimeout(() => {
-            this.camionsCarte.invalidateSize(true);
-        }, 100);
-        setTimeout(() => {
-            this.parcelsCarte.invalidateSize(true);
-        }, 100);*/
     }
 
     // --------------------------------------------------------------------------------------------------------------- //
@@ -496,6 +461,10 @@ export class LeafLetHomeComponent implements OnInit {
                         };
                        if (tracker.data.position) {
                            const marker = L.marker(tracker.data.position.coordinates, options);
+                           marker.bindTooltip(tracker.ridelle_code,  {
+                               permanent: true,
+                               className: 'leaflet-tooltip2'
+                           }).openTooltip();
                            tracker.marker = marker;
                            this.markerClusterGroup.addLayers([marker]);
                        }
@@ -534,12 +503,18 @@ export class LeafLetHomeComponent implements OnInit {
     // --------------------------------------------------------------------------------------------------------------- //
 
     onCamionClicked(e: any) {
+        if (this.currentHistoryData && this.currentHistoryData.polyLine) {
+            this.camionsCarte.removeLayer(this.currentHistoryData.polyLine);
+            this.allowCreatePolygon = false;
+            this.drawOptions.draw.polygon = this.allowCreatePolygon;
+        }
         if (e.itemData && e.itemData.data && e.itemData.data.position) {
             this.show_camion_info = true;
         }
         if (!e.itemData.data || e.itemData.data === this.camion_data || !e.itemData.data.position) {
             return;
         }
+
         this.camion_data = e.itemData.data;
         if (this.currentPolyLine) {
             this.camionsCarte.removeLayer(this.currentPolyLine);
@@ -550,13 +525,12 @@ export class LeafLetHomeComponent implements OnInit {
     }
 
     onContextMenuItemClick = (e: any) => {
-        console.log(e);
         const tracker = this.contextMenuCamionClicked;
         const codeAction = e.itemData.code;
-        this.drawTracketHistory(+tracker.id, codeAction);
-    };
+        this.drawTrackerHistory(+tracker.id, codeAction);
+    }
 
-    drawTracketHistory(tracker_id: Number, codeAction: string, start_date = new Date(), end_date = new Date()) {
+    drawTrackerHistory(tracker_id: Number, codeAction: string, start_date = new Date(), end_date = new Date()) {
         this.loadingVisible = true;
         this.gpsService.getTrackerHistory(tracker_id, codeAction, start_date, end_date)
             .subscribe((res: any[]) => {
@@ -573,6 +547,7 @@ export class LeafLetHomeComponent implements OnInit {
                     this.currentHistoryData.polyLine.addLatLng(point.position.coordinates);
                 });
                 this.camionsCarte.addLayer(this.currentHistoryData.polyLine);
+                this.allowCreatePolygon = true;
             }, (err: any) => {
                 this.loadingVisible = false;
                 console.log(err);

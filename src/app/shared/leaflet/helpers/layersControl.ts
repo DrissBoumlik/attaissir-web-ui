@@ -9,6 +9,34 @@ export enum NavLinkOptions {
 
 
 export class LayersControl {
+    public static contextMenuOptions = [
+        {
+            text: 'Historique',
+            icon: 'dx-icon-clock',
+            'items': [
+                {
+                    text: 'Aujourd\'hui',
+                    code: 'TODAY'
+                },
+                {
+                    text: 'Hier',
+                    code: 'YESTERDAY'
+                },
+                {
+                    text: 'Cette semaine',
+                    code: 'WEEK'
+                },
+                {
+                    text: 'Ce mois',
+                    code: 'MONTH'
+                }
+            ],
+            action: (e: any) => {
+                console.log(e);
+            }
+        }
+    ];
+
     public static ParcelLayersControl = {
         baseLayers: {
             'Open Street Map': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

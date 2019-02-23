@@ -1966,14 +1966,14 @@ table.ui.fixed.table > tbody > tr > td:nth-child(2):after {
   grid-template-columns: 0.2fr 1.8fr;
   grid-template-rows: 1fr;
   grid-gap: 1px 1px;
-  grid-template-areas: "CDAs map";
+  grid-template-areas: "CDAs map-container";
   /*
   padding: 2% 2% 2% 2%;
   */
 }
 
-.map {
-  grid-area: map;
+.map-container {
+  grid-area: map-container;
   padding-left: inherit;
 }
 
@@ -2186,6 +2186,28 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0) !important;
 }
 
+.leaflet-tooltip2 {
+  background: rgba(235, 235, 235, 0.81) !important;
+  background-clip: padding-box !important;
+  border-color: rgba(119, 119, 119, 0) !important;
+  border-color: rgba(0, 0, 0, 0.58) !important;
+  border-radius: 4px !important;
+  border-style: solid !important;
+  border-width: 4px !important;
+  color: #111 !important;
+  display: block !important;
+  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif !important;
+  font-weight: bold !important;
+  padding: 1px 6px !important;
+  position: absolute !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  pointer-events: none !important;
+  white-space: nowrap !important;
+}
+
 /*
 #m_ver_menu{
   height: 100vh;
@@ -2248,3 +2270,52 @@ body {
   }
 }
 
+
+
+
+.lt-grid-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 0.4fr 1.6fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "lt-side lt-map";
+}
+
+.lt-map { grid-area: lt-map; }
+
+.lt-side { grid-area: lt-side; }
+
+
+@media all and (max-width: 768px) {
+  .CDAs {
+    width: inherit;
+  }
+}
+@media all and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media all and (-ms-high-contrast:none) {
+  .lt-grid-container {
+    display: -ms-grid;
+    -ms-grid-columns: 0.4fr 1.6fr;
+    -ms-grid-rows: 1fr;
+  }
+
+  .lt-map {
+    -ms-grid-row: 1;
+    height: 100%;
+    -ms-grid-row-span: 1;
+    -ms-grid-col: 2;
+    -ms-grid-col-span: 1;
+  }
+
+  .lt-side {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    -ms-grid-col: 1;
+    -ms-grid-col-span: 1;
+  }
+
+}

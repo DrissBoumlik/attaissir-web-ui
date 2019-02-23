@@ -228,11 +228,16 @@ export class RotationsListComponent implements OnInit {
                         items: res.data.trucks,
                         valueExpr: 'id',
                         displayExpr: 'ridelle_code',
+                        searchExpr: 'ridelle_code',
+                        searchEnabled: true
+
                     };
                     this.loaderManualAssignmentEditorOptios = {
                         items: res.data.loaders,
                         valueExpr: 'id',
                         displayExpr: 'ridelle_code',
+                        searchExpr: 'ridelle_code',
+                        searchEnabled: true
                     };
                 }
             );

@@ -41,6 +41,7 @@
               "src/assets/vendors/metronic/css/styles.css",
               "src/styles.scss",
               "node_modules/leaflet/dist/leaflet.css",
+              "src/assets/css/leaflet.label.css",
               "node_modules/leaflet-draw/dist/leaflet.draw.css",
               "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
               "node_modules/leaflet.markercluster/dist/MarkerCluster.css",

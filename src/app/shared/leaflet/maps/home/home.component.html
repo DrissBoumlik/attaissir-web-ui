@@ -5,8 +5,6 @@
                  style="height: 100%; width: 100%;">
                 <div style="height: 100%; width: 100%;"
                      leaflet
-                     leafletDraw
-                     [leafletDrawOptions]="drawOptions"
                      [leafletOptions]="camionOptions"
                      [leafletLayersControl]="camionLayersControl"
                      (leafletMapReady)="initCamionMap($event)"
@@ -14,6 +12,9 @@
                      [leafletMarkerClusterOptions]="markerClusterOptions"
                      (leafletMarkerClusterReady)="markerClusterReady($event)"
                      #camionMap>
+                    <div *ngIf="allowCreatePolygon"
+                         leafletDraw
+                         [leafletDrawOptions]="drawOptions"></div>
                 </div>
             </div>
             <app-map-widget-info [data]="camion_data"
@@ -58,7 +59,7 @@
                             (onItemContextMenu)="onItemContextMenu($event)"
                             searchExpr="ridelle_code"
                             searchMode="contains"
-                            [showSelectionControls]="true"
+                            [showSelectionControls]="false"
                             [selectedItemKeys]="[]">
                         <div *dxTemplate="let data of 'item'">
                             <div id="item" [attr.datasrc]="data" class="cda_item" data-cda="503" data-id="5"  [ngStyle]="{
@@ -127,7 +128,7 @@
                     </div>
                 </div>
             </dx-context-menu>
-            <!--<ul class="menu" >
+            <!--&lt;!&ndash;<ul class="menu" >
               <li title="Menu"  ><a  (click)="show('Menu')" class="home" >Menu</a></li>
               &lt;!&ndash;<li title="liste des cda" *ngIf="!showCdas" ><a (click)="show('cdas')" class="about">CDAs</a></li>&ndash;&gt;
             </ul>
@@ -144,7 +145,7 @@
             <div *dxTemplate="let data of 'item'">
               <app-cda-sigaa [cda]="{name: data.name, polygon: data.polygon}"></app-cda-sigaa>
             </div>
-          </dx-list>-->
+          </dx-list>&ndash;&gt;-->
         </div>
     </div>
     <app-parcel-info [ilot]="ilot_info" *ngIf="ilot_info && show_parcel_info"></app-parcel-info>
@@ -160,3 +161,4 @@
             [closeOnOutsideClick]="false">
     </dx-load-panel>
 </div>
+
