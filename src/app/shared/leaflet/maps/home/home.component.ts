@@ -22,6 +22,7 @@ import {GpsService} from '../../../services/gps.service';
 import {LayersControl, NavLinkOptions} from '../../helpers/layersControl';
 import '../../services/MovingMarker';
 import '../../services/rotatedMarker';
+import '../../../../../assets/leaflet-sidebar/side-bar';
 import {LineString, MultiLineString} from 'geojson';
 import * as geojson from 'geojson';
 
@@ -117,6 +118,7 @@ export class LeafLetHomeComponent implements OnInit {
     contextMenuCamionClicked: any;
     harvestLayer: LayerGroup;
     allowCreatePolygon: any = false;
+    selectedHistoryVehicle: Number;
 
     /*----------------------Styles--------------------------*/
     constructor(private zonesService: ZonesService,
@@ -331,7 +333,7 @@ export class LeafLetHomeComponent implements OnInit {
             // console.log(layer);
             map.addLayer(e.layer);
             // console.log(JSON.stringify(e.layer.toGeoJSON()));
-            this.gpsService.addHarvestPolygon(layer.toGeoJSON())
+            this.gpsService.addHarvestPolygon(layer.toGeoJSON(), this.selectedHistoryVehicle)
                 .subscribe(
                     (res: any) => {
                         console.log(res);
@@ -539,6 +541,7 @@ export class LeafLetHomeComponent implements OnInit {
                     return;
                 }
                 if (this.currentHistoryData.polyLine) {
+                    this.selectedHistoryVehicle = null;
                     this.camionsCarte.removeLayer(this.currentHistoryData.polyLine);
                 }
                 this.currentHistoryData.polyLine = new Polyline([res[0].position.coordinates, res[0].position.coordinates]);
@@ -548,6 +551,7 @@ export class LeafLetHomeComponent implements OnInit {
                 });
                 this.camionsCarte.addLayer(this.currentHistoryData.polyLine);
                 this.allowCreatePolygon = true;
+                this.selectedHistoryVehicle = tracker_id;
             }, (err: any) => {
                 this.loadingVisible = false;
                 console.log(err);

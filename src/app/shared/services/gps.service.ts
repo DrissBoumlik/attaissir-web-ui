@@ -56,8 +56,11 @@ export class GpsService {
         });
     }
 
-    addHarvestPolygon(feature: Feature<geojson.Polygon | geojson.MultiPolygon, any>): Observable<any> {
-        return this.http.post(`${environment.apiUrl}/${this.routeName}/add/polygon`, JSON.stringify({geom: feature}), {
+    addHarvestPolygon(feature: Feature<geojson.Polygon | geojson.MultiPolygon, any>, vehicle_id): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/add/polygon`, JSON.stringify({
+            geom: feature,
+            vehicle_id: vehicle_id
+        }), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
