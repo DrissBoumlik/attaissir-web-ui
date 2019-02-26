@@ -186,9 +186,9 @@ declare var $: any;
           <div>
                   <div>
 
-<div id="_count">
+<div id="count">
 
-  <span class=" num nbr timer count-title count-number" >{{nbr1}}</span>
+  <span class="num nbr timer count-title count-number" >{{nbr1}}</span>
  <!-- <span class=" num nbr timer count-title count-number" attr.data-to="{{nbr1}}" data-speed="1500"></span> !-->
   <span class="text1"> {{sub_title}} </span>
   <span style="  font-weight: bold; color: #fff;"> / </span>

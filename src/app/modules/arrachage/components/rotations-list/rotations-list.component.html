@@ -88,11 +88,11 @@
         <dxi-column [alignment]="'center'" dataType="Text" [allowEditing]="false" dataField="p_name" [groupIndex]="0"
                     caption="Parcelle"></dxi-column>
 
-        <dxi-column [alignment]="'center'" [allowEditing]="false" dataType="Text" dataField="encoding_status"
+        <dxi-column [alignment]="'center'" [allowEditing]="false" [allowFiltering]="false" dataType="Text" dataField="encoding_status"
                     cellTemplate="statusTemplate"
                     caption="État (encodage)"></dxi-column>
 
-        <dxi-column [alignment]="'center'" [allowEditing]="false" dataType="Text" dataField="rot_status"
+        <dxi-column [alignment]="'center'" [allowEditing]="false"  [allowFiltering]="false" dataType="Text" dataField="rot_status"
                     cellTemplate="rotationStatusTemplate"
                     caption="État (rotation)"></dxi-column>
 
@@ -440,3 +440,14 @@
 </dx-popup>
 
 
+<dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [position]="{ of: 'me' }"
+        style="z-index: 2000;"
+        [(visible)]="loadingVisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
+</dx-load-panel>

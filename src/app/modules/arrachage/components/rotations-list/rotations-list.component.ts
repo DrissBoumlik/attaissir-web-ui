@@ -16,6 +16,7 @@ import {ModelHasPermissionService} from '../../services/model-has-permission.ser
 export class RotationsListComponent implements OnInit {
 
     rotations: any = {};
+    loadingVisible = false;
     schema: {
         encoding: {
             status: 'awaiting' | 'loading' | 'loaded',
@@ -50,6 +51,8 @@ export class RotationsListComponent implements OnInit {
         text: 'Valider',
         useSubmitBehaviour: true,
         onClick: () => {
+            this.loadingVisible = true;
+
             this.arrachageService
                 .assignVehiculeToRotationManual(
                     this.manual_assignment.id_truck,
@@ -61,12 +64,17 @@ export class RotationsListComponent implements OnInit {
                     )
                 .subscribe((res) => {
                     this.popupVisible = false;
+                    this.loadingVisible = false;
                     this.toaster.success('La rotation  a été affectée avec succès', 'Affectation', {
                         positionClass: 'toast-top-center'
                     });
                     this.manual_assignment = {};
                     this.dataGrid.instance.refresh();
-                });
+                }, err => {
+                    console.log(err);
+                    this.loadingVisible = false;
+
+            });
         }
     };
     manualAssignmentEditorOptios: any = {};
@@ -93,8 +101,12 @@ export class RotationsListComponent implements OnInit {
             icon: 'check',
             useSubmitBehavior: true,
             onClick: ($ev) => {
+                this.loadingVisible = true;
+
                 this.arrachageService.proposeAssignment(this.ridelle.code).subscribe((res) => {
                     if (res.data.camion) {
+                        this.loadingVisible = false;
+
                         this.returnedCamion = res.data.camion;
                         this.returnedRotation = res.data.rotation;
                         this.dataSource = [{
@@ -104,6 +116,8 @@ export class RotationsListComponent implements OnInit {
                         this.validateAssignmentGrid = true;
                     }
                 }, err => {
+                    this.loadingVisible = false;
+
                     this.toaster.warning(err.error.message, err.error.data, {
                         positionClass: 'toast-top-center'
                     });
@@ -177,14 +191,20 @@ export class RotationsListComponent implements OnInit {
     };
 
     cancel = (data, btn) => {
+        this.loadingVisible = true;
+
         this.arrachageService.cancelRotation(data.data.rot_id)
             .subscribe(
                 (res: any) => {
+                    this.loadingVisible = false;
+
                     btn.disabled = true;
                     this.toaster.success(`La rotation  ${res.data.id} a été annulée avec succès `, 'Success', {
                         positionClass: 'toast-top-center'
                     });
                 }, err => {
+                    this.loadingVisible = false;
+
                     this.toaster.warning(err.error.message, err.error.data, {
                         positionClass: 'toast-top-center'
                     });
@@ -202,12 +222,18 @@ export class RotationsListComponent implements OnInit {
     }
 
     validateAssignment() {
+        this.loadingVisible = false;
+
         this.arrachageService.proposeAssignment(this.returnedCamion.ridelle_code, true).subscribe((res) => {
             this.assignPopUpVisible = false;
+            this.loadingVisible = false;
+
             this.toaster.success(`La parcelle  ${res.rotation.p_name} a été affectée avec succès `, 'Success', {
                 positionClass: 'toast-top-center'
             });
         }, err => {
+            this.loadingVisible = false;
+
             this.toaster.warning(err.error.message, err.error.data, {
                 positionClass: 'toast-top-center'
             });
@@ -220,9 +246,14 @@ export class RotationsListComponent implements OnInit {
     }
 
     loadVehicles(e: any) {
+        this.loadingVisible = true;
+
         this.arrachageService.getAvailableVehicles(this.selectedRotation)
             .subscribe(
+
                 (res: any) => {
+                    this.loadingVisible = false;
+
                     console.log(res);
                     this.manualAssignmentEditorOptios = {
                         items: res.data.trucks,
@@ -239,6 +270,10 @@ export class RotationsListComponent implements OnInit {
                         searchExpr: 'ridelle_code',
                         searchEnabled: true
                     };
+                }, err => {
+                    console.log(err);
+                    this.loadingVisible = false;
+
                 }
             );
     }

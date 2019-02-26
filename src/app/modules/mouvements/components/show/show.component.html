@@ -1,23 +1,23 @@
 <div class="clr-row">
     <div class="clr-col">
-        <h1> Fiche de Mouvement N° {{ mouvement.id }} </h1>
+        <h1> Fiche de Mouvement N° {{ mouvement?.id }} </h1>
     </div>
-    <div class="clr-col-1 clr-align-content-end">
-         <span class="label label-info" *ngIf="mouvement.state == 'inprogress'">
-                        <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
+    <div class="clr-col-1 clr-align-content-end" >
+         <span class="label label-info"  *ngIf="mouvement?.state == 'inprogress'">
+                        <i class="fa  fa-spinner"></i> EN COURS
                       </span>
 
 
-        <span class="label label-success" *ngIf="mouvement.state == 'done'">
-                        <i class="fa  fa-check" aria-hidden="true"></i> VALIDÉ
+        <span class="label label-success" *ngIf="mouvement?.state == 'done'">
+                        <i class="fa  fa-check" ></i> VALIDÉ
                       </span>
 
-        <span class="label label-danger" *ngIf="mouvement.state == 'canceled'">
-                        <i class="fa  fa-times" aria-hidden="true"></i> ANNULÉ
+        <span class="label label-danger" *ngIf="mouvement?.state == 'canceled'">
+                        <i class="fa  fa-times"></i> ANNULÉ
                       </span>
         <span [appPermissionHidden]="['distributionCenter.stocks.change_status']"
               style="font-size: 12px; padding-left: 12px; cursor: pointer;"
-              *ngIf="mouvement.state === 'done'"> <a (click)="Scan()"> <i class="fa fa-refresh"
+              *ngIf="mouvement?.state === 'done'"> <a (click)="Scan()"> <i class="fa fa-refresh"
                                                                           aria-hidden="true"></i> <span
                 style="text-decoration: underline;"> En cours </span> </a> </span>
     </div>
@@ -40,7 +40,7 @@
             <div class="clr-col-12">
 
                 <p class="siam-form-input-value siam-form-input-value-nodata">
-                    {{ helper.orderType(mouvement.type).toUpperCase() }}
+                    {{ helper.orderType(mouvement?.type).toUpperCase() }}
                 </p>
 
             </div>
@@ -54,7 +54,7 @@
             <div class="clr-col-12">
 
                 <p class="siam-form-input-value siam-form-input-value-nodata">
-                    {{mouvement.bon_number}}
+                    {{mouvement?.bon_number}}
 
                 </p>
             </div>
@@ -70,7 +70,7 @@
 
                 <p class="siam-form-input-value siam-form-input-value-nodata">
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
-                    {{mouvement.date}}
+                    {{mouvement?.date}}
                 </p>
 
             </div>
@@ -180,18 +180,17 @@
 
 </dx-data-grid>
 <div class="clr-row clr-align-items-end">
-    <div class="clr-col-12 clr-justify-content-end">
-        <dx-button *ngIf="mouvement.state === 'inprogress'" icon="fa fa-paper-plane"
-                   [appPermissionHidden]="['distributionCenter.stocks.validationOperation']"
-                   [visible]="(mouvement.type === 'transfer' && to.canValidate) || (mouvement.type !== 'transfer')"
-                   text="VALIDER" type="success" style="margin: 5px;"
+    <div class="clr-col-12 clr-justify-content-end" >
+        <dx-button *ngIf="mouvement?.state === 'inprogress'" icon="fa fa-paper-plane"
+                   [visible]="modelHaspermission('distributionCenter.stocks.validationOperation')"
+                   text="VALIDER" type="success"
                    (onClick)="showDeliverPopup()"></dx-button>
 
-        <dx-button  *ngIf="mouvement.state === 'done'" icon="fa fa-print"
+        <dx-button  *ngIf="mouvement?.state === 'done'" icon="fa fa-print"
                    (onClick)="print()" text="IMPRIMER" type="primary"
-                   style="margin: 5px;"></dx-button> &nbsp; &nbsp;
+                   ></dx-button> &nbsp; &nbsp;
 
-        <dx-button *ngIf="mouvement.state === 'inprogress'" icon="fa fa-trash" text="ANNULER"
+        <dx-button *ngIf="mouvement?.state === 'inprogress'" icon="fa fa-trash" text="ANNULER" [visible]="modelHaspermission('distributionCenter.stocks.validationOperation')"
                    type="danger" (onClick)="showDeletePopup()"></dx-button> &nbsp; &nbsp;
     </div>
 </div>
@@ -307,37 +306,37 @@
         <div id="receipt-wrapper">
             <div class="receipt-block">
                 <div class="receipt-head">
-                    <div>BON DE {{ this.helper.orderType(this.mouvement.type).toUpperCase() }}</div>
+                    <div>BON DE {{ this.helper.orderType(this.mouvement?.type).toUpperCase() }}</div>
                 </div>
 
                 <div style="text-align : center; margin-bottom: 10px;">
-                    <div>N° {{this.mouvement.id}}</div>
+                    <div>N° {{this.mouvement?.id}}</div>
 
                 </div>
 
                 <div style="text-align : right;  margin-bottom: 5px; font-size:12px;">
-                    <div>La Date : {{this.mouvement.date }}</div>
+                    <div>La Date : {{this.mouvement?.date }}</div>
                 </div>
 
                 <div style="text-align : right; margin-bottom: 10px; font-size:12px;">
-                    <div>{{this.mouvement.campaign}}</div>
+                    <div>{{this.mouvement?.campaign}}</div>
                 </div>
 
                 <div class="receipt-info"
-                     *ngIf="this.mouvement.type != 'transfer' &&  this.mouvement.type != 'receive'  &&  this.mouvement.type != 'return'">
+                     *ngIf="this.mouvement?.type != 'transfer' &&  this.mouvement?.type != 'receive'  &&  this.mouvement?.type != 'return'">
 
                     <div>
                         <div class="receipt-item">
                             <div class="receipt-item-lbl">CDA</div>
-                            <div class="receipt-item-price">{{this.mouvement.cda}}</div>
+                            <div class="receipt-item-price">{{this.mouvement?.cda}}</div>
                         </div>
                         <div class="receipt-item">
                             <div class="receipt-item-lbl">ZONE</div>
-                            <div class="receipt-item-price">{{this.mouvement.zone }}</div>
+                            <div class="receipt-item-price">{{this.mouvement?.zone }}</div>
                         </div>
                         <div class="receipt-item">
                             <div class="receipt-item-lbl">PARCELLE</div>
-                            <div class="receipt-item-price">{{this.mouvement.parcel}}</div>
+                            <div class="receipt-item-price">{{this.mouvement?.parcel}}</div>
                         </div>
 
                     </div>
@@ -361,11 +360,11 @@
 
                     <div class="receipt-item">
                         <div class="receipt-item-lbl" style="font-size:13px;">Emetteur</div>
-                        <div class="receipt-item-price"> &nbsp; {{this.mouvement.from.full_name }}</div>
+                        <div class="receipt-item-price"> &nbsp; {{this.mouvement?.from.full_name }}</div>
                     </div>
                     <div class="receipt-item">
                         <div class="receipt-item-lbl" style="font-size:13px;">Récepteur</div>
-                        <div class="receipt-item-price"> &nbsp; {{this.mouvement.to.name}}</div>
+                        <div class="receipt-item-price"> &nbsp; {{this.mouvement?.to.name}}</div>
                     </div>
 
                 </div>
