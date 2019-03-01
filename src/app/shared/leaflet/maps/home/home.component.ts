@@ -92,6 +92,9 @@ export class LeafLetHomeComponent implements OnInit {
     style_incident = LayersControl.styles.style_incident;
     style_harvest_cane = LayersControl.styles.style_harvest_cane;
     style_harvest = LayersControl.styles.style_harvest;
+    style_harvest_convocated = LayersControl.styles.style_harvest_convocated;
+    style_harvest_done = LayersControl.styles.style_harvest_done;
+    style_harvest_inprogress = LayersControl.styles.style_harvest_inprogress;
     /*----------------------Data--------------------------*/
     cdas: any = {};
     camionsCarte: Map;
@@ -164,7 +167,7 @@ export class LeafLetHomeComponent implements OnInit {
     }
 
     // --------------------------------------------------------------------------------------------------------------- //
-    initParcelMap(map: Map) {
+    /*initParcelMap(map: Map) {
         this.onMapReady(map);
         this.parcelsCarte = map;
         setTimeout(() => {
@@ -226,14 +229,14 @@ export class LeafLetHomeComponent implements OnInit {
 
 
                     // this.loadingVisible = false;
-                    /*res.data.forEach(ilot => {
+                    /!*res.data.forEach(ilot => {
                       const geom = JSON.parse(ilot.da);
                       console.log(geom);
                       console.log(this.map);
                       const polygon = new Polygon(geom.coordinates, {color: '#06A214'});
                       map.addLayer(polygon);
-                    });*/
-                    /*
+                    });*!/
+                    /!*
                     * ,
                       onEachFeature: (feature: Feature, layer: Layer) => {
                         if (map.getZoom() > 15) {
@@ -243,7 +246,7 @@ export class LeafLetHomeComponent implements OnInit {
                             className: 'leaflet-tooltip1'
                           });
                         }
-                      }*/
+                      }*!/
                 }
             );
         });
@@ -301,7 +304,7 @@ export class LeafLetHomeComponent implements OnInit {
                 this.loadingVisible = false;
             }
         );
-    }
+    }*/
 
     // --------------------------------------------------------------------------------------------------------------- //
     initCamionMap(map: Map) {
@@ -361,6 +364,18 @@ export class LeafLetHomeComponent implements OnInit {
                     const parcels = new GeoJSON(res.data, {
                         style: (geom: any) => {
 
+                            if (+geom.properties.type === 1) {
+                                if (geom.properties.is_harvest_convocated) {
+                                    return this.style_harvest_convocated;
+                                }
+                                if (geom.properties.is_harvest_inprogress) {
+                                    return this.style_harvest_inprogress;
+                                }
+                                if (geom.properties.is_harvest_done) {
+                                    return this.style_harvest_done;
+                                }
+                            }
+
                             if (geom.properties.has_incident) {
                                 return this.style_incident;
                             }
@@ -373,6 +388,7 @@ export class LeafLetHomeComponent implements OnInit {
                             if (+geom.properties.type === 2) {
                                 return this.style_harvest;
                             }
+
                             return this.style;
                         },
                         onEachFeature: (feature: any, layer: Layer) => {

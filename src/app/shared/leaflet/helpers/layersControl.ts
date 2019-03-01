@@ -175,6 +175,21 @@ export class LayersControl {
             color: '#334452',
             fillColor: '#475da1',
             fillOpacity: .7
+        },
+        style_harvest_convocated: {
+            color: '#9683ad',
+            fillColor: '#6452d1',
+            fillOpacity: .7
+        },
+        style_harvest_done: {
+            color: '#524233',
+            fillColor: '#83663c',
+            fillOpacity: .7
+        },
+        style_harvest_inprogress: {
+            color: '#ff5048',
+            fillColor: '#e26c6d',
+            fillOpacity: .7
         }
     };
     public static fullScreen = L.control.fullscreen({
