@@ -86,4 +86,15 @@ export class ZonesService {
         });
     }
 
+    getParcelByZone(zone_id: number | any | null | any[]) {
+        return this.http.get(`${environment.apiUrl}/zone/${zone_id}/parcels`);
+    }
+
+    updateIlot(ilot_id: any, parcel_id: any) {
+        return this.http.post(`${environment.apiUrl}/ilot/update`, JSON.stringify({ilot_id, parcel_id}), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
 }

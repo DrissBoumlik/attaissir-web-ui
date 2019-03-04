@@ -192,6 +192,17 @@ export class LayersControl {
             fillOpacity: .7
         }
     };
+
+    public static iconLinks = [
+        {
+            type: 'Camion',
+            iconLink: 'assets/images/truck_small_2.png'
+        },
+        {
+            type: 'loader',
+            iconLink: 'assets/images/truck_small_2.png'
+        }
+    ];
     public static fullScreen = L.control.fullscreen({
         position: 'topleft', // change the position of the button can be topleft, topright, bottomright or bottomleft, defaut topleft
         title: 'Plein écran', // change the title of the button, default Full Screen
@@ -221,6 +232,7 @@ export class LayersControl {
             name: layer.p_name,
             contracted_surface: layer.contracted_surface[0].surface,
             id: layer.id,
+            ilot_id: layer.ilot_id,
             cda: layer.cda_name,
             parcel_surface: layer.parcel_surface,
             ilot_surface: layer.ilot_surface,

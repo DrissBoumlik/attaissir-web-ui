@@ -308,7 +308,7 @@
                     caption="canne_refoulee"></dxi-column>
         <
 
-        <dxi-column [alignment]="'center'" dataType="string" dataField="canne_refoulee" [allowFiltering]="false"
+        <dxi-column [visible]="modeHaspermission(['convocations.rotations.cancel'])" [alignment]="'center'" dataType="string" dataField="canne_refoulee" [allowFiltering]="false"
                     caption="" cellTemplate="deleteButtonTemplate"></dxi-column>
     </dxi-column>
 
