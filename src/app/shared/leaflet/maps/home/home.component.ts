@@ -146,15 +146,15 @@ export class LeafLetHomeComponent implements OnInit {
         map.on('enterFullscreen', () => map.invalidateSize());
         map.on('exitFullscreen', () => map.invalidateSize());
         // --------------------------------------------------------------------------------------------------------------- //
-    }
+    };
     // --------------------------------------------------------------------------------------------------------------- //
     onSelectionChanged = (e: any) => {
         this.camionsCarte.flyTo(JSON.parse(e.addedItems[0].center));
-    }
+    };
     // --------------------------------------------------------------------------------------------------------------- //
     show = (name: string) => {
         this.router.navigate(['/']);
-    }
+    };
 
     // --------------------------------------------------------------------------------------------------------------- //
     markerClusterReady(group: L.MarkerClusterGroup) {
@@ -350,7 +350,14 @@ export class LeafLetHomeComponent implements OnInit {
             }
             map.eachLayer((layer: any) => {
                 if (layer.feature && layer.feature.properties) {
-                    map.removeLayer(layer);
+                    if (
+                        !map.getBounds().contains(layer.getBounds().getNorthWest())
+                        && !map.getBounds().contains(layer.getBounds().getNorthWest())
+                        && !map.getBounds().contains(layer.getBounds().getSouthEast())
+                        && !map.getBounds().contains(layer.getBounds().getSouthWest())
+                    ) {
+                        map.removeLayer(layer);
+                    }
                 }
             });
             const bounds = polygon(LayersControl.getMapBound(map)).toGeoJSON();
@@ -391,20 +398,37 @@ export class LeafLetHomeComponent implements OnInit {
 
                             return this.style;
                         },
-                        onEachFeature: (feature: any, layer: Layer) => {
-                            if (map.getZoom() > 15) {
-                                layer.bindTooltip(feature.properties.p_name, {
-                                    permanent: true,
-                                    direction: 'center',
-                                    className: 'leaflet-tooltip1'
-                                });
+                        onEachFeature: (feature: any, layer: any) => {
+                            let check_semis_layers = false;
+                            let check_harvest_layers = false;
+                            this.semisLayer.eachLayer((lyr: any) => {
+                                if (lyr.getBounds().contains(layer.getBounds().getCenter())) {
+                                    check_semis_layers = true;
+                                }
+                            });
+                            this.harvestLayer.eachLayer((lyr: any) => {
+                                if (lyr.getBounds().contains(layer.getBounds().getCenter())) {
+                                    check_harvest_layers = true;
+                                }
+                            });
+                            layer.bindTooltip(feature.properties.p_name, {
+                                permanent: true,
+                                direction: 'center',
+                                className: 'leaflet-tooltip1'
+                            });
+                            layer.getTooltip().setOpacity(0);
+                            if (!check_semis_layers) {
+                                if (+feature.properties.type === 1) {
+
+                                    layer.addTo(this.semisLayer);
+                                }
                             }
-                            if (+feature.properties.type === 1) {
-                                layer.addTo(this.semisLayer);
+                            if (!check_harvest_layers) {
+                                if (+feature.properties.type === 2) {
+                                    layer.addTo(this.harvestLayer);
+                                }
                             }
-                            if (+feature.properties.type === 2) {
-                                layer.addTo(this.harvestLayer);
-                            }
+
                         }
                     }).on('click', (ev: LeafletEvent) => {
                         const e: any = ev;
@@ -412,8 +436,7 @@ export class LeafLetHomeComponent implements OnInit {
                         this.ilot_info = LayersControl.getParcelInfo(layer);
                         this.show_parcel_info = true;
                     });
-
-
+                    this.loadingVisible = false;
                     // this.loadingVisible = false;
                     /*res.data.forEach(ilot => {
                       const geom = JSON.parse(ilot.da);
@@ -433,6 +456,9 @@ export class LeafLetHomeComponent implements OnInit {
                           });
                         }
                       }*/
+                },
+                (err: any) => {
+                    this.loadingVisible = false;
                 }
             );
         });
@@ -459,9 +485,13 @@ export class LeafLetHomeComponent implements OnInit {
         map.setZoom(map.getZoom() + 1);
         // --------------------------------------------------------------------------------------------------------------- //
         this.loadingVisible = true;
+
         this.gpsService.getTrackerList().subscribe((res: any) => {
             this.trackers = res.data;
             this.trackerEditorOptions.items = res.data;
+            if (!this.trackers.length) {
+                return;
+            }
             this.gpsService.getTrackersPosition(this.trackers.map(tracker => tracker.tracker_id)).subscribe(
                 (tracker_datas: any[]) => {
                     this.loadingVisible = false;
@@ -477,45 +507,46 @@ export class LeafLetHomeComponent implements OnInit {
                             icon,
                             rotationAngle: 180
                         };
-                       if (tracker.data.position) {
-                           const marker = L.marker(tracker.data.position.coordinates, options);
-                           marker.bindTooltip(tracker.ridelle_code,  {
-                               permanent: true,
-                               className: 'leaflet-tooltip2'
-                           }).openTooltip();
-                           tracker.marker = marker;
-                           this.markerClusterGroup.addLayers([marker]);
-                       }
+                        if (tracker.data.position) {
+                            const marker = L.marker(tracker.data.position.coordinates, options);
+                            marker.bindTooltip(tracker.ridelle_code, {
+                                permanent: true,
+                                className: 'leaflet-tooltip2'
+                            }).openTooltip();
+                            tracker.marker = marker;
+                            this.markerClusterGroup.addLayers([marker]);
+                        }
                     });
                 }, error1 => {
                     console.log(error1);
                     this.loadingVisible = false;
                 });
+            setInterval(() => {
+                this.gpsService.getTrackersPosition(this.trackers.map(tracker => tracker.tracker_id)).subscribe(
+                    (tracker_datas: any[]) => {
+                        tracker_datas.forEach((tracker_data) => {
+                            const tracker = this.trackers.find((tr: any) => tr.tracker_id === tracker_data.id);
+                            tracker.data = tracker_data;
+                            if (this.currentPolyLine && this.camion_data.id === tracker_data.id) {
+                                this.currentPolyLine.addLatLng(tracker.data.position.coordinates);
+                            }
+                            if (this.camion_data && tracker_data.id === this.camion_data.id) {
+                                this.camion_data = tracker_data;
+                            }
+                            if (tracker.marker && tracker.marker.options) {
+                                tracker.marker.options.rotationAngle = tracker.data.angle + 100;
+                                tracker.marker.slideTo(tracker.data.position.coordinates, {
+                                    duration: 5000,
+                                    keepAtCenter: false
+                                });
+                            }
+                        });
+                    }
+                );
+            }, 5000);
         });
 
-        setInterval(() => {
-            this.gpsService.getTrackersPosition(this.trackers.map(tracker => tracker.tracker_id)).subscribe(
-                (tracker_datas: any[]) => {
-                    tracker_datas.forEach((tracker_data) => {
-                        const tracker = this.trackers.find((tr: any) => tr.tracker_id === tracker_data.id);
-                        tracker.data = tracker_data;
-                        if (this.currentPolyLine && this.camion_data.id === tracker_data.id) {
-                            this.currentPolyLine.addLatLng(tracker.data.position.coordinates);
-                        }
-                        if (this.camion_data && tracker_data.id === this.camion_data.id) {
-                            this.camion_data = tracker_data;
-                        }
-                        if (tracker.marker && tracker.marker.options) {
-                            tracker.marker.options.rotationAngle = tracker.data.angle + 100;
-                            tracker.marker.slideTo(tracker.data.position.coordinates, {
-                                duration: 5000,
-                                keepAtCenter: false
-                            });
-                        }
-                    });
-                }
-            );
-        }, 5000);
+
     }
 
     // --------------------------------------------------------------------------------------------------------------- //
@@ -546,7 +577,7 @@ export class LeafLetHomeComponent implements OnInit {
         const tracker = this.contextMenuCamionClicked;
         const codeAction = e.itemData.code;
         this.drawTrackerHistory(+tracker.id, codeAction);
-    }
+    };
 
     drawTrackerHistory(tracker_id: Number, codeAction: string, start_date = new Date(), end_date = new Date()) {
         this.loadingVisible = true;

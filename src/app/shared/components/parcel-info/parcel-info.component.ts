@@ -26,7 +26,6 @@ export class ParcelInfoComponent implements OnInit {
                 this.zoneService.updateIlot(this.ilot.ilot_id, this.ilot_info.parcel)
                     .subscribe(
                         (res) => {
-                            console.log(res);
                             this.loadingVisible = false;
                             this.popupVisible = false;
                             this.ilot_info = {};
