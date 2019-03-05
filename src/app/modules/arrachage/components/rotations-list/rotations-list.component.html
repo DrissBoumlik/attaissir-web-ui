@@ -308,10 +308,11 @@
                     caption="canne_refoulee"></dxi-column>
         <
 
-        <dxi-column [visible]="modeHaspermission(['convocations.rotations.cancel'])" [alignment]="'center'" dataType="string" dataField="canne_refoulee" [allowFiltering]="false"
-                    caption="" cellTemplate="deleteButtonTemplate"></dxi-column>
     </dxi-column>
 
+
+        <dxi-column [visible]="modeHaspermission(['convocations.rotations.cancel'])"  [alignment]="'center'" dataType="string" dataField="canne_refoulee" [allowFiltering]="false"
+                    caption="" cellTemplate="deleteButtonTemplate"></dxi-column>
 
     <div *dxTemplate="let data of 'deleteButtonTemplate'">
         <dx-button type="danger" [disabled]="disableDeleteBtn(data)" [text]="'Annuler'"
