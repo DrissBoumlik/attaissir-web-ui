@@ -416,7 +416,9 @@ export class LeafLetHomeComponent implements OnInit {
                                 direction: 'center',
                                 className: 'leaflet-tooltip1'
                             });
-                            layer.getTooltip().setOpacity(0);
+                            if (map.getZoom() < 15) {
+                                layer.getTooltip().setOpacity(0);
+                            }
                             if (!check_semis_layers) {
                                 if (+feature.properties.type === 1) {
 
