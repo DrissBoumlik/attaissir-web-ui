@@ -299,7 +299,7 @@ export class ThemeComponent implements OnInit {
                 name: 'Reporting',
                 permission: ['reporting.contracts.grid'],
                 icon: 'folder-open',
-                url: '/reporting/contracts',
+                url: '/reporting',
                 description: '',
                 disabled: 'false'
             },

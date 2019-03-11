@@ -1,0 +1,111 @@
+<div class="clr-row">
+    <div class="clr-col-12">
+        <ul class="m-nav-sticky"
+            style="margin-top: 30px; background-color: rgba(0,0,0,0); box-shadow: rgba(0,0,0,0) !important;">
+            <dx-button (onClick)="toggleChart()" icon="back" [disabled]="false">
+            </dx-button>
+        </ul>
+        <div #chartContainer class="slide-in-right">
+            <dx-chart #chart id="chart" [dataSource]="chartData" title="Tonnage réceptionné / Jour" [palette]="'Soft Pastel'"
+            >
+                <dxo-loading-indicator [show]="chartLoadingIndicator" text="Chargement"></dxo-loading-indicator>
+                <dxi-series argumentField="day" argumentType="datetime" valueField="poids_net_accumulated" type="bar">
+                    <dxo-label [customizeText]="customizeLabel" [visible]="true"
+                               [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
+                </dxi-series>
+                <dxi-series argumentField="day" color="rgb(235, 53, 115)" argumentType="datetime"
+                            valueField="poids_net_accumulated"
+                            type="spline">
+                    <dxo-tooltip
+                            [enabled]="true"
+                            location="edge">
+                    </dxo-tooltip>
+                    <dxo-label [visible]="false" [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
+                </dxi-series>
+                <dxo-legend [visible]="false"></dxo-legend>
+                <dxo-export [enabled]="true"></dxo-export>
+            </dx-chart>
+        </div>
+    </div>
+</div>
+<dx-data-grid
+        id="ReceptionHourlyStateGrid"
+        [dataSource]="receptions"
+        [columnHidingEnabled]="false"
+        align="center"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        noDataText="Aucun rotation n'a été rapporté"
+        [rowAlternationEnabled]="true"
+        KeyExpr="id"
+        #ReportingContracts>
+
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="day" caption="Date" [groupIndex]="0"
+                dataType="date"></dxi-column>
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="hour" caption="Heure"></dxi-column>
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="poids_net"
+                caption="Tonnage  réceptionné"></dxi-column>
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="poids_net_accumulated"
+                caption="Tonnage  réceptionné (accumulée)"></dxi-column>
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="net_impurete" caption="Impuretés moyen"></dxi-column>
+    <dxi-column [visible]="false" [alignment]="'center'" dataField="net_impurete_accumulated"
+                caption="Impuretés moyen (accumulées)"></dxi-column>
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="fibre" caption="Fibre moyen"></dxi-column>
+    <dxi-column [visible]="false" [alignment]="'center'" dataField="fibre_accumulated"
+                caption="Fibre moyen (accumulée)"></dxi-column>
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="richesse" caption="Richesse moyen"></dxi-column>
+    <dxi-column [visible]="false" [alignment]="'center'" dataField="richesse_accumulated"
+                caption="Richesse moyen (accumulée)"></dxi-column>
+    <dxi-column [visible]="false" [alignment]="'center'" dataField="n_richesse" caption="n_richesse"></dxi-column>
+    <dxi-column [visible]="false" [alignment]="'center'" dataField="n_richesse_accumulated"
+                caption="n_richesse_accumulated"></dxi-column>
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="srt_labo" caption="SRT Labo moyen"></dxi-column>
+    <dxi-column [visible]="false" [alignment]="'center'" dataField="srt_labo_accumulated"
+                caption="SRT Labo moyen (accumulées)"></dxi-column>
+    <dxi-column [visible]="false" [alignment]="'center'" dataField="srt_calc" caption="srt_calc"></dxi-column>
+    <dxi-column [visible]="false" [alignment]="'center'" dataField="srt_calc_accumulated"
+                caption="srt_calc_accumulated"></dxi-column>
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="poids_net_combine"
+                caption="Tonnage  Combiné"></dxi-column>
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="poids_net_combine_accumulated"
+                caption="Tonnage  moyen  (accumulée)"></dxi-column>
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="poids_net_came"
+                caption="Tonnage moyen mécainque"></dxi-column>
+    <dxi-column [visible]="false" [alignment]="'center'" dataField="poids_net_came_accumulated"
+                caption="Tonnage moyen mécainque (accumulée)"></dxi-column>
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="poids_net_cama"
+                caption="Tonnage moyen manuel"></dxi-column>
+    <dxi-column [visible]="false" [alignment]="'center'" dataField="poids_net_cama_accumulated"
+                caption="Tonnage moyen manuel(accumulée)"></dxi-column>
+    <dxi-column [visible]="false" [alignment]="'center'" dataField="poids_gateau" caption="poids_gateau"></dxi-column>
+    <dxi-column [visible]="false" [alignment]="'center'" dataField="poids_gateau_accumulated"
+                caption="poids_gateau_accumulated"></dxi-column>
+    <dxi-column [visible]="true" [alignment]="'center'" dataField="nbr_rotations"
+                caption="Nombre de rotations"></dxi-column>
+
+
+    <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-scrolling mode="standard" [showScrollbar]="'always'"></dxo-scrolling>
+    <dxo-sorting mode="multiple"></dxo-sorting>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-export [enabled]="true" fileName="situation_contracts" [excelFilterEnabled]="true"
+                [allowExportSelectedData]="true"></dxo-export>
+    <dxo-filter-row
+            [visible]="true" [applyFilter]="true"></dxo-filter-row>
+    <dxo-sorting mode="multiple"></dxo-sorting>
+    <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+    </dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+    <dxo-group-panel [visible]="true"
+                     emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
+    <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+</dx-data-grid>
+

@@ -1,20 +1,22 @@
 <div class="siam-dashboard-intro">
     <div class="grid-container">
         <div class="map-container">
-            <div class="map" [hidden]="option !== optionHelper.CAMIONS && option !== optionHelper.HISTORY && option !== optionHelper.PARCELS"
+            <div class="map"
+                 [hidden]="option !== optionHelper.CAMIONS && option !== optionHelper.HISTORY && option !== optionHelper.PARCELS"
                  style="height: 100%; width: 100%;">
                 <div style="height: 100%; width: 100%;"
                      leaflet
                      [leafletOptions]="camionOptions"
                      [leafletLayersControl]="camionLayersControl"
                      (leafletMapReady)="initCamionMap($event)"
-                     [leafletMarkerCluster]="markerClusterData"
-                     [leafletMarkerClusterOptions]="markerClusterOptions"
-                     (leafletMarkerClusterReady)="markerClusterReady($event)"
+
                      #camionMap>
                     <div *ngIf="allowCreatePolygon"
                          leafletDraw
                          [leafletDrawOptions]="drawOptions"></div>
+                    <div [leafletMarkerCluster]="markerClusterData"
+                         [leafletMarkerClusterOptions]="markerClusterOptions"
+                         (leafletMarkerClusterReady)="markerClusterReady($event)"></div>
                 </div>
             </div>
 
@@ -63,7 +65,7 @@
                             [showSelectionControls]="false"
                             [selectedItemKeys]="[]">
                         <div *dxTemplate="let data of 'item'">
-                            <div id="item" [attr.datasrc]="data" class="cda_item" data-cda="503" data-id="5"  [ngStyle]="{
+                            <div id="item" [attr.datasrc]="data" class="cda_item" data-cda="503" data-id="5" [ngStyle]="{
                                                         cursor: data?.data?.position  ? 'pointer' : 'not-allowed'
                                                       }">
                                 <div class="cda_item_body" #div>
@@ -76,9 +78,9 @@
                                         <div class="clr-col-6">
                                             <h1>
                                                 <span style="display: block; margin: -9px;">{{ data.ridelle_code }}</span>
-<!--
-                                                <span style="margin: -32px;display: block; font-size: 12px;">il y a environ 3 heures</span>
--->
+                                                <!--
+                                                                                                <span style="margin: -32px;display: block; font-size: 12px;">il y a environ 3 heures</span>
+                                                -->
                                             </h1>
                                         </div>
                                         <div class="clr-col">

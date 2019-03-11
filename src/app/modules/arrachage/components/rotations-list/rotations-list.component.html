@@ -85,7 +85,7 @@
         <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="z_name" [allowHeaderFiltering]="true"
                     caption="Zone"></dxi-column>
 
-        <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="p_name" [groupIndex]="0" [allowHeaderFiltering]="true"
+        <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="p_name"  [allowHeaderFiltering]="true"
                     caption="Parcelle"></dxi-column>
 
         <dxi-column [alignment]="'center'" [allowEditing]="false" [allowFiltering]="false" dataType="string"
@@ -105,7 +105,7 @@
         <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="tp_full_name"
                     [visible]="false"
                     caption="Nom (Agrègè)"></dxi-column>
-        <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="tp_cin" [visible]="false"
+        <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="tp_cin" [visible]="true"
                     caption="CIN (Agrègè)"></dxi-column>
         <dxi-column [alignment]="'center'" dataType="number" [allowEditing]="false" [visible]="false"
                     dataField="p_annuel_surface"
@@ -469,6 +469,7 @@
         [shading]="true"
         [closeOnOutsideClick]="false">
 </dx-load-panel>
+<!--
 <div style="display:none;">
     <div id="t2">
         <div id="receipt-wrapper">
@@ -530,4 +531,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
