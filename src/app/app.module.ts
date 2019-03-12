@@ -43,7 +43,7 @@ import { PermissionGuard } from './shared/directives/guard.directive';
 import { ActivityModule } from './modules/activity/activity.module';
 import { ImportModule } from './modules/import/import.module';
 import { ClarityModule } from '@clr/angular';
-import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster';
+import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster';
 
 @NgModule({
     declarations: [

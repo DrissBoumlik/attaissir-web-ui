@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ReportingService} from './services/reporting-service.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ReportingService } from './services/reporting-service.service';
 
 @Component({
     selector: 'app-reporting',
@@ -14,8 +14,8 @@ export class ReportingComponent implements OnInit {
     loadingVisible = false;
 
     constructor(private router: Router,
-                private route: ActivatedRoute,
-                private reportingService: ReportingService) {
+        private route: ActivatedRoute,
+        private reportingService: ReportingService) {
     }
 
     ngOnInit() {
@@ -31,6 +31,6 @@ export class ReportingComponent implements OnInit {
         this.selectedItem = this.reports.find(report => {
             return report.code === e.value;
         });
-        this.router.navigate([this.selectedItem.url], {relativeTo: this.route});
+        this.router.navigate([this.selectedItem.url], { relativeTo: this.route });
     }
 }

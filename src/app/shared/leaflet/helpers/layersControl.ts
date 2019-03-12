@@ -1,4 +1,4 @@
-import {Map, tileLayer} from 'leaflet';
+import { Map, tileLayer } from 'leaflet';
 import * as L from 'leaflet';
 
 export enum NavLinkOptions {
@@ -45,19 +45,19 @@ export class LayersControl {
             }),
             'HERE hybridDay': tileLayer('https://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/' +
                 '{mapID}/hybrid.day/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
-                attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-                subdomains: '1234',
-                mapID: 'newest',
-                app_id: 'LFDFxuH7piXnFpMEhCfS',
-                app_code: 'wgD39fkWKD3SNkEBLx_0LQ',
-                base: 'aerial',
-                maxZoom: 20,
-                type: 'maptile',
-                language: 'eng',
-                format: 'png8',
-                size: '256',
-                keepBuffer: 10
-            }),
+                    attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+                    subdomains: '1234',
+                    mapID: 'newest',
+                    app_id: 'LFDFxuH7piXnFpMEhCfS',
+                    app_code: 'wgD39fkWKD3SNkEBLx_0LQ',
+                    base: 'aerial',
+                    maxZoom: 20,
+                    type: 'maptile',
+                    language: 'eng',
+                    format: 'png8',
+                    size: '256',
+                    keepBuffer: 10
+                }),
             'Esri': tileLayer(
                 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                     maxZoom: 18,
@@ -79,38 +79,38 @@ export class LayersControl {
                 }),
             'CartoDB_DarkMatter': tileLayer('https://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/' +
                 '{mapID}/normal.night.grey/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}&style=wings', {
-                attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-                subdomains: '1234',
-                mapID: 'newest',
-                app_id: 'LFDFxuH7piXnFpMEhCfS',
-                app_code: 'wgD39fkWKD3SNkEBLx_0LQ',
-                base: 'base',
-                maxZoom: 20,
-                type: 'maptile',
-                language: 'eng',
-                format: 'png8',
-                size: '256',
-                keepBuffer: 10
-            }),
+                    attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+                    subdomains: '1234',
+                    mapID: 'newest',
+                    app_id: 'LFDFxuH7piXnFpMEhCfS',
+                    app_code: 'wgD39fkWKD3SNkEBLx_0LQ',
+                    base: 'base',
+                    maxZoom: 20,
+                    type: 'maptile',
+                    language: 'eng',
+                    format: 'png8',
+                    size: '256',
+                    keepBuffer: 10
+                }),
             'Open Street Map': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 18,
                 attribution: 'Leaflet, openstreetmap.'
             }),
             'HERE hybridDay': tileLayer('https://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/' +
                 '{mapID}/hybrid.day/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
-                attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-                subdomains: '1234',
-                mapID: 'newest',
-                app_id: 'LFDFxuH7piXnFpMEhCfS',
-                app_code: 'wgD39fkWKD3SNkEBLx_0LQ',
-                base: 'aerial',
-                maxZoom: 20,
-                type: 'maptile',
-                language: 'eng',
-                format: 'png8',
-                size: '256',
-                keepBuffer: 10
-            })
+                    attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+                    subdomains: '1234',
+                    mapID: 'newest',
+                    app_id: 'LFDFxuH7piXnFpMEhCfS',
+                    app_code: 'wgD39fkWKD3SNkEBLx_0LQ',
+                    base: 'aerial',
+                    maxZoom: 20,
+                    type: 'maptile',
+                    language: 'eng',
+                    format: 'png8',
+                    size: '256',
+                    keepBuffer: 10
+                })
         }
     };
     public static drawOptions = {
@@ -217,13 +217,13 @@ export class LayersControl {
         const center_ = map.getBounds().getCenter();
         const latlngs_ = [];
         latlngs_.push(map.getBounds().getSouthWest()); // bottom left
-        latlngs_.push({lat: map.getBounds().getSouth(), lng: center_.lng}); // bottom center_
+        latlngs_.push({ lat: map.getBounds().getSouth(), lng: center_.lng }); // bottom center_
         latlngs_.push(map.getBounds().getSouthEast()); // bottom right
-        latlngs_.push({lat: center_.lat, lng: map.getBounds().getEast()}); // center_ right
+        latlngs_.push({ lat: center_.lat, lng: map.getBounds().getEast() }); // center_ right
         latlngs_.push(map.getBounds().getNorthEast()); // top right
-        latlngs_.push({lat: map.getBounds().getNorth(), lng: map.getCenter().lng}); // top center_
+        latlngs_.push({ lat: map.getBounds().getNorth(), lng: map.getCenter().lng }); // top center_
         latlngs_.push(map.getBounds().getNorthWest()); // top left
-        latlngs_.push({lat: map.getCenter().lat, lng: map.getBounds().getWest()}); // center_ left
+        latlngs_.push({ lat: map.getCenter().lat, lng: map.getBounds().getWest() }); // center_ left
         return latlngs_;
     }
 

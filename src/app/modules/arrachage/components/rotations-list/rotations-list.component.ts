@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ArrachageService} from '../../services/arrachage.service';
-import {ToastrService} from 'ngx-toastr';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ArrachageService } from '../../services/arrachage.service';
+import { ToastrService } from 'ngx-toastr';
 import CustomStore from 'devextreme/data/custom_store';
 import DataSource from 'devextreme/data/data_source';
-import {Helper} from '../../../../shared/classes/helper';
-import {isNull} from 'util';
-import {DxDataGridComponent} from 'devextreme-angular';
-import {ModelHasPermissionService} from '../../services/model-has-permission.service';
+import { Helper } from '../../../../shared/classes/helper';
+import { isNull } from 'util';
+import { DxDataGridComponent } from 'devextreme-angular';
+import { ModelHasPermissionService } from '../../services/model-has-permission.service';
 
 @Component({
     selector: 'app-rotations-list',
@@ -40,9 +40,9 @@ export class RotationsListComponent implements OnInit {
     };
     encodingStatusEditorOptions = {
         dataSource: [
-            {code: 'awaiting', text: 'En attent d\'encodage'},
-            {code: 'loading', text: 'Encodeé | en cours de chargement'},
-            {code: 'loaded', text: 'Encodeé | chargeé'},
+            { code: 'awaiting', text: 'En attent d\'encodage' },
+            { code: 'loading', text: 'Encodeé | en cours de chargement' },
+            { code: 'loaded', text: 'Encodeé | chargeé' },
         ],
         valueExpr: 'code',
         displayExpr: 'text',
@@ -61,7 +61,7 @@ export class RotationsListComponent implements OnInit {
                     this.manual_assignment.last_rotation,
                     this.selectedParcel,
                     this.selectedRotation
-                    )
+                )
                 .subscribe((res) => {
                     this.popupVisible = false;
                     this.loadingVisible = false;
@@ -74,7 +74,7 @@ export class RotationsListComponent implements OnInit {
                     console.log(err);
                     this.loadingVisible = false;
 
-            });
+                });
         }
     };
     manualAssignmentEditorOptios: any = {};
@@ -92,7 +92,7 @@ export class RotationsListComponent implements OnInit {
 
 
     constructor(private arrachageService: ArrachageService,
-                private toaster: ToastrService) {
+        private toaster: ToastrService) {
         this.helper = Helper;
         this.today = Date.now();
         this.submitButtonOptions = {
@@ -146,7 +146,7 @@ export class RotationsListComponent implements OnInit {
                         return response;
                     })
                     .catch(err => {
-                        throw  err;
+                        throw err;
                     });
             }
         });

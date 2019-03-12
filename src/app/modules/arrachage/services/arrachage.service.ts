@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../../../environments/environment';
-import {HarvestConvocation} from '../classes/HarvestConvocation';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
+import { HarvestConvocation } from '../classes/HarvestConvocation';
 
 @Injectable({
     providedIn: 'root'
@@ -50,7 +50,7 @@ export class ArrachageService {
     }
 
     saveAnalyse(analyse_data: any, id: number): Observable<any> {
-        return this.http.put(`${environment.apiUrl}/${this.routeName}/interventions/${id}`, JSON.stringify({analyse: analyse_data}), {
+        return this.http.put(`${environment.apiUrl}/${this.routeName}/interventions/${id}`, JSON.stringify({ analyse: analyse_data }), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
@@ -62,7 +62,7 @@ export class ArrachageService {
     }
 
     downloadMotif(motifId: number) {
-        return this.http.post(`${environment.apiUrl}/${this.routeName}/motif`, JSON.stringify({motifId: motifId}), {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/motif`, JSON.stringify({ motifId: motifId }), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
@@ -112,7 +112,7 @@ export class ArrachageService {
     }
 
     getRotations(idConvocation: any): Observable<any> {
-        return this.http.post(`${environment.apiUrl}/${this.routeName}/generated/rotations`, JSON.stringify({idConvocation: idConvocation}), {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/generated/rotations`, JSON.stringify({ idConvocation: idConvocation }), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
@@ -124,10 +124,10 @@ export class ArrachageService {
             codeRidelle: codeRidelle,
             validated: validated
         }), {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        });
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json'
+                })
+            });
     }
 
     cancelRotation(idRotation: any): Observable<any> {
@@ -144,10 +144,10 @@ export class ArrachageService {
             start_date: start_date,
             end_date: end_date
         }), {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        });
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json'
+                })
+            });
     }
 
     getGeneratedTonnageChartData(start_date: Date, end_date: Date): Observable<any> {
@@ -155,10 +155,10 @@ export class ArrachageService {
             start_date: start_date,
             end_date: end_date
         }), {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        });
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json'
+                })
+            });
     }
 
     getHarvestVars(): Observable<any> {
@@ -166,7 +166,7 @@ export class ArrachageService {
     }
 
     getAvailableVehicles(selectedRotation: any): Observable<any> {
-        return this.http.post(`${environment.apiUrl}/${this.routeName}/vehicles/available`, JSON.stringify({id_rotation: selectedRotation}), {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/vehicles/available`, JSON.stringify({ id_rotation: selectedRotation }), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
@@ -188,14 +188,14 @@ export class ArrachageService {
             parcel_id,
             last_rotation,
         }), {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        });
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json'
+                })
+            });
     }
 
     addManualEncoding(encoding_data: any): Observable<any> {
-        return this.http.post(`${environment.apiUrl}/${this.routeName}/encoding/manual`, JSON.stringify({encoding_data: encoding_data}), {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/encoding/manual`, JSON.stringify({ encoding_data: encoding_data }), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })

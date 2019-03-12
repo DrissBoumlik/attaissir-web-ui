@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MouvementsService } from '../../service/mouvements.service';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from '../../../../shared/classes/helper';
-import {ModelHasPermissionService} from '../../../arrachage/services/model-has-permission.service';
+import { ModelHasPermissionService } from '../../../arrachage/services/model-has-permission.service';
 
 @Component({
     selector: 'app-show',

@@ -26,7 +26,7 @@ import * as CryptoJS from 'crypto-js';
 export class ThemeComponent implements OnInit {
     lastAction: string;
     canRefresh: boolean;
-    demoCollapsed = true;
+    demoCollapsed = false;
     routes = [];
     currentUser: any = {};
     tenants: any;

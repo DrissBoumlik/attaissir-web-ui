@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as L from 'leaflet';
 import {
     GeoJSON,
@@ -15,15 +15,15 @@ import {
     Polyline
 } from 'leaflet';
 import 'leaflet.markercluster';
-import {ZonesService} from '../../../../modules/contracts/services/zones.service';
-import {CarteService} from '../../../../modules/cartographie/carte.service';
+import { ZonesService } from '../../../../modules/contracts/services/zones.service';
+import { CarteService } from '../../../../modules/cartographie/carte.service';
 import '../../../../../../node_modules/leaflet.fullscreen/Control.FullScreen.js';
-import {GpsService} from '../../../services/gps.service';
-import {LayersControl, NavLinkOptions} from '../../helpers/layersControl';
+import { GpsService } from '../../../services/gps.service';
+import { LayersControl, NavLinkOptions } from '../../helpers/layersControl';
 import '../../services/MovingMarker';
 import '../../services/rotatedMarker';
 import '../../../../../assets/leaflet-sidebar/side-bar';
-import {LineString, MultiLineString} from 'geojson';
+import { LineString, MultiLineString } from 'geojson';
 import * as geojson from 'geojson';
 import set = Reflect.set;
 
@@ -117,9 +117,9 @@ export class LeafLetHomeComponent implements OnInit {
         polyLine: Polyline<geojson.LineString | geojson.MultiLineString>,
         stops
     } = {
-        polyLine: null,
-        stops: null
-    };
+            polyLine: null,
+            stops: null
+        };
     contextMenuCamionClicked: any;
     harvestLayer: LayerGroup;
     vehiclesLayer: LayerGroup;
@@ -133,9 +133,9 @@ export class LeafLetHomeComponent implements OnInit {
 
     /*----------------------Styles--------------------------*/
     constructor(private zonesService: ZonesService,
-                private ilotService: CarteService,
-                private gpsService: GpsService,
-                private router: Router) {
+        private ilotService: CarteService,
+        private gpsService: GpsService,
+        private router: Router) {
         this.layer = new Layer();
     }
 
@@ -330,7 +330,7 @@ export class LeafLetHomeComponent implements OnInit {
             'Parcelles en cours de chargement': this.harvest_inprogress_layer, // an option to show or hide the layer you created from geojson
             'Parcelles clôturées': this.harvest_done_layer, // an option to show or hide the layer you created from geojson
             'Parcelles récoltées': this.harvestLayer, // an option to show or hide the layer you created from geojson
-           // 'Véhicules': this.vehiclesLayer// an option to show or hide the layer you created from geojson
+            // 'Véhicules': this.vehiclesLayer// an option to show or hide the layer you created from geojson
         };
         this.camionLayersControl.overlays = layerControl;
 
@@ -380,7 +380,7 @@ export class LeafLetHomeComponent implements OnInit {
                 }
             });
             const bounds = polygon(LayersControl.getMapBound(map)).toGeoJSON();
-            this.ilotService.getIlotByZone({geom: bounds.geometry, skip: this.currentIlotIds}).subscribe(
+            this.ilotService.getIlotByZone({ geom: bounds.geometry, skip: this.currentIlotIds }).subscribe(
                 (res: any) => {
                     res.data = res.data.map(il => {
                         il.da = JSON.parse(il.da);

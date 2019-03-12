@@ -1,23 +1,23 @@
-import {catchError} from 'rxjs/operators';
-import {Injectable} from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import {
     HttpRequest,
     HttpHandler,
     HttpEvent,
     HttpInterceptor
 } from '@angular/common/http';
-import {AuthenticationService} from '../../auth/_services';
+import { AuthenticationService } from '../../auth/_services';
 
-import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Observable} from 'rxjs';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
     constructor(public auth: AuthenticationService,
-                private toastr: ToastrService,
-                public router: Router) {
+        private toastr: ToastrService,
+        public router: Router) {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

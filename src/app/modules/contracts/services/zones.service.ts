@@ -91,7 +91,7 @@ export class ZonesService {
     }
 
     updateIlot(ilot_id: any, parcel_id: any) {
-        return this.http.post(`${environment.apiUrl}/ilot/update`, JSON.stringify({ilot_id, parcel_id}), {
+        return this.http.post(`${environment.apiUrl}/ilot/update`, JSON.stringify({ ilot_id, parcel_id }), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })

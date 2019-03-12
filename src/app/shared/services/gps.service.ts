@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment';
-import {Feature} from 'geojson';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { Feature } from 'geojson';
 import * as geojson from 'geojson';
 
 @Injectable({
@@ -27,7 +27,7 @@ export class GpsService {
      * @returns {Observable<any>}
      */
     getTrackersPosition(params: any): Observable<any> {
-        return this.http.post(`${environment.apiUrl}/${this.routeName}/trackers/position`, JSON.stringify({trackers: params}), {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/trackers/position`, JSON.stringify({ trackers: params }), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
@@ -61,10 +61,10 @@ export class GpsService {
             geom: feature,
             vehicle_id: vehicle_id
         }), {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        });
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json'
+                })
+            });
     }
 
     getLineupData() {

@@ -1,12 +1,12 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Helper} from '../../../../shared/classes/helper';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Helper } from '../../../../shared/classes/helper';
 import CustomStore from 'devextreme/data/custom_store';
-import {ArrachageService} from '../../services/arrachage.service';
-import {DxChartComponent, DxDataGridComponent} from 'devextreme-angular';
-import {HarvestConvocation} from '../../classes/HarvestConvocation';
-import {ToastrService} from 'ngx-toastr';
-import {catchError} from 'rxjs/operators';
-import {ModelHasPermissionService} from '../../services/model-has-permission.service';
+import { ArrachageService } from '../../services/arrachage.service';
+import { DxChartComponent, DxDataGridComponent } from 'devextreme-angular';
+import { HarvestConvocation } from '../../classes/HarvestConvocation';
+import { ToastrService } from 'ngx-toastr';
+import { catchError } from 'rxjs/operators';
+import { ModelHasPermissionService } from '../../services/model-has-permission.service';
 
 @Component({
     selector: 'app-order-list',
@@ -42,8 +42,8 @@ export class OrderListComponent implements OnInit {
     vars: any;
 
     constructor(private arrachageService: ArrachageService,
-                private toaster: ToastrService,
-                private permService: ModelHasPermissionService) {
+        private toaster: ToastrService,
+        private permService: ModelHasPermissionService) {
         this.helper = Helper;
         this.today = new Date();
         this.tomorrow = new Date();
@@ -88,7 +88,7 @@ export class OrderListComponent implements OnInit {
     }
 
     customizePoint = (arg: any) => {
-        return {color: '#3adb64', hoverStyle: {color: '#75ffae'}};
+        return { color: '#3adb64', hoverStyle: { color: '#75ffae' } };
     };
 
     customizeLabel = (e: any) => {

@@ -9,7 +9,7 @@ import { ChargementAffectationListComponent } from './components/chargement-affe
 import { EncodageLisComponent } from './components/encodage-lis/encodage-lis.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { RotationsListComponent } from './components/rotations-list/rotations-list.component';
-import {TruckLineupComponent} from './components/truck-lineup/truck-lineup.component';
+import { TruckLineupComponent } from './components/truck-lineup/truck-lineup.component';
 
 const routes: Routes = [{
     path: 'arrachage',

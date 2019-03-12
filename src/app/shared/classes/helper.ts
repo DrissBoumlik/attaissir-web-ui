@@ -1,7 +1,7 @@
-import {isArray, isNull} from 'util';
-import {load} from '@angular/core/src/render3/instructions';
+import { isArray, isNull } from 'util';
+import { load } from '@angular/core/src/render3/instructions';
 import * as CryptoJS from 'crypto-js';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 export class Helper {
     /**
@@ -170,7 +170,7 @@ export class Helper {
     }
 
     public static realObject = (spy) => {
-        Object.keys(spy).forEach(function (key) {
+        Object.keys(spy).forEach(function(key) {
             if (spy[key] === '') {
                 spy[key] = null;
             }

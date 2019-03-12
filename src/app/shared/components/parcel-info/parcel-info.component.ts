@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ZonesService} from '../../../modules/contracts/services/zones.service';
-import {ToastrService} from 'ngx-toastr';
-import {Helper} from '../../classes/helper';
+import { Component, Input, OnInit } from '@angular/core';
+import { ZonesService } from '../../../modules/contracts/services/zones.service';
+import { ToastrService } from 'ngx-toastr';
+import { Helper } from '../../classes/helper';
 
 @Component({
     selector: 'app-parcel-info',
@@ -43,7 +43,7 @@ export class ParcelInfoComponent implements OnInit {
     helper: any;
 
     constructor(private zoneService: ZonesService,
-                private  toastr: ToastrService) {
+        private toastr: ToastrService) {
         this.helper = Helper;
     }
 
@@ -91,22 +91,22 @@ export class ParcelInfoComponent implements OnInit {
                                 searchEnabled: true,
                                 onSelectionChanged: (event) => {
                                     console.log(event);
-                                     if (event.selectedItem) {
-                                         this.zoneService.getParcelByZone(event.selectedItem.zone_id).subscribe(parcels => {
-                                             this.parcels = parcels;
-                                             this.parcelEditorOptions = {
-                                                 label: 'Parcelle',
-                                                 items: this.parcels,
-                                                 displayExpr: 'name',
-                                                 valueExpr: 'id',
-                                                 searchEnabled: true,
-                                                 onSelectionChanged: (event1) => {
-                                                 }
-                                             };
-                                         }, error1 => {
-                                             this.toastr.warning(error1.error.message);
-                                         });
-                                     }
+                                    if (event.selectedItem) {
+                                        this.zoneService.getParcelByZone(event.selectedItem.zone_id).subscribe(parcels => {
+                                            this.parcels = parcels;
+                                            this.parcelEditorOptions = {
+                                                label: 'Parcelle',
+                                                items: this.parcels,
+                                                displayExpr: 'name',
+                                                valueExpr: 'id',
+                                                searchEnabled: true,
+                                                onSelectionChanged: (event1) => {
+                                                }
+                                            };
+                                        }, error1 => {
+                                            this.toastr.warning(error1.error.message);
+                                        });
+                                    }
                                 }
                             };
                         }, error1 => {

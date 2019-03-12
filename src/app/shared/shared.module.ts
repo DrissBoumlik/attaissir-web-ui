@@ -32,7 +32,7 @@ import { CdaSigaaComponent } from './components/cda-sigaa/cda-sigaa.component';
 import { ParcelInfoComponent } from './components/parcel-info/parcel-info.component';
 import { ClarityModule } from '@clr/angular';
 import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
-import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster';
+import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster';
 import { MapWidgetInfoComponent } from './components/map-widget-info/map-widget-info.component';
 
 @NgModule({

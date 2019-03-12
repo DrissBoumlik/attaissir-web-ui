@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {GpsService} from '../../../../shared/services/gps.service';
+import { Component, OnInit } from '@angular/core';
+import { GpsService } from '../../../../shared/services/gps.service';
 
 @Component({
     selector: 'app-truck-lineup',
@@ -7,9 +7,9 @@ import {GpsService} from '../../../../shared/services/gps.service';
     styleUrls: ['./truck-lineup.component.scss']
 })
 export class TruckLineupComponent implements OnInit {
-     encoded: any = [];
-     last_rotation: any = [];
-     not_encoded: any = [];
+    encoded: any = [];
+    last_rotation: any = [];
+    not_encoded: any = [];
     loadingVisible = false;
     constructor(private gpsService: GpsService) {
     }

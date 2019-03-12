@@ -20,7 +20,7 @@ import {
 } from 'devextreme-angular';
 import { ClarityModule } from '@clr/angular';
 import { HttpClientModule } from '@angular/common/http';
-import {HttpModule} from '@angular/http';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
     declarations: [

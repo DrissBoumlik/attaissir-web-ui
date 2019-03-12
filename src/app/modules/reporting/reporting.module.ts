@@ -17,6 +17,8 @@ import { CardsComponent } from './cards/cards.component';
 import { MouvementsComponent } from './mouvements/mouvements.component';
 import { IlotsComponent } from './ilots/ilots.component';
 import { HourlyReceptionComponent } from './harvest/cane/hourly-reception/hourly-reception.component';
+import { DxoArgumentAxisModule } from 'devextreme-angular/ui/nested/argument-axis';
+import { DxoArgumentFormatModule } from 'devextreme-angular/ui/nested/argument-format';
 
 @NgModule({
     imports: [
@@ -27,7 +29,9 @@ import { HourlyReceptionComponent } from './harvest/cane/hourly-reception/hourly
         DxSelectBoxModule,
         DxLoadPanelModule,
         DxButtonModule,
-        DxChartModule
+        DxChartModule,
+        DxoArgumentAxisModule,
+        DxoArgumentFormatModule
     ],
     declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent, HourlyReceptionComponent]
 })
