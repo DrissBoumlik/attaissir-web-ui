@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
-import { ImportService } from '../services/import.service';
-import { ToastrService } from 'ngx-toastr';
+import {ImportService} from '../services/import.service';
+import {ToastrService} from 'ngx-toastr';
 
 declare const require: any;
 const $ = require('jquery');
@@ -16,14 +16,15 @@ export class IndexComponent implements OnInit {
     buttonsave: any;
 
     import: any = {};
-
+    loadingVisible = false;
     value: any[] = [];
     typeOptions: any;
     filePath = [];
 
 
     constructor(private importService: ImportService,
-        private toaster: ToastrService) { }
+                private toaster: ToastrService) {
+    }
 
     ngOnInit() {
 
@@ -41,9 +42,6 @@ export class IndexComponent implements OnInit {
 
             }
         };
-
-
-
 
 
         this.typeOptions = {
@@ -73,7 +71,6 @@ export class IndexComponent implements OnInit {
     }
 
 
-
     test(e) {
         console.log(this.import.type);
 
@@ -84,21 +81,31 @@ export class IndexComponent implements OnInit {
             file: this.filePath[0]
         };
 
-
+        this.loadingVisible = true;
         this.importService.upload(newDoc.file, newDoc.type).subscribe(
             res => {
                 d.resolve();
-                const blob = new Blob([res], { type: 'text/csv' });
-                const url = window.URL.createObjectURL(blob);
-                window.open(url);
+                const blob = new Blob([res]);
+                if (window.navigator.msSaveOrOpenBlob) { // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
+                    window.navigator.msSaveBlob(blob, 'resultat.csv');
+                } else {
+                    const a: any = window.document.createElement('a');
+                    a.href = window.URL.createObjectURL(blob);
+                    a.download = 'resultat.csv';
+                    document.body.appendChild(a);
+                    a.click();  // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
+                    document.body.removeChild(a);
+                }
                 this.toaster.success('Le document a été téléchargé avec succès.');
+                this.loadingVisible = false;
+
             }, error => {
                 console.log(error);
+                this.loadingVisible = false;
                 this.toaster.error('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
 
                 //  d.reject('Le document que vous essayez d\'importer est  trop volumineux, ou bien corrompu.');
             });
-
 
 
     }
