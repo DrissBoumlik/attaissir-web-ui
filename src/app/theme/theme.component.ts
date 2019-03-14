@@ -305,7 +305,7 @@ export class ThemeComponent implements OnInit {
             },
             {
                 name: 'GESTION DES UTILISATEURS',
-                permission: ['user.roles.grid'],
+                permission: ['user.roles.grid', 'user.users.index'],
                 icon: 'cog',
                 url: '/roles/liste',
                 description: '',

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import { environment } from '../../../../environments/environment.prod';
-import { Observable } from 'rxjs';
+import {environment} from '../../../../environments/environment.prod';
+import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -52,7 +52,7 @@ export class ReportingService {
     }
 
     getVarsByZone(zone_id: number): Observable<any> {
-        return this.http.post(`${environment.apiUrl}/${this.routeName}/vars`, JSON.stringify({ zone_id: zone_id }), {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/vars`, JSON.stringify({zone_id: zone_id}), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
@@ -113,8 +113,24 @@ export class ReportingService {
      *
      * @param loadOptions
      */
-    getHourlyReceptionStateCDADx(loadOptions: any) {
+    getHourlyReceptionStateCDADx(loadOptions: any): Observable<any> {
         return this.http.post(`${environment.apiUrl}/${this.routeName}/reception/hourly/cda/cane/grid`, JSON.stringify(loadOptions), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
+    getConvocatedParcels(): Observable<any> {
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/parcels/convocated`, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
+    getParcelRidelleHistory(params: any): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/parcels/history/ridelle`, JSON.stringify(params), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })

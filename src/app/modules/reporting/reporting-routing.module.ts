@@ -10,6 +10,7 @@ import { MouvementsComponent } from './mouvements/mouvements.component';
 import { IlotsComponent } from './ilots/ilots.component';
 import { HourlyReceptionComponent } from './harvest/cane/hourly-reception/hourly-reception.component';
 import {HourlyReceptionCdaComponent} from './harvest/cane/hourly-reception-cda/hourly-reception-cda.component';
+import {ParcelRidelleHistoryComponent} from './harvest/general/parcel-ridelle-history/parcel-ridelle-history.component';
 
 const routes: Routes = [{
     path: 'reporting',
@@ -46,6 +47,10 @@ const routes: Routes = [{
         {
             path: 'ilots',
             component: IlotsComponent,
+        },
+        {
+            path: 'parcels/loading/history',
+            component: ParcelRidelleHistoryComponent,
         },
         {
             path: 'receptions/cane/hourly',

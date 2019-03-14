@@ -7,7 +7,7 @@ import {
     DxBoxModule,
     DxButtonModule,
     DxChartModule,
-    DxDataGridModule, DxDateBoxModule,
+    DxDataGridModule, DxDateBoxModule, DxFormModule,
     DxLoadPanelModule,
     DxSelectBoxModule
 } from 'devextreme-angular';
@@ -20,6 +20,8 @@ import { HourlyReceptionComponent } from './harvest/cane/hourly-reception/hourly
 import { DxoArgumentAxisModule } from 'devextreme-angular/ui/nested/argument-axis';
 import { DxoArgumentFormatModule } from 'devextreme-angular/ui/nested/argument-format';
 import { HourlyReceptionCdaComponent } from './harvest/cane/hourly-reception-cda/hourly-reception-cda.component';
+import { ParcelRidelleHistoryComponent } from './harvest/general/parcel-ridelle-history/parcel-ridelle-history.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -32,9 +34,11 @@ import { HourlyReceptionCdaComponent } from './harvest/cane/hourly-reception-cda
         DxLoadPanelModule,
         DxButtonModule,
         DxChartModule,
+        DxFormModule,
+        FormsModule,
         DxoArgumentAxisModule,
         DxoArgumentFormatModule
     ],
-    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent, HourlyReceptionComponent, HourlyReceptionCdaComponent]
+    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent, HourlyReceptionComponent, HourlyReceptionCdaComponent, ParcelRidelleHistoryComponent]
 })
 export class ReportingModule { }
