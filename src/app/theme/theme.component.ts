@@ -305,7 +305,7 @@ export class ThemeComponent implements OnInit {
             },
             {
                 name: 'GESTION DES UTILISATEURS',
-                permission: ['user.users.index'],
+                permission: ['import.import.index'],
                 icon: 'cog',
                 url: '/import/index',
                 description: '',
