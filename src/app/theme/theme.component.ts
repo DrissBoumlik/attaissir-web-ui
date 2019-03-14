@@ -305,7 +305,7 @@ export class ThemeComponent implements OnInit {
             },
             {
                 name: 'GESTION DES UTILISATEURS',
-                permission: ['user.roles.grid', 'user.users.index'],
+                permission: ['user.users.index'],
                 icon: 'cog',
                 url: '/roles/liste',
                 description: '',
@@ -315,7 +315,6 @@ export class ThemeComponent implements OnInit {
                     { icon: 'users', name: 'Liste des utilisateurs', url: '/utilisateurs/liste', permission: ['user.users.index'] },
                     { icon: 'eye-hide', name: 'Journal d\'activités', url: '/activity/index', permission: ['user.users.index'] },
                     { icon: 'upload-cloud', name: 'Import', url: '/import/index', permission: ['user.users.index'] },
-
                 ],
                 disabled: 'false'
             }
