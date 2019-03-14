@@ -307,14 +307,14 @@ export class ThemeComponent implements OnInit {
                 name: 'GESTION DES UTILISATEURS',
                 permission: ['user.users.index'],
                 icon: 'cog',
-                url: '/roles/liste',
+                url: '/import/index',
                 description: '',
                 subMenu: [
                     { icon: 'plus', name: 'Nouveau role', url: '/roles/ajouter', permission: ['user.roles.store'] },
                     { icon: 'checkbox-list', name: 'Liste des roles', url: '/roles/liste', permission: ['user.roles.grid'] },
                     { icon: 'users', name: 'Liste des utilisateurs', url: '/utilisateurs/liste', permission: ['user.users.index'] },
                     { icon: 'eye-hide', name: 'Journal d\'activités', url: '/activity/index', permission: ['user.users.index'] },
-                    { icon: 'upload-cloud', name: 'Import', url: '/import/index', permission: ['user.users.index'] },
+                    { icon: 'upload-cloud', name: 'Import', url: '/import/index', permission: ['import.import.index'] },
                 ],
                 disabled: 'false'
             }
