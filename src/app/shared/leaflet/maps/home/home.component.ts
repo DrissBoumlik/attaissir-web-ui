@@ -49,6 +49,7 @@ export class LeafLetHomeComponent implements OnInit {
     trackers: any[] = [];
     // -----------------------Custom History------------------------------
     semisLayer: LayerGroup;
+    unknownLayer: LayerGroup;
     // -----------------------Custom History------------------------------
     customHistory: any = {};
     currentIlotIds: any[] = [];
@@ -97,6 +98,7 @@ export class LeafLetHomeComponent implements OnInit {
     style_harvest_convocated = LayersControl.styles.style_harvest_convocated;
     style_harvest_done = LayersControl.styles.style_harvest_done;
     style_harvest_inprogress = LayersControl.styles.style_harvest_inprogress;
+    style_unknown = LayersControl.styles.style_unknown;
     /*----------------------Data--------------------------*/
     cdas: any = {};
     camionsCarte: Map;
@@ -318,6 +320,7 @@ export class LeafLetHomeComponent implements OnInit {
     initCamionMap(map: Map) {
         // create an operational layer that is empty for now
         this.semisLayer = L.layerGroup().addTo(map);
+        this.unknownLayer = L.layerGroup().addTo(map);
         this.harvestLayer = L.layerGroup().addTo(map);
         this.convocated_layer = L.layerGroup().addTo(map);
         this.harvest_inprogress_layer = L.layerGroup().addTo(map);
@@ -326,6 +329,7 @@ export class LeafLetHomeComponent implements OnInit {
 
         const layerControl = {
             'Parcelles semées': this.semisLayer,
+            'Parcelles inconnues': this.unknownLayer,
             'Parcelles convoquées': this.convocated_layer, // an option to show or hide the layer you created from geojson
             'Parcelles en cours de chargement': this.harvest_inprogress_layer, // an option to show or hide the layer you created from geojson
             'Parcelles clôturées': this.harvest_done_layer, // an option to show or hide the layer you created from geojson
@@ -391,6 +395,9 @@ export class LeafLetHomeComponent implements OnInit {
                         style: (geom: any) => {
 
                             if (+geom.properties.type === 1) {
+                                if (geom.properties.is_unknown) {
+                                    return this.style_unknown;
+                                }
                                 if (geom.properties.is_harvest_convocated) {
                                     return this.style_harvest_convocated;
                                 }
@@ -453,6 +460,10 @@ export class LeafLetHomeComponent implements OnInit {
                                 }
                                 if (feature.properties.is_harvest_done) {
                                     layer.addTo(this.harvest_done_layer);
+                                    return;
+                                }
+                                if (feature.properties.is_unknown) {
+                                    layer.addTo(this.unknownLayer);
                                     return;
                                 }
                                 layer.addTo(this.semisLayer);

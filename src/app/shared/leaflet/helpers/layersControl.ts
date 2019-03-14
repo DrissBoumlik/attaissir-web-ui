@@ -190,6 +190,11 @@ export class LayersControl {
             color: '#ff5048',
             fillColor: '#e26c6d',
             fillOpacity: .7
+        },
+        style_unknown: {
+            color: '#e2ac56',
+            fillColor: '#ff7a1c',
+            fillOpacity: .9
         }
     };
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { environment } from '../../../../environments/environment.prod';
 import { Observable } from 'rxjs';
 
@@ -84,8 +84,37 @@ export class ReportingService {
         });
     }
 
+    /**
+     *
+     */
     getHourlyReceptionStateCx(): Observable<any> {
         return this.http.get(`${environment.apiUrl}/${this.routeName}/reception/hourly/cane/chart`, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
+    /**
+     *
+     */
+    getHourlyReceptionStateCDACx(houre: any): Observable<any> {
+        const params = new HttpParams()
+            .append('hour', houre);
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/reception/hourly/cda/cane/chart`, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            }),
+            params: params
+        });
+    }
+
+    /**
+     *
+     * @param loadOptions
+     */
+    getHourlyReceptionStateCDADx(loadOptions: any) {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/reception/hourly/cda/cane/grid`, JSON.stringify(loadOptions), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })

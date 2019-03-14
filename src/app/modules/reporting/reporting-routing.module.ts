@@ -9,6 +9,7 @@ import { CardsComponent } from './cards/cards.component';
 import { MouvementsComponent } from './mouvements/mouvements.component';
 import { IlotsComponent } from './ilots/ilots.component';
 import { HourlyReceptionComponent } from './harvest/cane/hourly-reception/hourly-reception.component';
+import {HourlyReceptionCdaComponent} from './harvest/cane/hourly-reception-cda/hourly-reception-cda.component';
 
 const routes: Routes = [{
     path: 'reporting',
@@ -49,6 +50,10 @@ const routes: Routes = [{
         {
             path: 'receptions/cane/hourly',
             component: HourlyReceptionComponent,
+        },
+        {
+            path: 'receptions/cane/hourly/cda',
+            component: HourlyReceptionCdaComponent,
         }
     ]
 }];
