@@ -94,6 +94,11 @@
                     caption="État (encodage)"></dxi-column>
 
         <dxi-column [alignment]="'center'" [allowEditing]="false" [allowFiltering]="false" dataType="string"
+                    dataField="loader_ridelle_code"
+                    cellTemplate="cut_type_template"
+                    caption="Type de coupe"></dxi-column>
+
+        <dxi-column [alignment]="'center'" [allowEditing]="false" [allowFiltering]="false" dataType="string"
                     dataField="rot_status"
                     cellTemplate="rotationStatusTemplate"
                     caption="État (rotation)"></dxi-column>
@@ -319,6 +324,9 @@
                    [visible]="modeHaspermission(['convocations.rotations.cancel'])"
                    (onClick)="cancel(data,cancelBtn)" #cancelBtn>
         </dx-button>
+    </div>
+    <div *dxTemplate="let data of 'cut_type_template'">
+        {{ data.data.loader_ridelle_code?.includes('CB') ? 'Mécanique' : 'Manuel' }}
     </div>
 
     <div *dxTemplate="let data of 'consulterTemplate'">

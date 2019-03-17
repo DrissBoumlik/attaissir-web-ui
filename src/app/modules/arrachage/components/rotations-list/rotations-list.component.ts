@@ -212,7 +212,7 @@ export class RotationsListComponent implements OnInit {
             );
     }
     disableDeleteBtn = (data) => {
-        return data.rot_status === 'done';
+        return data.data.rot_status === 'done';
     }
 
 
