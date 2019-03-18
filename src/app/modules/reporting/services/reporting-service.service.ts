@@ -136,4 +136,12 @@ export class ReportingService {
             })
         });
     }
+
+    getAlocationsAndReturnsDx(loadOptions: any): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/allocations/grid`, JSON.stringify(loadOptions), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
 }

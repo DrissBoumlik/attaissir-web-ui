@@ -401,7 +401,7 @@ export class LeafLetHomeComponent implements OnInit {
                                 if (geom.properties.is_harvest_convocated) {
                                     return this.style_harvest_convocated;
                                 }
-                                if (geom.properties.is_harvest_inprogress) {
+                                if (geom.properties.is_harvest_inprogres) {
                                     return this.style_harvest_inprogress;
                                 }
                                 if (geom.properties.is_harvest_done) {

@@ -22,6 +22,7 @@ import { DxoArgumentFormatModule } from 'devextreme-angular/ui/nested/argument-f
 import { HourlyReceptionCdaComponent } from './harvest/cane/hourly-reception-cda/hourly-reception-cda.component';
 import { ParcelRidelleHistoryComponent } from './harvest/general/parcel-ridelle-history/parcel-ridelle-history.component';
 import {FormsModule} from '@angular/forms';
+import { AlocationsAndReturnsComponent } from './alocations-and-returns/alocations-and-returns.component';
 
 @NgModule({
     imports: [
@@ -39,6 +40,6 @@ import {FormsModule} from '@angular/forms';
         DxoArgumentAxisModule,
         DxoArgumentFormatModule
     ],
-    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent, HourlyReceptionComponent, HourlyReceptionCdaComponent, ParcelRidelleHistoryComponent]
+    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent, HourlyReceptionComponent, HourlyReceptionCdaComponent, ParcelRidelleHistoryComponent, AlocationsAndReturnsComponent]
 })
 export class ReportingModule { }
