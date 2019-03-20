@@ -173,5 +173,9 @@ export class InterventionService {
                 })
             });
     }
+
+    getCuttersList(): Observable<any> {
+        return this.http.get(`${environment.apiUrl}/cutter/list`);
+    }
 }
 

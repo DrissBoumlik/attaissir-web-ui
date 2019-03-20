@@ -149,6 +149,7 @@ export class AddComponent implements OnInit {
         parcel: true,
         dc: true,
         camion: false,
+        cutter: false,
         proposition: true,
     };
 
@@ -410,6 +411,7 @@ export class AddComponent implements OnInit {
                                 parcel: res.data.params.parcel ? JSON.parse(res.data.params.parcel) : this.global_type.parcel,
                                 dc: res.data.params.dc ? JSON.parse(res.data.params.dc) : this.global_type.dc,
                                 camion: res.data.params.camion ? JSON.parse(res.data.params.camion) : this.global_type.camion,
+                                cutter: res.data.params.cutter ? JSON.parse(res.data.params.cutter) : this.global_type.cutter,
                                 proposition: res.data.params.proposition ? JSON.parse(res.data.params.proposition) : this.global_type.proposition,
                             };
                             console.log(this.global_type);
@@ -432,7 +434,7 @@ export class AddComponent implements OnInit {
                                 };
                                 switch (cf.type) {
                                     case (this.DB_NUMBER_BOX): {
-                                        dxCustomField.editorType = this.DX_NUMBER_BOX;
+                                        dxCustomField.editorType =  this.DX_NUMBER_BOX;
                                         dxCustomField.colspan = 2;
                                         break;
                                     }
@@ -444,9 +446,21 @@ export class AddComponent implements OnInit {
                                     case (this.DB_SELECT_BOX): {
                                         dxCustomField.editorType = this.DX_SELECT_BOX;
                                         dxCustomField.colspan = 1;
-                                        if(this.global_type.camion)
-                                        {
+                                        if (this.global_type.camion) {
                                             this.interventionService.getCamionsList().subscribe(
+                                                (list: any) => {
+                                                    dxCustomField.editorOptions = {
+                                                        placeholder: cf.label,
+                                                        displayExpr: 'ridelle_code',
+                                                        valueExpr: 'id',
+                                                        items: list,
+                                                        searchEnabled: true,
+                                                        searchMode: 'contains',
+                                                    };
+                                                });
+                                        }
+                                        if (this.global_type.cutter) {
+                                            this.interventionService.getCuttersList().subscribe(
                                                 (list: any) => {
                                                     dxCustomField.editorOptions = {
                                                         placeholder: cf.label,
