@@ -23,6 +23,7 @@ import { HourlyReceptionCdaComponent } from './harvest/cane/hourly-reception-cda
 import { ParcelRidelleHistoryComponent } from './harvest/general/parcel-ridelle-history/parcel-ridelle-history.component';
 import {FormsModule} from '@angular/forms';
 import { AlocationsAndReturnsComponent } from './alocations-and-returns/alocations-and-returns.component';
+import { NetDistributionByReceiptComponent } from './net-distribution-by-receipt/net-distribution-by-receipt.component';
 
 @NgModule({
     imports: [
@@ -40,6 +41,6 @@ import { AlocationsAndReturnsComponent } from './alocations-and-returns/alocatio
         DxoArgumentAxisModule,
         DxoArgumentFormatModule
     ],
-    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent, HourlyReceptionComponent, HourlyReceptionCdaComponent, ParcelRidelleHistoryComponent, AlocationsAndReturnsComponent]
+    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent, HourlyReceptionComponent, HourlyReceptionCdaComponent, ParcelRidelleHistoryComponent, AlocationsAndReturnsComponent, NetDistributionByReceiptComponent]
 })
 export class ReportingModule { }

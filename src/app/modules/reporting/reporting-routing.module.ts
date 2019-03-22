@@ -12,6 +12,7 @@ import {HourlyReceptionComponent} from './harvest/cane/hourly-reception/hourly-r
 import {HourlyReceptionCdaComponent} from './harvest/cane/hourly-reception-cda/hourly-reception-cda.component';
 import {ParcelRidelleHistoryComponent} from './harvest/general/parcel-ridelle-history/parcel-ridelle-history.component';
 import {AlocationsAndReturnsComponent} from './alocations-and-returns/alocations-and-returns.component';
+import {NetDistributionByReceiptComponent} from './net-distribution-by-receipt/net-distribution-by-receipt.component';
 
 const routes: Routes = [{
     path: 'reporting',
@@ -38,6 +39,12 @@ const routes: Routes = [{
         {
             path: 'alocations',
             component: AlocationsAndReturnsComponent,
+            canActivate: [PermissionGuard],
+            data: {permission: ['none']}
+        },
+        {
+            path: 'distributions/net/bon',
+            component: NetDistributionByReceiptComponent,
             canActivate: [PermissionGuard],
             data: {permission: ['none']}
         }
