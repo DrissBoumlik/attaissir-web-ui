@@ -86,18 +86,18 @@ export class IndexComponent implements OnInit {
         this.importService.upload(newDoc.file, newDoc.type).subscribe(
             res => {
                 d.resolve();
-                window.open(`${environment.apiUrl}/storage/${res}`);
-                /*const blob = new Blob([res]);
+                // window.open(`${environment.apiUrl}/storage/${res}`);
+                const blob = new Blob([res],  { type: 'application/vnd.ms-excel' });
                 if (window.navigator.msSaveOrOpenBlob) { // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
-                    window.navigator.msSaveBlob(blob, 'resultat.csv');
+                    window.navigator.msSaveBlob(blob, 'resultat.xlsx');
                 } else {
                     const a: any = window.document.createElement('a');
                     a.href = window.URL.createObjectURL(blob);
-                    a.download = 'resultat.csv';
+                    a.download = 'resultat.xlsx';
                     document.body.appendChild(a);
                     a.click();  // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
                     document.body.removeChild(a);
-                }*/
+                }
                 this.toaster.success('Le document a été téléchargé avec succès.');
                 this.loadingVisible = false;
 

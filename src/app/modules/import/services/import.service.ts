@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Article } from '../../../shared/classes/article';
 import { environment } from '../../../../environments/environment';
+import {ResponseContentType} from '@angular/http';
 
 @Injectable({
     providedIn: 'root'
@@ -32,9 +33,9 @@ export class ImportService {
 
         return this.http.post(`${environment.apiUrl}/${this.routeName}/upload`, formData, {
             headers: new HttpHeaders({
-                'Accept': 'application/json'
-                // 'Content-Type': 'application/json'
-            }), responseType: 'text'
+                'Accept': 'application/json',
+                // 'Content-Type': 'application/octet-stream'
+            }), responseType: 'blob'
         });
     }
 
