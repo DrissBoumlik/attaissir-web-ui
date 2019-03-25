@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
 import {ImportService} from '../services/import.service';
 import {ToastrService} from 'ngx-toastr';
+import {environment} from '../../../../environments/environment';
 
 declare const require: any;
 const $ = require('jquery');
@@ -85,7 +86,8 @@ export class IndexComponent implements OnInit {
         this.importService.upload(newDoc.file, newDoc.type).subscribe(
             res => {
                 d.resolve();
-                const blob = new Blob([res]);
+                window.open(`${environment.apiUrl}/storage/${res}`);
+                /*const blob = new Blob([res]);
                 if (window.navigator.msSaveOrOpenBlob) { // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
                     window.navigator.msSaveBlob(blob, 'resultat.csv');
                 } else {
@@ -95,7 +97,7 @@ export class IndexComponent implements OnInit {
                     document.body.appendChild(a);
                     a.click();  // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
                     document.body.removeChild(a);
-                }
+                }*/
                 this.toaster.success('Le document a été téléchargé avec succès.');
                 this.loadingVisible = false;
 
