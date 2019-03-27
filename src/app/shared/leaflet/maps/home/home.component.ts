@@ -372,10 +372,7 @@ export class LeafLetHomeComponent implements OnInit {
             if (map.getZoom() <= 12) {
                 return;
             }
-            if (this.postponeLoading) {
-                return;
-            }
-            this.postponeLoading = true;
+
             map.eachLayer((layer: any) => {
                 if (layer.feature && layer.feature.properties) {
                     if (
@@ -487,7 +484,6 @@ export class LeafLetHomeComponent implements OnInit {
                         this.show_parcel_info = true;
                     });
                     this.loadingVisible = false;
-                    this.postponeLoading = false;
                     // this.loadingVisible = false;
                     /*res.data.forEach(ilot => {
                       const geom = JSON.parse(ilot.da);
@@ -510,6 +506,7 @@ export class LeafLetHomeComponent implements OnInit {
                 },
                 (err: any) => {
                     this.loadingVisible = false;
+
                 }
             );
         });
