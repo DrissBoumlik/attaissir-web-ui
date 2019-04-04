@@ -87,7 +87,7 @@ export class ZonesService {
     }
 
     getParcelByZone(zone_id: number | any | null | any[]) {
-        return this.http.get(`${environment.apiUrl}/zone/${zone_id}/parcels`);
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/${zone_id}/parcels`);
     }
 
     updateIlot(ilot_id: any, parcel_id: any) {

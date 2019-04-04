@@ -111,6 +111,31 @@ export class ArrachageService {
         });
     }
 
+
+    /**
+     *
+     * @param param
+     */
+    getInprogressRotations(param: any): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/rotations/inprogress`, JSON.stringify(param), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
+    /**
+     *
+     * @param param
+     */
+    getAwaitingRotations(param: any): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/rotations/awaiting`, JSON.stringify(param), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
     getRotations(idConvocation: any): Observable<any> {
         return this.http.post(`${environment.apiUrl}/${this.routeName}/generated/rotations`, JSON.stringify({ idConvocation: idConvocation }), {
             headers: new HttpHeaders({
@@ -178,6 +203,7 @@ export class ArrachageService {
         id_loader: any,
         encoding_status: any,
         last_rotation: any,
+        parcel_id_to_modify: any,
         parcel_id: any,
         selectedRotation: any): Observable<any> {
         return this.http.post(`${environment.apiUrl}/${this.routeName}/vehicles/assign/manual`, JSON.stringify({
@@ -185,6 +211,7 @@ export class ArrachageService {
             id_truck,
             id_loader,
             encoding_status,
+            parcel_id_to_modify,
             parcel_id,
             last_rotation,
         }), {
@@ -200,5 +227,9 @@ export class ArrachageService {
                 'Content-Type': 'application/json'
             })
         });
+    }
+
+    getUnknownTruckList(): Observable<any> {
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/trucks/unknown`);
     }
 }

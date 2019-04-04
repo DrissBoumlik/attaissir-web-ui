@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import * as L from 'leaflet';
 import {
     GeoJSON,
@@ -15,15 +15,15 @@ import {
     Polyline
 } from 'leaflet';
 import 'leaflet.markercluster';
-import { ZonesService } from '../../../../modules/contracts/services/zones.service';
-import { CarteService } from '../../../../modules/cartographie/carte.service';
+import {ZonesService} from '../../../../modules/contracts/services/zones.service';
+import {CarteService} from '../../../../modules/cartographie/carte.service';
 import '../../../../../../node_modules/leaflet.fullscreen/Control.FullScreen.js';
-import { GpsService } from '../../../services/gps.service';
-import { LayersControl, NavLinkOptions } from '../../helpers/layersControl';
+import {GpsService} from '../../../services/gps.service';
+import {LayersControl, NavLinkOptions} from '../../helpers/layersControl';
 import '../../services/MovingMarker';
 import '../../services/rotatedMarker';
 import '../../../../../assets/leaflet-sidebar/side-bar';
-import { LineString, MultiLineString } from 'geojson';
+import {LineString, MultiLineString} from 'geojson';
 import * as geojson from 'geojson';
 import set = Reflect.set;
 
@@ -119,9 +119,9 @@ export class LeafLetHomeComponent implements OnInit {
         polyLine: Polyline<geojson.LineString | geojson.MultiLineString>,
         stops
     } = {
-            polyLine: null,
-            stops: null
-        };
+        polyLine: null,
+        stops: null
+    };
     contextMenuCamionClicked: any;
     harvestLayer: LayerGroup;
     vehiclesLayer: LayerGroup;
@@ -136,11 +136,12 @@ export class LeafLetHomeComponent implements OnInit {
     /*----------------------Styles--------------------------*/
     /*----------------------Styles--------------------------*/
     postponeLoading = false;
+
     /*----------------------Styles--------------------------*/
     constructor(private zonesService: ZonesService,
-        private ilotService: CarteService,
-        private gpsService: GpsService,
-        private router: Router) {
+                private ilotService: CarteService,
+                private gpsService: GpsService,
+                private router: Router) {
         this.layer = new Layer();
     }
 
@@ -388,7 +389,7 @@ export class LeafLetHomeComponent implements OnInit {
                 }
             });
             const bounds = polygon(LayersControl.getMapBound(map)).toGeoJSON();
-            this.ilotService.getIlotByZone({ geom: bounds.geometry, skip: this.currentIlotIds }).subscribe(
+            this.ilotService.getIlotByZone({geom: bounds.geometry, skip: this.currentIlotIds}).subscribe(
                 (res: any) => {
                     res.data = res.data.map(il => {
                         il.da = JSON.parse(il.da);
@@ -546,11 +547,17 @@ export class LeafLetHomeComponent implements OnInit {
                     tracker_datas.forEach((tracker_data) => {
                         const tracker = this.trackers.find((tr: any) => tr.tracker_id === tracker_data.id);
                         tracker.data = tracker_data;
-                        const icon = L.icon({
-                            iconUrl: tracker.vehicule_type === 'Camion' ? 'assets/images/truck_small_2.png' : 'assets/images/loader1.png',
+                        let iconUrl = tracker.vehicule_type === 'Camion' ? 'assets/images/truck_small_2.png' : 'assets/images/loader1.png';
+                        if (tracker.costum_fields && JSON.parse(tracker.costum_fields).data) {
+                            console.log('red truck');
+                            iconUrl = 'assets/images/truck_small_2_red.png';
+                        }
+                        const icon: any = L.icon({
+                            iconUrl: iconUrl,
                             iconSize: tracker.vehicule_type === 'Camion' ? [20, 40] : [50, 40], // size of the icon
                             iconAnchor: [10, 10]
                         });
+
                         const options: any = {
                             icon,
                             rotationAngle: 180

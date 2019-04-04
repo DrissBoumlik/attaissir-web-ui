@@ -11,7 +11,7 @@ import {
     DxFormModule, DxListModule,
     DxLoadPanelModule,
     DxNumberBoxModule,
-    DxPopupModule, DxScrollViewModule, DxSwitchModule
+    DxPopupModule, DxScrollViewModule, DxSwitchModule, DxTileViewModule
 } from 'devextreme-angular';
 import { EchantillonnageListComponent } from './components/echantillonnage-list/echantillonnage-list.component';
 import { EchantillonnageShowComponent } from './components/echantillonnage-show/echantillonnage-show.component';
@@ -21,6 +21,8 @@ import { EncodageLisComponent } from './components/encodage-lis/encodage-lis.com
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { RotationsListComponent } from './components/rotations-list/rotations-list.component';
 import { TruckLineupComponent } from './components/truck-lineup/truck-lineup.component';
+import { RotationsInprogressListComponent } from './components/rotations-inprogress-list/rotations-inprogress-list.component';
+import { RotationsAwaitingListComponent } from './components/rotations-awaiting-list/rotations-awaiting-list.component';
 
 @NgModule({
     imports: [
@@ -39,8 +41,9 @@ import { TruckLineupComponent } from './components/truck-lineup/truck-lineup.com
         DxScrollViewModule,
         DxChartModule,
         DxBoxModule,
-        DxLoadPanelModule
+        DxLoadPanelModule,
+        DxTileViewModule
     ],
-    declarations: [ConvoationListComponent, EchantillonnageListComponent, EchantillonnageShowComponent, ChargementAffectationListComponent, EncodageLisComponent, OrderListComponent, RotationsListComponent, TruckLineupComponent]
+    declarations: [ConvoationListComponent, EchantillonnageListComponent, EchantillonnageShowComponent, ChargementAffectationListComponent, EncodageLisComponent, OrderListComponent, RotationsListComponent, TruckLineupComponent, RotationsInprogressListComponent, RotationsAwaitingListComponent]
 })
 export class ArrachageModule { }

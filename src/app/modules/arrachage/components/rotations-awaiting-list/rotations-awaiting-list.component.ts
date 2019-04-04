@@ -1,19 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ArrachageService } from '../../services/arrachage.service';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Helper} from '../../../../shared/classes/helper';
+import {DxDataGridComponent} from 'devextreme-angular';
+import {ArrachageService} from '../../services/arrachage.service';
+import {ToastrService} from 'ngx-toastr';
 import CustomStore from 'devextreme/data/custom_store';
-import DataSource from 'devextreme/data/data_source';
-import { Helper } from '../../../../shared/classes/helper';
-import { isNull } from 'util';
-import { DxDataGridComponent } from 'devextreme-angular';
-import { ModelHasPermissionService } from '../../services/model-has-permission.service';
+import {isNull} from 'util';
+import {ModelHasPermissionService} from '../../services/model-has-permission.service';
 
 @Component({
-    selector: 'app-rotations-list',
-    templateUrl: './rotations-list.component.html',
-    styleUrls: ['./rotations-list.component.scss']
+  selector: 'app-rotations-awaiting-list',
+  templateUrl: './rotations-awaiting-list.component.html',
+  styleUrls: ['./rotations-awaiting-list.component.scss']
 })
-export class RotationsListComponent implements OnInit {
+export class RotationsAwaitingListComponent implements OnInit {
 
     rotations: any = {};
     schema_leds = {
@@ -115,7 +114,7 @@ export class RotationsListComponent implements OnInit {
 
 
     constructor(private arrachageService: ArrachageService,
-        private toaster: ToastrService) {
+                private toaster: ToastrService) {
         this.helper = Helper;
         this.today = Date.now();
         this.submitButtonOptions = {
@@ -152,7 +151,7 @@ export class RotationsListComponent implements OnInit {
     ngOnInit() {
         this.rotations.store = new CustomStore({
             load: (loadOptions: any) => {
-                return this.arrachageService.getGeneratedParcels(loadOptions)
+                return this.arrachageService.getAwaitingRotations(loadOptions)
                     .toPromise()
                     .then(response => {
                         return response;
@@ -323,3 +322,4 @@ export class RotationsListComponent implements OnInit {
         return ModelHasPermissionService.modelHahPermission(strings);
     }
 }
+

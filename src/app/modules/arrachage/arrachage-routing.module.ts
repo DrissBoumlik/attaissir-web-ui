@@ -10,6 +10,8 @@ import { EncodageLisComponent } from './components/encodage-lis/encodage-lis.com
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { RotationsListComponent } from './components/rotations-list/rotations-list.component';
 import { TruckLineupComponent } from './components/truck-lineup/truck-lineup.component';
+import {RotationsInprogressListComponent} from './components/rotations-inprogress-list/rotations-inprogress-list.component';
+import {RotationsAwaitingListComponent} from './components/rotations-awaiting-list/rotations-awaiting-list.component';
 
 const routes: Routes = [{
     path: 'arrachage',
@@ -17,6 +19,8 @@ const routes: Routes = [{
         { path: 'ordre', component: OrderListComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.order.view'] } },
         { path: 'convocations', component: ConvoationListComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.generate.view'] } },
         { path: 'convocations/generated', component: RotationsListComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.rotations.view'] } },
+        { path: 'rotations/inprogress', component: RotationsInprogressListComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.rotations.view'] } },
+        { path: 'rotations/awaiting', component: RotationsAwaitingListComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.rotations.view'] } },
         { path: 'encodage/liste', component: EncodageLisComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
         { path: 'chargements', component: ChargementAffectationListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
         { path: 'echantillons', component: EchantillonnageListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },

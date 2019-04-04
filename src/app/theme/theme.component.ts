@@ -283,10 +283,23 @@ export class ThemeComponent implements OnInit {
                     },
                     {
                         icon: 'replay-one',
-                        name: 'Rotations de récolte',
+                        name: 'Rotations (en cours)',
+                        url: '/arrachage/rotations/inprogress',
+                        permission: ['convocations.rotations.view']
+                    },
+                    {
+                        icon: 'exclamation-circle',
+                        name: 'Rotations (en attente d\'affectation)',
+                        url: '/arrachage/rotations/awaiting',
+                        permission: ['convocations.rotations.view']
+                    },
+                    {
+                        icon: 'check-circle',
+                        name: 'Rotations (usinage)',
                         url: '/arrachage/convocations/generated',
                         permission: ['convocations.rotations.view']
                     },
+
                     {
                         icon: 'truck',
                         name: 'File d\'attente',
