@@ -365,11 +365,16 @@
                    [(formData)]="manual_assignment"
                    #form>
 
-            <dxi-item itemType="group" caption="Dernière livraison déclarée"
-                      [visible]="modeHaspermission(['convocations.encoding.last_rotation'])">
-              <dxi-item dataField="last_rotation" editorType="dxSwitch"
-                        [editorOptions]="lastRotationEditorOptions">
-                <dxo-label text="Confirmer la dernière livraison"></dxo-label>
+            <dxi-item itemType="group" caption="Affectation" [colCount]="2"
+                      [visible]="modeHaspermission(['convocations.rotations.manual_assign'])">
+              <dxi-item dataField="id_truck" [colCount]="1" editorType="dxSelectBox"
+                        [editorOptions]="manualAssignmentEditorOptios">
+                <dxo-label text="Camion"></dxo-label>
+                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+              </dxi-item>
+              <dxi-item dataField="id_loader" [colCount]="1" editorType="dxSelectBox"
+                        [editorOptions]="loaderManualAssignmentEditorOptios">
+                <dxo-label text="Chargeuse"></dxo-label>
                 <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
               </dxi-item>
             </dxi-item>
