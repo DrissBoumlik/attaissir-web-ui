@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { Feature } from 'geojson';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../../environments/environment';
+import {Feature} from 'geojson';
 import * as geojson from 'geojson';
 
 @Injectable({
@@ -27,7 +27,7 @@ export class GpsService {
      * @returns {Observable<any>}
      */
     getTrackersPosition(params: any): Observable<any> {
-        return this.http.post(`${environment.apiUrl}/${this.routeName}/trackers/position`, JSON.stringify({ trackers: params }), {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/trackers/position`, JSON.stringify({trackers: params}), {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
@@ -56,18 +56,23 @@ export class GpsService {
         });
     }
 
-    addHarvestPolygon(feature: Feature<geojson.Polygon | geojson.MultiPolygon, any>, vehicle_id): Observable<any> {
+    addHarvestPolygon(feature: Feature<geojson.Polygon | geojson.MultiPolygon, any>, vehicle_id, type): Observable<any> {
         return this.http.post(`${environment.apiUrl}/${this.routeName}/add/polygon`, JSON.stringify({
             geom: feature,
-            vehicle_id: vehicle_id
+            vehicle_id: vehicle_id,
+            type: type
         }), {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json'
-                })
-            });
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
     }
 
     getLineupData() {
         return this.http.get(`${environment.apiUrl}/${this.routeName}/trackers/lineup`);
+    }
+
+    locateParcel($parcel_id) {
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/parcels/locate/${$parcel_id}`);
     }
 }

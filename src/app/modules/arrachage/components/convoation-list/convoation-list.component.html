@@ -5,8 +5,8 @@
     <dx-button (onClick)="toggleChart()" icon="back" [disabled]="false">
     </dx-button>
 </ul>
-<div #chartContainer class="slide-in-right">
-    <dx-chart #chart id="chart" [dataSource]="chartData" title="Tonnage generé / Jour" [rotated]="true"
+<div #chartContainer>
+    <dx-chart #chart id="chart" [dataSource]="chartData" title="Tonnage generé / Jour" [rotated]="false"
               [palette]="'Material'">
         <dxo-loading-indicator [show]="chartLoadingIndicator" text="Chargement"></dxo-loading-indicator>
         <dxi-series argumentField="date" argumentType="datetime" valueField="sum" type="bar">
@@ -24,6 +24,7 @@
         <dxo-export [enabled]="true"></dxo-export>
     </dx-chart>
 </div>
+
 <dx-data-grid
         id="fieldStatesGrid"
         [dataSource]="convocations"

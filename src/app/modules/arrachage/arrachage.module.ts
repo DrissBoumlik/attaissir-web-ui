@@ -23,6 +23,9 @@ import { RotationsListComponent } from './components/rotations-list/rotations-li
 import { TruckLineupComponent } from './components/truck-lineup/truck-lineup.component';
 import { RotationsInprogressListComponent } from './components/rotations-inprogress-list/rotations-inprogress-list.component';
 import { RotationsAwaitingListComponent } from './components/rotations-awaiting-list/rotations-awaiting-list.component';
+import {TruckSvgComponent} from '../../shared/components/truck-svg/truck-svg.component';
+import {TruckSvgsGreenComponent} from '../../shared/components/truck-svgs-green/truck-svgs-green.component';
+import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
     imports: [
@@ -42,7 +45,8 @@ import { RotationsAwaitingListComponent } from './components/rotations-awaiting-
         DxChartModule,
         DxBoxModule,
         DxLoadPanelModule,
-        DxTileViewModule
+        DxTileViewModule,
+        SharedModule
     ],
     declarations: [ConvoationListComponent, EchantillonnageListComponent, EchantillonnageShowComponent, ChargementAffectationListComponent, EncodageLisComponent, OrderListComponent, RotationsListComponent, TruckLineupComponent, RotationsInprogressListComponent, RotationsAwaitingListComponent]
 })

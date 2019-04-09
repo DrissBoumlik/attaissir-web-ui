@@ -1,17 +1,18 @@
 <div class="siam-dashboard-intro">
     <div class="grid-container">
         <div class="map-container">
-            <div class="map"
-                 [hidden]="option !== optionHelper.CAMIONS && option !== optionHelper.HISTORY && option !== optionHelper.PARCELS"
+            <div class="map" id="map"
                  style="height: 100%; width: 100%;">
                 <div style="height: 100%; width: 100%;"
                      leaflet
                      [leafletOptions]="camionOptions"
                      [leafletLayersControl]="camionLayersControl"
                      (leafletMapReady)="initCamionMap($event)"
-
                      #camionMap>
                     <div *ngIf="allowCreatePolygon"
+                         leafletDraw
+                         [leafletDrawOptions]="drawOptions"></div>
+                    <div *ngIf="allowCreatePolygonSemis"
                          leafletDraw
                          [leafletDrawOptions]="drawOptions"></div>
                     <div [leafletMarkerCluster]="markerClusterData"
@@ -131,6 +132,17 @@
                     </div>
                 </div>
             </dx-context-menu>
+            <dx-context-menu
+                    [dataSource]="mapContextMenuOptions"
+                    [width]="200"
+                    target="#map"
+                    (onItemClick)="onMapContextMenuItemClick($event)">
+                <div *dxTemplate="let e of 'item'">
+                    <div>
+                        <span [ngClass]="e.icon"></span> {{e.text}}
+                    </div>
+                </div>
+            </dx-context-menu>
             <!--&lt;!&ndash;<ul class="menu" >
               <li title="Menu"  ><a  (click)="show('Menu')" class="home" >Menu</a></li>
               &lt;!&ndash;<li title="liste des cda" *ngIf="!showCdas" ><a (click)="show('cdas')" class="about">CDAs</a></li>&ndash;&gt;
@@ -152,6 +164,38 @@
         </div>
     </div>
     <app-parcel-info [ilot]="ilot_info" *ngIf="ilot_info && show_parcel_info"></app-parcel-info>
+
+    <dx-popup
+            class="popup"
+            [height]="300"
+            [showTitle]="true"
+            title="localisation de parcelles"
+            [dragEnabled]="false"
+            [closeOnOutsideClick]="true"
+            [(visible)]="ParcelSearchPopupVisible">
+        <div *dxTemplate="let data of 'content'">
+            <dx-form id="form"
+                     [formData]="parcel_info">
+                <dxi-item itemType="group" [colCount]="3">
+                    <dxi-item dataField="cda"  editorType="dxSelectBox" [editorOptions]="cdaEditorOptions"></dxi-item>
+                    <dxi-item dataField="zone" editorType="dxSelectBox" [editorOptions]="zoneEditorOptions"></dxi-item>
+                    <dxi-item dataField="parcel" editorType="dxSelectBox" [editorOptions]="parcelEditorOptions"></dxi-item>
+                </dxi-item>
+                <dxi-item  editorType="dxButton" [editorOptions]="buttonEditorOptions"></dxi-item>
+            </dx-form>
+        </div>
+    </dx-popup>
+    <dx-load-panel
+            #loadPanel
+            shadingColor="rgba(0,0,0,0.4)"
+            [position]="{ of: 'me' }"
+            style="z-index: 2000;"
+            [(visible)]="loadingVisible"
+            [showIndicator]="true"
+            [showPane]="true"
+            [shading]="true"
+            [closeOnOutsideClick]="false">
+    </dx-load-panel>
     <dx-load-panel
             #loadPanel
             shadingColor="rgba(0,0,0,0.4)"

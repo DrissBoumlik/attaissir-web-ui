@@ -26,6 +26,8 @@ import '../../../../../assets/leaflet-sidebar/side-bar';
 import {LineString, MultiLineString} from 'geojson';
 import * as geojson from 'geojson';
 import set = Reflect.set;
+import {ToastrService} from 'ngx-toastr';
+import {Helper} from '../../../classes/helper';
 
 declare module 'leaflet' {
     namespace control {
@@ -50,6 +52,54 @@ export class LeafLetHomeComponent implements OnInit {
     // -----------------------Custom History------------------------------
     semisLayer: LayerGroup;
     unknownLayer: LayerGroup;
+    // -----------------------Custom Parcel------------------------------
+    cdaEditorOptions: any;
+    zoneEditorOptions: any;
+    parcelEditorOptions: any;
+    parcel_info: any = {};
+    buttonEditorOptions = {
+        text: 'Localiser',
+        type: 'success',
+        onClick: ($event) => {
+            console.log($event);
+            this.loadingVisible = true;
+            if (this.allowCreatePolygonSemis) {
+                this.gpsService.addHarvestPolygon(this.semis_layer_draw.toGeoJSON(), this.parcel_info.parcel, 1)
+                    .subscribe(
+                        (res: any) => {
+                            this.camionsCarte.setZoom(this.camionsCarte.getZoom() + 0.3);
+                            this.camionsCarte.removeLayer(this.semis_layer_draw);
+                            this.allowCreatePolygonSemis = false;
+                            this.ParcelSearchPopupVisible = false;
+                            this.loadingVisible = false;
+                        }, (err: any) => {
+                            this.loadingVisible = false;
+
+                        }
+                    );
+            } else {
+                this.gpsService.locateParcel(this.parcel_info.parcel)
+                    .subscribe(
+                        (res: any) => {
+                            const center = JSON.parse(res.data.center);
+                            console.log(JSON.parse(res.data.center)[0]);
+                            this.camionsCarte.flyTo(center);
+                            this.loadingVisible = false;
+                            this.ParcelSearchPopupVisible = false;
+                            this.parcel_info = {};
+                        }, err => {
+                            this.loadingVisible = false;
+                        }
+                    );
+            }
+            // this.loadingVisible = true;
+        }
+    };
+    cdas: any;
+    zones: any;
+    parcels: any;
+    ParcelSearchPopupVisible = false;
+    helper: any;
     // -----------------------Custom History------------------------------
     customHistory: any = {};
     currentIlotIds: any[] = [];
@@ -80,6 +130,7 @@ export class LeafLetHomeComponent implements OnInit {
     markerClusterData: any[] = [];
     markerClusterOptions: L.MarkerClusterGroupOptions;
     contextMenuOptions = LayersControl.contextMenuOptions;
+    mapContextMenuOptions = LayersControl.mapContextMenuOptions;
     /*----------------------Dates--------------------------*/
     today = new Date();
     /*----------------------Camion map options--------------------------*/
@@ -100,7 +151,6 @@ export class LeafLetHomeComponent implements OnInit {
     style_harvest_inprogress = LayersControl.styles.style_harvest_inprogress;
     style_unknown = LayersControl.styles.style_unknown;
     /*----------------------Data--------------------------*/
-    cdas: any = {};
     camionsCarte: Map;
     parcelsCarte: Map;
     layer: Layer;
@@ -130,25 +180,98 @@ export class LeafLetHomeComponent implements OnInit {
     harvest_done_layer: LayerGroup;
 
     allowCreatePolygon: any = false;
+    allowCreatePolygonSemis: any = false;
     selectedHistoryVehicle: Number;
     markers: Layer[] = [];
 
     /*----------------------Styles--------------------------*/
     /*----------------------Styles--------------------------*/
     postponeLoading = false;
+    semis_layer_draw: Polygon;
 
     /*----------------------Styles--------------------------*/
     constructor(private zonesService: ZonesService,
                 private ilotService: CarteService,
                 private gpsService: GpsService,
+                private  toastr: ToastrService,
                 private router: Router) {
         this.layer = new Layer();
+        this.helper = Helper;
     }
 
     // --------------------------------------------------------------------------------------------------------------- //
     ngOnInit() {
         this.zonesService.getCDAs().subscribe((res: any) => {
             this.cdas = res.data;
+        });
+        this.zonesService.getCDAs().subscribe(cda => {
+            // CDA
+            this.cdas = this.helper.dataFormatter(cda, false);
+            this.cdaEditorOptions = {
+                label: 'CDA',
+                items: this.cdas,
+                displayExpr: 'name',
+                valueExpr: 'zone_id',
+                searchEnabled: true,
+                onInitialized: (e) => {
+                    console.log(200);
+                    if (e.selectedItem) {
+                        this.zonesService.getZonesByCDA(e.selectedItem.zone_id).subscribe(zone => {
+                            this.zones = this.helper.dataFormatter(zone, false);
+                            this.zoneEditorOptions = {
+                                label: 'Zone',
+                                items: this.zones,
+                                displayExpr: 'name',
+                                valueExpr: 'zone_id',
+                                searchEnabled: true,
+                                onSelectionChanged: (event) => {
+                                }
+                            };
+                        }, error1 => {
+                            this.toastr.warning(error1.error.message);
+                        });
+                    }
+                },
+                onSelectionChanged: (e) => {
+                    // Zone
+                    console.log(200);
+                    if (e.selectedItem) {
+                        this.zonesService.getZonesByCDA(e.selectedItem.zone_id).subscribe(zone => {
+                            this.zones = this.helper.dataFormatter(zone, false);
+                            this.zoneEditorOptions = {
+                                label: 'Zone',
+                                items: this.zones,
+                                displayExpr: 'name',
+                                valueExpr: 'zone_id',
+                                searchEnabled: true,
+                                onSelectionChanged: (event) => {
+                                    console.log(event);
+                                    if (event.selectedItem) {
+                                        this.zonesService.getParcelByZone(event.selectedItem.zone_id).subscribe(parcels => {
+                                            this.parcels = parcels;
+                                            this.parcelEditorOptions = {
+                                                label: 'Parcelle',
+                                                items: this.parcels,
+                                                displayExpr: 'name',
+                                                valueExpr: 'id',
+                                                searchEnabled: true,
+                                                onSelectionChanged: (event1) => {
+                                                }
+                                            };
+                                        }, error1 => {
+                                            this.toastr.warning(error1.error.message);
+                                        });
+                                    }
+                                }
+                            };
+                        }, error1 => {
+                            this.toastr.warning(error1.error.message);
+                        });
+                    }
+                }
+            };
+        }, error1 => {
+            this.toastr.warning(error1.error.message);
         });
     }
 
@@ -359,14 +482,22 @@ export class LeafLetHomeComponent implements OnInit {
             const layer: Polygon = e.layer;
             // console.log(layer);
             map.addLayer(e.layer);
-            // console.log(JSON.stringify(e.layer.toGeoJSON()));
-            this.gpsService.addHarvestPolygon(layer.toGeoJSON(), this.selectedHistoryVehicle)
-                .subscribe(
-                    (res: any) => {
-                        console.log(res);
-                        map.removeLayer(layer);
-                    }
-                );
+            if (this.allowCreatePolygonSemis) {
+                this.semis_layer_draw = layer;
+                this.buttonEditorOptions.text = 'Enregistrer';
+                setTimeout(() => {
+                    this.ParcelSearchPopupVisible = true;
+                }, 100);
+            } else {// console.log(JSON.stringify(e.layer.toGeoJSON()));
+                this.gpsService.addHarvestPolygon(layer.toGeoJSON(), this.selectedHistoryVehicle, 2)
+                    .subscribe(
+                        (res: any) => {
+                            console.log(res);
+                            map.setZoom(map.getZoom() + 0.3);
+                            map.removeLayer(layer);
+                        }
+                    );
+            }
         });
         // --------------------------------------------------------------------------------------------------------------- //
         map.on('moveend', () => {
@@ -638,6 +769,16 @@ export class LeafLetHomeComponent implements OnInit {
         const tracker = this.contextMenuCamionClicked;
         const codeAction = e.itemData.code;
         this.drawTrackerHistory(+tracker.id, codeAction);
+    };
+
+    onMapContextMenuItemClick = (e: any) => {
+        e.itemData.action('test');
+        if (e.itemData.code === 'FINDP') {
+            this.ParcelSearchPopupVisible = true;
+        }
+        if (e.itemData.code === 'DRAWSEMIS') {
+            this.allowCreatePolygonSemis = true;
+        }
     };
 
     drawTrackerHistory(tracker_id: Number, codeAction: string, start_date = new Date(), end_date = new Date()) {

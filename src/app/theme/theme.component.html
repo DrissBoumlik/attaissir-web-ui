@@ -35,7 +35,7 @@
             <router-outlet></router-outlet>
         </div>
         <nav class="sidenav" [clr-nav-level]="1">
-            <clr-vertical-nav [clrVerticalNavCollapsible]="true" [collapsed]="false" [clrVerticalNavCollapsed]="demoCollapsed">
+            <clr-vertical-nav [clrVerticalNavCollapsible]="demoCollapsed" [collapsed]="demoCollapsed" [clrVerticalNavCollapsed]="demoCollapsed">
                 <div *ngFor="let route of routes">
                     <clr-vertical-nav-group
                             *ngIf="route.subMenu"

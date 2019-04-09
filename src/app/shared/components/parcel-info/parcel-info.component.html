@@ -16,6 +16,13 @@
                 </div>
             </div>
         </div>
+        <div class="field_infos_header">
+            <div class="field_infos_header">
+                <div class="p_surface">
+                    <a (click)="deleteParcel()"> <span id="field_infos_surface" style="cursor: pointer">Supprimer</span></a>
+                </div>
+            </div>
+        </div>
         <ul>
             <li>Réf : <span id="field_infos_ref_zone">{{ ilot.id }}</span></li>
             <li>
@@ -71,6 +78,22 @@
             </dxi-item>
             <dxi-item  editorType="dxButton" [editorOptions]="buttonEditorOptions"></dxi-item>
         </dx-form>
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [height]="200"
+        [width]="300"
+        [showTitle]="true"
+        title="Confirmation"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="confirmPopupVisible">
+    <div *dxTemplate="let data of 'content'">
+       <div style="align-content: end; text-align: right">
+           <dx-button [stylingMode]="'outlined'" [type]="'danger'" [text]="'Supprimer'"  (onClick)="confirmDeleteParcel($event)"></dx-button>
+           <dx-button [stylingMode]="'outlined'" [type]="'normal'" [text]="'Annuler'"  (onClick)="cancelDeleteParcel($event)"></dx-button>
+       </div>
     </div>
 </dx-popup>
 <dx-load-panel

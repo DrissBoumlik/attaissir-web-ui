@@ -17,6 +17,7 @@ export class RotationsInprogressListComponent implements OnInit {
 
     rotations: any = {};
     unknownTrucksPopUpVisible = false;
+    verifiedTrucksPopUpVisible = false;
     schema_leds = {
         'current_state': {
             third_party: {
@@ -153,7 +154,9 @@ export class RotationsInprogressListComponent implements OnInit {
     checkCorrespondencePanelVisible = false;
     currentCorsCheck: any = {};
     unknown_trucks: any = [];
+    verified_trucks: any = [];
     currentUnknownTruck: any = {};
+    currentVerifiedTruck: any = {};
 
     constructor(private harvestService: ArrachageService,
                 private toaster: ToastrService,
@@ -287,6 +290,16 @@ export class RotationsInprogressListComponent implements OnInit {
             this.toaster.warning(error1.error.message);
         });
         this.getUnknownTruckList();
+
+        setInterval(() => {
+            this.getUnknownTruckList();
+        }, 120000);
+
+        this.getVerifiedTruckList();
+
+        setInterval(() => {
+            this.getVerifiedTruckList();
+        }, 120000);
     }
 
     showRotations(data: any) {
@@ -468,7 +481,12 @@ export class RotationsInprogressListComponent implements OnInit {
         this.currentCorsCheck.current_state_p_name = data.current_state_p_name;
         this.currentCorsCheck.current_state_p_center = data.current_state_p_center;
         this.currentCorsCheck.p_name = data.p_name;
-        this.checkCorrespondencePanelVisible = true;
+        this.currentCorsCheck.truck_ridelle_code = data.truck_ridelle_code;
+        if (data.current_state_parcel_is_ok === true || data.current_state_parcel_is_ok === 'true') {
+            this.checkCorrespondencePanelVisible = true;
+        } else {
+            this.getSourceParcel();
+        }
     }
 
     onAgCardClick(data: any) {
@@ -511,7 +529,6 @@ export class RotationsInprogressListComponent implements OnInit {
         }
         this.currentCorsCheck.current_state_loader_id = data.current_state_loader_ridelle_code;
         this.currentCorsCheck.loader_ridelle_code = data.loader_ridelle_code;
-        this.checkCorrespondencePanelVisible = true;
     }
 
 
@@ -527,9 +544,45 @@ export class RotationsInprogressListComponent implements OnInit {
             );
     }
 
+    getVerifiedTruckList() {
+        this.harvestService.getVerifiedTruckList()
+            .subscribe(
+                (res: any) => {
+                    this.verified_trucks = res.data;
+                },
+                (err: any) => {
+                    console.log(err);
+                }
+            );
+    }
+
     unknownTruckClicked(e: any) {
-        console.log(e);
         this.currentUnknownTruck = this.unknown_trucks[e.itemIndex];
         this.unknownTrucksPopUpVisible = true;
     }
+
+    verifiedTruckClicked(e: any) {
+        this.currentVerifiedTruck = this.verified_trucks[e.itemIndex];
+        this.verifiedTrucksPopUpVisible = true;
+    }
+
+
+    getSourceParcel() {
+        this.loadingVisible = true;
+        this.harvestService
+            .getSourceParcel(this.currentCorsCheck.truck_ridelle_code)
+            .subscribe(
+                (res: any) => {
+                    this.loadingVisible = false;
+                    this.currentCorsCheck.current_state_p_name = res.data[0].getsourceparcel;
+                    this.checkCorrespondencePanelVisible = true;
+                }, (err: any) => {
+                    this.loadingVisible = false;
+                    this.checkCorrespondencePanelVisible = true;
+                }
+            );
+
+    }
+
+
 }

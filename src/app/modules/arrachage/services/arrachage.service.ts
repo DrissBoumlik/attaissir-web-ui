@@ -232,4 +232,10 @@ export class ArrachageService {
     getUnknownTruckList(): Observable<any> {
         return this.http.get(`${environment.apiUrl}/${this.routeName}/trucks/unknown`);
     }
+    getVerifiedTruckList(): Observable<any> {
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/trucks/verified`);
+    }
+    getSourceParcel(ridelle: string): Observable<any> {
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/trucks/unknown/parcel/${ridelle}`);
+    }
 }

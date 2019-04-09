@@ -12,6 +12,7 @@ export class ParcelInfoComponent implements OnInit {
 
     @Input('ilot') ilot: any;
     popupVisible = false;
+    confirmPopupVisible = false;
     loadingVisible = false;
     cdaEditorOptions: any;
     zoneEditorOptions: any;
@@ -124,6 +125,30 @@ export class ParcelInfoComponent implements OnInit {
     editParcel() {
         this.popupVisible = true;
         console.log(this.ilot);
+    }
+
+    deleteParcel() {
+        this.confirmPopupVisible = true;
+    }
+
+    confirmDeleteParcel(e: any) {
+        this.loadingVisible = true;
+        this.zoneService.deleteIlot(this.ilot.ilot_id)
+            .subscribe(
+                (res: any) => {
+                    this.loadingVisible = false;
+                    this.confirmPopupVisible = false;
+                    this.toastr.success('l\'îlot a été supprimé avec succès');
+                }, err => {
+                    this.loadingVisible = false;
+                    this.confirmPopupVisible = false;
+
+                }
+            );
+    }
+
+    cancelDeleteParcel(e: any) {
+        this.confirmPopupVisible = false;
     }
 
 }

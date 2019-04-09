@@ -303,3 +303,15 @@
 }
 
 
+::ng-deep .dx-texteditor.dx-editor-underlined.dx-show-clear-button .dx-texteditor-input {
+  color: white !important;
+}
+
+::ng-deep .dx-datebox.dx-auto-width.dx-dropdowneditor-button-visible.dx-editor-underlined .dx-texteditor-input, .dx-datebox:not(.dx-texteditor-empty).dx-auto-width.dx-dropdowneditor-button-visible.dx-editor-underlined .dx-texteditor-input {
+  color: #f9fff3 !important;
+}
+
+
+::ng-deep .dx-dropdownlist-popup-wrapper .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item-content {
+  color: black !important;
+}
