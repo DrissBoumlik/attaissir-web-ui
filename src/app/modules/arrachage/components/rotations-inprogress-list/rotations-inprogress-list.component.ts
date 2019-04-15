@@ -118,14 +118,14 @@ export class RotationsInprogressListComponent implements OnInit {
             w.document.write('</body>');
             w.document.write('</html>');
 
-            setTimeout(() => {
+            /*setTimeout(() => {
                 w.print();
             }, 3000);
 
 
             setTimeout(() => {
                 w.close();
-            }, 5000);
+            }, 5000);*/
 
 
             return true;

@@ -205,7 +205,8 @@ export class ArrachageService {
         last_rotation: any,
         parcel_id_to_modify: any,
         parcel_id: any,
-        selectedRotation: any): Observable<any> {
+        selectedRotation: any,
+        validate_rotation: any = null): Observable<any> {
         return this.http.post(`${environment.apiUrl}/${this.routeName}/vehicles/assign/manual`, JSON.stringify({
             id_rotation: selectedRotation,
             id_truck,
@@ -214,6 +215,7 @@ export class ArrachageService {
             parcel_id_to_modify,
             parcel_id,
             last_rotation,
+            validate_rotation,
         }), {
                 headers: new HttpHeaders({
                     'Content-Type': 'application/json'
