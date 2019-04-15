@@ -728,7 +728,7 @@ export class LeafLetHomeComponent implements OnInit {
                             if (tracker.marker && tracker.marker.options) {
                                 tracker.marker.options.rotationAngle = angle;
                                 tracker.marker.slideTo(tracker.data.position.coordinates, {
-                                    duration: 5000,
+                                    duration: 50000,
                                     keepAtCenter: false
                                 });
                             }
