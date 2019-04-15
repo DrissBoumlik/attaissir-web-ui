@@ -72,6 +72,10 @@
 
         <dxi-column dataField="rot_id" [formItem]="{visible: false}" [allowEditing]="false" [width]="40" caption=""
                     [allowSorting]="false" [allowFiltering]="false"
+                    cellTemplate="isValidatedTemplate"></dxi-column>
+
+        <dxi-column dataField="rot_id" [formItem]="{visible: false}" [allowEditing]="false" [width]="40" caption=""
+                    [allowSorting]="false" [allowFiltering]="false"
                     cellTemplate="consulterTemplate"></dxi-column>
 
         <dxi-column [allowHeaderFiltering]="true" [allowEditing]="false" [alignment]="'center'" dataType="number"
@@ -345,12 +349,16 @@
            {{ helper.getRotationEncodageStatus(data).text }}
       </span>
     </div>
+    <div *dxTemplate="let data of 'isValidatedTemplate'">
+        <i *ngIf="data.data.validate_rotation === 'true'"
+           style="font-size: 150%; align-content: center; cursor: default; color: #71d262 !important;"
+           class="fa fa-check-circle fa-5x"></i>
+    </div>
 
 </dx-data-grid>
 
 <dx-popup
         class="popup"
-        (onShowing)="loadVehicles($event)"
         [showTitle]="true"
         [title]="'Affectation et encodage manuel '"
         [dragEnabled]="false"
@@ -365,11 +373,16 @@
                              [(formData)]="manual_assignment"
                              #form>
 
-                        <dxi-item itemType="group" caption="Dernière livraison déclarée"
-                                  [visible]="modeHaspermission(['convocations.encoding.last_rotation'])">
+                        <dxi-item itemType="group" caption="Validation de la rotation">
                             <dxi-item dataField="last_rotation" editorType="dxSwitch"
+                                      [visible]="modeHaspermission(['convocations.encoding.last_rotation'])"
                                       [editorOptions]="lastRotationEditorOptions">
                                 <dxo-label text="Confirmer la dernière livraison"></dxo-label>
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                            </dxi-item>
+                            <dxi-item dataField="validate" editorType="dxSwitch" [visible]="modeHaspermission(['convocations.encoding.validate_rotation'])"
+                                      [editorOptions]="validateRotationEditorOptions">
+                                <dxo-label text="Valider la rotation"></dxo-label>
                                 <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
                             </dxi-item>
                         </dxi-item>

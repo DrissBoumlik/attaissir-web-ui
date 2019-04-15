@@ -245,11 +245,11 @@
             <div [ngClass]="(!data.data.current_state_loader_id || data.data.current_state_loader_id === '') ? 'grey led' :
              ((data.data.current_state_loader_is_ok == ture || data.data.current_state_loader_is_ok === 'true') ? 'green led' :
             'red led')"
-                 *ngIf="data.data.loader_ridelle_code?.includes('CB')"
+                 *ngIf="data.data.loader_ridelle_code?.includes('C')"
                  (click)="onLoaderCardClick(data.data)">
             </div>
             <div style="align-self: center;" class="label label-default"
-                 *ngIf="data.data.loader_ridelle_code?.includes('CB')">Carte chargeuse
+                 *ngIf="data.data.loader_ridelle_code?.includes('C')">Carte chargeuse
             </div>
         </div>
 

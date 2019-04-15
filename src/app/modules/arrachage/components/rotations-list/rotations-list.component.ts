@@ -60,6 +60,9 @@ export class RotationsListComponent implements OnInit {
     lastRotationEditorOptions = {
         value: false
     };
+    validateRotationEditorOptions = {
+        value: false
+    };
     encodingStatusEditorOptions = {
         dataSource: [
             { code: 'awaiting', text: 'En attent d\'encodage' },
@@ -83,7 +86,8 @@ export class RotationsListComponent implements OnInit {
                     this.manual_assignment.last_rotation,
                     null,
                     this.selectedParcel,
-                    this.selectedRotation
+                    this.selectedRotation,
+                    this.manual_assignment.validate,
                 )
                 .subscribe((res) => {
                     this.popupVisible = false;
