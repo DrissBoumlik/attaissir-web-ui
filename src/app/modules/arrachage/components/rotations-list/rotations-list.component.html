@@ -70,7 +70,7 @@
     <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Rotation"
                 [alignment]="'center'">
 
-        <dxi-column dataField="rot_id" [formItem]="{visible: false}" [allowEditing]="false" [width]="40" caption=""
+        <dxi-column dataField="rot_id" [formItem]="{visible: false}"  [allowEditing]="false" [width]="40" caption=""
                     [allowSorting]="false" [allowFiltering]="false"
                     cellTemplate="isValidatedTemplate"></dxi-column>
 
@@ -175,7 +175,7 @@
                 [visible]="modeHaspermission(['convocations.rotations.impurity'])"
                 caption="Impureté nette"></dxi-column>
     <dxi-column [allowFiltering]="false" [allowSorting]="false"
-                [visible]="modeHaspermission(['convocations.encoding.result'])" [allowSearch]="false" caption="Résultat"
+                [visible]="modeHaspermission(['convocations.encoding.result'])" *ngIf="modeHaspermission(['convocations.encoding.result'])" [allowSearch]="false" caption="Résultat"
                 [alignment]="'center'">
         <dxi-column [alignment]="'center'" dataType="string" dataField="code_encodage" [visible]="false"
                     caption="Réf encodage"></dxi-column>
@@ -350,9 +350,14 @@
       </span>
     </div>
     <div *dxTemplate="let data of 'isValidatedTemplate'">
-        <i *ngIf="data.data.validate_rotation === 'true'"
+
+        <i *ngIf="data.data.validate_rotation === 'true' || data.data.encoding_is_manual !== 'true'"
            style="font-size: 150%; align-content: center; cursor: default; color: #71d262 !important;"
            class="fa fa-check-circle fa-5x"></i>
+
+        <i *ngIf="data.data.encoding_is_manual === 'true' && data.data.validate_rotation !== 'true'"
+           style="font-size: 150%; align-content: center; cursor: default; color: #d24727 !important;"
+           class="fa fa-times-circle fa-5x"></i>
     </div>
 
 </dx-data-grid>
