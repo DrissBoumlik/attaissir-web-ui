@@ -258,7 +258,7 @@ export class ThemeComponent implements OnInit {
             {
                 name: 'GESTION DE LA RECOLTE',
                 icon: 'truck',
-                permission: ['preconization.interventions.store'],
+                permission: ['preconization.interventions.harvest'],
                 url: '/arrachage/echantillons',
                 description: '',
                 subMenu: [
@@ -266,7 +266,7 @@ export class ThemeComponent implements OnInit {
                         icon: 'filter-grid-circle',
                         name: 'Echantillonnage',
                         url: '/arrachage/echantillons',
-                        permission: ['preconization.interventions.store']
+                        permission: ['preconization.interventions.sampling']
                     },
                     {
                         icon: 'number-list',
@@ -285,19 +285,19 @@ export class ThemeComponent implements OnInit {
                         icon: 'replay-one',
                         name: 'Rotations (en cours)',
                         url: '/arrachage/rotations/inprogress',
-                        permission: ['convocations.rotations.view']
+                        permission: ['convocations.rotations.inprogress']
                     },
                     {
                         icon: 'exclamation-circle',
                         name: 'Rotations (en attente d\'affectation)',
                         url: '/arrachage/rotations/awaiting',
-                        permission: ['convocations.rotations.view']
+                        permission: ['convocations.rotations.awaiting']
                     },
                     {
                         icon: 'check-circle',
                         name: 'Rotations (usinage)',
                         url: '/arrachage/convocations/generated',
-                        permission: ['convocations.rotations.view']
+                        permission: ['convocations.rotations.usinage']
                     },
 
                     {
