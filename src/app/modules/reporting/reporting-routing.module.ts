@@ -13,6 +13,8 @@ import {HourlyReceptionCdaComponent} from './harvest/cane/hourly-reception-cda/h
 import {ParcelRidelleHistoryComponent} from './harvest/general/parcel-ridelle-history/parcel-ridelle-history.component';
 import {AlocationsAndReturnsComponent} from './alocations-and-returns/alocations-and-returns.component';
 import {NetDistributionByReceiptComponent} from './net-distribution-by-receipt/net-distribution-by-receipt.component';
+import {RotationsPivotComponent} from './harvest/general/rotations-pivot/rotations-pivot.component';
+import {SolTrstComponent} from './sol-trst/sol-trst.component';
 
 const routes: Routes = [{
     path: 'reporting',
@@ -39,6 +41,12 @@ const routes: Routes = [{
         {
             path: 'alocations',
             component: AlocationsAndReturnsComponent,
+            canActivate: [PermissionGuard],
+            data: {permission: ['none']}
+        },
+        {
+            path: 'jobs',
+            component: SolTrstComponent,
             canActivate: [PermissionGuard],
             data: {permission: ['none']}
         },
@@ -74,6 +82,10 @@ const routes: Routes = [{
         {
             path: 'receptions/cane/hourly/cda',
             component: HourlyReceptionCdaComponent,
+        },
+        {
+            path: 'receptions/daily',
+            component: RotationsPivotComponent,
         }
     ]
 }];

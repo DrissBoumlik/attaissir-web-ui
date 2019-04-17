@@ -148,22 +148,24 @@ export class Helper {
                 cssClass: 'label label-success'
             };
         }
+
+        if (data.data.rot_status === 'done') {
+            status = {
+                text: 'Usinage',
+                cssClass: 'label label-success'
+            };
+        }
         if (data.data.last_rotation === 'true') {
             status = {
                 text: 'Dernière livraison déclarée | En attente de confirmation',
                 cssClass: 'label label-warning'
             };
         }
+
         if (data.data.last_rotation === 'confirmed') {
             status = {
                 text: 'Dernière livraison confirmée',
                 cssClass: 'label label-warning'
-            };
-        }
-        if (data.data.rot_status === 'done') {
-            status = {
-                text: 'Usinage',
-                cssClass: 'label label-success'
             };
         }
         return status;

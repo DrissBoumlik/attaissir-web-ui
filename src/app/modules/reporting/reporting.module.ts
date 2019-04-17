@@ -8,7 +8,7 @@ import {
     DxButtonModule,
     DxChartModule,
     DxDataGridModule, DxDateBoxModule, DxFormModule,
-    DxLoadPanelModule,
+    DxLoadPanelModule, DxPivotGridModule,
     DxSelectBoxModule
 } from 'devextreme-angular';
 import { ReportingComponent } from './reporting';
@@ -24,6 +24,9 @@ import { ParcelRidelleHistoryComponent } from './harvest/general/parcel-ridelle-
 import {FormsModule} from '@angular/forms';
 import { AlocationsAndReturnsComponent } from './alocations-and-returns/alocations-and-returns.component';
 import { NetDistributionByReceiptComponent } from './net-distribution-by-receipt/net-distribution-by-receipt.component';
+import { RotationsPivotComponent } from './harvest/general/rotations-pivot/rotations-pivot.component';
+import { GrossTonnageReceivedComponent } from './harvest/general/gross-tonnage-received/gross-tonnage-received.component';
+import { SolTrstComponent } from './sol-trst/sol-trst.component';
 
 @NgModule({
     imports: [
@@ -31,6 +34,7 @@ import { NetDistributionByReceiptComponent } from './net-distribution-by-receipt
         ReportingRoutingModule,
         DxDataGridModule,
         DxBoxModule,
+        DxPivotGridModule,
         DxDateBoxModule,
         DxSelectBoxModule,
         DxLoadPanelModule,
@@ -41,6 +45,6 @@ import { NetDistributionByReceiptComponent } from './net-distribution-by-receipt
         DxoArgumentAxisModule,
         DxoArgumentFormatModule
     ],
-    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent, HourlyReceptionComponent, HourlyReceptionCdaComponent, ParcelRidelleHistoryComponent, AlocationsAndReturnsComponent, NetDistributionByReceiptComponent]
+    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent, HourlyReceptionComponent, HourlyReceptionCdaComponent, ParcelRidelleHistoryComponent, AlocationsAndReturnsComponent, NetDistributionByReceiptComponent, RotationsPivotComponent, GrossTonnageReceivedComponent, SolTrstComponent]
 })
 export class ReportingModule { }

@@ -1,0 +1,56 @@
+<div id="pivotgrid-demo">
+    <dx-chart id="sales-chart">
+        <dxo-common-series-settings type="bar"></dxo-common-series-settings>
+        <dxo-size [height]="400"></dxo-size>
+        <dxo-zoom-and-pan
+                argumentAxis="both"
+        ></dxo-zoom-and-pan>
+        <dxo-scroll-bar [visible]="true"></dxo-scroll-bar>
+        <dxo-adaptive-layout [width]="450"></dxo-adaptive-layout>
+        <dxo-tooltip [enabled]="true" format="decimal" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+    </dx-chart>
+
+    <dx-pivot-grid id="pivotgrid"
+                   [allowSortingBySummary]="true"
+                   [allowFiltering]="true"
+                   (onContentReady)="onContentReady($event)"
+                   [allowSorting]="true"
+                   [export]="export"
+                   [showBorders]="true"
+                   [showColumnGrandTotals]="false"
+                   [showRowGrandTotals]="false"
+                   [showRowTotals]="false"
+                   [showColumnTotals]="false"
+                   [dataSource]="pivotGridDataSource">
+        <dxo-field-chooser [enabled]="true" [height]="600"></dxo-field-chooser>
+        <dxo-field-panel
+                [showDataFields]="true"
+                [showRowFields]="true"
+                [showColumnFields]="true"
+                [showFilterFields]="true"
+                [allowFieldDragging]="true"
+                [visible]="true">
+        </dxo-field-panel>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+        <dxo-state-storing
+                [enabled]="true"
+                type="localStorage"
+                storageKey="dx-widget-gallery-pivotgrid-storing">
+        </dxo-state-storing>
+        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+        <dxi-field dataType="number" dataField="richesse" caption="Richesse" [summaryType]="'avg'" [isMeasure]="true"></dxi-field>
+        <dxi-field dataField="net_impurete" dataType="number" [summaryType]="'avg'" [isMeasure]="true" caption="Net impureté">  </dxi-field>
+        <dxi-field dataField="etat_impurete" dataType="number" [summaryType]="'avg'" caption="Etat impureté">  </dxi-field>
+        <dxi-field dataField="fibre" dataType="number" [summaryType]="'avg'"  caption="Fibre" [isMeasure]="true">  </dxi-field>
+        <dxi-field dataField="n_richesse" dataType="number" caption="N richesse" [summaryType]="'avg'" [isMeasure]="true">  </dxi-field>
+        <dxi-field dataField="srt_labo" dataType="number" caption="Srt labo" [summaryType]="'avg'" [isMeasure]="true">  </dxi-field>
+        <dxi-field dataField="srt_calc" dataType="number" caption="Srt calc" [summaryType]="'avg'" [isMeasure]="true">  </dxi-field>
+        <dxi-field dataField="poids_net" dataType="number" caption="Poids net" [summaryType]="'sum'" [isMeasure]="true">  </dxi-field>
+        <dxi-field dataField="poids_brut" dataType="number" caption="Poids brut" [summaryType]="'sum'" [isMeasure]="true">  </dxi-field>
+        <dxi-field dataField="poids_gateau" dataType="number" caption="Poids gateau" [summaryType]="'sum'" [isMeasure]="true">  </dxi-field>
+        <dxi-field dataField="poids_net_combine" dataType="number" caption="Poids net combiné" [summaryType]="'sum'" [isMeasure]="true">  </dxi-field>
+        <dxi-field dataField="poids_net_came" dataType="number" caption="Poids net (mechanique)" [summaryType]="'sum'" [isMeasure]="true">  </dxi-field>
+        <dxi-field dataField="poids_net_cama" dataType="number" caption="Poids net (manuel)" [summaryType]="'sum'" [isMeasure]="true">  </dxi-field>
+        <dxi-field dataField="nbr_rotations" dataType="number" caption="Nombre de rotations" [summaryType]="'sum'" [isMeasure]="true">  </dxi-field>
+    </dx-pivot-grid>
+</div>

@@ -59,6 +59,15 @@ export class ReportingService {
         });
     }
 
+
+    getTravauxSol(): Observable<any> {
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/sol/jobs`, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
     /**
      * @param params
      * @returns {Observable<any>}
@@ -102,6 +111,21 @@ export class ReportingService {
         const params = new HttpParams()
             .append('hour', houre);
         return this.http.get(`${environment.apiUrl}/${this.routeName}/reception/hourly/cda/cane/chart`, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            }),
+            params: params
+        });
+    }
+
+    /**
+     *
+     */
+    getDailyReceptionState(cda: any = null, zone: any = null): Observable<any> {
+        const params = new HttpParams()
+            .append('cda', cda)
+            .append('zone', zone);
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/reception/daily/cda/zone`, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             }),
