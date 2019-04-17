@@ -1,0 +1,122 @@
+<!--
+<div class="clr-row">
+  <div class="clr-col-12">
+    <ul class="m-nav-sticky"
+        style="margin-top: 30px; background-color: rgba(0,0,0,0); box-shadow: rgba(0,0,0,0) !important;">
+      <dx-button (onClick)="toggleChart()" icon="back" [disabled]="false">
+      </dx-button>
+    </ul>
+    <div #chartContainer class="slide-in-right">
+      <div class="dx-field">
+        <div class="dx-field-value">
+          <dx-date-box
+                  (onValueChanged)="updateChart($event)"
+                  [value]="now"
+                  [displayFormat]="'shortTime'"
+                  type="time">
+          </dx-date-box>
+        </div>
+      </div>
+      <dx-chart #chart id="chart" [dataSource]="chartData" title="Tonnage Net/Brut réceptionné"
+                [palette]="'Soft Pastel'">
+        <dxo-scroll-bar [visible]="true"></dxo-scroll-bar>
+        <dxo-zoom-and-pan
+                argumentAxis="both"
+        ></dxo-zoom-and-pan>
+        <dxo-scroll-bar [visible]="true"></dxo-scroll-bar>
+        <dxo-loading-indicator [show]="chartLoadingIndicator" text="Chargement"></dxo-loading-indicator>
+        <dxi-series argumentField="cda_name" argumentType="text" name="Tonnage Net réceptionné ce jour "
+                    valueField="poids_net" [ignoreEmptyPoints]="true" type="bar">
+          <dxo-label [customizeText]="customizeLabel" [visible]="true"
+                     [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
+        </dxi-series>
+        <dxi-series argumentField="cda_name" argumentType="text" name="Tonnage Net réceptionné a ce jour "
+                    valueField="poids_net_accumulated" [ignoreEmptyPoints]="true" type="bar">
+          <dxo-label [customizeText]="customizeLabel" [visible]="true"
+                     [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
+        </dxi-series>
+        <dxi-series argumentField="cda_name" argumentType="text" name="Tonnage Brut réceptionné ce jour "
+                    [ignoreEmptyPoints]="true" valueField="poids_net_combine" type="bar">
+          <dxo-label [customizeText]="customizeLabel" [visible]="false"
+                     [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
+        </dxi-series>
+        <dxi-series argumentField="cda_name" argumentType="text" name="Tonnage Brut réceptionné a ce jour "
+                    [ignoreEmptyPoints]="true" valueField="poids_net_combine_accumulated" type="bar">
+          <dxo-label [customizeText]="customizeLabel" [visible]="false"
+                     [argumentFormat]="'dd/MM/yyyy'"></dxo-label>
+        </dxi-series>
+        <dxo-legend verticalAlignment="top"
+                    horizontalAlignment="center"></dxo-legend>
+        <dxo-export [enabled]="true"></dxo-export>
+        <dxo-tooltip
+                [enabled]="true"
+                location="edge"
+                [customizeTooltip]="customizeTooltip">
+        </dxo-tooltip>
+      </dx-chart>
+      <hr>
+      <dx-chart #chart id="chartI" [dataSource]="chartData" title="Qualité technologique horaire par CDA"
+                [palette]="'Material Alternate'">
+        <dxo-zoom-and-pan
+                argumentAxis="both"
+        ></dxo-zoom-and-pan>
+        <dxo-scroll-bar [visible]="true"></dxo-scroll-bar>
+        <dxo-loading-indicator [show]="chartLoadingIndicator" text="Chargement"></dxo-loading-indicator>
+        <dxi-series argumentField="cda_name"  name="Moyenne des impuretés"
+                    argumentType="text" [showInLegend]="true"
+                    valueField="net_impurete"
+                    type="spline">
+          <dxo-tooltip
+                  [enabled]="true"
+                  location="edge">
+          </dxo-tooltip>
+        </dxi-series>
+        <dxi-series argumentField="cda_name"  name="Moyenne des Fibres "
+                    argumentType="text" [showInLegend]="true"
+                    valueField="fibre"
+                    type="spline">
+          <dxo-tooltip
+                  [enabled]="true"
+                  location="edge">
+          </dxo-tooltip>
+        </dxi-series>
+        <dxi-series argumentField="cda_name"  name="Moyenne des Richesses"
+                    argumentType="text" [showInLegend]="true"
+                    valueField="richesse"
+                    type="spline">
+          <dxo-tooltip
+                  [enabled]="true"
+                  location="edge">
+          </dxo-tooltip>
+        </dxi-series>
+        <dxi-series argumentField="cda_name"  name="Moyenne des SRT Labo"
+                    argumentType="text" [showInLegend]="true"
+                    valueField="srt_labo"
+                    type="spline">
+          <dxo-tooltip
+                  [enabled]="true"
+                  location="edge">
+          </dxo-tooltip>
+        </dxi-series>
+        <dxi-series argumentField="cda_name"  name="Moyenne des Puretés"
+                    argumentType="text" [showInLegend]="true"
+                    valueField="purete"
+                    type="spline">
+          <dxo-tooltip
+                  [enabled]="true"
+                  location="edge">
+          </dxo-tooltip>
+        </dxi-series>
+        <dxo-legend verticalAlignment="top"
+                    horizontalAlignment="center"></dxo-legend>
+        <dxo-export [enabled]="true"></dxo-export>
+        <dxo-tooltip
+                [enabled]="true"
+                location="edge"
+                [customizeTooltip]="customizeTooltipTech">
+        </dxo-tooltip>
+      </dx-chart>
+    </div>
+  </div>
+</div>
+-->
