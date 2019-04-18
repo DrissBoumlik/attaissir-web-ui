@@ -46,11 +46,13 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
                     dataType: 'date',
                     area: 'column',
                     isMeasure: false,
-                    groupName: 'Date'
+                    groupName: 'Date',
+                    format: { year: '2-digit', month: '2-digit', day: '2-digit' }
                 },
-                {groupName: 'Date', groupInterval: 'year', groupIndex: 0},
-                {groupName: 'Date', groupInterval: 'month', groupIndex: 1},
+                {groupName: 'Date', groupInterval: 'year', groupIndex: 0, format: {year: '2-digit'}},
+                {groupName: 'Date', groupInterval: 'month', groupIndex: 1, format: {month: '2-digit'}},
                 {groupName: 'Date', groupInterval: 'day', groupIndex: 2},
+                {groupName: 'Date', groupInterval: 'hour', groupIndex: 3, format: 'hour'},
                 {
                     caption: 'Poids net',
                     dataField: 'poids_net',
@@ -127,6 +129,39 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
                         precision: 2
                     },
                     area: 'data'
+                },
+                {
+                    caption: 'Nombre de rotations',
+                    dataField: 'nbr_rotations',
+                    dataType: 'number',
+                    allowCrossGroupCalculation: true,
+                    allowSortingBySummary: true,
+                    showValues: true,
+                    isMeasure: true,
+                    summaryType: 'sum',
+                    area: 'data'
+                },
+                {
+                    caption: 'Rotations encodées manuellement',
+                    dataField: 'nbr_rotations_manual',
+                    dataType: 'number',
+                    allowCrossGroupCalculation: true,
+                    allowSortingBySummary: true,
+                    showValues: true,
+                    isMeasure: true,
+                    summaryType: 'sum',
+                    area: 'data'
+                },
+                {
+                    caption: 'Rotations encodées dans la parcelle',
+                    dataField: 'nbr_rotations_auto',
+                    dataType: 'number',
+                    allowCrossGroupCalculation: true,
+                    allowSortingBySummary: true,
+                    showValues: true,
+                    isMeasure: true,
+                    summaryType: 'sum',
+                    area: 'data'
                 }
 
             ],
@@ -157,7 +192,7 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
 
     customizeTooltip(args) {
         return {
-            html: args.seriesName + ' | <div class=\'currency\'>' + args.value.toFixed(2) + ' tonne' + '</div>'
+            html: args.seriesName + ' | <div class=\'currency\'>' + args.value.toFixed(2) +  '</div>'
         };
     }
 
