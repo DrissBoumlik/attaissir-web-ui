@@ -7,6 +7,7 @@ import { Helper } from '../../../../shared/classes/helper';
 import { isNull } from 'util';
 import { DxDataGridComponent } from 'devextreme-angular';
 import { ModelHasPermissionService } from '../../services/model-has-permission.service';
+import {AuthenticationService} from '../../../../auth/_services';
 
 @Component({
     selector: 'app-rotations-list',
@@ -119,6 +120,7 @@ export class RotationsListComponent implements OnInit {
 
 
     constructor(private arrachageService: ArrachageService,
+        private authService: AuthenticationService,
         private toaster: ToastrService) {
         this.helper = Helper;
         this.today = Date.now();
@@ -325,5 +327,9 @@ export class RotationsListComponent implements OnInit {
 
     modeHaspermission(strings: string[]) {
         return ModelHasPermissionService.modelHahPermission(strings);
+    }
+
+    currentDivision() {
+        return this.authService.getTanent();
     }
 }
