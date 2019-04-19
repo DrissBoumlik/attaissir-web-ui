@@ -240,4 +240,8 @@ export class ArrachageService {
     getSourceParcel(ridelle: string): Observable<any> {
         return this.http.get(`${environment.apiUrl}/${this.routeName}/trucks/unknown/parcel/${ridelle}`);
     }
+
+    getLoaderParcelAssignments() {
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/loader/parcel/assignment`);
+    }
 }

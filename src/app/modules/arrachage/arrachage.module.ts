@@ -26,6 +26,7 @@ import { RotationsAwaitingListComponent } from './components/rotations-awaiting-
 import {TruckSvgComponent} from '../../shared/components/truck-svg/truck-svg.component';
 import {TruckSvgsGreenComponent} from '../../shared/components/truck-svgs-green/truck-svgs-green.component';
 import {SharedModule} from '../../shared/shared.module';
+import { LoaderParcelAssingmentListComponent } from './components/loader-parcel-assingment-list/loader-parcel-assingment-list.component';
 
 @NgModule({
     imports: [
@@ -48,6 +49,6 @@ import {SharedModule} from '../../shared/shared.module';
         DxTileViewModule,
         SharedModule
     ],
-    declarations: [ConvoationListComponent, EchantillonnageListComponent, EchantillonnageShowComponent, ChargementAffectationListComponent, EncodageLisComponent, OrderListComponent, RotationsListComponent, TruckLineupComponent, RotationsInprogressListComponent, RotationsAwaitingListComponent]
+    declarations: [ConvoationListComponent, EchantillonnageListComponent, EchantillonnageShowComponent, ChargementAffectationListComponent, EncodageLisComponent, OrderListComponent, RotationsListComponent, TruckLineupComponent, RotationsInprogressListComponent, RotationsAwaitingListComponent, LoaderParcelAssingmentListComponent]
 })
 export class ArrachageModule { }

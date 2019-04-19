@@ -299,12 +299,17 @@ export class ThemeComponent implements OnInit {
                         url: '/arrachage/convocations/generated',
                         permission: ['convocations.rotations.usinage']
                     },
-
                     {
                         icon: 'truck',
                         name: 'File d\'attente',
                         url: '/arrachage/truck/lineup',
                         permission: ['convocations.rotations.queue']
+                    },
+                    {
+                        icon: 'calendar',
+                        name: 'List d\'affectation des machines',
+                        url: '/arrachage/loader/parcel/assignments',
+                        permission: ['convocations.rotations.usinage']
                     }
                 ]
             },
