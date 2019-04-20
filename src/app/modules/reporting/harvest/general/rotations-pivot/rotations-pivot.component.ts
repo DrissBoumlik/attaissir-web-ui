@@ -12,7 +12,22 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
     @ViewChild(DxChartComponent) chart: DxChartComponent;
 
     pivotGridDataSource: any;
-
+    dataFieldsDisplayMode: any = 'splitPanes';
+    modes = [
+        {
+            key: 'sp',
+            name: 'Panneaux divisés',
+            value: 'splitPanes'
+        }, {
+            key: 'as',
+            name: 'Axes divisés',
+            value: 'splitAxes'
+        }, {
+            key: 'sa',
+            name: 'Axe unique',
+            value: 'singleAxis'
+        }
+    ];
     store: any = {};
 
     export = {
@@ -47,7 +62,7 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
                     area: 'column',
                     isMeasure: false,
                     groupName: 'Date',
-                    format: { year: '2-digit', month: '2-digit', day: '2-digit' }
+                    format: {year: '2-digit', month: '2-digit', day: '2-digit'}
                 },
                 {groupName: 'Date', groupInterval: 'year', groupIndex: 0, format: {year: '2-digit'}},
                 {groupName: 'Date', groupInterval: 'month', groupIndex: 1, format: {month: '2-digit'}},
@@ -185,14 +200,14 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this.pivotGrid.instance.bindChart(this.chart.instance, {
-            dataFieldsDisplayMode: 'splitPanes',
+            dataFieldsDisplayMode: this.dataFieldsDisplayMode,
             alternateDataFields: false
         });
     }
 
     customizeTooltip(args) {
         return {
-            html: args.seriesName + ' | <div class=\'currency\'>' + args.value.toFixed(2) +  '</div>'
+            html: args.seriesName + ' | <div class=\'currency\'>' + args.value.toFixed(2) + '</div>'
         };
     }
 
@@ -201,6 +216,12 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
         if (ds.field('ts').area !== 'column') {
             ds.field('ts', {area: 'column'});
         }
-    }
+    };
 
+    onSelectionChanged(e) {
+        this.pivotGrid.instance.bindChart(this.chart.instance, {
+            dataFieldsDisplayMode: e.selectedItem.value,
+            alternateDataFields: false
+        });
+    }
 }
