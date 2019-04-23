@@ -1,17 +1,18 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from '../../../../shared/classes/helper';
 import CustomStore from 'devextreme/data/custom_store';
 import { ArrachageService } from '../../services/arrachage.service';
 import { isNull } from 'util';
 import { environment } from '../../../../../environments/environment';
+import {DxChartComponent} from 'devextreme-angular';
 
 @Component({
     selector: 'app-convoation-list',
     templateUrl: './convoation-list.component.html',
     styleUrls: ['./convoation-list.component.scss']
 })
-export class ConvoationListComponent implements OnInit {
+export class ConvoationListComponent implements OnInit, AfterViewInit {
 
     convocations: any = {};
     rotation: any = {};
@@ -28,6 +29,7 @@ export class ConvoationListComponent implements OnInit {
     chartData: any = {};
     chartLoadingIndicator: any = {};
     @ViewChild('chartContainer') chartContainer: ElementRef;
+    @ViewChild(DxChartComponent) chart: DxChartComponent;
     selectedRow: any = {};
 
     constructor(private arrachageService: ArrachageService,
@@ -96,6 +98,11 @@ export class ConvoationListComponent implements OnInit {
             });
     }
 
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this.chart.instance.render();
+        }, 1000);
+    }
     getStatusColor(value: string): string {
         if (isNull(value)) {
             return 'm-badge m-badge--primary m-badge--wide';
