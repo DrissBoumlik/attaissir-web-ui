@@ -9,11 +9,44 @@
                 [(value)]="dataFieldsDisplayMode"
                 valueExpr="key"
                 displayExpr="name"></dx-select-box>
+        <span>Type de Panneau</span>
+        <dx-select-box
+                [items]="charTypes"
+                (onSelectionChanged)="onChartTypeSelectionChanged($event)"
+                [(value)]="chartType"
+                valueExpr="key"
+                displayExpr="name"></dx-select-box>
+
+    </div>
+
+    <div class="option">
+        <div class="clr-row">
+            <div class="clr-col">
+                <dx-check-box
+                        text="Afficher les totaux globaux des colonnes"
+                        [(value)]="showColumnGrandTotals"></dx-check-box>
+            </div>
+            <div class="clr-col">
+                <dx-check-box
+                        text="Afficher les totaux globaux des lignes"
+                        [(value)]="showRowGrandTotals"></dx-check-box>
+            </div>
+            <div class="clr-col">
+                <dx-check-box
+                        text="Afficher le total des lignes"
+                        [(value)]="showRowTotals"></dx-check-box>
+            </div>
+            <div class="clr-col">
+                <dx-check-box
+                        text="afficher le total des colonnes"
+                        [(value)]="showColumnTotals"></dx-check-box>
+            </div>
+        </div>
     </div>
 </div>
 <div id="pivotgrid-demo" style="width: 100%">
     <dx-chart id="sales-chart">
-        <dxo-common-series-settings type="bar"></dxo-common-series-settings>
+        <dxo-common-series-settings [type]="chartType"></dxo-common-series-settings>
         <dxo-size [height]="400"></dxo-size>
         <dxo-zoom-and-pan
                 argumentAxis="both"
@@ -30,10 +63,10 @@
                    [allowSorting]="true"
                    [export]="export"
                    [showBorders]="true"
-                   [showColumnGrandTotals]="false"
-                   [showRowGrandTotals]="false"
-                   [showRowTotals]="false"
-                   [showColumnTotals]="false"
+                   [showColumnGrandTotals]="showColumnGrandTotals"
+                   [showRowGrandTotals]="showRowGrandTotals"
+                   [showRowTotals]="showRowTotals"
+                   [showColumnTotals]="showColumnTotals"
                    [dataSource]="pivotGridDataSource">
         <dxo-field-chooser [enabled]="true" [height]="600"></dxo-field-chooser>
         <dxo-field-panel

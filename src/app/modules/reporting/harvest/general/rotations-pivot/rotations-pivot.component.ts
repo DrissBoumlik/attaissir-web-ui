@@ -13,6 +13,52 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
 
     pivotGridDataSource: any;
     dataFieldsDisplayMode: any = 'splitPanes';
+    chartType: any = 'bar';
+    charTypes: any = [{
+        key: 'area',
+        name: 'En aires',
+        value: 'area'
+    }, {
+        key: 'stackedarea',
+        name: 'En aires empilées',
+        value: 'stackedarea'
+    }, {
+        key: 'steparea',
+        name: 'En étapes',
+        value: 'steparea'
+    }, {
+        key: 'bar',
+        name: 'En barres',
+        value: 'bar'
+    }, {
+        key: 'stackedbar',
+        name: 'En barres empilées',
+        value: 'stackedbar'
+    }, {
+        key: 'line',
+        name: 'En lignes',
+        value: 'line'
+    }, {
+        key: 'stackedline',
+        name: 'En lignes empilées',
+        value: 'stackedline'
+    }, {
+        key: 'spline',
+        name: 'En SP lignes',
+        value: 'spline'
+    }, {
+        key: 'stackedspline',
+        name: 'En SP lignes empilées',
+        value: 'stackedspline'
+    }, {
+        key: 'stepline',
+        name: 'En courbes',
+        value: 'stepline'
+    }];
+    showColumnGrandTotals = false;
+    showRowGrandTotals = false;
+    showRowTotals = false;
+    showColumnTotals = false;
     modes = [
         {
             key: 'sp',
@@ -82,6 +128,30 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
                 }, {
                     caption: 'Poids brut',
                     dataField: 'poids_brut',
+                    dataType: 'number',
+                    summaryType: 'sum',
+                    isMeasure: true,
+                    format: {
+                        type: 'largeNumber',
+                        precision: 2
+                    },
+                    area: 'data'
+                },
+                {
+                    caption: 'Poids brut (mécanique)',
+                    dataField: 'poids_brut_came',
+                    dataType: 'number',
+                    summaryType: 'sum',
+                    isMeasure: true,
+                    format: {
+                        type: 'largeNumber',
+                        precision: 2
+                    },
+                    area: 'data'
+                },
+                {
+                    caption: 'Poids brut (manuel)',
+                    dataField: 'poids_brut_cama',
                     dataType: 'number',
                     summaryType: 'sum',
                     isMeasure: true,
@@ -203,6 +273,9 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
             dataFieldsDisplayMode: this.dataFieldsDisplayMode,
             alternateDataFields: false
         });
+        setTimeout(() => {
+            this.chart.instance.render();
+        }, 1000);
     }
 
     customizeTooltip(args) {
@@ -212,10 +285,10 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
     }
 
     onContentReady = (e) => {
-        const ds = e.component.getDataSource();
+        /*const ds = e.component.getDataSource();
         if (ds.field('ts').area !== 'column') {
             ds.field('ts', {area: 'column'});
-        }
+        }*/
     };
 
     onSelectionChanged(e) {
@@ -223,5 +296,9 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
             dataFieldsDisplayMode: e.selectedItem.value,
             alternateDataFields: false
         });
+    }
+
+    onChartTypeSelectionChanged(e) {
+        // this.chartType = e.selectedItem.value;
     }
 }

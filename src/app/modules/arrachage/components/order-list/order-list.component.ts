@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Helper } from '../../../../shared/classes/helper';
 import CustomStore from 'devextreme/data/custom_store';
 import { ArrachageService } from '../../services/arrachage.service';
@@ -13,7 +13,7 @@ import { ModelHasPermissionService } from '../../services/model-has-permission.s
     templateUrl: './order-list.component.html',
     styleUrls: ['./order-list.component.scss']
 })
-export class OrderListComponent implements OnInit {
+export class OrderListComponent implements OnInit, AfterViewInit {
 
     chartVisible = true;
     chartLoadingIndicator = false;
@@ -125,6 +125,12 @@ export class OrderListComponent implements OnInit {
                 return Promise.resolve(true);
             }
         });
+    }
+
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this.chart.instance.render();
+        }, 1000);
     }
 
     valuechange(e: any, data: any, value: any): void {

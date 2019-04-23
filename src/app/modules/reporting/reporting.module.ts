@@ -6,7 +6,7 @@ import { ContractsComponent } from './contracts/contracts.component';
 import {
     DxBoxModule,
     DxButtonModule,
-    DxChartModule,
+    DxChartModule, DxCheckBoxModule,
     DxDataGridModule, DxDateBoxModule, DxFormModule,
     DxLoadPanelModule, DxPivotGridModule,
     DxSelectBoxModule
@@ -43,7 +43,8 @@ import { SolTrstComponent } from './sol-trst/sol-trst.component';
         DxFormModule,
         FormsModule,
         DxoArgumentAxisModule,
-        DxoArgumentFormatModule
+        DxoArgumentFormatModule,
+        DxCheckBoxModule
     ],
     declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent, HourlyReceptionComponent, HourlyReceptionCdaComponent, ParcelRidelleHistoryComponent, AlocationsAndReturnsComponent, NetDistributionByReceiptComponent, RotationsPivotComponent, GrossTonnageReceivedComponent, SolTrstComponent]
 })
