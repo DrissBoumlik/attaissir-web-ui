@@ -151,6 +151,17 @@ export class ConvoationListComponent implements OnInit, AfterViewInit {
                 (cData: any) => {
                     this.chartLoadingIndicator = false;
                     this.chartData = cData.data;
+                    this.chartData = cData.data.map(l => {
+                        l.quota = parseFloat(l.quota);
+                        l.sum = parseFloat(l.sum);
+                        if (l.quota === 0) {
+                            delete l.quota;
+                        }
+                        if (l.sum === 0) {
+                            delete l.sum;
+                        }
+                        return l;
+                    });
                 });
     };
 
