@@ -247,6 +247,21 @@ export class RotationsPivotComponent implements OnInit, AfterViewInit {
                     isMeasure: true,
                     summaryType: 'sum',
                     area: 'data'
+                },
+                {
+                    caption: 'Taux d\'encodage',
+                    dataField: 'encoding_rate',
+                    dataType: 'number',
+                    allowCrossGroupCalculation: true,
+                    allowSortingBySummary: true,
+                    showValues: true,
+                    isMeasure: true,
+                    format: {
+                        type: 'fixedPoint',
+                        precision: 2
+                    },
+                    summaryType: 'avg',
+                    area: 'data'
                 }
 
             ],
