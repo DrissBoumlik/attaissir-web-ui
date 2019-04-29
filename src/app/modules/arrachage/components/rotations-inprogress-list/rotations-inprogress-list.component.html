@@ -271,6 +271,15 @@
                     <dx-form id="ms_form"
                              [(formData)]="manual_assignment"
                              #form>
+                        <dxi-item itemType="group" caption="Validation de la rotation">
+                            <dxi-item dataField="last_rotation" editorType="dxSwitch"
+                                      [visible]="modeHaspermission(['convocations.encoding.last_rotation'])"
+                                      [editorOptions]="lastRotationEditorOptions">
+                                <dxo-label text="Confirmer la dernière livraison"></dxo-label>
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                            </dxi-item>
+                        </dxi-item>
+
                         <dxi-item itemType="group" caption="Affectation" [colCount]="2"
                                   [visible]="modeHaspermission(['convocations.rotations.manual_assign'])">
                             <dxi-item dataField="id_truck" [colCount]="1" editorType="dxSelectBox"
