@@ -104,15 +104,9 @@ export class OperatedRotationsTodayComponent implements OnInit {
                 });
         }
     };
-    manualAssignmentEditorOptios: any = {};
-    loaderManualAssignmentEditorOptios: any = {};
     popupVisible = false;
-    assignPopUpVisible = false;
     helper: Helper;
     today: any;
-    returnedCamion: any = {};
-    returnedRotation: any = {};
-    validateAssignmentGrid = false;
     selectedRotation: any;
     @ViewChild('dataGrid') dataGrid: DxDataGridComponent;
     selectedParcel: any;
@@ -123,35 +117,7 @@ export class OperatedRotationsTodayComponent implements OnInit {
                 private toaster: ToastrService) {
         this.helper = Helper;
         this.today = Date.now();
-        this.submitButtonOptions = {
-            text: 'Consulter',
-            type: 'default',
-            icon: 'check',
-            useSubmitBehavior: true,
-            onClick: ($ev) => {
-                this.loadingVisible = true;
-
-                this.arrachageService.proposeAssignment(this.ridelle.code).subscribe((res) => {
-                    if (res.data.camion) {
-                        this.loadingVisible = false;
-
-                        this.returnedCamion = res.data.camion;
-                        this.returnedRotation = res.data.rotation;
-                        this.dataSource = [{
-                            returnedCamion: this.returnedCamion,
-                            returnedRotation: this.returnedRotation
-                        }];
-                        this.validateAssignmentGrid = true;
-                    }
-                }, err => {
-                    this.loadingVisible = false;
-
-                    this.toaster.warning(err.error.message, err.error.data, {
-                        positionClass: 'toast-top-center'
-                    });
-                });
-            }
-        };
+        this.submitButtonOptions = null;
     }
 
     ngOnInit() {
@@ -174,13 +140,6 @@ export class OperatedRotationsTodayComponent implements OnInit {
         this.popupVisible = true;
         this.selectedRotation = data.value;
         this.selectedParcel = data.data.p_id;
-        /*return this.arrachageService.getRotations(data)
-            .subscribe((res: any) => {
-                this.popupVisible = true;
-                this.selectedConvocation = res.data;
-            }, error => {
-                console.log(error);
-            });*/
     }
 
     getStatusColor(value: string): string {
@@ -207,111 +166,16 @@ export class OperatedRotationsTodayComponent implements OnInit {
         return '';
     };
 
-    cancel = (data, btn) => {
-        this.loadingVisible = true;
-
-        this.arrachageService.cancelRotation(data.data.rot_id)
-            .subscribe(
-                (res: any) => {
-                    this.loadingVisible = false;
-
-                    btn.disabled = true;
-                    this.toaster.success(`La rotation  ${res.data.id} a été annulée avec succès `, 'Success', {
-                        positionClass: 'toast-top-center'
-                    });
-                }, err => {
-                    this.loadingVisible = false;
-
-                    this.toaster.warning(err.error.message, err.error.data, {
-                        positionClass: 'toast-top-center'
-                    });
-                }
-            );
-    }
-
-    disableDeleteBtn = (data) => {
-        return data.data.rot_status === 'done';
-    }
 
 
 
-    assignByRC() {
-        this.assignPopUpVisible = true;
-    }
 
-    validateAssignment() {
-        this.loadingVisible = false;
 
-        this.arrachageService.proposeAssignment(this.returnedCamion.ridelle_code, true).subscribe((res) => {
-            this.assignPopUpVisible = false;
-            this.loadingVisible = false;
 
-            this.toaster.success(`La parcelle  ${res.rotation.p_name} a été affectée avec succès `, 'Success', {
-                positionClass: 'toast-top-center'
-            });
-        }, err => {
-            this.loadingVisible = false;
 
-            this.toaster.warning(err.error.message, err.error.data, {
-                positionClass: 'toast-top-center'
-            });
-        });
-    }
 
-    clearAssignmentData() {
-        this.returnedCamion = null;
-        this.returnedRotation = null;
-    }
 
-    loadVehicles(e: any) {
-        this.loadingVisible = true;
 
-        this.arrachageService.getAvailableVehicles(this.selectedRotation)
-            .subscribe(
-
-                (res: any) => {
-                    this.loadingVisible = false;
-
-                    console.log(res);
-                    this.manualAssignmentEditorOptios = {
-                        items: res.data.trucks,
-                        valueExpr: 'id',
-                        displayExpr: 'ridelle_code',
-                        searchExpr: 'ridelle_code',
-                        searchEnabled: true
-
-                    };
-                    this.loaderManualAssignmentEditorOptios = {
-                        items: res.data.loaders,
-                        valueExpr: 'id',
-                        displayExpr: 'ridelle_code',
-                        searchExpr: 'ridelle_code',
-                        searchEnabled: true
-                    };
-                }, err => {
-                    console.log(err);
-                    this.loadingVisible = false;
-
-                }
-            );
-    }
-
-    onEditingStart = (e) => {
-        /*if (!e.key.code_encodage) {
-            this.toaster.warning('Rotation déjà encodée', 'Encodage non autorisé');
-            e.cancel = true;
-        }*/
-        if (!e.key.v_id) {
-            this.toaster.warning('Rotation en attente d\'affectation', 'Encodage non autorisé');
-            e.cancel = true;
-        }
-
-        const schema = {
-            encoding: {
-                status: {}
-            }
-        };
-    };
 
     modeHaspermission(strings: string[]) {
         return ModelHasPermissionService.modelHahPermission(strings);

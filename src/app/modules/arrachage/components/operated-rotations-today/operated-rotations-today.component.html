@@ -1,19 +1,6 @@
-<h1>Rotations de récolte | Encodage.</h1>
+<h1>Rotations de récolte | Aujourd'hui | Encodage.</h1>
 <hr>
-<div class="clr-row clr-align-items-end">
-  <div class="clr-col clr-align-self-end">
-    <dx-button
-            class="d-none d-sm-block pull-right"
-            icon="fa fa-credit-card-alt"
-            style="font-weight: bold"
-            [type]="'success'"
-            [visible]="modeHaspermission(['convocations.rotations.manual_assign'])"
-            [disabled]="!modeHaspermission(['convocations.rotations.manual_assign'])"
-            text="Affecter par code de ridelle"
-            (onClick)="assignByRC()">
-    </dx-button>
-  </div>
-</div>
+
 
 <dx-data-grid
         #dataGrid
@@ -21,7 +8,6 @@
         [dataSource]="rotations"
         [columnHidingEnabled]="false"
         [allowColumnResizing]="false"
-        (onEditingStart)="onEditingStart($event)"
         [allowColumnReordering]="true"
         [columnAutoWidth]="true"
         [remoteOperations]="{ paging: true, sorting: true, filtering: true}">
@@ -350,21 +336,9 @@
                 caption="n_srt"></dxi-column>
     <dxi-column [alignment]="'center'" dataType="string" dataField="canne_refoulee" [visible]="false"
                 caption="canne_refoulee"></dxi-column>
-    <
-
   </dxi-column>
 
 
-  <dxi-column [visible]="modeHaspermission(['convocations.rotations.cancel'])" [alignment]="'center'"
-              dataType="string" dataField="canne_refoulee" [allowFiltering]="false"
-              caption="" cellTemplate="deleteButtonTemplate"></dxi-column>
-
-  <div *dxTemplate="let data of 'deleteButtonTemplate'">
-    <dx-button type="danger" [disabled]="disableDeleteBtn(data)" [text]="'Annuler'"
-               [visible]="modeHaspermission(['convocations.rotations.cancel'])"
-               (onClick)="cancel(data,cancelBtn)" #cancelBtn>
-    </dx-button>
-  </div>
   <div *dxTemplate="let data of 'cut_type_template'">
     {{ data.data.loader_ridelle_code?.includes('CB') ? 'Mécanique' : 'Manuel' }}
   </div>
@@ -435,68 +409,6 @@
         </form>
       </div>
     </dx-scroll-view>
-  </div>
-</dx-popup>
-<dx-popup
-        class="popup"
-        [showTitle]="true"
-        [title]="'Affectation par code ridelle'"
-        [dragEnabled]="false"
-        [closeOnOutsideClick]="true"
-        (onShown)="clearAssignmentData()"
-        [(visible)]="assignPopUpVisible">
-  <div *dxTemplate="let data of 'content'">
-    <dx-form id="form"
-             [formData]="ridelle">
-      <dxi-item itemType="group" cssClass="first-group" [colCount]="1">
-        <dxi-item itemType="group">
-          <dxi-item dataField="code" editorType="dxTextBox">
-            <dxo-label text="Code ridelle"></dxo-label>
-            <dxi-validation-rule type="required"></dxi-validation-rule>
-          </dxi-item>
-        </dxi-item>
-        <dxi-item itemType="group">
-          <dxi-item
-                  itemType="button"
-                  horizontalAlignment="right"
-                  verticalAlignment="bottom"
-                  [buttonOptions]="submitButtonOptions">
-          </dxi-item>
-        </dxi-item>
-      </dxi-item>
-    </dx-form>
-    <br>
-    <dx-data-grid
-            [dataSource]="dataSource"
-            [visible]="returnedRotation"
-            [showBorders]="true"
-            [columnAutoWidth]="true">
-      <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Camion"
-                  [alignment]="'center'">
-        <dxi-column dataField="returnedCamion.ridelle_code" caption="Code Ridelle"></dxi-column>
-        <dxi-column dataField="returnedCamion.taille" caption="Taille"></dxi-column>
-        <dxi-column dataField="returnedCamion.immatricule_number" caption="Immatricule"></dxi-column>
-        <dxi-column dataField="returnedCamion.ptc" caption="PTC"></dxi-column>
-      </dxi-column>
-      <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Rotation"
-                  [alignment]="'center'">
-        <dxi-column dataField="returnedRotation.cda_name" caption="CDA"></dxi-column>
-        <dxi-column dataField="returnedRotation.z_name" caption="Zone"></dxi-column>
-        <dxi-column dataField="returnedRotation.p_name" caption="Nom de la parcelle"></dxi-column>
-        <dxi-column dataField="returnedRotation.p_harvest_order" caption="Ordre"></dxi-column>
-        <dxi-column dataField="returnedRotation.tp_cin" caption="CIN"></dxi-column>
-        <dxi-column dataField="returnedRotation.tp_full_name" [visible]="true" caption="Nom complet"
-                    style="color: #6d7fcc; align-content: center; cursor: pointer"></dxi-column>
-      </dxi-column>
-    </dx-data-grid>
-    <br>
-    <dx-button
-            text="Valider"
-            type="success"
-            [visible]="returnedRotation"
-            class="mybutton"
-            (onClick)="validateAssignment()"
-            icon="check"></dx-button>
   </div>
 </dx-popup>
 <dx-load-panel

@@ -13,6 +13,7 @@ import { TruckLineupComponent } from './components/truck-lineup/truck-lineup.com
 import {RotationsInprogressListComponent} from './components/rotations-inprogress-list/rotations-inprogress-list.component';
 import {RotationsAwaitingListComponent} from './components/rotations-awaiting-list/rotations-awaiting-list.component';
 import {LoaderParcelAssingmentListComponent} from './components/loader-parcel-assingment-list/loader-parcel-assingment-list.component';
+import {OperatedRotationsTodayComponent} from './components/operated-rotations-today/operated-rotations-today.component';
 
 const routes: Routes = [{
     path: 'arrachage',
@@ -22,6 +23,7 @@ const routes: Routes = [{
         { path: 'convocations/generated', component: RotationsListComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.rotations.usinage'] } },
         { path: 'rotations/inprogress', component: RotationsInprogressListComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.rotations.inprogress'] } },
         { path: 'rotations/awaiting', component: RotationsAwaitingListComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.rotations.awaiting'] } },
+        { path: 'rotations/today', component: OperatedRotationsTodayComponent, canActivate: [PermissionGuard], data: { permission: ['convocations.rotations.usinage'] } },
         { path: 'encodage/liste', component: EncodageLisComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
         { path: 'chargements', component: ChargementAffectationListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.incidents.grid'] } },
         { path: 'echantillons', component: EchantillonnageListComponent, canActivate: [PermissionGuard], data: { permission: ['preconization.interventions.sampling'] } },
