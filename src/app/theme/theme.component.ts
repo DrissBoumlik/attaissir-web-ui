@@ -294,8 +294,13 @@ export class ThemeComponent implements OnInit {
                         permission: ['convocations.rotations.awaiting']
                     },
                     {
+                        icon: 'tree',
+                        name: 'Rotations (usinées - aujourd\'hui)',
+                        url: '/arrachage/rotations/today',
+                        permission: ['convocations.rotations.usinage']
+                    }, {
                         icon: 'check-circle',
-                        name: 'Rotations (usinage)',
+                        name: 'Rotations (usinées)',
                         url: '/arrachage/convocations/generated',
                         permission: ['convocations.rotations.usinage']
                     },

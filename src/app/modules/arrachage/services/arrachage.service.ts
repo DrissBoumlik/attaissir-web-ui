@@ -111,6 +111,14 @@ export class ArrachageService {
         });
     }
 
+    getOperatedRotationsToday(param: any): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/rotations/operated/grid`, JSON.stringify(param), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
 
     /**
      *
