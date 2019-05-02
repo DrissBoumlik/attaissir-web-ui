@@ -93,7 +93,7 @@ export class RotationsInprogressListComponent implements OnInit {
                     this.manual_assignment = {};
                     this.dataGrid.instance.refresh();
                 }, err => {
-                    console.log(err);
+                    this.toaster.warning(err.error.message, err.error.data);
                     this.loadingVisible = false;
 
                 });
