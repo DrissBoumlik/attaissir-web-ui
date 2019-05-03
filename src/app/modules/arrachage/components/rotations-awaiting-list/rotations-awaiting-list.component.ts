@@ -73,7 +73,6 @@ export class RotationsAwaitingListComponent implements OnInit {
         useSubmitBehaviour: true,
         onClick: () => {
             this.loadingVisible = true;
-
             this.arrachageService
                 .assignVehiculeToRotationManual(
                     this.manual_assignment.id_truck,
@@ -245,8 +244,7 @@ export class RotationsAwaitingListComponent implements OnInit {
     }
 
     validateAssignment() {
-        this.loadingVisible = false;
-
+        this.loadingVisible = true;
         this.arrachageService.proposeAssignment(this.returnedCamion.ridelle_code, true).subscribe((res) => {
             this.assignPopUpVisible = false;
             this.loadingVisible = false;
