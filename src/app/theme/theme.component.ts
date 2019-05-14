@@ -80,7 +80,7 @@ export class ThemeComponent implements OnInit {
                     },
                     {
                         icon: 'view-list',
-                        name: 'Liste des agrégé',
+                        name: 'Liste des agrégés',
                         url: '/tiers/liste',
                         permission: ['agreement.parcels.grid'],
                     }

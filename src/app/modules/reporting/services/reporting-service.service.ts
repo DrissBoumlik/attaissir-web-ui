@@ -169,6 +169,14 @@ export class ReportingService {
         });
     }
 
+    getPulplDotationsDx(loadOptions: any): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/pulp/dotations/grid`, JSON.stringify(loadOptions), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
     getNetDistributionsByReceipt(loadOptions: any): Observable<any> {
         return this.http.post(`${environment.apiUrl}/${this.routeName}/distributions/net/grid`, JSON.stringify(loadOptions), {
             headers: new HttpHeaders({

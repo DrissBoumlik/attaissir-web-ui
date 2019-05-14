@@ -15,6 +15,7 @@ import {AlocationsAndReturnsComponent} from './alocations-and-returns/alocations
 import {NetDistributionByReceiptComponent} from './net-distribution-by-receipt/net-distribution-by-receipt.component';
 import {RotationsPivotComponent} from './harvest/general/rotations-pivot/rotations-pivot.component';
 import {SolTrstComponent} from './sol-trst/sol-trst.component';
+import {PulpDotationsComponent} from './pulp-dotations/pulp-dotations.component';
 
 const routes: Routes = [{
     path: 'reporting',
@@ -70,6 +71,10 @@ const routes: Routes = [{
         {
             path: 'ilots',
             component: IlotsComponent,
+        },
+        {
+            path: 'pulp',
+            component: PulpDotationsComponent,
         },
         {
             path: 'parcels/loading/history',
