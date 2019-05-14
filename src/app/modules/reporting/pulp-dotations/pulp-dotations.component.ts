@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {PreconisationsIntrantsService} from '../../preconisations-intrants/service/preconisations-intrants.service';
+import {ReportingService} from '../services/reporting-service.service';
 import {Helper} from '../../../shared/classes/helper';
 import CustomStore from 'devextreme/data/custom_store';
-import {isNull} from "util";
-import {ReportingService} from '../services/reporting-service.service';
 
 @Component({
-  selector: 'app-alocations-and-returns',
-  templateUrl: './alocations-and-returns.component.html',
-  styleUrls: ['./alocations-and-returns.component.scss']
+  selector: 'app-pulp-dotations',
+  templateUrl: './pulp-dotations.component.html',
+  styleUrls: ['./pulp-dotations.component.scss']
 })
-export class AlocationsAndReturnsComponent implements OnInit {
+export class PulpDotationsComponent implements OnInit {
 
-    alocations: any = {};
+    dotations: any = {};
     helper: any;
 
 
@@ -22,9 +20,9 @@ export class AlocationsAndReturnsComponent implements OnInit {
 
 
     ngOnInit() {
-        this.alocations.store = new CustomStore({
+        this.dotations.store = new CustomStore({
             load: (loadOptions: any) => {
-                return this.reportingService.getAlocationsAndReturnsDx(loadOptions)
+                return this.reportingService.getPulplDotationsDx(loadOptions)
                     .toPromise()
                     .then(response => {
                         const json = response;
@@ -37,8 +35,5 @@ export class AlocationsAndReturnsComponent implements OnInit {
         });
 
     }
-
-
-
 
 }
