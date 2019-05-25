@@ -140,6 +140,16 @@
                 caption="Date prévue de fin de récolte"></dxi-column>
   </dxi-column>
 
+  <dxi-column [visible]="modeHaspermission(['rotations.awaiting.cancel'])" [alignment]="'center'"
+              dataType="string" dataField="canne_refoulee" [allowFiltering]="false"
+              caption="" cellTemplate="deleteButtonTemplate"></dxi-column>
+  <div *dxTemplate="let data of 'deleteButtonTemplate'">
+    <dx-button type="danger" [disabled]="disableDeleteBtn(data)" [text]="'Annuler'"
+               [visible]="modeHaspermission(['rotations.awaiting.cancel'])"
+               (onClick)="cancel(data,cancelBtn)" #cancelBtn>
+    </dx-button>
+  </div>
+
 
   <div *dxTemplate="let data of 'consulterTemplate'">
     <i *ngIf="data.data.status !== 'done'" (click)="showRotations(data)"
