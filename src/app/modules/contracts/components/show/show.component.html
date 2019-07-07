@@ -1,0 +1,1356 @@
+<div class="clr-row">
+    <div class="clr-col">
+        <h1> {{ (!contract?.parent_id) ? 'Contrat Agrégat-Agrégé' : 'Avenant'}} {{ contract?.code }}</h1>
+    </div>
+    <div class="clr-col-1 clr-align-content-end">
+            <span class="label label-info"
+                  *ngIf="contract?.status == 'inprogress'">
+                        <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
+                      </span>
+
+
+        <span class="label label-success" *ngIf="contract?.status == 'done'">
+                        <i class="fa  fa-check" aria-hidden="true"></i> VALIDÉ
+                      </span>
+
+        <span class="label label-danger" *ngIf="contract?.status == 'canceled'">
+                        <i class="fa  fa-times" aria-hidden="true"></i> ANNULÉ
+                      </span>
+        <span [appPermissionHidden]="['agreement.contracts.change_status']"
+              style="font-size: 12px; padding-left: 12px; cursor: pointer;" *ngIf="contract?.status === 'actif'"> <a
+                (click)="Scan()"> <i class="fa fa-refresh" aria-hidden="true"></i> <span
+                style="text-decoration: underline;"> En cours </span> </a> </span>
+
+    </div>
+</div>
+<hr>
+<clr-tabs>
+    <clr-tab>
+        <button clrTabLink>Contrat</button>
+        <clr-tab-content *clrIfActive>
+            <div class="clr-row">
+                <div class="clr-col">
+                    <div class="clr-row">
+                        <h2 class="m-form__section">
+                            Informations générales
+                        </h2>
+                    </div>
+                    <div class="clr-row">
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Date d'application
+                                </label>
+                                <div class="clr-col-12">
+
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                        {{contract?.application_date }}
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Date d'expiration
+                                </label>
+                                <div class="clr-col-12">
+
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                        {{
+                                        contract?.expiration_date }}
+
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Date de signature
+                                </label>
+                                <div class="clr-col-12">
+
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                        {{ contract?.signature_date
+                                        }}
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Type de contrat
+                                </label>
+                                <div class="clr-col-12">
+
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                        {{ contract?.type }}
+
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Statut
+                                </label>
+                                <div class="clr-col-12">
+                                    <span [ngClass]="helper.getContractStatusClass(contract?.status_value)">{{ contract?.status_value }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <div *ngIf="isContractEncours">
+                                    <dx-button [text]="'Valider'" [type]="'success'"
+                                               (onClick)="activateContrat()" style=" margin-top: 5%"></dx-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button clrTabLink>Agrégé</button>
+        <clr-tab-content *clrIfActive>
+            <div class="clr-row">
+                <div class="clr-col">
+                    <div class="clr-row">
+                        <h2 class="m-form__section">
+                            Informations générales
+                        </h2>
+                    </div>
+                    <div class="clr-row">
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Nom complet
+                                </label>
+                                <div class="clr-col-12">
+
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                        {{third?.full_name }}
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    CIN
+                                </label>
+                                <div class="clr-col-12">
+
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                        {{third?.cin }}
+
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Date du décès
+                                </label>
+                                <div class="clr-col-12">
+
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                        {{ third?.death_date |
+                                        uppercase }}
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Numéro de téléphone 1
+                                </label>
+                                <div class="clr-col-12">
+
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                        {{ third?.tel1 | uppercase }}
+
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Numéro de téléphone 2
+                                </label>
+                                <div class="clr-col-12">
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                                    {{ third?.tel2}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Email
+                                </label>
+                                <div class="clr-col-12">
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+
+                                    {{ third?.email}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Assurance
+                                </label>
+                                <div class="clr-col-12">
+                                    <p class="siam-form-input-value" *ngIf="third?.is_insured !== null">{{ third?.is_insured ?
+                                        'Oui' : 'Non' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Retraite
+                                </label>
+                                <div class="clr-col-12">
+                                    <p class="siam-form-input-value" *ngIf="third?.is_retired !== null">{{ third?.is_retired ?
+                                        'Oui' : 'Non' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Retraite
+                                </label>
+                                <div class="clr-col-12">
+                                    <p class="siam-form-input-value" *ngIf="third?.is_retired !== null">{{ third?.is_retired ?
+                                        'Oui' : 'Non' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clr-row">
+                <div class="clr-col">
+                    <div class="clr-row">
+                        <h2 class="m-form__section">
+                            Société
+                        </h2>
+                    </div>
+                    <div class="clr-row">
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Raison sociale
+                                </label>
+                                <div class="clr-col-12">
+
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                        {{
+                                        third?.company_name}}
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Numéro de patente
+                                </label>
+                                <div class="clr-col-12">
+
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                        {{
+                                        third?.patent_number}}
+
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Code TVA
+                                </label>
+                                <div class="clr-col-12">
+
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                        {{ third?.tva_code}}
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Identification fiscale
+                                </label>
+                                <div class="clr-col-12">
+
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                        {{ third?.if}}
+
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-col-4">
+                            <div class="clr-row">
+                                <label class="clr-col-12">
+                                    Identifiant commun de l’entreprise.
+                                </label>
+                                <div class="clr-col-12">
+                                    <p class="siam-form-input-value siam-form-input-value-nodata">
+                                    {{ third?.ice}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button clrTabLink>Campagnes</button>
+        <clr-tab-content *clrIfActive>
+            <div class="clr-col">
+                <dx-data-grid id="CampaignGridContainer"
+                              [allowColumnReordering]="true"
+                              [dataSource]="campagnes"
+                              [showColumnLines]="true"
+                              [showRowLines]="true"
+                              [showBorders]="true"
+                              [rowAlternationEnabled]="true"
+                              style="padding-top: 2vh"
+                              [columnAutoWidth]="true"
+                              [noDataText]="'Le contrat ne dispose pas de  campagne'">
+                    <dxi-column dataField="campaign" caption="Campagne"></dxi-column>
+                    <!--<dxi-column dataField="campaign.start_date" caption="Date de début"></dxi-column>
+                    <dxi-column dataField="campaign.end_date" caption="Date de fin"></dxi-column>-->
+                    <dxi-column dataField="surface" cellTemplate="cellTemplate1" caption="Surface contractée"></dxi-column>
+                    <!--<dxi-column dataField="campaign.description" caption="Description"></dxi-column>-->
+                    <div *dxTemplate="let data of 'cellTemplate1'">
+                        {{ data.data.surface }} (ha)
+                    </div>
+                    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                    <dxo-remote-operations
+                            [sorting]="true"
+                            [paging]="false">
+                    </dxo-remote-operations>
+                    <dxo-selection mode="none"></dxo-selection>
+                    <dxo-editing
+                            [useIcons]="true"
+                            mode="row"
+                            [allowUpdating]="false"
+                            [allowDeleting]="false"
+                            [allowAdding]="false">
+                    </dxo-editing>
+                    <dxo-pager
+                            [showPageSizeSelector]="false"
+                    ></dxo-pager>
+                </dx-data-grid>
+            </div>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button clrTabLink>Parcelles</button>
+        <clr-tab-content *clrIfActive>
+            <div class="clr-col">
+                <dx-data-grid
+                        id="ParcelsGridContainer"
+                        [dataSource]="parcels"
+                        [columnAutoWidth]="true"
+                        [columnHidingEnabled]="true"
+                        [allowColumnResizing]="false"
+                        [allowColumnReordering]="true"
+                        [columnAutoWidth]="true"
+                        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+                        [masterDetail]="{ enabled: false, template: 'detail' }"
+                >
+
+                    <dxo-export [enabled]="true" fileName="contrats" [allowExportSelectedData]="true" [formats]="['PNG', 'PDF', 'JPEG', 'SVG', 'GIF']"></dxo-export>
+                    <dxi-column dataField="name" caption="Nom"></dxi-column>
+                    <dxi-column dataField="cda" caption="CDA" sortOrder="desc"></dxi-column>
+                    <dxi-column dataField="zone" caption="Zone"></dxi-column>
+                    <dxi-column dataField="sector" caption="Secteur"></dxi-column>
+                    <dxi-column dataField="block" caption="Bloc"></dxi-column>
+                    <dxi-column dataField="code_ormva" caption="Code ORMVA"></dxi-column>
+                    <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
+                    <dxi-column dataField="annuel_surface" cellTemplate="cellTemplate1"
+                                caption="Superficie annuelle"></dxi-column>
+                    <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
+                    <div *dxTemplate="let data of 'cellTemplate1'">
+                        {{ data.data.annuel_surface }} (ha)
+                    </div>
+                    <div *dxTemplate="let data of 'detail'">
+                        <dx-data-grid
+                                *ngIf="data.data.parcels"
+                                [dataSource]="data.data.parcels"
+                                [showBorders]="true"
+                                [columnAutoWidth]="true">
+                            <dxi-column dataField="cda" caption="CDA" sortOrder="desc"></dxi-column>
+                            <dxi-column dataField="zone" caption="Zone"></dxi-column>
+                            <dxi-column dataField="sector" caption="Secteur"></dxi-column>
+                            <dxi-column dataField="block" caption="Bloc"></dxi-column>
+                            <dxi-column dataField="code_ormva" caption="Code ORMVA"></dxi-column>
+                            <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
+                            <dxi-column dataField="annuel_surface" cellTemplate="cellTemplate2" caption="Superficie annuelle"></dxi-column>
+                            <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
+                            <div *dxTemplate="let data of 'cellTemplate2'">
+                                {{ data.value }} (ha)
+                            </div>
+                        </dx-data-grid>
+                    </div>
+
+                    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+                    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                    <dxo-remote-operations
+                            [sorting]="true"
+                            [paging]="false">
+                    </dxo-remote-operations>
+                    <dxo-editing
+                            [useIcons]="true"
+                            mode="row"
+                            [allowUpdating]="false"
+                            [allowDeleting]="false"
+                            [allowAdding]="false">
+                    </dxo-editing>
+                    <dxo-pager
+                            [showPageSizeSelector]="false"
+                    ></dxo-pager>
+                </dx-data-grid>
+            </div>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button (click)="loadDocuments()" clrTabLink>Documents</button>
+        <clr-tab-content *clrIfActive>
+            <div class="clr-col">
+                <dx-data-grid
+                        id="gridCont"
+                        [allowColumnReordering]="true"
+                        [dataSource]="documents"
+                        [showColumnLines]="true"
+                        [showRowLines]="true"
+                        [showBorders]="true"
+                        (onRowInserting)="onAddDOC($event)"
+                        [rowAlternationEnabled]="true"
+                        style="padding-top: 2vh"
+                        [columnAutoWidth]="true"
+                        [noDataText]="'Le contrat ne dispose pas de documents joints'"
+                        keyExpr="id">
+
+                    <dxi-column dataField="name" caption="Type" [visible]="false">
+                        <dxo-lookup
+                                [dataSource]="docTypes"
+                                displayExpr="Name"
+                                valueExpr="ID">
+                        </dxo-lookup>
+                    </dxi-column>
+
+                    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                    <dxi-column dataField="name" caption="Type"></dxi-column>
+
+                    <dxi-column dataField="path" caption="Charger" editCellTemplate="cellTemplate2"
+                                [visible]="false"></dxi-column>
+
+                    <dxi-column dataField="downloadPath" caption="Télécharger" cellTemplate="cellTemplate"></dxi-column>
+
+                    <div *dxTemplate="let data of 'cellTemplate'">
+                        <dx-button
+                                class="send"
+                                icon="fa fa-cloud-download"
+                                text="Télécharger"
+                                (onClick)="downloadDocument(data)">
+                        </dx-button>
+                    </div>
+                    <div *dxTemplate="let data of 'cellTemplate2'">
+                        <dx-file-uploader
+                                selectButtonText="Ajouter un document"
+                                labelText="document"
+                                accept="image/*"
+                                uploadMode="useForm"
+                                [(value)]="filePath">
+                        </dx-file-uploader>
+                    </div>
+                    <dxo-remote-operations
+                            [sorting]="true"
+                            [paging]="false">
+                    </dxo-remote-operations>
+                    <dxo-selection mode="none"></dxo-selection>
+                    <dxo-editing
+                            [useIcons]="true"
+                            mode="popup"
+                            [form]="{items: ['name', 'path']}"
+                            [allowUpdating]="true"
+                            [allowDeleting]="true"
+                            [allowAdding]="true">
+                        <dxo-popup
+                                title="Ajouter ou modifier"
+                                [showTitle]="true"
+                                [height]="345"
+                                [position]="{ my: 'center', at: 'center'}">
+                        </dxo-popup>
+                    </dxo-editing>
+                    <dxo-pager
+                            [showPageSizeSelector]="false"
+                    ></dxo-pager>
+                </dx-data-grid>
+            </div>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab *ngIf="!contract?.parent_id && !isContractEncours">
+        <button clrTabLink >Avenants</button>
+        <clr-tab-content *clrIfActive>
+            <div class="clr-col">
+                <a class="btn btn-success" [routerLink]="['/contrats/modifier/' + contract?.id]"><i
+                        class="fa fa-plus"></i> Ajouter Avenants</a>
+            </div>
+            <dx-data-grid id="AvenantsgridContainer"
+                          [allowColumnReordering]="true"
+                          [dataSource]="avenants"
+                          [showColumnLines]="true"
+                          [showRowLines]="true"
+                          [showBorders]="true"
+                          [rowAlternationEnabled]="true"
+                          style="padding-top: 2vh"
+                          [columnAutoWidth]="true"
+                          [noDataText]="'le contrat ne dispose pas d\'avenants'"
+                          keyExpr="id">
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxi-column cellTemplate="linkTemplate" caption="Réference">
+                </dxi-column>
+                <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
+                </dxi-column>
+                <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
+                </dxi-column>
+
+                <div *dxTemplate="let data of 'linkTemplate'">
+                    <a routerLink="/contrats/afficher/{{ data.data.id }}">{{ data.data.code }}</a>
+                </div>
+                <div *dxTemplate="let data of 'statusTemplate'">
+                        <span [ngClass]="helper.getStatusColor(data.value)">
+                          {{ data.value }}
+                        </span>
+                </div>
+                <dxo-remote-operations
+                        [sorting]="true"
+                        [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-editing
+                        [useIcons]="true"
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="false"
+                        [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                        [showPageSizeSelector]="false"
+                ></dxo-pager>
+            </dx-data-grid>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button clrTabLink >Les ayants droits</button>
+        <clr-tab-content *clrIfActive>
+            <form id="form2">
+                <dx-data-grid
+                        id="gridCont2"
+                        [allowColumnReordering]="true"
+                        [dataSource]="rightsholders"
+                        [showColumnLines]="true"
+                        [showRowLines]="true"
+                        [showBorders]="true"
+                        (onRowInserting)="onAddRightHolder($event)"
+                        (onRowUpdating)="onUpdateRightHolder($event)"
+                        (onRowRemoving)="onRemoveRightHolder($event)"
+                        [rowAlternationEnabled]="true"
+                        style="padding-top: 2vh"
+                        [columnAutoWidth]="true"
+                        keyExpr="id">
+                    <dxo-scrolling [showScrollbar]="'false'"></dxo-scrolling>
+
+                    <dxi-column dataField="full_name" caption="Non complet">
+                        <dxi-validation-rule type="required"></dxi-validation-rule>
+                    </dxi-column>
+                    <dxi-column dataField="cin" caption="Cin">
+                        <dxi-validation-rule type="required"></dxi-validation-rule>
+                        <dxi-validation-rule
+                                type="pattern"
+                                [pattern]="cinPattern"
+                                message="CIN invalide" i18n-message>
+                        </dxi-validation-rule>
+                    </dxi-column>
+                    <dxi-column dataField="description" caption="Description"> </dxi-column>
+
+                    <dxo-remote-operations
+                            [sorting]="true"
+                            [paging]="false">
+                    </dxo-remote-operations>
+                    <dxo-selection mode="none"></dxo-selection>
+                    <dxo-editing
+                            [useIcons]="true"
+                            mode="popup"
+                            [form]="{items: ['full_name', 'cin','description']}"
+                            [allowUpdating]="true"
+                            [allowDeleting]="true"
+                            [allowAdding]="true">
+                        <dxo-popup
+                                title="Ajouter ou modifier"
+                                [showTitle]="true"
+                                [height]="345"
+                                [position]="{ my: 'center', at: 'center'}">
+                        </dxo-popup>
+                    </dxo-editing>
+                    <dxo-pager
+                            [showPageSizeSelector]="false"
+                    ></dxo-pager>
+                </dx-data-grid>
+            </form>
+        </clr-tab-content>
+    </clr-tab>
+</clr-tabs>
+<!-- END: Subheader -->
+<!--<div class="m-content">
+  <div class="m-portlet m-portlet&#45;&#45;bordered-semi m-portlet&#45;&#45;full-height m-portlet&#45;&#45;rounded ">
+    <div class="m-portlet__body">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12">
+
+
+            <div class="row">
+                <div class="col-12">
+
+
+                  <h3 class="m-form__section" style="padding-top: 11px;">
+                    Informations générales
+
+                    <span class="d-none d-sm-block" >
+
+                        <span class="siam-form-input-value _status_inprogress "  *ngIf="contract?.status == 'inprogress'">
+                        <i class="fa  fa-spinner" aria-hidden="true"></i> EN COURS
+                      </span>
+
+
+                        <span class="siam-form-input-value _status_done" *ngIf="contract?.status == 'actif'">
+                        <i class="fa  fa-check" aria-hidden="true"></i> VALIDÉ
+                      </span>
+
+                        <span class="siam-form-input-value _status_cancled " *ngIf="contract?.status == 'canceled'">
+                        <i class="fa  fa-times" aria-hidden="true"></i> ANNULÉ
+                      </span>
+                      <span [appPermissionHidden]="['agreement.contracts.change_status']"  style="font-size: 12px; padding-left: 12px; cursor: pointer;" *ngIf="contract?.status === 'actif'"   > <a (click)="Scan()"> <i class="fa fa-refresh" aria-hidden="true"></i> <span style="text-decoration: underline;"> En cours </span> </a> </span>
+
+                   </span>
+                  </h3>
+
+
+                  <div class="m-form__seperator m-form__seperator&#45;&#45;dashed m-form__seperator&#45;&#45;space-2x"></div>
+                </div>
+              </div>
+
+
+
+          <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line&#45;&#45;left m-tabs-line&#45;&#45;primary" role="tablist">
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
+                <i class="flaticon-share m&#45;&#45;hide"></i>
+                Contrat
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
+                Agrégé
+              </a>
+            </li>
+            &lt;!&ndash;<li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_4" role="tab">
+                Site
+              </a>
+            </li>&ndash;&gt;
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
+                Campagnes
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#parcelles" role="tab">
+                Parcelles
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_5"
+                 (click)="loadDocuments()" role="tab">
+                Documents
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item" *ngIf="!contract?.parent_id && !isContractEncours">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_6" role="tab">
+                Avenants
+              </a>
+            </li>
+
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_7"  role="tab">
+                Les ayants droits
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane " id="m_user_profile_tab_2">
+              <div class="m-form m-form&#45;&#45;fit">
+                <div class="m-portlet__body">
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                      <div class="row">
+                        <div class="col-12">
+                          <h3 class="m-form__section" style="margin-top: 20px;">
+                            Informations générales
+                          </h3>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="row">
+                            <label class="col-12">
+                              Nom complet
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value">{{ third?.full_name }}</p>
+                            </div>
+                          </div>
+                          <div class="row" DIR="ltr">
+                            <label class="col-12">
+                              الاسم الكامل
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value">{{ third?.full_name_ar }}</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              CIN
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.cin">{{ third?.cin }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.cin">Pas de
+                                données</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="row">
+                            <label class="col-12">
+                              Date du décès
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.death_date">{{ third?.death_date |
+                                uppercase }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.death_date">
+                                Pas de données</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              Numéro de téléphone 1
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.tel1">{{ third?.tel1 | uppercase }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.tel1">Pas de
+                                données</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              Numéro de téléphone 2
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.tel2">{{ third?.tel2}}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.tel2">Pas de
+                                données</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="row">
+                            <label class="col-12">
+                              Email
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.email">{{ third?.email}}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.email">Pas de
+                                données</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              Assurance.
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.is_insured !== null">{{ third?.is_insured ?
+                                'Oui' : 'Non' }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata"
+                                 *ngIf="third?.is_insured == null">Pas de données</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-12">
+                              Retraite.
+                            </label>
+                            <div class="col-12">
+                              <p class="siam-form-input-value" *ngIf="third?.is_retired !== null">{{ third?.is_retired ?
+                                'Oui' : 'Non' }}</p>
+                              <p class="siam-form-input-value siam-form-input-value-nodata"
+                                 *ngIf="third?.is_retired == null">Pas de données</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                      <div *ngIf="third?.company_name">
+                        <div class="row">
+                          <div class="col-12">
+                            <h3 class="m-form__section">
+                              Société
+                            </h3>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4">
+                            <div class="row">
+                              <label class="col-12">
+                                Raison sociale
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.company_name">{{
+                                  third?.company_name}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata"
+                                   *ngIf="!third?.company_name">Pas de données</p>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <label class="col-12">
+                                Numéro de patente
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.patent_number">{{
+                                  third?.patent_number}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata"
+                                   *ngIf="!third?.patent_number">Pas de données</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="row">
+                              <label class="col-12">
+                                Code TVA
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.tva_code">{{ third?.tva_code}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.tva_code">
+                                  Pas de données</p>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <label class="col-12">
+                                Identification fiscale
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.if">{{ third?.if}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.if">Pas de
+                                  données</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="row">
+                              <label class="col-12">
+                                Identifiant commun de l’entreprise.
+                              </label>
+                              <div class="col-12">
+                                <p class="siam-form-input-value" *ngIf="third?.ice">{{ third?.ice}}</p>
+                                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!third?.ice">Pas de
+                                  données</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="m_user_profile_tab_3">
+              <dx-data-grid id="CampaignGridContainer"
+                            [allowColumnReordering]="true"
+                            [dataSource]="campagnes"
+                            [showColumnLines]="true"
+                            [showRowLines]="true"
+                            [showBorders]="true"
+                            [rowAlternationEnabled]="true"
+                            style="padding-top: 2vh"
+                            [columnAutoWidth]="true"
+                            [noDataText]="'Le contrat ne dispose pas de  campagne'">
+                <dxi-column dataField="campaign" caption="Campagne"></dxi-column>
+                &lt;!&ndash;<dxi-column dataField="campaign.start_date" caption="Date de début"></dxi-column>
+                <dxi-column dataField="campaign.end_date" caption="Date de fin"></dxi-column>&ndash;&gt;
+                <dxi-column dataField="surface" cellTemplate="cellTemplate1" caption="Surface contractée"></dxi-column>
+                &lt;!&ndash;<dxi-column dataField="campaign.description" caption="Description"></dxi-column>&ndash;&gt;
+                <div *dxTemplate="let data of 'cellTemplate1'">
+                  {{ data.data.surface }} (ha)
+                </div>
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxo-remote-operations
+                  [sorting]="true"
+                  [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-editing
+                  [useIcons]="true"
+                  mode="row"
+                  [allowUpdating]="false"
+                  [allowDeleting]="false"
+                  [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                  [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </div>
+            <div class="tab-pane" id="parcelles">
+              <button class="btn btn-success" *ngIf="false" (click)="createLogicalParcel($event)" [disabled]="!selectedItems"><i class="fa fa-plus"></i> Crée une parcelle logique</button>
+              <hr>
+
+
+
+                <dx-data-grid
+                  id="ParcelsGridContainer"
+                  [dataSource]="parcels"
+                  [columnAutoWidth]="true"
+                  [columnHidingEnabled]="true"
+                  [allowColumnResizing]="false"
+                  [allowColumnReordering]="true"
+                  [columnAutoWidth]="true"
+                  [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+                  [masterDetail]="{ enabled: false, template: 'detail' }"
+                >
+
+                <dxo-export [enabled]="true" fileName="contrats" [allowExportSelectedData]="true" [formats]="['PNG', 'PDF', 'JPEG', 'SVG', 'GIF']"></dxo-export>
+                <dxi-column dataField="name" caption="Nom"></dxi-column>
+                <dxi-column dataField="cda" caption="CDA" sortOrder="desc"></dxi-column>
+                <dxi-column dataField="zone" caption="Zone"></dxi-column>
+                <dxi-column dataField="sector" caption="Secteur"></dxi-column>
+                <dxi-column dataField="block" caption="Bloc"></dxi-column>
+                <dxi-column dataField="code_ormva" caption="Code ORMVA"></dxi-column>
+                <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
+                <dxi-column dataField="annuel_surface" cellTemplate="cellTemplate1"
+                            caption="Superficie annuelle"></dxi-column>
+                <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
+                <div *dxTemplate="let data of 'cellTemplate1'">
+                  {{ data.data.annuel_surface }} (ha)
+                </div>
+                <div *dxTemplate="let data of 'detail'">
+                  <dx-data-grid
+                    *ngIf="data.data.parcels"
+                    [dataSource]="data.data.parcels"
+                    [showBorders]="true"
+                    [columnAutoWidth]="true">
+                    <dxi-column dataField="cda" caption="CDA" sortOrder="desc"></dxi-column>
+                    <dxi-column dataField="zone" caption="Zone"></dxi-column>
+                    <dxi-column dataField="sector" caption="Secteur"></dxi-column>
+                    <dxi-column dataField="block" caption="Bloc"></dxi-column>
+                    <dxi-column dataField="code_ormva" caption="Code ORMVA"></dxi-column>
+                    <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
+                    <dxi-column dataField="annuel_surface" cellTemplate="cellTemplate2" caption="Superficie annuelle"></dxi-column>
+                    <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
+                    <div *dxTemplate="let data of 'cellTemplate2'">
+                      {{ data.value }} (ha)
+                    </div>
+                  </dx-data-grid>
+                </div>
+
+                <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxo-remote-operations
+                  [sorting]="true"
+                  [paging]="false">
+                </dxo-remote-operations>
+                <dxo-editing
+                  [useIcons]="true"
+                  mode="row"
+                  [allowUpdating]="false"
+                  [allowDeleting]="false"
+                  [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                  [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </div>
+            <div class="tab-pane" id="m_user_profile_tab_4">
+              <div class="m-form m-form&#45;&#45;fit">
+                <div class="m-portlet__body">
+                  <div class="row">
+                    <div class="col-12">
+                      <h3 class="m-form__section">
+                        Informations sur le site
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Libelle
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.name">{{ structure?.name }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.name">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Code
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.code">{{ structure?.code }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.code">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Ville
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.city">{{ structure?.city }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.city">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Adresse
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.address">{{ structure?.address }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.address">Pas
+                            de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Code postale
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.zip_code">{{ structure?.zip_code }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.zip_code">Pas
+                            de données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Email
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.email">{{ structure?.email }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.email">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="row">
+                        <label class="col-12">
+                          Numéro de téléphone 1:
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.tel1">{{ structure?.tel1 }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.tel1">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-12">
+                          Numéro de téléphone 2:
+                        </label>
+                        <div class="col-12">
+                          <p class="siam-form-input-value" *ngIf="structure?.tel2">{{ structure?.tel2 }}</p>
+                          <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="!structure?.tel2">Pas de
+                            données</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="m-form__seperator m-form__seperator&#45;&#45;dashed m-form__seperator&#45;&#45;space-2x"></div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="m_user_profile_tab_5">
+              <form id="form">
+                <dx-data-grid
+                  id="gridCont"
+                  [allowColumnReordering]="true"
+                  [dataSource]="documents"
+                  [showColumnLines]="true"
+                  [showRowLines]="true"
+                  [showBorders]="true"
+                  (onRowInserting)="onAddDOC($event)"
+                  [rowAlternationEnabled]="true"
+                  style="padding-top: 2vh"
+                  [columnAutoWidth]="true"
+                  [noDataText]="'Le contrat ne dispose pas de documents joints hors contrat'"
+                  keyExpr="id">
+
+                  <dxi-column dataField="name" caption="Type" [visible]="false">
+                    <dxo-lookup
+                      [dataSource]="docTypes"
+                      displayExpr="Name"
+                      valueExpr="ID">
+                    </dxo-lookup>
+                  </dxi-column>
+
+                  <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                  <dxi-column dataField="name" caption="Type"></dxi-column>
+
+                  <dxi-column dataField="path" caption="Charger" editCellTemplate="cellTemplate2"
+                              [visible]="false"></dxi-column>
+
+                  <dxi-column dataField="downloadPath" caption="Télécharger" cellTemplate="cellTemplate"></dxi-column>
+
+                  <div *dxTemplate="let data of 'cellTemplate'">
+                    <dx-button
+                      class="send"
+                      icon="fa fa-cloud-download"
+                      text="Télécharger"
+                      (onClick)="downloadDocument(data)">
+                    </dx-button>
+                  </div>
+                  <div *dxTemplate="let data of 'cellTemplate2'">
+                    <dx-file-uploader
+                      selectButtonText="Ajouter un document"
+                      labelText="document"
+                      accept="image/*"
+                      uploadMode="useForm"
+                      [(value)]="filePath">
+                    </dx-file-uploader>
+                  </div>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="false">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="none"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="popup"
+                    [form]="{items: ['name', 'path']}"
+                    [allowUpdating]="true"
+                    [allowDeleting]="true"
+                    [allowAdding]="true">
+                    <dxo-popup
+                      title="Ajouter ou modifier"
+                      [showTitle]="true"
+                      [height]="345"
+                      [position]="{ my: 'center', at: 'center'}">
+                    </dxo-popup>
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="false"
+                  ></dxo-pager>
+                </dx-data-grid>
+              </form>
+            </div>
+            <div class="tab-pane" id="m_user_profile_tab_6">
+              <div class="m-portlet__body">
+                <a class="btn btn-success" [routerLink]="['/contrats/modifier/' + contract?.id]"><i
+                  class="fa fa-plus"></i> Ajouter Avenants</a>
+                <dx-data-grid id="AvenantsgridContainer"
+                              [allowColumnReordering]="true"
+                              [dataSource]="avenants"
+                              [showColumnLines]="true"
+                              [showRowLines]="true"
+                              [showBorders]="true"
+                              [rowAlternationEnabled]="true"
+                              style="padding-top: 2vh"
+                              [columnAutoWidth]="true"
+                              [noDataText]="'le contrat ne dispose pas d\'avenants'"
+                              keyExpr="id">
+                  <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                  <dxi-column cellTemplate="linkTemplate" caption="Réference">
+                  </dxi-column>
+                  <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
+                  </dxi-column>
+                  <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date">
+                  </dxi-column>
+
+                  <div *dxTemplate="let data of 'linkTemplate'">
+                    <a routerLink="/contrats/afficher/{{ data.data.id }}">{{ data.data.code }}</a>
+                  </div>
+                  <div *dxTemplate="let data of 'statusTemplate'">
+                        <span [ngClass]="helper.getStatusColor(data.value)">
+                          {{ data.value }}
+                        </span>
+                  </div>
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="false">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="none"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="row"
+                    [allowUpdating]="false"
+                    [allowDeleting]="false"
+                    [allowAdding]="false">
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="false"
+                  ></dxo-pager>
+                </dx-data-grid>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="m_user_profile_tab_7">
+              <form id="form2">
+                <dx-data-grid
+                  id="gridCont2"
+                  [allowColumnReordering]="true"
+                  [dataSource]="rightsholders"
+                  [showColumnLines]="true"
+                  [showRowLines]="true"
+                  [showBorders]="true"
+                  (onRowInserting)="onAddRightHolder($event)"
+                  (onRowUpdating)="onUpdateRightHolder($event)"
+                  (onRowRemoving)="onRemoveRightHolder($event)"
+                  [rowAlternationEnabled]="true"
+                  style="padding-top: 2vh"
+                  [columnAutoWidth]="true"
+                  keyExpr="id">
+                  <dxo-scrolling [showScrollbar]="'false'"></dxo-scrolling>
+
+                  <dxi-column dataField="full_name" caption="Non complet">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                  </dxi-column>
+                  <dxi-column dataField="cin" caption="Cin">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                    <dxi-validation-rule
+                    type="pattern"
+                    [pattern]="cinPattern"
+                    message="CIN invalide" i18n-message>
+                  </dxi-validation-rule>
+                  </dxi-column>
+                  <dxi-column dataField="description" caption="Description"> </dxi-column>
+
+                  <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="false">
+                  </dxo-remote-operations>
+                  <dxo-selection mode="none"></dxo-selection>
+                  <dxo-editing
+                    [useIcons]="true"
+                    mode="popup"
+                    [form]="{items: ['full_name', 'cin','description']}"
+                    [allowUpdating]="true"
+                    [allowDeleting]="true"
+                    [allowAdding]="true">
+                    <dxo-popup
+                      title="Ajouter ou modifier"
+                      [showTitle]="true"
+                      [height]="345"
+                      [position]="{ my: 'center', at: 'center'}">
+                    </dxo-popup>
+                  </dxo-editing>
+                  <dxo-pager
+                    [showPageSizeSelector]="false"
+                  ></dxo-pager>
+                </dx-data-grid>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+
+<div name="popup" id="popup" #popup>
+    <dx-popup
+            class="popup"
+            [width]="580"
+            [height]="400"
+            [showTitle]="true"
+            title="Confirmation "
+            [dragEnabled]="false"
+            (onShown)="SearchByRfid()"
+            [closeOnOutsideClick]="true"
+            [(visible)]="popupRfidVisible"
+            (window:keypress)="doSomething($event)"
+    >
+        <div *dxTemplate="let data of 'content'">
+
+            <div class="gilsser">
+                <h1>GLISSER LA CARTE</h1>
+                <p>Faire glisser la carte sur le lecteur de carte pour changer le status</p>
+                <div class="glisser-carte-agriculteur">
+                    <div class="credit-card">
+                        <div class="rfid-tripe"></div>
+                    </div>
+                    <div class="swiper-top"></div>
+                    <div class="swiper-bottom">
+                        <div class="light-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </dx-popup>
+
+</div>
+
+
+<input type="text" name="rfid" style="width: 0; height: 0;border: none;" #rfid>
+<input class="rfid-input" type="text" name="focusout" style="width: 0; height: 0;border: none;" #focusout>
+  
+  

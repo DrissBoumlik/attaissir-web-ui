@@ -2,9 +2,12 @@
 
 # compiled output
 /dist
+/dist-old
+/dist-old1
 /tmp
 /out-tsc
 /documentation
+/src/environments/environment.ts
 
 # dependencies
 /node_modules

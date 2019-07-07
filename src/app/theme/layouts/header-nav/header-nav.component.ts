@@ -1,25 +1,380 @@
-import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { Helpers } from '../../../helpers';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+
+import { Helper } from '../../../shared/classes/helper';
 
 declare let mLayout: any;
 @Component({
-  selector: 'app-header-nav',
-  templateUrl: './header-nav.component.html',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-header-nav',
+    templateUrl: './header-nav.component.html',
+    styleUrls: ['./header-nav.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class HeaderNavComponent implements OnInit, AfterViewInit {
+    currentUser: any;
+    displayMenu: boolean;
+    tenants: any;
+    tenant: string;
+    mainMenu: any;
+
+    helper: any;
+
+    constructor(
+        private router: Router
+    ) {
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.currentUser = this.currentUser.data;
+        this.helper = Helper;
+
+    }
+    ngOnInit() {
+        const data = JSON.parse(localStorage.getItem('currentUser'));
+        this.tenants = data.data.tenants;
+        this.tenant = localStorage.getItem('tenantId');
 
 
-  constructor() {
 
-  }
-  ngOnInit() {
 
-  }
-  ngAfterViewInit() {
 
-    mLayout.initHeader();
 
-  }
+        this.mainMenu = [
+
+            {
+                name: 'Tableau de bord',
+                permission: ['base.reporting.show'],
+                icon: ' flaticon-line-graph',
+
+                subMenu: [
+                    {
+                        icon: 'flaticon-list',
+                        name: 'Tableau de bord',
+                        url: '/index',
+                        permission: ['none']
+                    }
+                ],
+
+                url: '/reporting/contracts',
+                description: '',
+                disabled: 'false'
+            },
+
+            {
+                name: 'Contractualisation',
+                permission: ['agreement.contracts.grid'],
+                icon: 'flaticon-file',
+                url: '/contrats/liste',
+                description: '',
+                subMenu: [
+                    {
+                        icon: 'flaticon-plus',
+                        name: 'Nouveau contrat',
+                        url: '/contrats/ajouter',
+                        permission: ['agreement.contracts.store'],
+                    },
+                    {
+                        icon: 'flaticon-list',
+                        name: 'Liste des contrats',
+                        url: '/contrats/liste',
+                        permission: ['agreement.contracts.grid'],
+                    },
+                    /*{
+                      icon: 'flaticon-list',
+                      name: 'Contrats actifs',
+                      url: '/contrats/liste/courant',
+                      permission: ['agreement.contracts.grid'],
+                    },*/
+                    {
+                        icon: 'flaticon-list',
+                        name: 'Liste des parcelles',
+                        url: '/parcelles/liste',
+                        permission: ['agreement.parcels.grid'],
+                    },
+
+
+
+                    {
+                        icon: 'flaticon-users',
+                        name: 'Liste des agrégé',
+                        url: '/tiers/liste',
+                        permission: ['agreement.parcels.grid'],
+                    }
+
+
+
+                ],
+                disabled: 'false'
+            },
+
+            {
+                name: 'CARTES RFID',
+                permission: ['agreement.cards.show'],
+                icon: 'flaticon-web',
+                url: '/reporting/cards',
+                description: '',
+                subMenu: [
+                    { icon: 'flaticon-list-3', name: 'Liste des cartes RFID', url: '/reporting/cards', permission: ['agreement.cards.show'] },
+                ],
+                disabled: 'false'
+            },
+
+            {
+                name: 'PRECONISATIONS',
+                icon: 'flaticon-add',
+                permission: ['preconization.interventions.grid'],
+                url: '/preconisations-intrants/liste',
+                description: '',
+                subMenu: [
+                    {
+                        icon: 'flaticon-plus',
+                        name: 'Préconisation individuelle',
+                        url: '/interventions/selectionner',
+                        permission: ['preconization.interventions.store']
+                    },
+                    {
+                        icon: 'flaticon-tabs',
+                        name: 'Liste des préconisations des intrants',
+                        url: '/preconisations-intrants/liste',
+                        permission: ['preconization.articletemplates.grid']
+                    }
+                ],
+                disabled: 'false'
+            },
+
+            {
+                name: 'Centres de distribution',
+                permission: ['distributionCenter.warehouses.grid'],
+                icon: 'flaticon-user',
+                url: '/jeunepromoteurs/liste',
+                description: '',
+
+                subMenu: [
+                    {
+                        icon: 'flaticon-list',
+                        name: 'Centres de distribution',
+                        url: '/jeunepromoteurs/liste',
+                        permission: ['distributionCenter.warehouses.grid']
+                    }
+                ],
+
+                /*subMenu: [
+                  {
+                    icon: 'flaticon-list',
+                    name: 'Liste des Centre de distribution',
+                    url: '/jeunepromoteurs/liste',
+                    permission: ['distributionCenter.warehouses.grid']
+                  },
+                ],*/
+                disabled: 'false'
+            },
+            {
+                name: 'SYNTHÈSE DE STOCK',
+                icon: 'flaticon-open-box',
+                permission: ['distributionCenter.stocks.grid'],
+                url: '/stock/situation',
+                description: '',
+                subMenu: [
+                    /* { icon: 'flaticon-line-graph', name: 'Tableau de bord', url: '/stock/board' },*/
+                    {
+                        icon: 'flaticon-list',
+                        name: 'Situation de stock',
+                        url: '/stock/situation',
+                        permission: ['distributionCenter.stocks.grid']
+                    },
+                    {
+                        icon: 'flaticon-plus',
+                        name: 'Approvisionnement de stock',
+                        url: '/stock/reappro',
+                        permission: ['distributionCenter.stocks.reapprovisionnement']
+                    },
+                    {
+                        name: 'Liste des mouvements', icon: 'fa fa-exchange', url: '/mouvements',
+                        description: 'Liste des mouvements', disabled: 'false', permission: ['distributionCenter.stocks.grid']
+                    },
+                    {
+                        name: 'Liste des demandes d\'achat', icon: 'fa  fa-shopping-cart', url: '/demandes',
+                        description: 'Centre de distrubition', disabled: 'false', permission: ['distributionCenter.orders.grid']
+                    },
+                    {
+                        icon: 'flaticon-list',
+                        name: 'Liste des articles',
+                        url: '/articles/liste',
+                        permission: ['distributionCenter.articlecategories.grid']
+                    },
+
+                ],
+                disabled: 'false'
+            },
+
+            {
+                name: 'AVANCES & PRIMES',
+                icon: 'flaticon-list-1',
+                permission: ['preconization.interventions.avance_prime'],
+                url: '/preconisations-intrants/avance-primes',
+                description: '',
+                subMenu: [
+                    {
+                        icon: 'flaticon-list-1',
+                        name: 'Avances et primes (agriculteur)',
+                        url: '/preconisations-intrants/avance-primes',
+                        permission: ['preconization.interventions.avance_prime']
+                    },
+                    {
+                        icon: 'flaticon-list',
+                        name: 'Avances et primes (préstataires)',
+                        url: '/preconisations-intrants/avance-prest',
+                        queryParams: {
+                            prestataires: true
+                        },
+                        permission: ['preconization.interventions.avance_prime']
+                    },
+                ]
+            },
+
+
+            {
+                name: 'SUIVI CULTURAL',
+                permission: ['distributionCenter.stocks.grid'],
+                icon: 'fa flaticon-clipboard',
+                url: '/incidents/liste',
+                queryParams: { magazin: this.tenant },
+                description: '',
+                subMenu: [
+                    /* { icon: 'fa fa-archive', name: 'Mon stock', url: '/stock/situation', permission: ['distributionCenter.stocks.grid'], },*/
+                    {
+                        icon: 'fa flaticon-clipboard',
+                        name: 'Liste des incidents',
+                        url: '/incidents/liste',
+                        permission: ['preconization.interventions.store'],
+                    },
+                    {
+                        icon: 'fa flaticon-clipboard',
+                        name: 'Etat de la culture',
+                        url: '/fieldstates/liste',
+                        permission: ['preconization.interventions.store'],
+                    },
+                    {
+                        icon: 'fa flaticon-computer',
+                        name: 'Parcelles observatoires',
+                        url: '/incidents/todos',
+                        permission: ['parcel.diagnose.activate'],
+                    },
+                    {
+                        name: 'Suivi cultural',
+                        permission: ['preconization.interventions.store'],
+                        icon: 'flaticon-map-location',
+                        url: '/carte/suivi',
+                        disabled: 'false'
+                    }
+                ],
+                disabled: 'false'
+            },
+
+
+
+            {
+                name: 'GESTION DE LA RECOLTE',
+                icon: 'flaticon-tabs',
+                permission: ['preconization.interventions.store'],
+                url: '/arrachage/echantillons',
+                description: '',
+                subMenu: [
+                    {
+                        icon: 'flaticon-list',
+                        name: 'Echantillonnage',
+                        url: '/arrachage/echantillons',
+                        permission: ['preconization.interventions.store']
+                    },
+                    {
+                        icon: 'flaticon-list-1',
+                        name: 'Liste des affectations des camions',
+                        url: '/arrachage/chargements',
+                        permission: ['preconization.interventions.store']
+                    },
+                    {
+                        icon: 'flaticon-email',
+                        name: 'Convocations d\'arrachage',
+                        url: '/arrachage/convocations',
+                        permission: ['preconization.interventions.store']
+                    }
+                ]
+            },
+            {
+                name: 'Reporting',
+                permission: ['base.reporting.show'],
+                icon: 'flaticon-graphic-1',
+
+                subMenu: [
+                    {
+                        icon: 'flaticon-list',
+                        name: 'Reporting',
+                        url: '/reporting/contracts',
+                        permission: ['base.reporting.show']
+                    }
+                ],
+
+                url: '/reporting/contracts',
+                description: '',
+                disabled: 'false'
+            },
+
+
+        ];
+
+
+
+    }
+
+    ngAfterViewInit() {
+        mLayout.initHeader();
+
+        $('.navbar-nav>li>div>a').on('click', function() {
+            // $('.navbar-collapse').collapse('hide');
+            (<any>$('.navbar-collapse')).collapse('hide');
+
+        });
+
+    }
+
+    showMenu = (): void => {
+        this.displayMenu = true;
+    }
+
+    hideMenu = (): void => {
+        this.displayMenu = true;
+    }
+
+    changeTenant = (id) => {
+        localStorage.setItem('tenantId', id);
+        this.tenant = localStorage.getItem('tenantId');
+    }
+
+
+    searchType = 'agre';
+    searchBtn(type, value) {
+
+        if (value != '') {
+
+            this.searchType = type;
+            console.log('search ' + this.searchType + ' ' + value)
+
+            if (this.searchType == 'agre') {
+
+                this.router.navigate(['/tiers/liste/recherche/' + value]);
+            } else if (this.searchType == 'contrat') {
+                this.router.navigate(['contrats/liste/recherche/' + value]);
+
+            } else if (this.searchType == 'distribution') {
+                this.router.navigate(['jeunepromoteurs/liste/recherche/' + value]);
+            }
+        }
+
+    }
+
+
+
+
+
+
 
 }

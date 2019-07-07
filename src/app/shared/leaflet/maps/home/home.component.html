@@ -1,0 +1,273 @@
+<div class="siam-dashboard-intro">
+    <div class="grid-container">
+        <div class="map-container">
+            <div class="map" id="map"
+                 style="height: 100%; width: 100%;">
+                <div style="height: 100%; width: 100%;"
+                     leaflet
+                     [leafletOptions]="camionOptions"
+                     [leafletLayersControl]="camionLayersControl"
+                     (leafletMapReady)="initCamionMap($event)"
+                     #camionMap>
+                    <div *ngIf="allowCreatePolygon"
+                         leafletDraw
+                         [leafletDrawOptions]="drawOptions"></div>
+                    <div *ngIf="allowCreatePolygonSemis"
+                         leafletDraw
+                         [leafletDrawOptions]="drawOptions"></div>
+                    <div [leafletMarkerCluster]="markerClusterData"
+                         [leafletMarkerClusterOptions]="markerClusterOptions"
+                         (leafletMarkerClusterReady)="markerClusterReady($event)"></div>
+                </div>
+            </div>
+
+            <app-map-widget-info [data]="camion_data"
+                                 *ngIf="show_camion_info && optionHelper.CAMIONS === option"></app-map-widget-info>
+        </div>
+        <div class="CDAs" style="overflow: scroll">
+            <dx-tab-panel
+                    #tabPanel
+                    [dataSource]="links"
+                    [selectedIndex]="0"
+                    [loop]="false"
+                    (onSelectionChanged)="onOptionchanged($event)"
+                    [animationEnabled]="true"
+                    [swipeEnabled]="true">
+                <div *dxTemplate="let link of 'title'">
+                    <span> {{ link.name }}</span>
+                </div>
+                <div *dxTemplate="let link of 'item'">
+                    <dx-list
+                            #list
+                            *ngIf="link.id === 4"
+                            [dataSource]="cdas"
+                            [searchEnabled]="true"
+                            selectionMode="single"
+                            valueExpr="id"
+                            [visible]="showCdas"
+                            searchExpr="name"
+                            (onSelectionChanged)="onSelectionChanged($event)"
+                            searchMode="contains">
+                        <div *dxTemplate="let data of 'item'">
+                            <app-cda-sigaa [cda]="{name: data.name, polygon: data.polygon}"></app-cda-sigaa>
+                        </div>
+                    </dx-list>
+                    <dx-list
+                            #list
+                            *ngIf="link.id === 1"
+                            [dataSource]="trackers"
+                            [searchEnabled]="true"
+                            selectionMode="multiple"
+                            valueExpr="id"
+                            (onItemClick)="onCamionClicked($event)"
+                            (onItemContextMenu)="onItemContextMenu($event)"
+                            searchExpr="ridelle_code"
+                            searchMode="contains"
+                            [showSelectionControls]="false"
+                            [selectedItemKeys]="[]">
+                        <div *dxTemplate="let data of 'item'">
+                            <div id="item" [attr.datasrc]="data" class="cda_item" data-cda="503" data-id="5" [ngStyle]="{
+                                                        cursor: data?.data?.position  ? 'pointer' : 'not-allowed'
+                                                      }">
+                                <div class="cda_item_body" #div>
+                                    <div class="clr-row">
+                                        <div class="clr-col">
+                                            <span><img
+                                                    src="http://icons.iconarchive.com/icons/bartkowalski/1960-matchbox-cars/32/Refrigeration-Truck-icon.png"
+                                                    alt=""></span>
+                                        </div>
+                                        <div class="clr-col-6">
+                                            <h1>
+                                                <span style="display: block; margin: -9px;">{{ data.ridelle_code }}</span>
+                                                <!--
+                                                                                                <span style="margin: -32px;display: block; font-size: 12px;">il y a environ 3 heures</span>
+                                                -->
+                                            </h1>
+                                        </div>
+                                        <div class="clr-col">
+                                            <clr-icon [ngStyle]="{
+                                                        color: data?.data?.position  ? '#80ff7c' : '#ff4d4c'
+                                                      }"
+                                                      [attr.shape]="data?.data?.position   ? 'wifi' : 'no-wifi'"></clr-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </dx-list>
+                    <div style="padding: 10px" *ngIf="link.id === 2">
+                        <dx-form id="form"
+                                 *ngIf="link.id === 2"
+                                 [formData]="customHistory">
+                            <dxi-item dataField="tracer" editorType="dxSelectBox"
+                                      [editorOptions]="trackerEditorOptions">
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                                <dxo-label [text]="'Traceur'"></dxo-label>
+                            </dxi-item>
+                            <dxi-item dataField="start_date" editorType="dxDateBox"
+                                      [editorOptions]="dateTimeEditorOption">
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                                <dxo-label [text]="'Date de début'"></dxo-label>
+                            </dxi-item>
+                            <dxi-item dataField="end_date" editorType="dxDateBox"
+                                      [editorOptions]="dateTimeEditorOption">
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                                <dxo-label [text]="'Date de fin'"></dxo-label>
+                            </dxi-item>
+                            <dxi-item editorType="dxButton"
+                                      [editorOptions]="customHistoryButtonEditorOption"></dxi-item>
+                        </dx-form>
+                    </div>
+                </div>
+            </dx-tab-panel>
+            <dx-context-menu
+                    [dataSource]="contextMenuOptions"
+                    [width]="200"
+                    target="#item"
+                    (onItemClick)="onContextMenuItemClick($event)">
+                <div *dxTemplate="let e of 'item'">
+                    <div>
+                        <span [ngClass]="e.icon"></span>
+                        <span *ngIf="e.items" class="dx-icon-spinright"></span> {{e.text}}
+                    </div>
+                </div>
+            </dx-context-menu>
+            <dx-context-menu
+                    [dataSource]="mapContextMenuOptions"
+                    [width]="200"
+                    target="#map"
+                    (onItemClick)="onMapContextMenuItemClick($event)">
+                <div *dxTemplate="let e of 'item'">
+                    <div>
+                        <span [ngClass]="e.icon"></span> {{e.text}}
+                    </div>
+                </div>
+            </dx-context-menu>
+            <!--&lt;!&ndash;<ul class="menu" >
+              <li title="Menu"  ><a  (click)="show('Menu')" class="home" >Menu</a></li>
+              &lt;!&ndash;<li title="liste des cda" *ngIf="!showCdas" ><a (click)="show('cdas')" class="about">CDAs</a></li>&ndash;&gt;
+            </ul>
+            <dx-list
+            #list
+            [dataSource]="cdas"
+            [searchEnabled]="true"
+            selectionMode="single"
+            valueExpr="id"
+            [visible]="showCdas"
+            searchExpr="name"
+            (onSelectionChanged)="onSelectionChanged($event)"
+            searchMode="contains">
+            <div *dxTemplate="let data of 'item'">
+              <app-cda-sigaa [cda]="{name: data.name, polygon: data.polygon}"></app-cda-sigaa>
+            </div>
+          </dx-list>&ndash;&gt;-->
+        </div>
+    </div>
+    <app-parcel-info [ilot]="ilot_info" *ngIf="ilot_info && show_parcel_info"></app-parcel-info>
+
+    <dx-popup
+            class="popup"
+            [height]="300"
+            [showTitle]="true"
+            title="localisation de parcelles"
+            [dragEnabled]="false"
+            [closeOnOutsideClick]="true"
+            [(visible)]="ParcelSearchPopupVisible">
+        <div *dxTemplate="let data of 'content'">
+            <dx-form id="form"
+                     [formData]="parcel_info">
+                <dxi-item itemType="group" [colCount]="3">
+                    <dxi-item dataField="cda"  editorType="dxSelectBox" [editorOptions]="cdaEditorOptions"></dxi-item>
+                    <dxi-item dataField="zone" editorType="dxSelectBox" [editorOptions]="zoneEditorOptions"></dxi-item>
+                    <dxi-item dataField="parcel" editorType="dxSelectBox" [editorOptions]="parcelEditorOptions"></dxi-item>
+                </dxi-item>
+                <dxi-item  editorType="dxButton" [editorOptions]="buttonEditorOptions"></dxi-item>
+            </dx-form>
+        </div>
+    </dx-popup>
+    <dx-load-panel
+            #loadPanel
+            shadingColor="rgba(0,0,0,0.4)"
+            [position]="{ of: 'me' }"
+            style="z-index: 2000;"
+            [(visible)]="loadingVisible"
+            [showIndicator]="true"
+            [showPane]="true"
+            [shading]="true"
+            [closeOnOutsideClick]="false">
+    </dx-load-panel>
+    <dx-load-panel
+            #loadPanel
+            shadingColor="rgba(0,0,0,0.4)"
+            [position]="{ of: 'me' }"
+            style="z-index: 2000;"
+            [(visible)]="loadingVisible"
+            [showIndicator]="true"
+            [showPane]="true"
+            [shading]="true"
+            [closeOnOutsideClick]="false">
+    </dx-load-panel>
+</div>
+<!--<div id="sidebar" class="sidebar collapsed">
+    &lt;!&ndash; Nav tabs &ndash;&gt;
+    <div class="sidebar-tabs">
+        <ul role="tablist">
+            <li><a href="javascript:void(0)" role="tab"><i class="fa fa-bars"></i></a></li>
+            <li><a href="#"  [attr.fragment]="'profile'" role="tab"><i class="fa fa-user"></i></a></li>
+            <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+            <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
+        </ul>
+
+        <ul role="tablist">
+            <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+        </ul>
+    </div>
+
+    &lt;!&ndash; Tab panes &ndash;&gt;
+    <div class="sidebar-content">
+        <div class="sidebar-pane" id="home">
+            <h1 class="sidebar-header">
+                sidebar-v2
+                <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+            </h1>
+
+            <p>A responsive sidebar for mapping libraries like <a href="http://leafletjs.com/">Leaflet</a> or <a href="http://openlayers.org/">OpenLayers</a>.</p>
+
+            <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+            <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+            <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+            <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        </div>
+
+        <div class="sidebar-pane" id="profile">
+            <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        </div>
+
+        <div class="sidebar-pane" id="messages">
+            <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        </div>
+
+        <div class="sidebar-pane" id="settings">
+            <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        </div>
+    </div>
+</div>
+<div id="map" class="sidebar-map"
+     style="height: 100vh; width: 100%;">
+    <div style="height: 100%; width: 100%;"
+         leaflet
+         [leafletOptions]="camionOptions"
+         [leafletLayersControl]="camionLayersControl"
+         (leafletMapReady)="initCamionMap($event)"
+         [leafletMarkerCluster]="markerClusterData"
+         [leafletMarkerClusterOptions]="markerClusterOptions"
+         (leafletMarkerClusterReady)="markerClusterReady($event)"
+         #camionMap>
+        <div *ngIf="allowCreatePolygon"
+             leafletDraw
+             [leafletDrawOptions]="drawOptions"></div>
+    </div>
+</div>-->

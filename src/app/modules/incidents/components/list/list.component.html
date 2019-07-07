@@ -1,0 +1,54 @@
+<h1>Liste des incidents</h1>
+<hr>
+<dx-data-grid
+        id="incidentsGrid"
+        [dataSource]="incidents"
+        [columnHidingEnabled]="false"
+        align="center"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        noDataText="Aucun incident n'a été rapporté"
+        [rowAlternationEnabled]="true"
+        KeyExpr="id">
+
+  <dxi-column [alignment]="'center'" dataField="id" caption="Réf" [visible]="true"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="cda" caption="CDA"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="zone" caption="Zone"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="parcel_name" caption="Parcelle"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="revisit_date" caption="Date de visite"></dxi-column>
+  <dxi-column [alignment]="'center'" [width]="200" dataField="description" caption="Description"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="type" caption="Type"></dxi-column>
+  <dxi-column [alignment]="'center'" datatype="number" dataField="priority" cellTemplate="severityTemplate"  caption="Priorité"></dxi-column>
+  <dxi-column [alignment]="'center'" datatype="number" dataField="severity"  cellTemplate="severityTemplate" caption="Gravité"></dxi-column>
+  <dxi-column [alignment]="'center'" datatype="number" dataField="frequency"  caption="Fréquence"></dxi-column>
+  <dxi-column [alignment]="'center'" datatype="number" dataField="harshness"  caption="Sévérité"></dxi-column>
+  <dxi-column [alignment]="'center'" datatype="number" dataField="population"  caption="Population"></dxi-column>
+  <dxi-column [alignment]="'center'" datatype="number" dataField="contagion_risk" cellTemplate="severityTemplate" caption="Risque de contagion"></dxi-column>
+  <dxi-column [alignment]="'center'" datatype="number" dataField="affected_surface" caption="Superficie sinistrée (ha)"></dxi-column>
+  <dxi-column [alignment]="'center'" datatype="number" dataField="lost_surface" caption="Superficie perdue (ha)"></dxi-column>
+
+  <dxo-selection mode="multiple"></dxo-selection>
+  <dxo-scrolling mode="standard" [showScrollbar]="'always'"></dxo-scrolling>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-filter-row
+          [visible]="true" [applyFilter]="true"></dxo-filter-row>
+  <dxo-pager
+          [allowedPageSizes]="[5, 8, 15, 30]"
+          [showInfo]="true"
+          [showNavigationButtons]="true"
+          [showPageSizeSelector]="true"
+          [visible]="true">
+  </dxo-pager>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+  <dxo-search-panel [visible]="true"></dxo-search-panel>
+  <dxo-group-panel [visible]="true"
+                   emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+  <dxo-export [enabled]="true" fileName="incidents" [allowExportSelectedData]="true"></dxo-export>
+  <div *dxTemplate="let data of 'severityTemplate'">
+    <span class="dot" *ngFor="let i of arrayOne(5); let indx = index" [ngStyle]="{'background-color': helper.getSeverityColor(indx, data.value)}"></span>
+  </div>
+</dx-data-grid>

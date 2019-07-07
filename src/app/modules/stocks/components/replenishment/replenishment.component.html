@@ -1,0 +1,90 @@
+<h1>Approvisionnement de stock</h1>
+<hr>
+
+<div class="clr-row clr-align-items-end">
+    <div class="clr-col clr-align-items-end">
+            <dx-button
+                    style="font-weight: bold"
+                    [type]="'success'"
+                    text="Créer une commande  et envoyer un mail de  réapprovisionnement"
+                    (onClick)="replenishStock()">
+            </dx-button>
+    </div>
+</div>
+<dx-data-grid
+        #targetDataGrid
+        [(selectedRowKeys)]="selectedItems"
+        id="ReplenishGrid"
+        [dataSource]="stock"
+        [columnHidingEnabled]="false"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        noDataText="Aucun article n'est disponible"
+        KeyExpr="id"
+        [rowAlternationEnabled]="true"
+>
+
+    <dxi-column dataField="warehouse_name" caption="Magasin" alignment="center"></dxi-column>
+    <dxi-column dataField="warehouse_zone_name" caption="CDA" alignment="center"></dxi-column>
+    <dxi-column dataField="category_name" caption="Famille" alignment="center"></dxi-column>
+    <dxi-column dataField="sub_category_name" caption="Sous-famille" alignment="center"></dxi-column>
+    <dxi-column dataField="article_name" caption="Article" alignment="center"></dxi-column>
+    <dxi-column dataField="qr" dataType="number" caption="Quantité en stock" alignment="center"></dxi-column>
+    <dxi-column dataField="threshold" dataType="number" caption="Seuil" alignment="center"></dxi-column>
+    <dxi-column dataField="dt" dataType="number" cellTemplate="ToOrder" caption="Quantité à commander"
+                alignment="center"></dxi-column>
+
+    <div *dxTemplate="let data of 'ToOrder'">
+        <dx-number-box #dxNb
+                       [min]="0"
+                       [value]="0"
+                       [showSpinButtons]="true"
+                       [showClearButton]="true"
+                       (onValueChanged)="valuechange($event, data, dxNb.value)"></dx-number-box>
+        <!--<input class="form-control m-input" [(ngModel)]="data.value" id="example-number-input" type="number">-->
+    </div>
+
+    <dxo-remote-operations
+            [sorting]="true"
+            [paging]="true">
+    </dxo-remote-operations>
+    <dxo-filter-row
+            [visible]="true" [applyFilter]="true"></dxo-filter-row>
+    <dxo-editing
+            mode="popup"
+            [useIcons]="true"
+            [allowAdding]="false"
+            [allowUpdating]="false"
+            [allowDeleting]="false">
+    </dxo-editing>
+    <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+    <dxo-export [enabled]="true" fileName="situation_stock" [excelFilterEnabled]="true"
+                [allowExportSelectedData]="true"></dxo-export>
+    <dxo-sorting mode="multiple"></dxo-sorting>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+    </dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+    <dxo-search-panel [visible]="false"></dxo-search-panel>
+    <dxo-group-panel [visible]="true"
+                     emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
+    <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+</dx-data-grid>
+<dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [position]="{my: 'center'}"
+        [(visible)]="loadingVisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
+</dx-load-panel>

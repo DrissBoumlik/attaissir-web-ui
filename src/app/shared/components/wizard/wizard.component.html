@@ -1,0 +1,337 @@
+<aw-wizard [navBarLayout]="navBarLayout">
+  <aw-wizard-step stepTitle="1. Agrégé"
+                  [navigationSymbol]="{ symbol: '&#xf10e;', fontFamily: 'Flaticon'}" (stepExit)="goToContractInfo()"
+                  i18n-step-title>
+
+    <!-- Agreggated Informations -->
+    <div class="">
+
+      <div *ngIf="!addThird">
+
+        <div class="">
+          <div class="siam-empty-page" *ngIf="!currentThird.id">
+            <div class="siam-empty-page-content">
+              <h2>Choisir un agrégé</h2>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-sm-10 siam-adjust">
+                      <div class="dx-field">
+                        <div class="dx-field-value">
+                          <dx-text-box placeholder="Rechercher par CIN ou registre de commerce"
+                                       style="border-bottom-right-radius: 0; border-top-right-radius: 0;"
+                                       (onEnterKey)="search()" [(ngModel)]="searchThird"></dx-text-box>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-2 siam-adjust" style="flex: 0 0 13.66667%;">
+                      <button class="btn btn-success btn-large"
+                              style="border-bottom-left-radius: 0; border-top-left-radius: 0;" (click)="search()"><span
+                        i18n>Rechercher</span></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <button class="btn btn-large pull-left" (click)="newThird()"><span i18n>Ajouter un agrégé</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="currentThird.id">
+            <dx-form id="form"
+                     [formData]="currentThird"
+                     [readOnly]="isEdit"
+                     labelLocation="top">
+
+              <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+
+                <dxi-item dataField="full_name" [disabled]="true">
+                  <dxo-label text="Nom complet"></dxo-label>
+                </dxi-item>
+                <dxi-item dataField="full_name_ar" [disabled]="true">
+                  <dxo-label text="الإسم الكامل"></dxo-label>
+                </dxi-item>
+                <dxi-item dataField="cin" [disabled]="true">
+                  <dxo-label text="CIN"></dxo-label>
+                </dxi-item>
+                <dxi-item dataField="birth_date" editorType="dxDateBox" [editorOptions]="{ width: '100%', displayFormat: 'dd/MM/yyyy', type: 'date' }" [disabled]="true">
+                  <dxo-label text="Date de naissance"></dxo-label>
+                </dxi-item>
+
+              </dxi-item>
+              <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+                <dxi-item itemType="group">
+                  <dxi-item dataField="address" [disabled]="true">
+                    <dxo-label text="Adresse"></dxo-label>
+                  </dxi-item>
+                  <dxi-item dataField="city" [disabled]="true">
+                    <dxo-label text="Ville"></dxo-label>
+                  </dxi-item>
+                  <dxi-item dataField="zip_code" [disabled]="true">
+                    <dxo-label text="Code postale"></dxo-label>
+                  </dxi-item>
+                </dxi-item>
+                <dxi-item itemType="group">
+                  <dxi-item dataField="email" [label]="{text: 'Email'}" [disabled]="true">
+                    <dxo-label text="Email"></dxo-label>
+                  </dxi-item>
+                  <dxi-item dataField="tel1" [label]="{text: 'Telephone 1'}" [disabled]="true">
+                    <dxo-label text="Téléphone 1"></dxo-label>
+                  </dxi-item>
+                  <dxi-item dataField="tel2" [label]="{text: 'Telephone 2'}" [disabled]="true">
+                    <dxo-label text="Téléphone"></dxo-label>
+                  </dxi-item>
+                </dxi-item>
+              </dxi-item>
+            </dx-form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <app-tiers-form [isEdit]="isEdit" [readOnly]="isEdit" [validationGroup]="tierData" [tier]="tier" [isAggregated]="true" [isWizard]="true"
+                      *ngIf="addThird" (submit)="onFormSubmit($event)"></app-tiers-form>
+    </div>
+    <!-- End Agreggated Informations -->
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5" *ngIf="!addThird && !!currentThird.id">
+      <div class="m-form__actionss">
+        <button type="button" class="btn default float-left" *ngIf="!isEdit" (click)="cancelThird()" i18n>Étape précédente</button>
+        <button type="button" class="btn btn-success float-right" awNextStep i18n>Étape suivante</button>
+      </div>
+    </div>
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5" *ngIf="addThird">
+      <div class="m-form__actionss">
+        <button class="btn btn-success float-right" (click)="saveThird()" *ngIf="false"><span i18n>Sauvegarder</span>
+        </button>
+        <button class="btn  float-right mr-3" (click)="cancelThird()"><span i18n>Anuller</span></button>
+      </div>
+    </div>
+
+  </aw-wizard-step>
+  <aw-wizard-step [stepTitle]="step2" [canEnter]="!!currentThird.id"
+                  (stepExit)="goToArea()"
+                  [navigationSymbol]="{ symbol: '&#xf151;', fontFamily: 'Flaticon'}"
+                  i18n-step-title>
+    <div>
+
+      <dx-form id="form11"
+               labelLocation="top"
+               [formData]="contract">
+
+        <dxi-item itemType="group" [colCount]="2">
+          <dxi-item dataField="application_date" i18n-label
+                    editorType="dxDateBox">
+            <dxo-label text="Date d'application"></dxo-label>
+          </dxi-item>
+          <dxi-item *ngIf="false" dataField="expiration_date" i18n-label
+                    editorType="dxDateBox">
+            <dxo-label text="Date d'expirationn"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="type" editorType="dxSelectBox" i18n-label
+                    [editorOptions]="contracteditorOptions" *ngIf="!isEdit"
+          ></dxi-item>
+          <!--  <dxi-item dataField="superficie_total" [editorOptions]="{ label: 'Total superficie'}" i18n-label
+                      editorType="dxNumberBox"></dxi-item>-->
+        </dxi-item>
+
+      </dx-form>
+    </div>
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5">
+      <div class="m-form__actionss">
+        <button type="button" class="btn default float-left" awPreviousStep i18n>Étape précédente</button>
+        <button type="button" class="btn btn-success float-right" awNextStep i18n>Étape suivante</button>
+      </div>
+    </div>
+  </aw-wizard-step>
+  <aw-wizard-step stepTitle="3. Superficie contractée" [canEnter]="!!contract.application_date"
+                  (stepExit)="goToParcels()"
+                  [navigationSymbol]="{ symbol: '&#xf19f;', fontFamily: 'Flaticon'}"
+                  i18n-step-title>
+
+    <div>
+      <form>
+        <dx-form id="form2" *ngFor="let camp of campaigns; let i = index;"
+                 [formData]="camp"
+                 [readOnly]="false"
+                 labelLocation="top"
+                 [showColonAfterLabel]="true"
+                 [showValidationSummary]="true">
+
+          <dxi-item itemType="group" caption="" [colCount]="12"
+                    [attr.data-index]="i">
+            <dxi-item dataField="campaign" [editorOptions]="{ value: camp?.campaign }" [colSpan]="5"
+                      [disabled]="true">
+              <dxo-label
+                text="Campagne" i18n-text>
+              </dxo-label>
+            </dxi-item>
+
+            <dxi-item dataField="surface" editorType="dxNumberBox" [colSpan]="5">
+              <dxo-label
+                text="Superficie (ha)" i18n-text>
+              </dxo-label>
+            </dxi-item>
+
+            <dxi-item
+              *ngIf="(campaigns[campaigns.length - 1].campaign === camp.campaign) && (campaigns.length < maxYears)"
+              itemType="button"
+              horizontalAlignment="bottom"
+              [buttonOptions]="addButtonOptions">
+            </dxi-item>
+            <dxi-item *ngIf="(campaigns[campaigns.length - 1].campaign === camp.campaign) && (campaigns.length > 1)"
+                      itemType="button"
+                      horizontalAlignment="bottom"
+                      [buttonOptions]="removeButtonOptions">
+            </dxi-item>
+          </dxi-item>
+        </dx-form>
+      </form>
+    </div>
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5">
+      <div class="m-form__actionss">
+        <button type="button" class="btn default float-left" awPreviousStep i18n>Étape précédente</button>
+        <button type="button" class="btn btn-success float-right" awNextStep i18n>Étape suivante</button>
+      </div>
+    </div>
+  </aw-wizard-step>
+  <aw-wizard-step stepTitle="4. Parcelle"
+                  [canEnter]="!!currentThird.id && (campaigns.length > 0 && campaigns[0].surface > 0)"
+                  i18n-step-title
+                  [navigationSymbol]="{ symbol: '&#xf1a0;', fontFamily: 'Flaticon'}">
+
+    <div>
+      <div id="form-container">
+        <dx-form id="form3"
+                 [colCount]="4"
+                 labelLocation="top"
+
+                 [formData]="parcelForm">
+
+          <dxi-item dataField="cda" i18n-label editorType="dxSelectBox" [editorOptions]="cdaEditorOptions">
+            <dxo-label text="CDA"></dxo-label>
+            <dxi-validation-rule type="required" message="CDA est obligatoire"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="zone" caption="Zone" i18n-caption editorType="dxSelectBox"
+                    [editorOptions]="zoneEditorOptions">
+            <dxo-label text="Zone"></dxo-label>
+            <dxi-validation-rule type="required" message="Zone est obligatoire"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="sector" editorType="dxTextBox"
+                    [editorOptions]="sectorEditorOptions">
+            <dxo-label text="Secteur"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="block" i18n-caption editorType="dxTextBox"
+                    [editorOptions]="blocEditorOptions">
+            <dxo-label text="Bloc"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="registration_number" i18n-caption>
+            <dxo-label text="Matricule parcelle"></dxo-label>
+            <dxi-validation-rule type="required" message="Matricule est obligatoire"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="total_surface" [editorOptions]="{ label: 'Superficie totale (ha)' }"
+                    editorType="dxNumberBox">
+            <dxo-label text="Superficie totale (ha)"></dxo-label>
+            <dxi-validation-rule type="required" message="Superficie totale est obligatoire"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="annuel_surface"
+                    editorType="dxNumberBox">
+            <dxo-label text="Superficie contractée (ha)"></dxo-label>
+            <dxi-validation-rule type="required" message="Superficie contractée est obligatoire"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="tenure" i18n-caption editorType="dxSelectBox"
+                    [editorOptions]="worthEditorOptions">
+            <dxo-label text="Mode faire-valoir"></dxo-label>
+            <dxi-validation-rule type="required" message="Le champ mode faire-valoir est obligatoire" i18n-message>
+            </dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="code_ormva" i18n-caption>
+            <dxo-label text="Code ORMVA"></dxo-label>
+          </dxi-item>
+          <!--
+          <dxi-item dataField="irrigation_mode" i18n-caption>
+            <dxo-label text="Mode d'irrigation"></dxo-label>
+          </dxi-item>-->
+          
+          
+          <dxi-item itemType="button"
+                    horizontalAlignment="right" [disabled]=" (parcelForm.cda === null) || (parcelForm.tenure === null)
+                                                            || (parcelForm.zone === null) || (parcelForm.annuel_surface == 0) || (!parcelForm.annuel_surface)"
+                    [buttonOptions]="addParcelOptions"></dxi-item>
+        </dx-form>
+      </div>
+
+      <div class="siam-table-fullwidth-portlet mt-5">
+        <h2 class="siam-caption">Superficie de la campagne courante: {{ campaigns[0].surface }} (ha).</h2>
+        <dx-data-grid
+          id="gridContainer"
+          [dataSource]="groundsList"
+          (onRowUpdating)="editParcels($event)"
+          (onInitialized)="initParcelRow($event)"
+          (onRowRemoving)="removeParcelRow($event)"
+          keyExpr="registration_number">
+
+          <dxo-editing
+            mode="row"
+            [useIcons]="true"
+            [allowUpdating]="true"
+            [allowDeleting]="true"
+            [allowAdding]="false">
+          </dxo-editing>
+
+          <dxo-pager
+            [allowedPageSizes]="false"
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+          </dxo-pager>
+          <dxo-paging [pageSize]="10"></dxo-paging>
+
+          <dxi-column dataField="id" caption="ID" i18n-caption sortOrder="desc"></dxi-column>
+          <dxi-column dataField="registration_number" caption="Matricule" i18n-caption>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-column>
+          <dxi-column dataField="cda_id" caption="CDA" i18n-caption>
+            <dxo-lookup
+              [dataSource]="cdas"
+              displayExpr="name"
+              valueExpr="zone_id">
+            </dxo-lookup>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-column>
+          <dxi-column dataField="zone_id" caption="Zone"  i18n-caption>
+           <dxo-lookup
+              [dataSource]="zones"
+              displayExpr="name"
+              valueExpr="zone_id">
+            </dxo-lookup>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-column>
+
+          <dxi-column dataField="sector" caption="Secteur" i18n-caption></dxi-column>
+          <dxi-column dataField="block" caption="Bloc" i18n-caption></dxi-column>
+          <dxi-column dataField="code_ormva" caption="Code ORMVA" i18n-caption></dxi-column>
+          <dxi-column dataField="total_surface" caption="Superficie totale" i18n-caption>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-column>
+          <dxi-column dataField="annuel_surface" caption="Superficie contractée" i18n-caption>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-column>
+
+        </dx-data-grid>
+      </div>
+    </div>
+    <div class="m-portlet__foot m-portlet__foot--fit pt-4 mt-5">
+      <div class="m-form__actionss">
+        <button type="button" class="btn default float-left" awPreviousStep i18n>Étape précédente</button>
+        <button type="button" class="btn btn-success float-right" *ngIf="groundsList.length > 0"
+                (click)="finishFunction($event)" [disabled]="clicked" i18n>Finir
+        </button>
+      </div>
+    </div>
+  </aw-wizard-step>
+</aw-wizard>

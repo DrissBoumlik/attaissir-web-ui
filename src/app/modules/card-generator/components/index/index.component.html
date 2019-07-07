@@ -1,0 +1,137 @@
+<h1>GÉNÉRATEUR DE CARTES</h1>
+<hr>
+<div class="clr-row">
+    <div class="clr-col">
+        <dx-data-grid
+                #ref1
+                id="gridContainer"
+                keyExpr="ID"
+
+                [dataSource]="card_generator"
+                [columnHidingEnabled]="true"
+                [allowColumnReordering]="true"
+                [(selectedRowKeys)]="selectedItems"
+                [columnAutoWidth]="true"
+                [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+
+                (onSelectionChanged)="selectionChangedHandler()"
+
+                [hoverStateEnabled]="true"
+                [showBorders]="true"
+
+
+        >
+
+            <!--<dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>-->
+
+            <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="true">
+            </dxo-remote-operations>
+
+            <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+
+            <dxo-sorting mode="multiple"></dxo-sorting>
+            <dxo-filter-row
+                    [visible]="true" [applyFilter]="applyFilter"></dxo-filter-row>
+
+            <dxo-header-filter [visible]="false"></dxo-header-filter>
+            <dxo-selection [allowSelectAll]="false"
+                           mode="multiple"></dxo-selection>
+
+            <dxo-pager
+                    [allowedPageSizes]="[5, 8, 15, 30]"
+                    [showInfo]="true"
+                    [showNavigationButtons]="true"
+                    [showPageSizeSelector]="true"
+                    [visible]="true">
+            </dxo-pager>
+
+            <dxo-paging [pageSize]="5"></dxo-paging>
+
+            <dxo-column-chooser [enabled]="false" mode="select"></dxo-column-chooser>
+
+            <dxo-search-panel [visible]="false"></dxo-search-panel>
+
+            <dxo-group-panel [visible]="false"></dxo-group-panel>
+            <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+
+            <dxi-column dataField="playOn" [width]="'40px'" [allowFiltering]="false" cellTemplate="statusTemplate"
+                        caption=" " i18n-caption>
+            </dxi-column>
+            <dxi-column dataField="full_name" caption="Nom complet" i18n-caption>
+            </dxi-column>
+            <dxi-column dataField="cin" caption="CIN" i18n-caption>
+            </dxi-column>
+            <dxi-column dataField="cda" caption="CDA" i18n-caption>
+            </dxi-column>
+            <dxi-column dataField="zone" caption="Zone" i18n-caption>
+            </dxi-column>
+
+            <dxi-column dataField="rfid" caption="Rfid" i18n-caption>
+            </dxi-column>
+
+            <div *dxTemplate="let data of 'statusTemplate'">
+                 <span>
+                       <span class="workingMode" [ngClass]="{'on': data.value}"></span>
+                  </span>
+            </div>
+
+
+        </dx-data-grid>
+    </div>
+    <div class="clr-col">
+
+
+        <div class="widget-container">
+            <dx-gallery #gallery
+                        id="gallery"
+                        [dataSource]="img_scr_recto_array"
+                        [height]="450"
+                        [slideshowDelay]="slideshowDelay"
+                        [loop]="false"
+                        [showNavButtons]="true"
+                        [showIndicator]="false"
+            ></dx-gallery>
+        </div>
+
+
+        <!--    <img src="http://s1.dboumlik.code.go/cards/4/generate?face=recto&amp;id=4&amp;rfid=333&amp;type=agri&amp;full_name=ZKAL ABDENBI &amp;cin=GK73601" width="350"> !-->
+        <img *ngIf="img_scr_recto !== ''" [src]="img_scr_recto" width="350">
+        <img *ngIf="img_scr_verso !== ''" [src]="img_scr_verso" width="350">
+
+
+    </div>
+</div>
+<div class="clr-row">
+    <div class="dx-fieldset">
+        <div class="dx-field">
+            <div>
+                <div class="clr-row">
+                    <div class="clr-col">
+                        <dx-button  [icon]="start_btn.icon" [text]="start_btn.text" [type]="start_btn.type"
+                                   (onClick)="startFunc()" style="margin-left: 10px; margin-right: 10px;"></dx-button>
+                    </div>
+                    <div class="clr-col">
+                        <dx-button  icon="fa  fa-ban" text="ANNULER" type="danger" (click)="cancel()"
+                                   routerLinkActive="active" style="margin-left: 10px; margin-right: 10px;"></dx-button>&nbsp;
+                    </div>
+                    <div class="clr-col">
+                        <dx-button  (click)="export()" icon="fa fa-cloud-download"
+                                   [disabled]="selectedItems.length < 1" text="EXPORTER" type="primary"
+                                   style="margin-left: 10px; margin-right: 10px;"></dx-button>
+                    </div>
+                    <div class="clr-col">
+                        <dx-button  icon="fa fa-check" text="VALIDER" type="default"
+                                   [disabled]="selectedItems.length < 1" (click)="validate()"
+                                   style="margin-left: 10px; margin-right: 0;"></dx-button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<input type="text" name="rfid" style="width: 0; height: 0;border: none;" #rfid>
+<input class="rfid-input" type="text" name="focusout" style="width: 0; height: 0;border: none;" #focusout>
+

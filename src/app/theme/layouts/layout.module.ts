@@ -10,33 +10,40 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HrefPreventDefaultDirective } from '../../_directives/href-prevent-default.directive';
 import { UnwrapTagDirective } from '../../_directives/unwrap-tag.directive';
+import { SubHeaderComponent } from './sub-header/sub-header.component';
+import { AvatarModule } from 'ng2-avatar';
+import { SharedModule } from '../../shared/shared.module';
+
 
 @NgModule({
-  declarations: [
-    HeaderNavComponent,
-    DefaultComponent,
-    AsideNavComponent,
-    FooterComponent,
-    QuickSidebarComponent,
-    ScrollTopComponent,
-    TooltipsComponent,
-    HrefPreventDefaultDirective,
-    UnwrapTagDirective,
-  ],
-  exports: [
-    HeaderNavComponent,
-    DefaultComponent,
-    AsideNavComponent,
-    FooterComponent,
-    QuickSidebarComponent,
-    ScrollTopComponent,
-    TooltipsComponent,
-    HrefPreventDefaultDirective,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-  ]
+    declarations: [
+        HeaderNavComponent,
+        DefaultComponent,
+        AsideNavComponent,
+        FooterComponent,
+        QuickSidebarComponent,
+        ScrollTopComponent,
+        TooltipsComponent,
+        HrefPreventDefaultDirective,
+        UnwrapTagDirective,
+        SubHeaderComponent,
+    ],
+    exports: [
+        HeaderNavComponent,
+        DefaultComponent,
+        AsideNavComponent,
+        FooterComponent,
+        QuickSidebarComponent,
+        ScrollTopComponent,
+        TooltipsComponent,
+        HrefPreventDefaultDirective,
+    ],
+    imports: [
+        SharedModule,
+        CommonModule,
+        RouterModule,
+        AvatarModule.forRoot()
+    ]
 })
 export class LayoutModule {
 }

@@ -1,0 +1,262 @@
+<h1>Modification d'utilisateur</h1>
+<hr>
+<form style="margin-top: 20px"
+      (submit)="onFormSubmit($event)">
+  <dx-form id="utilisateursForm"
+           [formData]="user"
+           [readOnly]="false"
+           [showColonAfterLabel]="true"
+           [showValidationSummary]="true"
+           validationGroup="customerData">
+
+    <dxi-item itemType="group" caption="Informations générales">
+      <dxi-item
+              dataField="name">
+        <dxo-label
+                text="Nom complet">
+        </dxo-label>
+        <dxi-validation-rule
+                type="required"
+                message="Nom complete est obligatoire">
+        </dxi-validation-rule>
+      </dxi-item>
+      <dxi-item dataField="email">
+        <dxi-validation-rule
+                type="required"
+                message="Email est obligatoire">
+        </dxi-validation-rule>
+        <dxi-validation-rule
+                type="email"
+                message="veuillez saisir une adresse email valide">
+        </dxi-validation-rule>
+      </dxi-item>
+
+
+
+      <dxi-item dataField="_password"
+                [editorOptions]="{ mode: 'password'}">
+        <dxo-label
+                text="Mot de passe">
+        </dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType="group">
+
+      <dxi-item dataField="role_id"
+                [editorOptions]="roleSelectOptions"
+                editorType="dxSelectBox">
+        <dxo-label
+                text="Role">
+        </dxo-label>
+        <dxi-validation-rule
+                type="required"
+                message="role est obligatoire"></dxi-validation-rule>
+      </dxi-item>
+
+    </dxi-item>
+
+
+
+    <dxi-item itemType="group" [colCount]="6" >
+      <dxi-item [colSpan]="1"  class="d-none d-sm-block">
+        <dx-button style="background-color: #676767; border: none" icon="fa fa-id-card" text="Scanner la carte administrateur" (onClick)="Scan()" type="default"></dx-button>
+      </dxi-item>
+      <dxi-item [colSpan]="5">
+        <dx-text-box  placeholder="RFid" [(value)]="user.rfid">
+        </dx-text-box>
+      </dxi-item>
+    </dxi-item>
+
+
+    <dxi-item itemType="group" caption="Choix des structures">
+
+      <div class="dx-field">
+        <div class="dx-field-label">les structures</div>
+        <div class="dx-field-value">
+          <dx-select-box
+                  [dataSource]="listOfStructures"
+                  displayExpr="name"
+                  valueExpr="id"
+                  (onItemClick)="addToChoosingStructures($event)"
+          ></dx-select-box>
+        </div>
+      </div>
+
+
+    </dxi-item>
+
+
+    <dxi-item itemType="group">
+
+      <dx-data-grid
+
+              class="mobile_v"
+
+              id="gridContainer"
+              keyExpr="id"
+              [dataSource]="choosingStructures"
+              [allowColumnReordering]="true"
+              [showColumnLines]="true"
+              [showRowLines]="true"
+              [showBorders]="true"
+              [rowAlternationEnabled]="true"
+              [columnAutoWidth]="true"
+              [noDataText]="'Aucune sructue n\'est ajoute!'"
+              (onRowRemoved)="removeItemFromChoosingStructures($event)">
+
+        <dxo-paging [enabled]="true"></dxo-paging>
+        <dxo-editing
+                mode="row"
+                [allowDeleting]="true"
+                [useIcons]="true"
+        >
+        </dxo-editing>
+        <dxi-column
+                caption="les sructues choisis"
+                dataField="name"></dxi-column>
+
+
+        <dxi-column *ngIf="roleIsCentreDistribution"
+                    dataField="warehouses"
+                    cellTemplate="cellTemplate2"
+                    caption="Magasin"
+                    alignment="center"></dxi-column>
+        <div *dxTemplate="let data of 'cellTemplate2'">
+
+
+          <dx-form
+                  [formData]="magasin"
+                  [readOnly]="false"
+                  [showColonAfterLabel]="true"
+                  [showValidationSummary]="true"
+                  [showValidationSummary]="true">
+            <dxi-item dataField="warehouses_id"
+                      [editorOptions]="{items: data.data.warehouses, displayExpr: 'warehouse_name', valueExpr: 'warehouse_id', value: tempSelectValue}"
+                      editorType="dxSelectBox">
+              <dxo-label
+                      text="Magasin">
+              </dxo-label>
+              <dxi-validation-rule
+                      type="required"
+                      message="Magasin est obligatoire"></dxi-validation-rule>
+            </dxi-item>
+          </dx-form>
+        </div>
+
+
+        <dxi-column dataField="id"
+                    cellTemplate="cellTemplate"
+                    caption=""
+                    alignment="center"></dxi-column>
+        <div *dxTemplate="let data of 'cellTemplate'">
+          <a (click)="showStructureZones(data)"
+             style="cursor:pointer; text-align: left;color: black">
+
+                   <span class="d-block d-sm-none">
+                      <i class="flaticon-add"></i> </span>
+
+            <span class="d-none d-sm-block">
+                   <i class="flaticon-add" style="margin-right: 7px"></i>
+                  Assigner les zones </span> </a>
+        </div>
+      </dx-data-grid>
+
+    </dxi-item>
+
+
+    <dxi-item
+            itemType="button"
+            alignment="right"
+            [buttonOptions]="{text: 'Enregistrer',type: 'success',useSubmitBehavior: true}">
+    </dxi-item>
+  </dx-form>
+</form>
+<div *ngIf="popupVisible">
+  <dx-popup
+          class="popup"
+          [showTitle]="true"
+          title="Selection des zones"
+          [dragEnabled]="false"
+          [closeOnOutsideClick]="true"
+          [(visible)]="popupVisible">
+    <div *dxTemplate="let data of 'content'">
+
+
+      <div class="pop-up-wrapper" >
+        <div class="pop-up-body" style="overflow: scroll">
+
+
+
+
+          <dx-tree-view
+                  keyExpr="Tree_id"
+                  id="selection-treeview"
+                  [items]="choosingStructures[rowIndex].cdas"
+                  width="auto"
+                  showCheckBoxesMode="normal"
+                  selectedExpr="isSelected"
+                  (onItemSelectionChanged)="selectionChanged($event)"
+          >
+
+            <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
+
+
+            <div *dxTemplate="let data of 'item'">
+              <span *ngIf="data.items">CDA</span> {{data.name}}
+            </div>
+
+
+          </dx-tree-view>
+
+
+
+        </div>
+        <div class="pop-up-actions">
+          <dx-button style="margin-right: 20px"
+                     text="Terminer"
+                     type="success"
+                     (onClick)="savePopUpCdas()"></dx-button>
+        </div>
+      </div>
+
+
+    </div>
+  </dx-popup>
+</div>
+<div name="popup" id="popup" #popup>
+    <dx-popup
+      class="popup"
+      [width]="580"
+      [height]="400"
+      [showTitle]="true"
+      title="Confirmation "
+      [dragEnabled]="false"
+      (onShown)="SearchByRfid()"
+      [closeOnOutsideClick]="true"
+      [(visible)]="popupRfidVisible"
+      (window:keypress)="doSomething($event)"
+    >
+      <div *dxTemplate="let data of 'content'">
+
+        <div class="gilsser">
+          <h1>GLISSER LA CARTE</h1>
+          <p>Faire glisser la carte sur le lecteur de carte pour lancer la recherche</p>
+          <div class="glisser-carte-agriculteur">
+            <div class="credit-card">
+              <div class="rfid-tripe"></div>
+            </div>
+            <div class="swiper-top"></div>
+            <div class="swiper-bottom">
+              <div class="light-indicator"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </dx-popup>
+
+  </div>
+<input type="text" name="rfid" style="width: 0; height: 0;border: none;" #rfid>
+<input class="rfid-input" type="text" name="focusout" style="width: 0; height: 0;border: none;" #focusout>

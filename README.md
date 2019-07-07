@@ -38,6 +38,17 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ```
 
+
+# GIT
+Steps to fellow
+
+```
+git add .
+git commit -m "votre message"
+git pull origin developpement
+git push origin developpement
+```
+
 # Documantation
 
 ```bash
@@ -59,18 +70,3 @@ snyk test
 
 # Workarounds
 
-Edit in file `node_modules/jszip/lib/readable-stream-browser.js`
-```javascript
- // Change
- module.exports = require("stream");
- // To  
- module.exports = require("readable-stream");
-
-```
-
-
-# IMPORTANT
-```javascript
-// Clean  'src/assets' directory, and specialy
-assets/demo/demo12/base/style.bundle.css
-```

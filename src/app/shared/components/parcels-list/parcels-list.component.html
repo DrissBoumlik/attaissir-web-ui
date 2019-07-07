@@ -1,0 +1,150 @@
+<h1>Parcelles</h1>
+<hr>
+<div [appPermissionHidden]="['parcel.diagnose.activate']">
+    <div class="clr-row ">
+        <div class="clr-col-3">
+            <dx-button
+                    style="font-weight: bold; padding-right: 1px"
+                    [type]="'success'"
+                    text="Valider"
+                    [disabled]="validerDisabled"
+                    (onClick)="validate()">
+            </dx-button>
+        </div>
+        <div class="clr-col-5">
+            <dx-button
+                    style="font-weight: bold; padding-right: 1px"
+                    [type]="'success'"
+                    text="sélectionner les parcelles à diagnostiquer"
+                    (onClick)="selectTodoParcels()">
+            </dx-button>
+        </div>
+        <div class="clr-col-4">
+            <dx-number-box
+                    [(value)]="todoValue"
+                    [min]="1"
+                    [max]="20"
+                    [showSpinButtons]="true"
+                    [showClearButton]="false"
+            ></dx-number-box>
+        </div>
+    </div>
+</div>
+<dx-data-grid
+        #parcelGrid
+        id="gridContainer"
+        [dataSource]="data"
+        [columnHidingEnabled]="true"
+        [allowColumnResizing]="false"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        [masterDetail]="{ enabled: false, template: 'detail' }"
+>
+    <dxo-remote-operations
+            [sorting]="true"
+            [paging]="true">
+    </dxo-remote-operations>
+
+    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+    <dxo-editing
+            mode="row"
+            [useIcons]="true"
+            [allowUpdating]="false"
+            [allowDeleting]="false">
+    </dxo-editing>
+    <dxo-selection mode="multiple"></dxo-selection>
+
+    <dxo-sorting mode="multiple"></dxo-sorting>
+    <dxo-filter-row
+            [visible]="true" [applyFilter]="true"></dxo-filter-row>
+
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-export [enabled]="true" fileName="Parcels" [allowExportSelectedData]="true"></dxo-export>
+
+    <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+    </dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+    <dxo-search-panel [visible]="false"></dxo-search-panel>
+
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+
+
+    <dxi-column dataField="id"
+                dataType="number"
+                [caption]="'Réf'"
+                [allowSorting]="false"
+                [allowFiltering]="false"></dxi-column>
+    <dxi-column dataField="cda" caption="CDA"></dxi-column>
+    <dxi-column dataField="zone" caption="Zone"></dxi-column>
+    <dxi-column dataField="sector" caption="Secteur"></dxi-column>
+    <dxi-column dataField="name" caption="Nom de la parcelle"></dxi-column>
+    <dxi-column dataField="third_party_code" caption="Code Agrégé" cellTemplate="userTemplate"
+                [visible]="helper.permissionMethod(['thirdParty.third-parties.show'])" width="150px"></dxi-column>
+    <dxi-column dataField="cin" caption="CIN"></dxi-column>
+    <dxi-column dataField="full_name" caption="Nom complet"
+                style="color: #6d7fcc; align-content: center; cursor: pointer"></dxi-column>
+    <dxi-column dataField="rib" [allowFiltering]="false" caption="RIB"
+                style="color: #6d7fcc; align-content: center; cursor: pointer"></dxi-column>
+    <dxi-column dataField="contract_code" caption="Réf. Contrat" cellTemplate="contractTemplate"
+                [visible]="helper.permissionMethod(['agreement.contracts.grid'])" width="150px"></dxi-column>
+    <dxi-column dataField="application_date" dataType="date" caption="Date d'application"
+                [visible]="false"></dxi-column>
+    <dxi-column dataType="number" dataField="annuel_surface" dataType="number"
+                caption="Superficie annuelle (Ha)"></dxi-column>
+    <dxi-column dataType="number" dataField="compaign_surface" dataType="number"
+                caption="Superficie de la campagne"></dxi-column>
+    <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
+    <dxi-column dataField="status" caption="Etat" cellTemplate="contractStatusTemplate"></dxi-column>
+    <div *dxTemplate="let data of 'detail'">
+        <dx-data-grid
+                [dataSource]="data.data.parcels"
+                [showBorders]="true"
+                [columnAutoWidth]="true">
+            <dxi-column dataField="cda" caption="CDA" sortOrder="desc"></dxi-column>
+            <dxi-column dataField="zone" caption="Zone"></dxi-column>
+            <dxi-column dataField="sector" caption="Secteur"></dxi-column>
+            <dxi-column dataField="block" caption="Bloc"></dxi-column>
+            <dxi-column dataField="code_ormva" caption="Code ORMVA"></dxi-column>
+            <dxi-column dataField="registration_number" caption="Matricule"></dxi-column>
+            <dxi-column dataField="annuel_surface" cellTemplate="cellTemplate2"
+                        caption="Superficie annuelle"></dxi-column>
+            <dxi-column dataField="tenure" caption="Mode faire-valoir"></dxi-column>
+            <div *dxTemplate="let data of 'cellTemplate2'">
+                {{ data.value }} (ha)
+            </div>
+        </dx-data-grid>
+    </div>
+
+
+    <div *dxTemplate="let data of 'consulterTemplate'">
+        <a (click)="helper.gotoShow('parcelles', data.data.id, router, toastr)"><i
+                style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+                class="fa fa-info-circle fa-5x"></i></a>
+    </div>
+
+
+    <div *dxTemplate="let data of 'contractStatusTemplate'">
+          <span [ngClass]="helper.getContractStatusClass(data.value)">
+              {{ data.value }}
+          </span>
+    </div>
+    <div *dxTemplate="let data of 'contractTemplate'">
+        <a style="color: #6d7fcc; align-content: center; cursor: pointer"
+           (click)="helper.gotoShow('contrats', data.data.contract_id, router, toastr)">{{ data.data.contract_code
+            }}</a>
+    </div>
+    <div *dxTemplate="let data of 'userTemplate'">
+        <a class="siam-link" (click)="helper.gotoShow('tiers', data.data.third_party_id, router, toastr)">{{
+            data.data.third_party_code }}</a>
+    </div>
+</dx-data-grid>

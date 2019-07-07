@@ -1,5 +1,4 @@
 export const environment = {
-  production: true,
-  apiUrl: 'http://json.code.go'
-
+    production: true,
+    apiUrl: 'https://api.agrigestion.attaissir.com'
 };

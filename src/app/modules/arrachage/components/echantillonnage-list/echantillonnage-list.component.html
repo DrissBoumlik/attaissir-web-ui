@@ -1,0 +1,114 @@
+<h1>Echantillonnage</h1>
+<hr>
+<!--<dx-button
+              width="300"
+              icon="fa fa-barcode"
+              class="d-none d-sm-block pull-right"
+              style="font-weight: bold"
+              [type]="'success'"
+              text="Recherche avec lecteur code barre"
+              (onClick)="Scan()">
+      </dx-button>-->
+ <dx-data-grid
+        id="fieldStatesGrid"
+        [dataSource]="echantillons"
+        [columnHidingEnabled]="false"
+        align="center"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        noDataText="Aucune echantillon disponible"
+        [rowAlternationEnabled]="true"
+        KeyExpr="id">
+
+        <dxi-column dataField="id" [width]="40" caption=""
+                    [allowSorting]="true" [allowFiltering]="true"
+                    cellTemplate="consulterTemplate"></dxi-column>
+        <dxi-column [allowHeaderFiltering]="true" [alignment]="'center'" dataType="Number" dataField="id" caption="Réf" [visible]="true"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="cda" caption="CDA"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="zone" caption="Zone"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="parcel_name" caption="Parcelle"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text" dataField="surface_work" caption="Superficie (Ha)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="date"
+                    caption="Date de convocation"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="Text"  dataField="tp_full_name"
+                    caption="Nom (Agrègè)"></dxi-column>
+        <dxi-column [alignment]="'center'" datatype="Text" dataField="tp_cin"
+                    caption="CIN (Agrègè)"></dxi-column>
+        <dxi-column [alignment]="'center'" datatype="text" dataField="costum_fields.prelevement_code"
+                    caption="Code prélèvement"></dxi-column>
+        <dxi-column [alignment]="'center'" datatype="text" dataField="costum_fields.nombre_feuille"
+                    caption="Nombre de Feuille"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="text" dataField="costum_fields.poids_racine"
+                    caption="Poids racine"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="text" dataField="costum_fields.poids_feuille"
+                    caption="Poids Feuille"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="text" dataField="costum_fields.nombre_feuille"
+                    caption="Nombre de racines"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="text" dataField="costum_fields.rendement"
+                    caption="Rendement"></dxi-column>
+        <dxo-selection mode="multiple"></dxo-selection>
+        <dxo-scrolling mode="standard" [showScrollbar]="'always'"></dxo-scrolling>
+        <dxo-sorting mode="multiple"></dxo-sorting>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-filter-row
+          [visible]="true" [applyFilter]="true"></dxo-filter-row>
+        <dxo-pager
+          [allowedPageSizes]="[5, 8, 15, 30]"
+          [showInfo]="true"
+          [showNavigationButtons]="true"
+          [showPageSizeSelector]="true"
+          [visible]="true">
+        </dxo-pager>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+        <dxo-search-panel [visible]="true"></dxo-search-panel>
+        <dxo-group-panel [visible]="true"
+                         emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
+        <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+        <dxo-export [enabled]="true" fileName="echantillons_arrachage" [allowExportSelectedData]="true"></dxo-export>
+        <div *dxTemplate="let data of 'state'">
+          <span [ngClass]="getStatusColor(data.value)">
+              {{ data.value }}
+          </span>
+        </div>
+        <div *dxTemplate="let data of 'consulterTemplate'">
+          <a routerLink="/arrachage/echantillons/{{data.value}}" routerLinkActive="active"><i
+            style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+            class="fa fa-info-circle fa-5x"></i></a>
+        </div>
+      </dx-data-grid>
+<!--<div  name="popup" id="popup" #popup>
+<dx-popup
+  class="popup"
+  [width]="420"
+  [height]="220"
+  [showTitle]="false"
+  [dragEnabled]="false"
+  (onShown)="SearchBycodebarre()"
+  [closeOnOutsideClick]="true"
+  [(visible)]="popupcodebarreVisible"
+
+>
+  <div *dxTemplate="let data of 'content'">
+
+     <div   class="cardWrap">
+      <div class="_card cardLeft">
+        <h1>Scanner le code barre  </h1>
+        <img id="img_code" src="http://www.c-3usa.com/barcode_scanner.gif"  />
+      </div>
+      <div class="_card cardRight">
+         <div class="number">
+          <h3><i class="fa fa-search" id="search_icon" aria-hidden="true" ></i></h3>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</dx-popup>
+</div>
+<input type="text" name="codebarre" style="width: 0; height: 0;border: none;"  #codebarre>
+<input class="rfid-input" type="text"   name="focusout" style="width: 0; height: 0;border: none;"  #focusout>-->
+
+

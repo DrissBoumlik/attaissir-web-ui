@@ -1,0 +1,88 @@
+<h1>Liste des Cartes</h1>
+<hr>
+<div class="buttons">
+    <dx-select-box id="select-prefix"
+                   [dataSource]="[
+                      {name: 'Activation', action: 'activate'},
+                      {name: 'Désactivation', action: 'deactivate'}
+                      ]"
+                   placeholder="Selectionner une action"
+                   displayExpr="name"
+                   valueExpr="action"
+                   (onValueChanged)="selectAction($event)">
+    </dx-select-box>
+    <dx-button
+            text="Appliquer"
+            [disabled]="!selectedItems?.length || !action"
+            (onClick)="doAction($event)">
+    </dx-button>
+</div>
+<dx-data-grid
+        id="gridContainer"
+        [dataSource]="cards"
+        [columnHidingEnabled]="true"
+        [allowColumnReordering]="true"
+        [(selectedRowKeys)]="selectedItems"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ groupPaging: true }"
+        (onEditingStart)="onStartEdit($event.data.id)"
+        (onRowRemoving)="onRemoveThird($event.data.id)"
+>
+
+    <!--<dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>-->
+
+    <dxo-remote-operations
+            [sorting]="true"
+            [paging]="true">
+    </dxo-remote-operations>
+
+    <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+
+    <dxo-sorting mode="multiple"></dxo-sorting>
+    <dxo-filter-row
+            [visible]="true" [applyFilter]="applyFilter"></dxo-filter-row>
+
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-export [enabled]="true" fileName="Tiers" [allowExportSelectedData]="true"></dxo-export>
+
+    <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+    </dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+
+    <dxi-column dataField="full_name" caption="Nom complet" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="cin" caption="CIN" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="perimeter" caption="Périmetre" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="cda" caption="CDA" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="status" cellTemplate="statusTemplate" caption="Statut" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="zone" caption="Zone" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="sector" caption="Secteur" i18n-caption>
+    </dxi-column>
+    <dxi-column dataField="block" caption="Bloc" i18n-caption>
+    </dxi-column>
+
+    <div *dxTemplate="let data of 'statusTemplate'">
+      <span [ngClass]="helper.getStatusColor(data.value)">
+          {{ data.value }}
+      </span>
+    </div>
+</dx-data-grid>
+

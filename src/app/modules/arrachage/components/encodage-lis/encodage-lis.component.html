@@ -1,0 +1,123 @@
+<h1>Encodage</h1>
+<hr>
+<dx-data-grid
+        id="fieldStatesGrid"
+        [dataSource]="list"
+        [columnHidingEnabled]="false"
+        align="center"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        noDataText="La liste est vide"
+        [rowAlternationEnabled]="true"
+        KeyExpr="id">
+
+  <dxi-column [allowHeaderFiltering]="true" [alignment]="'center'" dataType="number" dataField="id" caption="Réf" [visible]="true"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="cda" caption="CDA"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="zone" caption="Zone"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="parcel_name" caption="Parcelle"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="bloc" caption="Bloc"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="code_agrege" caption="Code agrégé"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="division_source" caption="Division (source)"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="division_reception" caption="Division (destination)"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="id_encodage" cellTemplate="state" caption="Status"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="numero_bl" caption="Numéro BL"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="numero_bc" caption="Numéro BC"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" [visible]="false" dataField="bl_ref" caption="bl_ref"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="numero_entree" caption="Numéro d'entrée"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="date_entree" caption="Date d'entrée"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="heure_entree" caption="Heure d'entrée"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="numero_sortie" caption="Heure de sortie"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="date_sortie" caption="Date de sortie"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="ptc" caption="PTC"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="pav" caption="PAV"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" [visible]="false" dataField="charge" caption="charge"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="ridelle" caption="Code ridelle"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="flag_modif" [visible]="false" caption="flag_modif"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="numero_centre" [visible]="false" caption="Numéro de centre"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="brut" [visible]="false" caption="brut"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="net" [visible]="false" caption="net"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="tare" [visible]="false" caption="tare"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="date_tare" [visible]="false" caption="date_tare"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="heure_tare" [visible]="false" caption="heure_tare"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="richesse" caption="Richesse"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="contre" caption="Centre"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="poids_net" caption="Poids net"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="date_saccha" [visible]="false" caption="date_saccha"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="heure_saccha" [visible]="false" caption="heure_saccha"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="cin" caption="CIM"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="immat" caption="Immatriculation"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="numero_chrono" [visible]="false" caption="numero_chrono"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="fru" [visible]="false" caption="fru"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="glu" [visible]="false" caption="glu"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="az" [visible]="false" caption="az"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="k"[visible]="false"  caption="k"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="na" [visible]="false"caption="na"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="pur"[visible]="false" caption="pur"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="sm" [visible]="false" caption="sm"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="se" [visible]="false" caption="se"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="rd" [visible]="false" caption="rd"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="date_purete" [visible]="false" caption="date_purete"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="fiche_envoye" [visible]="false" caption="fiche_envoye"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="date_envoi" [visible]="false" caption="date_envoi"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="nom_modif"  [visible]="false"caption="nom_modif"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="date_modif" [visible]="false" caption="date_modif"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="index_modif" [visible]="false" caption="index_modif"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="heure_modif" [visible]="false" caption="heure_modif"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="type_bl" [visible]="false" caption="type_bl"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="date_bl" [visible]="false" caption="date_bl"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="categorie" caption="Categorie"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="purete_envoyee" [visible]="false" caption="purete_envoyee"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="date_envoi_purete" [visible]="false" caption="date_envoi_purete"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="mecanique" [visible]="false" caption="mecanique"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="code_fournisseur_transport" caption="Code fournisseur transport"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="code_fournisseur_chargement" caption="Code fournisseur _hargement"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="livraison_finale_globale" [visible]="false" caption="livraison_finale_globale"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="date_prevu" caption="Date prévu"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="annee_plantation"  [visible]="false" caption="annee_plantation"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="secteur_parcelle" [visible]="false" caption="secteur_parcelle"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="etat_impurete" [visible]="false" caption="etat_impurete"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="etat_gateau" [visible]="false" caption="etat_gateau"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="etat_brix_pol" [visible]="false" caption="etat_brix_pol"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="poids_gateau" [visible]="false" caption="poids_gateau"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="brut_gateau" [visible]="false" caption="brut_gateau"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="fibre" [visible]="false" caption="fibre"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="brix"  [visible]="false" caption="brix"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="l_pol" [visible]="false" caption="l_pol"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="pol"  [visible]="false" caption="pol"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="purete"  [visible]="false" caption="purete"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="srt_labo" [visible]="false" caption="srt_labo"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="srt_calc" [visible]="false" caption="srt_calc"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="net_impurete" [visible]="false" caption="net_impurete"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="machine"  [visible]="false" caption="machine"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="mode_coupe" [visible]="false" caption="mode_coupe"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="n_richesse"[visible]="false" caption="n_richesse"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="n_srt" [visible]="false" caption="n_srt"></dxi-column>
+  <dxi-column [alignment]="'center'" dataType="Text" dataField="canne_refoulee" [visible]="false" caption="canne_refoulee"></dxi-column>
+  <dxo-selection mode="multiple"></dxo-selection>
+  <dxo-scrolling mode="standard" [showScrollbar]="'always'"></dxo-scrolling>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-filter-row
+          [visible]="true" [applyFilter]="true"></dxo-filter-row>
+  <dxo-pager
+          [allowedPageSizes]="[5, 8, 15, 30]"
+          [showInfo]="true"
+          [showNavigationButtons]="true"
+          [showPageSizeSelector]="true"
+          [visible]="true">
+  </dxo-pager>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+  <dxo-search-panel [visible]="true"></dxo-search-panel>
+  <dxo-group-panel [visible]="true"
+                   emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+  <dxo-export [enabled]="true" fileName="convocations_arrachage" [allowExportSelectedData]="true"></dxo-export>
+  <div *dxTemplate="let data of 'state'">
+          <span [ngClass]="getStatusColor(data.value)">
+              {{ data.value ? 'Validé' : 'En cours'}}
+          </span>
+  </div>
+</dx-data-grid>
+

@@ -1,0 +1,520 @@
+import { isArray, isNull } from 'util';
+import { load } from '@angular/core/src/render3/instructions';
+import * as CryptoJS from 'crypto-js';
+import { Observable } from 'rxjs';
+
+export class Helper {
+    /**
+     * Map to format and return request params used in DxGrid
+     * @param loadOptions
+     * @returns {string}
+     */
+    public static mapParams = (loadOptions: any) => {
+        console.log(loadOptions);
+        let params = '?';
+
+        params += 'skip=' + loadOptions.skip || 0;
+        params += '&take=' + loadOptions.take || 12;
+
+        if (loadOptions.sort) {
+            params += '&orderby=' + loadOptions.sort[0].selector;
+            if (loadOptions.sort[0].desc) {
+                params += ' desc';
+            }
+        }
+
+        params += `&requireTotalCount=1`;
+        return params;
+    };
+
+    /**
+     * Map Array and return a Dx datasource
+     * @param data
+     * @param {boolean} upper
+     * @returns {{Name: any; ID: string}[]}
+     */
+    public static dataSourceformatter = (data: any, upper = true) => {
+        return Object.keys(data).map((key) => {
+            return {
+                Name: (upper) ? data[key].toUpperCase() : data[key],
+                ID: key
+            };
+        });
+    };
+
+    public static addFilter = (loadOptions: any, name: string, value: string) => {
+        if (!loadOptions.hasOwnProperty('filter')) {
+            loadOptions['filter'] = [[name, '=', value]];
+        } else if (typeof loadOptions['filter'] !== 'undefined') {
+            if (loadOptions['filter'].length === 3 && loadOptions['filter'][1] !== 'and' && !isArray(loadOptions['filter'][1])) {
+                const tmp = loadOptions['filter'].splice(0, 3);
+                loadOptions['filter'].push(tmp);
+
+            }
+            loadOptions['filter'].push('and');
+            loadOptions['filter'].push([name, '=', value]);
+        }
+    };
+
+
+    public static addContainFilter = (loadOptions: any, name: string, value: string) => {
+        if (!loadOptions.hasOwnProperty('filter')) {
+            loadOptions['filter'] = [[name, 'contains', value]];
+        } else if (typeof loadOptions['filter'] !== 'undefined') {
+            if (loadOptions['filter'].length === 3 && loadOptions['filter'][1] !== 'and' && !isArray(loadOptions['filter'][1])) {
+                const tmp = loadOptions['filter'].splice(0, 3);
+                loadOptions['filter'].push(tmp);
+
+            }
+            loadOptions['filter'].push('and');
+            loadOptions['filter'].push([name, 'contains', value]);
+        }
+    };
+
+    public static editFilter = (loadOptions: any, name: string, value: string) => {
+        if (loadOptions.hasOwnProperty('filter')) {
+            if (typeof loadOptions['filter'] !== 'undefined') {
+                if (loadOptions['filter'].length === 3 && loadOptions['filter'][1] !== 'and' && !isArray(loadOptions['filter'][1])) {
+                    const index = loadOptions['filter'].indexOf(name);
+                    if (index !== -1) {
+                        loadOptions[index] = value;
+                    }
+                }
+            }
+        }
+    };
+
+    public static getContractStatusClass(statusFr: string) {
+        switch (statusFr.toUpperCase().trim()) {
+            case 'ENCOURS': {
+                return 'label label-info';
+            }
+            case 'ENFABRICATION': {
+                return 'label label-info';
+            }
+            case 'ACTIF': {
+                return 'label label-success';
+            }
+            case 'ACTIVE': {
+                return 'label label-success';
+            }
+            case 'INACTIVE': {
+                return 'label label-warning';
+            }
+            case 'VALIDÉ': {
+                return 'label label-success';
+            }
+            case 'ANNULÉ': {
+                return 'label label-danger';
+            }
+        }
+        return 'label label-info';
+    }
+
+    public static getEncodageStatus(data) {
+        let status = {
+            text: 'En attente d\'encodage',
+            cssClass: 'label label-default'
+        };
+        if (data.data.encoding_status === 'awaiting') {
+            status = {
+                text: 'En attente d\'encodage',
+                cssClass: 'label label-default'
+            };
+        }
+        if (data.data.encoding_status === 'loading') {
+            status = {
+                text: 'Chargement',
+                cssClass: 'label label-warning'
+            };
+        }
+        if (data.data.encoding_status === 'loaded') {
+            status = {
+                text: 'Chargé',
+                cssClass: 'label label-success'
+            };
+        }
+        return status;
+    }
+
+    public static getRotationEncodageStatus(data) {
+        let status = {
+            text: 'En attente d\'affectation',
+            cssClass: 'label label-default'
+        };
+        if (data.data.id_truck) {
+            status = {
+                text: 'Affectée',
+                cssClass: 'label label-success'
+            };
+        }
+
+        if (data.data.rot_status === 'done') {
+            status = {
+                text: 'Usinage',
+                cssClass: 'label label-success'
+            };
+        }
+        if (data.data.last_rotation === 'true') {
+            status = {
+                text: 'Dernière livraison déclarée | En attente de confirmation',
+                cssClass: 'label label-warning'
+            };
+        }
+
+        if (data.data.last_rotation === 'confirmed') {
+            status = {
+                text: 'Dernière livraison confirmée',
+                cssClass: 'label label-warning'
+            };
+        }
+        return status;
+    }
+
+    public static realObject = (spy) => {
+        Object.keys(spy).forEach(function(key) {
+            if (spy[key] === '') {
+                spy[key] = null;
+            }
+        });
+        return spy;
+    };
+
+    public static getStatut = (value: string): string => {
+        if (value === 'inprogress') {
+            return 'ENCOURS';
+        } else if (value === 'done') {
+            return 'VALIDÉ';
+        } else if (value === 'canceled' || value === 'lost') {
+            return 'ANNULÉ';
+        }
+        return value;
+    };
+
+    public static articleType = (type) => {
+        if (type === 'service') {
+            return 'Service';
+        }
+        return 'Produit';
+    };
+
+
+    /**
+     * Get color by status
+     * @param {string} value
+     * @returns {string}
+     */
+    public static getStatusColor(value: string): string {
+        if (isNull(value)) {
+            return 'm-badge m-badge--primary m-badge--wide';
+        }
+        if (value.toLowerCase() === 'inactif'.toLowerCase() || value.toLowerCase() === 'Inactive'.toLowerCase()) {
+            return 'm-badge m-badge--warning m-badge--wide';
+        } else if (value.toLowerCase() === 'inprogress'.toLowerCase() || value.toLowerCase() === 'En cours'.toLowerCase()) {
+            return 'm-badge m-badge--info m-badge--wide';
+        } else if (value.toLowerCase() === 'actif'.toLowerCase() || value.toLowerCase() === 'Active'.toLowerCase()
+            || value.toLowerCase() === 'Validé'.toLowerCase()
+        ) {
+            return 'm-badge m-badge--success m-badge--wide';
+        } else if (value.toLowerCase() === 'suspended'.toLowerCase() || value.toLowerCase() === 'Suspendu'.toLowerCase()
+            || value.toLowerCase() === 'Annulé'.toLowerCase() || value.toLowerCase() === 'canceled'.toLowerCase()
+        ) {
+            return 'm-badge m-badge--danger m-badge--wide';
+        } else {
+            return 'm-badge m-badge--primary m-badge--wide';
+        }
+    }
+
+    public static getStatusValue(value: string): string {
+        if (value === 'inprogress') {
+            return 'En cours';
+        }
+        if (value === 'canceled') {
+            return 'Annulé';
+        }
+        return 'Validé';
+    }
+
+
+    /*  public static getStatusColor = (value: string): string => {
+        if (value === 'inprogress') {
+          return 'ENCOURS';
+        } else if (value === 'done') {
+          return 'VALIDÉ';
+        } else if (value === 'canceled') {
+          return 'ANNULÉ';
+        }
+        return 'ENCOURS';
+      }*/
+
+    public static getOrderStatusColor(value: string): string {
+        if (isNull(value)) {
+            return 'm-badge m-badge--primary m-badge--wide';
+        }
+        if (value.toLowerCase() === 'recive'.toLowerCase() || value.toLowerCase() === 'Recive'.toLowerCase()) {
+            return 'm-badge m-badge--primary m-badge--wide';
+        } else if (value.toLowerCase() === 'delivery'.toLowerCase() || value.toLowerCase() === 'Delivery'.toLowerCase()) {
+            return 'm-badge m-badge--info m-badge--wide';
+        } else if (value.toLowerCase() === 'transfer'.toLowerCase() || value.toLowerCase() === 'Transfer'.toLowerCase()) {
+            return 'm-badge m-badge--success m-badge--wide';
+        } else {
+            return 'm-badge m-badge--primary m-badge--wide';
+        }
+    }
+
+    public static getSeverityColor(i: number, value: number): string {
+        let color = '#d7182d';
+        if (+value <= 4) {
+            color = '#d76725';
+        }
+        if (+value <= 3) {
+            color = '#d7b112';
+        }
+        if (+value <= 2) {
+            color = '#4fd755';
+        }
+        return i < value ? color : '#d6d6d7';
+    }
+
+    /**
+     * get Third party type
+     * @param link
+     * @returns {string}
+     */
+    public static getThirdType = (link) => {
+        console.log(link);
+        if (/jeunepromoteurs/g.test(link)) {
+            return 'young_promoter';
+        } else if (/tiers/g.test(link)) {
+            return 'aggregated';
+        } else if (/mecanisation/g.test(link)) {
+            return 'mechanization_provider';
+        } else if (/boutures/g.test(link)) {
+            return 'cuttings_supplier';
+        } else if (/produits/g.test(link)) {
+            return 'products_supplier';
+        }
+        return 'aggregated';
+    };
+
+    /** 
+     * get Third party type link
+     * @param link
+     * @returns {string}
+     */
+    public static getThirdLink = (link) => {
+        if (/jeunepromoteurs/g.test(link)) {
+            return 'jeunepromoteurs';
+        } else if (/tiers/g.test(link)) {
+            return 'tiers';
+        } else if (/mecanisations/g.test(link)) {
+            return 'mecanisations';
+        } else if (/boutures/g.test(link)) {
+            return 'boutures';
+        } else if (/produits/g.test(link)) {
+            return 'produits';
+        }
+        return 'tiers';
+    };
+
+    /**
+     * get Third party type name
+     * @param link
+     * @returns {string}
+     */
+    public static getThirdTypeName = (link) => {
+
+        if (/jeunepromoteurs/g.test(link)) {
+            return 'Jeune promoteur';
+        } else if (/tiers/g.test(link)) {
+            return 'Agrégé';
+        } else if (/mecanisations/g.test(link)) {
+            return 'Prestataire de mécanisation';
+        } else if (/boutures/g.test(link)) {
+            return 'Fournisseur de boutures';
+        } else if (/produits/g.test(link)) {
+            return 'Fournisseur de produits';
+        }
+        return 'Agrégé';
+    };
+
+    /**
+     * Goto A Route
+     * @param {string} routeName
+     * @param {number} id
+     * @param router
+     * @param toastr
+     * @param action
+     */
+    public static gotoShow = (routeName: string, id: number, router: any, toastr, action = 'afficher') => {
+        router.navigate([`/${routeName}/${action}/${id}`]).catch(
+            err => {
+                toastr.error(err.error.message);
+            }
+        );
+    };
+    /**
+     * Change value to null if undefined or empty string
+     * @param val
+     */
+    public static makeNullable = (val: any) => {
+        if (val === '' || val === {} || val === []) {
+            return null;
+        }
+        return val;
+    };
+
+    /**
+     * Format data depending of API
+     * @param dat
+     * @param {boolean} test
+     * @returns {any}
+     */
+    public static dataFormatter = (dat: any, test: boolean) => {
+        return (!test) ? dat['data'] : dat;
+    };
+
+
+    public static orderType = (value: string): string => {
+        if (value === 'transfer') {
+            return 'transfert';
+        } else if (value === 'delivery') {
+            return 'LIVRAISON';
+        } else if (value === 'return' || value === 'retour fournisseur') {
+            return 'Retour Fournisseur';
+        } else if (value === 'receive' || value === 'réception') {
+            return 'Réception des intrants';
+        }
+        return value;
+    };
+
+    public static makeParcel = (data) => {
+        if (data.hasOwnProperty('name')) {
+            return {
+                id: data.id,
+                name: data.name,
+                soil_id: data.soil.id,
+                parcel_id: data.parcel_id,
+                perimeter: ((data.soil !== null) && (data.soil.perimeter !== null))
+                    ? data.soil.perimeter : '',
+                region: ((data.soil !== null) && (data.soil.region !== null))
+                    ? data.soil.region : '',
+                district: ((data.soil !== null) && (data.soil.district !== null))
+                    ? data.soil.district : '',
+                rural_commune: ((data.soil !== null) && (data.soil.rural_commune !== null))
+                    ? data.soil.rural_commune : '',
+                cda: ((data.soil !== null) && (data.soil.cda !== null))
+                    ? data.soil.cda : '',
+                zone: ((data.soil !== null) && (data.soil.zone !== null))
+                    ? data.soil.zone : '',
+                sector: ((data.soil !== null) && (data.soil.sector !== null))
+                    ? data.soil.sector : '',
+                block: ((data.soil !== null) && (data.soil.block !== null))
+                    ? data.soil.block : '',
+                registration_number: ((data.soil !== null) && (data.soil.registration_number !== null))
+                    ? data.soil.registration_number : '',
+                annuel_surface: data.annuel_surface,
+                tenure: data.tenure,
+                code_ormva: data.code_ormva,
+                parcels: data.parcels.map(p => Helper.makeParcel(p))
+            };
+        }
+        return {
+            id: data.id,
+            name: data.name,
+            soil_id: data.soil.id,
+            parcel_id: data.parcel_id,
+            perimeter: ((data.soil !== null) && (data.soil.perimeter !== null))
+                ? data.soil.perimeter : '',
+            region: ((data.soil !== null) && (data.soil.region !== null))
+                ? data.soil.region : '',
+            district: ((data.soil !== null) && (data.soil.district !== null))
+                ? data.soil.district : '',
+            rural_commune: ((data.soil !== null) && (data.soil.rural_commune !== null))
+                ? data.soil.rural_commune : '',
+            cda: ((data.soil !== null) && (data.soil.cda !== null))
+                ? data.soil.cda : '',
+            zone: ((data.soil !== null) && (data.soil.zone !== null))
+                ? data.soil.zone : '',
+            sector: ((data.soil !== null) && (data.soil.sector !== null))
+                ? data.soil.sector : '',
+            block: ((data.soil !== null) && (data.soil.block !== null))
+                ? data.soil.block : '',
+            registration_number: ((data.soil !== null) && (data.soil.registration_number !== null))
+                ? data.soil.registration_number : '',
+            annuel_surface: data.annuel_surface,
+            tenure: data.tenure,
+            code_ormva: data.code_ormva,
+            parcels: []
+        };
+    };
+
+
+    /**
+     * Format data depending of API
+     * @param {string} value
+     * @returns {string}
+     */
+
+    public static tenureType = (value: string): string => {
+        if (value === 'property') {
+            return 'propriété';
+        } else if (value === 'lease') {
+            return 'bail';
+        } else if (value === 'procuration') {
+            return 'procuration';
+        }
+        return value;
+    };
+
+    /*************** Custom Grid Grouping Value ***************/
+
+    public static groupedMouvementValue = (e) => {
+        return Helper.orderType(e.type).toUpperCase();
+    };
+
+    /***************Premission methode ***************/
+
+    public static permissionMethod = (value: any): boolean => {
+        let v = false;
+        const permissions_ = localStorage.getItem('permissions');
+        if (permissions_) {
+            try {
+                const bytes = CryptoJS.AES.decrypt(permissions_, 'Gra61884546585_55');
+                const permissions_decrypt = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
+                if (value[0] === 'none') {
+                    // this.el.nativeElement.style.display = 'initial';
+                    v = true;
+                }
+                const per_array: Boolean[] = new Array(value.length);
+                for (let i = 0; i < value.length; i++) {
+                    per_array[i] = false;
+                }
+                permissions_decrypt.forEach((it) => {
+                    for (let i = 0; i < value.length; i++) {
+                        if (it === value[i]) {
+                            per_array[i] = true;
+                        }
+                    }
+                });
+                let visibility = true;
+                for (let i = 0; i < value.length; i++) {
+                    if (per_array[i] === false) {
+                        visibility = false;
+                    }
+                }
+                if (visibility) {
+                    v = true;
+                    return v;
+                }
+                return v;
+            } catch (err) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    };
+
+}

@@ -1,0 +1,676 @@
+<h1>Nouvelle intervention </h1>
+<hr>
+<form style="height: auto">
+  <dx-form id="form"
+           [formData]="interventions"
+           [readOnly]="false"
+           [showColonAfterLabel]="true"
+           [showValidationSummary]="true"
+           labelLocation="top"
+           #Form>
+    <!--*********************************************************************************-->
+    <dxi-item itemType="group" caption="Informations Générales" [colCount]="2">
+
+      <dxi-item itemType="group" [colCount]="1">
+
+        <dxi-item dataField="third.cin" editorType="dxTextBox" [disabled]="true">
+          <dxo-label
+                  text="CIN">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="third.full_name" editorType="dxTextBox" [disabled]="true">
+          <dxo-label
+                  text="Nom complet">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="third.tel1" editorType="dxTextBox" [disabled]="true">
+          <dxo-label
+                  text="N Téléphone">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item itemType="group" [colCount]="10" *ngIf="global_type.parcel">
+          <dxi-item dataField="logical_parcel" editorType="dxSelectBox" [colSpan]="9" [editorOptions]="parcelOptions" #logicalParcel>
+            <dxo-label
+                    text="Parcelle">
+            </dxo-label>
+            <dxi-validation-rule
+                    type="required"
+                    message="sélectionnez une parcelle logique avant de continuer.">
+            </dxi-validation-rule>
+          </dxi-item>
+          <dxi-item itemType="button" [buttonOptions]="filterButton"></dxi-item>
+
+        </dxi-item>
+
+        <dxi-item dataField="contracted_surface" *ngIf="global_type.parcel" [disabled]="true" editorType="dxNumberBox">
+          <dxo-label
+                  text="Superficie contractée">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="actual_surface" *ngIf="global_type.parcel" [disabled]="true" editorType="dxNumberBox">
+          <dxo-label
+                  text="Superficie réelle">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="remaining_surface" *ngIf="global_type.parcel" [visible]="false" [disabled]="true" editorType="dxNumberBox">
+          <dxo-label
+                  text="Superficie restante">
+          </dxo-label>
+        </dxi-item>
+
+      </dxi-item>
+
+      <dxi-item itemType="group" *ngIf="global_type.parcel" [colCount]="1">
+        <dxi-item dataField="scheduled_date" *ngIf="true" editorType="dxDateBox"
+                  [editorOptions]="{value: today, min: today}">
+          <dxo-label
+                  text="Date prévue">
+          </dxo-label>
+          <dxi-validation-rule
+                  type="required"
+                  message="sélectionnez la date d'intervention prévue avant de continuer.">
+          </dxi-validation-rule>
+        </dxi-item>
+        <dxi-item dataField="surface_to_work" editorType="dxNumberBox" [editorOptions]="stwOptions">
+          <dxo-label
+                  text="Superficie a travailler">
+          </dxo-label>
+          <dxi-validation-rule
+                  type="required"
+                  message="Entrez un numéro valide avant de continuer.">
+          </dxi-validation-rule>
+        </dxi-item>
+
+        <dxi-item dataField="proposition" *ngIf="global_type.proposition" editorType="dxSelectBox" [editorOptions]="templateEditorOptions">
+          <dxo-label
+                  text="Proposition">
+          </dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="warehouse" *ngIf="global_type.dc" editorType="dxSelectBox" [editorOptions]="cdOptions">
+          <dxo-label
+                  text="Centre distribution">
+          </dxo-label>
+          <dxi-validation-rule
+                  type="required"
+                  message="sélectionnez un centre de distribution avant de continuer.">
+          </dxi-validation-rule>
+        </dxi-item>
+
+        <dxi-item dataField="description" editorType="dxTextArea">
+          <dxo-label
+                  text="Description">
+          </dxo-label>
+
+        </dxi-item>
+
+      </dxi-item>
+
+    </dxi-item>
+    <!--*********************************************************************************-->
+    <dxi-item itemType="group" [colCount]="1">
+      <div *dxTemplate>
+        <dx-form
+                id="form3"
+                [formData]="interventions"
+                [readOnly]="false"
+                [showColonAfterLabel]="true"
+                [showValidationSummary]="true"
+                labelLocation="top"
+                #Form3>
+          <dxi-item itemType="group"    *ngIf="data.semence.length" [colCount]="5" caption="Choix de la semence" #choixSemence>
+
+            <dxi-item dataField="semance_famille" editorType="dxSelectBox" [editorOptions]="semenceCategoryOptions" >
+              <dxo-label
+                      text="Famille">
+              </dxo-label>
+
+            </dxi-item>
+
+            <dxi-item dataField="semance_sub_famille" editorType="dxSelectBox"
+                      [editorOptions]="semenceSubCategoryOptions">
+              <dxo-label
+                      text="Sous Famille">
+              </dxo-label>
+
+            </dxi-item>
+
+            <dxi-item dataField="semance_article" editorType="dxSelectBox" [editorOptions]="semenceArticleOptions">
+              <dxo-label
+                      text="Article">
+              </dxo-label>
+
+            </dxi-item>
+
+            <dxi-item dataField="semance_quantity" editorType="dxNumberBox"  [editorOptions]="semenceQuantityOptions" >
+              <dxo-label
+                      text="Quantité">
+              </dxo-label>
+            </dxi-item>
+
+            <dxi-item
+                    itemType="button"
+                    alignment="left"
+                    [buttonOptions]="addSemance">
+            </dxi-item>
+
+            <!--<dxi-item
+                    itemType="button"
+                    alignment="left"
+                    [buttonOptions]="suggestSemence">
+            </dxi-item>-->
+
+            <dxi-item [colSpan]="5" *ngIf="data.semence.length">
+              <dx-data-grid
+                      #semenceGrid
+                      id="semenceGrid"
+                      [allowColumnReordering]="true"
+                      [dataSource]="semences"
+                      [showColumnLines]="true"
+                      [showRowLines]="true"
+                      [showBorders]="true"
+                      [rowAlternationEnabled]="true"
+                      [columnAutoWidth]="true"
+                      [noDataText]="'Aucan article n\'est ajoute!'">
+
+                <dxi-column [allowEditing]="false" dataField="category.category_name" caption="Famille"></dxi-column>
+                <dxi-column [allowEditing]="false" dataField="sub_category.sub_category_name" caption="Sous famille"></dxi-column>
+                <dxi-column [allowEditing]="false" dataField="article.name" caption="Article"></dxi-column>
+                <dxi-column [allowEditing]="true" dataField="quantity" caption="Quantité"></dxi-column>
+                <dxo-scrolling  [showScrollbar]="'always'"></dxo-scrolling>
+                <dxo-remote-operations
+                        [sorting]="true"
+                        [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-editing
+                        [useIcons]="true"
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                        [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </dxi-item>
+
+          </dxi-item>
+          <dxi-item itemType="simple"  *ngIf="!data.semence.length"></dxi-item>
+        </dx-form>
+      </div>
+    </dxi-item>
+
+
+
+
+
+
+    <!--*********************************************************************************-->
+    <dxi-item   itemType="group" [colCount]="1">
+      <div *dxTemplate>
+        <dx-form
+                id="form4"
+                [formData]="interventions"
+                [readOnly]="false"
+                [showColonAfterLabel]="true"
+                [showValidationSummary]="true"
+                labelLocation="top"
+                #Form4>
+          <dxi-item itemType="group"  *ngIf="data.products.length" [colCount]="5" caption="Choix des produits" #choixProducts>
+
+            <dxi-item dataField="prod_famille" editorType="dxSelectBox"  [editorOptions]="productsCategoryOptions">
+              <dxo-label
+                      text="Famille">
+              </dxo-label>
+
+            </dxi-item>
+            <dxi-item dataField="prod_sub_famille" editorType="dxSelectBox"
+                      [editorOptions]="productsSubCategoryOptions">
+              <dxo-label
+                      text="Sous Famille">
+              </dxo-label>
+
+            </dxi-item>
+
+            <dxi-item dataField="prod_article" editorType="dxSelectBox" [editorOptions]="productsArticleOptions">
+              <dxo-label
+                      text="Article">
+              </dxo-label>
+
+            </dxi-item>
+            <dxi-item dataField="prod_quantity" editorType="dxNumberBox" [editorOptions]="productsQuantityOptions">
+              <dxo-label
+                      text="Quantity">
+              </dxo-label>
+            </dxi-item>
+
+            <dxi-item
+                    itemType="button"
+                    alignment="left"
+                    [buttonOptions]="addProduct">
+            </dxi-item>
+
+            <!--<dxi-item
+                    itemType="button"
+                    alignment="left"
+                    [buttonOptions]="suggestPR">
+            </dxi-item>-->
+
+            <dxi-item [colSpan]="5" *ngIf="data.products.length" >
+
+              <dx-data-grid
+
+                      #productsGrid
+                      id="productsGrid"
+                      [allowColumnReordering]="true"
+                      [dataSource]="products"
+                      [showColumnLines]="true"
+                      [showRowLines]="true"
+                      [showBorders]="true"
+                      [rowAlternationEnabled]="true"
+                      style="padding-top: 2vh"
+                      [columnAutoWidth]="true"
+                      [noDataText]="'Aucan article n\'est ajoute'">
+                <dxi-column dataField="category.category_name" caption="Famille"></dxi-column>
+                <dxi-column dataField="sub_category.sub_category_name" caption="Sous famille"></dxi-column>
+                <dxi-column dataField="article.name" caption="Article"></dxi-column>
+                <dxi-column dataField="quantity" caption="Quantité"></dxi-column>
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxo-remote-operations
+                        [sorting]="true"
+                        [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-editing
+                        [useIcons]="true"
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                        [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </dxi-item>
+
+
+          </dxi-item>
+          <dxi-item itemType="simple"  *ngIf="!data.products.length"></dxi-item>
+
+        </dx-form>
+      </div>
+    </dxi-item>
+    <!--*********************************************************************************-->
+    <dxi-item>
+      <div *dxTemplate>
+        <dx-form>
+          <dxi-item itemType="group" *ngIf="data.services.length"  [colCount]="5" caption="Choix des préstations de service" #choixServices>
+            <dx-list
+                    [dataSource]="prestations"
+                    [showSelectionControls]="true"
+                    selectionMode="multiple"
+                    noDataText="Ce type d'intervention ne possède pas de préstations de service"
+                    [(selectedItems)]="selectedItems">
+            </dx-list>
+          </dxi-item>
+          <dxi-item itemType="simple"  *ngIf="!data.services.length"></dxi-item>
+        </dx-form>
+      </div>
+    </dxi-item>
+    <!--*********************************************************************************-->
+    <dxi-item>
+      <div *dxTemplate>
+        <dx-form
+                id="form5"
+                [formData]="interventions"
+                [readOnly]="false"
+                [showColonAfterLabel]="true"
+                [showValidationSummary]="true"
+                labelLocation="top"
+                #Form4>
+          <dxi-item itemType="group"  *ngIf="data.api.length" [colCount]="5" caption="Avances et primes" >
+
+            <dxi-item dataField="ap_famille" editorType="dxSelectBox" [editorOptions]="APCategoryOptions">
+              <dxo-label
+                      text="Famille">
+              </dxo-label>
+            </dxi-item>
+            <dxi-item dataField="ap_sub_famille" editorType="dxSelectBox"
+                      [editorOptions]="APSubCategoryOptions">
+              <dxo-label
+                      text="Sous Famille">
+              </dxo-label>
+
+            </dxi-item>
+
+            <dxi-item dataField="ap_article"  editorType="dxSelectBox" [editorOptions]="APArticleOptions">
+              <dxo-label
+                      text="Article">
+              </dxo-label>
+
+            </dxi-item>
+            <dxi-item dataField="ap_quantity" editorType="dxNumberBox"  [editorOptions]="APQuantityOptions">
+              <dxo-label
+                      text="Quantity">
+              </dxo-label>
+            </dxi-item>
+
+            <dxi-item
+                    itemType="button"
+                    alignment="left"
+                    [buttonOptions]="addAP">
+            </dxi-item>
+
+
+            <dxi-item [colSpan]="5" *ngIf="data.api.length" >
+              <dx-data-grid
+                      #apiGrid
+                      id="apGrid"
+                      [allowColumnReordering]="true"
+                      [dataSource]="apis"
+                      [showColumnLines]="true"
+                      [showRowLines]="true"
+                      [showBorders]="true"
+                      [rowAlternationEnabled]="true"
+                      style="padding-top: 2vh"
+                      [columnAutoWidth]="true"
+                      [noDataText]="'Aucan article n\'est ajoute'">
+                <dxi-column dataField="category.category_name" caption="Famille"></dxi-column>
+                <dxi-column dataField="sub_category.sub_category_name" caption="Sous famille"></dxi-column>
+                <dxi-column dataField="article.name" caption="Article"></dxi-column>
+                <dxi-column dataField="quantity" caption="Quantité"></dxi-column>
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxo-remote-operations
+                        [sorting]="true"
+                        [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-editing
+                        [useIcons]="true"
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                        [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </dxi-item>
+
+
+          </dxi-item>
+          <dxi-item itemType="simple"  *ngIf="!data.api.length"></dxi-item>
+
+        </dx-form>
+      </div>
+    </dxi-item>
+    <!--*********************************************************************************-->
+    <dxi-item>
+      <div *dxTemplate>
+        <dx-form
+                id="form6"
+                [formData]="interventions"
+                [readOnly]="false"
+                [showColonAfterLabel]="true"
+                [showValidationSummary]="true"
+                labelLocation="top"
+                #Form4>
+          <dxi-item itemType="group"  *ngIf="data.btr.length" [colCount]="5" caption="Bouture" >
+
+            <dxi-item dataField="ap_famille" editorType="dxSelectBox" [editorOptions]="BTRCategoryOptions">
+              <dxo-label
+                      text="Famille">
+              </dxo-label>
+            </dxi-item>
+            <dxi-item dataField="ap_sub_famille" editorType="dxSelectBox"
+                      [editorOptions]="BTRSubCategoryOptions">
+              <dxo-label
+                      text="Sous Famille">
+              </dxo-label>
+
+            </dxi-item>
+
+            <dxi-item dataField="ap_article"  editorType="dxSelectBox" [editorOptions]="BTRArticleOptions">
+              <dxo-label
+                      text="Article">
+              </dxo-label>
+
+            </dxi-item>
+            <dxi-item dataField="ap_quantity" editorType="dxNumberBox"  [editorOptions]="BTRQuantityOptions">
+              <dxo-label
+                      text="Quantity">
+              </dxo-label>
+            </dxi-item>
+
+            <dxi-item
+                    itemType="button"
+                    alignment="left"
+                    [buttonOptions]="addBTR">
+            </dxi-item>
+
+
+            <dxi-item [colSpan]="5" *ngIf="data.btr.length" >
+              <dx-data-grid
+                      #btrGrid
+                      id="btrGrid"
+                      [allowColumnReordering]="true"
+                      [dataSource]="btrs"
+                      [showColumnLines]="true"
+                      [showRowLines]="true"
+                      [showBorders]="true"
+                      [rowAlternationEnabled]="true"
+                      style="padding-top: 2vh"
+                      [columnAutoWidth]="true"
+                      [noDataText]="'Aucan article n\'est ajoute'">
+                <dxi-column dataField="category.category_name" caption="Famille"></dxi-column>
+                <dxi-column dataField="sub_category.sub_category_name" caption="Sous famille"></dxi-column>
+                <dxi-column dataField="article.name" caption="Article"></dxi-column>
+                <dxi-column dataField="quantity" caption="Quantité"></dxi-column>
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxo-remote-operations
+                        [sorting]="true"
+                        [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-editing
+                        [useIcons]="true"
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                        [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </dxi-item>
+
+
+          </dxi-item>
+          <dxi-item itemType="simple"  *ngIf="!data.btr.length"></dxi-item>
+
+        </dx-form>
+      </div>
+    </dxi-item>
+    <!--*********************************************************************************-->
+    <dxi-item>
+      <div *dxTemplate>
+        <dx-form
+                id="form_equipement"
+                [formData]="interventions"
+                [readOnly]="false"
+                [showColonAfterLabel]="true"
+                [showValidationSummary]="true"
+                labelLocation="top"
+                #Form4>
+          <dxi-item itemType="group"  *ngIf="data.equipments.length" [colCount]="5" caption="Allocation matériel" >
+
+            <dxi-item dataField="ap_famille" editorType="dxSelectBox" [editorOptions]="EquipmentCategoryOptions">
+              <dxo-label
+                      text="Famille">
+              </dxo-label>
+            </dxi-item>
+            <dxi-item dataField="ap_sub_famille" editorType="dxSelectBox"
+                      [editorOptions]="EquipmentSubCategoryOptions">
+              <dxo-label
+                      text="Sous Famille">
+              </dxo-label>
+
+            </dxi-item>
+            <dxi-item dataField="ap_article"  editorType="dxSelectBox" [editorOptions]="EquipmentArticleOptions">
+              <dxo-label
+                      text="Article">
+              </dxo-label>
+
+            </dxi-item>
+            <dxi-item dataField="ap_quantity" editorType="dxNumberBox"  [editorOptions]="EquipmentQuantityOptions">
+              <dxo-label
+                      text="Quantity">
+              </dxo-label>
+            </dxi-item>
+            <dxi-item
+                    itemType="button"
+                    alignment="left"
+                    [buttonOptions]="addEquipment">
+            </dxi-item>
+            <dxi-item [colSpan]="5" *ngIf="data.equipments.length" >
+              <dx-data-grid
+                      #equipmentGrid
+                      id="equipmentGrid"
+                      [allowColumnReordering]="true"
+                      [dataSource]="equipments"
+                      [showColumnLines]="true"
+                      [showRowLines]="true"
+                      [showBorders]="true"
+                      [rowAlternationEnabled]="true"
+                      style="padding-top: 2vh"
+                      [columnAutoWidth]="true"
+                      [noDataText]="'Aucan article n\'est ajoute'">
+                <dxi-column dataField="category.category_name" caption="Famille"></dxi-column>
+                <dxi-column dataField="sub_category.sub_category_name" caption="Sous famille"></dxi-column>
+                <dxi-column dataField="article.name" caption="Article"></dxi-column>
+                <dxi-column dataField="quantity" caption="Quantité"></dxi-column>
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxo-remote-operations
+                        [sorting]="true"
+                        [paging]="false">
+                </dxo-remote-operations>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-editing
+                        [useIcons]="true"
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                        [showPageSizeSelector]="false"
+                ></dxo-pager>
+              </dx-data-grid>
+            </dxi-item>
+
+
+          </dxi-item>
+          <dxi-item itemType="simple"  *ngIf="!data.equipments.length"></dxi-item>
+
+        </dx-form>
+      </div>
+    </dxi-item>
+    <!--*********************************************************************************-->
+    <dxi-item *ngIf="custom_fields.length" itemType="group" caption="Eléments" [colCount]="6">
+
+      <dx-form id="form2"
+               [formData]="custom_fields_form_data"
+               [readOnly]="false"
+               [showColonAfterLabel]="true"
+               [showValidationSummary]="true"
+               labelLocation="top"
+               #Form2>
+        <dxi-item itemType="group" [colCount]="6">
+          <dxi-item *ngFor="let field of DX_custom_fields"
+                    [editorType]="field.editorType"
+                    [dataField]="field.dataField"
+                    [editorOptions]="field.editorOptions"
+                    itemType="simple"
+                    [colSpan]="field.colspan">
+            <dxo-label text="{{ field.label }}"></dxo-label>
+            <dxi-validation-rule
+                    message="Ce champs est obligatoire"
+                    type="required" *ngIf="field.required"
+            >
+            </dxi-validation-rule>
+          </dxi-item>
+        </dxi-item>
+      </dx-form>
+
+    </dxi-item>
+    <!--*********************************************************************************-->
+    <dxi-item itemType="group" caption="Enregistrer comme modèle" [colCount]="6">
+      <dxi-item itemType="group" [colSpan]="4" [colCount]="4">
+        <dxi-item [colSpan]="1" dataField="isSaveAsModel" editorType="dxSwitch"
+                  [editorOptions]="saveAsModelOptions">
+
+          <dxo-label
+                  text="Enregistrer comme modèle">
+          </dxo-label>
+        </dxi-item>
+        <dxi-item>
+          <div *dxTemplate>
+            <span *ngIf="saveAsModel" class="label-t18">Nom de modèle:</span>
+            <dx-text-box *ngIf="saveAsModel"  placeholder="Entrer un nom de modèle" [(value)]="interventions.model_name"></dx-text-box>
+          </div>
+        </dxi-item>
+
+        <dxi-item>
+          <div *dxTemplate>
+            <span *ngIf="saveAsModel" class="label-t18">Visible à tous:</span><br>
+            <dx-switch *ngIf="saveAsModel"  onText="Oui" offText="Non"  [(value)]="interventions.model_visibility"></dx-switch>
+          </div>
+        </dxi-item>
+
+      </dxi-item>
+
+    </dxi-item>
+    <!--*********************************************************************************-->
+    <dxi-item itemType="group" [colCount]="5">
+      <dxi-item itemType="group" [colSpan]="3">
+        <dxi-item dataField="model_name" [visible]="false" editorType="dxTextBox">
+        </dxi-item>
+      </dxi-item>
+      <dxi-item itemType="button" [buttonOptions]="buttoncancel"></dxi-item>&nbsp;
+      <dxi-item itemType="button" [buttonOptions]="buttonsave"></dxi-item>
+    </dxi-item>
+    <!--*********************************************************************************-->
+  </dx-form>
+</form>
+<!--*********************************************************************************-->
+<dx-load-panel
+  #loadPanel
+  shadingColor="rgba(0,0,0,0.4)"
+  [position]="{my: 'center'}"
+  [(visible)]="loadingVisible"
+  [showIndicator]="true"
+  [showPane]="true"
+  [shading]="true"
+  [closeOnOutsideClick]="false">
+</dx-load-panel>
+<dx-popup
+  class="popup"
+  [showTitle]="true"
+  title="Information"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="parcelGridPopup">
+  <div *dxTemplate="let data of 'content'">
+    <app-parcel-grid [data]="parcels" (outData)="selectLogicalParcel($event)"></app-parcel-grid>
+  </div>
+</dx-popup>

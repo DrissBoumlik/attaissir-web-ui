@@ -1,0 +1,42 @@
+.header-title {
+  font-size: 26px;
+  line-height: 12px;
+  text-decoration: none;
+  font-weight: 500;
+  float: left;
+  margin: 21px 14px 5px 5px;
+  color: #eef0f0 !important;
+}
+
+::ng-deep .nav {
+  display: inline-block !important;
+  overflow-y: scroll !important;
+}
+
+::ng-deep .header .header-nav .nav-link, header .header-nav .nav-link {
+  display: inherit !important;
+  opacity: 0.8 !important;
+}
+
+@media screen and (max-width: 768px) {
+  .header-title {
+    display: none
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-container.open-hamburger-menu .clr-vertical-nav.clr-nav-level-1, .main-container.open-hamburger-menu .header-nav.clr-nav-level-1, .main-container.open-hamburger-menu .sidenav.clr-nav-level-1, .main-container.open-hamburger-menu .sub-nav.clr-nav-level-1, .main-container.open-hamburger-menu .subnav.clr-nav-level-1 {
+    padding-top: 2rem !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header-title {
+    color: #2c2d2e !important;
+  }
+}
+
+.sidenav {
+  width: unset !important;
+  min-width: unset !important;
+}

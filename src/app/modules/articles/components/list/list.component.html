@@ -1,0 +1,80 @@
+<h1>Liste des articles</h1>
+<hr>
+<dx-data-grid
+        id="gridContainer"
+        [dataSource]="articles"
+        [columnHidingEnabled]="false"
+        [allowColumnResizing]="true"
+        [columnAutoWidth]="true"
+        [allowColumnReordering]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+>
+
+  <!--<dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>-->
+  <dxo-remote-operations
+          [sorting]="true"
+          [paging]="true">
+  </dxo-remote-operations>
+
+  <dxo-editing
+          mode="row"
+          [useIcons]="true"
+          [allowUpdating]="false"
+          [allowDeleting]="false">
+  </dxo-editing>
+  <dxo-selection mode="multiple"></dxo-selection>
+  <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-filter-row
+          [visible]="true" [applyFilter]="true"></dxo-filter-row>
+
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-export [enabled]="true" fileName="Tiers" [allowExportSelectedData]="true"></dxo-export>
+
+  <dxo-pager
+          [allowedPageSizes]="[5, 8, 15, 30]"
+          [showInfo]="true"
+          [showNavigationButtons]="true"
+          [showPageSizeSelector]="true"
+          [visible]="true">
+  </dxo-pager>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+  <dxo-search-panel [visible]="false"></dxo-search-panel>
+
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="false"></dxo-grouping>
+
+  <dxi-column dataField="" [allowSorting]="false" [visible]="helper.permissionMethod(['distributionCenter.articlecategories.show'])" cellTemplate="cellTemplate" caption="" width="50px"  allowColumnResizing="true">
+  </dxi-column>
+  <div *dxTemplate="let data of 'cellTemplate'">
+    <a  (click)="helper.gotoShow('articles', data.data.id, router, toastr)"><i style="font-size: 150%; align-content: center; cursor: pointer" class="fa fa-info-circle fa-5x"></i></a>
+  </div>
+  <dxi-column dataField="code" caption="Code" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="name" caption="Nom" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="dose" datatype="number" caption="Dose" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="unit" datatype="number" allowHiding="true" hidden="hidden" caption="Unite" >
+  </dxi-column>
+  <dxi-column dataField="price" datatype="number" caption="Prix"  i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="type" caption="Type" cellTemplate="typeTemplate" allowColumnResizing="true">
+  </dxi-column>
+  <dxi-column dataField="article_category_parent" caption="Famille" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="article_category" caption="Sous-Famille" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="technical_caracteristics" caption="Caractér technique" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="article_group" caption="Groupe marchandise" i18n-caption>
+  </dxi-column>
+  <div *dxTemplate="let data of 'typeTemplate'">
+    {{ helper.articleType(data.value) }}
+  </div>
+</dx-data-grid>
+

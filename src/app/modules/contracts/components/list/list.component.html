@@ -1,0 +1,102 @@
+<h1>Contrats</h1>
+<dx-data-grid
+        id="gridContainer"
+        [dataSource]="contracts"
+        showBorders="true"
+        (onSelectionChanged)="selectionChanged($event)"
+        (onEditingStart)="onStartEdit($event.data.id)"
+        (onContentReady)="contentReady($event)"
+        (onCellPrepared)="onCellPrepared($event)"
+        [columnHidingEnabled]="true"
+        [allowColumnResizing]="false"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true, searching: true}"
+        [masterDetail]="{ enabled: false, template: 'detail' }"
+
+        KeyExpr="id">
+
+  <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-editing
+          mode="row"
+          [useIcons]="true"
+          [allowDeleting]="helper.permissionMethod(['agreement.contracts.destroy,'])"
+          [allowEditing]="false"
+          [allowUpdating]="false">
+  </dxo-editing>
+  <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+  <dxo-selection mode="multiple"></dxo-selection>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-export [enabled]="true" fileName="contrats" [allowExportSelectedData]="true" [formats]="['PNG', 'PDF', 'JPEG', 'SVG', 'GIF']"></dxo-export>
+
+  <dxo-remote-operations
+          [sorting]="true"
+          [paging]="true">
+  </dxo-remote-operations>
+  <dxo-pager
+          [allowedPageSizes]="[5, 8, 15, 30]"
+          [showInfo]="true"
+          [showNavigationButtons]="true"
+          [showPageSizeSelector]="true"
+          [visible]="true">
+  </dxo-pager>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+  <dxo-search-panel [visible]="false"></dxo-search-panel>
+
+  <dxi-column cellTemplate="cellTemplate" [visible]="helper.permissionMethod(['agreement.contracts.grid'])" [allowSorting]="false" caption="" width="70px">
+  </dxi-column>
+  <dxi-column cellTemplate="cellTemplate33" [visible]="helper.permissionMethod(['agreement.contracts.update'])" [allowSorting]="false" caption="" width="70px">
+  </dxi-column>
+
+  <dxi-column dataField="code" [hidingPriority]="2" caption="Code" sortOrder="desc">
+  </dxi-column>
+  <dxi-column dataField="third_cin" caption="CIN" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="third_full_name" cellTemplate="thirdNameTemplate" caption="Nom" datatype="Text"></dxi-column>
+  <dxi-column dataField="application_date" [hidingPriority]="4" caption="Date d'application" dataType="date">
+  </dxi-column>
+  <dxi-column dataField="expiration_date" caption="Date d'expiration" [hidingPriority]="1" dataType="date">
+  </dxi-column>
+  <!--<dxi-column dataField="type" caption="type de contrat" dataType="Text">
+  </dxi-column>
+  <dxi-column dataField="cda" caption="CDA" i18n-caption>
+  </dxi-column>
+  <dxi-column dataField="zone" caption="ZONE" i18n-caption>
+  </dxi-column>-->
+
+  <dxi-column dataField="contract_type" caption="Type"  [allowFiltering]="false" [allowSorting]="false" [allowGrouping]="false"  >
+  </dxi-column>
+
+  <dxi-column dataField="status" [hidingPriority]="3" cellTemplate="contractListTemplate" caption="Statut">
+  </dxi-column>
+  <dxi-column dataField="structure_name" caption="Division" [hidingPriority]="0" dataType="Text"></dxi-column>
+
+  <div *dxTemplate="let contract of 'thirdNameTemplate'">
+          <span>
+                {{ (contract.data['third_type'] === 'natural') ? contract.data['third_full_name'] : contract.data['third_company_name'] }}
+          </span>
+  </div>
+
+  <div *dxTemplate="let data of 'cellTemplate'">
+    <i style="font-size: 150%; align-content: center; cursor: pointer" (click)="helper.gotoShow('contrats', data.data.id, router, toastr)"
+       class="fa fa-info-circle fa-5x"  allowColumnResizing="true">
+    </i>
+  </div>
+  <div *dxTemplate="let data of 'cellTemplate33'">
+    <i *ngIf="data.data.status === 'ENCOURS'" style="font-size: 150%; align-content: center; cursor: pointer;padding-left: 10px;" (click)="helper.gotoShow('contrats', data.data.id, router, toastr, 'modifier')"
+       class="fa fa-edit fa-5x"  allowColumnResizing="true">
+    </i>
+  </div>
+  <div *dxTemplate="let data of 'contractListTemplate'">
+          <span [ngClass]="helper.getContractStatusClass(data.value)">
+              {{ data.value }}
+          </span>
+  </div>
+
+</dx-data-grid>

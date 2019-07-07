@@ -1,0 +1,98 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <a class="siam-header-back-btn" href="/index"><i class="fa fa-angle-left"></i> Tableau de bord</a>
+    </div>
+  </div>
+</div>
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body">
+
+
+
+      <div class="content" style="z-index: 2; margin-bottom: 80px">
+        <div class="card">
+          <div class="firstinfo"> <avatar name="{{userInfo.name}}"   [displayType]="'circle'" [background]="'green'" [size]="120"></avatar>
+            <div class="profileinfo">
+              <h1>{{userInfo.name}}</h1>
+              <h3>Role : {{userInfo.role_name}}</h3>
+              <p class="bio">   Divisions :  {{nbr_structs}} &nbsp;  &nbsp; Cda : {{nbr_cdas}} &nbsp; Zone :  {{nbr_zones}} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <form style="margin-top: 20px" id="user" >
+        <dx-form id="utilisateursForm"
+                 [formData]="user"
+                 [readOnly]="false"
+                 [showColonAfterLabel]="true"
+                 [showValidationSummary]="true"
+                 validationGroup="customerData">
+
+          <dxi-item itemType="group" caption="Informations générales">
+            <dxi-item  dataField="old_password"
+            [editorOptions]="{ mode: 'password' }">
+              <dxo-label
+                text="Ancien mot de passe">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="Nom complete est obligatoire">
+              </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="new_password"
+                      [editorOptions]="{ mode: 'password' }">
+              <dxo-label
+                text="Tapez le nouveau mot de passe">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="Password est obligatoire">
+              </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="new_password1"
+                      [editorOptions]="{ mode: 'password' }">
+              <dxo-label
+                text="Retapez le nouveau mot de passe">
+              </dxo-label>
+              <dxi-validation-rule
+                type="required"
+                message="Password est obligatoire">
+              </dxi-validation-rule>
+            </dxi-item>
+
+          </dxi-item>
+
+
+
+          <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-value">
+                <dxi-item  itemType="button"  [buttonOptions]="buttonsave"></dxi-item>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </dx-form>
+      </form>
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+
+</div>
+

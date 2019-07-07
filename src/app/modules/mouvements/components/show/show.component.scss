@@ -1,0 +1,142 @@
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-fieldset {
+  width: 420px;
+  margin: 30px auto;
+}
+
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-fieldset:first-child {
+  margin-top: 120px;
+}
+
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-fieldset-header {
+  font-size: 16px;
+}
+
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-field {
+  display: inline-block;
+  width: 24%;
+}
+
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-field-value:not(.dx-widget) > .dx-button {
+  float: none;
+}
+
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-field-value:not(.dx-switch):not(.dx-checkbox):not(.dx-button),
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-field-label {
+  float: none;
+  width: 100%;
+}
+
+::ng-deep .dx-viewport:not(.dx-theme-ios7) .dx-field-label {
+  padding-left: 0;
+}
+
+
+.siam-form-input-value {
+  background-color: rgba(253, 253, 253, 0) !important;
+  color: #383838 !important;
+}
+
+._status_inprogress {
+  color : #fff !important;
+  background-color: #f9d49a  !important; ;
+}
+
+._status_cancled {
+  color : #fff !important;
+  background-color: #c33c37 !important; ;
+}
+
+
+._status_done {
+  color : #fff !important;
+  background-color: #2bb81d  !important; ;
+}
+
+
+
+
+
+
+
+
+.glisser-carte-agriculteur{
+  position:relative;
+  width: 500px;
+  height: 200px;
+  margin: 60px auto;
+  overflow: visible;
+}
+
+.credit-card{
+  width: 250px;
+  height: 140px;
+  background-image:  url('../../../../../assets/images/generate.png');
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+  border-radius:10px;
+  position:relative;
+  z-index: 2;
+  animation: swipe-card 2s ease-in-out infinite;
+
+}
+.swiper-top, .swiper-bottom{
+  border-radius:8px 8px 0 0;
+  position:absolute;
+  background: #434343;
+}
+.swiper-top{
+  height: 20px;
+  bottom:105px;
+  z-index: 0;
+  width: 400px;
+  left: calc(50% - 200px);
+}
+.swiper-bottom{
+  height: 100px;
+  bottom:0;
+  z-index: 3;
+  width: 420px;
+  left: calc(50% - 210px);
+
+  .light-indicator{
+    position:absolute;
+    top:10px;
+    right:15px;
+    width: 10px;
+    height: 10px;
+    border-radius:50%;
+    background:#dadada;
+    animation: reader-light 2s ease-in-out infinite;
+  }
+}
+
+
+@keyframes swipe-card{
+  0%{
+    margin-left: -150px;
+    transform:rotate(25deg);
+  }
+  50%{
+    transform:rotate(0deg);
+  }
+  100%{
+    margin-left: 500px;
+    transform:rotate(-25deg);
+  }
+}
+
+@keyframes reader-light{
+  0%{
+    background:#dadada;
+  }
+  60%{
+    background:#B8FD99;
+  }
+  80%{
+
+    background: #11fd19;
+  }
+}
+
+

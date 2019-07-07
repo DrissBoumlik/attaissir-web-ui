@@ -1,0 +1,109 @@
+<div class="field_infos" style="opacity: 0.9; top: 60px; z-index: 1001">
+    <div class="block_info">
+        <!--<a class="close-btn" > <i class="fa fa-times"></i></a>-->
+        <div class="field_infos_header">
+            <div class="p_info">
+                <span id="field_infos_id">{{ilot.name}}</span>
+            </div>
+            <div class="p_surface">
+                <span id="field_infos_surface">{{ilot.contracted_surface}} HA</span>
+            </div>
+        </div>
+        <div class="field_infos_header">
+            <div class="field_infos_header">
+                <div class="p_surface">
+                    <a (click)="editParcel()"> <span id="field_infos_surface" style="cursor: pointer">Modifier</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="field_infos_header">
+            <div class="field_infos_header">
+                <div class="p_surface">
+                    <a (click)="deleteParcel()"> <span id="field_infos_surface" style="cursor: pointer">Supprimer</span></a>
+                </div>
+            </div>
+        </div>
+        <ul>
+            <li>Réf : <span id="field_infos_ref_zone">{{ ilot.id }}</span></li>
+            <li>
+                <div class="field_infos_zones">CDA : <span id="field_infos_cda">{{ ilot.cda }}</span>/</div>
+                <div class="field_infos_zones">Zone : <span id="field_infos_zone">{{ ilot.zone }}</span> /</div>
+                <div class="field_infos_zones">Parcelle : <span id="field_infos_code_client">{{ilot.name}}</span></div>
+            </li>
+            <li>Superficie contractée : <span id="field_infos_sup_total_ilots">{{ilot.contracted_surface}} (Ha)</span>
+            </li>
+            <li>Superficie de la parcelle : <span id="field_infos_sup_total_ilots">{{ilot.parcel_surface}} (Ha)</span>
+            </li>
+            <li>Superficie de l'ilot : <span id="field_infos_sup_total_ilots">{{ilot.ilot_surface}} (Ha)</span></li>
+            <li>Nom d'agriculteur : <span id="field_infos_agri_name">{{ilot.ag_name}}</span></li>
+            <li>Téléphone : <span id="field_infos_agri_tel">{{ilot.ag_tel}}</span></li>
+            <li>Prestataire : <span id="field_infos_prestataire">{{ilot.prestataire}}</span></li>
+            <li>Semoir : <span id="field_infos_object">{{ilot.semoir}}</span></li>
+            <li>Date de semis : <span id="field_infos_start_date">{{ilot.date_semis}}</span></li>
+        </ul>
+        <div class="controls">
+        </div>
+    </div>
+
+    <div class="block_field_editor" style="display: none;">
+        <div class="field_editor_merge_fields">
+            Parcelles à fusionner
+        </div>
+        <a class="field_editor_window_btn" href="javascript:saveFieldEditor()">Enregister</a>
+        <a class="field_editor_window_btn_close" href="javascript:closeFieldEditor()"><i class="fa fa-times"></i></a>
+    </div>
+    <div class="block_field_childs">
+        <a href="javascript:showFieldinfo(10308)" *ngFor="let ad of ilot.advisors"> {{ ad }}<span
+                class="surface"></span></a>
+    </div>
+
+</div>
+
+
+<dx-popup
+        class="popup"
+        [height]="300"
+        [showTitle]="true"
+        title="Modification"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupVisible">
+    <div *dxTemplate="let data of 'content'">
+        <dx-form id="form"
+                 [formData]="ilot_info">
+            <dxi-item itemType="group" [colCount]="3">
+                   <dxi-item dataField="cda"  editorType="dxSelectBox" [editorOptions]="cdaEditorOptions"></dxi-item>
+                   <dxi-item dataField="zone" editorType="dxSelectBox" [editorOptions]="zoneEditorOptions"></dxi-item>
+                   <dxi-item dataField="parcel" editorType="dxSelectBox" [editorOptions]="parcelEditorOptions"></dxi-item>
+            </dxi-item>
+            <dxi-item  editorType="dxButton" [editorOptions]="buttonEditorOptions"></dxi-item>
+        </dx-form>
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [height]="200"
+        [width]="300"
+        [showTitle]="true"
+        title="Confirmation"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="confirmPopupVisible">
+    <div *dxTemplate="let data of 'content'">
+       <div style="align-content: end; text-align: right">
+           <dx-button [stylingMode]="'outlined'" [type]="'danger'" [text]="'Supprimer'"  (onClick)="confirmDeleteParcel($event)"></dx-button>
+           <dx-button [stylingMode]="'outlined'" [type]="'normal'" [text]="'Annuler'"  (onClick)="cancelDeleteParcel($event)"></dx-button>
+       </div>
+    </div>
+</dx-popup>
+<dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [position]="{ of: 'me' }"
+        style="z-index: 2000;"
+        [(visible)]="loadingVisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
+</dx-load-panel>

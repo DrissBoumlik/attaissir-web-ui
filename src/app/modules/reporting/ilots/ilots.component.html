@@ -1,0 +1,92 @@
+<dx-data-grid
+        id="gridContainer"
+        [dataSource]="ilots"
+        showBorders="true"
+        [columnHidingEnabled]="false"
+        [allowColumnResizing]="false"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        KeyExpr="id">
+
+    <dxo-export [enabled]="true" fileName="ilots" [allowExportSelectedData]="true"></dxo-export>
+
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+    <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+    <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+    <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+    </dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+    <dxi-column dataField="i_id" caption="Réf îlot"></dxi-column>
+    <dxi-column dataField="s_name" caption="Division"></dxi-column>
+    <dxi-column [visible]="false" dataField="s_name_ar" caption="Division(AR)"></dxi-column>
+    <dxi-column [visible]="false" dataField="s_code" caption="Code division"></dxi-column>
+    <dxi-column [visible]="false" dataField="s_city" caption="Ville division"></dxi-column>
+    <dxi-column [visible]="false" dataField="s_address" caption="Adresse division"></dxi-column>
+    <dxi-column [visible]="false" dataField="s_address" caption="Adresse division"></dxi-column>
+    <dxi-column [visible]="false" dataField="s_zip_code" caption="Code postale division"></dxi-column>
+    <dxi-column [visible]="false" dataField="s_tel1" caption="№ tel (Division)"></dxi-column>
+    <dxi-column [visible]="true" dataField="i_gps_box_name" caption="Semoir"></dxi-column>
+    <dxi-column dataField="cda_name" caption="CDA"></dxi-column>
+    <dxi-column [visible]="false" dataField="cda_code" caption="Code CDA"></dxi-column>
+    <dxi-column dataField="z_name" caption="Zone"></dxi-column>
+    <dxi-column [visible]="false" dataField="z_code" caption="Code zone"></dxi-column>
+    <dxi-column dataField="p_name" caption="Parcelle"></dxi-column>
+    <dxi-column [visible]="false" dataField="p_code_ormva" caption="Code ORMVA"></dxi-column>
+    <dxi-column dataField="i_sup_semis"    [allowFiltering]="true"
+                caption="Superficie semée (îlot) Ha"></dxi-column>
+    <dxi-column dataField="i_date_semis" format="dd-MM-yyyy" dataType="date" [allowFiltering]="true"
+                caption="Date de semis (îlot)"></dxi-column>
+    <dxi-column dataField="tp_full_name" caption="Nom complet (agrégé)"></dxi-column>
+    <dxi-column dataField="tp_full_name_ar" caption="Nom complet(AR) (agrégé)"></dxi-column>
+    <dxi-column dataField="tp_cin" caption="CIN (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_email" caption="Email (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_birth_date" caption="Date de naissance (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_death_date" caption="Date de décès (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_sexe" caption="Sexe (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_address" caption="Adresse (agrégé) "></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_address_ar" caption="Adresse(AR) (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_city" caption="Ville (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_district" caption="District (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_commandment" caption="Commandement (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_commune" caption="Commune (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_region" caption="Région (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_zip_code" caption="Code postale (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_tel1" caption="№ tel (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_is_insured" caption="Assuré(e) (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_is_retired" caption="retraité(e) (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_payment_method" caption="Mode de paiement (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="tp_bank_name" caption="Banque (agrégé)"></dxi-column>
+    <dxi-column dataField="tp_code" caption="Code agrégé"></dxi-column>
+    <dxi-column dataField="tp_rib" caption="RIB (agrégé)"></dxi-column>
+    <dxi-column [visible]="false" dataField="a_code" caption="Code (Contrat)"></dxi-column>
+    <dxi-column [visible]="false" dataField="a_application_date" caption="Date d'application (Contrat)"></dxi-column>
+    <dxi-column [visible]="false" dataField="a_type" caption="Type (Contrat)"></dxi-column>
+    <dxi-column [visible]="false" dataField="a_contracted_surface" datatype="number"
+                caption="Superficie contractée (Ha)(Contrat)"></dxi-column>
+    <dxi-column [visible]="false" dataField="a_compaign_surface" datatype="number"
+                caption="Superficie de la campagne (Ha)(Contrat)"></dxi-column>
+    <dxi-column [visible]="false" dataField="cmp_description" caption="Campagne"></dxi-column>
+    <dxi-column [visible]="false" dataField="cmp_estimated_surface" datatype="number"
+                caption="Superficie estimée (Ha)(Campagne)"></dxi-column>
+    <dxi-column [visible]="false" dataField="cmp_estimated_tonnage" datatype="number"
+                caption="Tonnage estimé (Campagne)"></dxi-column>
+    <div *dxTemplate="let data of 'statusTemplate'">
+      <span [ngClass]="helper.getContractStatusClass(data.value)">
+                  {{ data.value }}
+      </span>
+    </div>
+</dx-data-grid>

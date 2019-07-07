@@ -1,0 +1,133 @@
+<div class="clr-row">
+    <div class="clr-col">
+        <div class="clr-row">
+            <div class="clr-col clr-align-items-start">
+                <h3> Rechercher un tiers </h3>
+            </div>
+            <div class="clr-co clr-align-items-end">
+                <button type="button" (click)="onGoback()" class="btn btn-primary  " style="margin-right: 5%;">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div class="clr-col">
+            <hr>
+        </div>
+    </div>
+</div>
+<div class="clr-row">
+    <div class="clr-col">
+        <dx-form id="form2">
+            <dxi-item itemType="group">
+                <dxi-item>
+                    <dx-button style="background-color: #676767; border: none" icon="fa fa-id-card" text="Scanner la carte agriculteur" (onClick)="Scan()" type="default"></dx-button>
+                </dxi-item>
+                <dxi-item>
+                    <dx-text-box placeholder="Tapez l'identifiant" (onInput)="onCinInput($event)">
+                    </dx-text-box>
+                </dxi-item>
+            </dxi-item>
+        </dx-form>
+    </div>
+</div>
+<!--
+<div class="m-portlet__head" style="padding: 2%;">
+
+
+  <div class="m-portlet__head-title">
+    <h3 class="m-portlet__head-text">
+      <button type="button" (click)="onGoback()" class="btn btn-primary  " style="margin-right: 5%;">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+      </button>
+
+    </h3>
+    <p class=" d-none d-sm-block">Taper le C.I.N de l'agrégé, ou bien scanner la carte d'agriculteur</p>
+    <p class=" d-block d-sm-none">Taper le C.I.N de l'agrégé</p>
+    <hr>
+  </div>
+
+
+
+
+  <div class="container">
+    <div class="row">
+  <dx-form id="form2">
+    <dxi-item itemType="group" [colCount]="6">
+      <dxi-item class="d-none d-sm-block">
+        <dx-button style="background-color: #676767; border: none" icon="fa fa-id-card" text="Scanner la carte agriculteur" (onClick)="Scan()" type="default"></dx-button>
+      </dxi-item>
+      <dxi-item [colSpan]="4">
+        <dx-text-box placeholder="Tape le C.I.N." (onInput)="onCinInput($event)">
+        </dx-text-box>
+      </dxi-item>
+    </dxi-item>
+    </dx-form>
+    </div>
+    </div>
+
+
+  <div   name="popup" id="popup">
+    <dx-popup
+      class="popup"
+      [width]="600"
+      [height]="400"
+      [showTitle]="true"
+      shadingColor="rgba(0,0,0,0.6)"
+      title="Glisser la carte"
+      [dragEnabled]="false"
+      (onShown)="ReadCard()"
+      [closeOnOutsideClick]="true"
+      [(visible)]="popupVisible" >
+      <div *dxTemplate="let data of 'content'">
+        <div class="glisser" #popup>
+          <h1>GLISSER LA CARTE</h1>
+          <p>Faire glisser la carte sur le lecteur de carte pour lancer la recherche</p>
+          <div class="glisser-carte-agriculteur">
+            <div class="credit-card">
+              <div class="rfid-tripe"></div>
+            </div>
+            <div class="swiper-top"></div>
+            <div class="swiper-bottom">
+              <div class="light-indicator"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dx-popup>
+  </div>
+  <input class="rfid-input" type="text" name="rfid"  #rfid>
+  <input class="rfid-input" type="text" name="focusout"  #focusout>
+</div>
+
+-->
+<div   name="popup" id="popup">
+    <dx-popup
+            class="popup"
+            [width]="600"
+            [height]="400"
+            [showTitle]="true"
+            shadingColor="rgba(0,0,0,0.6)"
+            title="Glisser la carte"
+            [dragEnabled]="false"
+            (onShown)="ReadCard()"
+            [closeOnOutsideClick]="true"
+            [(visible)]="popupVisible" >
+        <div *dxTemplate="let data of 'content'">
+            <div class="glisser" #popup>
+                <h1>GLISSER LA CARTE</h1>
+                <p>Faire glisser la carte sur le lecteur de carte pour lancer la recherche</p>
+                <div class="glisser-carte-agriculteur">
+                    <div class="credit-card">
+                        <div class="rfid-tripe"></div>
+                    </div>
+                    <div class="swiper-top"></div>
+                    <div class="swiper-bottom">
+                        <div class="light-indicator"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dx-popup>
+</div>
+<input class="rfid-input" type="text" name="rfid"  #rfid>
+<input class="rfid-input" type="text" name="focusout"  #focusout>

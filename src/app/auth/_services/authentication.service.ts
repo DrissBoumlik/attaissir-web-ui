@@ -1,27 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Response } from '@angular/http';
+
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class AuthenticationService {
 
-  constructor(private http: Http) {
-  }
+    private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
+    private options = {
+        headers: this.headers
+    };
 
-  login(email: string, password: string) {
-    return this.http.post('/api/authenticate', JSON.stringify({ email: email, password: password }))
-      .map((response: Response) => {
-        // login successful if there's a jwt token in the response
-        let user = response.json();
-        if (user && user.token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-        }
-      });
-  }
 
-  logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-  }
+    constructor(private http: HttpClient) {
+    }
+
+    login(email: string, password: string) {
+        return this.http.post(`${environment.apiUrl}/login`, JSON.stringify({ email: email.toLowerCase(), password: password }), this.options);
+    }
+
+    myPermission(): any {
+        return this.http.get(`${environment.apiUrl}/my-permissions`, this.options);
+    }
+
+    refresh = () => {
+        return this.http.get(`${environment.apiUrl}/refresh`);
+    };
+
+    logout() {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
+    }
+
+    getToken = () => {
+        return localStorage.getItem('token');
+    };
+
+    getTanent = () => {
+        return localStorage.getItem('tenantId');
+    };
 }

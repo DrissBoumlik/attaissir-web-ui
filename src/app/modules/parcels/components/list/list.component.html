@@ -1,0 +1,3 @@
+<app-parcels-list [data]="parcels"
+                  (onEditingStart)="onStartEdit($event.data.id)"
+                  (onRowRemoving)="onRemoveParcel($event.data.id)"></app-parcels-list>

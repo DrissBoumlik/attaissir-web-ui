@@ -1,0 +1,392 @@
+<div class="clr-row">
+    <div class="clr-col">
+        <h1> Fiche de Mouvement N° {{ mouvement?.id }} </h1>
+    </div>
+    <div class="clr-col-1 clr-align-content-end" >
+         <span class="label label-info"  *ngIf="mouvement?.state == 'inprogress'">
+                        <i class="fa  fa-spinner"></i> EN COURS
+                      </span>
+
+
+        <span class="label label-success" *ngIf="mouvement?.state == 'done'">
+                        <i class="fa  fa-check" ></i> VALIDÉ
+                      </span>
+
+        <span class="label label-danger" *ngIf="mouvement?.state == 'canceled'">
+                        <i class="fa  fa-times"></i> ANNULÉ
+                      </span>
+        <span [appPermissionHidden]="['distributionCenter.stocks.change_status']"
+              style="font-size: 12px; padding-left: 12px; cursor: pointer;"
+              *ngIf="mouvement?.state === 'done'"> <a (click)="Scan()"> <i class="fa fa-refresh"
+                                                                          aria-hidden="true"></i> <span
+                style="text-decoration: underline;"> En cours </span> </a> </span>
+    </div>
+</div>
+<hr>
+<div class="clr-row">
+    <div class="clr-col">
+        <h2 class="m-form__section">
+            Informations générales
+        </h2>
+        <hr>
+    </div>
+</div>
+<div class="clr-row">
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Type
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                    {{ helper.orderType(mouvement?.type).toUpperCase() }}
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                N° Bon
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                    {{mouvement?.bon_number}}
+
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Date
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    {{mouvement?.date}}
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Commande
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="order">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ order.object
+                    }}
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Emetteur
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="from">
+
+                    <i style="font-size: 150%; align-content: center; color: #ac2925;"
+                       class="fa fa-chevron-up fa-5x"></i> {{ from.name || from.full_name }}
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <div class="clr-row">
+            <label class="clr-col-12">
+                Récepteur
+            </label>
+            <div class="clr-col-12">
+
+                <p class="siam-form-input-value siam-form-input-value-nodata" *ngIf="to">
+                    <i style="font-size: 150%; align-content: center; color: #0b9c8f;"
+                       class="fa fa-chevron-down fa-5x"></i> {{ to.name || to.full_name }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clr-row">
+    <div class="clr-col">
+        <h2 class="m-form__section">
+            Liste des articles
+        </h2>
+        <hr>
+    </div>
+</div>
+<dx-data-grid
+        id="gridContainer"
+        [dataSource]="articles"
+        showBorders="true"
+        [columnHidingEnabled]="true"
+        [allowColumnResizing]="false"
+        [allowColumnReordering]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        KeyExpr="id">
+
+    <dxo-export [enabled]="true" fileName="magasin"
+                [allowExportSelectedData]="true"></dxo-export>
+
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-scrolling mode="virtual"></dxo-scrolling>
+    <dxo-editing
+            mode="popup"
+            [useIcons]="true"
+            [allowDeleting]="false"
+            [allowUpdating]="false"
+    >
+    </dxo-editing>
+    <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+    <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+
+    <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+    </dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+    <dxi-column dataField="article.id" [width]="100" caption="" [allowSorting]="false"
+                [allowFiltering]="false" [allowSorting]="false"></dxi-column>
+    <dxi-column dataField="article.category.article_category.name"
+                caption="Famille"></dxi-column>
+    <dxi-column dataField="article.category.name" caption="Sous Famille"></dxi-column>
+    <dxi-column dataField="article.name" caption="Article"></dxi-column>
+    <dxi-column dataField="quantity" caption="Quantité globale"></dxi-column>
+
+</dx-data-grid>
+<div class="clr-row clr-align-items-end">
+    <div class="clr-col-12 clr-justify-content-end" >
+        <dx-button *ngIf="mouvement?.state === 'inprogress'" icon="fa fa-paper-plane"
+                   [visible]="modelHaspermission('distributionCenter.stocks.validationOperation')"
+                   text="VALIDER" type="success"
+                   (onClick)="showDeliverPopup()"></dx-button>
+
+        <dx-button  *ngIf="mouvement?.state === 'done'" icon="fa fa-print"
+                   (onClick)="print()" text="IMPRIMER" type="primary"
+                   ></dx-button> &nbsp; &nbsp;
+
+        <dx-button *ngIf="mouvement?.state === 'inprogress'" icon="fa fa-trash" text="ANNULER" [visible]="modelHaspermission('distributionCenter.stocks.validationOperation')"
+                   type="danger" (onClick)="showDeletePopup()"></dx-button> &nbsp; &nbsp;
+    </div>
+</div>
+
+
+<dx-popup
+        class="popup"
+        [width]="320"
+        [height]="150"
+        [showTitle]="true"
+        title="Confirmation "
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupDeliverVisible"
+>
+    <div *dxTemplate="let data of 'content'">
+        <div class="pull-right">
+            <dx-button class="pull-left"
+                       type="success"
+                       text="Oui"
+                       width="80"
+                       (onClick)="deliver()">
+            </dx-button>
+            &nbsp;
+            &nbsp;
+
+            <dx-button class="pull-right"
+                       class="button-info"
+                       text="No"
+                       width="80"
+                       (onClick)="cancelPopup()">
+            </dx-button>
+        </div>
+
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [width]="350"
+        [height]="150"
+        [showTitle]="true"
+        title="Confirmation"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupDeleteVisible"
+>
+    <div *dxTemplate="let data of 'content'">
+        <p>
+            Voulez-vous vraiment annuler cet élement ?
+        </p>
+
+        <div class="pull-right">
+
+            <dx-button class="pull-left"
+                       width="80"
+                       type="danger"
+                       text="Oui"
+                       (onClick)="delete()">
+            </dx-button>
+
+
+            <dx-button class="pull-right"
+                       class="button-info"
+                       width="80"
+                       text="No"
+                       (onClick)="cancelPopup()">
+            </dx-button>
+        </div>
+
+    </div>
+</dx-popup>
+<div name="popup" id="popup" #popup>
+    <dx-popup
+            class="popup"
+            [width]="580"
+            [height]="400"
+            [showTitle]="true"
+            title="Confirmation "
+            [dragEnabled]="false"
+            (onShown)="SearchByRfid()"
+            [closeOnOutsideClick]="true"
+            [(visible)]="popupRfidVisible"
+            (window:keypress)="doSomething($event)"
+    >
+        <div *dxTemplate="let data of 'content'">
+
+            <div class="gilsser">
+                <h1>GLISSER LA CARTE</h1>
+                <p>Faire glisser la carte sur le lecteur de carte pour changer le status</p>
+                <div class="glisser-carte-agriculteur">
+                    <div class="credit-card">
+                        <div class="rfid-tripe"></div>
+                    </div>
+                    <div class="swiper-top"></div>
+                    <div class="swiper-bottom">
+                        <div class="light-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </dx-popup>
+
+</div>
+<input type="text" name="rfid" style="width: 0; height: 0;border: none;" #rfid>
+<input class="rfid-input" type="text" name="focusout" style="width: 0; height: 0;border: none;" #focusout>
+<div style="display:none;">
+    <div id="t1">
+        <div id="receipt-wrapper">
+            <div class="receipt-block">
+                <div class="receipt-head">
+                    <div>BON DE {{ this.helper.orderType(this.mouvement?.type).toUpperCase() }}</div>
+                </div>
+
+                <div style="text-align : center; margin-bottom: 10px;">
+                    <div>N° {{this.mouvement?.id}}</div>
+
+                </div>
+
+                <div style="text-align : right;  margin-bottom: 5px; font-size:12px;">
+                    <div>La Date : {{this.mouvement?.date }}</div>
+                </div>
+
+                <div style="text-align : right; margin-bottom: 10px; font-size:12px;">
+                    <div>{{this.mouvement?.campaign}}</div>
+                </div>
+
+                <div class="receipt-info"
+                     *ngIf="this.mouvement?.type != 'transfer' &&  this.mouvement?.type != 'receive'  &&  this.mouvement?.type != 'return'">
+
+                    <div>
+                        <div class="receipt-item">
+                            <div class="receipt-item-lbl">CDA</div>
+                            <div class="receipt-item-price">{{this.mouvement?.cda}}</div>
+                        </div>
+                        <div class="receipt-item">
+                            <div class="receipt-item-lbl">ZONE</div>
+                            <div class="receipt-item-price">{{this.mouvement?.zone }}</div>
+                        </div>
+                        <div class="receipt-item">
+                            <div class="receipt-item-lbl">PARCELLE</div>
+                            <div class="receipt-item-price">{{this.mouvement?.parcel}}</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="receipt-items" *ngFor="let article of articles; let i = index">
+
+
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl" style="font-size:13px;"> {{article.article.name}}</div>
+
+                        <div class="receipt-item-price"> {{article.quantity}} {{article.article.unit}}</div>
+                    </div>
+
+                </div>
+
+
+                <div class="receipt-info">
+
+
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl" style="font-size:13px;">Emetteur</div>
+                        <div class="receipt-item-price"> &nbsp; {{this.mouvement?.from.full_name }}</div>
+                    </div>
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl" style="font-size:13px;">Récepteur</div>
+                        <div class="receipt-item-price"> &nbsp; {{this.mouvement?.to.name}}</div>
+                    </div>
+
+                </div>
+
+
+                <div class="signature" style="font-size:12px;">
+                    <div>** **</div>
+
+                    <div>* *</div>
+
+                    <div>-------------------------</div>
+
+                    <div>** MERCI **</div>
+
+                    <div>*****</div>
+                    <div>***</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+

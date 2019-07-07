@@ -1,0 +1,565 @@
+<h1>Rotations de récolte | En cours | Encodage.</h1>
+<hr>
+<!--
+        *ngIf="modelHaspermission('convocations.rotations.unknown')"
+-->
+<div class="clr-row">
+    <div class="clr-col">
+        <div class="card">
+            <div class="card-header">
+                Tonnage en cours de chargement
+            </div>
+            <div class="card-block">
+                <div class="card-title" style="text-align: center">
+                    <h3> <b> {{ tonnageVars_loading }} T</b></h3>  <strong>({{ tonnageVars_loading_count }} rotations)</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col">
+        <div class="card">
+            <div class="card-header">
+                Tonnage chargé (vers l'usine)
+            </div>
+            <div class="card-block">
+                <div class="card-title" style="text-align: center">
+                    <h3><b>{{ tonnageVars_loaded }} T</b></h3> <strong>({{ tonnageVars_loaded_count }} rotations)</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col">
+        <div class="card">
+            <div class="card-header">
+                Tonnage receptionné aujourd'hui
+            </div>
+            <div class="card-block">
+                <div class="card-title" style="text-align: center">
+                    <h3><b>{{ tonnageVars_today }} T</b></h3><strong>({{ tonnageVars_today_count }} rotations)</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--   <div class="clr-col">
+           <div class="card">
+               <div class="card-header">
+                   tonnage dans la file d'attente
+               </div>
+               <div class="card-block">
+                   <div class="card-title">
+                       Block
+                   </div>
+               </div>
+           </div>
+       </div>-->
+    <div class="clr-col">
+        <div class="card">
+            <div class="card-header">
+                tonnage affecté (vers la parcelle)
+            </div>
+            <div class="card-block">
+                <div class="card-title" style="text-align: center">
+                    <h3><b>{{ tonnageVars_awaiting }} T</b></h3><strong>({{ tonnageVars_awaiting_count }} rotations)</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<!--<h2 *ngIf="modeHaspermission(['convocations.rotations.unknown'])">{{ unknown_trucks.length }} Camions sans affectation</h2>
+<dx-tile-view
+        #tileView
+        *ngIf="modeHaspermission(['convocations.rotations.unknown'])"
+        [height]="150"
+        title="Camions sans affectations"
+        [baseItemHeight]="200"
+        [baseItemWidth]="185"
+        width="100%"
+        (onItemClick)="unknownTruckClicked($event)"
+        [itemMargin]="10"
+        direction="horizontal">
+    <dxi-item
+            *ngFor="let truck of unknown_trucks"
+            [widthRatio]="truck.widthRatio"
+            [heightRatio]="truck.heightRatio">
+        <div class="image">
+            <app-truck-svg [v_ridelle_code]="truck.v_ridelle_code"></app-truck-svg>
+        </div>
+    </dxi-item>
+</dx-tile-view>-->
+<!--<h2 *ngIf="modeHaspermission(['convocations.rotations.unknown'])">{{ verified_trucks.length }} Camions encodés vérifiés</h2>
+<dx-tile-view
+        #tileView
+        *ngIf="modeHaspermission(['convocations.rotations.unknown'])"
+        [height]="150"
+        title="Camions encodés vérifiés"
+        [baseItemHeight]="200"
+        [baseItemWidth]="185"
+        width="100%"
+        (onItemClick)="verifiedTruckClicked($event)"
+        [itemMargin]="10"
+        direction="horizontal">
+    <dxi-item
+            *ngFor="let truck of verified_trucks"
+            [widthRatio]="truck.widthRatio"
+            [heightRatio]="truck.heightRatio">
+        <div class="image">
+            <app-truck-svgs-green [v_ridelle_code]="truck.truck_ridelle_code"></app-truck-svgs-green>
+        </div>
+    </dxi-item>
+</dx-tile-view>-->
+<dx-data-grid
+        #dataGrid
+        id="dataGrid"
+        [dataSource]="rotations"
+        [columnHidingEnabled]="false"
+        [allowColumnResizing]="false"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}">
+    <dxo-remote-operations
+            [sorting]="true"
+            [paging]="true">
+    </dxo-remote-operations>
+
+    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+    <dxo-selection mode="none" [deferred]="true"></dxo-selection>
+
+    <dxo-sorting mode="multiple"></dxo-sorting>
+    <dxo-filter-row
+            [visible]="true" [applyFilter]="true"></dxo-filter-row>
+
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-export [enabled]="true" fileName="Parcels" [allowExportSelectedData]="true"></dxo-export>
+
+    <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+    </dxo-pager>
+    <dxo-editing
+            mode="popup"
+            [allowUpdating]="false"
+            [allowDeleting]="false"
+            [allowAdding]="false">
+        <dxo-popup
+                title="Encodage manuel"
+                [showTitle]="true">
+        </dxo-popup>
+    </dxo-editing>
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+    <dxo-search-panel [visible]="false"></dxo-search-panel>
+
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+
+    <dxi-column *ngIf="modeHaspermission(['convocations.rotations.status'])" [allowFiltering]="false"
+                [allowSorting]="false" [allowSearch]="false" caption="État (encodage)"
+                [alignment]="'center'">
+        <dxi-column dataField="rot_seq" [allowEditing]="false" caption="" [allowHeaderFiltering]="false"
+                    [allowSorting]="false" [allowFiltering]="true"
+                    cellTemplate="timeLineTemplate"></dxi-column>
+    </dxi-column>
+
+    <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Rotation"
+                [alignment]="'center'">
+
+        <dxi-column dataField="rot_id" [formItem]="{visible: false}" [allowEditing]="false" [width]="40" caption=""
+                    [allowSorting]="false" [allowFiltering]="false"
+                    cellTemplate="consulterTemplate"></dxi-column>
+
+        <dxi-column [allowHeaderFiltering]="true" [allowEditing]="false" [alignment]="'center'" dataType="number"
+                    dataField="rot_id"
+                    caption="Réf"
+                    [visible]="true"></dxi-column>
+
+        <dxi-column [alignment]="'center'" dataType="string" [allowHeaderFiltering]="true" [allowEditing]="false"
+                    dataField="cda_name"
+                    caption="CDA"></dxi-column>
+
+        <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="z_name"
+                    [allowHeaderFiltering]="true"
+                    caption="Zone"></dxi-column>
+
+        <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="p_name"
+                    [allowHeaderFiltering]="true"
+                    caption="Parcelle"></dxi-column>
+
+        <dxi-column [alignment]="'center'" [allowEditing]="false" [allowFiltering]="false" dataType="string"
+                    dataField="encoding_status"
+                    cellTemplate="statusTemplate"
+                    caption="État (chargement)"></dxi-column>
+
+        <dxi-column [alignment]="'center'" [allowEditing]="false" [allowFiltering]="false" dataType="string"
+                    dataField="loader_ridelle_code"
+                    cellTemplate="cut_type_template"
+                    caption="Type de coupe"></dxi-column>
+
+        <dxi-column [alignment]="'center'" [allowEditing]="false" [allowFiltering]="false" dataType="string"
+                    dataField="rot_status"
+                    cellTemplate="rotationStatusTemplate"
+                    caption="État (rotation)"></dxi-column>
+
+
+        <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="p_harvest_order"
+                    caption="Ordre"
+                    [visible]="false"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="tp_full_name"
+                    [visible]="false"
+                    caption="Nom (Agrègè)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="tp_cin" [visible]="true"
+                    caption="CIN (Agrègè)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="number" [allowEditing]="false" [visible]="false"
+                    dataField="p_annuel_surface"
+                    [visible]="false"
+                    caption="Superficie annuelle (Ha)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="number" dataField="sup_semis" [allowEditing]="false"
+                    [visible]="false"
+                    caption="Superficie semis (Ha)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="number" dataField="ir_sup_con" [visible]="false"
+                    [allowEditing]="false"
+                    caption="Superficie convoquée (Ha)"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="number" dataField="irt_name" [visible]="false"
+                    [allowEditing]="false"
+                    caption="Type"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="date" dataField="ir_date_con" [allowEditing]="false"
+                    [visible]="false"
+                    caption="Date de convocation"></dxi-column>
+        <dxi-column [alignment]="'center'" dataType="number" dataField="ir_daily_quota" [allowEditing]="false"
+                    [visible]="false"
+                    caption="Tonnage/Jour (Ha)"></dxi-column>
+
+        <dxi-column [alignment]="'center'" dataType="number" dataField="camion_count" [visible]="false"
+                    [allowEditing]="false"
+                    caption="Nombre max de camions autorisé"></dxi-column>
+
+        <dxi-column [alignment]="'center'" datatype="date" dataField="ir_start_date" [allowEditing]="false"
+                    [visible]="false"
+                    caption="Date de debut de récolte"></dxi-column>
+
+        <dxi-column [alignment]="'center'" datatype="date" dataField="ir_end_date" [allowEditing]="false"
+                    [visible]="false"
+                    caption="Date prévue de fin de récolte"></dxi-column>
+    </dxi-column>
+
+    <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Camion"
+                [allowEditing]="false"
+                [alignment]="'center'">
+        <dxi-column dataField="truck_ridelle_code" caption="Code Ridelle" [allowEditing]="false"></dxi-column>
+        <dxi-column dataField="truck_tel_driver" caption="Numéro tél" [allowEditing]="false"></dxi-column>
+        <dxi-column dataField="truck_immatricule_number" caption="Immatricule" [allowEditing]="false"
+                    [visible]="false"></dxi-column>
+        <dxi-column dataField="truck_ptc" caption="PTC" [allowEditing]="false" [visible]="false"></dxi-column>
+    </dxi-column>
+
+    <dxi-column [allowFiltering]="false" [visible]="false" [allowSorting]="false" [allowSearch]="false"
+                caption="Chargeuse"
+                [allowEditing]="false"
+                [alignment]="'center'">
+        <dxi-column dataField="loader_ridelle_code" caption="Code Ridelle" [visible]="false"
+                    [allowEditing]="false"></dxi-column>
+        <dxi-column dataField="loader_immatricule_number" caption="Immatricule" [visible]="false"
+                    [allowEditing]="false"></dxi-column>
+        <dxi-column dataField="loader_ptc" caption="PTC" [visible]="false" [allowEditing]="false"></dxi-column>
+    </dxi-column>
+
+    <dxi-column [visible]="modeHaspermission(['convocations.rotations.cancel'])" [alignment]="'center'"
+                dataType="string" dataField="canne_refoulee" [allowFiltering]="false"
+                caption="" cellTemplate="deleteButtonTemplate"></dxi-column>
+    <div *dxTemplate="let data of 'deleteButtonTemplate'">
+        <dx-button type="danger" [disabled]="disableDeleteBtn(data)" [text]="'Annuler'"
+                   [visible]="modeHaspermission(['convocations.rotations.cancel'])"
+                   (onClick)="cancel(data,cancelBtn)" #cancelBtn>
+        </dx-button>
+    </div>
+    <div *dxTemplate="let data of 'cut_type_template'">
+        {{ data.data.loader_ridelle_code?.includes('CB') ? 'Mécanique' : 'Manuel' }}
+    </div>
+    <div *dxTemplate="let data of 'consulterTemplate'">
+        <i *ngIf="data.data.status !== 'done'" (click)="showRotations(data)"
+           style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+           class="fa fa-info-circle fa-5x"></i>
+    </div>
+    <div *dxTemplate="let data of 'statusTemplate'">
+      <span [ngClass]="helper.getEncodageStatus(data).cssClass">
+           {{ helper.getEncodageStatus(data).text }}
+      </span>
+    </div>
+    <div *dxTemplate="let data of 'rotationStatusTemplate'">
+      <span [ngClass]="helper.getRotationEncodageStatus(data).cssClass">
+           {{ helper.getRotationEncodageStatus(data).text }}
+      </span>
+    </div>
+    <div *dxTemplate="let data of 'timeLineTemplate'">
+        <div style="display: inline-flex;">
+            <div [ngClass]="(!data.data.current_state_parcel_is_ok || data.data.current_state_parcel_is_ok === '') ? 'grey led' :
+             ((data.data.current_state_parcel_is_ok === 'true' || data.data.current_state_parcel_is_ok === true) ? 'green led' : 'red led')"
+                 (click)="onParcelLedClick(data.data)"></div>
+            <div style="align-self: center;" class="label label-default">Parcelle</div>
+            <div [ngClass]="(!data.data.current_state_tp_code || data.data.current_state_tp_code === '')  ? 'grey led' :
+             ((data.data.current_state_tp_is_ok === 'true' || data.data.current_state_tp_is_ok === true) ? 'green led' : 'red led')"
+                 (click)="onAgCardClick(data.data)"></div>
+            <div style="align-self: center;" class="label label-default">Carte Agriculteur</div>
+            <div [ngClass]="(!data.data.current_state_loader_id || data.data.current_state_loader_id === '') ? 'grey led' :
+             ((data.data.current_state_loader_is_ok == ture || data.data.current_state_loader_is_ok === 'true') ? 'green led' :
+            'red led')"
+                 *ngIf="data.data.loader_ridelle_code?.includes('C')"
+                 (click)="onLoaderCardClick(data.data)">
+            </div>
+            <div style="align-self: center;" class="label label-default"
+                 *ngIf="data.data.loader_ridelle_code?.includes('C')">Carte chargeuse
+            </div>
+        </div>
+
+    </div>
+</dx-data-grid>
+<dx-popup
+        class="popup"
+        (onShowing)="loadVehicles($event)"
+        [showTitle]="true"
+        [title]="'Affectation et encodage manuel '"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupVisible">
+    <div *dxTemplate="let data of 'content'">
+        <dx-scroll-view
+                direction="both">
+            <div id="content">
+                <form>
+                    <dx-form id="ms_form"
+                             [(formData)]="manual_assignment"
+                             #form>
+                        <dxi-item itemType="group" caption="Validation de la rotation">
+                            <dxi-item dataField="last_rotation" editorType="dxSwitch"
+                                      [visible]="modeHaspermission(['convocations.encoding.last_rotation'])"
+                                      [editorOptions]="lastRotationEditorOptions">
+                                <dxo-label text="Confirmer la dernière livraison"></dxo-label>
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                            </dxi-item>
+                        </dxi-item>
+
+                        <dxi-item itemType="group" caption="Affectation" [colCount]="2"
+                                  [visible]="modeHaspermission(['convocations.rotations.manual_assign'])">
+                            <dxi-item dataField="id_truck" [colCount]="1" editorType="dxSelectBox"
+                                      [editorOptions]="manualAssignmentEditorOptios">
+                                <dxo-label text="Camion"></dxo-label>
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                            </dxi-item>
+                            <dxi-item dataField="id_loader" [colCount]="1" editorType="dxSelectBox"
+                                      [editorOptions]="loaderManualAssignmentEditorOptios">
+                                <dxo-label text="Chargeuse"></dxo-label>
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                            </dxi-item>
+                        </dxi-item>
+
+                        <dxi-item itemType="group" caption="Encodage"
+                                  [visible]="modeHaspermission(['convocations.rotations.manual_assign'])">
+                            <dxi-item dataField="encoding_status" editorType="dxSelectBox"
+                                      [editorOptions]="encodingStatusEditorOptions">
+                                <dxo-label text="État d'encodage"></dxo-label>
+                                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+                            </dxi-item>
+                        </dxi-item>
+
+                        <dxi-item itemType="group" caption="Changement de parcelle" [colCount]="3"
+                                  [visible]="modeHaspermission(['convocations.encoding.change_parcel'])">
+                            <dxi-item dataField="cda_id" [colCount]="1" editorType="dxSelectBox"
+                                      [editorOptions]="cdaEditorOptions">
+                                <dxo-label text="CDA"></dxo-label>
+                            </dxi-item>
+                            <dxi-item dataField="zone_id" [colCount]="1" editorType="dxSelectBox"
+                                      [editorOptions]="zoneEditorOptions">
+                                <dxo-label text="Zone"></dxo-label>
+                            </dxi-item>
+                            <dxi-item dataField="parcel_id_to_modify" [colCount]="1" editorType="dxSelectBox"
+                                      [editorOptions]="parcelEditorOptions">
+                                <dxo-label text="Parcelle"></dxo-label>
+                            </dxi-item>
+                        </dxi-item>
+
+                        <dxi-item editorType="dxButton"
+                                  [editorOptions]="manualAssignmentSubmitButtonEditorOptios"></dxi-item>
+
+                        <dxi-item itemType="group" caption="Bon de chargement" [colCount]="4"
+                                  [visible]="modeHaspermission(['convocations.encoding.print'])">
+                            <dxi-item editorType="dxButton" [colSpan]="4"
+                                      [editorOptions]="PrintButtonEditorOptios"></dxi-item>
+                        </dxi-item>
+
+
+                    </dx-form>
+                </form>
+            </div>
+        </dx-scroll-view>
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [width]="350"
+        [height]="300"
+        [showTitle]="true"
+        [title]="currentCorsCheck.title"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        (onShown)="clearAssignmentData()"
+        [(visible)]="checkCorrespondencePanelVisible">
+    <div *dxTemplate="let data of 'content'">
+        <p><strong>{{ currentCorsCheck.text }}</strong></p>
+        <p *ngIf="currentCorsCheck.show_parcel">
+            Parcelle affectée:
+            <strong><span>{{currentCorsCheck.p_name}}</span></strong>
+        </p>
+        <p *ngIf="currentCorsCheck.show_parcel">
+            Parcelle chargée:
+            <strong><span>{{currentCorsCheck.current_state_p_name}}</span></strong>
+        </p>
+        <p *ngIf="currentCorsCheck.show_ag">
+            Carte agriculteur inserée :
+            <strong><span>{{currentCorsCheck.current_state_tp_code}}</span></strong>
+        </p>
+        <p *ngIf="currentCorsCheck.show_ag">
+            Carte agriculteur affectée :
+            <strong><span>{{currentCorsCheck.tp_code}}</span></strong>
+        </p>
+        <p *ngIf="currentCorsCheck.show_loader">
+            Carte chargeuse inserée :
+            <strong><span>{{currentCorsCheck.current_state_loader_ridelle_code}}</span></strong>
+        </p>
+        <p *ngIf="currentCorsCheck.show_loader">
+            Carte chargeuse affectée :
+            <strong><span>{{currentCorsCheck.loader_ridelle_code}}</span></strong>
+        </p>
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [width]="350"
+        [height]="500"
+        [showTitle]="true"
+        title="Camion sans affectation"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="unknownTrucksPopUpVisible">
+    <div *dxTemplate="let data of 'content'">
+        <p>
+            Code ridelle:
+            <strong><span>{{currentUnknownTruck.v_ridelle_code}}</span></strong>
+        </p>
+        <p>
+            Carte insérée dans la parcelle:
+            <strong> <span>{{currentUnknownTruck.p_name ? currentUnknownTruck.p_name : 'N/A' }}</span></strong>
+        </p>
+        <p>
+            Ridelle chargeuse:
+            <strong> <span>{{currentUnknownTruck.loader_ridelle_code ? currentUnknownTruck.loader_ridelle_code : 'N/A' }}</span></strong>
+        </p>
+        <p>
+            Code Agriculteur:
+            <strong> <span>{{currentUnknownTruck.tp_code}}</span></strong>
+        </p>
+        <p>
+            Agriculteur :
+            <strong> <span>{{currentUnknownTruck.tp_full_name}}</span></strong>
+        </p>
+        <p>
+            CDA :
+            <strong> <span>{{currentUnknownTruck.cda_name ? currentUnknownTruck.cda_name : 'N/A'}}</span></strong>
+        </p>
+        <p>
+            Zone :
+            <strong> <span>{{currentUnknownTruck.z_name ? currentUnknownTruck.z_name : 'N/A'}}</span></strong>
+        </p>
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [width]="350"
+        [height]="500"
+        [showTitle]="true"
+        title="Camion encodé vérifié"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="verifiedTrucksPopUpVisible">
+    <div *dxTemplate="let data of 'content'">
+        <p>
+            Réf rotation:
+            <strong><span>{{currentVerifiedTruck.rot_id}}</span></strong>
+        </p>
+        <p>
+            Code ridelle:
+            <strong><span>{{currentVerifiedTruck.truck_ridelle_code}}</span></strong>
+        </p>
+        <p>
+            Carte insérée:
+            <strong> <span>{{currentVerifiedTruck.p_name ? currentVerifiedTruck.p_name : 'N/A' }}</span></strong>
+        </p>
+        <p>
+            Ridelle chargeuse:
+            <strong> <span>{{currentVerifiedTruck.loader_ridelle_code ? currentVerifiedTruck.loader_ridelle_code : 'N/A' }}</span></strong>
+        </p>
+        <p>
+            Code Agriculteur:
+            <strong> <span>{{currentVerifiedTruck.tp_code}}</span></strong>
+        </p>
+        <p>
+            Agriculteur :
+            <strong> <span>{{currentVerifiedTruck.tp_full_name}}</span></strong>
+        </p>
+        <p>
+            CDA :
+            <strong> <span>{{currentVerifiedTruck.cda_name ? currentVerifiedTruck.cda_name : 'N/A'}}</span></strong>
+        </p>
+        <p>
+            Zone :
+            <strong> <span>{{currentVerifiedTruck.z_name ? currentVerifiedTruck.z_name : 'N/A'}}</span></strong>
+        </p>
+    </div>
+</dx-popup>
+<dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [position]="{ of: 'me' }"
+        style="z-index: 2000;"
+        [(visible)]="loadingVisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
+</dx-load-panel>
+<div style="display:none;">
+    <div id="t2">
+        <div id="receipt-wrapper">
+            <div class="receipt-block">
+                <div style="text-align : center;" class="receipt-head">
+                    <div>BON DE CHARGEMENT</div>
+                </div>
+                <div class="receipt-head" style="text-align : center; margin-bottom: 5px;">
+                    <div>Usine : {{ selectedRotationData?.div_name }}</div>
+                </div>
+                <div style="text-align : center; margin-bottom: 5px;">
+                    <div>Référence° {{ selectedRotationData?.rot_seq }}</div>
+                </div>
+                <div class="receipt-info" style="text-align : center;">
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl">Ridelle :</div>
+                        <div class="receipt-item-price">{{ selectedRotationData?.truck_ridelle_code }}</div>
+                    </div>
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl">Immatriculation :</div>
+                        <div class="receipt-item-price">{{ selectedRotationData?.truck_immatricule_number }}</div>
+                    </div>
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl">Date :</div>
+                        <div class="receipt-item-price"> {{ formatedToday }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

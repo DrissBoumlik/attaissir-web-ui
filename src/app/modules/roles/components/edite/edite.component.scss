@@ -1,0 +1,30 @@
+input[type=checkbox]{
+    position: absolute;
+    visibility: hidden;
+}
+input[type=checkbox] ~ span{
+ border: 1px solid #e7e7e7; 
+ padding: 8px 20px;
+ min-width: 70 px;
+ margin-left:15px; 
+ cursor: pointer;
+ color: black
+}
+
+input[type=checkbox]:checked ~ span{
+    background-color: #5cb85cb3;
+    color: #fff;
+    border-color: #5cb85c
+}
+.existe{
+    background-color: #5cb85cb3;
+    color: #fff;
+    border-color: #5cb85c
+}
+// .action-class .permission-class{
+//   width: 150px;
+// }
+
+
+
+   

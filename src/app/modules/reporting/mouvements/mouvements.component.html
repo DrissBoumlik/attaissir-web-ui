@@ -1,0 +1,95 @@
+<dx-data-grid
+  id="gridContainer"
+  [dataSource]="mouvements"
+  showBorders="true"
+  [columnHidingEnabled]="false"
+  [allowColumnResizing]="false"
+  [allowColumnReordering]="true"
+  [columnAutoWidth]="true"
+  [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+  KeyExpr="id">
+
+  <dxo-export [enabled]="true" fileName="magasin" [excelFilterEnabled]="true"
+              [allowExportSelectedData]="true"></dxo-export>
+
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-scrolling  [showScrollbar]="'always'"></dxo-scrolling>
+  <dxo-editing
+    mode="popup"
+    [useIcons]="true"
+    [allowDeleting]="false"
+    [allowUpdating]="false"
+  >
+  </dxo-editing>
+  <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+  <dxo-selection mode="multiple"></dxo-selection>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+  <dxo-pager
+    [allowedPageSizes]="[5, 8, 15, 30]"
+    [showInfo]="true"
+    [showNavigationButtons]="true"
+    [showPageSizeSelector]="true"
+    [visible]="true">
+  </dxo-pager>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+  <dxi-column dataField="so_date" format="dd-MM-yyyy"  dataType="date de mouvement" [allowFiltering]="false" caption="Date"></dxi-column>
+  <dxi-column dataField="so_type" caption="Type" cellTemplate="typeTemplate"></dxi-column>
+  <dxi-column dataField="so_bon_number" caption="N° Bon de livraison fournisseur" cellTemplate="bon_nbrTemplate"></dxi-column>
+  <dxi-column dataField="so_state" caption="Etat"  [allowFiltering]="true" cellTemplate="statusTemplate"></dxi-column>
+  <dxi-column dataField="ar_name" caption="Article"></dxi-column>
+  <dxi-column dataField="soa_quantity" dataType="number" caption="Quantité"></dxi-column>
+  <dxi-column dataField="ar_code" caption="Code article"></dxi-column>
+  <dxi-column dataField="ar_unit" caption="Unité"></dxi-column>
+  <dxi-column dataField="ar_variety" caption="Varieté"></dxi-column>
+  <dxi-column dataField="ar_value"   dataType="number" caption="Valeur"></dxi-column>
+  <dxi-column dataField="arc_name" caption="Groupe d'article"></dxi-column>
+  <dxi-column dataField="arc_doe" caption="Code groupe article"></dxi-column>
+  <dxi-column dataField="emetteur.name" caption="Emetteur"  [calculateFilterExpression]="calculateFilterExpression"></dxi-column>
+  <dxi-column dataField="emetteur.address" caption="Adresse emetteur"></dxi-column>
+  <dxi-column dataField="emetteur.tel" caption="Tél emetteur"></dxi-column>
+  <dxi-column dataField="emetteur.email" caption="Adresse mail emetteur"></dxi-column>
+  <dxi-column dataField="emetteur.rc" caption="RC emetteur"></dxi-column>
+  <dxi-column dataField="emetteur.patent_number" caption="numéro de patente emetteur"></dxi-column>
+  <dxi-column dataField="emetteur.i_f" caption="IF emetteur"></dxi-column>
+  <dxi-column dataField="emetteur.ice" caption="ICE emetteur"></dxi-column>
+  <dxi-column dataField="emetteur.tva_code" caption="Code TVA emetteur"></dxi-column>
+  <dxi-column dataField="recepteur.name" caption="Récepteur"></dxi-column>
+  <dxi-column dataField="recepteur.address" caption="Adresse récepteur"></dxi-column>
+  <dxi-column dataField="recepteur.tel" caption="Tél récepteur"></dxi-column>
+  <dxi-column dataField="recepteur.email" caption="Adresse mail récepteur"></dxi-column>
+  <div *dxTemplate="let data of 'statusTemplate'">
+      <span [ngClass]="helper.getContractStatusClass(data.value)">
+                  {{ data.value }}
+      </span>
+  </div>
+
+  <div *dxTemplate="let data of 'bon_nbrTemplate'" class="pull-left">
+    # {{data.value}}
+  </div>
+
+  <div *dxTemplate="let data of 'consulterTemplate'">
+    <a  routerLink="/mouvements/afficher/{{data.value}}" routerLinkActive="active"><i style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+                                                                                      class="fa fa-info-circle fa-5x"></i></a>
+  </div>
+
+  <div *dxTemplate="let data of 'typeTemplate'">
+    {{ helper.orderType(data.value).toUpperCase() }}
+  </div>
+
+  <!--<div *dxTemplate="let data of 'emetterTemplate'">
+    <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center; color: #ac2925;"
+                                   class="fa fa-chevron-up fa-5x"></i> &nbsp; {{data.value}}</a>
+  </div>
+
+  <div *dxTemplate="let data of 'recepteurTemplate'">
+    <a (click)="gotoShow(data)"><i style="font-size: 150%; align-content: center;   color:  #0b9c8f;"
+                                   class="fa fa-chevron-down fa-5x"></i> &nbsp;  {{data.value}}</a>
+  </div>-->
+
+</dx-data-grid>

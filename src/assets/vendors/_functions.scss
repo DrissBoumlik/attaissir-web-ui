@@ -14,7 +14,7 @@
 }
 
 //== Map Get Deep
-// Given a map and a list of keys, find the value at the given key
+// Given a map and a warehouse-list of keys, find the value at the given key
 @function array-get($map, $keys...) {
     @if length($keys) == 1 {
         $keys: nth($keys, 1);
@@ -71,9 +71,9 @@
 
     @if $get != null {
         @return true;
-    } 
+    }
     @else {
-        @return false;   
+        @return false;
     }
 }
 
@@ -276,7 +276,7 @@
         @if ($i == '+++++') {
             $i: lighten4;
         }
-    }    
+    }
 
     @return array-get($m--typography-colors, $skin, $type, $i);
 }
@@ -364,7 +364,7 @@
         @if ($i == '+++++') {
             $i: lighten5;
         }
-    }    
+    }
 
     @return array-get($m--box-shadows, $skin, $i);
 }
@@ -380,7 +380,7 @@
         $base: darken($base, 10%);
     }
 
-    @if $i == '+++' { 
+    @if $i == '+++' {
         $base: darken($base, 15%);
     }
 
@@ -496,19 +496,19 @@
         $size: down5;
     }
 
-    @return array-get($m--font-sizes, $type, $size);   
+    @return array-get($m--font-sizes, $type, $size);
 }
 
 @function get-font-weight($type) {
-    @return array-get($m--font-weights, $type);   
+    @return array-get($m--font-weights, $type);
 }
 
 @function get-heading-font-family() {
-    @return array-get($m--font-families, heading);   
+    @return array-get($m--font-families, heading);
 }
 
 @function get-regular-font-family() {
-    @return array-get($m--font-families, regular);   
+    @return array-get($m--font-families, regular);
 }
 
 //== Skin functions

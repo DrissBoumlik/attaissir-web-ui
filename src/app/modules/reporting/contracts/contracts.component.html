@@ -1,0 +1,133 @@
+<dx-data-grid
+  id="ReportingContracts"
+  [dataSource]="contracts"
+  [columnHidingEnabled]="false"
+  align="center"
+  [allowColumnReordering]="true"
+  [columnAutoWidth]="true"
+  [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+  noDataText="Aucun contrat n'a été rapporté"
+  [rowAlternationEnabled]="true"
+  KeyExpr="id"
+  #ReportingContracts>
+
+  <dxi-column [alignment]="'center'" dataField="cda_name" caption="CDA"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="z_name" caption="Zone"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="secteur" caption="Secteur"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="p_name" caption="Parcelle"></dxi-column>
+  <dxi-column [alignment]="'center'" datatype="number" dataField="p_annuel_surface"
+              caption="Superficie contractée"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="tp_cin" caption="CIN de l'agriculteur"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="tp_full_name" caption="Nom et prénom"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="tp_commune" caption="Commune"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="tp_tel1" caption="Numéro de téléphone"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="a_application_date" caption="Date d'application"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="a_parent_id" cellTemplate="TypeTemplate"
+              caption="Type"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="a_status" cellTemplate="contractListTemplate"
+              caption="Status"></dxi-column>
+  <dxi-column [alignment]="'center'" dataField="za_advisors" caption="Conseiller"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="a_code" caption="Code contrat"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataType="number"  dataField="a_compaign_surface" caption="Superficie de la campagne (Contrat)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataType="number" dataField="a_contracted_surface" caption="Superficie Contractée (contrat)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="a_type" caption="Type (contrat)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="cda_code" caption="Code CDA"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="cmp_description" caption="Campagne"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="cmp_estimated_surface" caption="Superficie estimée"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="cmp_estimated_tonnage" caption="Tonnage estimé"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="p_code_ormva" caption="Code ormva (parcelle)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="s_name" caption="Division"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="s_name_ar" caption="Division (AR)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="s_city" caption="Ville (division)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="s_code" caption="Code (division)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_address" caption="Adresse (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_address_ar" caption="Adresse ar (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_bank_name" caption="Banque (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_birth_date" caption="Date de naissance (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_city" caption="Ville (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_civil_status" caption="État civil (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_code" caption="Code (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_district" caption="District (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_email" caption="Email (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_full_name_ar" caption="Nom (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataType="boolean" dataField="tp_is_insured" caption="Assuré(e)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataType="boolean" dataField="tp_is_retired" caption="Retraité(e)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_payment_method" caption="Mode de paiement (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_region" caption="Région(agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_rib" caption="RIB (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_sexe" caption="Sexe (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="tp_zip_code" caption="Code postal (agrégée)"></dxi-column>
+  <dxi-column [visible]="false" [alignment]="'center'" dataField="z_code" caption="Code zone"></dxi-column>
+
+  <dxo-selection mode="multiple"></dxo-selection>
+  <dxo-scrolling mode="standard" [showScrollbar]="'always'"></dxo-scrolling>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-export [enabled]="true" fileName="situation_contracts" [excelFilterEnabled]="true"
+              [allowExportSelectedData]="true"></dxo-export>
+  <dxo-filter-row
+    [visible]="true" [applyFilter]="true"></dxo-filter-row>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-pager
+    [allowedPageSizes]="[5, 8, 15, 30]"
+    [showInfo]="true"
+    [showNavigationButtons]="true"
+    [showPageSizeSelector]="true"
+    [visible]="true">
+  </dxo-pager>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+  <dxo-search-panel [visible]="true"></dxo-search-panel>
+  <dxo-group-panel [visible]="true"
+                   emptyPanelText="Glissez-déposez ici la colonne par laquelle vous souhaitez regrouper les données."></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+  <div *dxTemplate="let data of 'TypeTemplate'">
+    <div *ngIf="data.value">Avenant</div>
+    <div *ngIf="!data.value">Contrat</div>
+  </div>
+  <div *dxTemplate="let data of 'contractListTemplate'">
+          <span [ngClass]="helper.getContractStatusClass(data.value)">
+              {{ data.value }}
+          </span>
+  </div>
+  <div *dxTemplate="let data of 'consTemplate'">
+    <div>{{ getConsByZone(data.value) }}</div>
+  </div>
+
+  <dxo-summary [calculateCustomSummary]="calculateDistinctCin">
+    <dxi-total-item
+      column="p_annuel_surface"
+      summaryType="sum"
+      displayFormat="Total: {0}"
+      showInColumn="z_name"
+      valueFormat="#.## (ha) contractée">
+    </dxi-total-item>
+    <dxi-total-item
+      name="SelectedRowsSummary"
+      summaryType="custom"
+      valueFormat="# agrégés"
+      displayFormat="Total: {0}"
+      showInColumn="cda_name">
+    </dxi-total-item>
+    <dxi-total-item
+      summaryType="avg"
+      column="p_annuel_surface"
+      valueFormat="#.## (ha)/Parcelle"
+      displayFormat="Moyenne: {0}"
+      showInColumn="p_name">
+    </dxi-total-item>
+    <dxi-group-item
+      column="p_annuel_surface"
+      summaryType="avg"
+      valueFormat="#.## (ha)/Parcelle"
+      displayFormat="Moyenne: {0}">
+    </dxi-group-item>
+    <dxi-group-item
+      column="p_annuel_surface"
+      summaryType="sum"
+      displayFormat="Total: {0}"
+      valueFormat="#.## (ha) contractée">
+    </dxi-group-item>
+  </dxo-summary>
+</dx-data-grid>
+

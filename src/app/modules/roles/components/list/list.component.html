@@ -1,0 +1,74 @@
+<div class="clr-row">
+  <div class="clr-col-11 clr-align-self-start">
+    <h1>Roles </h1>
+  </div>
+  <div class="clr-col clr-align-self-end">
+    <button type="button" type="button" class="btn btn-icon">
+      <a [appPermissionHidden]="['user.roles.store']" class="siam-header-btn-new"
+         routerLink="/roles/ajouter" title="Ajouter role">
+        <clr-icon shape="add"></clr-icon>
+      </a>
+    </button>
+  </div>
+</div>
+<hr>
+<dx-data-grid
+        id="gridContainer"
+        [dataSource]="rolesDataSource"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true"
+        [allowColumnResizing]="false"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        [masterDetail]="{ enabled: false, template: 'detail' }"
+        (onEditingStart)="onStartEdit($event.data.id)"
+>
+  <dxo-export [enabled]="true" fileName="utilisateurs" [allowExportSelectedData]="true"></dxo-export>
+
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-filter-row
+          [visible]="true" [applyFilter]="true"></dxo-filter-row>
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+
+  <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+  <dxo-selection mode="multiple"></dxo-selection>
+  <dxo-remote-operations
+          [sorting]="true"
+          [paging]="true">
+  </dxo-remote-operations>
+  <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+
+  <dxo-pager
+          [allowedPageSizes]="[5, 8, 15, 30]"
+          [showInfo]="true"
+          [showNavigationButtons]="true"
+          [showPageSizeSelector]="true"
+          [visible]="true">
+  </dxo-pager>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+
+  <dxo-editing
+          mode="row"
+          [allowUpdating]="helper.permissionMethod(['distributionCenter.stocks.update'])"
+          [useIcons]="true">
+  </dxo-editing>
+  <!-- <dxo-selection mode="multiple"></dxo-selection> -->
+
+  <dxi-column dataField="id" caption="ID" alignment="left"></dxi-column>
+  <dxi-column dataField="description" caption="Role"></dxi-column>
+
+
+  <!-- <dxi-column dataField="id"  cellTemplate="cellTemplate" caption="" alignment="left"></dxi-column> -->
+
+
+  <!-- <div *dxTemplate="let data of 'cellTemplate'">
+    <a href="roles/modifier/{{data.value}}" style="text-align: left;color: black">Modifer</a>
+  </div>    -->
+
+</dx-data-grid>
+
+
+

@@ -1,0 +1,17 @@
+.dx-field-label {
+  font-weight: bolder;
+  margin: 0;
+}
+.dx-field-value {
+  margin: 0;
+}
+
+
+.label-t18 {
+  color: #90959a;
+  font-weight: bold;
+}
+
+::ng-deep .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-state-focused {
+  color: #101010;
+}

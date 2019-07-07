@@ -1,0 +1,631 @@
+<div class="clr-row">
+    <div class="clr-col-11 clr-align-self-start">
+        <h1>Fiche {{ (thirdType === 'young_promoter') ? 'centre de distribution' : title.toLowerCase() }} ({{ (thirdType
+            ===
+            'young_promoter') ? third?.company_name.toUpperCase() : third?.full_name.toUpperCase() }})</h1>
+    </div>
+    <div class="clr-col clr-align-self-end">
+        <button type="button" type="button" class="btn btn-icon">
+            <a routerLink="/{{ goTo }}/modifier/{{ third?.id }}">
+                <clr-icon shape="pencil"></clr-icon>
+            </a>
+        </button>
+    </div>
+</div>
+<clr-tabs>
+    <clr-tab *ngIf="thirdType === 'aggregated'">
+        <button clrTabLink id="Fiche">Fiche</button>
+        <clr-tab-content id="File" *clrIfActive>
+            <div class="m-form m-form--fit">
+                <div class="m-portlet__body">
+
+                    <div class="row" *ngIf="third?.type !== 'Physique'">
+                        <div class="col-12">
+                            <h3 class="m-form__section">
+                                Société
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="third?.type !== 'Physique'">
+                        <div class="col-4">
+                            <div class="row">
+                                <label class="col-12">
+                                    Raison sociale
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.company_name}">{{
+                                        third?.company_name || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Numéro de patente
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.patent_number}">{{
+                                        third?.patent_number || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <label class="col-12">
+                                    Identification fiscal
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.if}">{{ third?.if ||
+                                        'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Code TVA
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.tva_code}">{{
+                                        third?.tva_code || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <label class="col-12">
+                                    Identifiant commun de l’entreprise.
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.ice}">{{ third?.ice ||
+                                        'Pas de données' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 class="m-form__section">
+                                Informations générales
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row">
+                                <label class="col-12">
+                                    Nom complet
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value">{{ third?.full_name }}</p>
+                                </div>
+                            </div>
+                            <div class="row" DIR="ltr">
+                                <label class="col-12">
+                                    الاسم الكامل
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value">{{ third?.full_name_ar }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    CIN
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.cin}">{{ third?.cin ||
+                                        'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Sexe.
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.sexe}">{{ third?.sexe ||
+                                        'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Situation familiale
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.civil_status}">{{
+                                        third?.civil_status || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <label class="col-12">
+                                    Code client
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.code}">{{ third?.code ||
+                                        'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Date de naissance
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.birth_date}">{{
+                                        third?.birth_date || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Date du décès
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.death_date}">{{
+                                        third?.death_date || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Retraite.
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value" *ngIf="third?.is_retired !== null">{{
+                                        third?.is_retired ?
+                                        'Oui' : 'Non' }}</p>
+                                    <p class="siam-form-input-value siam-form-input-value-nodata"
+                                       *ngIf="third?.is_retired == null">Pas de données</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Nombre d'enfant
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.children_number}">{{
+                                        third?.children_number || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <label class="col-12">
+                                    Téléphone 1
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.tel1}">{{ third?.tel1 ||
+                                        'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Téléphone 2
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.tel2}">{{ third?.tel2 ||
+                                        'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Email
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.email}">{{ third?.email
+                                        || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Assurance.
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value" *ngIf="third?.is_insured !== null">{{
+                                        third?.is_insured ?
+                                        'Oui' : 'Non' }}</p>
+                                    <p class="siam-form-input-value siam-form-input-value-nodata"
+                                       *ngIf="third?.is_insured == null">Pas de données</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Niveau d`instruction
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.education_degree}">{{
+                                        third?.education_degree || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 class="m-form__section">
+                                Adresse
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row">
+                                <label class="col-12">
+                                    Adresse
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.address}">{{
+                                        third?.address || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    العنوان
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.address_ar}">{{
+                                        third?.address_ar || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Commandement
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.commandment}">{{
+                                        third?.commandment || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <label class="col-12">
+                                    Ville
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.city}">{{ third?.city ||
+                                        'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Commune
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.commune}">{{
+                                        third?.commune || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Arrondissement
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.district}">{{
+                                        third?.district || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <label class="col-12">
+                                    Code postal
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.zip_code}">{{
+                                        third?.zip_code || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-12">
+                                    Région
+                                </label>
+                                <div class="col-12">
+                                    <p class="siam-form-input-value"
+                                       [ngClass]="{'siam-form-input-value-nodata' : !third?.region}">{{
+                                        third?.region || 'Pas de données' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab *ngIf="thirdType === 'aggregated'">
+        <button clrTabLink id="Contrat">Contrats</button>
+        <clr-tab-content id="Contract" *clrIfActive>
+            <dx-data-grid
+                    id="ContractsgridContainer"
+                    [dataSource]="contracts"
+                    [columnAutoWidth]="true"
+                    [columnHidingEnabled]="false"
+                    [allowColumnResizing]="false"
+                    [allowColumnReordering]="true"
+                    style="padding-top: 2vh"
+                    [noDataText]="'L\'agrégé ne dispose pas de contrats'"
+                    keyExpr="id">
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxi-column dataField="id" caption="" width="50" cellTemplate="detsTemplate"></dxi-column>
+                <dxi-column dataField="code" caption="Code">
+                </dxi-column>
+                <dxi-column dataField="application_date" caption="Date d'application" dataType="date">
+                </dxi-column>
+                <dxi-column dataField="expiration_date" caption="Date d'expiration" dataType="date"></dxi-column>
+                <dxi-column dataField="signature_date" caption="Date de signature" dataType="date"></dxi-column>
+                <dxi-column dataField="type" caption="Type de contrat" cellTemplate="typeTemplate" dataType="Text">
+                </dxi-column>
+                <dxi-column dataField="status" caption="Statut" cellTemplate="statusTemplate">
+                </dxi-column>
+                <div *dxTemplate="let data of 'statusTemplate'">
+                        <span [ngClass]="helper.getContractStatusClass(data.value)">
+                              {{ contract_status[data.value] }}
+                          </span>
+                </div>
+                <div *dxTemplate="let data of 'typeTemplate'">
+                        <span *ngIf="data.data.parent_id">
+                          Avenant pour <span class="badge badge-info">{{ getContract(data.data.parent_id).code }}</span>
+                          </span>
+                    <span *ngIf="!data.data.parent_id">
+                              Contrat
+                          </span>
+                </div>
+                <div *dxTemplate="let data of 'detsTemplate'">
+                    <i style="font-size: 150%; align-content: center; cursor: pointer"
+                       (click)="helper.gotoShow('contrats', data.value, router, toastr)"
+                       class="fa fa-info-circle fa-5x"></i>
+                </div>
+                <dxo-pager
+                        [showPageSizeSelector]="false"
+                ></dxo-pager>
+            </dx-data-grid>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab *ngIf="thirdType === 'aggregated'">
+        <button clrTabLink id="Comptes">Comptes Bancaires</button>
+        <clr-tab-content id="Accounts" *clrIfActive>
+            <dx-data-grid
+                    (onRowRemoving)="onRemoveBA($event)"
+                    (onRowUpdating)="onUpdateBA($event)"
+                    (onEditingStart)="onStartUpdate($event)"
+
+                    id="gridCon"
+                    [dataSource]="bank_accounts"
+
+                    [allowColumnReordering]="true"
+                    [showColumnLines]="true"
+                    [showRowLines]="true"
+                    [showBorders]="true"
+                    [rowAlternationEnabled]="true"
+                    [columnAutoWidth]="true"
+
+
+                    [columnHidingEnabled]="true"
+                    [allowColumnResizing]="false"
+
+
+                    style="padding-top: 2vh"
+
+                    [noDataText]="'L\'agrégé ne dispose pas de compte bancaire'"
+
+                    (onRowInserting)="onAddBA($event)"
+
+
+            >
+
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxi-column dataField="bank_name" caption="Dénomination">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-column>
+                <dxi-column dataField="bank_account_number" caption="Numero de compte bancaire">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-column>
+                <dxi-column dataField="bank_code" caption="Code bancaire">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-column>
+                <dxi-column dataField="bank_rib_key" caption="Clé RIB bancaire">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-column>
+                <dxo-pager
+                        [showPageSizeSelector]="false"
+                ></dxo-pager>
+            </dx-data-grid>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab *ngIf="thirdType === 'aggregated'">
+        <button clrTabLink id="Documents">Documents joints</button>
+        <clr-tab-content id="docs" *clrIfActive>
+            <dx-data-grid
+                    id="gridCont"
+                    [allowColumnReordering]="true"
+                    [dataSource]="documents"
+                    (onRowRemoving)="onRemoveDOC($event)"
+                    (onRowUpdating)="onUpdateDOC($event)"
+                    [showColumnLines]="true"
+                    [showRowLines]="true"
+                    [showBorders]="true"
+                    (onRowInserting)="onAddDOC($event)"
+                    [rowAlternationEnabled]="true"
+                    [columnAutoWidth]="true"
+                    style="padding-top: 2vh"
+                    [noDataText]="'L\'agrégé ne dispose pas de documents joints'"
+                    keyExpr="id">
+
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxi-column dataField="name" caption="Type" [visible]="false">
+                    <dxo-lookup
+                            [dataSource]="docTypes"
+                            displayExpr="Name"
+                            valueExpr="ID">
+                    </dxo-lookup>
+                </dxi-column>
+
+                <dxi-column dataField="name" caption="Type"></dxi-column>
+
+                <dxi-column dataField="path" caption="Charger" editCellTemplate="cellTemplate2"
+                            [visible]="false"></dxi-column>
+
+                <dxi-column dataField="downloadPath" caption="Télécharger" cellTemplate="cellTemplate"></dxi-column>
+
+                <div *dxTemplate="let data of 'cellTemplate'">
+                    <dx-button
+                            class="send"
+                            icon="fa fa-cloud-download"
+                            text="Télécharger"
+                            (onClick)="downloadDocument(data)">
+                    </dx-button>
+                </div>
+                <div *dxTemplate="let data of 'cellTemplate2'">
+                    <dx-file-uploader
+                            selectButtonText="Ajouter un document"
+                            labelText="document"
+                            accept="image/png,image/gif,application/pdf"
+                            uploadMode="useForm"
+                            [(value)]="filePath" style="padding-bottom: 100px">
+                    </dx-file-uploader>
+                </div>
+                <dxo-remote-operations
+                        [sorting]="true"
+                        [paging]="false">
+                </dxo-remote-operations>
+                <dxo-editing
+                        [useIcons]="true"
+                        mode="popup"
+                        [form]="{items: ['name', 'path']}"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="true">
+                    <dxo-popup
+                            title="Ajouter ou modifier"
+                            [showTitle]="true"
+                            [height]="345"
+                            [position]="{ my: 'center', at: 'center'}">
+                    </dxo-popup>
+                </dxo-editing>
+                <dxo-pager
+                        [showPageSizeSelector]="false"
+                ></dxo-pager>
+            </dx-data-grid>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab *ngIf="thirdType === 'aggregated'">
+        <button clrTabLink id="Cartes">Cartes</button>
+        <clr-tab-content id="cards" *clrIfActive>
+            <dx-data-grid
+                    id="CardsgridContainer"
+                    [dataSource]="cards"
+
+                    [allowColumnReordering]="true"
+                    [showColumnLines]="true"
+                    [showRowLines]="true"
+                    [showBorders]="true"
+                    [rowAlternationEnabled]="true"
+                    [columnAutoWidth]="true"
+                    style="padding-top: 2vh"
+
+                    [noDataText]="'L\'agrégé ne dispose pas de carte agriculteur'"
+                    keyExpr="id">
+
+                <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+                <dxi-column dataField="rfid" caption="Serie" [visible]="false">
+                </dxi-column>
+                <dxi-column width="200" dataField="status" caption="Statut" cellTemplate="statusTemplate">
+                </dxi-column>
+                <dxi-column width="200" dataField="printed_at" caption="Statut d'impression"
+                            cellTemplate="PStatusTemplate">
+                </dxi-column>
+                <dxi-column dataField="id" caption="Action" cellTemplate="actionsTemplate">
+                </dxi-column>
+                <div *dxTemplate="let data of 'statusTemplate'" style="padding: 10px; text-align: center">
+                    <span [ngClass]="helper.getContractStatusClass(data.value)">
+                      {{ card_status[data.value] }}
+                    </span>
+                </div>
+                <div *dxTemplate="let data of 'actionsTemplate'">
+                    <div class="clr-row">
+                        <div class="clr-col">
+                            <dx-button [text]="'Déclarer perdu'"
+                                       type="danger"
+                                       (click)="DeclareLost(data.value)"
+                                       [disabled]="!declareLost(data.value)"></dx-button>
+                        </div>
+                        <div class="clr-col">
+                            <dx-button [appPermissionHidden]="['agreement.contracts.activate']" [text]="'Activer'"
+                                       type="success"
+                                       (click)="activateCard(data.value)"
+                                       [disabled]="!canActivateCard(data.value)"></dx-button>
+                        </div>
+                        <div class="clr-col">
+                            <dx-button [appPermissionHidden]="['agreement.contracts.activate']"
+                                       [text]="'Désactiver'"
+                                       type="default"
+                                       (click)="activateCard(data.value, true)"
+                                       [disabled]="!canDeactivateCard(data.value)"></dx-button>
+                        </div>
+                    </div>
+                </div>
+                <div *dxTemplate="let data of 'PStatusTemplate'" style="padding: 10px; text-align: center">
+                  <span ngClass="label label-success" *ngIf="data.value">
+                       imprimé.
+                     </span>
+                    <span ngClass="label label-danger" *ngIf="!data.value">
+                      en cours d'impression.
+                    </span>
+                </div>
+                <dxo-remote-operations
+                        [sorting]="true"
+                        [paging]="true">
+                </dxo-remote-operations>
+                <dxo-editing
+                        [useIcons]="true"
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="false"
+                        [allowAdding]="false">
+                </dxo-editing>
+                <dxo-pager
+                        [showPageSizeSelector]="true"
+                ></dxo-pager>
+            </dx-data-grid>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab *ngIf="thirdType === 'young_promoter'">
+        <button clrTabLink id="Magasins">Magasins</button>
+        <clr-tab-content id="warehouses" *clrIfActive>
+            <dx-data-grid
+                    id="warehouseContainer"
+                    [dataSource]="warehouses"
+                    [columnHidingEnabled]="false"
+                    [allowColumnResizing]="false"
+                    [allowColumnReordering]="true"
+                    KeyExpr="id">
+
+                <dxo-scrolling mode="virtual"></dxo-scrolling>
+
+
+                <dxi-column dataField="name" caption="Name"></dxi-column>
+                <dxi-column dataField="convention_ref" caption="Référence Convention"></dxi-column>
+                <dxi-column dataField="address" caption="Adress"></dxi-column>
+                <dxi-column dataField="city" caption="Ville"></dxi-column>
+                <dxi-column dataField="zip_code" caption="Code postale"></dxi-column>
+                <dxi-column dataField="tel" caption="N° Téléphone"></dxi-column>
+            </dx-data-grid>
+        </clr-tab-content>
+    </clr-tab>
+</clr-tabs>

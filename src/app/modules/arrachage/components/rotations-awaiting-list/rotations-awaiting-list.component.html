@@ -1,0 +1,347 @@
+<h1>Rotations de récolte | En attente d'affectation Encodage.</h1>
+<hr>
+<div class="clr-row clr-align-items-end">
+  <div class="clr-col clr-align-self-end">
+    <dx-button
+            class="d-none d-sm-block pull-right"
+            icon="fa fa-credit-card-alt"
+            style="font-weight: bold"
+            [type]="'success'"
+            [visible]="modeHaspermission(['convocations.rotations.manual_assign'])"
+            [disabled]="!modeHaspermission(['convocations.rotations.manual_assign'])"
+            text="Affecter par code de ridelle"
+            (onClick)="assignByRC()">
+    </dx-button>
+  </div>
+</div>
+
+<dx-data-grid
+        #dataGrid
+        id="dataGrid"
+        [dataSource]="rotations"
+        [columnHidingEnabled]="false"
+        [allowColumnResizing]="false"
+        (onEditingStart)="onEditingStart($event)"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}">
+  <dxo-remote-operations
+          [sorting]="true"
+          [paging]="true">
+  </dxo-remote-operations>
+
+  <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+  <dxo-selection mode="none" [deferred]="true"></dxo-selection>
+
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-filter-row
+          [visible]="true" [applyFilter]="true"></dxo-filter-row>
+
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-export [enabled]="true" fileName="Parcels" [allowExportSelectedData]="true"></dxo-export>
+
+  <dxo-pager
+          [allowedPageSizes]="[5, 8, 15, 30]"
+          [showInfo]="true"
+          [showNavigationButtons]="true"
+          [showPageSizeSelector]="true"
+          [visible]="true">
+  </dxo-pager>
+  <dxo-editing
+          mode="popup"
+          [allowUpdating]="false"
+          [allowDeleting]="false"
+          [allowAdding]="false">
+    <dxo-popup
+            title="Encodage manuel"
+            [showTitle]="true">
+    </dxo-popup>
+  </dxo-editing>
+
+  <dxo-paging [pageSize]="10"></dxo-paging>
+
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+  <dxo-search-panel [visible]="false"></dxo-search-panel>
+
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+
+  <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Rotation"
+              [alignment]="'center'">
+
+    <dxi-column dataField="rot_id" [formItem]="{visible: false}" [allowEditing]="false" [width]="40" caption=""
+                [allowSorting]="false" [allowFiltering]="false"
+                cellTemplate="consulterTemplate"></dxi-column>
+
+    <dxi-column [allowHeaderFiltering]="true" [allowEditing]="false" [alignment]="'center'" dataType="number"
+                dataField="rot_id"
+                caption="Réf"
+                [visible]="true"></dxi-column>
+
+    <dxi-column [alignment]="'center'" dataType="string" [allowHeaderFiltering]="true" [allowEditing]="false" dataField="cda_name"
+                caption="CDA"></dxi-column>
+
+    <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="z_name" [allowHeaderFiltering]="true"
+                caption="Zone"></dxi-column>
+
+    <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="p_name"  [allowHeaderFiltering]="true"
+                caption="Parcelle"></dxi-column>
+
+    <dxi-column [alignment]="'center'" [allowEditing]="false" [allowFiltering]="false" dataType="string"
+                dataField="encoding_status"
+                cellTemplate="statusTemplate"
+                caption="État (encodage)"></dxi-column>
+
+
+    <dxi-column [alignment]="'center'" [allowEditing]="false" [allowFiltering]="false" dataType="string"
+                dataField="rot_status"
+                cellTemplate="rotationStatusTemplate"
+                caption="État (rotation)"></dxi-column>
+
+
+    <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="p_harvest_order"
+                caption="Ordre"
+                [visible]="false"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="tp_full_name"
+                [visible]="false"
+                caption="Nom (Agrègè)"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="string" [allowEditing]="false" dataField="tp_cin" [visible]="true"
+                caption="CIN (Agrègè)"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="number" [allowEditing]="false" [visible]="false"
+                dataField="p_annuel_surface"
+                [visible]="false"
+                caption="Superficie annuelle (Ha)"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="number" dataField="sup_semis" [allowEditing]="false"
+                [visible]="false"
+                caption="Superficie semis (Ha)"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="number" dataField="ir_sup_con" [visible]="false"
+                [allowEditing]="false"
+                caption="Superficie convoquée (Ha)"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="number" dataField="irt_name" [visible]="false" [allowEditing]="false"
+                caption="Type"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="date" dataField="ir_date_con" [allowEditing]="false"
+                [visible]="false"
+                caption="Date de convocation"></dxi-column>
+    <dxi-column [alignment]="'center'" dataType="number" dataField="ir_daily_quota" [allowEditing]="false"
+                [visible]="false"
+                caption="Tonnage/Jour (Ha)"></dxi-column>
+
+    <dxi-column [alignment]="'center'" dataType="number" dataField="camion_count" [visible]="false"
+                [allowEditing]="false"
+                caption="Nombre max de camions autorisé"></dxi-column>
+
+    <dxi-column [alignment]="'center'" datatype="date" dataField="ir_start_date" [allowEditing]="false"
+                [visible]="false"
+                caption="Date de debut de récolte"></dxi-column>
+
+    <dxi-column [alignment]="'center'" datatype="date" dataField="ir_end_date" [allowEditing]="false"
+                [visible]="false"
+                caption="Date prévue de fin de récolte"></dxi-column>
+  </dxi-column>
+
+  <dxi-column [visible]="modeHaspermission(['rotations.awaiting.cancel'])" [alignment]="'center'"
+              dataType="string" dataField="canne_refoulee" [allowFiltering]="false"
+              caption="" cellTemplate="deleteButtonTemplate"></dxi-column>
+  <div *dxTemplate="let data of 'deleteButtonTemplate'">
+    <dx-button type="danger" [disabled]="disableDeleteBtn(data)" [text]="'Annuler'"
+               [visible]="modeHaspermission(['rotations.awaiting.cancel'])"
+               (onClick)="cancel(data,cancelBtn)" #cancelBtn>
+    </dx-button>
+  </div>
+
+
+  <div *dxTemplate="let data of 'consulterTemplate'">
+    <i *ngIf="data.data.status !== 'done'" (click)="showRotations(data)"
+       style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+       class="fa fa-info-circle fa-5x"></i>
+  </div>
+
+  <div *dxTemplate="let data of 'statusTemplate'">
+      <span [ngClass]="helper.getEncodageStatus(data).cssClass">
+           {{ helper.getEncodageStatus(data).text }}
+      </span>
+  </div>
+  <div *dxTemplate="let data of 'rotationStatusTemplate'">
+      <span [ngClass]="helper.getRotationEncodageStatus(data).cssClass">
+           {{ helper.getRotationEncodageStatus(data).text }}
+      </span>
+  </div>
+
+</dx-data-grid>
+
+<dx-popup
+        class="popup"
+        (onShowing)="loadVehicles($event)"
+        [showTitle]="true"
+        [title]="'Affectation et encodage manuel '"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupVisible">
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view
+            direction="both">
+      <div id="content">
+        <form>
+          <dx-form id="ms_form"
+                   [(formData)]="manual_assignment"
+                   #form>
+
+            <dxi-item itemType="group" caption="Affectation" [colCount]="2"
+                      [visible]="modeHaspermission(['convocations.rotations.manual_assign'])">
+              <dxi-item dataField="id_truck" [colCount]="1" editorType="dxSelectBox"
+                        [editorOptions]="manualAssignmentEditorOptios">
+                <dxo-label text="Camion"></dxo-label>
+                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+              </dxi-item>
+              <dxi-item dataField="id_loader" [colCount]="1" editorType="dxSelectBox"
+                        [editorOptions]="loaderManualAssignmentEditorOptios">
+                <dxo-label text="Chargeuse"></dxo-label>
+                <dxi-validation-rule type="required" message="Champs obligatoire"></dxi-validation-rule>
+              </dxi-item>
+            </dxi-item>
+
+            <dxi-item editorType="dxButton"
+                      [editorOptions]="manualAssignmentSubmitButtonEditorOptios"></dxi-item>
+          </dx-form>
+        </form>
+      </div>
+    </dx-scroll-view>
+  </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [showTitle]="true"
+        [title]="'Affectation par code ridelle'"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        (onShown)="clearAssignmentData()"
+        [(visible)]="assignPopUpVisible">
+  <div *dxTemplate="let data of 'content'">
+    <dx-form id="form"
+             [formData]="ridelle">
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="1">
+        <dxi-item itemType="group">
+          <dxi-item dataField="code" editorType="dxTextBox">
+            <dxo-label text="Code ridelle"></dxo-label>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item
+                  itemType="button"
+                  horizontalAlignment="right"
+                  verticalAlignment="bottom"
+                  [buttonOptions]="submitButtonOptions">
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dx-form>
+    <br>
+    <dx-data-grid
+            [dataSource]="dataSource"
+            [visible]="returnedRotation"
+            [showBorders]="true"
+            [columnAutoWidth]="true">
+      <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Camion"
+                  [alignment]="'center'">
+        <dxi-column dataField="returnedCamion.ridelle_code" caption="Code Ridelle"></dxi-column>
+        <dxi-column dataField="returnedCamion.taille" caption="Taille"></dxi-column>
+        <dxi-column dataField="returnedCamion.immatricule_number" caption="Immatricule"></dxi-column>
+        <dxi-column dataField="returnedCamion.ptc" caption="PTC"></dxi-column>
+      </dxi-column>
+      <dxi-column [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="Rotation"
+                  [alignment]="'center'">
+        <dxi-column dataField="returnedRotation.cda_name" caption="CDA"></dxi-column>
+        <dxi-column dataField="returnedRotation.z_name" caption="Zone"></dxi-column>
+        <dxi-column dataField="returnedRotation.p_name" caption="Nom de la parcelle"></dxi-column>
+        <dxi-column dataField="returnedRotation.p_harvest_order" caption="Ordre"></dxi-column>
+        <dxi-column dataField="returnedRotation.tp_cin" caption="CIN"></dxi-column>
+        <dxi-column dataField="returnedRotation.tp_full_name" [visible]="true" caption="Nom complet"
+                    style="color: #6d7fcc; align-content: center; cursor: pointer"></dxi-column>
+      </dxi-column>
+    </dx-data-grid>
+    <br>
+    <dx-button
+            text="Valider"
+            type="success"
+            [visible]="returnedRotation"
+            class="mybutton"
+            (onClick)="validateAssignment()"
+            icon="check"></dx-button>
+  </div>
+</dx-popup>
+<dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [position]="{ of: 'me' }"
+        style="z-index: 2000;"
+        [(visible)]="loadingVisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
+</dx-load-panel>
+<!--
+<div style="display:none;">
+    <div id="t2">
+        <div id="receipt-wrapper">
+            <div class="receipt-block">
+                <div class="receipt-head">
+                    <div>BON DE CHARGEMENT</div>
+                </div>
+                <div style="text-align : center; margin-bottom: 5px;">
+                    <div>N° {{ this.selectedRow.id }}</div>
+                </div>
+                <div class="receipt-info">
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl">CDA</div>
+                        <div class="receipt-item-price">{{this.selectedRow.cda}}</div>
+                    </div>
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl">ZONE</div>
+                        <div class="receipt-item-price">{{this.selectedRow.zone }}</div>
+                    </div>
+                    <div class="receipt-item">
+                        <div class="receipt-item-lbl">PARCELLE</div>
+                        <div class="receipt-item-price">{{this.selectedRow.parcel_name}}</div>
+                    </div>
+                </div>
+                <div class="receipt-info">
+                    <div style="text-align : right;  margin-bottom: 5px;">
+                        <div>La Date : {{this.selectedRow.date }}</div>
+                    </div>
+                    <div style="text-align : right; margin-bottom: 10px;">
+                        <div>{{this.selectedRow.ca_desc}}</div>
+                    </div>
+                    <div class="receipt-items" style="text-align : center; ">
+                        <div style="text-align : center !important; ">
+                            <div class="receipt-item-lbl" style="text-align : center; ">Ridelle</div>
+                        </div>
+                        <div style="text-align : center !important; ">
+                            <div class="receipt-item-price" style="text-align : center; ">{{this.selectedRow.ridelle_code}}</div>
+                        </div>
+                    </div>
+                    <div class="receipt-items" style="text-align : center; ">
+                        <div style="text-align : center !important; ">
+                            <div class="receipt-item-lbl" style="text-align : center; ">Numero Mineralogique</div>
+                        </div>
+                        <div style="text-align : center !important; ">
+                            <div class="receipt-item-price" style="text-align : center; "> {{this.selectedRow.immatricule_number}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="receipt-info">
+                    <div class="signature">
+                        <div>** **</div>
+                        <div>* *</div>
+                        <div>** MERCI **</div>
+                        <div>*****</div>
+                        <div>***</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

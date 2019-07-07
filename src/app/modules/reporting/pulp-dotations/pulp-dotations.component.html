@@ -1,0 +1,53 @@
+<dx-data-grid
+        id="gridContainer"
+        [dataSource]="dotations"
+        showBorders="true"
+        [columnHidingEnabled]="false"
+        [allowColumnResizing]="false"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [remoteOperations]="{ paging: true, sorting: true, filtering: true}"
+        KeyExpr="id">
+
+    <dxo-export [enabled]="true" fileName="allocations_retours" [excelFilterEnabled]="true"
+                [allowExportSelectedData]="true"></dxo-export>
+
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+    <dxo-editing
+            mode="popup"
+            [useIcons]="true"
+            [allowDeleting]="false"
+            [allowUpdating]="false"
+    >
+    </dxo-editing>
+    <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+    <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+    <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+    </dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+    <dxi-column dataField="soa_id" dataType="number" caption="Référence"></dxi-column>
+    <dxi-column dataField="div_name" dataType="text" caption="Division"></dxi-column>
+    <dxi-column dataField="tp_full_name" dataType="text" caption="Agriculteur"></dxi-column>
+    <dxi-column dataField="tp_code" dataType="text" caption="Code"></dxi-column>
+    <dxi-column dataField="cin" dataType="text" caption="CIN"></dxi-column>
+    <dxi-column dataField="cda" dataType="text" caption="CDA"></dxi-column>
+    <dxi-column dataField="parcel" dataType="text" caption="Parcelle"></dxi-column>
+    <dxi-column dataField="start_date" format="dd-MM-yyyy" caption="Date début prélèvement"></dxi-column>
+    <dxi-column dataField="end_date" format="dd-MM-yyyy" caption="Date fin prélèvemnet"></dxi-column>
+    <dxi-column dataField="a_name" dataType="text" caption="Aricle"></dxi-column>
+    <dxi-column dataField="a_code" dataType="text" caption="Code article"></dxi-column>
+    <dxi-column dataField="a_unite" dataType="text" caption="Unité"></dxi-column>
+    <dxi-column dataField="soa_quantity" dataType="number" caption="Quantité"></dxi-column>
+</dx-data-grid>

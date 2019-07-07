@@ -1,0 +1,36 @@
+<dx-vector-map
+  id="vector-map"
+  [center]="center"
+  [zoomFactor]="50"
+  [bounds]="[-90, 45, 90, -30]">
+  <dxo-loading-indicator  backgroundColor="rgba(0,0,0,0)" show="true" text="Chargement....">
+
+  </dxo-loading-indicator>
+  <dxo-size [height]="800"></dxo-size>
+  <dxo-tooltip
+    [enabled]="true"
+    color="grba(0,0,0,0)"
+    [customizeTooltip]="customizeTooltip">
+    <dxo-border color="grba(0,0,0,0)"></dxo-border>
+    <dxo-shadow color="red"></dxo-shadow>
+  </dxo-tooltip>
+  <dxi-layer
+    #map
+    name="cdas"
+    color="rgba(0,0,0,0)"
+    borderColor="#989da3"
+    selectionMode="single"
+    hoveredBorderColor="#989da3"
+    borderWidth="3.5"
+    hoveredColor="rgba(0, 167, 231, 0.35)"
+    hoveredBorderWidth="5"
+    [dataSource]="infiniteList"
+    type="area"
+    [customize]="customizeLayers">
+    <dxo-label  [enabled]="true" dataField="name">
+      <dxo-font color="#b8bbbf" size="16"></dxo-font>
+    </dxo-label>
+  </dxi-layer>
+  <dxo-background color="rgba(0,0,0,0)" borderColor="rgba(0,0,0,0)"></dxo-background>
+  <dxo-control-bar borderColor="#989da3" opacity="0.2" color="rgba(0,0,0,0)"></dxo-control-bar>
+</dx-vector-map>

@@ -1,0 +1,46 @@
+<dx-box
+        direction="row"
+        width="100%">
+
+
+    <div class="container">
+        <div class="row">
+
+            <dxi-item
+                    class="rect demo-dark"
+                    [ratio]="1">
+                <h2>{{ selectedItem?.title }}</h2>
+            </dxi-item>
+            <br/>
+
+            <dxi-item
+                    class="rect demo-light"
+                    [ratio]="1"
+                    align="end">
+                <dx-select-box #company
+                               displayExpr="title"
+                               valueExpr="code"
+                               (onValueChanged)="onSelectionChanged($event)"
+                               [dataSource]="reports"
+                               [value]="selectedItem?.code"></dx-select-box>
+            </dxi-item>
+
+
+        </div>
+    </div>
+
+
+</dx-box>
+<hr>
+<router-outlet></router-outlet>
+<dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [position]="{ of: 'me' }"
+        style="z-index: 2000;"
+        [(visible)]="loadingVisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
+</dx-load-panel>

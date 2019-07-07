@@ -1,0 +1,63 @@
+
+      <form>
+        <dx-form id="form"  [formData]="conseille">
+
+
+          <dxi-item itemType="group"  caption="Informations Générales" [colCount]="2" i18n-caption>
+            <dxi-item itemType="group">
+              <dxi-item dataField="first_name">
+                <dxo-label text="Nom" i18n-text> </dxo-label>
+              </dxi-item>
+              <dxi-item dataField="last_name">
+                <dxo-label text="Prénom" i18n-text> </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="cin">
+                <dxo-label text="Cin" i18n-text> </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="phone">
+                <dxo-label text="Telephone" i18n-text> </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="adress">
+                <dxo-label text="Adresse" i18n-text> </dxo-label>
+              </dxi-item>
+
+
+            </dxi-item>
+            <dxi-item itemType="group">
+
+
+              <dxi-item dataField="city">
+                <dxo-label text="Ville" i18n-text> </dxo-label>
+              </dxi-item>
+
+
+              <dxi-item dataField="postal_code">
+                <dxo-label text="Code postal" i18n-text> </dxo-label>
+              </dxi-item>
+
+              <dxi-item dataField="code">
+                <dxo-label text="Matricule" i18n-text> </dxo-label>
+              </dxi-item>
+
+
+              <dxi-item dataField="email">
+                <dxo-label text="Email" i18n-text> </dxo-label>
+              </dxi-item>
+
+            </dxi-item>
+
+                  </dxi-item>
+
+          <hr>
+
+          <dxi-item
+            itemType="button"
+            alignment="left"
+            [buttonOptions]="buttonOptions">
+          </dxi-item>
+
+        </dx-form>
+      </form>

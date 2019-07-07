@@ -1,0 +1,99 @@
+<h1>Nouvelle préconisation</h1>
+<hr>
+
+<div class="clr-row">
+    <div class="clr-col">
+        <div *ngIf="step == 0">
+            <div *ngFor="let type of types">
+                <div class="clr-col">
+                    <h3>{{type.type_name}} </h3>
+                </div>
+                <div class="clr-col">
+                    <hr>
+                </div>
+                <div class="clr-row">
+                    <form>
+                        <dx-form id="form" [screenByWidth]="screen">
+                            <dxi-item itemType="group" [colCountByScreen]="colCountByScreen">
+                                <dxi-item *ngFor="let family of type.families">
+                                    <div class="clr-col">
+                                        <button type="button" (click)="selectFamily(type.type_id, family.family_id)"
+                                                class="btn btn-success  _btn">{{ family.family_name }}
+                                        </button>
+                                    </div>
+                                </dxi-item>
+                            </dxi-item>
+                        </dx-form>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="step == 1">
+            <div class="clr-row">
+                <div class="clr-col clr-align-items-start">
+                    <h3> {{ family.family_name }}</h3>
+                </div>
+                <div class="clr-co clr-align-items-end">
+                    <button type="button" (click)="goBack()" class="btn btn-primary  "
+                            style="margin-right: 5%;">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="clr-col">
+                <hr>
+            </div>
+            <div class="clr-row">
+                <form>
+                    <dx-form id="form2" [screenByWidth]="screen">
+                        <dxi-item itemType="group" [colCountByScreen]="colCountByScreen">
+                            <dxi-item *ngFor="let sub_family of family.sub_families">
+                                <div class="clr-col">
+                                    <button type="button" (click)="selectSubFamily(sub_family.sub_family_id)"
+                                            class="btn btn-success _btn">{{
+                                        sub_family.sub_family_name }}
+                                    </button>
+                                </div>
+                            </dxi-item>
+                        </dxi-item>
+                    </dx-form>
+                </form>
+            </div>
+        </div>
+
+
+        <div *ngIf="step == 2">
+           <div class="clr-row">
+               <div class="clr-col">
+                   <app-rfid-card-reader (outData)="readRFID($event)" (goBack)="goBack()"></app-rfid-card-reader>
+               </div>
+           </div>
+            <div class="clr-row">
+                <div class="clr-col clr-align-items-end">
+                    <dx-button icon="fa fa-check" (onClick)="validate()" [text]="'Valider'" type="success"></dx-button>
+                </div>
+            </div>
+            <!-- <div class="m-portlet__head">
+                 <div>
+                     <dx-button icon="fa fa-check" (onClick)="validate()" [text]="'Valider'" type="success"></dx-button>
+                 </div>
+             </div>-->
+        </div>
+    </div>
+</div>
+
+<dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.5)"
+        [position]="{my: 'center'}"
+        [(visible)]="loadingVisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
+</dx-load-panel>
+
+
+
+

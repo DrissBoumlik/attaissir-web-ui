@@ -1,0 +1,139 @@
+<h1>Avance et primes {{ this.is_for_pres ? ' (préstataires)' : ''}}</h1>
+<hr>
+<dx-data-grid
+        #proclist
+        id="gridContainer"
+        [dataSource]="preconisations"
+        [columnHidingEnabled]="false"
+        [allowColumnResizing]="true"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [filterValue]="[]"
+        [remoteOperations]="{ paging: false, sorting: false, filtering: false, searching: false}"
+        [masterDetail]="{ enabled: false, template: 'detail' }"
+
+        KeyExpr="id">
+
+    <dxo-remote-operations
+            [sorting]="false"
+            [paging]="false"
+            [filtering]="false">
+    </dxo-remote-operations>
+
+
+    <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-scrolling [showScrollbar]="'always'"></dxo-scrolling>
+
+    <dxo-sorting mode="multiple"></dxo-sorting>
+
+    <dxo-filter-row
+            [visible]="true" [applyFilter]="'auto'"></dxo-filter-row>
+
+
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-export [enabled]="true" [fileName]="'Avances ' + today +' export'"
+                [allowExportSelectedData]="true"></dxo-export>
+
+    <dx-button width="90" text="'deleteButtonOptions.text'" type="success"></dx-button>
+
+    <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+    </dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+    <dxo-search-panel [visible]="false"></dxo-search-panel>
+
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-grouping #expand [autoExpandAll]="false"></dxo-grouping>
+
+    <dxi-column dataField="id" [width]="40" caption=""
+                [visible]="helper.permissionMethod(['preconization.interventions.show'])"
+                [allowFiltering]="false"
+                [allowSorting]="false" cellTemplate="consulterTemplate"></dxi-column>
+    <dxi-column dataType="Number" sortOrder="desc" dataField="id" caption="Réf"></dxi-column>
+    <dxi-column dataType="Date" dataField="date" caption="Date d'octroi"></dxi-column>
+    <dxi-column dataType="text" dataField="ar_name" caption="Type"></dxi-column>
+    <dxi-column [visible]="!this.is_for_pres" dataField="division" caption="Division"></dxi-column>
+    <dxi-column [visible]="!this.is_for_pres" dataField="cda" caption="CDA"></dxi-column>
+    <dxi-column [visible]="!this.is_for_pres" dataField="zone" caption="Zone"></dxi-column>
+    <dxi-column [visible]="!this.is_for_pres" dataField="secteur" caption="Secteur"></dxi-column>
+    <dxi-column [visible]="!this.is_for_pres" dataField="parcel" caption="Parcelle"></dxi-column>
+    <dxi-column [visible]="!this.is_for_pres" dataField="parcel" caption="Code ORMVA"></dxi-column>
+    <dxi-column [visible]="!this.is_for_pres" dataType="number" dataField="surface"
+                caption="Superficie (ha)"></dxi-column>
+    <dxi-column [visible]="!this.is_for_pres" dataType="number" dataField="montant" caption="Montant"
+                cellTemplate="montantTemplate"></dxi-column>
+    <dxi-column dataField="full_name" [caption]="this.is_for_pres ? 'Nom fournisseur' : 'Nom agriculteur'"></dxi-column>
+    <dxi-column dataField="code" [caption]="this.is_for_pres ? 'Code fournisseur' : 'Code agriculteur'"></dxi-column>
+    <dxi-column dataField="cin" [caption]="this.is_for_pres ? 'C.I.N fournisseur' : 'C.I.N agriculteur'"></dxi-column>
+    <dxi-column dataField="rib" [caption]="this.is_for_pres ? 'R.I.B fournisseur' : 'RIB agriculteurr'"></dxi-column>
+    <dxi-column dataField="state" [allowSorting]="false" caption="Etat" cellTemplate="statusTemplate"></dxi-column>
+
+    <div *dxTemplate="let data of 'montantTemplate'">
+        {{ data.value}} DH
+    </div>
+
+    <div *dxTemplate="let data of 'statusTemplate'">
+      <span [ngClass]="helper.getContractStatusClass(data.value)">
+               {{ data.value }}
+      </span>
+    </div>
+
+    <div *dxTemplate="let data of 'consulterTemplate'">
+        <a routerLink="/preconisations-intrants/afficher/{{data.value}}" routerLinkActive="active"><i
+                style="font-size: 150%; align-content: center; cursor: pointer; color: #000 !important;"
+                class="fa fa-info-circle fa-5x"></i></a>
+    </div>
+
+</dx-data-grid>
+<div name="popup" id="popup" #popup>
+    <dx-popup
+            class="popup"
+            [width]="580"
+            [height]="400"
+            [showTitle]="true"
+            title="Confirmation "
+            [dragEnabled]="false"
+            (onShown)="SearchByRfid()"
+            [closeOnOutsideClick]="true"
+            [(visible)]="popupRfidVisible"
+            (window:keypress)="doSomething($event)"
+    >
+        <div *dxTemplate="let data of 'content'">
+
+            <div class="gilsser">
+                <h1>GLISSER LA CARTE</h1>
+                <p>Faire glisser la carte sur le lecteur de carte pour lancer la recherche</p>
+                <div class="glisser-carte-agriculteur">
+                    <div class="credit-card">
+                        <div class="rfid-tripe"></div>
+                    </div>
+                    <div class="swiper-top"></div>
+                    <div class="swiper-bottom">
+                        <div class="light-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </dx-popup>
+
+</div>
+<input type="text" name="rfid" style="width: 0; height: 0;border: none;" #rfid>
+<input class="rfid-input" type="text" name="focusout" style="width: 0; height: 0;border: none;" #focusout>
+
+
+
+
+
+
+
+
+
+

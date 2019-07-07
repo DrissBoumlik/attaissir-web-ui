@@ -1,0 +1,113 @@
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="siam-page-header">
+      <h2>Tableau de bord</h2>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded ">
+    <div class="m-portlet__body m-portlet__body" style="padding: 15px">
+      <dx-chart
+        id="chart"
+        [dataSource]="dataSource"
+        palette="soft">
+        <dxo-title
+          text="Statistiques sur l'ensemble des magasins"
+          subtitle="à partir de janvier 2018">
+        </dxo-title>
+        <dxo-legend
+          verticalAlignment="top"
+          horizontalAlignment="center"
+          itemTextPosition="right">
+        </dxo-legend>
+        <dxo-common-series-settings
+          argumentField="name"
+          type="bar"
+          valueField="value"
+          hoverMode="allArgumentPoints"
+          [ignoreEmptyPoints]="true">
+          <dxo-label
+            [visible]="true"
+            [format]="{
+                type: 'fixedPoint',
+                precision: '0'
+            }">
+          </dxo-label>
+        </dxo-common-series-settings>
+        <dxo-series-template nameField="name"></dxo-series-template>
+      </dx-chart>
+    </div>
+    <hr>
+    <div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="m-portlet__body m-portlet__body" style="padding: 15px">
+            <dx-chart
+              id="chart1"
+              [dataSource]="inactiveWarehouses">
+              <dxo-title
+                text="Les magasins les moins  actifs"
+                subtitle="Articles livrés">
+              </dxo-title>
+              <dxo-legend
+                verticalAlignment="top"
+                horizontalAlignment="center"
+                itemTextPosition="right">
+              </dxo-legend>
+              <dxo-common-series-settings
+                argumentField="name"
+                type="bar"
+                valueField="count"
+                hoverMode="allArgumentPoints"
+                [ignoreEmptyPoints]="true">
+                <dxo-label
+                  [visible]="true"
+                  [format]="{
+                type: 'fixedPoint',
+                precision: '0'
+            }">
+                </dxo-label>
+              </dxo-common-series-settings>
+              <dxo-series-template nameField="name"></dxo-series-template>
+            </dx-chart>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="m-portlet__body m-portlet__body" style="padding: 15px">
+            <dx-chart
+              id="chart2"
+              [dataSource]="activeWarehouses"
+              palette="'#7CBAB4', '#92C7E2', '#75B5D6', '#B78C9B', '#F2CA84', '#A7CA74'">
+              <dxo-title
+                text="Les magasins les plus actifs"
+                subtitle="Articles livrés">
+              </dxo-title>
+              <dxo-legend
+                verticalAlignment="top"
+                horizontalAlignment="center"
+                itemTextPosition="right">
+              </dxo-legend>
+              <dxo-common-series-settings
+                argumentField="name"
+                type="bar"
+                valueField="count"
+                hoverMode="allArgumentPoints"
+                [ignoreEmptyPoints]="true">
+                <dxo-label
+                  [visible]="true"
+                  [format]="{
+                type: 'fixedPoint',
+                precision: '0'
+            }">
+                </dxo-label>
+              </dxo-common-series-settings>
+              <dxo-series-template nameField="name"></dxo-series-template>
+            </dx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -22,6 +22,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/favicon-16x16.png",
@@ -32,18 +33,30 @@
               "node_modules/dragula/dist/dragula.css",
               "src/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css",
               "node_modules/devextreme/dist/css/dx.common.css",
-              "node_modules/devextreme/dist/css/dx.softblue.css",
+              "node_modules/devextreme/dist/css/dx.material.blue.light.css",
               "node_modules/font-awesome/css/font-awesome.min.css",
               "src/assets/vendors/base/flaticon.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/assets/vendors/metronic/css/style.bundle.css",
               "src/assets/vendors/metronic/css/styles.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/leaflet/dist/leaflet.css",
+              "src/assets/leaflet-sidebar/side-bar.css",
+              "node_modules/leaflet-draw/dist/leaflet.draw.css",
+              "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
+              "node_modules/leaflet.markercluster/dist/MarkerCluster.css",
+              "node_modules/leaflet.fullscreen/Control.FullScreen.css",
+              "node_modules/@clr/icons/clr-icons.min.css",
+              "node_modules/@clr/ui/clr-ui.min.css"
             ],
             "scripts": [
+              "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/devextreme-intl/dist/devextreme-intl.min.js",
-              "node_modules/dragula/dist/dragula.js"
+              "node_modules/dragula/dist/dragula.js",
+              {
+                "input": "node_modules/document-register-element/build/document-register-element.js"
+              },
+              "node_modules/@clr/icons/clr-icons.min.js"
             ]
           },
           "configurations": {
@@ -103,7 +116,6 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/devextreme-intl/dist/devextreme-intl.min.js",
               "node_modules/dragula/dist/dragula.js"
             ]
           }
