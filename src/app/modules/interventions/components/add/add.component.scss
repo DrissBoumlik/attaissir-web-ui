@@ -12,4 +12,6 @@
   font-weight: bold;
 }
 
-
+::ng-deep .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-state-focused {
+  color: #101010;
+}

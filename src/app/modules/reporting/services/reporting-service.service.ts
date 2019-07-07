@@ -177,6 +177,14 @@ export class ReportingService {
         });
     }
 
+    getMaterialAlocations(loadOptions: any): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/${this.routeName}/material/allocations`, JSON.stringify(loadOptions), {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
     getNetDistributionsByReceipt(loadOptions: any): Observable<any> {
         return this.http.post(`${environment.apiUrl}/${this.routeName}/distributions/net/grid`, JSON.stringify(loadOptions), {
             headers: new HttpHeaders({

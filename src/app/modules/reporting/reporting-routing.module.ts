@@ -16,6 +16,7 @@ import {NetDistributionByReceiptComponent} from './net-distribution-by-receipt/n
 import {RotationsPivotComponent} from './harvest/general/rotations-pivot/rotations-pivot.component';
 import {SolTrstComponent} from './sol-trst/sol-trst.component';
 import {PulpDotationsComponent} from './pulp-dotations/pulp-dotations.component';
+import {MaterialAllocationComponent} from './material-allocation/material-allocation.component';
 
 const routes: Routes = [{
     path: 'reporting',
@@ -91,6 +92,10 @@ const routes: Routes = [{
         {
             path: 'receptions/daily',
             component: RotationsPivotComponent,
+        },
+        {
+            path: 'material/allocations',
+            component: MaterialAllocationComponent,
         }
     ]
 }];

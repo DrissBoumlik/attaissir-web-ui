@@ -157,10 +157,10 @@ export class ArrachageService {
             codeRidelle: codeRidelle,
             validated: validated
         }), {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json'
-                })
-            });
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
     }
 
     cancelRotation(idRotation: any): Observable<any> {
@@ -177,10 +177,10 @@ export class ArrachageService {
             start_date: start_date,
             end_date: end_date
         }), {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json'
-                })
-            });
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
     }
 
     getGeneratedTonnageChartData(start_date: Date, end_date: Date): Observable<any> {
@@ -188,10 +188,10 @@ export class ArrachageService {
             start_date: start_date,
             end_date: end_date
         }), {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json'
-                })
-            });
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
     }
 
     getHarvestVars(): Observable<any> {
@@ -225,10 +225,10 @@ export class ArrachageService {
             last_rotation,
             validate_rotation,
         }), {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json'
-                })
-            });
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
     }
 
     addManualEncoding(encoding_data: any): Observable<any> {
@@ -241,6 +241,10 @@ export class ArrachageService {
 
     getUnknownTruckList(): Observable<any> {
         return this.http.get(`${environment.apiUrl}/${this.routeName}/trucks/unknown`);
+    }
+
+    getTonnageVars(): Observable<any> {
+        return this.http.get(`${environment.apiUrl}/${this.routeName}/tonnage/vars`);
     }
     getVerifiedTruckList(): Observable<any> {
         return this.http.get(`${environment.apiUrl}/${this.routeName}/trucks/verified`);

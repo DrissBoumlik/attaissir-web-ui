@@ -3,7 +3,70 @@
 <!--
         *ngIf="modelHaspermission('convocations.rotations.unknown')"
 -->
-<h2 *ngIf="modeHaspermission(['convocations.rotations.unknown'])">{{ unknown_trucks.length }} Camions sans affectation</h2>
+<div class="clr-row">
+    <div class="clr-col">
+        <div class="card">
+            <div class="card-header">
+                Tonnage en cours de chargement
+            </div>
+            <div class="card-block">
+                <div class="card-title" style="text-align: center">
+                    <h3> <b> {{ tonnageVars_loading }} T</b></h3>  <strong>({{ tonnageVars_loading_count }} rotations)</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col">
+        <div class="card">
+            <div class="card-header">
+                Tonnage chargé (vers l'usine)
+            </div>
+            <div class="card-block">
+                <div class="card-title" style="text-align: center">
+                    <h3><b>{{ tonnageVars_loaded }} T</b></h3> <strong>({{ tonnageVars_loaded_count }} rotations)</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col">
+        <div class="card">
+            <div class="card-header">
+                Tonnage receptionné aujourd'hui
+            </div>
+            <div class="card-block">
+                <div class="card-title" style="text-align: center">
+                    <h3><b>{{ tonnageVars_today }} T</b></h3><strong>({{ tonnageVars_today_count }} rotations)</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--   <div class="clr-col">
+           <div class="card">
+               <div class="card-header">
+                   tonnage dans la file d'attente
+               </div>
+               <div class="card-block">
+                   <div class="card-title">
+                       Block
+                   </div>
+               </div>
+           </div>
+       </div>-->
+    <div class="clr-col">
+        <div class="card">
+            <div class="card-header">
+                tonnage affecté (vers la parcelle)
+            </div>
+            <div class="card-block">
+                <div class="card-title" style="text-align: center">
+                    <h3><b>{{ tonnageVars_awaiting }} T</b></h3><strong>({{ tonnageVars_awaiting_count }} rotations)</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<!--<h2 *ngIf="modeHaspermission(['convocations.rotations.unknown'])">{{ unknown_trucks.length }} Camions sans affectation</h2>
 <dx-tile-view
         #tileView
         *ngIf="modeHaspermission(['convocations.rotations.unknown'])"
@@ -23,8 +86,8 @@
             <app-truck-svg [v_ridelle_code]="truck.v_ridelle_code"></app-truck-svg>
         </div>
     </dxi-item>
-</dx-tile-view>
-<h2 *ngIf="modeHaspermission(['convocations.rotations.unknown'])">{{ verified_trucks.length }} Camions encodés vérifiés</h2>
+</dx-tile-view>-->
+<!--<h2 *ngIf="modeHaspermission(['convocations.rotations.unknown'])">{{ verified_trucks.length }} Camions encodés vérifiés</h2>
 <dx-tile-view
         #tileView
         *ngIf="modeHaspermission(['convocations.rotations.unknown'])"
@@ -44,7 +107,7 @@
             <app-truck-svgs-green [v_ridelle_code]="truck.truck_ridelle_code"></app-truck-svgs-green>
         </div>
     </dxi-item>
-</dx-tile-view>
+</dx-tile-view>-->
 <dx-data-grid
         #dataGrid
         id="dataGrid"
@@ -96,7 +159,8 @@
     <dxo-group-panel [visible]="true"></dxo-group-panel>
     <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
-    <dxi-column *ngIf="modeHaspermission(['convocations.rotations.status'])" [allowFiltering]="false" [allowSorting]="false" [allowSearch]="false" caption="État (encodage)"
+    <dxi-column *ngIf="modeHaspermission(['convocations.rotations.status'])" [allowFiltering]="false"
+                [allowSorting]="false" [allowSearch]="false" caption="État (encodage)"
                 [alignment]="'center'">
         <dxi-column dataField="rot_seq" [allowEditing]="false" caption="" [allowHeaderFiltering]="false"
                     [allowSorting]="false" [allowFiltering]="true"

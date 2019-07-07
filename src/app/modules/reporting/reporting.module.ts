@@ -28,6 +28,7 @@ import { RotationsPivotComponent } from './harvest/general/rotations-pivot/rotat
 import { GrossTonnageReceivedComponent } from './harvest/general/gross-tonnage-received/gross-tonnage-received.component';
 import { SolTrstComponent } from './sol-trst/sol-trst.component';
 import { PulpDotationsComponent } from './pulp-dotations/pulp-dotations.component';
+import { MaterialAllocationComponent } from './material-allocation/material-allocation.component';
 
 @NgModule({
     imports: [
@@ -47,6 +48,6 @@ import { PulpDotationsComponent } from './pulp-dotations/pulp-dotations.componen
         DxoArgumentFormatModule,
         DxCheckBoxModule
     ],
-    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent, HourlyReceptionComponent, HourlyReceptionCdaComponent, ParcelRidelleHistoryComponent, AlocationsAndReturnsComponent, NetDistributionByReceiptComponent, RotationsPivotComponent, GrossTonnageReceivedComponent, SolTrstComponent, PulpDotationsComponent]
+    declarations: [ReportingComponent, ContractsComponent, PreconisationsComponent, CardsComponent, MouvementsComponent, IlotsComponent, HourlyReceptionComponent, HourlyReceptionCdaComponent, ParcelRidelleHistoryComponent, AlocationsAndReturnsComponent, NetDistributionByReceiptComponent, RotationsPivotComponent, GrossTonnageReceivedComponent, SolTrstComponent, PulpDotationsComponent, MaterialAllocationComponent]
 })
 export class ReportingModule { }

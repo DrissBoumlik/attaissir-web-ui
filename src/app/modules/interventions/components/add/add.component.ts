@@ -121,10 +121,12 @@ export class AddComponent implements OnInit {
     DX_custom_fields = [];
     /*-----------------CONSTANTS--------------------------*/
     DB_NUMBER_BOX = 'number';
+    DB_DATE_BOX = 'date';
     DB_CHECK_BOX = 'checkbox';
     DB_SELECT_BOX = 'select';
     /*-----------------CONSTANTS--------------------------*/
     DX_TEXT_BOX = 'dxTextBox';
+    DX_DATE_BOX = 'dxDateBox';
     DX_NUMBER_BOX = 'dxNumberBox';
     DX_CHECK_BOX = 'dxCheckBox';
     DX_SELECT_BOX = 'dxSelectBox';
@@ -438,6 +440,11 @@ export class AddComponent implements OnInit {
                                         dxCustomField.colspan = 2;
                                         break;
                                     }
+                                    case (this.DB_DATE_BOX): {
+                                        dxCustomField.editorType =  this.DX_DATE_BOX;
+                                        dxCustomField.colspan = 2;
+                                        break;
+                                    }
                                     case (this.DB_CHECK_BOX): {
                                         dxCustomField.editorType = this.DX_CHECK_BOX;
                                         dxCustomField.colspan = 1;
@@ -471,6 +478,15 @@ export class AddComponent implements OnInit {
                                                         searchMode: 'contains',
                                                     };
                                                 });
+                                        } else {
+                                            dxCustomField.editorOptions = {
+                                                placeholder: cf.label,
+                                                displayExpr: 'displayExpr',
+                                                valueExpr: 'valueExpr',
+                                                items: cf.list,
+                                                searchEnabled: true,
+                                                searchMode: 'contains',
+                                            };
                                         }
                                         break;
                                     }
@@ -1029,6 +1045,9 @@ export class AddComponent implements OnInit {
                 } else if (this.data.btr.length && this.btrGrid.instance.getVisibleRows().length === 0) {
                     NewComponent.notifyMe('Aucun produit (prime/avance) n\'a été choisi.');
                     return -1;
+                }   else if (this.data.equipments.length && this.equipmentGrid.instance.getVisibleRows().length === 0) {
+                    NewComponent.notifyMe('Aucun matériel n\'a été choisi.');
+                    return -1;
                 }
                 /*--------------------------------------------------------*/
                 const data = {
@@ -1047,6 +1066,7 @@ export class AddComponent implements OnInit {
                     service_articles: [],
                     api_articles: [],
                     btr_articles: [],
+                    equipment_articles: [],
                     custom_fields: []
                 };
 
@@ -1078,6 +1098,13 @@ export class AddComponent implements OnInit {
                 if (this.btrGrid) {
                     this.btrGrid.instance.getVisibleRows().forEach(row => {
                         data.btr_articles.push({
+                            article_id: row.data.article.id,
+                            quantity: row.data.quantity,
+                        });
+                    });
+                }   if (this.equipmentGrid) {
+                    this.equipmentGrid.instance.getVisibleRows().forEach(row => {
+                        data.equipment_articles.push({
                             article_id: row.data.article.id,
                             quantity: row.data.quantity,
                         });

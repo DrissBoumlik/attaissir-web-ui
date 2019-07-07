@@ -156,7 +156,16 @@ export class RotationsInprogressListComponent implements OnInit {
     unknown_trucks: any = [];
     verified_trucks: any = [];
     currentUnknownTruck: any = {};
+    tonnageVars: any = {};
     currentVerifiedTruck: any = {};
+    tonnageVars_today: any = '';
+    tonnageVars_today_count: any = '';
+    tonnageVars_awaiting: any = '';
+    tonnageVars_awaiting_count: any = '';
+    tonnageVars_loaded: any = '';
+    tonnageVars_loaded_count: any = '';
+    tonnageVars_loading: any = '';
+    tonnageVars_loading_count: any = '';
 
     constructor(private harvestService: ArrachageService,
                 private toaster: ToastrService,
@@ -289,17 +298,20 @@ export class RotationsInprogressListComponent implements OnInit {
         }, error1 => {
             this.toaster.warning(error1.error.message);
         });
-        this.getUnknownTruckList();
 
-        setInterval(() => {
+        // this.getUnknownTruckList();
+
+        this.getTonnageVars();
+
+        /*setInterval(() => {
             this.getUnknownTruckList();
-        }, 120000);
+        }, 300000);*/
 
-        this.getVerifiedTruckList();
+        /*this.getVerifiedTruckList();
 
         setInterval(() => {
             this.getVerifiedTruckList();
-        }, 120000);
+        }, 120000);*/
     }
 
     showRotations(data: any) {
@@ -537,6 +549,39 @@ export class RotationsInprogressListComponent implements OnInit {
             .subscribe(
                 (res: any) => {
                     this.unknown_trucks = res.data;
+                },
+                (err: any) => {
+                    console.log(err);
+                }
+            );
+    }
+
+    getTonnageVars() {
+        this.harvestService.getTonnageVars()
+            .subscribe(
+                (res: any) => {
+                    this.tonnageVars_today = res.data.today[0].sum;
+                    this.tonnageVars_today_count = res.data.today[0].count;
+                    this.tonnageVars_awaiting = res.data.inprogress.find(dt => {
+                        return dt.encoding_status === 'awaiting';
+                    }).round;
+
+                    this.tonnageVars_awaiting_count = res.data.inprogress.find(dt => {
+                        return dt.encoding_status === 'awaiting';
+                    }).count;
+                    this.tonnageVars_loaded = res.data.inprogress.find(dt => {
+                        return dt.encoding_status === 'loaded';
+                    }).round;
+
+                    this.tonnageVars_loaded_count = res.data.inprogress.find(dt => {
+                        return dt.encoding_status === 'loaded';
+                    }).count;
+                    this.tonnageVars_loading = res.data.inprogress.find(dt => {
+                        return dt.encoding_status === 'loading';
+                    }).round;
+                    this.tonnageVars_loading_count = res.data.inprogress.find(dt => {
+                        return dt.encoding_status === 'loading';
+                    }).count;
                 },
                 (err: any) => {
                     console.log(err);
